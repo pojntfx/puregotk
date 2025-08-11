@@ -91,6 +91,9 @@ type {{.Name}}Base struct {
 }
 
 func (x *{{.Name}}Base) GoPointer() uintptr {
+     if x == nil {
+         return 0
+     }
      return x.Ptr
 }
 
@@ -210,6 +213,9 @@ func (x *{{$outer.Name}}) {{.Name}}({{conv .Args.API.Full}}) {{.Ret.Return}} {
 {{end}}
 
 func (c *{{.Name}}) GoPointer() uintptr {
+     if c == nil {
+         return 0
+     }
      return c.Ptr
 }
 
