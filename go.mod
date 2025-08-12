@@ -2,6 +2,6 @@ module github.com/jwijenbergh/puregotk
 
 go 1.23
 
-require github.com/jwijenbergh/purego v0.0.0-20241210143217-aeaa0bfe09e0
+replace github.com/ebitengine/purego => github.com/jwijenbergh/purego v0.0.0-20250812125240-cafa2c762d9d
 
-require golang.org/x/sys v0.28.0 // indirect
+require github.com/ebitengine/purego v0.0.0-00010101000000-000000000000

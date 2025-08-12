@@ -12,7 +12,7 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 )
 
 func PuregoSafeRegister(fptr interface{}, handle uintptr, name string) error {
