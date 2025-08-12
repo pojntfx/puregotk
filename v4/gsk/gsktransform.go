@@ -2,7 +2,7 @@
 package gsk
 
 import (
-	"github.com/ebitengine/purego"
+	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 )
 
