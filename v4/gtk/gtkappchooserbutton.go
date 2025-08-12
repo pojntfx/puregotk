@@ -193,6 +193,9 @@ func (x *AppChooserButton) SetShowDialogItem(SettingVar bool) {
 }
 
 func (c *AppChooserButton) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

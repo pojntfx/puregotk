@@ -202,6 +202,9 @@ func (x *Revealer) SetTransitionType(TransitionVar RevealerTransitionType) {
 }
 
 func (c *Revealer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

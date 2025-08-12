@@ -1413,6 +1413,9 @@ func (x *Socket) SpeaksIpv4() bool {
 }
 
 func (c *Socket) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

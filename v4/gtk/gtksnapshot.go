@@ -640,6 +640,9 @@ func (x *Snapshot) Translate3d(PointVar *graphene.Point3D) {
 }
 
 func (c *Snapshot) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -225,6 +225,9 @@ func (x *ContentProvider) WriteMimeTypeFinish(ResultVar gio.AsyncResult) (bool, 
 }
 
 func (c *ContentProvider) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

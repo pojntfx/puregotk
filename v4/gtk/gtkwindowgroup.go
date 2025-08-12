@@ -101,6 +101,9 @@ func (x *WindowGroup) RemoveWindow(WindowVar *Window) {
 }
 
 func (c *WindowGroup) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

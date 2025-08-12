@@ -102,6 +102,9 @@ func (x *CarouselIndicatorDots) SetCarousel(CarouselVar *Carousel) {
 }
 
 func (c *CarouselIndicatorDots) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

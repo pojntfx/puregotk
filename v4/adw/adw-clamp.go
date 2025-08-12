@@ -184,6 +184,9 @@ func (x *Clamp) SetUnit(UnitVar LengthUnit) {
 }
 
 func (c *Clamp) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

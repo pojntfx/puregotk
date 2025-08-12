@@ -282,6 +282,9 @@ func (x *CheckButton) SetUseUnderline(SettingVar bool) {
 }
 
 func (c *CheckButton) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

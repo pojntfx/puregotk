@@ -52,6 +52,9 @@ type ColorChooserBase struct {
 }
 
 func (x *ColorChooserBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

@@ -108,6 +108,9 @@ func ActivateActionNewFromInternalPtr(ptr uintptr) *ActivateAction {
 }
 
 func (c *ActivateAction) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -170,6 +173,9 @@ func NewCallbackAction(CallbackVar *ShortcutFunc, DataVar uintptr, DestroyVar *g
 }
 
 func (c *CallbackAction) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -195,6 +201,9 @@ func MnemonicActionNewFromInternalPtr(ptr uintptr) *MnemonicAction {
 }
 
 func (c *MnemonicAction) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -271,6 +280,9 @@ func (x *NamedAction) GetActionName() string {
 }
 
 func (c *NamedAction) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -296,6 +308,9 @@ func NothingActionNewFromInternalPtr(ptr uintptr) *NothingAction {
 }
 
 func (c *NothingAction) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -435,6 +450,9 @@ func (x *ShortcutAction) ToString() string {
 }
 
 func (c *ShortcutAction) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -491,6 +509,9 @@ func (x *SignalAction) GetSignalName() string {
 }
 
 func (c *SignalAction) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

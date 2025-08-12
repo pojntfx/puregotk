@@ -718,6 +718,9 @@ func (x *OutputStream) WritevFinish(ResultVar AsyncResult, BytesWrittenVar uint)
 }
 
 func (c *OutputStream) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

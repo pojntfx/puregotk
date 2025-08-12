@@ -208,6 +208,9 @@ func (x *SearchBar) SetShowCloseButton(VisibleVar bool) {
 }
 
 func (c *SearchBar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -143,6 +143,9 @@ func (x *ToastOverlay) SetChild(ChildVar *gtk.Widget) {
 }
 
 func (c *ToastOverlay) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

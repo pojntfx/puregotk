@@ -195,6 +195,9 @@ func (x *GridLayout) SetRowSpacing(SpacingVar uint) {
 }
 
 func (c *GridLayout) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -292,6 +295,9 @@ func (x *GridLayoutChild) SetRowSpan(SpanVar int) {
 }
 
 func (c *GridLayoutChild) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

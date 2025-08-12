@@ -84,6 +84,9 @@ func (x *CustomFilter) SetFilterFunc(MatchFuncVar *CustomFilterFunc, UserDataVar
 }
 
 func (c *CustomFilter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

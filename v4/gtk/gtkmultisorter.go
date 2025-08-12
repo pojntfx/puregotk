@@ -89,6 +89,9 @@ func (x *MultiSorter) Remove(PositionVar uint) {
 }
 
 func (c *MultiSorter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

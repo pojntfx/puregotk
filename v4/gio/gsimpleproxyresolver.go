@@ -98,6 +98,9 @@ func (x *SimpleProxyResolver) SetUriProxy(UriSchemeVar string, ProxyVar string) 
 }
 
 func (c *SimpleProxyResolver) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

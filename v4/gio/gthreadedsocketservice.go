@@ -79,6 +79,9 @@ func NewThreadedSocketService(MaxThreadsVar int) *ThreadedSocketService {
 }
 
 func (c *ThreadedSocketService) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

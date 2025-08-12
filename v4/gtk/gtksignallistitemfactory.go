@@ -95,6 +95,9 @@ func NewSignalListItemFactory() *SignalListItemFactory {
 }
 
 func (c *SignalListItemFactory) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

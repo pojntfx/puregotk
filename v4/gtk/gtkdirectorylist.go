@@ -214,6 +214,9 @@ func (x *DirectoryList) SetMonitored(MonitoredVar bool) {
 }
 
 func (c *DirectoryList) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

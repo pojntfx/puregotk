@@ -127,6 +127,9 @@ func (x *BookmarkList) SetIoPriority(IoPriorityVar int) {
 }
 
 func (c *BookmarkList) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

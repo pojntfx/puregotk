@@ -973,6 +973,9 @@ func (x *CellArea) StopEditing(CanceledVar bool) {
 }
 
 func (c *CellArea) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

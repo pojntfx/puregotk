@@ -49,6 +49,9 @@ type ConverterBase struct {
 }
 
 func (x *ConverterBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

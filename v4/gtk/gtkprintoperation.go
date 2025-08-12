@@ -760,6 +760,9 @@ func (x *PrintOperation) SetUseFullPage(FullPageVar bool) {
 }
 
 func (c *PrintOperation) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

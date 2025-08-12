@@ -39,6 +39,9 @@ func NativeVolumeMonitorNewFromInternalPtr(ptr uintptr) *NativeVolumeMonitor {
 }
 
 func (c *NativeVolumeMonitor) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

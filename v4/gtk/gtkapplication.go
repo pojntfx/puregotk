@@ -435,6 +435,9 @@ func (x *Application) Uninhibit(CookieVar uint) {
 }
 
 func (c *Application) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

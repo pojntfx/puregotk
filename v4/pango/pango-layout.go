@@ -1671,6 +1671,9 @@ func (x *Layout) XyToIndex(XVar int, YVar int, IndexVar int, TrailingVar int) bo
 }
 
 func (c *Layout) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

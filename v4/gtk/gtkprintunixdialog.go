@@ -295,6 +295,9 @@ func (x *PrintUnixDialog) SetSupportSelection(SupportSelectionVar bool) {
 }
 
 func (c *PrintUnixDialog) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

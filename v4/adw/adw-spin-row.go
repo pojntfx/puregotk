@@ -311,6 +311,9 @@ func (x *SpinRow) Update() {
 }
 
 func (c *SpinRow) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

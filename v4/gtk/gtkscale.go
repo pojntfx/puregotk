@@ -337,6 +337,9 @@ func (x *Scale) SetValuePos(PosVar PositionType) {
 }
 
 func (c *Scale) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

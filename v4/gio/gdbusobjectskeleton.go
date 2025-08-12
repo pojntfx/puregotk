@@ -127,6 +127,9 @@ func (x *DBusObjectSkeleton) SetObjectPath(ObjectPathVar string) {
 }
 
 func (c *DBusObjectSkeleton) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

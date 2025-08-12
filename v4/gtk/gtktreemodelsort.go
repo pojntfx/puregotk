@@ -266,6 +266,9 @@ func (x *TreeModelSort) ResetDefaultSortFunc() {
 }
 
 func (c *TreeModelSort) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

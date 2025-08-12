@@ -536,6 +536,9 @@ func (x *FlowBox) UnselectChild(ChildVar *FlowBoxChild) {
 }
 
 func (c *FlowBox) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -984,6 +987,9 @@ func (x *FlowBoxChild) SetChild(ChildVar *Widget) {
 }
 
 func (c *FlowBoxChild) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

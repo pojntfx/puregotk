@@ -77,6 +77,9 @@ type ActionMapBase struct {
 }
 
 func (x *ActionMapBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

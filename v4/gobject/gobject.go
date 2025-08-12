@@ -437,6 +437,9 @@ func InitiallyUnownedNewFromInternalPtr(ptr uintptr) *InitiallyUnowned {
 }
 
 func (c *InitiallyUnowned) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1469,6 +1472,9 @@ func (x *Object) WeakUnref(NotifyVar *WeakNotify, DataVar uintptr) {
 }
 
 func (c *Object) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

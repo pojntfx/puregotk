@@ -223,6 +223,9 @@ func (x *ViewSwitcherTitle) SetViewSwitcherEnabled(EnabledVar bool) {
 }
 
 func (c *ViewSwitcherTitle) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -306,6 +306,9 @@ func (x *LevelBar) SetValue(ValueVar float64) {
 }
 
 func (c *LevelBar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

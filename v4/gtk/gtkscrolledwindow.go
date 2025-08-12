@@ -563,6 +563,9 @@ func (x *ScrolledWindow) UnsetPlacement() {
 }
 
 func (c *ScrolledWindow) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

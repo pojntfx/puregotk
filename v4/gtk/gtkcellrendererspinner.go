@@ -55,6 +55,9 @@ func NewCellRendererSpinner() *CellRendererSpinner {
 }
 
 func (c *CellRendererSpinner) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

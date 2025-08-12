@@ -61,6 +61,9 @@ type RemoteActionGroupBase struct {
 }
 
 func (x *RemoteActionGroupBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

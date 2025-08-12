@@ -215,6 +215,9 @@ func (x *TimedAnimation) SetValueTo(ValueVar float64) {
 }
 
 func (c *TimedAnimation) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

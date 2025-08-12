@@ -123,6 +123,9 @@ func (x *PopoverMenuBar) SetMenuModel(ModelVar *gio.MenuModel) {
 }
 
 func (c *PopoverMenuBar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -647,6 +647,9 @@ func (x *AlertDialog) SetResponseLabel(ResponseVar string, LabelVar string) {
 }
 
 func (c *AlertDialog) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

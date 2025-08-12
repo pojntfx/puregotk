@@ -181,6 +181,9 @@ func (x *FilterListModel) SetModel(ModelVar gio.ListModel) {
 }
 
 func (c *FilterListModel) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

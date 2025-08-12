@@ -117,6 +117,9 @@ func (x *MemoryInputStream) AddData(DataVar []byte, LenVar int, DestroyVar *glib
 }
 
 func (c *MemoryInputStream) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

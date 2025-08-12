@@ -51,6 +51,9 @@ type TreeDragDestBase struct {
 }
 
 func (x *TreeDragDestBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 
@@ -104,6 +107,9 @@ type TreeDragSourceBase struct {
 }
 
 func (x *TreeDragSourceBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

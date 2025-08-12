@@ -45,6 +45,9 @@ type CellEditableBase struct {
 }
 
 func (x *CellEditableBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

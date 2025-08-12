@@ -95,6 +95,9 @@ func NewFixedLayout() *FixedLayout {
 }
 
 func (c *FixedLayout) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -138,6 +141,9 @@ func (x *FixedLayoutChild) SetTransform(TransformVar *gsk.Transform) {
 }
 
 func (c *FixedLayoutChild) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

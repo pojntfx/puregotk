@@ -200,6 +200,9 @@ func (x *Frame) SetLabelWidget(LabelWidgetVar *Widget) {
 }
 
 func (c *Frame) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

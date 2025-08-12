@@ -220,6 +220,9 @@ func (x *StyleManager) SetColorScheme(ColorSchemeVar ColorScheme) {
 }
 
 func (c *StyleManager) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

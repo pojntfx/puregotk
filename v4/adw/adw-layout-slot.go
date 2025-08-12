@@ -71,6 +71,9 @@ func (x *LayoutSlot) GetSlotId() string {
 }
 
 func (c *LayoutSlot) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

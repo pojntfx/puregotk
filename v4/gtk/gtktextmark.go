@@ -169,6 +169,9 @@ func (x *TextMark) SetVisible(SettingVar bool) {
 }
 
 func (c *TextMark) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

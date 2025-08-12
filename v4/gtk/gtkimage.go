@@ -453,6 +453,9 @@ func (x *Image) SetPixelSize(PixelSizeVar int) {
 }
 
 func (c *Image) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

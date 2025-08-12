@@ -65,6 +65,9 @@ func (x *Settings) ResetProperty(NameVar string) {
 }
 
 func (c *Settings) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

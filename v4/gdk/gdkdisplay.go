@@ -475,6 +475,9 @@ func (x *Display) TranslateKey(KeycodeVar uint, StateVar ModifierType, GroupVar 
 }
 
 func (c *Display) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

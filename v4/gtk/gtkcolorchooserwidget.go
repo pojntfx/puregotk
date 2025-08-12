@@ -67,6 +67,9 @@ func NewColorChooserWidget() *ColorChooserWidget {
 }
 
 func (c *ColorChooserWidget) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

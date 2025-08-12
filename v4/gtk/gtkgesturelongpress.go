@@ -89,6 +89,9 @@ func (x *GestureLongPress) SetDelayFactor(DelayFactorVar float64) {
 }
 
 func (c *GestureLongPress) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

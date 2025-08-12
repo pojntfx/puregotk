@@ -90,6 +90,9 @@ func AppInfoMonitorNewFromInternalPtr(ptr uintptr) *AppInfoMonitor {
 }
 
 func (c *AppInfoMonitor) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -189,6 +192,9 @@ func (x *BytesIcon) GetBytes() *glib.Bytes {
 }
 
 func (c *BytesIcon) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -304,6 +310,9 @@ func DBusActionGroupNewFromInternalPtr(ptr uintptr) *DBusActionGroup {
 }
 
 func (c *DBusActionGroup) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -719,6 +728,9 @@ func (x *DBusAuthObserver) AuthorizeAuthenticatedPeer(StreamVar *IOStream, Crede
 }
 
 func (c *DBusAuthObserver) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1914,6 +1926,9 @@ func (x *DBusConnection) UnregisterSubtree(RegistrationIdVar uint) bool {
 }
 
 func (c *DBusConnection) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -2158,6 +2173,9 @@ func DBusMenuModelNewFromInternalPtr(ptr uintptr) *DBusMenuModel {
 }
 
 func (c *DBusMenuModel) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -2817,6 +2835,9 @@ func (x *DBusMessage) ToGerror() (bool, error) {
 }
 
 func (c *DBusMessage) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -3151,6 +3172,9 @@ func (x *DBusMethodInvocation) TakeError(ErrorVar *glib.Error) {
 }
 
 func (c *DBusMethodInvocation) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -3291,6 +3315,9 @@ func (x *DBusServer) Stop() {
 }
 
 func (c *DBusServer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -3619,6 +3646,9 @@ func (x *Menu) RemoveAll() {
 }
 
 func (c *Menu) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -4054,6 +4084,9 @@ func (x *MenuItem) SetSubmenu(SubmenuVar *MenuModel) {
 }
 
 func (c *MenuItem) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -4304,6 +4337,9 @@ func (x *Notification) SetUrgent(UrgentVar bool) {
 }
 
 func (c *Notification) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -4402,6 +4438,9 @@ func NewPropertyAction(NameVar string, ObjectVar *gobject.Object, PropertyNameVa
 }
 
 func (c *PropertyAction) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -4632,6 +4671,9 @@ func (x *SimpleAction) SetStateHint(StateHintVar *glib.Variant) {
 }
 
 func (c *SimpleAction) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -4884,6 +4926,9 @@ func NewSimpleIOStream(InputStreamVar *InputStream, OutputStreamVar *OutputStrea
 }
 
 func (c *SimpleIOStream) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -4930,6 +4975,9 @@ func NewSimplePermission(AllowedVar bool) *SimplePermission {
 }
 
 func (c *SimplePermission) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -5463,6 +5511,9 @@ func (x *Subprocess) WaitFinish(ResultVar AsyncResult) (bool, error) {
 }
 
 func (c *Subprocess) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -5894,6 +5945,9 @@ func (x *SubprocessLauncher) Unsetenv(VariableVar string) {
 }
 
 func (c *SubprocessLauncher) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -6087,6 +6141,9 @@ func (x *TestDBus) Up() {
 }
 
 func (c *TestDBus) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

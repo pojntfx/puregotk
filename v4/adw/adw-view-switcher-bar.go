@@ -163,6 +163,9 @@ func (x *ViewSwitcherBar) SetStack(StackVar *ViewStack) {
 }
 
 func (c *ViewSwitcherBar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

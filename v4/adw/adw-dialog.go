@@ -434,6 +434,9 @@ func (x *Dialog) SetTitle(TitleVar string) {
 }
 
 func (c *Dialog) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

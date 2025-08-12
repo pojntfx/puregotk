@@ -231,6 +231,9 @@ func (x *Window) SetContent(ContentVar *gtk.Widget) {
 }
 
 func (c *Window) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

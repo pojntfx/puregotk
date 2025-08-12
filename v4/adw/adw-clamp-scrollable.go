@@ -162,6 +162,9 @@ func (x *ClampScrollable) SetUnit(UnitVar LengthUnit) {
 }
 
 func (c *ClampScrollable) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

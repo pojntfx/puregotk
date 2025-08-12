@@ -62,6 +62,9 @@ type PollableOutputStreamBase struct {
 }
 
 func (x *PollableOutputStreamBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

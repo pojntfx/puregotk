@@ -86,6 +86,9 @@ func (x *FilenameCompleter) SetDirsOnly(DirsOnlyVar bool) {
 }
 
 func (c *FilenameCompleter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

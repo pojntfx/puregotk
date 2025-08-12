@@ -89,6 +89,9 @@ func (x *CharsetConverter) SetUseFallback(UseFallbackVar bool) {
 }
 
 func (c *CharsetConverter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

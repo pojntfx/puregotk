@@ -93,6 +93,9 @@ func (x *WindowHandle) SetChild(ChildVar *Widget) {
 }
 
 func (c *WindowHandle) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

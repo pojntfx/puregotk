@@ -513,6 +513,9 @@ func (x *AboutDialog) SetWrapLicense(WrapLicenseVar bool) {
 }
 
 func (c *AboutDialog) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

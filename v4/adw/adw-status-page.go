@@ -204,6 +204,9 @@ func (x *StatusPage) SetTitle(TitleVar string) {
 }
 
 func (c *StatusPage) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

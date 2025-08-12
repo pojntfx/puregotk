@@ -192,6 +192,9 @@ func NewCClosureExpression(ValueTypeVar types.GType, MarshalVar *gobject.Closure
 }
 
 func (c *CClosureExpression) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -237,6 +240,9 @@ func NewClosureExpression(ValueTypeVar types.GType, ClosureVar *gobject.Closure,
 }
 
 func (c *ClosureExpression) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -304,6 +310,9 @@ func (x *ConstantExpression) GetValue() *gobject.Value {
 }
 
 func (c *ConstantExpression) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -578,6 +587,9 @@ func (x *Expression) Watch(ThisVar *gobject.Object, NotifyVar *ExpressionNotify,
 }
 
 func (c *Expression) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -642,6 +654,9 @@ func (x *ObjectExpression) GetObject() *gobject.Object {
 }
 
 func (c *ObjectExpression) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -667,6 +682,9 @@ func ParamSpecExpressionNewFromInternalPtr(ptr uintptr) *ParamSpecExpression {
 }
 
 func (c *ParamSpecExpression) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -776,6 +794,9 @@ func (x *PropertyExpression) GetPspec() *gobject.ParamSpec {
 }
 
 func (c *PropertyExpression) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

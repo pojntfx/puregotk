@@ -159,6 +159,9 @@ func (x *ActionBar) SetRevealed(RevealedVar bool) {
 }
 
 func (c *ActionBar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

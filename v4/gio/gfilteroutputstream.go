@@ -78,6 +78,9 @@ func (x *FilterOutputStream) SetCloseBaseStream(CloseBaseVar bool) {
 }
 
 func (c *FilterOutputStream) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

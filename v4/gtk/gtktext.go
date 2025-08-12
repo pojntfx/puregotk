@@ -541,6 +541,9 @@ func (x *Text) UnsetInvisibleChar() {
 }
 
 func (c *Text) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -88,6 +88,9 @@ func (x *DBusObjectProxy) GetConnection() *DBusConnection {
 }
 
 func (c *DBusObjectProxy) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

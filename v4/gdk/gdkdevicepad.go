@@ -55,6 +55,9 @@ type DevicePadBase struct {
 }
 
 func (x *DevicePadBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

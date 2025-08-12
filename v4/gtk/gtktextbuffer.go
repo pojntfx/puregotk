@@ -1150,6 +1150,9 @@ func (x *TextBuffer) Undo() {
 }
 
 func (c *TextBuffer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

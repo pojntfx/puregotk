@@ -60,6 +60,9 @@ func NewFontChooserDialog(TitleVar string, ParentVar *Window) *FontChooserDialog
 }
 
 func (c *FontChooserDialog) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

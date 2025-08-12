@@ -509,6 +509,9 @@ func (x *Flap) SetTransitionType(TransitionTypeVar FlapTransitionType) {
 }
 
 func (c *Flap) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

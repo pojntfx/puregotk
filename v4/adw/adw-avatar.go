@@ -207,6 +207,9 @@ func (x *Avatar) SetText(TextVar string) {
 }
 
 func (c *Avatar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

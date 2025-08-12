@@ -565,6 +565,9 @@ func (x *ListBox) UnselectRow(RowVar *ListBoxRow) {
 }
 
 func (c *ListBox) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1066,6 +1069,9 @@ func (x *ListBoxRow) SetSelectable(SelectableVar bool) {
 }
 
 func (c *ListBoxRow) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -105,6 +105,9 @@ func (x *DeviceTool) GetToolType() DeviceToolType {
 }
 
 func (c *DeviceTool) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

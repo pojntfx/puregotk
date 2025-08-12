@@ -183,6 +183,9 @@ func (x *SingleSelection) SetSelected(PositionVar uint) {
 }
 
 func (c *SingleSelection) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

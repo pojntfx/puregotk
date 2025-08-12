@@ -85,6 +85,9 @@ func (x *GesturePan) SetOrientation(OrientationVar Orientation) {
 }
 
 func (c *GesturePan) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

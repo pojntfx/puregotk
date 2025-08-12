@@ -91,6 +91,9 @@ func (x *Layout) SetName(NameVar string) {
 }
 
 func (c *Layout) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

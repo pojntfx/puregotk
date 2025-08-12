@@ -1154,6 +1154,9 @@ func (x *TextView) WindowToBufferCoords(WinVar TextWindowType, WindowXVar int, W
 }
 
 func (c *TextView) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

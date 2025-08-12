@@ -568,6 +568,9 @@ func (x *GLShader) GetUniformType(IdxVar int) GLUniformType {
 }
 
 func (c *GLShader) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -928,6 +928,9 @@ func (x *PrintSettings) Unset(KeyVar string) {
 }
 
 func (c *PrintSettings) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

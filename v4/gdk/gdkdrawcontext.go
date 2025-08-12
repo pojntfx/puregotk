@@ -146,6 +146,9 @@ func (x *DrawContext) IsInFrame() bool {
 }
 
 func (c *DrawContext) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

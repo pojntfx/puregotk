@@ -139,6 +139,9 @@ func (x *DropTargetAsync) SetFormats(FormatsVar *gdk.ContentFormats) {
 }
 
 func (c *DropTargetAsync) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

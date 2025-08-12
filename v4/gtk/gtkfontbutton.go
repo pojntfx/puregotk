@@ -156,6 +156,9 @@ func (x *FontButton) SetUseSize(UseSizeVar bool) {
 }
 
 func (c *FontButton) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

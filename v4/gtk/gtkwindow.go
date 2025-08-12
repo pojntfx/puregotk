@@ -950,6 +950,9 @@ func (x *Window) Unminimize() {
 }
 
 func (c *Window) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

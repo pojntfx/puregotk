@@ -470,6 +470,9 @@ func (x *InputStream) SkipFinish(ResultVar AsyncResult) (int, error) {
 }
 
 func (c *InputStream) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

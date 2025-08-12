@@ -101,6 +101,9 @@ func (x *CarouselIndicatorLines) SetCarousel(CarouselVar *Carousel) {
 }
 
 func (c *CarouselIndicatorLines) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

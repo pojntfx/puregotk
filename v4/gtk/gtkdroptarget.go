@@ -263,6 +263,9 @@ func (x *DropTarget) SetPreload(PreloadVar bool) {
 }
 
 func (c *DropTarget) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

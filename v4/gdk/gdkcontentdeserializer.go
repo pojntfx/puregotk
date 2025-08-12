@@ -208,6 +208,9 @@ func (x *ContentDeserializer) SetTaskData(DataVar uintptr, NotifyVar *glib.Destr
 }
 
 func (c *ContentDeserializer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

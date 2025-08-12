@@ -37,6 +37,9 @@ type FontBase struct {
 }
 
 func (x *FontBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 
@@ -81,6 +84,9 @@ type FontMapBase struct {
 }
 
 func (x *FontMapBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

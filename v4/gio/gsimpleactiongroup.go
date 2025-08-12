@@ -121,6 +121,9 @@ func (x *SimpleActionGroup) Remove(ActionNameVar string) {
 }
 
 func (c *SimpleActionGroup) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -107,6 +107,9 @@ func (x *LockButton) SetPermission(PermissionVar *gio.Permission) {
 }
 
 func (c *LockButton) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

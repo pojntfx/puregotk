@@ -209,6 +209,9 @@ func (x *ContentSerializer) SetTaskData(DataVar uintptr, NotifyVar *glib.Destroy
 }
 
 func (c *ContentSerializer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

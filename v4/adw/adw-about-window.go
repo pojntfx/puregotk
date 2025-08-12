@@ -954,6 +954,9 @@ func (x *AboutWindow) SetWebsite(WebsiteVar string) {
 }
 
 func (c *AboutWindow) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

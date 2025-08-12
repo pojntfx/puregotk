@@ -65,6 +65,9 @@ type BuilderScopeBase struct {
 }
 
 func (x *BuilderScopeBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 
@@ -184,6 +187,9 @@ func (x *BuilderCScope) LookupCallbackSymbol(CallbackNameVar string) uintptr {
 }
 
 func (c *BuilderCScope) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

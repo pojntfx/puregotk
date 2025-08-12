@@ -235,6 +235,9 @@ func (x *UnixConnection) SendFd(FdVar int, CancellableVar *Cancellable) (bool, e
 }
 
 func (c *UnixConnection) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

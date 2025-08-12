@@ -473,6 +473,9 @@ func (x *ParamSpec) Unref() {
 }
 
 func (c *ParamSpec) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

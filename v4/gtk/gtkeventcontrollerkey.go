@@ -107,6 +107,9 @@ func (x *EventControllerKey) SetImContext(ImContextVar *IMContext) {
 }
 
 func (c *EventControllerKey) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

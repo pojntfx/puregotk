@@ -920,6 +920,9 @@ func (x *Label) SetYalign(YalignVar float32) {
 }
 
 func (c *Label) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

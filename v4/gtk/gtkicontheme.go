@@ -140,6 +140,9 @@ func (x *IconPaintable) IsSymbolic() bool {
 }
 
 func (c *IconPaintable) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -597,6 +600,9 @@ func (x *IconTheme) SetThemeName(ThemeNameVar string) {
 }
 
 func (c *IconTheme) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

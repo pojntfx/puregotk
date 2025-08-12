@@ -219,6 +219,9 @@ func (x *Drag) SetHotspot(HotXVar int, HotYVar int) {
 }
 
 func (c *Drag) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

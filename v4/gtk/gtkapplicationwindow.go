@@ -197,6 +197,9 @@ func (x *ApplicationWindow) SetShowMenubar(ShowMenubarVar bool) {
 }
 
 func (c *ApplicationWindow) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

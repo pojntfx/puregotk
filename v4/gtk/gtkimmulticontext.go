@@ -92,6 +92,9 @@ func (x *IMMulticontext) SetContextId(ContextIdVar string) {
 }
 
 func (c *IMMulticontext) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

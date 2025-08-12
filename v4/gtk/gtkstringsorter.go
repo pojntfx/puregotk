@@ -112,6 +112,9 @@ func (x *StringSorter) SetIgnoreCase(IgnoreCaseVar bool) {
 }
 
 func (c *StringSorter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

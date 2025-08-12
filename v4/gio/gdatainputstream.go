@@ -451,6 +451,9 @@ func (x *DataInputStream) SetNewlineType(TypeVar DataStreamNewlineType) {
 }
 
 func (c *DataInputStream) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -165,6 +165,9 @@ func (x *FontMap) LoadFontset(ContextVar *Context, DescVar *FontDescription, Lan
 }
 
 func (c *FontMap) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

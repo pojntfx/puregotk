@@ -1235,6 +1235,9 @@ func (x *Settings) SetValue(KeyVar string, ValueVar *glib.Variant) bool {
 }
 
 func (c *Settings) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

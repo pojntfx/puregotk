@@ -306,6 +306,9 @@ func (x *PixbufLoader) WriteBytes(BufferVar *glib.Bytes) (bool, error) {
 }
 
 func (c *PixbufLoader) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

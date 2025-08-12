@@ -265,6 +265,9 @@ func (x *IOStream) SpliceAsync(Stream2Var *IOStream, FlagsVar IOStreamSpliceFlag
 }
 
 func (c *IOStream) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

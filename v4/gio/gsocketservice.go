@@ -146,6 +146,9 @@ func (x *SocketService) Stop() {
 }
 
 func (c *SocketService) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

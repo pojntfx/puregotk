@@ -469,6 +469,9 @@ func (x *Toast) SetUseMarkup(UseMarkupVar bool) {
 }
 
 func (c *Toast) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

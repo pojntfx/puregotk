@@ -58,6 +58,9 @@ type DesktopAppInfoLookupBase struct {
 }
 
 func (x *DesktopAppInfoLookupBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 
@@ -415,6 +418,9 @@ func (x *DesktopAppInfo) ListActions() []string {
 }
 
 func (c *DesktopAppInfo) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

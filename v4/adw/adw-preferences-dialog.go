@@ -193,6 +193,9 @@ func (x *PreferencesDialog) SetVisiblePageName(NameVar string) {
 }
 
 func (c *PreferencesDialog) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

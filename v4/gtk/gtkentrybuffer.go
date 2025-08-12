@@ -189,6 +189,9 @@ func (x *EntryBuffer) SetText(CharsVar string, NCharsVar int) {
 }
 
 func (c *EntryBuffer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -222,6 +222,9 @@ func (x *DrawingArea) SetDrawFunc(DrawFuncVar *DrawingAreaDrawFunc, UserDataVar 
 }
 
 func (c *DrawingArea) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

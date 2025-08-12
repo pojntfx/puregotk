@@ -103,6 +103,9 @@ func (x *UnixInputStream) SetCloseFd(CloseFdVar bool) {
 }
 
 func (c *UnixInputStream) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

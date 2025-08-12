@@ -86,6 +86,9 @@ func (x *MediaControls) SetMediaStream(StreamVar *MediaStream) {
 }
 
 func (c *MediaControls) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

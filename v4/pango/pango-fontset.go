@@ -97,6 +97,9 @@ func (x *Fontset) GetMetrics() *FontMetrics {
 }
 
 func (c *Fontset) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -162,6 +165,9 @@ func (x *FontsetSimple) Size() int {
 }
 
 func (c *FontsetSimple) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -206,6 +206,9 @@ func (x *Credentials) ToString() string {
 }
 
 func (c *Credentials) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

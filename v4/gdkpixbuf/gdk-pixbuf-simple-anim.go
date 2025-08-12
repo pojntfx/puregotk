@@ -81,6 +81,9 @@ func (x *PixbufSimpleAnim) SetLoop(LoopVar bool) {
 }
 
 func (c *PixbufSimpleAnim) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

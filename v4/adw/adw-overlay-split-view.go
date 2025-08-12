@@ -464,6 +464,9 @@ func (x *OverlaySplitView) SetSidebarWidthUnit(UnitVar LengthUnit) {
 }
 
 func (c *OverlaySplitView) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

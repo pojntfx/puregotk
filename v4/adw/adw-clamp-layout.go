@@ -152,6 +152,9 @@ func (x *ClampLayout) SetUnit(UnitVar LengthUnit) {
 }
 
 func (c *ClampLayout) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

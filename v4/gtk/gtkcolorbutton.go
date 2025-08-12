@@ -125,6 +125,9 @@ func (x *ColorButton) SetTitle(TitleVar string) {
 }
 
 func (c *ColorButton) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -352,6 +352,9 @@ func (x *SplitButton) SetUseUnderline(UseUnderlineVar bool) {
 }
 
 func (c *SplitButton) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

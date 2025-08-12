@@ -115,6 +115,9 @@ func (x *AppChooserDialog) SetHeading(HeadingVar string) {
 }
 
 func (c *AppChooserDialog) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

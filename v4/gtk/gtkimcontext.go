@@ -280,6 +280,9 @@ func (x *IMContext) SetUsePreedit(UsePreeditVar bool) {
 }
 
 func (c *IMContext) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

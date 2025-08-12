@@ -42,6 +42,9 @@ func ShortcutsGroupNewFromInternalPtr(ptr uintptr) *ShortcutsGroup {
 }
 
 func (c *ShortcutsGroup) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

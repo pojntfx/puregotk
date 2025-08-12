@@ -352,6 +352,9 @@ func (x *Renderer) SetMatrix(MatrixVar *Matrix) {
 }
 
 func (c *Renderer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

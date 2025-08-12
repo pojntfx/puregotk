@@ -283,6 +283,9 @@ func (x *ActionRow) SetTitleLines(TitleLinesVar int) {
 }
 
 func (c *ActionRow) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

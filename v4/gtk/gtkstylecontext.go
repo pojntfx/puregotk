@@ -338,6 +338,9 @@ func (x *StyleContext) ToString(FlagsVar StyleContextPrintFlags) string {
 }
 
 func (c *StyleContext) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -237,6 +237,9 @@ func (x *GridView) SetSingleClickActivate(SingleClickActivateVar bool) {
 }
 
 func (c *GridView) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

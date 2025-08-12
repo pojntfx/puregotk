@@ -78,6 +78,9 @@ type TypePluginBase struct {
 }
 
 func (x *TypePluginBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 
@@ -367,6 +370,9 @@ func (x *Binding) Unbind() {
 }
 
 func (c *Binding) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -490,6 +496,9 @@ func (x *BindingGroup) SetSource(SourceVar *Object) {
 }
 
 func (c *BindingGroup) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -671,6 +680,9 @@ func (x *SignalGroup) Unblock() {
 }
 
 func (c *SignalGroup) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

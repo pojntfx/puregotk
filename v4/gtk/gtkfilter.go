@@ -158,6 +158,9 @@ func (x *Filter) Match(ItemVar *gobject.Object) bool {
 }
 
 func (c *Filter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

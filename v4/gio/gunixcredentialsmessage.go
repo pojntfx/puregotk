@@ -115,6 +115,9 @@ func (x *UnixCredentialsMessage) GetCredentials() *Credentials {
 }
 
 func (c *UnixCredentialsMessage) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

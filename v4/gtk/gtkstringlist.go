@@ -168,6 +168,9 @@ func (x *StringList) Take(StringVar string) {
 }
 
 func (c *StringList) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -322,6 +325,9 @@ func (x *StringObject) GetString() string {
 }
 
 func (c *StringObject) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

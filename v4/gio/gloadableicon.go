@@ -43,6 +43,9 @@ type LoadableIconBase struct {
 }
 
 func (x *LoadableIconBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

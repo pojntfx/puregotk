@@ -462,6 +462,9 @@ func (x *ConstraintLayout) RemoveGuide(GuideVar *ConstraintGuide) {
 }
 
 func (c *ConstraintLayout) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -497,6 +500,9 @@ func ConstraintLayoutChildNewFromInternalPtr(ptr uintptr) *ConstraintLayoutChild
 }
 
 func (c *ConstraintLayoutChild) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

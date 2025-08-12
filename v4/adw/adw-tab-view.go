@@ -498,6 +498,9 @@ func (x *TabPage) SetTooltip(TooltipVar string) {
 }
 
 func (c *TabPage) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1289,6 +1292,9 @@ func (x *TabView) TransferPage(PageVar *TabPage, OtherViewVar *TabView, Position
 }
 
 func (c *TabView) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

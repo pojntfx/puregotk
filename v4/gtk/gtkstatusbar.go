@@ -136,6 +136,9 @@ func (x *Statusbar) RemoveAll(ContextIdVar uint) {
 }
 
 func (c *Statusbar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

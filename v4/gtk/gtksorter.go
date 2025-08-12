@@ -163,6 +163,9 @@ func (x *Sorter) GetOrder() SorterOrder {
 }
 
 func (c *Sorter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

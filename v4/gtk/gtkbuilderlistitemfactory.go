@@ -132,6 +132,9 @@ func (x *BuilderListItemFactory) GetScope() *BuilderScopeBase {
 }
 
 func (c *BuilderListItemFactory) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

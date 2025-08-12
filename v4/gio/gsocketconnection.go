@@ -183,6 +183,9 @@ func (x *SocketConnection) IsConnected() bool {
 }
 
 func (c *SocketConnection) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

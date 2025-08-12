@@ -84,6 +84,9 @@ type MountBase struct {
 }
 
 func (x *MountBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

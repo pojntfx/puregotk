@@ -217,6 +217,9 @@ func (x *FileFilter) ToGvariant() *glib.Variant {
 }
 
 func (c *FileFilter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

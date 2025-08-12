@@ -78,6 +78,9 @@ func NewPasswordEntryRow() *PasswordEntryRow {
 }
 
 func (c *PasswordEntryRow) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

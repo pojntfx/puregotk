@@ -89,6 +89,9 @@ func (x *SelectionFilterModel) SetModel(ModelVar SelectionModel) {
 }
 
 func (c *SelectionFilterModel) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

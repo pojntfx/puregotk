@@ -740,6 +740,9 @@ func (x *Builder) ValueFromStringType(TypeVar types.GType, StringVar string, Val
 }
 
 func (c *Builder) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

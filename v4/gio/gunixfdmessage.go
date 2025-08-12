@@ -158,6 +158,9 @@ func (x *UnixFDMessage) StealFds(LengthVar int) []int {
 }
 
 func (c *UnixFDMessage) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

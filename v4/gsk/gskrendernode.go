@@ -254,6 +254,9 @@ func (x *RenderNode) WriteToFile(FilenameVar string) (bool, error) {
 }
 
 func (c *RenderNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

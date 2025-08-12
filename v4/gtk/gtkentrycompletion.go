@@ -368,6 +368,9 @@ func (x *EntryCompletion) SetTextColumn(ColumnVar int) {
 }
 
 func (c *EntryCompletion) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

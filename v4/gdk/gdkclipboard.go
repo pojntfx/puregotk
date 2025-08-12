@@ -362,6 +362,9 @@ func (x *Clipboard) StoreFinish(ResultVar gio.AsyncResult) (bool, error) {
 }
 
 func (c *Clipboard) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

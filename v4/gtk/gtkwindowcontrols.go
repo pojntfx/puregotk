@@ -168,6 +168,9 @@ func (x *WindowControls) SetSide(SideVar PackType) {
 }
 
 func (c *WindowControls) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

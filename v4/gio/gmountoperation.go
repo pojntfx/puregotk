@@ -258,6 +258,9 @@ func (x *MountOperation) SetUsername(UsernameVar string) {
 }
 
 func (c *MountOperation) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

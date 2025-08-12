@@ -77,6 +77,9 @@ func (x *DragIcon) SetChild(ChildVar *Widget) {
 }
 
 func (c *DragIcon) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

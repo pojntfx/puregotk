@@ -294,6 +294,9 @@ func (x *TreeModelFilter) SetVisibleFunc(FuncVar *TreeModelFilterVisibleFunc, Da
 }
 
 func (c *TreeModelFilter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

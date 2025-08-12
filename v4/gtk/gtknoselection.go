@@ -88,6 +88,9 @@ func (x *NoSelection) SetModel(ModelVar gio.ListModel) {
 }
 
 func (c *NoSelection) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

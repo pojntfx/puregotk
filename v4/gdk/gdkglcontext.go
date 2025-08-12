@@ -379,6 +379,9 @@ func (x *GLContext) SetUseEs(UseEsVar int) {
 }
 
 func (c *GLContext) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

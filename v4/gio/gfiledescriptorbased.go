@@ -44,6 +44,9 @@ type FileDescriptorBasedBase struct {
 }
 
 func (x *FileDescriptorBasedBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

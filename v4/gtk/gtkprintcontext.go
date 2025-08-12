@@ -241,6 +241,9 @@ func (x *PrintContext) SetCairoContext(CrVar *cairo.Context, DpiXVar float64, Dp
 }
 
 func (c *PrintContext) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

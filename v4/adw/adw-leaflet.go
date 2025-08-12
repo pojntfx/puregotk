@@ -562,6 +562,9 @@ func (x *Leaflet) SetVisibleChildName(NameVar string) {
 }
 
 func (c *Leaflet) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -850,6 +853,9 @@ func (x *LeafletPage) SetNavigatable(NavigatableVar bool) {
 }
 
 func (c *LeafletPage) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -172,6 +172,9 @@ func (x *DBusObjectManagerServer) Unexport(ObjectPathVar string) bool {
 }
 
 func (c *DBusObjectManagerServer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

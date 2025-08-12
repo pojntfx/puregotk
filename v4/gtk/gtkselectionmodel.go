@@ -96,6 +96,9 @@ type SelectionModelBase struct {
 }
 
 func (x *SelectionModelBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

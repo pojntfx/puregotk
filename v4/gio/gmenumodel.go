@@ -186,6 +186,9 @@ func (x *MenuAttributeIter) Next() bool {
 }
 
 func (c *MenuAttributeIter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -279,6 +282,9 @@ func (x *MenuLinkIter) Next() bool {
 }
 
 func (c *MenuLinkIter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -561,6 +567,9 @@ func (x *MenuModel) IterateItemLinks(ItemIndexVar int) *MenuLinkIter {
 }
 
 func (c *MenuModel) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

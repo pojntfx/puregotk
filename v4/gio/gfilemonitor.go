@@ -104,6 +104,9 @@ func (x *FileMonitor) SetRateLimit(LimitMsecsVar int) {
 }
 
 func (c *FileMonitor) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -124,6 +124,9 @@ func (x *SocketAddressEnumerator) NextFinish(ResultVar AsyncResult) (*SocketAddr
 }
 
 func (c *SocketAddressEnumerator) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

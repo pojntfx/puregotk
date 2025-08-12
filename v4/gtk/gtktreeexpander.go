@@ -186,6 +186,9 @@ func (x *TreeExpander) SetListRow(ListRowVar *TreeListRow) {
 }
 
 func (c *TreeExpander) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

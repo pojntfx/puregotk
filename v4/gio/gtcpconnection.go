@@ -74,6 +74,9 @@ func (x *TcpConnection) SetGracefulDisconnect(GracefulDisconnectVar bool) {
 }
 
 func (c *TcpConnection) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

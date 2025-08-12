@@ -62,6 +62,9 @@ func NewNativeSocketAddress(NativeVar uintptr, LenVar uint) *NativeSocketAddress
 }
 
 func (c *NativeSocketAddress) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

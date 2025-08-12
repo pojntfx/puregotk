@@ -186,6 +186,9 @@ func (x *ScaleButton) SetValue(ValueVar float64) {
 }
 
 func (c *ScaleButton) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -205,6 +205,9 @@ func (x *DebugControllerDBus) Stop() {
 }
 
 func (c *DebugControllerDBus) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

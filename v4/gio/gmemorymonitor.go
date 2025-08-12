@@ -86,6 +86,9 @@ type MemoryMonitorBase struct {
 }
 
 func (x *MemoryMonitorBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

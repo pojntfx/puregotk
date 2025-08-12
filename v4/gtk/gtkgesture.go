@@ -395,6 +395,9 @@ func (x *Gesture) Ungroup() {
 }
 
 func (c *Gesture) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -62,6 +62,9 @@ func NewCellRendererPixbuf() *CellRendererPixbuf {
 }
 
 func (c *CellRendererPixbuf) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

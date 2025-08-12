@@ -330,6 +330,9 @@ func (x *Range) SetValue(ValueVar float64) {
 }
 
 func (c *Range) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -329,6 +329,9 @@ func (x *InfoBar) SetShowCloseButton(SettingVar bool) {
 }
 
 func (c *InfoBar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

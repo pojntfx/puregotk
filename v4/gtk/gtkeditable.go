@@ -202,6 +202,9 @@ type EditableBase struct {
 }
 
 func (x *EditableBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

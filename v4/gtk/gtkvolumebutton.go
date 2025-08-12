@@ -50,6 +50,9 @@ func NewVolumeButton() *VolumeButton {
 }
 
 func (c *VolumeButton) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

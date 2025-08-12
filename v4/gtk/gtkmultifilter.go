@@ -78,6 +78,9 @@ func NewAnyFilter() *AnyFilter {
 }
 
 func (c *AnyFilter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -228,6 +231,9 @@ func NewEveryFilter() *EveryFilter {
 }
 
 func (c *EveryFilter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -376,6 +382,9 @@ func (x *MultiFilter) Remove(PositionVar uint) {
 }
 
 func (c *MultiFilter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

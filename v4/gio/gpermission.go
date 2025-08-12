@@ -226,6 +226,9 @@ func (x *Permission) ReleaseFinish(ResultVar AsyncResult) (bool, error) {
 }
 
 func (c *Permission) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

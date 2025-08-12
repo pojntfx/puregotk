@@ -1308,6 +1308,9 @@ func (x *TreeView) UnsetRowsDragSource() {
 }
 
 func (c *TreeView) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

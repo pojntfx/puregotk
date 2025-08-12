@@ -459,6 +459,9 @@ func ParamSpecBooleanNewFromInternalPtr(ptr uintptr) *ParamSpecBoolean {
 }
 
 func (c *ParamSpecBoolean) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -484,6 +487,9 @@ func ParamSpecBoxedNewFromInternalPtr(ptr uintptr) *ParamSpecBoxed {
 }
 
 func (c *ParamSpecBoxed) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -509,6 +515,9 @@ func ParamSpecCharNewFromInternalPtr(ptr uintptr) *ParamSpecChar {
 }
 
 func (c *ParamSpecChar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -534,6 +543,9 @@ func ParamSpecDoubleNewFromInternalPtr(ptr uintptr) *ParamSpecDouble {
 }
 
 func (c *ParamSpecDouble) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -560,6 +572,9 @@ func ParamSpecEnumNewFromInternalPtr(ptr uintptr) *ParamSpecEnum {
 }
 
 func (c *ParamSpecEnum) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -586,6 +601,9 @@ func ParamSpecFlagsNewFromInternalPtr(ptr uintptr) *ParamSpecFlags {
 }
 
 func (c *ParamSpecFlags) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -611,6 +629,9 @@ func ParamSpecFloatNewFromInternalPtr(ptr uintptr) *ParamSpecFloat {
 }
 
 func (c *ParamSpecFloat) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -636,6 +657,9 @@ func ParamSpecGTypeNewFromInternalPtr(ptr uintptr) *ParamSpecGType {
 }
 
 func (c *ParamSpecGType) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -661,6 +685,9 @@ func ParamSpecIntNewFromInternalPtr(ptr uintptr) *ParamSpecInt {
 }
 
 func (c *ParamSpecInt) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -686,6 +713,9 @@ func ParamSpecInt64NewFromInternalPtr(ptr uintptr) *ParamSpecInt64 {
 }
 
 func (c *ParamSpecInt64) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -711,6 +741,9 @@ func ParamSpecLongNewFromInternalPtr(ptr uintptr) *ParamSpecLong {
 }
 
 func (c *ParamSpecLong) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -736,6 +769,9 @@ func ParamSpecObjectNewFromInternalPtr(ptr uintptr) *ParamSpecObject {
 }
 
 func (c *ParamSpecObject) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -771,6 +807,9 @@ func ParamSpecOverrideNewFromInternalPtr(ptr uintptr) *ParamSpecOverride {
 }
 
 func (c *ParamSpecOverride) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -797,6 +836,9 @@ func ParamSpecParamNewFromInternalPtr(ptr uintptr) *ParamSpecParam {
 }
 
 func (c *ParamSpecParam) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -822,6 +864,9 @@ func ParamSpecPointerNewFromInternalPtr(ptr uintptr) *ParamSpecPointer {
 }
 
 func (c *ParamSpecPointer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -848,6 +893,9 @@ func ParamSpecStringNewFromInternalPtr(ptr uintptr) *ParamSpecString {
 }
 
 func (c *ParamSpecString) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -873,6 +921,9 @@ func ParamSpecUCharNewFromInternalPtr(ptr uintptr) *ParamSpecUChar {
 }
 
 func (c *ParamSpecUChar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -898,6 +949,9 @@ func ParamSpecUIntNewFromInternalPtr(ptr uintptr) *ParamSpecUInt {
 }
 
 func (c *ParamSpecUInt) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -923,6 +977,9 @@ func ParamSpecUInt64NewFromInternalPtr(ptr uintptr) *ParamSpecUInt64 {
 }
 
 func (c *ParamSpecUInt64) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -948,6 +1005,9 @@ func ParamSpecULongNewFromInternalPtr(ptr uintptr) *ParamSpecULong {
 }
 
 func (c *ParamSpecULong) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -973,6 +1033,9 @@ func ParamSpecUnicharNewFromInternalPtr(ptr uintptr) *ParamSpecUnichar {
 }
 
 func (c *ParamSpecUnichar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -998,6 +1061,9 @@ func ParamSpecValueArrayNewFromInternalPtr(ptr uintptr) *ParamSpecValueArray {
 }
 
 func (c *ParamSpecValueArray) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1029,6 +1095,9 @@ func ParamSpecVariantNewFromInternalPtr(ptr uintptr) *ParamSpecVariant {
 }
 
 func (c *ParamSpecVariant) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

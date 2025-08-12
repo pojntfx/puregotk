@@ -75,6 +75,9 @@ func ShortcutsShortcutNewFromInternalPtr(ptr uintptr) *ShortcutsShortcut {
 }
 
 func (c *ShortcutsShortcut) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

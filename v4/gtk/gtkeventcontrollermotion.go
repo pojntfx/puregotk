@@ -80,6 +80,9 @@ func (x *EventControllerMotion) IsPointer() bool {
 }
 
 func (c *EventControllerMotion) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -91,6 +91,9 @@ type FileChooserBase struct {
 }
 
 func (x *FileChooserBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

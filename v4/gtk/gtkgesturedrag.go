@@ -88,6 +88,9 @@ func (x *GestureDrag) GetStartPoint(XVar float64, YVar float64) bool {
 }
 
 func (c *GestureDrag) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

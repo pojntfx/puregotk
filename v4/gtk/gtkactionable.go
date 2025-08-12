@@ -57,6 +57,9 @@ type ActionableBase struct {
 }
 
 func (x *ActionableBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

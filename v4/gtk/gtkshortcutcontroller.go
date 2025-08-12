@@ -199,6 +199,9 @@ func (x *ShortcutController) SetScope(ScopeVar ShortcutScope) {
 }
 
 func (c *ShortcutController) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

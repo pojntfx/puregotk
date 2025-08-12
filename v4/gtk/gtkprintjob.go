@@ -389,6 +389,9 @@ func (x *PrintJob) SetTrackPrintStatus(TrackStatusVar bool) {
 }
 
 func (c *PrintJob) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

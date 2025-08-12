@@ -129,6 +129,9 @@ func (x *GestureStylus) GetDeviceTool() *gdk.DeviceTool {
 }
 
 func (c *GestureStylus) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

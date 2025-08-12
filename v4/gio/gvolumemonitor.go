@@ -124,6 +124,9 @@ func (x *VolumeMonitor) GetVolumes() *glib.List {
 }
 
 func (c *VolumeMonitor) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

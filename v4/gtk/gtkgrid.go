@@ -395,6 +395,9 @@ func (x *Grid) SetRowSpacing(SpacingVar uint) {
 }
 
 func (c *Grid) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

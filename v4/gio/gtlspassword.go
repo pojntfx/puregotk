@@ -170,6 +170,9 @@ func (x *TlsPassword) SetWarning(WarningVar string) {
 }
 
 func (c *TlsPassword) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

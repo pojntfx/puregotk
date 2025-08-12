@@ -77,6 +77,9 @@ func (x *EnumListItem) GetValue() int {
 }
 
 func (c *EnumListItem) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -140,6 +143,9 @@ func (x *EnumListModel) GetEnumType() types.GType {
 }
 
 func (c *EnumListModel) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

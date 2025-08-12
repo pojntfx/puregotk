@@ -701,6 +701,9 @@ func (x *Notebook) SetTabReorderable(ChildVar *Widget, ReorderableVar bool) {
 }
 
 func (c *Notebook) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1092,6 +1095,9 @@ func (x *NotebookPage) GetChild() *Widget {
 }
 
 func (c *NotebookPage) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

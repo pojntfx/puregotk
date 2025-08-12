@@ -517,6 +517,9 @@ func (x *SimpleAsyncResult) TakeError(ErrorVar *glib.Error) {
 }
 
 func (c *SimpleAsyncResult) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

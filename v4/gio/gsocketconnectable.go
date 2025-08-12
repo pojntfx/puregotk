@@ -101,6 +101,9 @@ type SocketConnectableBase struct {
 }
 
 func (x *SocketConnectableBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

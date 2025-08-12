@@ -395,6 +395,9 @@ func (x *BottomSheet) SetShowDragHandle(ShowDragHandleVar bool) {
 }
 
 func (c *BottomSheet) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -288,6 +288,9 @@ func (x *ColumnViewColumn) SetVisible(VisibleVar bool) {
 }
 
 func (c *ColumnViewColumn) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

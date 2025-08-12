@@ -176,6 +176,9 @@ func (x *StringFilter) SetSearch(SearchVar string) {
 }
 
 func (c *StringFilter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -192,6 +192,9 @@ func (x *TreeListModel) SetAutoexpand(AutoexpandVar bool) {
 }
 
 func (c *TreeListModel) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -465,6 +468,9 @@ func (x *TreeListRow) SetExpanded(ExpandedVar bool) {
 }
 
 func (c *TreeListRow) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

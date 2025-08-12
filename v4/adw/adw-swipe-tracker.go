@@ -233,6 +233,9 @@ func (x *SwipeTracker) ShiftPosition(DeltaVar float64) {
 }
 
 func (c *SwipeTracker) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

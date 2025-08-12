@@ -87,6 +87,9 @@ func (x *CellRendererText) SetFixedHeightFromFont(NumberOfRowsVar int) {
 }
 
 func (c *CellRendererText) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

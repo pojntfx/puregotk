@@ -461,6 +461,9 @@ func (x *TlsConnection) SetUseSystemCertdb(UseSystemCertdbVar bool) {
 }
 
 func (c *TlsConnection) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

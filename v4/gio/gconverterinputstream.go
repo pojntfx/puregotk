@@ -85,6 +85,9 @@ func (x *ConverterInputStream) GetConverter() *ConverterBase {
 }
 
 func (c *ConverterInputStream) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -117,6 +117,9 @@ func (x *EditableLabel) StopEditing(CommitVar bool) {
 }
 
 func (c *EditableLabel) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

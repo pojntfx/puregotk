@@ -82,6 +82,9 @@ func ListItemFactoryNewFromInternalPtr(ptr uintptr) *ListItemFactory {
 }
 
 func (c *ListItemFactory) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

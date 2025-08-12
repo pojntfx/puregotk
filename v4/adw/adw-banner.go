@@ -162,6 +162,9 @@ func (x *Banner) SetUseMarkup(UseMarkupVar bool) {
 }
 
 func (c *Banner) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -58,6 +58,9 @@ func NewEventControllerLegacy() *EventControllerLegacy {
 }
 
 func (c *EventControllerLegacy) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

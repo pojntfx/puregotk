@@ -1351,6 +1351,9 @@ func (x *FileInfo) UnsetAttributeMask() {
 }
 
 func (c *FileInfo) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

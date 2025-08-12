@@ -182,6 +182,9 @@ func (x *ListItem) SetSelectable(SelectableVar bool) {
 }
 
 func (c *ListItem) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

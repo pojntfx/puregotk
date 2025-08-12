@@ -249,6 +249,9 @@ func (x *MultiLayoutView) SetLayoutName(NameVar string) {
 }
 
 func (c *MultiLayoutView) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

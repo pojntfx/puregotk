@@ -806,6 +806,9 @@ func (x *IconView) UnsetModelDragSource() {
 }
 
 func (c *IconView) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -203,6 +203,9 @@ func (x *UnixFDList) StealFds(LengthVar int) []int {
 }
 
 func (c *UnixFDList) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

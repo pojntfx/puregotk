@@ -47,6 +47,9 @@ func (x *CairoContext) CairoCreate() *cairo.Context {
 }
 
 func (c *CairoContext) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

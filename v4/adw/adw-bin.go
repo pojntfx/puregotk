@@ -96,6 +96,9 @@ func (x *Bin) SetChild(ChildVar *gtk.Widget) {
 }
 
 func (c *Bin) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

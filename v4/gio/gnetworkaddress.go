@@ -135,6 +135,9 @@ func (x *NetworkAddress) GetScheme() string {
 }
 
 func (c *NetworkAddress) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

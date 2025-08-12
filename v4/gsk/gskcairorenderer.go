@@ -62,6 +62,9 @@ func NewCairoRenderer() *CairoRenderer {
 }
 
 func (c *CairoRenderer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

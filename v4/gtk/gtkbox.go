@@ -206,6 +206,9 @@ func (x *Box) SetSpacing(SpacingVar int) {
 }
 
 func (c *Box) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

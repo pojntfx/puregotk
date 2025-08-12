@@ -329,6 +329,9 @@ func (x *FileEnumerator) SetPending(PendingVar bool) {
 }
 
 func (c *FileEnumerator) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

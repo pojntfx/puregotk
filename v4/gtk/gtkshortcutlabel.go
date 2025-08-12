@@ -92,6 +92,9 @@ func (x *ShortcutLabel) SetDisabledText(DisabledTextVar string) {
 }
 
 func (c *ShortcutLabel) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

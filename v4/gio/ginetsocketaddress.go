@@ -129,6 +129,9 @@ func (x *InetSocketAddress) GetScopeId() uint32 {
 }
 
 func (c *InetSocketAddress) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

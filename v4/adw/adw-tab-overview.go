@@ -385,6 +385,9 @@ func (x *TabOverview) SetupExtraDropTarget(ActionsVar gdk.DragAction, TypesVar [
 }
 
 func (c *TabOverview) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

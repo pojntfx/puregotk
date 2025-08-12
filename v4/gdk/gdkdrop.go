@@ -249,6 +249,9 @@ func (x *Drop) Status(ActionsVar DragAction, PreferredVar DragAction) {
 }
 
 func (c *Drop) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

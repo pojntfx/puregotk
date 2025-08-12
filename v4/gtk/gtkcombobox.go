@@ -482,6 +482,9 @@ func (x *ComboBox) SetRowSeparatorFunc(FuncVar *TreeViewRowSeparatorFunc, DataVa
 }
 
 func (c *ComboBox) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

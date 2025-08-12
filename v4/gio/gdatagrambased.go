@@ -94,6 +94,9 @@ type DatagramBasedBase struct {
 }
 
 func (x *DatagramBasedBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

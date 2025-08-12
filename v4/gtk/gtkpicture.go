@@ -407,6 +407,9 @@ func (x *Picture) SetResource(ResourcePathVar string) {
 }
 
 func (c *Picture) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

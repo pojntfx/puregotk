@@ -603,6 +603,9 @@ func (x *RecentManager) RemoveItem(UriVar string) (bool, error) {
 }
 
 func (c *RecentManager) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

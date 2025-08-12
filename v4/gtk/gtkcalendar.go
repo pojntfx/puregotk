@@ -221,6 +221,9 @@ func (x *Calendar) UnmarkDay(DayVar uint) {
 }
 
 func (c *Calendar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

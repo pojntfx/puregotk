@@ -189,6 +189,9 @@ func (x *NativeDialog) Show() {
 }
 
 func (c *NativeDialog) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

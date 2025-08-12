@@ -37,6 +37,9 @@ func VulkanContextNewFromInternalPtr(ptr uintptr) *VulkanContext {
 }
 
 func (c *VulkanContext) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

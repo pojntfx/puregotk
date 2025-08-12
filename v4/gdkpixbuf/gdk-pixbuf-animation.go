@@ -308,6 +308,9 @@ func (x *PixbufAnimation) Unref() {
 }
 
 func (c *PixbufAnimation) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -441,6 +444,9 @@ func (x *PixbufAnimationIter) OnCurrentlyLoadingFrame() bool {
 }
 
 func (c *PixbufAnimationIter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

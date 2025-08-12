@@ -97,6 +97,9 @@ type VolumeBase struct {
 }
 
 func (x *VolumeBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

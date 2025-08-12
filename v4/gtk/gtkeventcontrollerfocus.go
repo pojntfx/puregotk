@@ -80,6 +80,9 @@ func (x *EventControllerFocus) IsFocus() bool {
 }
 
 func (c *EventControllerFocus) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -258,6 +258,9 @@ func (x *FileChooserNative) SetCancelLabel(CancelLabelVar string) {
 }
 
 func (c *FileChooserNative) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

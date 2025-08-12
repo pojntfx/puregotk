@@ -366,6 +366,9 @@ func (x *ViewStack) SetVisibleChildName(NameVar string) {
 }
 
 func (c *ViewStack) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -690,6 +693,9 @@ func (x *ViewStackPage) SetVisible(VisibleVar bool) {
 }
 
 func (c *ViewStackPage) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -882,6 +888,9 @@ func (x *ViewStackPages) SetSelectedPage(PageVar *ViewStackPage) {
 }
 
 func (c *ViewStackPages) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

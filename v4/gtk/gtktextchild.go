@@ -109,6 +109,9 @@ func (x *TextChildAnchor) GetWidgets(OutLenVar uint) uintptr {
 }
 
 func (c *TextChildAnchor) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

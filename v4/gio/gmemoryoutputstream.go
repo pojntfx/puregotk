@@ -199,6 +199,9 @@ func (x *MemoryOutputStream) StealData() uintptr {
 }
 
 func (c *MemoryOutputStream) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

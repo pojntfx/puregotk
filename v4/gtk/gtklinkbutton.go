@@ -133,6 +133,9 @@ func (x *LinkButton) SetVisited(VisitedVar bool) {
 }
 
 func (c *LinkButton) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

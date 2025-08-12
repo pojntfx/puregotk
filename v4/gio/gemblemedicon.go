@@ -113,6 +113,9 @@ func (x *EmblemedIcon) GetIcon() *IconBase {
 }
 
 func (c *EmblemedIcon) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

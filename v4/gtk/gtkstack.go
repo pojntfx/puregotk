@@ -476,6 +476,9 @@ func (x *Stack) SetVisibleChildName(NameVar string) {
 }
 
 func (c *Stack) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -772,6 +775,9 @@ func (x *StackPage) SetVisible(VisibleVar bool) {
 }
 
 func (c *StackPage) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

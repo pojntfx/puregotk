@@ -495,6 +495,9 @@ func (x *ToolbarView) SetTopBarStyle(StyleVar ToolbarStyle) {
 }
 
 func (c *ToolbarView) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

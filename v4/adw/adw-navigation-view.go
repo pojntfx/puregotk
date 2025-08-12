@@ -215,6 +215,9 @@ func (x *NavigationPage) SetTitle(TitleVar string) {
 }
 
 func (c *NavigationPage) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -942,6 +945,9 @@ func (x *NavigationView) SetPopOnEscape(PopOnEscapeVar bool) {
 }
 
 func (c *NavigationView) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

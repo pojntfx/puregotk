@@ -202,6 +202,9 @@ func (x *PreferencesGroup) SetTitle(TitleVar string) {
 }
 
 func (c *PreferencesGroup) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

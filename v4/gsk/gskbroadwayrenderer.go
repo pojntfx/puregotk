@@ -58,6 +58,9 @@ func NewBroadwayRenderer() *BroadwayRenderer {
 }
 
 func (c *BroadwayRenderer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -49,6 +49,9 @@ type TlsBackendBase struct {
 }
 
 func (x *TlsBackendBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

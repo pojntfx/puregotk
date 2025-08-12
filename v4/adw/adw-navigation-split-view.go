@@ -394,6 +394,9 @@ func (x *NavigationSplitView) SetSidebarWidthUnit(UnitVar LengthUnit) {
 }
 
 func (c *NavigationSplitView) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

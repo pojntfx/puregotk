@@ -153,6 +153,9 @@ func (x *MapListModel) SetModel(ModelVar gio.ListModel) {
 }
 
 func (c *MapListModel) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

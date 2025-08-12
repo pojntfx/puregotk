@@ -169,6 +169,9 @@ func (x *SizeGroup) SetMode(ModeVar SizeGroupMode) {
 }
 
 func (c *SizeGroup) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

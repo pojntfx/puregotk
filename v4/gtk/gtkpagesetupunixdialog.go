@@ -106,6 +106,9 @@ func (x *PageSetupUnixDialog) SetPrintSettings(PrintSettingsVar *PrintSettings) 
 }
 
 func (c *PageSetupUnixDialog) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

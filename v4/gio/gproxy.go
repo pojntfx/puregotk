@@ -48,6 +48,9 @@ type ProxyBase struct {
 }
 
 func (x *ProxyBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

@@ -90,6 +90,9 @@ func (x *ZlibCompressor) SetFileInfo(FileInfoVar *FileInfo) {
 }
 
 func (c *ZlibCompressor) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

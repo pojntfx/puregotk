@@ -137,6 +137,9 @@ func (x *AlternativeTrigger) GetSecond() *ShortcutTrigger {
 }
 
 func (c *AlternativeTrigger) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -199,6 +202,9 @@ func (x *KeyvalTrigger) GetModifiers() gdk.ModifierType {
 }
 
 func (c *KeyvalTrigger) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -256,6 +262,9 @@ func (x *MnemonicTrigger) GetKeyval() uint {
 }
 
 func (c *MnemonicTrigger) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -281,6 +290,9 @@ func NeverTriggerNewFromInternalPtr(ptr uintptr) *NeverTrigger {
 }
 
 func (c *NeverTrigger) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -482,6 +494,9 @@ func (x *ShortcutTrigger) Trigger(EventVar *gdk.Event, EnableMnemonicsVar bool) 
 }
 
 func (c *ShortcutTrigger) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

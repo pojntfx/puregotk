@@ -53,6 +53,9 @@ func ProxyAddressEnumeratorNewFromInternalPtr(ptr uintptr) *ProxyAddressEnumerat
 }
 
 func (c *ProxyAddressEnumerator) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

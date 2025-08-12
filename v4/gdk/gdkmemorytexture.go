@@ -57,6 +57,9 @@ func NewMemoryTexture(WidthVar int, HeightVar int, FormatVar MemoryFormat, Bytes
 }
 
 func (c *MemoryTexture) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

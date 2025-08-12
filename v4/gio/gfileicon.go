@@ -72,6 +72,9 @@ func (x *FileIcon) GetFile() *FileBase {
 }
 
 func (c *FileIcon) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

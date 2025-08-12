@@ -128,6 +128,9 @@ func (x *IMContextSimple) AddTable(DataVar []uint16, MaxSeqLenVar int, NSeqsVar 
 }
 
 func (c *IMContextSimple) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

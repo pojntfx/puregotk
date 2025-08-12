@@ -169,6 +169,9 @@ func (x *DisplayManager) SetDefaultDisplay(DisplayVar *Display) {
 }
 
 func (c *DisplayManager) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

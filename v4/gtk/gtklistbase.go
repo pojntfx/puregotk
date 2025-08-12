@@ -35,6 +35,9 @@ func ListBaseNewFromInternalPtr(ptr uintptr) *ListBase {
 }
 
 func (c *ListBase) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

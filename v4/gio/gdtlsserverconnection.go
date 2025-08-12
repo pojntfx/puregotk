@@ -40,6 +40,9 @@ type DtlsServerConnectionBase struct {
 }
 
 func (x *DtlsServerConnectionBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

@@ -379,6 +379,9 @@ func (x *Squeezer) SetYalign(YalignVar float32) {
 }
 
 func (c *Squeezer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -605,6 +608,9 @@ func (x *SqueezerPage) SetEnabled(EnabledVar bool) {
 }
 
 func (c *SqueezerPage) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -508,6 +508,9 @@ func (x *MediaStream) Update(TimestampVar int64) {
 }
 
 func (c *MediaStream) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

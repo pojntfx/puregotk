@@ -185,6 +185,9 @@ func (x *ListStore) Splice(PositionVar uint, NRemovalsVar uint, AdditionsVar []g
 }
 
 func (c *ListStore) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

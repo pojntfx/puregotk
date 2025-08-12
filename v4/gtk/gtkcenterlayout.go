@@ -181,6 +181,9 @@ func (x *CenterLayout) SetStartWidget(WidgetVar *Widget) {
 }
 
 func (c *CenterLayout) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

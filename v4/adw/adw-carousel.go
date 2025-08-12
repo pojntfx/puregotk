@@ -319,6 +319,9 @@ func (x *Carousel) SetSpacing(SpacingVar uint) {
 }
 
 func (c *Carousel) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

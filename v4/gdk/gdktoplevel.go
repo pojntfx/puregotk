@@ -59,6 +59,9 @@ type ToplevelBase struct {
 }
 
 func (x *ToplevelBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

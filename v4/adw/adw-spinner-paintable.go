@@ -115,6 +115,9 @@ func (x *SpinnerPaintable) SetWidget(WidgetVar *gtk.Widget) {
 }
 
 func (c *SpinnerPaintable) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

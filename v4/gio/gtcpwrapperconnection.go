@@ -84,6 +84,9 @@ func (x *TcpWrapperConnection) GetBaseIoStream() *IOStream {
 }
 
 func (c *TcpWrapperConnection) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

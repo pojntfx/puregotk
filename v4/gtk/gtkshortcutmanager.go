@@ -51,6 +51,9 @@ type ShortcutManagerBase struct {
 }
 
 func (x *ShortcutManagerBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

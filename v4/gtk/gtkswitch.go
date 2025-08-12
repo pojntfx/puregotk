@@ -113,6 +113,9 @@ func (x *Switch) SetState(StateVar bool) {
 }
 
 func (c *Switch) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

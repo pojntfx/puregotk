@@ -280,6 +280,9 @@ func (x *ListView) SetSingleClickActivate(SingleClickActivateVar bool) {
 }
 
 func (c *ListView) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

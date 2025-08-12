@@ -484,6 +484,9 @@ func (x *Surface) TranslateCoordinates(ToVar *Surface, XVar float64, YVar float6
 }
 
 func (c *Surface) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

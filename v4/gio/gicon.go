@@ -71,6 +71,9 @@ type IconBase struct {
 }
 
 func (x *IconBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

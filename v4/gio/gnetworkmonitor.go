@@ -51,6 +51,9 @@ type NetworkMonitorBase struct {
 }
 
 func (x *NetworkMonitorBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

@@ -380,6 +380,9 @@ func (x *Context) SetRoundGlyphPositions(RoundPositionsVar bool) {
 }
 
 func (c *Context) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

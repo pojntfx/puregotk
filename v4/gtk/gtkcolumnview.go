@@ -352,6 +352,9 @@ func (x *ColumnView) SortByColumn(ColumnVar *ColumnViewColumn, DirectionVar Sort
 }
 
 func (c *ColumnView) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

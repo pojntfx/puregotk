@@ -264,6 +264,9 @@ func (x *InetAddress) ToString() string {
 }
 
 func (c *InetAddress) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

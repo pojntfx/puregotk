@@ -155,6 +155,9 @@ func (x *AspectFrame) SetYalign(YalignVar float32) {
 }
 
 func (c *AspectFrame) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

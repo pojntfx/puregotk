@@ -540,6 +540,9 @@ func (x *DBusProxy) SetInterfaceInfo(InfoVar *DBusInterfaceInfo) {
 }
 
 func (c *DBusProxy) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

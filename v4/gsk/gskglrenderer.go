@@ -51,6 +51,9 @@ func NewGLRenderer() *GLRenderer {
 }
 
 func (c *GLRenderer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

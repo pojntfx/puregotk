@@ -243,6 +243,9 @@ func (x *FrameClock) RequestPhase(PhaseVar FrameClockPhase) {
 }
 
 func (c *FrameClock) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

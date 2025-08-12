@@ -269,6 +269,9 @@ func (x *SpringAnimation) SetValueTo(ValueVar float64) {
 }
 
 func (c *SpringAnimation) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

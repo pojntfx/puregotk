@@ -91,6 +91,9 @@ func (x *BlendNode) GetTopChild() *RenderNode {
 }
 
 func (c *BlendNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -158,6 +161,9 @@ func (x *BlurNode) GetRadius() float32 {
 }
 
 func (c *BlurNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -229,6 +235,9 @@ func (x *BorderNode) GetWidths() [4]float32 {
 }
 
 func (c *BorderNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -295,6 +304,9 @@ func (x *CairoNode) GetSurface() *cairo.Surface {
 }
 
 func (c *CairoNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -363,6 +375,9 @@ func (x *ClipNode) GetClip() *graphene.Rect {
 }
 
 func (c *ClipNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -446,6 +461,9 @@ func (x *ColorMatrixNode) GetColorOffset() *graphene.Vec4 {
 }
 
 func (c *ColorMatrixNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -497,6 +515,9 @@ func (x *ColorNode) GetColor() *gdk.RGBA {
 }
 
 func (c *ColorNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -592,6 +613,9 @@ func (x *ConicGradientNode) GetRotation() float32 {
 }
 
 func (c *ConicGradientNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -661,6 +685,9 @@ func (x *ContainerNode) GetNChildren() uint {
 }
 
 func (c *ContainerNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -745,6 +772,9 @@ func (x *CrossFadeNode) GetStartChild() *RenderNode {
 }
 
 func (c *CrossFadeNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -816,6 +846,9 @@ func (x *DebugNode) GetMessage() string {
 }
 
 func (c *DebugNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -925,6 +958,9 @@ func (x *GLShaderNode) GetShader() *GLShader {
 }
 
 func (c *GLShaderNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1021,6 +1057,9 @@ func (x *InsetShadowNode) GetSpread() float32 {
 }
 
 func (c *InsetShadowNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1099,6 +1138,9 @@ func (x *LinearGradientNode) GetStart() *graphene.Point {
 }
 
 func (c *LinearGradientNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1167,6 +1209,9 @@ func (x *OpacityNode) GetOpacity() float32 {
 }
 
 func (c *OpacityNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1263,6 +1308,9 @@ func (x *OutsetShadowNode) GetSpread() float32 {
 }
 
 func (c *OutsetShadowNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1371,6 +1419,9 @@ func (x *RadialGradientNode) GetVradius() float32 {
 }
 
 func (c *RadialGradientNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1439,6 +1490,9 @@ func (x *RepeatNode) GetChildBounds() *graphene.Rect {
 }
 
 func (c *RepeatNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1482,6 +1536,9 @@ func NewRepeatingLinearGradientNode(BoundsVar *graphene.Rect, StartVar *graphene
 }
 
 func (c *RepeatingLinearGradientNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1527,6 +1584,9 @@ func NewRepeatingRadialGradientNode(BoundsVar *graphene.Rect, CenterVar *graphen
 }
 
 func (c *RepeatingRadialGradientNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1595,6 +1655,9 @@ func (x *RoundedClipNode) GetClip() *RoundedRect {
 }
 
 func (c *RoundedClipNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1672,6 +1735,9 @@ func (x *ShadowNode) GetShadow(IVar uint) *Shadow {
 }
 
 func (c *ShadowNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1778,6 +1844,9 @@ func (x *TextNode) HasColorGlyphs() bool {
 }
 
 func (c *TextNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1837,6 +1906,9 @@ func (x *TextureNode) GetTexture() *gdk.Texture {
 }
 
 func (c *TextureNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1905,6 +1977,9 @@ func (x *TransformNode) GetTransform() *Transform {
 }
 
 func (c *TransformNode) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

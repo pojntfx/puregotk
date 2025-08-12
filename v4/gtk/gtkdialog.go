@@ -451,6 +451,9 @@ func (x *Dialog) SetResponseSensitive(ResponseIdVar int, SettingVar bool) {
 }
 
 func (c *Dialog) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

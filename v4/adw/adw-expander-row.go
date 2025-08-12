@@ -282,6 +282,9 @@ func (x *ExpanderRow) SetTitleLines(TitleLinesVar int) {
 }
 
 func (c *ExpanderRow) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -369,6 +369,9 @@ func (x *Popover) SetPosition(PositionVar PositionType) {
 }
 
 func (c *Popover) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

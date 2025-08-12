@@ -158,6 +158,9 @@ func (x *Shortcut) SetTrigger(TriggerVar *ShortcutTrigger) {
 }
 
 func (c *Shortcut) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

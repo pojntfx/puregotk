@@ -407,6 +407,9 @@ func (x *PageSetup) ToKeyFile(KeyFileVar *glib.KeyFile, GroupNameVar string) {
 }
 
 func (c *PageSetup) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

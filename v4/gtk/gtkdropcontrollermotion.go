@@ -101,6 +101,9 @@ func (x *DropControllerMotion) IsPointer() bool {
 }
 
 func (c *DropControllerMotion) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

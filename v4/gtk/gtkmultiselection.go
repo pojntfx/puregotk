@@ -85,6 +85,9 @@ func (x *MultiSelection) SetModel(ModelVar gio.ListModel) {
 }
 
 func (c *MultiSelection) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

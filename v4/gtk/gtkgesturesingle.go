@@ -142,6 +142,9 @@ func (x *GestureSingle) SetTouchOnly(TouchOnlyVar bool) {
 }
 
 func (c *GestureSingle) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -128,6 +128,9 @@ func (x *BoxLayout) SetSpacing(SpacingVar uint) {
 }
 
 func (c *BoxLayout) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -330,6 +330,9 @@ func (x *Device) HasBidiLayouts() bool {
 }
 
 func (c *Device) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

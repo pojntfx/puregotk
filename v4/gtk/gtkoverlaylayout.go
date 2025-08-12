@@ -70,6 +70,9 @@ func NewOverlayLayout() *OverlayLayout {
 }
 
 func (c *OverlayLayout) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -131,6 +134,9 @@ func (x *OverlayLayoutChild) SetMeasure(MeasureVar bool) {
 }
 
 func (c *OverlayLayoutChild) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

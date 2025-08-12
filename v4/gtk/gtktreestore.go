@@ -393,6 +393,9 @@ func (x *TreeStore) Swap(AVar *TreeIter, BVar *TreeIter) {
 }
 
 func (c *TreeStore) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

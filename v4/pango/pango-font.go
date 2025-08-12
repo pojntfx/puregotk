@@ -1121,6 +1121,9 @@ func (x *Font) Serialize() *glib.Bytes {
 }
 
 func (c *Font) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1253,6 +1256,9 @@ func (x *FontFace) ListSizes(SizesVar []int, NSizesVar int) {
 }
 
 func (c *FontFace) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -1359,6 +1365,9 @@ func (x *FontFamily) ListFaces(FacesVar uintptr, NFacesVar int) {
 }
 
 func (c *FontFamily) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

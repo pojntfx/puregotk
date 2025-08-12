@@ -193,6 +193,9 @@ func (x *CenterBox) SetStartWidget(ChildVar *Widget) {
 }
 
 func (c *CenterBox) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

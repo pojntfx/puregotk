@@ -137,6 +137,9 @@ func (x *Seat) GetTools() *glib.List {
 }
 
 func (c *Seat) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -190,6 +190,9 @@ func (x *AppChooserWidget) SetShowRecommended(SettingVar bool) {
 }
 
 func (c *AppChooserWidget) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

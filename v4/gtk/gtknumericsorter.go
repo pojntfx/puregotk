@@ -111,6 +111,9 @@ func (x *NumericSorter) SetSortOrder(SortOrderVar SortType) {
 }
 
 func (c *NumericSorter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

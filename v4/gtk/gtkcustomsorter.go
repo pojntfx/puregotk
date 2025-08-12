@@ -76,6 +76,9 @@ func (x *CustomSorter) SetSortFunc(SortFuncVar *glib.CompareDataFunc, UserDataVa
 }
 
 func (c *CustomSorter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -206,6 +206,9 @@ func (x *DBusInterfaceSkeleton) UnexportFromConnection(ConnectionVar *DBusConnec
 }
 
 func (c *DBusInterfaceSkeleton) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

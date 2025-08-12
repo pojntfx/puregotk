@@ -379,6 +379,9 @@ func (x *TlsDatabase) VerifyChainFinish(ResultVar AsyncResult) (TlsCertificateFl
 }
 
 func (c *TlsDatabase) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -112,6 +112,9 @@ func (x *Scrollbar) SetAdjustment(AdjustmentVar *Adjustment) {
 }
 
 func (c *Scrollbar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

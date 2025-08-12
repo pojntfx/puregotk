@@ -120,6 +120,9 @@ func (x *FileInputStream) QueryInfoFinish(ResultVar AsyncResult) (*FileInfo, err
 }
 
 func (c *FileInputStream) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

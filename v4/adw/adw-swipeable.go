@@ -50,6 +50,9 @@ type SwipeableBase struct {
 }
 
 func (x *SwipeableBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

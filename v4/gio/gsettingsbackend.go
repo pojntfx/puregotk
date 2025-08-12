@@ -310,6 +310,9 @@ func (x *SettingsBackend) WritableChanged(KeyVar string) {
 }
 
 func (c *SettingsBackend) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

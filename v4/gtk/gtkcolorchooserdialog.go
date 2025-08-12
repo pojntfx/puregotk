@@ -56,6 +56,9 @@ func NewColorChooserDialog(TitleVar string, ParentVar *Window) *ColorChooserDial
 }
 
 func (c *ColorChooserDialog) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

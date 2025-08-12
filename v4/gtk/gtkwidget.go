@@ -3468,6 +3468,9 @@ func (x *Widget) UnsetStateFlags(FlagsVar StateFlags) {
 }
 
 func (c *Widget) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -279,6 +279,9 @@ func (x *TreeSelection) UnselectRange(StartPathVar *TreePath, EndPathVar *TreePa
 }
 
 func (c *TreeSelection) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

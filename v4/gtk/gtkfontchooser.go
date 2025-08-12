@@ -72,6 +72,9 @@ type FontChooserBase struct {
 }
 
 func (x *FontChooserBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

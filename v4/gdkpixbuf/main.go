@@ -48,6 +48,9 @@ func NewPixbufNonAnim(PixbufVar *Pixbuf) *PixbufNonAnim {
 }
 
 func (c *PixbufNonAnim) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -72,6 +75,9 @@ func PixbufSimpleAnimIterNewFromInternalPtr(ptr uintptr) *PixbufSimpleAnimIter {
 }
 
 func (c *PixbufSimpleAnimIter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

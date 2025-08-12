@@ -169,6 +169,9 @@ func (x *Overlay) SetMeasureOverlay(WidgetVar *Widget, MeasureVar bool) {
 }
 
 func (c *Overlay) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

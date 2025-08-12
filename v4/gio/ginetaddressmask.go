@@ -159,6 +159,9 @@ func (x *InetAddressMask) ToString() string {
 }
 
 func (c *InetAddressMask) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -330,6 +330,9 @@ func (x *Texture) SaveToTiffBytes() *glib.Bytes {
 }
 
 func (c *Texture) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -104,6 +104,9 @@ func (x *BoolFilter) SetInvert(InvertVar bool) {
 }
 
 func (c *BoolFilter) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

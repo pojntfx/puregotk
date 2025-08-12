@@ -540,6 +540,9 @@ func (x *UnixMountMonitor) SetRateLimit(LimitMsecVar int) {
 }
 
 func (c *UnixMountMonitor) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

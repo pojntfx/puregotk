@@ -276,6 +276,9 @@ func (x *Paned) SetWideHandle(WideVar bool) {
 }
 
 func (c *Paned) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

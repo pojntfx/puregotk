@@ -86,6 +86,9 @@ func (x *StackSidebar) SetStack(StackVar *Stack) {
 }
 
 func (c *StackSidebar) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

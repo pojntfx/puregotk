@@ -126,6 +126,9 @@ func (x *TextTag) SetPriority(PriorityVar int) {
 }
 
 func (c *TextTag) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -98,6 +98,9 @@ func (x *SocketAddress) ToNative(DestVar uintptr, DestlenVar uint) (bool, error)
 }
 
 func (c *SocketAddress) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

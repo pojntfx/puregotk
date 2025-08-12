@@ -92,6 +92,9 @@ func NewSpinner() *Spinner {
 }
 
 func (c *Spinner) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

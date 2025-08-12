@@ -255,6 +255,9 @@ func (x *Adjustment) SetValue(ValueVar float64) {
 }
 
 func (c *Adjustment) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

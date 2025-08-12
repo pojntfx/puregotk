@@ -97,6 +97,9 @@ type ActionGroupBase struct {
 }
 
 func (x *ActionGroupBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

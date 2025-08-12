@@ -328,6 +328,9 @@ func (x *Expander) SetUseUnderline(UseUnderlineVar bool) {
 }
 
 func (c *Expander) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

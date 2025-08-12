@@ -119,6 +119,9 @@ func (x *CellRendererToggle) SetRadio(RadioVar bool) {
 }
 
 func (c *CellRendererToggle) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

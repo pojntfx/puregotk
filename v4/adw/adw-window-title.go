@@ -112,6 +112,9 @@ func (x *WindowTitle) SetTitle(TitleVar string) {
 }
 
 func (c *WindowTitle) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

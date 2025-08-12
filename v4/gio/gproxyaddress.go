@@ -136,6 +136,9 @@ func (x *ProxyAddress) GetUsername() string {
 }
 
 func (c *ProxyAddress) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

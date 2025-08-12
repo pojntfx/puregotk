@@ -103,6 +103,9 @@ func (x *FlattenListModel) SetModel(ModelVar gio.ListModel) {
 }
 
 func (c *FlattenListModel) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

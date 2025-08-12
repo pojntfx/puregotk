@@ -235,6 +235,9 @@ func (x *BufferedInputStream) SetBufferSize(SizeVar uint) {
 }
 
 func (c *BufferedInputStream) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

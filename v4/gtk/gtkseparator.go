@@ -58,6 +58,9 @@ func NewSeparator(OrientationVar Orientation) *Separator {
 }
 
 func (c *Separator) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

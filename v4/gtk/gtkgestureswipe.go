@@ -78,6 +78,9 @@ func (x *GestureSwipe) GetVelocity(VelocityXVar float64, VelocityYVar float64) b
 }
 
 func (c *GestureSwipe) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

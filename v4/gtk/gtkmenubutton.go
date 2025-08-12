@@ -414,6 +414,9 @@ func (x *MenuButton) SetUseUnderline(UseUnderlineVar bool) {
 }
 
 func (c *MenuButton) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

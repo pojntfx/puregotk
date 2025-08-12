@@ -243,6 +243,9 @@ func (x *DragSource) SetIcon(PaintableVar gdk.Paintable, HotXVar int, HotYVar in
 }
 
 func (c *DragSource) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

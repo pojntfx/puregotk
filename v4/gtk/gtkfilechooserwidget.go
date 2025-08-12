@@ -59,6 +59,9 @@ func NewFileChooserWidget(ActionVar FileChooserAction) *FileChooserWidget {
 }
 
 func (c *FileChooserWidget) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

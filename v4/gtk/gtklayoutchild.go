@@ -82,6 +82,9 @@ func (x *LayoutChild) GetLayoutManager() *LayoutManager {
 }
 
 func (c *LayoutChild) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

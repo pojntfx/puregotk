@@ -240,6 +240,9 @@ func (x *CellView) SetModel(ModelVar TreeModel) {
 }
 
 func (c *CellView) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

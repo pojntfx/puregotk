@@ -412,6 +412,9 @@ func (x *Assistant) UpdateButtonsState() {
 }
 
 func (c *Assistant) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -820,6 +823,9 @@ func (x *AssistantPage) GetChild() *Widget {
 }
 
 func (c *AssistantPage) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

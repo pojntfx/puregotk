@@ -45,6 +45,9 @@ type DBusObjectBase struct {
 }
 
 func (x *DBusObjectBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

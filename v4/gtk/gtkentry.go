@@ -923,6 +923,9 @@ func (x *Entry) UnsetInvisibleChar() {
 }
 
 func (c *Entry) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

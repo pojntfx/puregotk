@@ -610,6 +610,9 @@ func (x *MessageDialog) SetResponseLabel(ResponseVar string, LabelVar string) {
 }
 
 func (c *MessageDialog) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -49,6 +49,9 @@ type ConstraintTargetBase struct {
 }
 
 func (x *ConstraintTargetBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 
@@ -252,6 +255,9 @@ func (x *Constraint) IsRequired() bool {
 }
 
 func (c *Constraint) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

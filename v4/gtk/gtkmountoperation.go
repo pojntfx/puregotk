@@ -141,6 +141,9 @@ func (x *MountOperation) SetParent(ParentVar *Window) {
 }
 
 func (c *MountOperation) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

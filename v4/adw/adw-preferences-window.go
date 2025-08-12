@@ -243,6 +243,9 @@ func (x *PreferencesWindow) SetVisiblePageName(NameVar string) {
 }
 
 func (c *PreferencesWindow) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

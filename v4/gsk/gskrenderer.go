@@ -174,6 +174,9 @@ func (x *Renderer) Unrealize() {
 }
 
 func (c *Renderer) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

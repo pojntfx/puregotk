@@ -104,6 +104,9 @@ func (x *CellAreaBox) SetSpacing(SpacingVar int) {
 }
 
 func (c *CellAreaBox) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -132,6 +132,9 @@ type AppInfoBase struct {
 }
 
 func (x *AppInfoBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 
@@ -746,6 +749,9 @@ func (x *AppLaunchContext) Unsetenv(VariableVar string) {
 }
 
 func (c *AppLaunchContext) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

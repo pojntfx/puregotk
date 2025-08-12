@@ -37,6 +37,9 @@ type DragSurfaceBase struct {
 }
 
 func (x *DragSurfaceBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 

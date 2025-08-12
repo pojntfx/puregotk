@@ -372,6 +372,9 @@ func (x *GLArea) SetUseEs(UseEsVar bool) {
 }
 
 func (c *GLArea) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

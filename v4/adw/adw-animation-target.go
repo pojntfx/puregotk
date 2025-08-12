@@ -57,6 +57,9 @@ func AnimationTargetNewFromInternalPtr(ptr uintptr) *AnimationTarget {
 }
 
 func (c *AnimationTarget) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -100,6 +103,9 @@ func NewCallbackAnimationTarget(CallbackVar *AnimationTargetFunc, UserDataVar ui
 }
 
 func (c *CallbackAnimationTarget) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 
@@ -198,6 +204,9 @@ func (x *PropertyAnimationTarget) GetPspec() *gobject.ParamSpec {
 }
 
 func (c *PropertyAnimationTarget) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

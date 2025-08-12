@@ -309,6 +309,9 @@ func (x *Inscription) SetYalign(YalignVar float32) {
 }
 
 func (c *Inscription) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

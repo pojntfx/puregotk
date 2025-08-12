@@ -223,6 +223,9 @@ func NewFileChooserDialog(TitleVar string, ParentVar *Window, ActionVar FileChoo
 }
 
 func (c *FileChooserDialog) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

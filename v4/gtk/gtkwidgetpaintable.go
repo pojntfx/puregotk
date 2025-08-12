@@ -101,6 +101,9 @@ func (x *WidgetPaintable) SetWidget(WidgetVar *Widget) {
 }
 
 func (c *WidgetPaintable) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

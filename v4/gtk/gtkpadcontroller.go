@@ -181,6 +181,9 @@ func (x *PadController) SetActionEntries(EntriesVar []PadActionEntry, NEntriesVa
 }
 
 func (c *PadController) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

@@ -310,6 +310,9 @@ func (x *DropDown) SetShowArrow(ShowArrowVar bool) {
 }
 
 func (c *DropDown) GoPointer() uintptr {
+	if c == nil {
+		return 0
+	}
 	return c.Ptr
 }
 

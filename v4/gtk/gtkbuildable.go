@@ -175,6 +175,9 @@ type BuildableBase struct {
 }
 
 func (x *BuildableBase) GoPointer() uintptr {
+	if x == nil {
+		return 0
+	}
 	return x.Ptr
 }
 
