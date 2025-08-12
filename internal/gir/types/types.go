@@ -771,6 +771,12 @@ func (r *ReturnValue) Template(ns string, ins string, kinds KindMap, throws bool
 	case CallbackType:
 		raw = "uintptr"
 		val = "uintptr"
+	case SliceType:
+		// our purego fork supports string slices as return values
+		if val != "[]string" {
+			raw = "uintptr"
+			val = "uintptr"
+		}
 	}
 	return funcRetTemplate{
 		Raw:     raw,
