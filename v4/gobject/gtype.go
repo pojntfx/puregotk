@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
@@ -734,11 +734,11 @@ func TypeCheckValueHolds(ValueVar *Value, TypeVar types.GType) bool {
 	return cret
 }
 
-var xTypeChildren func(types.GType, uint) []types.GType
+var xTypeChildren func(types.GType, uint) uintptr
 
 // Return a newly allocated and 0-terminated array of type IDs, listing
 // the child types of @type.
-func TypeChildren(TypeVar types.GType, NChildrenVar uint) []types.GType {
+func TypeChildren(TypeVar types.GType, NChildrenVar uint) uintptr {
 
 	cret := xTypeChildren(TypeVar, NChildrenVar)
 	return cret
@@ -1066,20 +1066,20 @@ func TypeInterfacePeek(InstanceClassVar *TypeClass, IfaceTypeVar types.GType) *T
 	return cret
 }
 
-var xTypeInterfacePrerequisites func(types.GType, uint) []types.GType
+var xTypeInterfacePrerequisites func(types.GType, uint) uintptr
 
 // Returns the prerequisites of an interfaces type.
-func TypeInterfacePrerequisites(InterfaceTypeVar types.GType, NPrerequisitesVar uint) []types.GType {
+func TypeInterfacePrerequisites(InterfaceTypeVar types.GType, NPrerequisitesVar uint) uintptr {
 
 	cret := xTypeInterfacePrerequisites(InterfaceTypeVar, NPrerequisitesVar)
 	return cret
 }
 
-var xTypeInterfaces func(types.GType, uint) []types.GType
+var xTypeInterfaces func(types.GType, uint) uintptr
 
 // Return a newly allocated and 0-terminated array of type IDs, listing
 // the interface types that @type conforms to.
-func TypeInterfaces(TypeVar types.GType, NInterfacesVar uint) []types.GType {
+func TypeInterfaces(TypeVar types.GType, NInterfacesVar uint) uintptr {
 
 	cret := xTypeInterfaces(TypeVar, NInterfacesVar)
 	return cret

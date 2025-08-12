@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject"
@@ -262,19 +262,19 @@ func NewTlsCertificateFromPkcs12(DataVar []byte, LengthVar uint, PasswordVar str
 
 }
 
-var xTlsCertificateGetDnsNames func(uintptr) []glib.Bytes
+var xTlsCertificateGetDnsNames func(uintptr) uintptr
 
 // Gets the value of #GTlsCertificate:dns-names.
-func (x *TlsCertificate) GetDnsNames() []glib.Bytes {
+func (x *TlsCertificate) GetDnsNames() uintptr {
 
 	cret := xTlsCertificateGetDnsNames(x.GoPointer())
 	return cret
 }
 
-var xTlsCertificateGetIpAddresses func(uintptr) []InetAddress
+var xTlsCertificateGetIpAddresses func(uintptr) uintptr
 
 // Gets the value of #GTlsCertificate:ip-addresses.
-func (x *TlsCertificate) GetIpAddresses() []InetAddress {
+func (x *TlsCertificate) GetIpAddresses() uintptr {
 
 	cret := xTlsCertificateGetIpAddresses(x.GoPointer())
 	return cret

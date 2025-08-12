@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/gdk"
 	"github.com/jwijenbergh/puregotk/v4/glib"
@@ -190,12 +190,12 @@ func (x *DropTarget) GetFormats() *gdk.ContentFormats {
 	return cret
 }
 
-var xDropTargetGetGtypes func(uintptr, uint) []types.GType
+var xDropTargetGetGtypes func(uintptr, uint) uintptr
 
 // Gets the list of supported `GType`s that can be dropped on the target.
 //
 // If no types have been set, `NULL` will be returned.
-func (x *DropTarget) GetGtypes(NTypesVar uint) []types.GType {
+func (x *DropTarget) GetGtypes(NTypesVar uint) uintptr {
 
 	cret := xDropTargetGetGtypes(x.GoPointer(), NTypesVar)
 	return cret

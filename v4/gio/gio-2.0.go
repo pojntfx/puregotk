@@ -4,7 +4,7 @@ package gio
 import (
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject"
@@ -2390,10 +2390,10 @@ func (x *DBusMessage) GetHeader(HeaderFieldVar DBusMessageHeaderField) *glib.Var
 	return cret
 }
 
-var xDBusMessageGetHeaderFields func(uintptr) []byte
+var xDBusMessageGetHeaderFields func(uintptr) uintptr
 
 // Gets an array of all header fields on @message that are set.
-func (x *DBusMessage) GetHeaderFields() []byte {
+func (x *DBusMessage) GetHeaderFields() uintptr {
 
 	cret := xDBusMessageGetHeaderFields(x.GoPointer())
 	return cret
@@ -2799,11 +2799,11 @@ func (x *DBusMessage) SetUnixFdList(FdListVar *UnixFDList) {
 
 }
 
-var xDBusMessageToBlob func(uintptr, uint, DBusCapabilityFlags, **glib.Error) []byte
+var xDBusMessageToBlob func(uintptr, uint, DBusCapabilityFlags, **glib.Error) uintptr
 
 // Serializes @message to a blob. The byte order returned by
 // g_dbus_message_get_byte_order() will be used.
-func (x *DBusMessage) ToBlob(OutSizeVar uint, CapabilitiesVar DBusCapabilityFlags) ([]byte, error) {
+func (x *DBusMessage) ToBlob(OutSizeVar uint, CapabilitiesVar DBusCapabilityFlags) (uintptr, error) {
 	var cerr *glib.Error
 
 	cret := xDBusMessageToBlob(x.GoPointer(), OutSizeVar, CapabilitiesVar, &cerr)

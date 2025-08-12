@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject"
@@ -1060,7 +1060,7 @@ func (x *Font) GetHbFont() uintptr {
 	return cret
 }
 
-var xFontGetLanguages func(uintptr) []Language
+var xFontGetLanguages func(uintptr) uintptr
 
 // Returns the languages that are supported by @font.
 //
@@ -1070,7 +1070,7 @@ var xFontGetLanguages func(uintptr) []Language
 //
 // The returned array is only valid as long as the font
 // and its fontmap are valid.
-func (x *Font) GetLanguages() []Language {
+func (x *Font) GetLanguages() uintptr {
 
 	cret := xFontGetLanguages(x.GoPointer())
 	return cret

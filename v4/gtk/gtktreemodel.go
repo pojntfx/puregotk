@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject"
@@ -221,14 +221,14 @@ func (x *TreePath) GetIndices() int {
 	return cret
 }
 
-var xTreePathGetIndicesWithDepth func(uintptr, int) []int
+var xTreePathGetIndicesWithDepth func(uintptr, int) uintptr
 
 // Returns the current indices of @path.
 //
 // This is an array of integers, each representing a node in a tree.
 // It also returns the number of elements in the array.
 // The array should not be freed.
-func (x *TreePath) GetIndicesWithDepth(DepthVar int) []int {
+func (x *TreePath) GetIndicesWithDepth(DepthVar int) uintptr {
 
 	cret := xTreePathGetIndicesWithDepth(x.GoPointer(), DepthVar)
 	return cret

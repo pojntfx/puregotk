@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
@@ -511,12 +511,12 @@ func SignalIsValidName(NameVar string) bool {
 	return cret
 }
 
-var xSignalListIds func(types.GType, uint) []uint
+var xSignalListIds func(types.GType, uint) uintptr
 
 // Lists the signals by id that a certain instance or interface type
 // created. Further information about the signals can be acquired through
 // g_signal_query().
-func SignalListIds(ItypeVar types.GType, NIdsVar uint) []uint {
+func SignalListIds(ItypeVar types.GType, NIdsVar uint) uintptr {
 
 	cret := xSignalListIds(ItypeVar, NIdsVar)
 	return cret

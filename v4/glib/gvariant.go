@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
@@ -870,13 +870,13 @@ func (x *Variant) Compare(TwoVar uintptr) int {
 	return cret
 }
 
-var xVariantDupBytestring func(uintptr, uint) []byte
+var xVariantDupBytestring func(uintptr, uint) uintptr
 
 // Similar to g_variant_get_bytestring() except that instead of
 // returning a constant string, the string is duplicated.
 //
 // The return value must be freed using g_free().
-func (x *Variant) DupBytestring(LengthVar uint) []byte {
+func (x *Variant) DupBytestring(LengthVar uint) uintptr {
 
 	cret := xVariantDupBytestring(x.GoPointer(), LengthVar)
 	return cret
@@ -1010,7 +1010,7 @@ func (x *Variant) GetByte() byte {
 	return cret
 }
 
-var xVariantGetBytestring func(uintptr) []byte
+var xVariantGetBytestring func(uintptr) uintptr
 
 // Returns the string value of a #GVariant instance with an
 // array-of-bytes type.  The string has no particular encoding.
@@ -1030,7 +1030,7 @@ var xVariantGetBytestring func(uintptr) []byte
 // array of bytes.
 //
 // The return value remains valid as long as @value exists.
-func (x *Variant) GetBytestring() []byte {
+func (x *Variant) GetBytestring() uintptr {
 
 	cret := xVariantGetBytestring(x.GoPointer())
 	return cret
@@ -1159,7 +1159,7 @@ func (x *Variant) GetDouble() float64 {
 	return cret
 }
 
-var xVariantGetFixedArray func(uintptr, uint, uint) []uintptr
+var xVariantGetFixedArray func(uintptr, uint, uint) uintptr
 
 // Provides access to the serialized data for an array of fixed-sized
 // items.
@@ -1187,7 +1187,7 @@ var xVariantGetFixedArray func(uintptr, uint, uint) []uintptr
 //
 // @n_elements, which must be non-%NULL, is set equal to the number of
 // items in the array.
-func (x *Variant) GetFixedArray(NElementsVar uint, ElementSizeVar uint) []uintptr {
+func (x *Variant) GetFixedArray(NElementsVar uint, ElementSizeVar uint) uintptr {
 
 	cret := xVariantGetFixedArray(x.GoPointer(), NElementsVar, ElementSizeVar)
 	return cret

@@ -2,7 +2,7 @@
 package gio
 
 import (
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject"
@@ -176,7 +176,7 @@ func DbusIsUniqueName(StringVar string) bool {
 	return cret
 }
 
-var xDbusUnescapeObjectPath func(string) []byte
+var xDbusUnescapeObjectPath func(string) uintptr
 
 // Unescapes an string that was previously escaped with
 // g_dbus_escape_object_path(). If the string is in a format that could
@@ -186,7 +186,7 @@ var xDbusUnescapeObjectPath func(string) []byte
 // Encoding alphanumeric characters which do not need to be
 // encoded is not allowed (e.g `_63` is not valid, the string
 // should contain `c` instead).
-func DbusUnescapeObjectPath(SVar string) []byte {
+func DbusUnescapeObjectPath(SVar string) uintptr {
 
 	cret := xDbusUnescapeObjectPath(SVar)
 	return cret

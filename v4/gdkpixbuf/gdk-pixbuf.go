@@ -2,7 +2,7 @@
 package gdkpixbuf
 
 import (
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/gio"
 	"github.com/jwijenbergh/puregotk/v4/glib"
@@ -847,7 +847,7 @@ func (x *Pixbuf) GetOptions() *glib.HashTable {
 	return cret
 }
 
-var xPixbufGetPixels func(uintptr) []byte
+var xPixbufGetPixels func(uintptr) uintptr
 
 // Queries a pointer to the pixel data of a pixbuf.
 //
@@ -856,13 +856,13 @@ var xPixbufGetPixels func(uintptr) []byte
 //
 // Please see the section on [image data](class.Pixbuf.html#image-data) for information
 // about how the pixel data is stored in memory.
-func (x *Pixbuf) GetPixels() []byte {
+func (x *Pixbuf) GetPixels() uintptr {
 
 	cret := xPixbufGetPixels(x.GoPointer())
 	return cret
 }
 
-var xPixbufGetPixelsWithLength func(uintptr, uint) []byte
+var xPixbufGetPixelsWithLength func(uintptr, uint) uintptr
 
 // Queries a pointer to the pixel data of a pixbuf.
 //
@@ -871,7 +871,7 @@ var xPixbufGetPixelsWithLength func(uintptr, uint) []byte
 //
 // Please see the section on [image data](class.Pixbuf.html#image-data) for information
 // about how the pixel data is stored in memory.
-func (x *Pixbuf) GetPixelsWithLength(LengthVar uint) []byte {
+func (x *Pixbuf) GetPixelsWithLength(LengthVar uint) uintptr {
 
 	cret := xPixbufGetPixelsWithLength(x.GoPointer(), LengthVar)
 	return cret

@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/gobject"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
@@ -691,7 +691,7 @@ func (x *Event) GetEventType() EventType {
 	return cret
 }
 
-var xEventGetHistory func(uintptr, uint) []TimeCoord
+var xEventGetHistory func(uintptr, uint) uintptr
 
 // Retrieves the history of the device that @event is for, as a list of
 // time and coordinates.
@@ -702,7 +702,7 @@ var xEventGetHistory func(uintptr, uint) []TimeCoord
 // Note that only motion and scroll events record history, and motion
 // events do it only if one of the mouse buttons is down, or the device
 // has a tool.
-func (x *Event) GetHistory(OutNCoordsVar uint) []TimeCoord {
+func (x *Event) GetHistory(OutNCoordsVar uint) uintptr {
 
 	cret := xEventGetHistory(x.GoPointer(), OutNCoordsVar)
 	return cret

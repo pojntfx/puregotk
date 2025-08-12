@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/gdk"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
@@ -35,7 +35,7 @@ type Swipeable interface {
 	GetCancelProgress() float64
 	GetDistance() float64
 	GetProgress() float64
-	GetSnapPoints(NSnapPointsVar int) []float64
+	GetSnapPoints(NSnapPointsVar int) uintptr
 	GetSwipeArea(NavigationDirectionVar NavigationDirection, IsDragVar bool, RectVar *gdk.Rectangle)
 }
 
@@ -87,7 +87,7 @@ func (x *SwipeableBase) GetProgress() float64 {
 //
 // Each snap point represents a progress value that is considered acceptable to
 // end the swipe on.
-func (x *SwipeableBase) GetSnapPoints(NSnapPointsVar int) []float64 {
+func (x *SwipeableBase) GetSnapPoints(NSnapPointsVar int) uintptr {
 
 	cret := XAdwSwipeableGetSnapPoints(x.GoPointer(), NSnapPointsVar)
 	return cret
@@ -111,7 +111,7 @@ func (x *SwipeableBase) GetSwipeArea(NavigationDirectionVar NavigationDirection,
 var XAdwSwipeableGetCancelProgress func(uintptr) float64
 var XAdwSwipeableGetDistance func(uintptr) float64
 var XAdwSwipeableGetProgress func(uintptr) float64
-var XAdwSwipeableGetSnapPoints func(uintptr, int) []float64
+var XAdwSwipeableGetSnapPoints func(uintptr, int) uintptr
 var XAdwSwipeableGetSwipeArea func(uintptr, NavigationDirection, bool, *gdk.Rectangle)
 
 func init() {

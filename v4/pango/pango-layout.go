@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject"
@@ -1039,7 +1039,7 @@ func (x *Layout) GetLogAttrs(AttrsVar uintptr, NAttrsVar int) {
 
 }
 
-var xLayoutGetLogAttrsReadonly func(uintptr, int) []LogAttr
+var xLayoutGetLogAttrsReadonly func(uintptr, int) uintptr
 
 // Retrieves an array of logical attributes for each character in
 // the @layout.
@@ -1052,7 +1052,7 @@ var xLayoutGetLogAttrsReadonly func(uintptr, int) []LogAttr
 // than the total number of characters in the layout, since there
 // need to be attributes corresponding to both the position before
 // the first character and the position after the last character.
-func (x *Layout) GetLogAttrsReadonly(NAttrsVar int) []LogAttr {
+func (x *Layout) GetLogAttrsReadonly(NAttrsVar int) uintptr {
 
 	cret := xLayoutGetLogAttrsReadonly(x.GoPointer(), NAttrsVar)
 	return cret

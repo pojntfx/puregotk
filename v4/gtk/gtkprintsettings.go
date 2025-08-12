@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject"
@@ -418,10 +418,10 @@ func (x *PrintSettings) GetOutputBin() string {
 	return cret
 }
 
-var xPrintSettingsGetPageRanges func(uintptr, int) []PageRange
+var xPrintSettingsGetPageRanges func(uintptr, int) uintptr
 
 // Gets the value of %GTK_PRINT_SETTINGS_PAGE_RANGES.
-func (x *PrintSettings) GetPageRanges(NumRangesVar int) []PageRange {
+func (x *PrintSettings) GetPageRanges(NumRangesVar int) uintptr {
 
 	cret := xPrintSettingsGetPageRanges(x.GoPointer(), NumRangesVar)
 	return cret

@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 )
 
@@ -784,10 +784,10 @@ func (x *BookmarkFile) SetVisitedDateTime(UriVar string, VisitedVar *DateTime) {
 
 }
 
-var xBookmarkFileToData func(uintptr, uint, **Error) []byte
+var xBookmarkFileToData func(uintptr, uint, **Error) uintptr
 
 // This function outputs @bookmark as a string.
-func (x *BookmarkFile) ToData(LengthVar uint) ([]byte, error) {
+func (x *BookmarkFile) ToData(LengthVar uint) (uintptr, error) {
 	var cerr *Error
 
 	cret := xBookmarkFileToData(x.GoPointer(), LengthVar, &cerr)

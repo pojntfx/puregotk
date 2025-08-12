@@ -4,7 +4,7 @@ package gtk
 import (
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/gdk"
 	"github.com/jwijenbergh/puregotk/v4/gio"
@@ -428,14 +428,14 @@ func (x *IconTheme) GetIconNames() []string {
 	return cret
 }
 
-var xIconThemeGetIconSizes func(uintptr, string) []int
+var xIconThemeGetIconSizes func(uintptr, string) uintptr
 
 // Returns an array of integers describing the sizes at which
 // the icon is available without scaling.
 //
 // A size of -1 means that the icon is available in a scalable
 // format. The array is zero-terminated.
-func (x *IconTheme) GetIconSizes(IconNameVar string) []int {
+func (x *IconTheme) GetIconSizes(IconNameVar string) uintptr {
 
 	cret := xIconThemeGetIconSizes(x.GoPointer(), IconNameVar)
 	return cret

@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
@@ -69,7 +69,7 @@ func (x *KeyFile) GetBoolean(GroupNameVar string, KeyVar string) (bool, error) {
 
 }
 
-var xKeyFileGetBooleanList func(uintptr, string, string, uint, **Error) []bool
+var xKeyFileGetBooleanList func(uintptr, string, string, uint, **Error) uintptr
 
 // Returns the values associated with @key under @group_name as
 // booleans.
@@ -78,7 +78,7 @@ var xKeyFileGetBooleanList func(uintptr, string, string, uint, **Error) []bool
 // %G_KEY_FILE_ERROR_KEY_NOT_FOUND. Likewise, if the values associated
 // with @key cannot be interpreted as booleans then %NULL is returned
 // and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
-func (x *KeyFile) GetBooleanList(GroupNameVar string, KeyVar string, LengthVar uint) ([]bool, error) {
+func (x *KeyFile) GetBooleanList(GroupNameVar string, KeyVar string, LengthVar uint) (uintptr, error) {
 	var cerr *Error
 
 	cret := xKeyFileGetBooleanList(x.GoPointer(), GroupNameVar, KeyVar, LengthVar, &cerr)
@@ -130,7 +130,7 @@ func (x *KeyFile) GetDouble(GroupNameVar string, KeyVar string) (float64, error)
 
 }
 
-var xKeyFileGetDoubleList func(uintptr, string, string, uint, **Error) []float64
+var xKeyFileGetDoubleList func(uintptr, string, string, uint, **Error) uintptr
 
 // Returns the values associated with @key under @group_name as
 // doubles.
@@ -139,7 +139,7 @@ var xKeyFileGetDoubleList func(uintptr, string, string, uint, **Error) []float64
 // %G_KEY_FILE_ERROR_KEY_NOT_FOUND. Likewise, if the values associated
 // with @key cannot be interpreted as doubles then %NULL is returned
 // and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
-func (x *KeyFile) GetDoubleList(GroupNameVar string, KeyVar string, LengthVar uint) ([]float64, error) {
+func (x *KeyFile) GetDoubleList(GroupNameVar string, KeyVar string, LengthVar uint) (uintptr, error) {
 	var cerr *Error
 
 	cret := xKeyFileGetDoubleList(x.GoPointer(), GroupNameVar, KeyVar, LengthVar, &cerr)
@@ -198,7 +198,7 @@ func (x *KeyFile) GetInteger(GroupNameVar string, KeyVar string) (int, error) {
 
 }
 
-var xKeyFileGetIntegerList func(uintptr, string, string, uint, **Error) []int
+var xKeyFileGetIntegerList func(uintptr, string, string, uint, **Error) uintptr
 
 // Returns the values associated with @key under @group_name as
 // integers.
@@ -208,7 +208,7 @@ var xKeyFileGetIntegerList func(uintptr, string, string, uint, **Error) []int
 // with @key cannot be interpreted as integers, or are out of range for
 // #gint, then %NULL is returned
 // and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
-func (x *KeyFile) GetIntegerList(GroupNameVar string, KeyVar string, LengthVar uint) ([]int, error) {
+func (x *KeyFile) GetIntegerList(GroupNameVar string, KeyVar string, LengthVar uint) (uintptr, error) {
 	var cerr *Error
 
 	cret := xKeyFileGetIntegerList(x.GoPointer(), GroupNameVar, KeyVar, LengthVar, &cerr)

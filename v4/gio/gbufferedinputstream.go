@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
@@ -186,12 +186,12 @@ func (x *BufferedInputStream) Peek(BufferVar []byte, OffsetVar uint, CountVar ui
 	return cret
 }
 
-var xBufferedInputStreamPeekBuffer func(uintptr, uint) []byte
+var xBufferedInputStreamPeekBuffer func(uintptr, uint) uintptr
 
 // Returns the buffer with the currently available bytes. The returned
 // buffer must not be modified and will become invalid when reading from
 // the stream or filling the buffer.
-func (x *BufferedInputStream) PeekBuffer(CountVar uint) []byte {
+func (x *BufferedInputStream) PeekBuffer(CountVar uint) uintptr {
 
 	cret := xBufferedInputStreamPeekBuffer(x.GoPointer(), CountVar)
 	return cret

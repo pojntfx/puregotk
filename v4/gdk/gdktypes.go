@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
@@ -97,13 +97,13 @@ func (x *ContentFormats) ContainMimeType(MimeTypeVar string) bool {
 	return cret
 }
 
-var xContentFormatsGetGtypes func(uintptr, uint) []types.GType
+var xContentFormatsGetGtypes func(uintptr, uint) uintptr
 
 // Gets the `GType`s included in @formats.
 //
 // Note that @formats may not contain any `GType`s, in particular when
 // they are empty. In that case %NULL will be returned.
-func (x *ContentFormats) GetGtypes(NGtypesVar uint) []types.GType {
+func (x *ContentFormats) GetGtypes(NGtypesVar uint) uintptr {
 
 	cret := xContentFormatsGetGtypes(x.GoPointer(), NGtypesVar)
 	return cret

@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject"
@@ -132,7 +132,7 @@ func (x *UnixFDMessage) GetFdList() *UnixFDList {
 	return cls
 }
 
-var xUnixFDMessageStealFds func(uintptr, int) []int
+var xUnixFDMessageStealFds func(uintptr, int) uintptr
 
 // Returns the array of file descriptors that is contained in this
 // object.
@@ -151,7 +151,7 @@ var xUnixFDMessageStealFds func(uintptr, int) []int
 //
 // This function never returns %NULL. In case there are no file
 // descriptors contained in @message, an empty array is returned.
-func (x *UnixFDMessage) StealFds(LengthVar int) []int {
+func (x *UnixFDMessage) StealFds(LengthVar int) uintptr {
 
 	cret := xUnixFDMessageStealFds(x.GoPointer(), LengthVar)
 	return cret

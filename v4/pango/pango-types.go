@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
@@ -56,7 +56,7 @@ func (x *Language) GetSampleString() string {
 	return cret
 }
 
-var xLanguageGetScripts func(uintptr, int) []Script
+var xLanguageGetScripts func(uintptr, int) uintptr
 
 // Determines the scripts used to to write @language.
 //
@@ -81,7 +81,7 @@ var xLanguageGetScripts func(uintptr, int) []Script
 // Note: while the return value is declared as `PangoScript`, the
 // returned values are from the `GUnicodeScript` enumeration, which
 // may have more values. Callers need to handle unknown values.
-func (x *Language) GetScripts(NumScriptsVar int) []Script {
+func (x *Language) GetScripts(NumScriptsVar int) uintptr {
 
 	cret := xLanguageGetScripts(x.GoPointer(), NumScriptsVar)
 	return cret

@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject"
@@ -155,7 +155,7 @@ func (x *UnixFDList) GetLength() int {
 	return cret
 }
 
-var xUnixFDListPeekFds func(uintptr, int) []int
+var xUnixFDListPeekFds func(uintptr, int) uintptr
 
 // Returns the array of file descriptors that is contained in this
 // object.
@@ -170,13 +170,13 @@ var xUnixFDListPeekFds func(uintptr, int) []int
 //
 // This function never returns %NULL. In case there are no file
 // descriptors contained in @list, an empty array is returned.
-func (x *UnixFDList) PeekFds(LengthVar int) []int {
+func (x *UnixFDList) PeekFds(LengthVar int) uintptr {
 
 	cret := xUnixFDListPeekFds(x.GoPointer(), LengthVar)
 	return cret
 }
 
-var xUnixFDListStealFds func(uintptr, int) []int
+var xUnixFDListStealFds func(uintptr, int) uintptr
 
 // Returns the array of file descriptors that is contained in this
 // object.
@@ -196,7 +196,7 @@ var xUnixFDListStealFds func(uintptr, int) []int
 //
 // This function never returns %NULL. In case there are no file
 // descriptors contained in @list, an empty array is returned.
-func (x *UnixFDList) StealFds(LengthVar int) []int {
+func (x *UnixFDList) StealFds(LengthVar int) uintptr {
 
 	cret := xUnixFDListStealFds(x.GoPointer(), LengthVar)
 	return cret

@@ -4,7 +4,7 @@ package gtk
 import (
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/cairo"
 	"github.com/jwijenbergh/puregotk/v4/glib"
@@ -95,10 +95,10 @@ func (x *PrintJob) GetNumCopies() int {
 	return cret
 }
 
-var xPrintJobGetPageRanges func(uintptr, int) []PageRange
+var xPrintJobGetPageRanges func(uintptr, int) uintptr
 
 // Gets the page ranges for this job.
-func (x *PrintJob) GetPageRanges(NRangesVar int) []PageRange {
+func (x *PrintJob) GetPageRanges(NRangesVar int) uintptr {
 
 	cret := xPrintJobGetPageRanges(x.GoPointer(), NRangesVar)
 	return cret

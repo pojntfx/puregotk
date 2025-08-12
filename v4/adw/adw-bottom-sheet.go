@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/gdk"
 	"github.com/jwijenbergh/puregotk/v4/glib"
@@ -453,7 +453,7 @@ func (x *BottomSheet) GetProgress() float64 {
 //
 // Each snap point represents a progress value that is considered acceptable to
 // end the swipe on.
-func (x *BottomSheet) GetSnapPoints(NSnapPointsVar int) []float64 {
+func (x *BottomSheet) GetSnapPoints(NSnapPointsVar int) uintptr {
 
 	cret := XAdwSwipeableGetSnapPoints(x.GoPointer(), NSnapPointsVar)
 	return cret

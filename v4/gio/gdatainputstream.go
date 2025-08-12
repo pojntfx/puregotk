@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
@@ -154,7 +154,7 @@ func (x *DataInputStream) ReadInt64(CancellableVar *Cancellable) (int64, error) 
 
 }
 
-var xDataInputStreamReadLine func(uintptr, uint, uintptr, **glib.Error) []byte
+var xDataInputStreamReadLine func(uintptr, uint, uintptr, **glib.Error) uintptr
 
 // Reads a line from the data input stream.  Note that no encoding
 // checks or conversion is performed; the input is not guaranteed to
@@ -163,7 +163,7 @@ var xDataInputStreamReadLine func(uintptr, uint, uintptr, **glib.Error) []byte
 // If @cancellable is not %NULL, then the operation can be cancelled by
 // triggering the cancellable object from another thread. If the operation
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
-func (x *DataInputStream) ReadLine(LengthVar uint, CancellableVar *Cancellable) ([]byte, error) {
+func (x *DataInputStream) ReadLine(LengthVar uint, CancellableVar *Cancellable) (uintptr, error) {
 	var cerr *glib.Error
 
 	cret := xDataInputStreamReadLine(x.GoPointer(), LengthVar, CancellableVar.GoPointer(), &cerr)
@@ -188,13 +188,13 @@ func (x *DataInputStream) ReadLineAsync(IoPriorityVar int, CancellableVar *Cance
 
 }
 
-var xDataInputStreamReadLineFinish func(uintptr, uintptr, uint, **glib.Error) []byte
+var xDataInputStreamReadLineFinish func(uintptr, uintptr, uint, **glib.Error) uintptr
 
 // Finish an asynchronous call started by
 // g_data_input_stream_read_line_async().  Note the warning about
 // string encoding in g_data_input_stream_read_line() applies here as
 // well.
-func (x *DataInputStream) ReadLineFinish(ResultVar AsyncResult, LengthVar uint) ([]byte, error) {
+func (x *DataInputStream) ReadLineFinish(ResultVar AsyncResult, LengthVar uint) (uintptr, error) {
 	var cerr *glib.Error
 
 	cret := xDataInputStreamReadLineFinish(x.GoPointer(), ResultVar.GoPointer(), LengthVar, &cerr)

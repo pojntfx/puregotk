@@ -5,7 +5,7 @@ import (
 	"structs"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject"
@@ -84,14 +84,14 @@ func (x *TlsPassword) GetFlags() TlsPasswordFlags {
 	return cret
 }
 
-var xTlsPasswordGetValue func(uintptr, uint) []byte
+var xTlsPasswordGetValue func(uintptr, uint) uintptr
 
 // Get the password value. If @length is not %NULL then it will be
 // filled in with the length of the password value. (Note that the
 // password value is not nul-terminated, so you can only pass %NULL
 // for @length in contexts where you know the password will have a
 // certain fixed length.)
-func (x *TlsPassword) GetValue(LengthVar uint) []byte {
+func (x *TlsPassword) GetValue(LengthVar uint) uintptr {
 
 	cret := xTlsPasswordGetValue(x.GoPointer(), LengthVar)
 	return cret

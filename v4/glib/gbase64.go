@@ -2,16 +2,16 @@
 package glib
 
 import (
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	"github.com/jwijenbergh/puregotk/internal/core"
 )
 
-var xBase64Decode func(string, uint) []byte
+var xBase64Decode func(string, uint) uintptr
 
 // Decode a sequence of Base-64 encoded text into binary data.  Note
 // that the returned binary data is not necessarily zero-terminated,
 // so it should not be used as a character string.
-func Base64Decode(TextVar string, OutLenVar uint) []byte {
+func Base64Decode(TextVar string, OutLenVar uint) uintptr {
 
 	cret := xBase64Decode(TextVar, OutLenVar)
 	return cret
