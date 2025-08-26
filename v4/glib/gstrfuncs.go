@@ -3,7 +3,7 @@ package glib
 
 import (
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
 // A typedef alias for gchar**. This is mostly useful when used together with

@@ -3,7 +3,7 @@ package gsk
 
 import (
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
 var xTransformParse func(string, **Transform) bool

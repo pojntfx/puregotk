@@ -3,7 +3,7 @@ package gtk
 
 import (
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
 var xTestAccessibleAssertionMessageRole func(string, string, int, string, string, uintptr, AccessibleRole, AccessibleRole)

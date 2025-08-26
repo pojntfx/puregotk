@@ -6,7 +6,7 @@ import (
 	"unsafe"
 
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
 // An opaque data structure representing a set of bookmarks.

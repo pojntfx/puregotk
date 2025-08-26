@@ -6,7 +6,7 @@ import (
 	"unsafe"
 
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
 // Represents a request of a screen object in a given orientation. These

@@ -3,7 +3,7 @@ package gsk
 
 import (
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/cairo"
 	"github.com/jwijenbergh/puregotk/v4/gdk"
 	"github.com/jwijenbergh/puregotk/v4/glib"

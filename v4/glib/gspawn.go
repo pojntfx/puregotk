@@ -3,7 +3,7 @@ package glib
 
 import (
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
 // Specifies the type of the setup function passed to g_spawn_async(),

@@ -3,7 +3,7 @@ package gio
 
 import (
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
 var xIoErrorFromErrno func(int) IOErrorEnum

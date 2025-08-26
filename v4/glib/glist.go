@@ -6,7 +6,7 @@ import (
 	"unsafe"
 
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
 // The #GList struct is used for each element in a doubly-linked list.

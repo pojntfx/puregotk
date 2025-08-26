@@ -3,7 +3,7 @@ package glib
 
 import (
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
 // Flags to pass to g_file_set_contents_full() to affect its safety and

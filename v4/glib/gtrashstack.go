@@ -6,7 +6,7 @@ import (
 	"unsafe"
 
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
 // Each piece of memory that is pushed onto the stack

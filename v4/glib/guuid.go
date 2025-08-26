@@ -3,7 +3,7 @@ package glib
 
 import (
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
 var xUuidStringIsValid func(string) bool

@@ -6,7 +6,7 @@ import (
 	"unsafe"
 
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
 // Declares a type of function which takes no arguments

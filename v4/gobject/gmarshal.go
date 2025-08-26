@@ -3,7 +3,7 @@ package gobject
 
 import (
 	"github.com/jwijenbergh/purego"
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
 var xCclosureMarshalBOOLEANBOXEDBOXED func(*Closure, *Value, uint, *Value, uintptr, uintptr)
