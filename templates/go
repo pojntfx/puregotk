@@ -25,7 +25,7 @@ import (
 	"github.com/jwijenbergh/purego"
 {{- end}}
 {{- if .NeedsInit}}
-	"github.com/jwijenbergh/puregotk/internal/core"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 {{- end}}
 )
 {{end}}
