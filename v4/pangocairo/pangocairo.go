@@ -525,6 +525,10 @@ func UpdateLayout(CrVar *cairo.Context, LayoutVar *pango.Layout) {
 }
 
 func init() {
+
+	core.SetPackageName("PANGOCAIRO", "pangocairo")
+
+	core.SetSharedLibrary("PANGOCAIRO", "libpangocairo-1.0.so.0")
 	lib, err := purego.Dlopen(core.GetPath("PANGOCAIRO"), purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		panic(err)

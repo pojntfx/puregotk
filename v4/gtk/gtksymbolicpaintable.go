@@ -77,6 +77,10 @@ func (x *SymbolicPaintableBase) SnapshotSymbolic(SnapshotVar *gdk.Snapshot, Widt
 var XGtkSymbolicPaintableSnapshotSymbolic func(uintptr, uintptr, float64, float64, []gdk.RGBA, uint)
 
 func init() {
+
+	core.SetPackageName("GTK", "gtk4")
+
+	core.SetSharedLibrary("GTK", "libgtk-4.so.1")
 	lib, err := purego.Dlopen(core.GetPath("GTK"), purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		panic(err)

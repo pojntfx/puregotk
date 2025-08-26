@@ -128,6 +128,10 @@ func (x *Frustum) IntersectsSphere(SphereVar *Sphere) bool {
 }
 
 func init() {
+
+	core.SetPackageName("GRAPHENE", "graphene-gobject-1.0")
+
+	core.SetSharedLibrary("GRAPHENE", "libgraphene-1.0.so.0")
 	lib, err := purego.Dlopen(core.GetPath("GRAPHENE"), purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		panic(err)

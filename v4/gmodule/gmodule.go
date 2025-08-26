@@ -143,6 +143,10 @@ func ModuleSupported() bool {
 }
 
 func init() {
+
+	core.SetPackageName("GMODULE", "gmodule-2.0")
+
+	core.SetSharedLibrary("GMODULE", "libgmodule-2.0.so.0")
 	lib, err := purego.Dlopen(core.GetPath("GMODULE"), purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		panic(err)

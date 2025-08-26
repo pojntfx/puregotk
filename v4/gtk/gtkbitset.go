@@ -114,6 +114,10 @@ func BitsetIterInitLast(IterVar *BitsetIter, SetVar *Bitset, ValueVar uint) bool
 }
 
 func init() {
+
+	core.SetPackageName("GTK", "gtk4")
+
+	core.SetSharedLibrary("GTK", "libgtk-4.so.1")
 	lib, err := purego.Dlopen(core.GetPath("GTK"), purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		panic(err)

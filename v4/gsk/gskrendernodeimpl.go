@@ -1988,6 +1988,10 @@ func (c *TransformNode) SetGoPointer(ptr uintptr) {
 }
 
 func init() {
+
+	core.SetPackageName("GSK", "gtk4")
+
+	core.SetSharedLibrary("GSK", "libgtk-4.so.1")
 	lib, err := purego.Dlopen(core.GetPath("GSK"), purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		panic(err)

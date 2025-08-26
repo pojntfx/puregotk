@@ -300,6 +300,10 @@ func (x *MemoryTexture) LoadFinish(ResVar gio.AsyncResult, TypeVar string) (*gio
 }
 
 func init() {
+
+	core.SetPackageName("GDK", "gtk4")
+
+	core.SetSharedLibrary("GDK", "libgtk-4.so.1")
 	lib, err := purego.Dlopen(core.GetPath("GDK"), purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		panic(err)

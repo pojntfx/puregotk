@@ -471,6 +471,10 @@ func (c *PixbufAnimationIter) SetGoPointer(ptr uintptr) {
 }
 
 func init() {
+
+	core.SetPackageName("GDKPIXBUF", "gdk-pixbuf-2.0")
+
+	core.SetSharedLibrary("GDKPIXBUF", "libgdk_pixbuf-2.0.so.0")
 	lib, err := purego.Dlopen(core.GetPath("GDKPIXBUF"), purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		panic(err)

@@ -759,6 +759,10 @@ func ImageSurfaceCreate() {
 }
 
 func init() {
+
+	core.SetPackageName("CAIRO", "cairo-gobject")
+
+	core.SetSharedLibrary("CAIRO", "libcairo-gobject.so.2")
 	lib, err := purego.Dlopen(core.GetPath("CAIRO"), purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		panic(err)

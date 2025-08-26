@@ -472,6 +472,10 @@ func SignalTypeCclosureNew(ItypeVar types.GType, StructOffsetVar uint) *Closure 
 }
 
 func init() {
+
+	core.SetPackageName("GOBJECT", "gobject-2.0")
+
+	core.SetSharedLibrary("GOBJECT", "libgobject-2.0.so.0")
 	lib, err := purego.Dlopen(core.GetPath("GOBJECT"), purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		panic(err)

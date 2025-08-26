@@ -861,6 +861,10 @@ func (x *SpinRow) SetWidthChars(NCharsVar int) {
 }
 
 func init() {
+
+	core.SetPackageName("ADW", "libadwaita-1")
+
+	core.SetSharedLibrary("ADW", "libadwaita-1.so.0")
 	lib, err := purego.Dlopen(core.GetPath("ADW"), purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		panic(err)

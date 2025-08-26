@@ -145,6 +145,10 @@ var XGdkPopupGetSurfaceAnchor func(uintptr) Gravity
 var XGdkPopupPresent func(uintptr, int, int, *PopupLayout) bool
 
 func init() {
+
+	core.SetPackageName("GDK", "gtk4")
+
+	core.SetSharedLibrary("GDK", "libgtk-4.so.1")
 	lib, err := purego.Dlopen(core.GetPath("GDK"), purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		panic(err)
