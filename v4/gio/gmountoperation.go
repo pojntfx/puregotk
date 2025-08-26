@@ -16,6 +16,36 @@ type MountOperationClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	AskPassword uintptr
+
+	AskQuestion uintptr
+
+	Reply uintptr
+
+	Aborted uintptr
+
+	ShowProcesses uintptr
+
+	ShowUnmountProgress uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
+
+	GReserved3 uintptr
+
+	GReserved4 uintptr
+
+	GReserved5 uintptr
+
+	GReserved6 uintptr
+
+	GReserved7 uintptr
+
+	GReserved8 uintptr
+
+	GReserved9 uintptr
 }
 
 func (x *MountOperationClass) GoPointer() uintptr {

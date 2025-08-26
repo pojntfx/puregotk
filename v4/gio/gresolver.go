@@ -16,6 +16,38 @@ type ResolverClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	Reload uintptr
+
+	LookupByName uintptr
+
+	LookupByNameAsync uintptr
+
+	LookupByNameFinish uintptr
+
+	LookupByAddress uintptr
+
+	LookupByAddressAsync uintptr
+
+	LookupByAddressFinish uintptr
+
+	LookupService uintptr
+
+	LookupServiceAsync uintptr
+
+	LookupServiceFinish uintptr
+
+	LookupRecords uintptr
+
+	LookupRecordsAsync uintptr
+
+	LookupRecordsFinish uintptr
+
+	LookupByNameWithFlagsAsync uintptr
+
+	LookupByNameWithFlagsFinish uintptr
+
+	LookupByNameWithFlags uintptr
 }
 
 func (x *ResolverClass) GoPointer() uintptr {

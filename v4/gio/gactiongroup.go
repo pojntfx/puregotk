@@ -16,6 +16,34 @@ type ActionGroupInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	HasAction uintptr
+
+	ListActions uintptr
+
+	GetActionEnabled uintptr
+
+	GetActionParameterType uintptr
+
+	GetActionStateType uintptr
+
+	GetActionStateHint uintptr
+
+	GetActionState uintptr
+
+	ChangeActionState uintptr
+
+	ActivateAction uintptr
+
+	ActionAdded uintptr
+
+	ActionRemoved uintptr
+
+	ActionEnabledChanged uintptr
+
+	ActionStateChanged uintptr
+
+	QueryAction uintptr
 }
 
 func (x *ActionGroupInterface) GoPointer() uintptr {

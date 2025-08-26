@@ -33,6 +33,8 @@ type DesktopAppInfoLookupIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	GetDefaultForUriScheme uintptr
 }
 
 func (x *DesktopAppInfoLookupIface) GoPointer() uintptr {

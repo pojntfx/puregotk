@@ -17,6 +17,10 @@ type CheckButtonClass struct {
 
 	ParentClass uintptr
 
+	Toggled uintptr
+
+	Activate uintptr
+
 	Padding [7]uintptr
 }
 

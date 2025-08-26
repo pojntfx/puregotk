@@ -17,6 +17,16 @@ type SwipeableInterface struct {
 
 	Parent uintptr
 
+	GetDistance uintptr
+
+	GetSnapPoints uintptr
+
+	GetProgress uintptr
+
+	GetCancelProgress uintptr
+
+	GetSwipeArea uintptr
+
 	Padding [4]uintptr
 }
 

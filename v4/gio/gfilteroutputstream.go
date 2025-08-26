@@ -15,6 +15,12 @@ type FilterOutputStreamClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
+
+	GReserved3 uintptr
 }
 
 func (x *FilterOutputStreamClass) GoPointer() uintptr {

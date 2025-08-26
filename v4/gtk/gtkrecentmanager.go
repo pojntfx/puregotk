@@ -330,6 +330,16 @@ type RecentManagerClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	Changed uintptr
+
+	GtkRecent1 uintptr
+
+	GtkRecent2 uintptr
+
+	GtkRecent3 uintptr
+
+	GtkRecent4 uintptr
 }
 
 func (x *RecentManagerClass) GoPointer() uintptr {

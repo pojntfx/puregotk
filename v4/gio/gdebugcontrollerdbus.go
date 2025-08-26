@@ -18,6 +18,8 @@ type DebugControllerDBusClass struct {
 
 	ParentClass uintptr
 
+	Authorize uintptr
+
 	Padding [12]uintptr
 }
 

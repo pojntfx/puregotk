@@ -24,6 +24,8 @@ type DrawingAreaClass struct {
 
 	ParentClass uintptr
 
+	Resize uintptr
+
 	Padding [8]uintptr
 }
 

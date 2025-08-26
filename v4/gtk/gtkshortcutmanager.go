@@ -17,6 +17,10 @@ type ShortcutManagerInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	AddController uintptr
+
+	RemoveController uintptr
 }
 
 func (x *ShortcutManagerInterface) GoPointer() uintptr {

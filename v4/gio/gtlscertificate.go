@@ -17,6 +17,8 @@ type TlsCertificateClass struct {
 
 	ParentClass uintptr
 
+	Verify uintptr
+
 	Padding [8]uintptr
 }
 

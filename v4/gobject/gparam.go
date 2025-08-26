@@ -21,6 +21,14 @@ type ParamSpecClass struct {
 
 	ValueType types.GType
 
+	Finalize uintptr
+
+	ValueSetDefault uintptr
+
+	ValueValidate uintptr
+
+	ValuesCmp uintptr
+
 	Dummy [4]uintptr
 }
 
@@ -111,7 +119,17 @@ type ParamSpecTypeInfo struct {
 
 	NPreallocs uint16
 
+	InstanceInit uintptr
+
 	ValueType types.GType
+
+	Finalize uintptr
+
+	ValueSetDefault uintptr
+
+	ValueValidate uintptr
+
+	ValuesCmp uintptr
 }
 
 func (x *ParamSpecTypeInfo) GoPointer() uintptr {

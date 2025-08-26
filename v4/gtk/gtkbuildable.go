@@ -17,6 +17,26 @@ type BuildableIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	SetId uintptr
+
+	GetId uintptr
+
+	AddChild uintptr
+
+	SetBuildableProperty uintptr
+
+	ConstructChild uintptr
+
+	CustomTagStart uintptr
+
+	CustomTagEnd uintptr
+
+	CustomFinished uintptr
+
+	ParserFinished uintptr
+
+	GetInternalChild uintptr
 }
 
 func (x *BuildableIface) GoPointer() uintptr {
@@ -137,6 +157,14 @@ func (x *BuildableParseContext) Push(ParserVar *BuildableParser, UserDataVar uin
 // A sub-parser for `GtkBuildable` implementations.
 type BuildableParser struct {
 	_ structs.HostLayout
+
+	StartElement uintptr
+
+	EndElement uintptr
+
+	Text uintptr
+
+	Error uintptr
 
 	Padding [4]uintptr
 }

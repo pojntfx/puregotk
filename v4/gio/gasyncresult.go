@@ -17,6 +17,12 @@ type AsyncResultIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	GetUserData uintptr
+
+	GetSourceObject uintptr
+
+	IsTagged uintptr
 }
 
 func (x *AsyncResultIface) GoPointer() uintptr {

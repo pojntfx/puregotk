@@ -21,6 +21,8 @@ type MessageDialogClass struct {
 
 	ParentClass uintptr
 
+	Response uintptr
+
 	Padding [4]uintptr
 }
 

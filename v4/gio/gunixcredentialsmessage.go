@@ -16,6 +16,10 @@ type UnixCredentialsMessageClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
 }
 
 func (x *UnixCredentialsMessageClass) GoPointer() uintptr {

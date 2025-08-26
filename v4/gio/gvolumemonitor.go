@@ -16,6 +16,56 @@ type VolumeMonitorClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	VolumeAdded uintptr
+
+	VolumeRemoved uintptr
+
+	VolumeChanged uintptr
+
+	MountAdded uintptr
+
+	MountRemoved uintptr
+
+	MountPreUnmount uintptr
+
+	MountChanged uintptr
+
+	DriveConnected uintptr
+
+	DriveDisconnected uintptr
+
+	DriveChanged uintptr
+
+	IsSupported uintptr
+
+	GetConnectedDrives uintptr
+
+	GetVolumes uintptr
+
+	GetMounts uintptr
+
+	GetVolumeForUuid uintptr
+
+	GetMountForUuid uintptr
+
+	AdoptOrphanMount uintptr
+
+	DriveEjectButton uintptr
+
+	DriveStopButton uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
+
+	GReserved3 uintptr
+
+	GReserved4 uintptr
+
+	GReserved5 uintptr
+
+	GReserved6 uintptr
 }
 
 func (x *VolumeMonitorClass) GoPointer() uintptr {

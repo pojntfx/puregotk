@@ -15,6 +15,10 @@ type BufferedOutputStreamClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
 }
 
 func (x *BufferedOutputStreamClass) GoPointer() uintptr {

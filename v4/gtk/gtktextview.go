@@ -20,6 +20,32 @@ type TextViewClass struct {
 
 	ParentClass uintptr
 
+	MoveCursor uintptr
+
+	SetAnchor uintptr
+
+	InsertAtCursor uintptr
+
+	DeleteFromCursor uintptr
+
+	Backspace uintptr
+
+	CutClipboard uintptr
+
+	CopyClipboard uintptr
+
+	PasteClipboard uintptr
+
+	ToggleOverwrite uintptr
+
+	CreateBuffer uintptr
+
+	SnapshotLayer uintptr
+
+	ExtendSelection uintptr
+
+	InsertEmoji uintptr
+
 	Padding [8]uintptr
 }
 

@@ -38,6 +38,14 @@ type SettingsClass struct {
 
 	ParentClass uintptr
 
+	WritableChanged uintptr
+
+	Changed uintptr
+
+	WritableChangeEvent uintptr
+
+	ChangeEvent uintptr
+
 	Padding [20]uintptr
 }
 

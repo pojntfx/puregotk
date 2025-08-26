@@ -16,6 +16,18 @@ type TypeModuleClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	Load uintptr
+
+	Unload uintptr
+
+	Reserved1 uintptr
+
+	Reserved2 uintptr
+
+	Reserved3 uintptr
+
+	Reserved4 uintptr
 }
 
 func (x *TypeModuleClass) GoPointer() uintptr {

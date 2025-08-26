@@ -18,6 +18,12 @@ type ComboBoxClass struct {
 
 	ParentClass uintptr
 
+	Changed uintptr
+
+	FormatEntryText uintptr
+
+	Activate uintptr
+
 	Padding [7]uintptr
 }
 

@@ -15,6 +15,8 @@ type MemoryMonitorInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	LowMemoryWarning uintptr
 }
 
 func (x *MemoryMonitorInterface) GoPointer() uintptr {

@@ -18,6 +18,8 @@ type DBusObjectSkeletonClass struct {
 
 	ParentClass uintptr
 
+	AuthorizeMethod uintptr
+
 	Padding [8]uintptr
 }
 

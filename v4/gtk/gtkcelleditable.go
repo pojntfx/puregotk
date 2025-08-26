@@ -15,6 +15,12 @@ type CellEditableIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	EditingDone uintptr
+
+	RemoveWidget uintptr
+
+	StartEditing uintptr
 }
 
 func (x *CellEditableIface) GoPointer() uintptr {

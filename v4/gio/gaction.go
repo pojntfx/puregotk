@@ -16,6 +16,22 @@ type ActionInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	GetName uintptr
+
+	GetParameterType uintptr
+
+	GetStateType uintptr
+
+	GetStateHint uintptr
+
+	GetEnabled uintptr
+
+	GetState uintptr
+
+	ChangeState uintptr
+
+	Activate uintptr
 }
 
 func (x *ActionInterface) GoPointer() uintptr {

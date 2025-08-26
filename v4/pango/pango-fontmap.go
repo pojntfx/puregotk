@@ -18,7 +18,21 @@ type FontMapClass struct {
 
 	ParentClass uintptr
 
+	LoadFont uintptr
+
+	ListFamilies uintptr
+
+	LoadFontset uintptr
+
 	ShapeEngineType uintptr
+
+	GetSerial uintptr
+
+	Changed uintptr
+
+	GetFamily uintptr
+
+	GetFace uintptr
 }
 
 func (x *FontMapClass) GoPointer() uintptr {

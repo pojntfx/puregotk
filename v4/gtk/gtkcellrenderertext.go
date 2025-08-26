@@ -17,6 +17,8 @@ type CellRendererTextClass struct {
 
 	ParentClass uintptr
 
+	Edited uintptr
+
 	Padding [8]uintptr
 }
 

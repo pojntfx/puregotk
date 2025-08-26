@@ -16,6 +16,8 @@ type MenuAttributeIterClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GetNext uintptr
 }
 
 func (x *MenuAttributeIterClass) GoPointer() uintptr {
@@ -34,6 +36,8 @@ type MenuLinkIterClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GetNext uintptr
 }
 
 func (x *MenuLinkIterClass) GoPointer() uintptr {
@@ -52,6 +56,22 @@ type MenuModelClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	IsMutable uintptr
+
+	GetNItems uintptr
+
+	GetItemAttributes uintptr
+
+	IterateItemAttributes uintptr
+
+	GetItemAttributeValue uintptr
+
+	GetItemLinks uintptr
+
+	IterateItemLinks uintptr
+
+	GetItemLink uintptr
 }
 
 func (x *MenuModelClass) GoPointer() uintptr {

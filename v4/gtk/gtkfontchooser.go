@@ -24,6 +24,20 @@ type FontChooserIface struct {
 
 	BaseIface uintptr
 
+	GetFontFamily uintptr
+
+	GetFontFace uintptr
+
+	GetFontSize uintptr
+
+	SetFilterFunc uintptr
+
+	FontActivated uintptr
+
+	SetFontMap uintptr
+
+	GetFontMap uintptr
+
 	Padding [10]uintptr
 }
 

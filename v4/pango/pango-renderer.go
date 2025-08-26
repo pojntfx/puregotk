@@ -31,6 +31,34 @@ type RendererClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	DrawGlyphs uintptr
+
+	DrawRectangle uintptr
+
+	DrawErrorUnderline uintptr
+
+	DrawShape uintptr
+
+	DrawTrapezoid uintptr
+
+	DrawGlyph uintptr
+
+	PartChanged uintptr
+
+	Begin uintptr
+
+	End uintptr
+
+	PrepareRun uintptr
+
+	DrawGlyphItem uintptr
+
+	PangoReserved2 uintptr
+
+	PangoReserved3 uintptr
+
+	PangoReserved4 uintptr
 }
 
 func (x *RendererClass) GoPointer() uintptr {

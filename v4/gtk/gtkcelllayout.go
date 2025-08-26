@@ -20,6 +20,24 @@ type CellLayoutIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	PackStart uintptr
+
+	PackEnd uintptr
+
+	Clear uintptr
+
+	AddAttribute uintptr
+
+	SetCellDataFunc uintptr
+
+	ClearAttributes uintptr
+
+	Reorder uintptr
+
+	GetCells uintptr
+
+	GetArea uintptr
 }
 
 func (x *CellLayoutIface) GoPointer() uintptr {

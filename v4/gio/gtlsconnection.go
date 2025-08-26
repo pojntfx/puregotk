@@ -18,6 +18,18 @@ type TlsConnectionClass struct {
 
 	ParentClass uintptr
 
+	AcceptCertificate uintptr
+
+	Handshake uintptr
+
+	HandshakeAsync uintptr
+
+	HandshakeFinish uintptr
+
+	GetBindingData uintptr
+
+	GetNegotiatedProtocol uintptr
+
 	Padding [6]uintptr
 }
 

@@ -16,6 +16,22 @@ type FontClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	Describe uintptr
+
+	GetCoverage uintptr
+
+	GetGlyphExtents uintptr
+
+	GetMetrics uintptr
+
+	GetFontMap uintptr
+
+	DescribeAbsolute uintptr
+
+	GetFeatures uintptr
+
+	CreateHbFont uintptr
 }
 
 func (x *FontClass) GoPointer() uintptr {
@@ -480,6 +496,20 @@ type FontFaceClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GetFaceName uintptr
+
+	Describe uintptr
+
+	ListSizes uintptr
+
+	IsSynthesized uintptr
+
+	GetFamily uintptr
+
+	PangoReserved3 uintptr
+
+	PangoReserved4 uintptr
 }
 
 func (x *FontFaceClass) GoPointer() uintptr {
@@ -490,6 +520,18 @@ type FontFamilyClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	ListFaces uintptr
+
+	GetName uintptr
+
+	IsMonospace uintptr
+
+	IsVariable uintptr
+
+	GetFace uintptr
+
+	PangoReserved2 uintptr
 }
 
 func (x *FontFamilyClass) GoPointer() uintptr {

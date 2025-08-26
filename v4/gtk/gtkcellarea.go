@@ -27,6 +27,44 @@ type CellAreaClass struct {
 
 	ParentClass uintptr
 
+	Add uintptr
+
+	Remove uintptr
+
+	Foreach uintptr
+
+	ForeachAlloc uintptr
+
+	Event uintptr
+
+	Snapshot uintptr
+
+	ApplyAttributes uintptr
+
+	CreateContext uintptr
+
+	CopyContext uintptr
+
+	GetRequestMode uintptr
+
+	GetPreferredWidth uintptr
+
+	GetPreferredHeightForWidth uintptr
+
+	GetPreferredHeight uintptr
+
+	GetPreferredWidthForHeight uintptr
+
+	SetCellProperty uintptr
+
+	GetCellProperty uintptr
+
+	Focus uintptr
+
+	IsActivatable uintptr
+
+	Activate uintptr
+
 	Padding [8]uintptr
 }
 

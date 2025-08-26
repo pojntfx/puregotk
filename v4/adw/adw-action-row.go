@@ -18,6 +18,8 @@ type ActionRowClass struct {
 
 	ParentClass uintptr
 
+	Activate uintptr
+
 	Padding [4]uintptr
 }
 

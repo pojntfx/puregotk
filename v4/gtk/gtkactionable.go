@@ -16,6 +16,14 @@ type ActionableInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	GetActionName uintptr
+
+	SetActionName uintptr
+
+	GetActionTargetValue uintptr
+
+	SetActionTargetValue uintptr
 }
 
 func (x *ActionableInterface) GoPointer() uintptr {

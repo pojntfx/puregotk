@@ -18,6 +18,44 @@ type TextBufferClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	InsertText uintptr
+
+	InsertPaintable uintptr
+
+	InsertChildAnchor uintptr
+
+	DeleteRange uintptr
+
+	Changed uintptr
+
+	ModifiedChanged uintptr
+
+	MarkSet uintptr
+
+	MarkDeleted uintptr
+
+	ApplyTag uintptr
+
+	RemoveTag uintptr
+
+	BeginUserAction uintptr
+
+	EndUserAction uintptr
+
+	PasteDone uintptr
+
+	Undo uintptr
+
+	Redo uintptr
+
+	GtkReserved1 uintptr
+
+	GtkReserved2 uintptr
+
+	GtkReserved3 uintptr
+
+	GtkReserved4 uintptr
 }
 
 func (x *TextBufferClass) GoPointer() uintptr {

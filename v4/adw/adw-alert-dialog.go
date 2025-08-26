@@ -19,6 +19,8 @@ type AlertDialogClass struct {
 
 	ParentClass uintptr
 
+	Response uintptr
+
 	Padding [4]uintptr
 }
 

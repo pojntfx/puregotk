@@ -23,6 +23,18 @@ type PaintableInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	Snapshot uintptr
+
+	GetCurrentImage uintptr
+
+	GetFlags uintptr
+
+	GetIntrinsicWidth uintptr
+
+	GetIntrinsicHeight uintptr
+
+	GetIntrinsicAspectRatio uintptr
 }
 
 func (x *PaintableInterface) GoPointer() uintptr {

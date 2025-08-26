@@ -24,6 +24,28 @@ type PrintOperationClass struct {
 
 	ParentClass uintptr
 
+	Done uintptr
+
+	BeginPrint uintptr
+
+	Paginate uintptr
+
+	RequestPageSetup uintptr
+
+	DrawPage uintptr
+
+	EndPrint uintptr
+
+	StatusChanged uintptr
+
+	CreateCustomWidget uintptr
+
+	CustomWidgetApply uintptr
+
+	Preview uintptr
+
+	UpdateCustomWidget uintptr
+
 	Padding [8]uintptr
 }
 

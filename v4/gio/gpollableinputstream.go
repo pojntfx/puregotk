@@ -25,6 +25,14 @@ type PollableInputStreamInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	CanPoll uintptr
+
+	IsReadable uintptr
+
+	CreateSource uintptr
+
+	ReadNonblocking uintptr
 }
 
 func (x *PollableInputStreamInterface) GoPointer() uintptr {

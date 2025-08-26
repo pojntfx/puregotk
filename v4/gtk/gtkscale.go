@@ -20,6 +20,8 @@ type ScaleClass struct {
 
 	ParentClass uintptr
 
+	GetLayoutOffsets uintptr
+
 	Padding [8]uintptr
 }
 

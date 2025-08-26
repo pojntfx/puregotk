@@ -17,6 +17,26 @@ type SorterClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	Compare uintptr
+
+	GetOrder uintptr
+
+	GtkReserved1 uintptr
+
+	GtkReserved2 uintptr
+
+	GtkReserved3 uintptr
+
+	GtkReserved4 uintptr
+
+	GtkReserved5 uintptr
+
+	GtkReserved6 uintptr
+
+	GtkReserved7 uintptr
+
+	GtkReserved8 uintptr
 }
 
 func (x *SorterClass) GoPointer() uintptr {

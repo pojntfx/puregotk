@@ -16,6 +16,14 @@ type FilenameCompleterClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GotCompletionData uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
+
+	GReserved3 uintptr
 }
 
 func (x *FilenameCompleterClass) GoPointer() uintptr {

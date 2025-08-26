@@ -31,6 +31,16 @@ type PollableOutputStreamInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	CanPoll uintptr
+
+	IsWritable uintptr
+
+	CreateSource uintptr
+
+	WriteNonblocking uintptr
+
+	WritevNonblocking uintptr
 }
 
 func (x *PollableOutputStreamInterface) GoPointer() uintptr {

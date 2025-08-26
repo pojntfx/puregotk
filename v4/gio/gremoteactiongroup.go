@@ -16,6 +16,10 @@ type RemoteActionGroupInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	ActivateActionFull uintptr
+
+	ChangeActionStateFull uintptr
 }
 
 func (x *RemoteActionGroupInterface) GoPointer() uintptr {

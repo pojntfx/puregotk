@@ -19,6 +19,12 @@ type GLAreaClass struct {
 
 	ParentClass uintptr
 
+	Render uintptr
+
+	Resize uintptr
+
+	CreateContext uintptr
+
 	Padding [8]uintptr
 }
 

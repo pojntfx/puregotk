@@ -18,6 +18,52 @@ type IMContextClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	PreeditStart uintptr
+
+	PreeditEnd uintptr
+
+	PreeditChanged uintptr
+
+	Commit uintptr
+
+	RetrieveSurrounding uintptr
+
+	DeleteSurrounding uintptr
+
+	SetClientWidget uintptr
+
+	GetPreeditString uintptr
+
+	FilterKeypress uintptr
+
+	FocusIn uintptr
+
+	FocusOut uintptr
+
+	Reset uintptr
+
+	SetCursorLocation uintptr
+
+	SetUsePreedit uintptr
+
+	SetSurrounding uintptr
+
+	GetSurrounding uintptr
+
+	SetSurroundingWithSelection uintptr
+
+	GetSurroundingWithSelection uintptr
+
+	GtkReserved1 uintptr
+
+	GtkReserved2 uintptr
+
+	GtkReserved3 uintptr
+
+	GtkReserved4 uintptr
+
+	GtkReserved5 uintptr
 }
 
 func (x *IMContextClass) GoPointer() uintptr {

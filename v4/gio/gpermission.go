@@ -17,6 +17,18 @@ type PermissionClass struct {
 
 	ParentClass uintptr
 
+	Acquire uintptr
+
+	AcquireAsync uintptr
+
+	AcquireFinish uintptr
+
+	Release uintptr
+
+	ReleaseAsync uintptr
+
+	ReleaseFinish uintptr
+
 	Reserved [16]uintptr
 }
 

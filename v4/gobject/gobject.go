@@ -47,6 +47,22 @@ type InitiallyUnownedClass struct {
 
 	ConstructProperties *glib.SList
 
+	Constructor uintptr
+
+	SetProperty uintptr
+
+	GetProperty uintptr
+
+	Dispose uintptr
+
+	Finalize uintptr
+
+	DispatchPropertiesChanged uintptr
+
+	Notify uintptr
+
+	Constructed uintptr
+
 	Flags uint
 
 	Pdummy [6]uintptr
@@ -91,6 +107,22 @@ type ObjectClass struct {
 	GTypeClass uintptr
 
 	ConstructProperties *glib.SList
+
+	Constructor uintptr
+
+	SetProperty uintptr
+
+	GetProperty uintptr
+
+	Dispose uintptr
+
+	Finalize uintptr
+
+	DispatchPropertiesChanged uintptr
+
+	Notify uintptr
+
+	Constructed uintptr
 
 	Flags uint
 

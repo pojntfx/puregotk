@@ -17,6 +17,56 @@ type AppInfoIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	Dup uintptr
+
+	Equal uintptr
+
+	GetId uintptr
+
+	GetName uintptr
+
+	GetDescription uintptr
+
+	GetExecutable uintptr
+
+	GetIcon uintptr
+
+	Launch uintptr
+
+	SupportsUris uintptr
+
+	SupportsFiles uintptr
+
+	LaunchUris uintptr
+
+	ShouldShow uintptr
+
+	SetAsDefaultForType uintptr
+
+	SetAsDefaultForExtension uintptr
+
+	AddSupportsType uintptr
+
+	CanRemoveSupportsType uintptr
+
+	RemoveSupportsType uintptr
+
+	CanDelete uintptr
+
+	DoDelete uintptr
+
+	GetCommandline uintptr
+
+	GetDisplayName uintptr
+
+	SetAsLastUsedForType uintptr
+
+	GetSupportedTypes uintptr
+
+	LaunchUrisAsync uintptr
+
+	LaunchUrisFinish uintptr
 }
 
 func (x *AppInfoIface) GoPointer() uintptr {
@@ -27,6 +77,22 @@ type AppLaunchContextClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GetDisplay uintptr
+
+	GetStartupNotifyId uintptr
+
+	LaunchFailed uintptr
+
+	Launched uintptr
+
+	LaunchStarted uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
+
+	GReserved3 uintptr
 }
 
 func (x *AppLaunchContextClass) GoPointer() uintptr {

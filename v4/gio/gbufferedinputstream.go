@@ -15,6 +15,22 @@ type BufferedInputStreamClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	Fill uintptr
+
+	FillAsync uintptr
+
+	FillFinish uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
+
+	GReserved3 uintptr
+
+	GReserved4 uintptr
+
+	GReserved5 uintptr
 }
 
 func (x *BufferedInputStreamClass) GoPointer() uintptr {

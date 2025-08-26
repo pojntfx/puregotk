@@ -17,6 +17,18 @@ type MediaFileClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	Open uintptr
+
+	Close uintptr
+
+	GtkReserved1 uintptr
+
+	GtkReserved2 uintptr
+
+	GtkReserved3 uintptr
+
+	GtkReserved4 uintptr
 }
 
 func (x *MediaFileClass) GoPointer() uintptr {

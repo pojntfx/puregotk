@@ -488,9 +488,21 @@ func (x *TypeQuery) GoPointer() uintptr {
 type TypeValueTable struct {
 	_ structs.HostLayout
 
+	ValueInit uintptr
+
+	ValueFree uintptr
+
+	ValueCopy uintptr
+
+	ValuePeekPointer uintptr
+
 	CollectFormat uintptr
 
+	CollectValue uintptr
+
 	LcopyFormat uintptr
+
+	LcopyValue uintptr
 }
 
 func (x *TypeValueTable) GoPointer() uintptr {

@@ -20,6 +20,32 @@ type TlsDatabaseClass struct {
 
 	ParentClass uintptr
 
+	VerifyChain uintptr
+
+	VerifyChainAsync uintptr
+
+	VerifyChainFinish uintptr
+
+	CreateCertificateHandle uintptr
+
+	LookupCertificateForHandle uintptr
+
+	LookupCertificateForHandleAsync uintptr
+
+	LookupCertificateForHandleFinish uintptr
+
+	LookupCertificateIssuer uintptr
+
+	LookupCertificateIssuerAsync uintptr
+
+	LookupCertificateIssuerFinish uintptr
+
+	LookupCertificatesIssuedBy uintptr
+
+	LookupCertificatesIssuedByAsync uintptr
+
+	LookupCertificatesIssuedByFinish uintptr
+
 	Padding [16]uintptr
 }
 

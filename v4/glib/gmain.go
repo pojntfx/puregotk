@@ -1180,6 +1180,12 @@ func (x *Source) Unref() {
 // functions for managing callback objects.
 type SourceCallbackFuncs struct {
 	_ structs.HostLayout
+
+	Ref uintptr
+
+	Unref uintptr
+
+	Get uintptr
 }
 
 func (x *SourceCallbackFuncs) GoPointer() uintptr {
@@ -1208,6 +1214,14 @@ func (x *SourceCallbackFuncs) GoPointer() uintptr {
 // required condition has been met, and returns %TRUE if so.
 type SourceFuncs struct {
 	_ structs.HostLayout
+
+	Prepare uintptr
+
+	Check uintptr
+
+	Dispatch uintptr
+
+	Finalize uintptr
 
 	ClosureCallback SourceFunc
 

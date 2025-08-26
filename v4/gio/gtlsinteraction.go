@@ -31,6 +31,18 @@ type TlsInteractionClass struct {
 
 	ParentClass uintptr
 
+	AskPassword uintptr
+
+	AskPasswordAsync uintptr
+
+	AskPasswordFinish uintptr
+
+	RequestCertificate uintptr
+
+	RequestCertificateAsync uintptr
+
+	RequestCertificateFinish uintptr
+
 	Padding [21]uintptr
 }
 

@@ -17,6 +17,8 @@ type TlsClientConnectionInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	CopySessionState uintptr
 }
 
 func (x *TlsClientConnectionInterface) GoPointer() uintptr {

@@ -18,6 +18,10 @@ type DBusObjectManagerClientClass struct {
 
 	ParentClass uintptr
 
+	InterfaceProxySignal uintptr
+
+	InterfaceProxyPropertiesChanged uintptr
+
 	Padding [8]uintptr
 }
 

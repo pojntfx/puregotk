@@ -16,6 +16,18 @@ import (
 // This functions related to this has been deprecated in 2.46, and no longer work.
 type MemVTable struct {
 	_ structs.HostLayout
+
+	Malloc uintptr
+
+	Realloc uintptr
+
+	Free uintptr
+
+	Calloc uintptr
+
+	TryMalloc uintptr
+
+	TryRealloc uintptr
 }
 
 func (x *MemVTable) GoPointer() uintptr {

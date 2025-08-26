@@ -15,6 +15,10 @@ type InetAddressClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	ToString uintptr
+
+	ToBytes uintptr
 }
 
 func (x *InetAddressClass) GoPointer() uintptr {

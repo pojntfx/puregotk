@@ -16,6 +16,12 @@ type SocketAddressClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GetFamily uintptr
+
+	GetNativeSize uintptr
+
+	ToNative uintptr
 }
 
 func (x *SocketAddressClass) GoPointer() uintptr {

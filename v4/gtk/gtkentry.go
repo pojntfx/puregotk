@@ -25,6 +25,8 @@ type EntryClass struct {
 
 	ParentClass uintptr
 
+	Activate uintptr
+
 	Padding [8]uintptr
 }
 

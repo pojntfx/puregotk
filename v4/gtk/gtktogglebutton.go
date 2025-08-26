@@ -17,6 +17,8 @@ type ToggleButtonClass struct {
 
 	ParentClass uintptr
 
+	Toggled uintptr
+
 	Padding [8]uintptr
 }
 

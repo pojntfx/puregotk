@@ -17,6 +17,8 @@ type ScaleButtonClass struct {
 
 	ParentClass uintptr
 
+	ValueChanged uintptr
+
 	Padding [8]uintptr
 }
 

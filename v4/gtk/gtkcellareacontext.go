@@ -16,6 +16,14 @@ type CellAreaContextClass struct {
 
 	ParentClass uintptr
 
+	Allocate uintptr
+
+	Reset uintptr
+
+	GetPreferredHeightForWidth uintptr
+
+	GetPreferredWidthForHeight uintptr
+
 	Padding [8]uintptr
 }
 

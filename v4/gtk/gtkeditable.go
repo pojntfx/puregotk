@@ -15,6 +15,24 @@ type EditableInterface struct {
 	_ structs.HostLayout
 
 	BaseIface uintptr
+
+	InsertText uintptr
+
+	DeleteText uintptr
+
+	Changed uintptr
+
+	GetText uintptr
+
+	DoInsertText uintptr
+
+	DoDeleteText uintptr
+
+	GetSelectionBounds uintptr
+
+	SetSelectionBounds uintptr
+
+	GetDelegate uintptr
 }
 
 func (x *EditableInterface) GoPointer() uintptr {

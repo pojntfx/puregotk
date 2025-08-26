@@ -18,6 +18,16 @@ type IconIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	Hash uintptr
+
+	Equal uintptr
+
+	ToTokens uintptr
+
+	FromTokens uintptr
+
+	Serialize uintptr
 }
 
 func (x *IconIface) GoPointer() uintptr {

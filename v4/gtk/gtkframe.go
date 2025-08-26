@@ -16,6 +16,8 @@ type FrameClass struct {
 
 	ParentClass uintptr
 
+	ComputeChildAllocation uintptr
+
 	Padding [8]uintptr
 }
 

@@ -24,6 +24,40 @@ type VfsClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	IsActive uintptr
+
+	GetFileForPath uintptr
+
+	GetFileForUri uintptr
+
+	GetSupportedUriSchemes uintptr
+
+	ParseName uintptr
+
+	LocalFileAddInfo uintptr
+
+	AddWritableNamespaces uintptr
+
+	LocalFileSetAttributes uintptr
+
+	LocalFileRemoved uintptr
+
+	LocalFileMoved uintptr
+
+	DeserializeIcon uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
+
+	GReserved3 uintptr
+
+	GReserved4 uintptr
+
+	GReserved5 uintptr
+
+	GReserved6 uintptr
 }
 
 func (x *VfsClass) GoPointer() uintptr {

@@ -72,6 +72,46 @@ type TreeModelIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	RowChanged uintptr
+
+	RowInserted uintptr
+
+	RowHasChildToggled uintptr
+
+	RowDeleted uintptr
+
+	RowsReordered uintptr
+
+	GetFlags uintptr
+
+	GetNColumns uintptr
+
+	GetColumnType uintptr
+
+	GetIter uintptr
+
+	GetPath uintptr
+
+	GetValue uintptr
+
+	IterNext uintptr
+
+	IterPrevious uintptr
+
+	IterChildren uintptr
+
+	IterHasChild uintptr
+
+	IterNChildren uintptr
+
+	IterNthChild uintptr
+
+	IterParent uintptr
+
+	RefNode uintptr
+
+	UnrefNode uintptr
 }
 
 func (x *TreeModelIface) GoPointer() uintptr {

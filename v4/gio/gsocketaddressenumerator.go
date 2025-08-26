@@ -17,6 +17,12 @@ type SocketAddressEnumeratorClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	Next uintptr
+
+	NextAsync uintptr
+
+	NextFinish uintptr
 }
 
 func (x *SocketAddressEnumeratorClass) GoPointer() uintptr {

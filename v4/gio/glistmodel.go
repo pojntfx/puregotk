@@ -16,6 +16,12 @@ type ListModelInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	GetItemType uintptr
+
+	GetNItems uintptr
+
+	GetItem uintptr
 }
 
 func (x *ListModelInterface) GoPointer() uintptr {

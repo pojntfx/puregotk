@@ -18,6 +18,26 @@ type SettingsBackendClass struct {
 
 	ParentClass uintptr
 
+	Read uintptr
+
+	GetWritable uintptr
+
+	Write uintptr
+
+	WriteTree uintptr
+
+	Reset uintptr
+
+	Subscribe uintptr
+
+	Unsubscribe uintptr
+
+	Sync uintptr
+
+	GetPermission uintptr
+
+	ReadUserValue uintptr
+
 	Padding [23]uintptr
 }
 

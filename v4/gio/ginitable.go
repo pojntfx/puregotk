@@ -18,6 +18,8 @@ type InitableIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	Init uintptr
 }
 
 func (x *InitableIface) GoPointer() uintptr {

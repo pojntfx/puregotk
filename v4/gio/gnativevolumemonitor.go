@@ -12,6 +12,8 @@ type NativeVolumeMonitorClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GetMountForMountPath uintptr
 }
 
 func (x *NativeVolumeMonitorClass) GoPointer() uintptr {

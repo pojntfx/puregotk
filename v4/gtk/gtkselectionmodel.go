@@ -26,6 +26,24 @@ type SelectionModelInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	IsSelected uintptr
+
+	GetSelectionInRange uintptr
+
+	SelectItem uintptr
+
+	UnselectItem uintptr
+
+	SelectRange uintptr
+
+	UnselectRange uintptr
+
+	SelectAll uintptr
+
+	UnselectAll uintptr
+
+	SetSelection uintptr
 }
 
 func (x *SelectionModelInterface) GoPointer() uintptr {

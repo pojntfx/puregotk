@@ -113,6 +113,8 @@ type Closure struct {
 
 	IsInvalid uint
 
+	Marshal uintptr
+
 	Data uintptr
 
 	Notifiers *ClosureNotifyData

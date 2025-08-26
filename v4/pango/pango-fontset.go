@@ -22,6 +22,22 @@ type FontsetClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GetFont uintptr
+
+	GetMetrics uintptr
+
+	GetLanguage uintptr
+
+	Foreach uintptr
+
+	PangoReserved1 uintptr
+
+	PangoReserved2 uintptr
+
+	PangoReserved3 uintptr
+
+	PangoReserved4 uintptr
 }
 
 func (x *FontsetClass) GoPointer() uintptr {

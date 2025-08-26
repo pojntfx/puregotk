@@ -16,6 +16,60 @@ type MountIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	Changed uintptr
+
+	Unmounted uintptr
+
+	GetRoot uintptr
+
+	GetName uintptr
+
+	GetIcon uintptr
+
+	GetUuid uintptr
+
+	GetVolume uintptr
+
+	GetDrive uintptr
+
+	CanUnmount uintptr
+
+	CanEject uintptr
+
+	Unmount uintptr
+
+	UnmountFinish uintptr
+
+	Eject uintptr
+
+	EjectFinish uintptr
+
+	Remount uintptr
+
+	RemountFinish uintptr
+
+	GuessContentType uintptr
+
+	GuessContentTypeFinish uintptr
+
+	GuessContentTypeSync uintptr
+
+	PreUnmount uintptr
+
+	UnmountWithOperation uintptr
+
+	UnmountWithOperationFinish uintptr
+
+	EjectWithOperation uintptr
+
+	EjectWithOperationFinish uintptr
+
+	GetDefaultLocation uintptr
+
+	GetSortKey uintptr
+
+	GetSymbolicIcon uintptr
 }
 
 func (x *MountIface) GoPointer() uintptr {

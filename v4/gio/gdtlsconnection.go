@@ -17,6 +17,26 @@ type DtlsConnectionInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	AcceptCertificate uintptr
+
+	Handshake uintptr
+
+	HandshakeAsync uintptr
+
+	HandshakeFinish uintptr
+
+	Shutdown uintptr
+
+	ShutdownAsync uintptr
+
+	ShutdownFinish uintptr
+
+	SetAdvertisedProtocols uintptr
+
+	GetNegotiatedProtocol uintptr
+
+	GetBindingData uintptr
 }
 
 func (x *DtlsConnectionInterface) GoPointer() uintptr {

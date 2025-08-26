@@ -18,6 +18,12 @@ type TlsPasswordClass struct {
 
 	ParentClass uintptr
 
+	GetValue uintptr
+
+	SetValue uintptr
+
+	GetDefaultWarning uintptr
+
 	Padding [4]uintptr
 }
 

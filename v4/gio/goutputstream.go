@@ -16,6 +16,46 @@ type OutputStreamClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	WriteFn uintptr
+
+	Splice uintptr
+
+	Flush uintptr
+
+	CloseFn uintptr
+
+	WriteAsync uintptr
+
+	WriteFinish uintptr
+
+	SpliceAsync uintptr
+
+	SpliceFinish uintptr
+
+	FlushAsync uintptr
+
+	FlushFinish uintptr
+
+	CloseAsync uintptr
+
+	CloseFinish uintptr
+
+	WritevFn uintptr
+
+	WritevAsync uintptr
+
+	WritevFinish uintptr
+
+	GReserved4 uintptr
+
+	GReserved5 uintptr
+
+	GReserved6 uintptr
+
+	GReserved7 uintptr
+
+	GReserved8 uintptr
 }
 
 func (x *OutputStreamClass) GoPointer() uintptr {

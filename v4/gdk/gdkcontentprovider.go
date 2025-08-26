@@ -19,6 +19,22 @@ type ContentProviderClass struct {
 
 	ParentClass uintptr
 
+	ContentChanged uintptr
+
+	AttachClipboard uintptr
+
+	DetachClipboard uintptr
+
+	RefFormats uintptr
+
+	RefStorableFormats uintptr
+
+	WriteMimeTypeAsync uintptr
+
+	WriteMimeTypeFinish uintptr
+
+	GetValue uintptr
+
 	Padding [8]uintptr
 }
 

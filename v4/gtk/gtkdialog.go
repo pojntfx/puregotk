@@ -19,6 +19,10 @@ type DialogClass struct {
 
 	ParentClass uintptr
 
+	Response uintptr
+
+	Close uintptr
+
 	Padding [8]uintptr
 }
 

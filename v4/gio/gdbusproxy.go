@@ -18,6 +18,10 @@ type DBusProxyClass struct {
 
 	ParentClass uintptr
 
+	GPropertiesChanged uintptr
+
+	GSignal uintptr
+
 	Padding [32]uintptr
 }
 

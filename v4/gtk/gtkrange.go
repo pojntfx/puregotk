@@ -18,6 +18,16 @@ type RangeClass struct {
 
 	ParentClass uintptr
 
+	ValueChanged uintptr
+
+	AdjustBounds uintptr
+
+	MoveSlider uintptr
+
+	GetRangeBorder uintptr
+
+	ChangeValue uintptr
+
 	Padding [8]uintptr
 }
 

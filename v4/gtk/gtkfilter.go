@@ -16,6 +16,26 @@ type FilterClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	Match uintptr
+
+	GetStrictness uintptr
+
+	GtkReserved1 uintptr
+
+	GtkReserved2 uintptr
+
+	GtkReserved3 uintptr
+
+	GtkReserved4 uintptr
+
+	GtkReserved5 uintptr
+
+	GtkReserved6 uintptr
+
+	GtkReserved7 uintptr
+
+	GtkReserved8 uintptr
 }
 
 func (x *FilterClass) GoPointer() uintptr {

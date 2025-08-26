@@ -16,6 +16,34 @@ type EntryBufferClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	InsertedText uintptr
+
+	DeletedText uintptr
+
+	GetText uintptr
+
+	GetLength uintptr
+
+	InsertText uintptr
+
+	DeleteText uintptr
+
+	GtkReserved1 uintptr
+
+	GtkReserved2 uintptr
+
+	GtkReserved3 uintptr
+
+	GtkReserved4 uintptr
+
+	GtkReserved5 uintptr
+
+	GtkReserved6 uintptr
+
+	GtkReserved7 uintptr
+
+	GtkReserved8 uintptr
 }
 
 func (x *EntryBufferClass) GoPointer() uintptr {

@@ -16,6 +16,24 @@ type TlsBackendInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	SupportsTls uintptr
+
+	GetCertificateType uintptr
+
+	GetClientConnectionType uintptr
+
+	GetServerConnectionType uintptr
+
+	GetFileDatabaseType uintptr
+
+	GetDefaultDatabase uintptr
+
+	SupportsDtls uintptr
+
+	GetDtlsClientConnectionType uintptr
+
+	GetDtlsServerConnectionType uintptr
 }
 
 func (x *TlsBackendInterface) GoPointer() uintptr {

@@ -18,6 +18,10 @@ type ConverterIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	Convert uintptr
+
+	Reset uintptr
 }
 
 func (x *ConverterIface) GoPointer() uintptr {

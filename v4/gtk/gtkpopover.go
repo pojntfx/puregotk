@@ -19,6 +19,10 @@ type PopoverClass struct {
 
 	ParentClass uintptr
 
+	Closed uintptr
+
+	ActivateDefault uintptr
+
 	Reserved [8]uintptr
 }
 

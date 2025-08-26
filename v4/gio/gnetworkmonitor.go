@@ -17,6 +17,14 @@ type NetworkMonitorInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	NetworkChanged uintptr
+
+	CanReach uintptr
+
+	CanReachAsync uintptr
+
+	CanReachFinish uintptr
 }
 
 func (x *NetworkMonitorInterface) GoPointer() uintptr {

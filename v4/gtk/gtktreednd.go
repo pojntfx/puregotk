@@ -16,6 +16,10 @@ type TreeDragDestIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	DragDataReceived uintptr
+
+	RowDropPossible uintptr
 }
 
 func (x *TreeDragDestIface) GoPointer() uintptr {
@@ -26,6 +30,12 @@ type TreeDragSourceIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	RowDraggable uintptr
+
+	DragDataGet uintptr
+
+	DragDataDelete uintptr
 }
 
 func (x *TreeDragSourceIface) GoPointer() uintptr {

@@ -20,6 +20,16 @@ type DatagramBasedInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	ReceiveMessages uintptr
+
+	SendMessages uintptr
+
+	CreateSource uintptr
+
+	ConditionCheck uintptr
+
+	ConditionWait uintptr
 }
 
 func (x *DatagramBasedInterface) GoPointer() uintptr {

@@ -26,9 +26,13 @@ type ActionEntry struct {
 
 	Name uintptr
 
+	Activate uintptr
+
 	ParameterType uintptr
 
 	State uintptr
+
+	ChangeState uintptr
 
 	Padding [3]uint
 }
@@ -42,6 +46,12 @@ type ActionMapInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	LookupAction uintptr
+
+	AddAction uintptr
+
+	RemoveAction uintptr
 }
 
 func (x *ActionMapInterface) GoPointer() uintptr {

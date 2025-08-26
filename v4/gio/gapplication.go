@@ -18,6 +18,36 @@ type ApplicationClass struct {
 
 	ParentClass uintptr
 
+	Startup uintptr
+
+	Activate uintptr
+
+	Open uintptr
+
+	CommandLine uintptr
+
+	LocalCommandLine uintptr
+
+	BeforeEmit uintptr
+
+	AfterEmit uintptr
+
+	AddPlatformData uintptr
+
+	QuitMainloop uintptr
+
+	RunMainloop uintptr
+
+	Shutdown uintptr
+
+	DbusRegister uintptr
+
+	DbusUnregister uintptr
+
+	HandleLocalOptions uintptr
+
+	NameLost uintptr
+
 	Padding [7]uintptr
 }
 

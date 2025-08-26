@@ -18,6 +18,28 @@ type CellRendererClass struct {
 
 	ParentClass uintptr
 
+	GetRequestMode uintptr
+
+	GetPreferredWidth uintptr
+
+	GetPreferredHeightForWidth uintptr
+
+	GetPreferredHeight uintptr
+
+	GetPreferredWidthForHeight uintptr
+
+	GetAlignedArea uintptr
+
+	Snapshot uintptr
+
+	Activate uintptr
+
+	StartEditing uintptr
+
+	EditingCanceled uintptr
+
+	EditingStarted uintptr
+
 	Padding [8]uintptr
 }
 

@@ -16,6 +16,12 @@ type LoadableIconIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	Load uintptr
+
+	LoadAsync uintptr
+
+	LoadFinish uintptr
 }
 
 func (x *LoadableIconIface) GoPointer() uintptr {

@@ -16,6 +16,14 @@ type ColorChooserInterface struct {
 
 	BaseInterface uintptr
 
+	GetRgba uintptr
+
+	SetRgba uintptr
+
+	AddPalette uintptr
+
+	ColorActivated uintptr
+
 	Padding [12]uintptr
 }
 

@@ -18,7 +18,211 @@ type FileIface struct {
 
 	GIface uintptr
 
+	Dup uintptr
+
+	Hash uintptr
+
+	Equal uintptr
+
+	IsNative uintptr
+
+	HasUriScheme uintptr
+
+	GetUriScheme uintptr
+
+	GetBasename uintptr
+
+	GetPath uintptr
+
+	GetUri uintptr
+
+	GetParseName uintptr
+
+	GetParent uintptr
+
+	PrefixMatches uintptr
+
+	GetRelativePath uintptr
+
+	ResolveRelativePath uintptr
+
+	GetChildForDisplayName uintptr
+
+	EnumerateChildren uintptr
+
+	EnumerateChildrenAsync uintptr
+
+	EnumerateChildrenFinish uintptr
+
+	QueryInfo uintptr
+
+	QueryInfoAsync uintptr
+
+	QueryInfoFinish uintptr
+
+	QueryFilesystemInfo uintptr
+
+	QueryFilesystemInfoAsync uintptr
+
+	QueryFilesystemInfoFinish uintptr
+
+	FindEnclosingMount uintptr
+
+	FindEnclosingMountAsync uintptr
+
+	FindEnclosingMountFinish uintptr
+
+	SetDisplayName uintptr
+
+	SetDisplayNameAsync uintptr
+
+	SetDisplayNameFinish uintptr
+
+	QuerySettableAttributes uintptr
+
+	QuerySettableAttributesAsync uintptr
+
+	QuerySettableAttributesFinish uintptr
+
+	QueryWritableNamespaces uintptr
+
+	QueryWritableNamespacesAsync uintptr
+
+	QueryWritableNamespacesFinish uintptr
+
+	SetAttribute uintptr
+
+	SetAttributesFromInfo uintptr
+
+	SetAttributesAsync uintptr
+
+	SetAttributesFinish uintptr
+
+	ReadFn uintptr
+
+	ReadAsync uintptr
+
+	ReadFinish uintptr
+
+	AppendTo uintptr
+
+	AppendToAsync uintptr
+
+	AppendToFinish uintptr
+
+	Create uintptr
+
+	CreateAsync uintptr
+
+	CreateFinish uintptr
+
+	Replace uintptr
+
+	ReplaceAsync uintptr
+
+	ReplaceFinish uintptr
+
+	DeleteFile uintptr
+
+	DeleteFileAsync uintptr
+
+	DeleteFileFinish uintptr
+
+	Trash uintptr
+
+	TrashAsync uintptr
+
+	TrashFinish uintptr
+
+	MakeDirectory uintptr
+
+	MakeDirectoryAsync uintptr
+
+	MakeDirectoryFinish uintptr
+
+	MakeSymbolicLink uintptr
+
+	MakeSymbolicLinkAsync uintptr
+
+	MakeSymbolicLinkFinish uintptr
+
+	Copy uintptr
+
+	CopyAsync uintptr
+
+	CopyFinish uintptr
+
+	Move uintptr
+
+	MoveAsync uintptr
+
+	MoveFinish uintptr
+
+	MountMountable uintptr
+
+	MountMountableFinish uintptr
+
+	UnmountMountable uintptr
+
+	UnmountMountableFinish uintptr
+
+	EjectMountable uintptr
+
+	EjectMountableFinish uintptr
+
+	MountEnclosingVolume uintptr
+
+	MountEnclosingVolumeFinish uintptr
+
+	MonitorDir uintptr
+
+	MonitorFile uintptr
+
+	OpenReadwrite uintptr
+
+	OpenReadwriteAsync uintptr
+
+	OpenReadwriteFinish uintptr
+
+	CreateReadwrite uintptr
+
+	CreateReadwriteAsync uintptr
+
+	CreateReadwriteFinish uintptr
+
+	ReplaceReadwrite uintptr
+
+	ReplaceReadwriteAsync uintptr
+
+	ReplaceReadwriteFinish uintptr
+
+	StartMountable uintptr
+
+	StartMountableFinish uintptr
+
+	StopMountable uintptr
+
+	StopMountableFinish uintptr
+
 	SupportsThreadContexts bool
+
+	UnmountMountableWithOperation uintptr
+
+	UnmountMountableWithOperationFinish uintptr
+
+	EjectMountableWithOperation uintptr
+
+	EjectMountableWithOperationFinish uintptr
+
+	PollMountable uintptr
+
+	PollMountableFinish uintptr
+
+	MeasureDiskUsage uintptr
+
+	MeasureDiskUsageAsync uintptr
+
+	MeasureDiskUsageFinish uintptr
 }
 
 func (x *FileIface) GoPointer() uintptr {

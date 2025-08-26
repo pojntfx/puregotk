@@ -26,6 +26,12 @@ type AttrClass struct {
 	_ structs.HostLayout
 
 	Type AttrType
+
+	Copy uintptr
+
+	Destroy uintptr
+
+	Equal uintptr
 }
 
 func (x *AttrClass) GoPointer() uintptr {

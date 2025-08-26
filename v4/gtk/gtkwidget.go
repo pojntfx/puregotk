@@ -82,6 +82,56 @@ type WidgetClass struct {
 
 	ParentClass uintptr
 
+	Show uintptr
+
+	Hide uintptr
+
+	Map uintptr
+
+	Unmap uintptr
+
+	Realize uintptr
+
+	Unrealize uintptr
+
+	Root uintptr
+
+	Unroot uintptr
+
+	SizeAllocate uintptr
+
+	StateFlagsChanged uintptr
+
+	DirectionChanged uintptr
+
+	GetRequestMode uintptr
+
+	Measure uintptr
+
+	MnemonicActivate uintptr
+
+	GrabFocus uintptr
+
+	Focus uintptr
+
+	SetFocusChild uintptr
+
+	MoveFocus uintptr
+
+	KeynavFailed uintptr
+
+	QueryTooltip uintptr
+
+	ComputeExpand uintptr
+
+	CssChanged uintptr
+
+	SystemSettingChanged uintptr
+
+	Snapshot uintptr
+
+	Contains uintptr
+
 	Priv *WidgetClassPrivate
 
 	Padding [8]uintptr

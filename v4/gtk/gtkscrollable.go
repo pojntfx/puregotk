@@ -15,6 +15,8 @@ type ScrollableInterface struct {
 	_ structs.HostLayout
 
 	BaseIface uintptr
+
+	GetBorder uintptr
 }
 
 func (x *ScrollableInterface) GoPointer() uintptr {

@@ -336,6 +336,16 @@ func (x *MarkupParseContext) Unref() {
 // back to its caller.
 type MarkupParser struct {
 	_ structs.HostLayout
+
+	StartElement uintptr
+
+	EndElement uintptr
+
+	Text uintptr
+
+	Passthrough uintptr
+
+	Error uintptr
 }
 
 func (x *MarkupParser) GoPointer() uintptr {

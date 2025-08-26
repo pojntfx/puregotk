@@ -29,6 +29,18 @@ type TreeSortableIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	SortColumnChanged uintptr
+
+	GetSortColumnId uintptr
+
+	SetSortColumnId uintptr
+
+	SetSortFunc uintptr
+
+	SetDefaultSortFunc uintptr
+
+	HasDefaultSortFunc uintptr
 }
 
 func (x *TreeSortableIface) GoPointer() uintptr {

@@ -18,7 +18,17 @@ type DBusInterfaceSkeletonClass struct {
 
 	ParentClass uintptr
 
+	GetInfo uintptr
+
+	GetVtable uintptr
+
+	GetProperties uintptr
+
+	Flush uintptr
+
 	VfuncPadding [8]uintptr
+
+	GAuthorizeMethod uintptr
 
 	SignalPadding [8]uintptr
 }

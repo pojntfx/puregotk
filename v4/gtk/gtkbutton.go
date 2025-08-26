@@ -17,6 +17,10 @@ type ButtonClass struct {
 
 	ParentClass uintptr
 
+	Clicked uintptr
+
+	Activate uintptr
+
 	Padding [8]uintptr
 }
 

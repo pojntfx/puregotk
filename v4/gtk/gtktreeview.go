@@ -43,6 +43,36 @@ type TreeViewClass struct {
 
 	ParentClass uintptr
 
+	RowActivated uintptr
+
+	TestExpandRow uintptr
+
+	TestCollapseRow uintptr
+
+	RowExpanded uintptr
+
+	RowCollapsed uintptr
+
+	ColumnsChanged uintptr
+
+	CursorChanged uintptr
+
+	MoveCursor uintptr
+
+	SelectAll uintptr
+
+	UnselectAll uintptr
+
+	SelectCursorRow uintptr
+
+	ToggleCursorRow uintptr
+
+	ExpandCollapseCursorRow uintptr
+
+	SelectCursorParent uintptr
+
+	StartInteractiveSearch uintptr
+
 	Reserved [16]uintptr
 }
 

@@ -338,6 +338,14 @@ type PixbufModule struct {
 	SaveToCallback PixbufModuleSaveCallbackFunc
 
 	IsSaveOptionSupported PixbufModuleSaveOptionSupportedFunc
+
+	Reserved1 uintptr
+
+	Reserved2 uintptr
+
+	Reserved3 uintptr
+
+	Reserved4 uintptr
 }
 
 func (x *PixbufModule) GoPointer() uintptr {

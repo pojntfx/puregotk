@@ -19,6 +19,12 @@ type ApplicationCommandLineClass struct {
 
 	ParentClass uintptr
 
+	PrintLiteral uintptr
+
+	PrinterrLiteral uintptr
+
+	GetStdin uintptr
+
 	Padding [11]uintptr
 }
 

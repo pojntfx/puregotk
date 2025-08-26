@@ -16,6 +16,32 @@ type FileEnumeratorClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	NextFile uintptr
+
+	CloseFn uintptr
+
+	NextFilesAsync uintptr
+
+	NextFilesFinish uintptr
+
+	CloseAsync uintptr
+
+	CloseFinish uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
+
+	GReserved3 uintptr
+
+	GReserved4 uintptr
+
+	GReserved5 uintptr
+
+	GReserved6 uintptr
+
+	GReserved7 uintptr
 }
 
 func (x *FileEnumeratorClass) GoPointer() uintptr {

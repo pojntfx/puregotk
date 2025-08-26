@@ -16,6 +16,70 @@ type DriveIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	Changed uintptr
+
+	Disconnected uintptr
+
+	EjectButton uintptr
+
+	GetName uintptr
+
+	GetIcon uintptr
+
+	HasVolumes uintptr
+
+	GetVolumes uintptr
+
+	IsMediaRemovable uintptr
+
+	HasMedia uintptr
+
+	IsMediaCheckAutomatic uintptr
+
+	CanEject uintptr
+
+	CanPollForMedia uintptr
+
+	Eject uintptr
+
+	EjectFinish uintptr
+
+	PollForMedia uintptr
+
+	PollForMediaFinish uintptr
+
+	GetIdentifier uintptr
+
+	EnumerateIdentifiers uintptr
+
+	GetStartStopType uintptr
+
+	CanStart uintptr
+
+	CanStartDegraded uintptr
+
+	Start uintptr
+
+	StartFinish uintptr
+
+	CanStop uintptr
+
+	Stop uintptr
+
+	StopFinish uintptr
+
+	StopButton uintptr
+
+	EjectWithOperation uintptr
+
+	EjectWithOperationFinish uintptr
+
+	GetSortKey uintptr
+
+	GetSymbolicIcon uintptr
+
+	IsRemovable uintptr
 }
 
 func (x *DriveIface) GoPointer() uintptr {

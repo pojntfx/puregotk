@@ -16,6 +16,14 @@ type ProxyInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	Connect uintptr
+
+	ConnectAsync uintptr
+
+	ConnectFinish uintptr
+
+	SupportsHostname uintptr
 }
 
 func (x *ProxyInterface) GoPointer() uintptr {

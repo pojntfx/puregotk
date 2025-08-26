@@ -29,6 +29,10 @@ type TreeModelFilterClass struct {
 
 	ParentClass uintptr
 
+	Visible uintptr
+
+	Modify uintptr
+
 	Padding [8]uintptr
 }
 

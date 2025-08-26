@@ -17,6 +17,8 @@ type SymbolicPaintableInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	SnapshotSymbolic uintptr
 }
 
 func (x *SymbolicPaintableInterface) GoPointer() uintptr {

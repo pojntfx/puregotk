@@ -16,6 +16,14 @@ type PixbufLoaderClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	SizePrepared uintptr
+
+	AreaPrepared uintptr
+
+	AreaUpdated uintptr
+
+	Closed uintptr
 }
 
 func (x *PixbufLoaderClass) GoPointer() uintptr {

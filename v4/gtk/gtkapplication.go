@@ -18,6 +18,10 @@ type ApplicationClass struct {
 
 	ParentClass uintptr
 
+	WindowAdded uintptr
+
+	WindowRemoved uintptr
+
 	Padding [8]uintptr
 }
 

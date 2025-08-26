@@ -20,6 +20,14 @@ type NavigationPageClass struct {
 
 	ParentClass uintptr
 
+	Showing uintptr
+
+	Shown uintptr
+
+	Hiding uintptr
+
+	Hidden uintptr
+
 	Padding [8]uintptr
 }
 

@@ -20,6 +20,16 @@ type WindowClass struct {
 
 	ParentClass uintptr
 
+	ActivateFocus uintptr
+
+	ActivateDefault uintptr
+
+	KeysChanged uintptr
+
+	EnableDebugging uintptr
+
+	CloseRequest uintptr
+
 	Padding [8]uintptr
 }
 

@@ -16,6 +16,16 @@ type SeekableIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	Tell uintptr
+
+	CanSeek uintptr
+
+	Seek uintptr
+
+	CanTruncate uintptr
+
+	TruncateFn uintptr
 }
 
 func (x *SeekableIface) GoPointer() uintptr {

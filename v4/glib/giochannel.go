@@ -559,6 +559,22 @@ func (x *IOChannel) WriteUnichar(ThecharVar uint32) (IOStatus, error) {
 // in a generic way.
 type IOFuncs struct {
 	_ structs.HostLayout
+
+	IoRead uintptr
+
+	IoWrite uintptr
+
+	IoSeek uintptr
+
+	IoClose uintptr
+
+	IoCreateWatch uintptr
+
+	IoFree uintptr
+
+	IoSetFlags uintptr
+
+	IoGetFlags uintptr
 }
 
 func (x *IOFuncs) GoPointer() uintptr {

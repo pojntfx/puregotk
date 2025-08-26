@@ -29,6 +29,12 @@ type BuilderScopeInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	GetTypeFromName uintptr
+
+	GetTypeFromFunction uintptr
+
+	CreateClosure uintptr
 }
 
 func (x *BuilderScopeInterface) GoPointer() uintptr {

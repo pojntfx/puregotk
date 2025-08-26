@@ -16,6 +16,34 @@ type InputStreamClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	ReadFn uintptr
+
+	Skip uintptr
+
+	CloseFn uintptr
+
+	ReadAsync uintptr
+
+	ReadFinish uintptr
+
+	SkipAsync uintptr
+
+	SkipFinish uintptr
+
+	CloseAsync uintptr
+
+	CloseFinish uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
+
+	GReserved3 uintptr
+
+	GReserved4 uintptr
+
+	GReserved5 uintptr
 }
 
 func (x *InputStreamClass) GoPointer() uintptr {

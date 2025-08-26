@@ -16,6 +16,36 @@ type IOStreamClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GetInputStream uintptr
+
+	GetOutputStream uintptr
+
+	CloseFn uintptr
+
+	CloseAsync uintptr
+
+	CloseFinish uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
+
+	GReserved3 uintptr
+
+	GReserved4 uintptr
+
+	GReserved5 uintptr
+
+	GReserved6 uintptr
+
+	GReserved7 uintptr
+
+	GReserved8 uintptr
+
+	GReserved9 uintptr
+
+	GReserved10 uintptr
 }
 
 func (x *IOStreamClass) GoPointer() uintptr {

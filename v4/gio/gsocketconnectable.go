@@ -16,6 +16,12 @@ type SocketConnectableIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	Enumerate uintptr
+
+	ProxyEnumerate uintptr
+
+	ToString uintptr
 }
 
 func (x *SocketConnectableIface) GoPointer() uintptr {

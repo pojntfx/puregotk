@@ -14,6 +14,14 @@ type IMMulticontextClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GtkReserved1 uintptr
+
+	GtkReserved2 uintptr
+
+	GtkReserved3 uintptr
+
+	GtkReserved4 uintptr
 }
 
 func (x *IMMulticontextClass) GoPointer() uintptr {

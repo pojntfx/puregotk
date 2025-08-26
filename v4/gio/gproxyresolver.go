@@ -17,6 +17,14 @@ type ProxyResolverInterface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	IsSupported uintptr
+
+	Lookup uintptr
+
+	LookupAsync uintptr
+
+	LookupFinish uintptr
 }
 
 func (x *ProxyResolverInterface) GoPointer() uintptr {

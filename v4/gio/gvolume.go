@@ -16,6 +16,48 @@ type VolumeIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	Changed uintptr
+
+	Removed uintptr
+
+	GetName uintptr
+
+	GetIcon uintptr
+
+	GetUuid uintptr
+
+	GetDrive uintptr
+
+	GetMount uintptr
+
+	CanMount uintptr
+
+	CanEject uintptr
+
+	MountFn uintptr
+
+	MountFinish uintptr
+
+	Eject uintptr
+
+	EjectFinish uintptr
+
+	GetIdentifier uintptr
+
+	EnumerateIdentifiers uintptr
+
+	ShouldAutomount uintptr
+
+	GetActivationRoot uintptr
+
+	EjectWithOperation uintptr
+
+	EjectWithOperationFinish uintptr
+
+	GetSortKey uintptr
+
+	GetSymbolicIcon uintptr
 }
 
 func (x *VolumeIface) GoPointer() uintptr {

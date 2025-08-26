@@ -15,6 +15,34 @@ type FileOutputStreamClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	Tell uintptr
+
+	CanSeek uintptr
+
+	Seek uintptr
+
+	CanTruncate uintptr
+
+	TruncateFn uintptr
+
+	QueryInfo uintptr
+
+	QueryInfoAsync uintptr
+
+	QueryInfoFinish uintptr
+
+	GetEtag uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
+
+	GReserved3 uintptr
+
+	GReserved4 uintptr
+
+	GReserved5 uintptr
 }
 
 func (x *FileOutputStreamClass) GoPointer() uintptr {

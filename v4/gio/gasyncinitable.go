@@ -18,6 +18,10 @@ type AsyncInitableIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	InitAsync uintptr
+
+	InitFinish uintptr
 }
 
 func (x *AsyncInitableIface) GoPointer() uintptr {

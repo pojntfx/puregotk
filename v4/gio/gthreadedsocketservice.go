@@ -16,6 +16,18 @@ type ThreadedSocketServiceClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	Run uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
+
+	GReserved3 uintptr
+
+	GReserved4 uintptr
+
+	GReserved5 uintptr
 }
 
 func (x *ThreadedSocketServiceClass) GoPointer() uintptr {

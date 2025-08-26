@@ -16,6 +16,14 @@ type DBusInterfaceIface struct {
 	_ structs.HostLayout
 
 	ParentIface uintptr
+
+	GetInfo uintptr
+
+	GetObject uintptr
+
+	SetObject uintptr
+
+	DupObject uintptr
 }
 
 func (x *DBusInterfaceIface) GoPointer() uintptr {

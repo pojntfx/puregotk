@@ -15,6 +15,8 @@ type FileDescriptorBasedIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	GetFd uintptr
 }
 
 func (x *FileDescriptorBasedIface) GoPointer() uintptr {

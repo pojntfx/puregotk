@@ -38,6 +38,8 @@ type FlowBoxChildClass struct {
 
 	ParentClass uintptr
 
+	Activate uintptr
+
 	Padding [8]uintptr
 }
 

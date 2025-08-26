@@ -19,7 +19,19 @@ type LayoutManagerClass struct {
 
 	ParentClass uintptr
 
+	GetRequestMode uintptr
+
+	Measure uintptr
+
+	Allocate uintptr
+
 	LayoutChildType types.GType
+
+	CreateLayoutChild uintptr
+
+	Root uintptr
+
+	Unroot uintptr
 
 	Padding [16]uintptr
 }

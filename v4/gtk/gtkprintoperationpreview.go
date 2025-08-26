@@ -14,6 +14,32 @@ type PrintOperationPreviewIface struct {
 	_ structs.HostLayout
 
 	GIface uintptr
+
+	Ready uintptr
+
+	GotPageSize uintptr
+
+	RenderPage uintptr
+
+	IsSelected uintptr
+
+	EndPreview uintptr
+
+	GtkReserved1 uintptr
+
+	GtkReserved2 uintptr
+
+	GtkReserved3 uintptr
+
+	GtkReserved4 uintptr
+
+	GtkReserved5 uintptr
+
+	GtkReserved6 uintptr
+
+	GtkReserved7 uintptr
+
+	GtkReserved8 uintptr
 }
 
 func (x *PrintOperationPreviewIface) GoPointer() uintptr {

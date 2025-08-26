@@ -17,6 +17,20 @@ type SocketServiceClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	Incoming uintptr
+
+	GReserved1 uintptr
+
+	GReserved2 uintptr
+
+	GReserved3 uintptr
+
+	GReserved4 uintptr
+
+	GReserved5 uintptr
+
+	GReserved6 uintptr
 }
 
 func (x *SocketServiceClass) GoPointer() uintptr {

@@ -20,6 +20,14 @@ type PixbufAnimationClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	IsStaticImage uintptr
+
+	GetStaticImage uintptr
+
+	GetSize uintptr
+
+	GetIter uintptr
 }
 
 func (x *PixbufAnimationClass) GoPointer() uintptr {
@@ -33,6 +41,14 @@ type PixbufAnimationIterClass struct {
 	_ structs.HostLayout
 
 	ParentClass uintptr
+
+	GetDelayTime uintptr
+
+	GetPixbuf uintptr
+
+	OnCurrentlyLoadingFrame uintptr
+
+	Advance uintptr
 }
 
 func (x *PixbufAnimationIterClass) GoPointer() uintptr {
