@@ -33,11 +33,23 @@ func ConvertInterface(currns string, ins string, inter Interface, implemented ma
 			},
 		})
 	}
+
+	// Process properties
+	properties := make([]PropertyTemplate, 0, len(inter.Properties))
+	for _, prop := range inter.Properties {
+		// Skip properties that are not introspectable
+		if !prop.IsIntrospectable() {
+			continue
+		}
+		properties = append(properties, prop.Template(currns, kinds))
+	}
+
 	name := util.SnakeToCamel(inter.Name)
 	return InterfaceTemplate{
 		Name:       name,
 		Doc:        inter.Doc.StringSafe(),
 		Methods:    methods,
+		Properties: properties,
 		TypeGetter: inter.GLibGetType,
 	}
 }

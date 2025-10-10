@@ -391,6 +391,29 @@ type SignalsTemplate struct {
 	Ret   funcRetTemplate
 }
 
+type PropertyTemplate struct {
+	// Name is the Go name of the property (e.g., "TestButtonSensitive")
+	Name string
+	// CName is the original GObject property name (e.g., "test-button-sensitive")
+	CName string
+	// Doc is the documentation for the property
+	Doc string
+	// Type is the Go type for this property
+	GoType string
+	// BaseGoType is the Go type without pointer prefix (for composite literals)
+	BaseGoType string
+	// GLibType is the GType constant for this property (e.g., "TypeBooleanVal")
+	GLibType string
+	// IsInterface indicates if the property type is an interface
+	IsInterface bool
+	// IsRecord indicates if the property type is a record/struct
+	IsRecord bool
+	// Writable indicates if this property can be set
+	Writable bool
+	// Readable indicates if this property can be get
+	Readable bool
+}
+
 type ClassTemplate struct {
 	// Doc is the documentation for the class
 	Doc string
@@ -406,6 +429,8 @@ type ClassTemplate struct {
 	Interfaces []InterfaceTemplate
 	// Functions are the Go function declarations
 	Functions []FuncTemplate
+	// Properties are the GObject properties with SetX/GetX accessors
+	Properties []PropertyTemplate
 	// Signals are helpers for ConnectX receivers
 	Signals []SignalsTemplate
 	// TypeGetter is the function to get the GLib type
@@ -417,6 +442,8 @@ type InterfaceTemplate struct {
 	Name string
 	// Methods is the methods that this interface defines
 	Methods []InterfaceFuncTemplate
+	// Properties are the GObject properties with SetX/GetX accessors
+	Properties []PropertyTemplate
 	// TypeGetter is the function to get the GLib type
 	TypeGetter string
 }

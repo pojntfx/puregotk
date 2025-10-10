@@ -376,6 +376,7 @@ type Class struct {
 	Methods        []Method        `xml:"http://www.gtk.org/introspection/core/1.0 method"`
 	VirtualMethods []VirtualMethod `xml:"http://www.gtk.org/introspection/core/1.0 virtual-method"`
 	Fields         []Field         `xml:"http://www.gtk.org/introspection/core/1.0 field"`
+	Properties     []Property      `xml:"http://www.gtk.org/introspection/core/1.0 property"`
 	Signals        []Signal        `xml:"http://www.gtk.org/introspection/glib/1.0 signal"`
 }
 
@@ -565,6 +566,7 @@ type Interface struct {
 	Methods        []Method        `xml:"http://www.gtk.org/introspection/core/1.0 method"`
 	VirtualMethods []VirtualMethod `xml:"http://www.gtk.org/introspection/core/1.0 virtual-method"`
 	Prerequisites  []Prerequisite  `xml:"http://www.gtk.org/introspection/core/1.0 prerequisite"`
+	Properties     []Property      `xml:"http://www.gtk.org/introspection/core/1.0 property"`
 	Signals        []Signal        `xml:"http://www.gtk.org/introspection/glib/1.0 signal"`
 
 	InfoAttrs
@@ -701,7 +703,140 @@ type Prerequisite struct {
 	Name    string   `xml:"name,attr"`
 }
 
-type Property struct{}
+type Property struct {
+	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 property"`
+	Name    string   `xml:"name,attr"`
+
+	Writable      *bool  `xml:"writable,attr"`      // default false for properties
+	Readable      *bool  `xml:"readable,attr"`      // default true
+	Construct     bool   `xml:"construct,attr"`     // can be set at construction
+	ConstructOnly bool   `xml:"construct-only,attr"` // can only be set at construction
+	Setter        string `xml:"setter,attr"`        // setter method name if any
+	Getter        string `xml:"getter,attr"`        // getter method name if any
+
+	TransferOwnership
+	AnyType
+	InfoAttrs
+	InfoElements
+}
+
+// IsWritable returns true if the property is writable.
+func (p Property) IsWritable() bool {
+	return p.Writable != nil && *p.Writable
+}
+
+// IsReadable returns true if the property is readable.
+func (p Property) IsReadable() bool {
+	return p.Readable == nil || *p.Readable
+}
+
+// Template converts a Property to a PropertyTemplate for code generation
+func (p *Property) Template(ns string, kinds KindMap) PropertyTemplate {
+	// Get the Go type for this property
+	goType := p.AnyType.Translate(ns, kinds)
+	kind := kinds.Kind(ns, goType)
+
+	// Normalize the type name with namespace
+	goType = util.NormalizeNamespace(ns, goType, true)
+
+	// Handle classes and records - they need pointer types
+	// Interfaces don't need pointer prefix since they're already reference types
+	if kind == ClassesType || kind == RecordsType {
+		if !strings.HasPrefix(goType, "*") {
+			goType = "*" + goType
+		}
+	}
+
+	// Determine the property type name from the GIR
+	propertyTypeName := ""
+	if p.Type != nil {
+		propertyTypeName = p.Type.Name
+	}
+
+	// Map Go type to GLib GType constant, using kind information and type name
+	glibType := goTypeToGLibType(goType, kind, propertyTypeName, kinds, ns)
+
+	// Convert property name from kebab-case to CamelCase
+	propName := util.DashToCamel(p.Name)
+
+	// Create BaseGoType by stripping the leading * if present
+	baseGoType := goType
+	if strings.HasPrefix(baseGoType, "*") {
+		baseGoType = strings.TrimPrefix(baseGoType, "*")
+	}
+
+	return PropertyTemplate{
+		Name:        propName,
+		CName:       p.Name,
+		Doc:         p.Doc.StringSafe(),
+		GoType:      goType,
+		BaseGoType:  baseGoType,
+		GLibType:    glibType,
+		IsInterface: kind == InterfacesType,
+		IsRecord:    kind == RecordsType,
+		Writable:    p.IsWritable(),
+		Readable:    p.IsReadable(),
+	}
+}
+
+// goTypeToGLibType maps a Go type to the corresponding GLib GType constant name
+func goTypeToGLibType(goType string, kind Kind, typeName string, kinds KindMap, ns string) string {
+	// Remove pointer prefix for mapping
+	baseType := strings.TrimPrefix(goType, "*")
+
+	// Check for GType specifically
+	if baseType == "types.GType" {
+		return "TypeGtypeVal"
+	}
+
+	// Check for slice types - these should use TypePointerVal, not TypeObjectVal
+	if strings.HasPrefix(baseType, "[]") || kind == SliceType {
+		return "TypePointerVal"
+	}
+
+	// If we have the original type name, check if it's an enum or bitfield in the namespace
+	if typeName != "" {
+		pair := kinds.pair(ns, typeName)
+		if pair.K == AliasType {
+			// Check if this alias points to an Enum or Bitfield
+			switch pair.Value.(type) {
+			case Enum:
+				return "TypeEnumVal"
+			case Bitfield:
+				return "TypeFlagsVal"
+			}
+		}
+	}
+
+	// Map primitive types
+	switch baseType {
+	case "bool":
+		return "TypeBooleanVal"
+	case "int":
+		return "TypeIntVal"
+	case "uint":
+		return "TypeUintVal"
+	case "int32":
+		return "TypeIntVal"
+	case "uint32":
+		return "TypeUintVal"
+	case "int64":
+		return "TypeInt64Val"
+	case "uint64":
+		return "TypeUint64Val"
+	case "float32":
+		return "TypeFloatVal"
+	case "float64":
+		return "TypeDoubleVal"
+	case "string":
+		return "TypeStringVal"
+	case "byte":
+		return "TypeUcharVal"
+	default:
+		// For classes and other complex types, use TypeObjectVal
+		return "TypeObjectVal"
+	}
+}
 
 type Record struct {
 	XMLName              xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 record"`
