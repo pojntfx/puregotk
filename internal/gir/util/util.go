@@ -213,3 +213,87 @@ func ConstructorName(name string, outer string) string {
 	// the default is just a concatenation if the constructor doesn't start with New
 	return outer + cname
 }
+
+// PropertyValueSet generates the appropriate v.SetXXX(value) call based on the property's GoType and GLibType
+func PropertyValueSet(goType, glibType, valueName, objPrefix string) string {
+	switch goType {
+	case "bool":
+		return "v.SetBoolean(" + valueName + ")"
+	case "int":
+		return "v.SetInt(" + valueName + ")"
+	case "int64":
+		return "v.SetInt64(" + valueName + ")"
+	case "uint":
+		return "v.SetUint(" + valueName + ")"
+	case "uint64":
+		return "v.SetUint64(" + valueName + ")"
+	case "float32":
+		return "v.SetFloat(" + valueName + ")"
+	case "float64":
+		return "v.SetDouble(" + valueName + ")"
+	case "string":
+		return "v.SetString(" + valueName + ")"
+	case "uintptr":
+		return "v.SetPointer(" + valueName + ")"
+	}
+
+	switch glibType {
+	case "TypeEnumVal":
+		return "v.SetEnum(int(" + valueName + "))"
+	case "TypeFlagsVal":
+		return "v.SetFlags(uint(" + valueName + "))"
+	case "TypeGtypeVal":
+		return "v.SetGtype(" + valueName + ")"
+	case "TypeObjectVal":
+		return "v.SetObject(&" + objPrefix + "Object{Ptr: " + valueName + ".GoPointer()})"
+	default:
+		return "v.SetPointer(uintptr(" + valueName + "))"
+	}
+}
+
+// PropertyValueGet generates the appropriate v.GetXXX() expression based on the property's GoType and GLibType
+func PropertyValueGet(goType, glibType, baseGoType string, isInterface, isRecord bool) string {
+	switch goType {
+	case "bool":
+		return "return v.GetBoolean()"
+	case "int":
+		return "return v.GetInt()"
+	case "int64":
+		return "return v.GetInt64()"
+	case "uint":
+		return "return v.GetUint()"
+	case "uint64":
+		return "return v.GetUint64()"
+	case "float32":
+		return "return v.GetFloat()"
+	case "float64":
+		return "return v.GetDouble()"
+	case "string":
+		return "return v.GetString()"
+	case "uintptr":
+		return "return v.GetPointer()"
+	}
+
+	switch glibType {
+	case "TypeEnumVal":
+		return "return " + goType + "(v.GetEnum())"
+	case "TypeFlagsVal":
+		return "return " + goType + "(v.GetFlags())"
+	case "TypeGtypeVal":
+		return "return v.GetGtype()"
+	case "TypeObjectVal":
+		result := "ptr := v.GetObject().GoPointer(); if ptr == 0 { return nil }; "
+		if isInterface {
+			result += "result := &" + baseGoType + "Base{}; result.Ptr = ptr; return result"
+		} else if isRecord {
+			result += "return (*" + baseGoType + ")(unsafe.Pointer(ptr))"
+		} else {
+			result += "result := &" + baseGoType + "{}; result.Ptr = ptr; return result"
+		}
+		return result
+	case "TypePointerVal":
+		return "return nil"
+	default:
+		return "return " + goType + "(v.GetPointer())"
+	}
+}

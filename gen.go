@@ -32,12 +32,14 @@ func main() {
 
 	// Create the template
 	gotemp, err := template.New("go").Funcs(template.FuncMap{
-		"conv":     util.ConvertArgs,
-		"convc":    util.ConvertArgsComma,
-		"convcb":   util.ConvertCallbackArgs,
-		"convcd":   util.ConvertArgsCommaDeref,
-		"convd":    util.ConvertArgsDeref,
-		"convcbne": util.ConvertCallbackArgsNoErr,
+		"conv":      util.ConvertArgs,
+		"convc":     util.ConvertArgsComma,
+		"convcb":    util.ConvertCallbackArgs,
+		"convcd":    util.ConvertArgsCommaDeref,
+		"convd":     util.ConvertArgsDeref,
+		"convcbne":  util.ConvertCallbackArgsNoErr,
+		"valueset":  util.PropertyValueSet,
+		"valueget":  util.PropertyValueGet,
 	}).ParseFiles("templates/go")
 	if err != nil {
 		panic(err)
