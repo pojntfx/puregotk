@@ -100,8 +100,8 @@ func (x *{{$outer.Name}}) {{.Name}}({{conv .Args.API.Full}}) {{.Ret.Return}} {
 {{end}}
 
 {{range .CallbackAccessors -}}
-{{if .Doc}}// Override{{.Name}} sets the callback function.
-{{.Doc}}{{else}}// Override{{.Name}} sets the callback function.{{end}}
+{{if .Doc}}// Override{{.Name}} sets the "{{.CName}}" callback function.
+{{.Doc}}{{else}}// Override{{.Name}} sets the "{{.CName}}" callback function.{{end}}
 func (x *{{$outer.Name}}) Override{{.Name}}(cb {{.CallbackType}}) {
      if cb == nil {
           x.x{{.Name}} = 0
@@ -116,8 +116,8 @@ func (x *{{$outer.Name}}) Override{{.Name}}(cb {{.CallbackType}}) {
      }
 }
 
-{{if .Doc}}// Get{{.Name}} gets the callback function.
-{{.Doc}}{{else}}// Get{{.Name}} gets the callback function.{{end}}
+{{if .Doc}}// Get{{.Name}} gets the "{{.CName}}" callback function.
+{{.Doc}}{{else}}// Get{{.Name}} gets the "{{.CName}}" callback function.{{end}}
 func (x *{{$outer.Name}}) Get{{.Name}}() {{.CallbackType}} {
      if x.x{{.Name}} == 0 {
           return nil
@@ -181,10 +181,11 @@ func (x *{{$outer.Name}}Base) {{.Name}}({{conv .Args.API.Full}}) {{.Ret.Return}}
 {{end}}
 
 {{range .Properties -}}
-
-{{.Doc}}
 {{if .Writable}}
-func (x *{{$outer.Name}}Base) SetProperty{{.Name}}(value {{.GoType}}) {
+{{if .Doc}}// SetProperty{{.Name}} sets the "{{.CName}}" property.
+{{.Doc}}
+{{else}}// SetProperty{{.Name}} sets the "{{.CName}}" property.
+{{end}}func (x *{{$outer.Name}}Base) SetProperty{{.Name}}(value {{.GoType}}) {
      {{if eq .GLibType "TypePointerVal"}}// Slice/array properties not supported{{else}}var v {{if $NotGObject}}gobject.{{end}}Value
      v.Init({{if $NotGObject}}gobject.{{end}}{{.GLibType}})
      {{if eq .GoType "bool"}}v.SetBoolean(value){{else if eq .GoType "int"}}v.SetInt(value){{else if eq .GoType "int64"}}v.SetInt64(value){{else if eq .GoType "uint"}}v.SetUint(value){{else if eq .GoType "uint64"}}v.SetUint64(value){{else if eq .GoType "float32"}}v.SetFloat(value){{else if eq .GoType "float64"}}v.SetDouble(value){{else if eq .GoType "string"}}v.SetString(value){{else if eq .GoType "uintptr"}}v.SetPointer(value){{else if eq .GLibType "TypeEnumVal"}}v.SetEnum(int(value)){{else if eq .GLibType "TypeFlagsVal"}}v.SetFlags(uint(value)){{else if eq .GLibType "TypeGtypeVal"}}v.SetGtype(value){{else if eq .GLibType "TypeObjectVal"}}v.SetObject(&{{if $NotGObject}}gobject.{{end}}Object{Ptr: value.GoPointer()}){{else}}v.SetPointer(uintptr(value)){{end}}
@@ -194,7 +195,10 @@ func (x *{{$outer.Name}}Base) SetProperty{{.Name}}(value {{.GoType}}) {
 {{end}}
 
 {{if .Readable}}
-func (x *{{$outer.Name}}Base) GetProperty{{.Name}}() {{.GoType}} {
+{{if .Doc}}// GetProperty{{.Name}} gets the "{{.CName}}" property.
+{{.Doc}}
+{{else}}// GetProperty{{.Name}} gets the "{{.CName}}" property.
+{{end}}func (x *{{$outer.Name}}Base) GetProperty{{.Name}}() {{.GoType}} {
      var v {{if $NotGObject}}gobject.{{end}}Value
      obj := {{if $NotGObject}}gobject.{{end}}Object{Ptr: x.GoPointer()}
      obj.GetProperty("{{.CName}}", &v)
@@ -316,10 +320,11 @@ func (c *{{.Name}}) SetGoPointer(ptr uintptr) {
 }
 
 {{range .Properties -}}
-
-{{.Doc}}
 {{if .Writable}}
-func (x *{{$outer.Name}}) SetProperty{{.Name}}(value {{.GoType}}) {
+{{if .Doc}}// SetProperty{{.Name}} sets the "{{.CName}}" property.
+{{.Doc}}
+{{else}}// SetProperty{{.Name}} sets the "{{.CName}}" property.
+{{end}}func (x *{{$outer.Name}}) SetProperty{{.Name}}(value {{.GoType}}) {
      {{if eq .GLibType "TypePointerVal"}}// Slice/array properties not supported{{else}}var v {{if $NotGObject}}gobject.{{end}}Value
      v.Init({{if $NotGObject}}gobject.{{end}}{{.GLibType}})
      {{if eq .GoType "bool"}}v.SetBoolean(value){{else if eq .GoType "int"}}v.SetInt(value){{else if eq .GoType "int64"}}v.SetInt64(value){{else if eq .GoType "uint"}}v.SetUint(value){{else if eq .GoType "uint64"}}v.SetUint64(value){{else if eq .GoType "float32"}}v.SetFloat(value){{else if eq .GoType "float64"}}v.SetDouble(value){{else if eq .GoType "string"}}v.SetString(value){{else if eq .GoType "uintptr"}}v.SetPointer(value){{else if eq .GLibType "TypeEnumVal"}}v.SetEnum(int(value)){{else if eq .GLibType "TypeFlagsVal"}}v.SetFlags(uint(value)){{else if eq .GLibType "TypeGtypeVal"}}v.SetGtype(value){{else if eq .GLibType "TypeObjectVal"}}v.SetObject(&{{if $NotGObject}}gobject.{{end}}Object{Ptr: value.GoPointer()}){{else}}v.SetPointer(uintptr(value)){{end}}
@@ -328,7 +333,10 @@ func (x *{{$outer.Name}}) SetProperty{{.Name}}(value {{.GoType}}) {
 {{end}}
 
 {{if .Readable}}
-func (x *{{$outer.Name}}) GetProperty{{.Name}}() {{.GoType}} {
+{{if .Doc}}// GetProperty{{.Name}} gets the "{{.CName}}" property.
+{{.Doc}}
+{{else}}// GetProperty{{.Name}} gets the "{{.CName}}" property.
+{{end}}func (x *{{$outer.Name}}) GetProperty{{.Name}}() {{.GoType}} {
      var v {{if $NotGObject}}gobject.{{end}}Value
      x.GetProperty("{{.CName}}", &v)
      {{if eq .GoType "bool"}}return v.GetBoolean(){{else if eq .GoType "int"}}return v.GetInt(){{else if eq .GoType "int64"}}return v.GetInt64(){{else if eq .GoType "uint"}}return v.GetUint(){{else if eq .GoType "uint64"}}return v.GetUint64(){{else if eq .GoType "float32"}}return v.GetFloat(){{else if eq .GoType "float64"}}return v.GetDouble(){{else if eq .GoType "string"}}return v.GetString(){{else if eq .GoType "uintptr"}}return v.GetPointer(){{else if eq .GLibType "TypeEnumVal"}}return {{.GoType}}(v.GetEnum()){{else if eq .GLibType "TypeFlagsVal"}}return {{.GoType}}(v.GetFlags()){{else if eq .GLibType "TypeGtypeVal"}}return v.GetGtype(){{else if eq .GLibType "TypeObjectVal"}}ptr := v.GetObject().GoPointer(); if ptr == 0 { return nil }; {{if .IsInterface}}result := &{{.BaseGoType}}Base{}; result.Ptr = ptr; return result{{else if .IsRecord}}return (*{{.BaseGoType}})(unsafe.Pointer(ptr)){{else}}result := &{{.BaseGoType}}{}; result.Ptr = ptr; return result{{end}}{{else if eq .GLibType "TypePointerVal"}}return nil{{else}}return {{.GoType}}(v.GetPointer()){{end}}

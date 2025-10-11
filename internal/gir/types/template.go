@@ -191,6 +191,9 @@ type CallbackAccessor struct {
 	// Name is the Go name of the callback field (without x prefix)
 	Name string
 
+	// CName is the original C name of the callback field
+	CName string
+
 	// Doc is the documentation for the callback
 	Doc string
 
