@@ -186,7 +186,35 @@ func (x *{{$outer.Name}}Base) {{.Name}}({{conv .Args.API.Full}}) {{.Ret.Return}}
 {{.Doc}}
 {{else}}// SetProperty{{.Name}} sets the "{{.CName}}" property.
 {{end}}func (x *{{$outer.Name}}Base) SetProperty{{.Name}}(value {{.GoType}}) {
-     {{if eq .GLibType "TypePointerVal"}}// Slice/array properties not supported{{else}}var v {{if $NotGObject}}gobject.{{end}}Value
+     {{if eq .GoType "[]string"}}var v {{if $NotGObject}}gobject.{{end}}Value
+     v.Init({{if $NotGObject}}glib.StrvGetType(){{else}}StrvGetType(){{end}})
+
+     cStrBytes := make([][]byte, len(value))
+     cStrings := make([]uintptr, len(value)+1)
+     for i, s := range value {
+          cStrBytes[i] = make([]byte, len(s)+1)
+          copy(cStrBytes[i], s)
+          cStrBytes[i][len(s)] = 0
+          cStrings[i] = uintptr(unsafe.Pointer(&cStrBytes[i][0]))
+     }
+     cStrings[len(value)] = 0
+
+     v.SetBoxed(uintptr(unsafe.Pointer(&cStrings[0])))
+     obj := {{if $NotGObject}}gobject.{{end}}Object{Ptr: x.GoPointer()}
+     obj.SetProperty("{{.CName}}", &v)
+
+     v.Unset(){{else if eq .GoType "[]byte"}}var v {{if $NotGObject}}gobject.{{end}}Value
+     v.Init({{if $NotGObject}}gobject.{{end}}TypePointerVal)
+
+     if len(value) > 0 {
+          v.SetPointer(uintptr(unsafe.Pointer(&value[0])))
+     } else {
+          v.SetPointer(0)
+     }
+     obj := {{if $NotGObject}}gobject.{{end}}Object{Ptr: x.GoPointer()}
+     obj.SetProperty("{{.CName}}", &v)
+
+     v.Unset(){{else}}var v {{if $NotGObject}}gobject.{{end}}Value
      v.Init({{if $NotGObject}}gobject.{{end}}{{.GLibType}})
      {{if $NotGObject}}{{valueset .GoType .GLibType "value" "gobject."}}{{else}}{{valueset .GoType .GLibType "value" ""}}{{end}}
      obj := {{if $NotGObject}}gobject.{{end}}Object{Ptr: x.GoPointer()}
@@ -199,10 +227,39 @@ func (x *{{$outer.Name}}Base) {{.Name}}({{conv .Args.API.Full}}) {{.Ret.Return}}
 {{.Doc}}
 {{else}}// GetProperty{{.Name}} gets the "{{.CName}}" property.
 {{end}}func (x *{{$outer.Name}}Base) GetProperty{{.Name}}() {{.GoType}} {
-     var v {{if $NotGObject}}gobject.{{end}}Value
+     {{if eq .GoType "[]string"}}var v {{if $NotGObject}}gobject.{{end}}Value
      obj := {{if $NotGObject}}gobject.{{end}}Object{Ptr: x.GoPointer()}
      obj.GetProperty("{{.CName}}", &v)
-     {{valueget .GoType .GLibType .BaseGoType .IsInterface .IsRecord}}
+     defer v.Unset()
+
+     strvPtr := v.GetBoxed()
+     if strvPtr == 0 {
+          return nil
+     }
+
+     var result []string
+     for i := 0; ; i++ {
+          charPtr := *(*uintptr)(unsafe.Pointer(strvPtr + uintptr(i)*unsafe.Sizeof(uintptr(0))))
+          if charPtr == 0 {
+               break
+          }
+          result = append(result, {{if $NotGLib}}core.GoString(charPtr){{else}}GoString(charPtr){{end}})
+     }
+
+     return result{{else if eq .GoType "[]byte"}}var v {{if $NotGObject}}gobject.{{end}}Value
+     obj := {{if $NotGObject}}gobject.{{end}}Object{Ptr: x.GoPointer()}
+     obj.GetProperty("{{.CName}}", &v)
+     defer v.Unset()
+
+     ptr := v.GetPointer()
+     if ptr == 0 {
+          return nil
+     }
+
+     return *(*[]byte)(unsafe.Pointer(ptr)){{else}}var v {{if $NotGObject}}gobject.{{end}}Value
+     obj := {{if $NotGObject}}gobject.{{end}}Object{Ptr: x.GoPointer()}
+     obj.GetProperty("{{.CName}}", &v)
+     {{valueget .GoType .GLibType .BaseGoType .IsInterface .IsRecord}}{{end}}
 }
 {{end}}
 {{end}}
@@ -325,7 +382,33 @@ func (c *{{.Name}}) SetGoPointer(ptr uintptr) {
 {{.Doc}}
 {{else}}// SetProperty{{.Name}} sets the "{{.CName}}" property.
 {{end}}func (x *{{$outer.Name}}) SetProperty{{.Name}}(value {{.GoType}}) {
-     {{if eq .GLibType "TypePointerVal"}}// Slice/array properties not supported{{else}}var v {{if $NotGObject}}gobject.{{end}}Value
+     {{if eq .GoType "[]string"}}var v {{if $NotGObject}}gobject.{{end}}Value
+     v.Init({{if $NotGObject}}glib.StrvGetType(){{else}}StrvGetType(){{end}})
+
+     cStrBytes := make([][]byte, len(value))
+     cStrings := make([]uintptr, len(value)+1)
+     for i, s := range value {
+          cStrBytes[i] = make([]byte, len(s)+1)
+          copy(cStrBytes[i], s)
+          cStrBytes[i][len(s)] = 0
+          cStrings[i] = uintptr(unsafe.Pointer(&cStrBytes[i][0]))
+     }
+     cStrings[len(value)] = 0
+
+     v.SetBoxed(uintptr(unsafe.Pointer(&cStrings[0])))
+     x.SetProperty("{{.CName}}", &v)
+
+     v.Unset(){{else if eq .GoType "[]byte"}}var v {{if $NotGObject}}gobject.{{end}}Value
+     v.Init({{if $NotGObject}}gobject.{{end}}TypePointerVal)
+
+     if len(value) > 0 {
+          v.SetPointer(uintptr(unsafe.Pointer(&value[0])))
+     } else {
+          v.SetPointer(0)
+     }
+     x.SetProperty("{{.CName}}", &v)
+
+     v.Unset(){{else}}var v {{if $NotGObject}}gobject.{{end}}Value
      v.Init({{if $NotGObject}}gobject.{{end}}{{.GLibType}})
      {{if $NotGObject}}{{valueset .GoType .GLibType "value" "gobject."}}{{else}}{{valueset .GoType .GLibType "value" ""}}{{end}}
      x.SetProperty("{{.CName}}", &v){{end}}
@@ -337,9 +420,36 @@ func (c *{{.Name}}) SetGoPointer(ptr uintptr) {
 {{.Doc}}
 {{else}}// GetProperty{{.Name}} gets the "{{.CName}}" property.
 {{end}}func (x *{{$outer.Name}}) GetProperty{{.Name}}() {{.GoType}} {
-     var v {{if $NotGObject}}gobject.{{end}}Value
+     {{if eq .GoType "[]string"}}var v {{if $NotGObject}}gobject.{{end}}Value
      x.GetProperty("{{.CName}}", &v)
-     {{valueget .GoType .GLibType .BaseGoType .IsInterface .IsRecord}}
+     defer v.Unset()
+
+     strvPtr := v.GetBoxed()
+     if strvPtr == 0 {
+          return nil
+     }
+
+     var result []string
+     for i := 0; ; i++ {
+          charPtr := *(*uintptr)(unsafe.Pointer(strvPtr + uintptr(i)*unsafe.Sizeof(uintptr(0))))
+          if charPtr == 0 {
+               break
+          }
+          result = append(result, {{if $NotGLib}}core.GoString(charPtr){{else}}GoString(charPtr){{end}})
+     }
+
+     return result{{else if eq .GoType "[]byte"}}var v {{if $NotGObject}}gobject.{{end}}Value
+     x.GetProperty("{{.CName}}", &v)
+     defer v.Unset()
+
+     ptr := v.GetPointer()
+     if ptr == 0 {
+          return nil
+     }
+
+     return *(*[]byte)(unsafe.Pointer(ptr)){{else}}var v {{if $NotGObject}}gobject.{{end}}Value
+     x.GetProperty("{{.CName}}", &v)
+     {{valueget .GoType .GLibType .BaseGoType .IsInterface .IsRecord}}{{end}}
 }
 {{end}}
 {{end}}
