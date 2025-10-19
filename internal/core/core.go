@@ -15,13 +15,15 @@ import (
 	"github.com/jwijenbergh/purego"
 )
 
-func PuregoSafeRegister(fptr interface{}, handle uintptr, name string) error {
-	sym, err := purego.Dlsym(handle, name)
-	if err != nil {
-		return err
+func PuregoSafeRegister(fptr interface{}, libs []uintptr, name string) {
+	for _, lib := range libs {
+		sym, err := purego.Dlsym(lib, name)
+		if err == nil {
+			purego.RegisterFunc(fptr, sym)
+
+			return
+		}
 	}
-	purego.RegisterFunc(fptr, sym)
-	return nil
 }
 
 // paths to where the shared object files should be located
@@ -38,43 +40,12 @@ var paths = map[string][]string{
 }
 
 // names is a lookup from library names to shared object filenames
-// This is populated dynamically via SetSharedLibrary and has defaults for common libraries
-var names = map[string][]string{
-	"ADW":        {"libadwaita-1.so"},
-	"CAIRO":      {"libcairo.so"},
-	"GDKPIXBUF":  {"libgdk_pixbuf-2.0.so"},
-	"GIO":        {"libgio-2.0.so"},
-	"GLIB":       {"libglib-2.0.so"},
-	"GMODULE":    {"libgmodule-2.0.so"},
-	"GOBJECT":    {"libgobject-2.0.so"},
-	"GRAPHENE":   {"libgraphene-1.0.so"},
-	"GTK":        {"libgtk-4.so"},
-	"PANGO":      {"libpango-1.0.so"},
-	"PANGOCAIRO": {"libpangocairo-1.0.so"},
-}
-
-// aliases are lib aliases
-// for example when we load the GSK lib, we should get the functions from the GTK shared library
-var aliases = map[string]string{
-	"GSK": "GTK",
-	"GDK": "GTK",
-}
+// This is populated dynamically via SetSharedLibrary
+var names = map[string][]string{}
 
 // pkgConfNames is a lookup from library names to pkg-config library names
-// This is populated dynamically via SetPackageName and has defaults for common libraries
-var pkgConfNames = map[string]string{
-	"ADW":        "libadwaita-1",
-	"CAIRO":      "cairo",
-	"GDKPIXBUF":  "gdk-pixbuf-2.0",
-	"GIO":        "gio-2.0",
-	"GLIB":       "glib-2.0",
-	"GMODULE":    "gmodule-2.0",
-	"GOBJECT":    "gobject-2.0",
-	"GRAPHENE":   "graphene-gobject-1.0",
-	"GTK":        "gtk4",
-	"PANGO":      "pango",
-	"PANGOCAIRO": "pangocairo",
-}
+// This is populated dynamically via SetPackageName
+var pkgConfNames = map[string]string{}
 
 // SetPackageName registers a pkg-config package name for a library.
 // This is used by the code generator to set package names from GIR files.
@@ -85,34 +56,35 @@ func SetPackageName(libName, pkgName string) {
 	}
 }
 
-// SetSharedLibrary registers a shared library name for a library.
+// SetSharedLibraries registers shared library names for a library.
 // This is used by the code generator to set library names from GIR files.
 // It won't override existing entries to preserve defaults.
-func SetSharedLibrary(libName, sharedLib string) {
-	if _, exists := names[libName]; !exists && sharedLib != "" {
-		names[libName] = []string{sharedLib}
+func SetSharedLibraries(libName string, sharedLibs []string) {
+	if _, exists := names[libName]; !exists && len(sharedLibs) > 0 {
+		names[libName] = sharedLibs
 	}
 }
 
-// findSo tries to find a shared object from a path and a library name
-// It does this by mapping the library name to a suitable shared object filename and then trying some suffixes
-func findSo(path string, name string) string {
+// findSos tries to find all shared objects from a path and a library name
+// It does this by mapping the library name to all suitable shared object filenames and then trying some suffixes
+func findSos(path string, name string) []string {
+	sos := []string{}
 	for _, n := range names[name] {
 		suffixes := []string{"", ".0", ".1", ".2"}
 		fn := filepath.Join(path, n)
 		for _, s := range suffixes {
 			if _, err := os.Stat(fn + s); err == nil {
-				return fn + s
+				sos = append(sos, fn+s)
 			}
 		}
 	}
-	return ""
+	return sos
 }
 
-// findPkgConf finds a shared object file with pkg-config
+// findPkgConf finds all shared object files with pkg-config
 // it does this by running pkg-config --libs-only-L libname
-// and then it loops over the directories returned and finds a suitable one
-func findPkgConf(name string) string {
+// and then it loops over the directories returned and finds all suitable ones
+func findPkgConf(name string) []string {
 	cmd := exec.Command("pkg-config", "--libs-only-L", pkgConfNames[name])
 	var out, outerr bytes.Buffer
 	cmd.Stdout = &out
@@ -120,7 +92,7 @@ func findPkgConf(name string) string {
 	err := cmd.Run()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "pkg-config, failed with: %v and stderr: %s\n", err, outerr.String())
-		return ""
+		return []string{}
 	}
 	outs := strings.Split(out.String(), "-L")
 	for _, v := range outs {
@@ -128,15 +100,15 @@ func findPkgConf(name string) string {
 		if c == "" {
 			continue
 		}
-		g := findSo(c, name)
-		if g != "" {
+		g := findSos(c, name)
+		if len(g) > 0 {
 			return g
 		}
 	}
-	return ""
+	return []string{}
 }
 
-// GetPath gets a shared object file from a library name
+// GetPaths gets all shared object files from a library name
 // it does it in the following order
 // see if PUREGOTK_LIBNAME_PATH is set (full path to the lib)
 // - e.g. PUREGOTK_GTK_PATH
@@ -146,22 +118,18 @@ func findPkgConf(name string) string {
 // panic if failed
 // TODO: Hardcore a library shared object with linker -X flag
 // This is useful for packaging
-func GetPath(name string) string {
-	// resolve alias
-	if v, ok := aliases[name]; ok {
-		name = v
-	}
+func GetPaths(name string) []string {
 	// try to get from env var
 	ev := fmt.Sprintf("PUREGOTK_%s_PATH", name)
 	if v := os.Getenv(ev); v != "" {
-		return v
+		return []string{v}
 	}
 
 	// Or if a general folder is set where everywhere is located, return that
 	ep := os.Getenv("PUREGOTK_LIB_FOLDER")
 	if ep != "" {
-		g := findSo(ep, name)
-		if g == "" {
+		g := findSos(ep, name)
+		if len(g) == 0 {
 			panic(fmt.Sprintf("Could not find lib: %s, at path: %s with env: %s", name, ep, "PUREGOTK_FOLDER"))
 		}
 		return g
@@ -172,8 +140,8 @@ func GetPath(name string) string {
 	if ok {
 		// try to loop over paths
 		for _, p := range gp {
-			g := findSo(p, name)
-			if g != "" {
+			g := findSos(p, name)
+			if len(g) > 0 {
 				return g
 			}
 
@@ -181,7 +149,7 @@ func GetPath(name string) string {
 	}
 	// last effort: pkg-config
 	g := findPkgConf(name)
-	if g != "" {
+	if len(g) > 0 {
 		return g
 	}
 
