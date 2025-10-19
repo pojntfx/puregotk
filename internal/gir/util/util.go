@@ -214,8 +214,8 @@ func ConstructorName(name string, outer string) string {
 	return outer + cname
 }
 
-// PropertyValueSet generates the appropriate v.SetXXX(value) call based on the property's GoType and GLibType
-func PropertyValueSet(goType, glibType, valueName, objPrefix string) string {
+// PropertyScalarSet generates the appropriate v.SetXXX(value) call based on the property's GoType and GLibType
+func PropertyScalarSet(goType, glibType, valueName, objPrefix string) string {
 	switch goType {
 	case "bool":
 		return "v.SetBoolean(" + valueName + ")"
@@ -251,8 +251,8 @@ func PropertyValueSet(goType, glibType, valueName, objPrefix string) string {
 	}
 }
 
-// PropertyValueGet generates the appropriate v.GetXXX() expression based on the property's GoType and GLibType
-func PropertyValueGet(goType, glibType, baseGoType string, isInterface, isRecord bool) string {
+// PropertyScalarGet generates the appropriate v.GetXXX() expression based on the property's GoType and GLibType
+func PropertyScalarGet(goType, glibType, baseGoType string, isInterface, isRecord bool) string {
 	switch goType {
 	case "bool":
 		return "return v.GetBoolean()"
@@ -298,9 +298,10 @@ func PropertyValueGet(goType, glibType, baseGoType string, isInterface, isRecord
 	}
 }
 
-// PropertySetArray generates the array conversion and v.SetXXX(value) call for array types
-func PropertySetArray(goType, objPrefix, glibPrefix, propertyName string, useBaseObj bool) string {
-	if goType == "[]string" {
+// PropertyVectorSet generates the array conversion and v.SetXXX(value) call for array types
+func PropertyVectorSet(goType, objPrefix, glibPrefix, propertyName string, useBaseObj bool) string {
+	switch goType {
+	case "[]string":
 		objAccess := "x"
 		if useBaseObj {
 			objAccess = "obj"
@@ -329,7 +330,8 @@ func PropertySetArray(goType, objPrefix, glibPrefix, propertyName string, useBas
 
      v.Unset()`
 		return result
-	} else if goType == "[]byte" {
+
+	case "[]byte":
 		objAccess := "x"
 		if useBaseObj {
 			objAccess = "obj"
@@ -353,12 +355,14 @@ func PropertySetArray(goType, objPrefix, glibPrefix, propertyName string, useBas
      v.Unset()`
 		return result
 	}
+
 	return ""
 }
 
-// PropertyGetArray generates the array conversion and v.GetXXX() call for array types
-func PropertyGetArray(goType, objPrefix, corePrefix, propertyName string, useBaseObj bool) string {
-	if goType == "[]string" {
+// PropertyVectorGet generates the array conversion and v.GetXXX() call for array types
+func PropertyVectorGet(goType, objPrefix, corePrefix, propertyName string, useBaseObj bool) string {
+	switch goType {
+	case "[]string":
 		objAccess := "x"
 		result := `var v ` + objPrefix + `Value`
 
@@ -387,7 +391,8 @@ func PropertyGetArray(goType, objPrefix, corePrefix, propertyName string, useBas
 
      return result`
 		return result
-	} else if goType == "[]byte" {
+
+	case "[]byte":
 		objAccess := "x"
 		result := `var v ` + objPrefix + `Value`
 
@@ -408,5 +413,6 @@ func PropertyGetArray(goType, objPrefix, corePrefix, propertyName string, useBas
      return *(*[]byte)(unsafe.Pointer(ptr))`
 		return result
 	}
+
 	return ""
 }

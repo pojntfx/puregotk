@@ -9,8 +9,8 @@ var (
 	ConvertArgsCommaDeref    = util.ConvertArgsCommaDeref
 	ConvertArgsDeref         = util.ConvertArgsDeref
 	ConvertCallbackArgsNoErr = util.ConvertCallbackArgsNoErr
-	PropertyValueSet         = util.PropertyValueSet
-	PropertyValueGet         = util.PropertyValueGet
-	PropertySetArray         = util.PropertySetArray
-	PropertyGetArray         = util.PropertyGetArray
+	PropertyScalarSet        = util.PropertyScalarSet
+	PropertyScalarGet        = util.PropertyScalarGet
+	PropertyVectorSet        = util.PropertyVectorSet
+	PropertyVectorGet        = util.PropertyVectorGet
 )

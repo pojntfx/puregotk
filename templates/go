@@ -186,9 +186,9 @@ func (x *{{$outer.Name}}Base) {{.Name}}({{conv .Args.API.Full}}) {{.Ret.Return}}
 {{.Doc}}
 {{else}}// SetProperty{{.Name}} sets the "{{.CName}}" property.
 {{end}}func (x *{{$outer.Name}}Base) SetProperty{{.Name}}(value {{.GoType}}) {
-     {{if or (eq .GoType "[]string") (eq .GoType "[]byte")}}{{if $NotGObject}}{{arraysetprop .GoType "gobject." "glib." .CName true}}{{else}}{{arraysetprop .GoType "" "" .CName true}}{{end}}{{else}}var v {{if $NotGObject}}gobject.{{end}}Value
+     {{if or (eq .GoType "[]string") (eq .GoType "[]byte")}}{{if $NotGObject}}{{propvset .GoType "gobject." "glib." .CName true}}{{else}}{{propvset .GoType "" "" .CName true}}{{end}}{{else}}var v {{if $NotGObject}}gobject.{{end}}Value
      v.Init({{if $NotGObject}}gobject.{{end}}{{.GLibType}})
-     {{if $NotGObject}}{{valueset .GoType .GLibType "value" "gobject."}}{{else}}{{valueset .GoType .GLibType "value" ""}}{{end}}
+     {{if $NotGObject}}{{propsset .GoType .GLibType "value" "gobject."}}{{else}}{{propsset .GoType .GLibType "value" ""}}{{end}}
      obj := {{if $NotGObject}}gobject.{{end}}Object{Ptr: x.GoPointer()}
      obj.SetProperty("{{.CName}}", &v){{end}}
 }
@@ -199,10 +199,10 @@ func (x *{{$outer.Name}}Base) {{.Name}}({{conv .Args.API.Full}}) {{.Ret.Return}}
 {{.Doc}}
 {{else}}// GetProperty{{.Name}} gets the "{{.CName}}" property.
 {{end}}func (x *{{$outer.Name}}Base) GetProperty{{.Name}}() {{.GoType}} {
-     {{if or (eq .GoType "[]string") (eq .GoType "[]byte")}}{{if $NotGObject}}{{arraygetprop .GoType "gobject." "core." .CName true}}{{else}}{{arraygetprop .GoType "" "" .CName true}}{{end}}{{else}}var v {{if $NotGObject}}gobject.{{end}}Value
+     {{if or (eq .GoType "[]string") (eq .GoType "[]byte")}}{{if $NotGObject}}{{propvget .GoType "gobject." "core." .CName true}}{{else}}{{propvget .GoType "" "" .CName true}}{{end}}{{else}}var v {{if $NotGObject}}gobject.{{end}}Value
      obj := {{if $NotGObject}}gobject.{{end}}Object{Ptr: x.GoPointer()}
      obj.GetProperty("{{.CName}}", &v)
-     {{valueget .GoType .GLibType .BaseGoType .IsInterface .IsRecord}}{{end}}
+     {{propsget .GoType .GLibType .BaseGoType .IsInterface .IsRecord}}{{end}}
 }
 {{end}}
 {{end}}
@@ -325,9 +325,9 @@ func (c *{{.Name}}) SetGoPointer(ptr uintptr) {
 {{.Doc}}
 {{else}}// SetProperty{{.Name}} sets the "{{.CName}}" property.
 {{end}}func (x *{{$outer.Name}}) SetProperty{{.Name}}(value {{.GoType}}) {
-     {{if or (eq .GoType "[]string") (eq .GoType "[]byte")}}{{if $NotGObject}}{{arraysetprop .GoType "gobject." "glib." .CName false}}{{else}}{{arraysetprop .GoType "" "" .CName false}}{{end}}{{else}}var v {{if $NotGObject}}gobject.{{end}}Value
+     {{if or (eq .GoType "[]string") (eq .GoType "[]byte")}}{{if $NotGObject}}{{propvset .GoType "gobject." "glib." .CName false}}{{else}}{{propvset .GoType "" "" .CName false}}{{end}}{{else}}var v {{if $NotGObject}}gobject.{{end}}Value
      v.Init({{if $NotGObject}}gobject.{{end}}{{.GLibType}})
-     {{if $NotGObject}}{{valueset .GoType .GLibType "value" "gobject."}}{{else}}{{valueset .GoType .GLibType "value" ""}}{{end}}
+     {{if $NotGObject}}{{propsset .GoType .GLibType "value" "gobject."}}{{else}}{{propsset .GoType .GLibType "value" ""}}{{end}}
      x.SetProperty("{{.CName}}", &v){{end}}
 }
 {{end}}
@@ -337,9 +337,9 @@ func (c *{{.Name}}) SetGoPointer(ptr uintptr) {
 {{.Doc}}
 {{else}}// GetProperty{{.Name}} gets the "{{.CName}}" property.
 {{end}}func (x *{{$outer.Name}}) GetProperty{{.Name}}() {{.GoType}} {
-     {{if or (eq .GoType "[]string") (eq .GoType "[]byte")}}{{if $NotGObject}}{{arraygetprop .GoType "gobject." "core." .CName false}}{{else}}{{arraygetprop .GoType "" "" .CName false}}{{end}}{{else}}var v {{if $NotGObject}}gobject.{{end}}Value
+     {{if or (eq .GoType "[]string") (eq .GoType "[]byte")}}{{if $NotGObject}}{{propvget .GoType "gobject." "core." .CName false}}{{else}}{{propvget .GoType "" "" .CName false}}{{end}}{{else}}var v {{if $NotGObject}}gobject.{{end}}Value
      x.GetProperty("{{.CName}}", &v)
-     {{valueget .GoType .GLibType .BaseGoType .IsInterface .IsRecord}}{{end}}
+     {{propsget .GoType .GLibType .BaseGoType .IsInterface .IsRecord}}{{end}}
 }
 {{end}}
 {{end}}
