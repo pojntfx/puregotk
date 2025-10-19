@@ -297,3 +297,116 @@ func PropertyValueGet(goType, glibType, baseGoType string, isInterface, isRecord
 		return "return " + goType + "(v.GetPointer())"
 	}
 }
+
+// PropertySetArray generates the array conversion and v.SetXXX(value) call for array types
+func PropertySetArray(goType, objPrefix, glibPrefix, propertyName string, useBaseObj bool) string {
+	if goType == "[]string" {
+		objAccess := "x"
+		if useBaseObj {
+			objAccess = "obj"
+		}
+
+		result := `var v ` + objPrefix + `Value
+     v.Init(` + glibPrefix + `StrvGetType())
+
+     cStrBytes := make([][]byte, len(value))
+     cStrings := make([]uintptr, len(value)+1)
+     for i, s := range value {
+          cStrBytes[i] = make([]byte, len(s)+1)
+          copy(cStrBytes[i], s)
+          cStrBytes[i][len(s)] = 0
+          cStrings[i] = uintptr(unsafe.Pointer(&cStrBytes[i][0]))
+     }
+     cStrings[len(value)] = 0
+
+     v.SetBoxed(uintptr(unsafe.Pointer(&cStrings[0])))`
+
+		if useBaseObj {
+			result += "\n     obj := " + objPrefix + "Object{Ptr: x.GoPointer()}"
+		}
+
+		result += "\n     " + objAccess + `.SetProperty("` + propertyName + `", &v)
+
+     v.Unset()`
+		return result
+	} else if goType == "[]byte" {
+		objAccess := "x"
+		if useBaseObj {
+			objAccess = "obj"
+		}
+
+		result := `var v ` + objPrefix + `Value
+     v.Init(` + objPrefix + `TypePointerVal)
+
+     if len(value) > 0 {
+          v.SetPointer(uintptr(unsafe.Pointer(&value[0])))
+     } else {
+          v.SetPointer(0)
+     }`
+
+		if useBaseObj {
+			result += "\n     obj := " + objPrefix + "Object{Ptr: x.GoPointer()}"
+		}
+
+		result += "\n     " + objAccess + `.SetProperty("` + propertyName + `", &v)
+
+     v.Unset()`
+		return result
+	}
+	return ""
+}
+
+// PropertyGetArray generates the array conversion and v.GetXXX() call for array types
+func PropertyGetArray(goType, objPrefix, corePrefix, propertyName string, useBaseObj bool) string {
+	if goType == "[]string" {
+		objAccess := "x"
+		result := `var v ` + objPrefix + `Value`
+
+		if useBaseObj {
+			objAccess = "obj"
+			result += "\n     obj := " + objPrefix + "Object{Ptr: x.GoPointer()}"
+		}
+
+		result += `
+     ` + objAccess + `.GetProperty("` + propertyName + `", &v)
+     defer v.Unset()
+
+     strvPtr := v.GetBoxed()
+     if strvPtr == 0 {
+          return nil
+     }
+
+     var result []string
+     for i := 0; ; i++ {
+          charPtr := *(*uintptr)(unsafe.Pointer(strvPtr + uintptr(i)*unsafe.Sizeof(uintptr(0))))
+          if charPtr == 0 {
+               break
+          }
+          result = append(result, ` + corePrefix + `GoString(charPtr))
+     }
+
+     return result`
+		return result
+	} else if goType == "[]byte" {
+		objAccess := "x"
+		result := `var v ` + objPrefix + `Value`
+
+		if useBaseObj {
+			objAccess = "obj"
+			result += "\n     obj := " + objPrefix + "Object{Ptr: x.GoPointer()}"
+		}
+
+		result += `
+     ` + objAccess + `.GetProperty("` + propertyName + `", &v)
+     defer v.Unset()
+
+     ptr := v.GetPointer()
+     if ptr == 0 {
+          return nil
+     }
+
+     return *(*[]byte)(unsafe.Pointer(ptr))`
+		return result
+	}
+	return ""
+}

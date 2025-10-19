@@ -11,4 +11,6 @@ var (
 	ConvertCallbackArgsNoErr = util.ConvertCallbackArgsNoErr
 	PropertyValueSet         = util.PropertyValueSet
 	PropertyValueGet         = util.PropertyValueGet
+	PropertySetArray         = util.PropertySetArray
+	PropertyGetArray         = util.PropertyGetArray
 )
