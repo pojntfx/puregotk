@@ -290,36 +290,11 @@ func gLibTypeConfigByGLibType(glibType string) *glibTypeConfig {
 	return nil
 }
 
-// IsVectorType returns true if the given Go type is a vector/array type with special handling
-func IsVectorType(goType string) bool {
-	_, ok := vectorTypeConfigs[goType]
-
-	return ok
-}
-
 // GetGLibTypeConstant returns the GLib type constant name for well-known special types
 // Returns empty string if not a known special type
 func GetGLibTypeConstant(typeName string) string {
 	if constant, ok := specialTypeToGLibType[typeName]; ok {
 		return constant
-	}
-
-	return ""
-}
-
-// GetAllGLibTypeConstants returns all GLib type constant definitions
-// This can be used to generate the constants block in templates/gobject
-func GetAllGLibTypeConstants() []glibTypeConstant {
-	return glibTypeConstants
-}
-
-// GetGLibTypeConstantValue returns the value expression for a given constant name
-// Returns empty string if the constant is not found
-func GetGLibTypeConstantValue(constantName string) string {
-	for _, constant := range glibTypeConstants {
-		if constant.Name == constantName {
-			return constant.Value
-		}
 	}
 
 	return ""
