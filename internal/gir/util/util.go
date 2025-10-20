@@ -11,12 +11,13 @@ import (
 
 // glibTypeConfig defines a mapping between Go types, GLib types, and their getter/setter methods
 type glibTypeConfig struct {
-	GoType         string
-	GLibType       string
-	SetterMethod   string
-	GetterMethod   string
-	SetterTemplate string
-	GetterTemplate string
+// glibTypeConstant defines a GLib type constant with its name and value
+// This matches the constants defined in templates/gobject
+type glibTypeConstant struct {
+	Name  string // The constant name (e.g. "TypeBooleanVal")
+	Value string // The constant value expression (e.g. "5 << 2")
+}
+
 }
 
 var (
@@ -61,9 +62,34 @@ var (
 			GetterMethod: "GetGtype",
 		},
 		"TypeObjectVal": {
-			GLibType:       "TypeObjectVal",
-			SetterTemplate: "v.SetObject(&%sObject{Ptr: %s.GoPointer()})",
-		},
+	glibTypeConstants = []glibTypeConstant{
+		{Name: "TypeInvalidVal", Value: "0"},
+		{Name: "TypeNoneVal", Value: "1 << 2"},
+		{Name: "TypeInterfaceVal", Value: "2 << 2"},
+		{Name: "TypeCharVal", Value: "3 << 2"},
+		{Name: "TypeUcharVal", Value: "4 << 2"},
+		{Name: "TypeBooleanVal", Value: "5 << 2"},
+		{Name: "TypeIntVal", Value: "6 << 2"},
+		{Name: "TypeUintVal", Value: "7 << 2"},
+		{Name: "TypeLongVal", Value: "8 << 2"},
+		{Name: "TypeUlongVal", Value: "9 << 2"},
+		{Name: "TypeInt64Val", Value: "10 << 2"},
+		{Name: "TypeUint64Val", Value: "11 << 2"},
+		{Name: "TypeEnumVal", Value: "12 << 2"},
+		{Name: "TypeFlagsVal", Value: "13 << 2"},
+		{Name: "TypeFloatVal", Value: "14 << 2"},
+		{Name: "TypeDoubleVal", Value: "15 << 2"},
+		{Name: "TypeStringVal", Value: "16 << 2"},
+		{Name: "TypePointerVal", Value: "17 << 2"},
+		{Name: "TypeBoxedVal", Value: "18 << 2"},
+		{Name: "TypeParamVal", Value: "19 << 2"},
+		{Name: "TypeObjectVal", Value: "20 << 2"},
+		{Name: "TypeReservedGLibLastVal", Value: "31 << 2"},
+		{Name: "TypeReservedBseFirstVal", Value: "32 << 2"},
+		{Name: "TypeReservedBseLastVal", Value: "48 << 2"},
+		{Name: "TypeReservedUserFirstVal", Value: "49 << 2"},
+		// TypeGtypeVal is special, it's initialized at runtime via g_gtype_get_type()
+	}
 	}
 )
 
@@ -83,6 +109,25 @@ func gLibTypeConfigByGLibType(glibType string) *glibTypeConfig {
 	}
 
 	return nil
+}
+
+// GetGLibTypeConstants generates the Go const block for all GLib type constants
+// This is used in templates to generate the type constants block
+func GetGLibTypeConstants() string {
+	var result strings.Builder
+	result.WriteString("// types\n")
+	result.WriteString("const (\n")
+	for i, constant := range glibTypeConstants {
+		if i == 0 {
+			// First constant gets the Type annotation
+			result.WriteString("\t" + constant.Name + " Type = " + constant.Value + "\n")
+		} else {
+			// Subsequent constants omit the type
+			result.WriteString("\t" + constant.Name + " = " + constant.Value + "\n")
+		}
+	}
+	result.WriteString(")\n")
+	return result.String()
 }
 
 // GGLibTypeByGoType returns the GLib type constant for a given Go type

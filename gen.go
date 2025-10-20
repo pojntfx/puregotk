@@ -30,7 +30,7 @@ func main() {
 	// collect basic type info
 	p.First()
 
-	// Create the template
+	// Create the Go template
 	gotemp, err := template.New("go").Funcs(template.FuncMap{
 		"conv":     util.ConvertArgs,
 		"convc":    util.ConvertArgsComma,
@@ -50,12 +50,26 @@ func main() {
 	// Write go files by making the second pass
 	p.Second(dir, gotemp)
 
-	// Finally copy some extra code that we want in the API
-	data, err := os.ReadFile("templates/gobject")
-	if err == nil {
-		os.WriteFile("v4/gobject/more.go", data, 0o644)
+	// Create and write the gobject template
+	gobjecttemp, err := template.New("gobject").Funcs(template.FuncMap{
+		"glibtypes": util.GetGLibTypeConstants,
+	}).ParseFiles("templates/gobject")
+	if err != nil {
+		panic(err)
 	}
-	data, err = os.ReadFile("templates/gtype")
+	gobjectFile, err := os.OpenFile("v4/gobject/more.go", os.O_CREATE|os.O_WRONLY, 0o644)
+	if err != nil {
+		panic(err)
+	}
+	defer gobjectFile.Close()
+
+	err = gobjecttemp.Execute(gobjectFile, nil)
+	if err != nil {
+		panic(err)
+	}
+
+	// Finally copy some extra code that we want in the API
+	data, err := os.ReadFile("templates/gtype")
 	if err == nil {
 		mkerr := os.MkdirAll("v4/gobject/types", 0o755)
 		if mkerr != nil {
