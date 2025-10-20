@@ -707,12 +707,12 @@ type Property struct {
 	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 property"`
 	Name    string   `xml:"name,attr"`
 
-	Writable      *bool  `xml:"writable,attr"`      // default false for properties
-	Readable      *bool  `xml:"readable,attr"`      // default true
-	Construct     bool   `xml:"construct,attr"`     // can be set at construction
-	ConstructOnly bool   `xml:"construct-only,attr"` // can only be set at construction
-	Setter        string `xml:"setter,attr"`        // setter method name if any
-	Getter        string `xml:"getter,attr"`        // getter method name if any
+	Writable      *bool  `xml:"writable,attr"` // default false
+	Readable      *bool  `xml:"readable,attr"` // default true
+	Construct     bool   `xml:"construct,attr"`
+	ConstructOnly bool   `xml:"construct-only,attr"`
+	Setter        string `xml:"setter,attr"`
+	Getter        string `xml:"getter,attr"`
 
 	TransferOwnership
 	AnyType
@@ -720,17 +720,14 @@ type Property struct {
 	InfoElements
 }
 
-// IsWritable returns true if the property is writable.
 func (p Property) IsWritable() bool {
 	return p.Writable != nil && *p.Writable
 }
 
-// IsReadable returns true if the property is readable.
 func (p Property) IsReadable() bool {
 	return p.Readable == nil || *p.Readable
 }
 
-// Template converts a Property to a PropertyTemplate for code generation
 func (p *Property) Template(ns string, kinds KindMap) PropertyTemplate {
 	// Get the Go type for this property
 	goType := p.AnyType.Translate(ns, kinds)
@@ -761,8 +758,8 @@ func (p *Property) Template(ns string, kinds KindMap) PropertyTemplate {
 
 	// Create BaseGoType by stripping the leading * if present
 	baseGoType := goType
-	if strings.HasPrefix(baseGoType, "*") {
-		baseGoType = strings.TrimPrefix(baseGoType, "*")
+	if after, ok := strings.CutPrefix(baseGoType, "*"); ok {
+		baseGoType = after
 	}
 
 	return PropertyTemplate{
@@ -808,34 +805,12 @@ func goTypeToGLibType(goType string, kind Kind, typeName string, kinds KindMap, 
 		}
 	}
 
-	// Map primitive types
-	switch baseType {
-	case "bool":
-		return "TypeBooleanVal"
-	case "int":
-		return "TypeIntVal"
-	case "uint":
-		return "TypeUintVal"
-	case "int32":
-		return "TypeIntVal"
-	case "uint32":
-		return "TypeUintVal"
-	case "int64":
-		return "TypeInt64Val"
-	case "uint64":
-		return "TypeUint64Val"
-	case "float32":
-		return "TypeFloatVal"
-	case "float64":
-		return "TypeDoubleVal"
-	case "string":
-		return "TypeStringVal"
-	case "byte":
-		return "TypeUcharVal"
-	default:
-		// For classes and other complex types, use TypeObjectVal
-		return "TypeObjectVal"
+	if glibType := util.GGLibTypeByGoType(baseType); glibType != "" {
+		return glibType
 	}
+
+	// For classes and other complex types, use TypeObjectVal
+	return "TypeObjectVal"
 }
 
 type Record struct {

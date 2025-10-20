@@ -342,10 +342,10 @@ func (p *Pass) writeGo(r types.Repository, gotemp *template.Template, dir string
 		}
 		properties := make([]types.PropertyTemplate, 0, len(cls.Properties))
 		for _, prop := range cls.Properties {
-			// Skip properties that are not introspectable
 			if !prop.IsIntrospectable() {
 				continue
 			}
+
 			properties = append(properties, prop.Template(ns.Name, p.Types))
 		}
 		receivers := make([]types.FuncTemplate, len(cls.Methods))
