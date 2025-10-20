@@ -782,13 +782,13 @@ func goTypeToGLibType(goType string, kind Kind, typeName string, kinds KindMap, 
 	baseType := strings.TrimPrefix(goType, "*")
 
 	// Check for GType specifically
-	if baseType == "types.GType" {
-		return "TypeGtypeVal"
+	if constant := util.GetGLibTypeConstant(baseType); constant != "" {
+		return constant
 	}
 
-	// Check for slice types - these should use TypePointerVal, not TypeObjectVal
+	// Slice types (TypePointerVal, not TypeObjectVal)
 	if strings.HasPrefix(baseType, "[]") || kind == SliceType {
-		return "TypePointerVal"
+		return util.GetGLibTypeConstant("slice")
 	}
 
 	// If we have the original type name, check if it's an enum or bitfield in the namespace
@@ -798,19 +798,21 @@ func goTypeToGLibType(goType string, kind Kind, typeName string, kinds KindMap, 
 			// Check if this alias points to an Enum or Bitfield
 			switch pair.Value.(type) {
 			case Enum:
-				return "TypeEnumVal"
+				return util.GetGLibTypeConstant("enum")
+
 			case Bitfield:
-				return "TypeFlagsVal"
+				return util.GetGLibTypeConstant("flags")
 			}
 		}
 	}
 
+	// Try to find mapping by Go type
 	if glibType := util.GGLibTypeByGoType(baseType); glibType != "" {
 		return glibType
 	}
 
-	// For classes and other complex types, use TypeObjectVal
-	return "TypeObjectVal"
+	// Fall back to TypeObjectVal for complex types
+	return util.GetGLibTypeConstant("object")
 }
 
 type Record struct {

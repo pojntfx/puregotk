@@ -11,6 +11,27 @@ import (
 
 // glibTypeConfig defines a mapping between Go types, GLib types, and their getter/setter methods
 type glibTypeConfig struct {
+	GoType           string
+	GLibType         string
+	SetterMethod     string
+	GetterMethod     string
+	SetterTemplate   string
+	GetterTemplate   string
+	CustomSetterFunc func(valueName, objPrefix string) string
+	CustomGetterFunc func(goType, baseGoType string, isInterface, isRecord bool) string
+}
+
+// vectorTypeConfig defines a mapping for vector/array types that need special handling
+type vectorTypeConfig struct {
+	GoType               string
+	GLibType             string
+	SetterFunction       func(objPrefix, glibPrefix, propertyName string, useBaseObj bool) string
+	GetterFunction       func(objPrefix, corePrefix, propertyName string, useBaseObj bool) string
+	UsesStrvGetType      bool
+	PropertySetterMethod string
+	PropertyGetterMethod string
+}
+
 // glibTypeConstant defines a GLib type constant with its name and value
 // This matches the constants defined in templates/gobject
 type glibTypeConstant struct {
@@ -18,6 +39,107 @@ type glibTypeConstant struct {
 	Value string // The constant value expression (e.g. "5 << 2")
 }
 
+func generateStringSliceSetter(objPrefix, glibPrefix, propertyName string, useBaseObj bool) string {
+	objAccess := "x"
+	result := `var v ` + objPrefix + `Value
+     v.Init(` + glibPrefix + `StrvGetType())
+
+     cStrBytes := make([][]byte, len(value))
+     cStrings := make([]uintptr, len(value)+1)
+     for i, s := range value {
+          cStrBytes[i] = make([]byte, len(s)+1)
+          copy(cStrBytes[i], s)
+          cStrBytes[i][len(s)] = 0
+          cStrings[i] = uintptr(unsafe.Pointer(&cStrBytes[i][0]))
+     }
+     cStrings[len(value)] = 0
+
+     v.SetBoxed(uintptr(unsafe.Pointer(&cStrings[0])))`
+
+	if useBaseObj {
+		objAccess = "obj"
+		result += "\n     obj := " + objPrefix + "Object{Ptr: x.GoPointer()}"
+	}
+
+	result += "\n     " + objAccess + `.SetProperty("` + propertyName + `", &v)
+
+     v.Unset()`
+	return result
+}
+
+func generateStringSliceGetter(objPrefix, corePrefix, propertyName string, useBaseObj bool) string {
+	objAccess := "x"
+	result := `var v ` + objPrefix + `Value`
+
+	if useBaseObj {
+		objAccess = "obj"
+		result += "\n     obj := " + objPrefix + "Object{Ptr: x.GoPointer()}"
+	}
+
+	result += `
+     ` + objAccess + `.GetProperty("` + propertyName + `", &v)
+     defer v.Unset()
+
+     strvPtr := v.GetBoxed()
+     if strvPtr == 0 {
+          return nil
+     }
+
+     var result []string
+     for i := 0; ; i++ {
+          charPtr := *(*uintptr)(unsafe.Pointer(strvPtr + uintptr(i)*unsafe.Sizeof(uintptr(0))))
+          if charPtr == 0 {
+               break
+          }
+          result = append(result, ` + corePrefix + `GoString(charPtr))
+     }
+
+     return result`
+	return result
+}
+
+func generateByteSliceSetter(objPrefix, glibPrefix, propertyName string, useBaseObj bool) string {
+	objAccess := "x"
+	result := `var v ` + objPrefix + `Value
+     v.Init(` + objPrefix + `TypePointerVal)
+
+     if len(value) > 0 {
+          v.SetPointer(uintptr(unsafe.Pointer(&value[0])))
+     } else {
+          v.SetPointer(0)
+     }`
+
+	if useBaseObj {
+		objAccess = "obj"
+		result += "\n     obj := " + objPrefix + "Object{Ptr: x.GoPointer()}"
+	}
+
+	result += "\n     " + objAccess + `.SetProperty("` + propertyName + `", &v)
+
+     v.Unset()`
+	return result
+}
+
+func generateByteSliceGetter(objPrefix, corePrefix, propertyName string, useBaseObj bool) string {
+	objAccess := "x"
+	result := `var v ` + objPrefix + `Value`
+
+	if useBaseObj {
+		objAccess = "obj"
+		result += "\n     obj := " + objPrefix + "Object{Ptr: x.GoPointer()}"
+	}
+
+	result += `
+     ` + objAccess + `.GetProperty("` + propertyName + `", &v)
+     defer v.Unset()
+
+     ptr := v.GetPointer()
+     if ptr == 0 {
+          return nil
+     }
+
+     return *(*[]byte)(unsafe.Pointer(ptr))`
+	return result
 }
 
 var (
@@ -42,7 +164,8 @@ var (
 		{GoType: "string", GLibType: "TypeStringVal", SetterMethod: "SetString", GetterMethod: "GetString"},
 		{GoType: "uintptr", GLibType: "TypePointerVal", SetterMethod: "SetPointer", GetterMethod: "GetPointer"},
 		{GoType: "byte", GLibType: "TypeUcharVal", SetterMethod: "SetUchar", GetterMethod: "GetUchar"},
-		// int32 and uint32 are handled separately with explicit casts in PropertyScalarSet/Get
+		{GoType: "int32", GLibType: "TypeIntVal", SetterTemplate: "v.SetInt(int(%s))", GetterTemplate: "return int32(v.GetInt())"},
+		{GoType: "uint32", GLibType: "TypeUintVal", SetterTemplate: "v.SetUint(uint(%s))", GetterTemplate: "return uint32(v.GetUint())"},
 	}
 
 	internalGLibTypeConfigs = map[string]glibTypeConfig{
@@ -62,6 +185,52 @@ var (
 			GetterMethod: "GetGtype",
 		},
 		"TypeObjectVal": {
+			GLibType: "TypeObjectVal",
+			CustomSetterFunc: func(valueName, objPrefix string) string {
+				return "v.SetObject(&" + objPrefix + "Object{Ptr: " + valueName + ".GoPointer()})"
+			},
+			CustomGetterFunc: func(goType, baseGoType string, isInterface, isRecord bool) string {
+				result := "ptr := v.GetObject().GoPointer(); if ptr == 0 { return nil }; "
+				if isInterface {
+					result += "result := &" + baseGoType + "Base{}; result.Ptr = ptr; return result"
+				} else if isRecord {
+					result += "return (*" + baseGoType + ")(unsafe.Pointer(ptr))"
+				} else {
+					result += "result := &" + baseGoType + "{}; result.Ptr = ptr; return result"
+				}
+				return result
+			},
+		},
+		"TypePointerVal": {
+			GLibType:     "TypePointerVal",
+			SetterMethod: "SetPointer",
+			GetterMethod: "GetPointer",
+			CustomGetterFunc: func(goType, baseGoType string, isInterface, isRecord bool) string {
+				return "return nil"
+			},
+		},
+	}
+
+	vectorTypeConfigs = map[string]vectorTypeConfig{
+		"[]string": {
+			GoType:               "[]string",
+			PropertySetterMethod: "SetBoxed",
+			PropertyGetterMethod: "GetBoxed",
+			UsesStrvGetType:      true,
+			SetterFunction:       generateStringSliceSetter,
+			GetterFunction:       generateStringSliceGetter,
+		},
+		"[]byte": {
+			GoType:               "[]byte",
+			GLibType:             "TypePointerVal",
+			PropertySetterMethod: "SetPointer",
+			PropertyGetterMethod: "GetPointer",
+			UsesStrvGetType:      false,
+			SetterFunction:       generateByteSliceSetter,
+			GetterFunction:       generateByteSliceGetter,
+		},
+	}
+
 	glibTypeConstants = []glibTypeConstant{
 		{Name: "TypeInvalidVal", Value: "0"},
 		{Name: "TypeNoneVal", Value: "1 << 2"},
@@ -90,6 +259,16 @@ var (
 		{Name: "TypeReservedUserFirstVal", Value: "49 << 2"},
 		// TypeGtypeVal is special, it's initialized at runtime via g_gtype_get_type()
 	}
+
+	specialTypeToGLibType = map[string]string{
+		"TypeGtype":   "TypeGtypeVal",
+		"types.GType": "TypeGtypeVal",
+		"enum":        "TypeEnumVal",
+		"flags":       "TypeFlagsVal",
+		"bitfield":    "TypeFlagsVal",
+		"object":      "TypeObjectVal",
+		"pointer":     "TypePointerVal",
+		"slice":       "TypePointerVal",
 	}
 )
 
@@ -109,6 +288,41 @@ func gLibTypeConfigByGLibType(glibType string) *glibTypeConfig {
 	}
 
 	return nil
+}
+
+// IsVectorType returns true if the given Go type is a vector/array type with special handling
+func IsVectorType(goType string) bool {
+	_, ok := vectorTypeConfigs[goType]
+
+	return ok
+}
+
+// GetGLibTypeConstant returns the GLib type constant name for well-known special types
+// Returns empty string if not a known special type
+func GetGLibTypeConstant(typeName string) string {
+	if constant, ok := specialTypeToGLibType[typeName]; ok {
+		return constant
+	}
+
+	return ""
+}
+
+// GetAllGLibTypeConstants returns all GLib type constant definitions
+// This can be used to generate the constants block in templates/gobject
+func GetAllGLibTypeConstants() []glibTypeConstant {
+	return glibTypeConstants
+}
+
+// GetGLibTypeConstantValue returns the value expression for a given constant name
+// Returns empty string if the constant is not found
+func GetGLibTypeConstantValue(constantName string) string {
+	for _, constant := range glibTypeConstants {
+		if constant.Name == constantName {
+			return constant.Value
+		}
+	}
+
+	return ""
 }
 
 // GetGLibTypeConstants generates the Go const block for all GLib type constants
@@ -132,14 +346,6 @@ func GetGLibTypeConstants() string {
 
 // GGLibTypeByGoType returns the GLib type constant for a given Go type
 func GGLibTypeByGoType(goType string) string {
-	if goType == "int32" {
-		return "TypeIntVal"
-	}
-
-	if goType == "uint32" {
-		return "TypeUintVal"
-	}
-
 	if config := gGLibTypeConfigByGoType(goType); config != nil {
 		return config.GLibType
 	}
@@ -344,30 +550,27 @@ func ConstructorName(name string, outer string) string {
 func PropertyScalarSet(goType, glibType, valueName, objPrefix string) string {
 	// First, try to find by Go type
 	if mapping := gGLibTypeConfigByGoType(goType); mapping != nil {
-		return "v." + mapping.SetterMethod + "(" + valueName + ")"
-	}
+		if mapping.CustomSetterFunc != nil {
+			return mapping.CustomSetterFunc(valueName, objPrefix)
+		}
 
-	// Handle int32/uint32 which need casting to int/uint
-	if goType == "int32" {
-		return "v.SetInt(int(" + valueName + "))"
-	}
+		if mapping.SetterTemplate != "" {
+			return strings.Replace(mapping.SetterTemplate, "%s", valueName, 1)
+		}
 
-	if goType == "uint32" {
-		return "v.SetUint(uint(" + valueName + "))"
+		if mapping.SetterMethod != "" {
+			return "v." + mapping.SetterMethod + "(" + valueName + ")"
+		}
 	}
 
 	// Try to find by GLib type for special types
 	if mapping := gLibTypeConfigByGLibType(glibType); mapping != nil {
-		if mapping.SetterTemplate != "" {
-			// Handle templates that need formatting
-			switch glibType {
-			case "TypeEnumVal", "TypeFlagsVal":
-				return strings.Replace(mapping.SetterTemplate, "%s", valueName, 1)
+		if mapping.CustomSetterFunc != nil {
+			return mapping.CustomSetterFunc(valueName, objPrefix)
+		}
 
-			case "TypeObjectVal":
-				// Replace first %s with objPrefix, second %s with valueName
-				return strings.Replace(strings.Replace(mapping.SetterTemplate, "%s", objPrefix, 1), "%s", valueName, 1)
-			}
+		if mapping.SetterTemplate != "" {
+			return strings.Replace(mapping.SetterTemplate, "%s", valueName, 1)
 		}
 
 		if mapping.SetterMethod != "" {
@@ -382,26 +585,12 @@ func PropertyScalarSet(goType, glibType, valueName, objPrefix string) string {
 func PropertyScalarGet(goType, glibType, baseGoType string, isInterface, isRecord bool) string {
 	// First, try to find by Go type
 	if mapping := gGLibTypeConfigByGoType(goType); mapping != nil {
-		return "return v." + mapping.GetterMethod + "()"
-	}
+		if mapping.CustomGetterFunc != nil {
+			return mapping.CustomGetterFunc(goType, baseGoType, isInterface, isRecord)
+		}
 
-	// Handle int32/uint32 which need casting from int/uint
-	if goType == "int32" {
-		return "return int32(v.GetInt())"
-	}
-
-	if goType == "uint32" {
-		return "return uint32(v.GetUint())"
-	}
-
-	// Then, try to find by GLib type for special types
-	if mapping := gLibTypeConfigByGLibType(glibType); mapping != nil {
 		if mapping.GetterTemplate != "" {
-			// Handle templates that need formatting
-			switch glibType {
-			case "TypeEnumVal", "TypeFlagsVal":
-				return "return " + strings.Replace(mapping.GetterTemplate, "%s", goType, 1)
-			}
+			return mapping.GetterTemplate
 		}
 
 		if mapping.GetterMethod != "" {
@@ -409,22 +598,19 @@ func PropertyScalarGet(goType, glibType, baseGoType string, isInterface, isRecor
 		}
 	}
 
-	// Special handling for TypeObjectVal
-	if glibType == "TypeObjectVal" {
-		result := "ptr := v.GetObject().GoPointer(); if ptr == 0 { return nil }; "
-		if isInterface {
-			result += "result := &" + baseGoType + "Base{}; result.Ptr = ptr; return result"
-		} else if isRecord {
-			result += "return (*" + baseGoType + ")(unsafe.Pointer(ptr))"
-		} else {
-			result += "result := &" + baseGoType + "{}; result.Ptr = ptr; return result"
+	// Then, try to find by GLib type for special types
+	if mapping := gLibTypeConfigByGLibType(glibType); mapping != nil {
+		if mapping.CustomGetterFunc != nil {
+			return mapping.CustomGetterFunc(goType, baseGoType, isInterface, isRecord)
 		}
-		return result
-	}
 
-	// Special handling for TypePointerVal
-	if glibType == "TypePointerVal" {
-		return "return nil"
+		if mapping.GetterTemplate != "" {
+			return "return " + strings.Replace(mapping.GetterTemplate, "%s", goType, 1)
+		}
+
+		if mapping.GetterMethod != "" {
+			return "return v." + mapping.GetterMethod + "()"
+		}
 	}
 
 	return "return " + goType + "(v.GetPointer())"
@@ -432,60 +618,8 @@ func PropertyScalarGet(goType, glibType, baseGoType string, isInterface, isRecor
 
 // PropertyVectorSet generates the array conversion and v.SetXXX(value) call for array types
 func PropertyVectorSet(goType, objPrefix, glibPrefix, propertyName string, useBaseObj bool) string {
-	switch goType {
-	case "[]string":
-		objAccess := "x"
-		if useBaseObj {
-			objAccess = "obj"
-		}
-
-		result := `var v ` + objPrefix + `Value
-     v.Init(` + glibPrefix + `StrvGetType())
-
-     cStrBytes := make([][]byte, len(value))
-     cStrings := make([]uintptr, len(value)+1)
-     for i, s := range value {
-          cStrBytes[i] = make([]byte, len(s)+1)
-          copy(cStrBytes[i], s)
-          cStrBytes[i][len(s)] = 0
-          cStrings[i] = uintptr(unsafe.Pointer(&cStrBytes[i][0]))
-     }
-     cStrings[len(value)] = 0
-
-     v.SetBoxed(uintptr(unsafe.Pointer(&cStrings[0])))`
-
-		if useBaseObj {
-			result += "\n     obj := " + objPrefix + "Object{Ptr: x.GoPointer()}"
-		}
-
-		result += "\n     " + objAccess + `.SetProperty("` + propertyName + `", &v)
-
-     v.Unset()`
-		return result
-
-	case "[]byte":
-		objAccess := "x"
-		if useBaseObj {
-			objAccess = "obj"
-		}
-
-		result := `var v ` + objPrefix + `Value
-     v.Init(` + objPrefix + `TypePointerVal)
-
-     if len(value) > 0 {
-          v.SetPointer(uintptr(unsafe.Pointer(&value[0])))
-     } else {
-          v.SetPointer(0)
-     }`
-
-		if useBaseObj {
-			result += "\n     obj := " + objPrefix + "Object{Ptr: x.GoPointer()}"
-		}
-
-		result += "\n     " + objAccess + `.SetProperty("` + propertyName + `", &v)
-
-     v.Unset()`
-		return result
+	if config, ok := vectorTypeConfigs[goType]; ok {
+		return config.SetterFunction(objPrefix, glibPrefix, propertyName, useBaseObj)
 	}
 
 	return ""
@@ -493,57 +627,8 @@ func PropertyVectorSet(goType, objPrefix, glibPrefix, propertyName string, useBa
 
 // PropertyVectorGet generates the array conversion and v.GetXXX() call for array types
 func PropertyVectorGet(goType, objPrefix, corePrefix, propertyName string, useBaseObj bool) string {
-	switch goType {
-	case "[]string":
-		objAccess := "x"
-		result := `var v ` + objPrefix + `Value`
-
-		if useBaseObj {
-			objAccess = "obj"
-			result += "\n     obj := " + objPrefix + "Object{Ptr: x.GoPointer()}"
-		}
-
-		result += `
-     ` + objAccess + `.GetProperty("` + propertyName + `", &v)
-     defer v.Unset()
-
-     strvPtr := v.GetBoxed()
-     if strvPtr == 0 {
-          return nil
-     }
-
-     var result []string
-     for i := 0; ; i++ {
-          charPtr := *(*uintptr)(unsafe.Pointer(strvPtr + uintptr(i)*unsafe.Sizeof(uintptr(0))))
-          if charPtr == 0 {
-               break
-          }
-          result = append(result, ` + corePrefix + `GoString(charPtr))
-     }
-
-     return result`
-		return result
-
-	case "[]byte":
-		objAccess := "x"
-		result := `var v ` + objPrefix + `Value`
-
-		if useBaseObj {
-			objAccess = "obj"
-			result += "\n     obj := " + objPrefix + "Object{Ptr: x.GoPointer()}"
-		}
-
-		result += `
-     ` + objAccess + `.GetProperty("` + propertyName + `", &v)
-     defer v.Unset()
-
-     ptr := v.GetPointer()
-     if ptr == 0 {
-          return nil
-     }
-
-     return *(*[]byte)(unsafe.Pointer(ptr))`
-		return result
+	if config, ok := vectorTypeConfigs[goType]; ok {
+		return config.GetterFunction(objPrefix, corePrefix, propertyName, useBaseObj)
 	}
 
 	return ""

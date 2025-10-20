@@ -13,4 +13,5 @@ var (
 	PropertyScalarGet        = util.PropertyScalarGet
 	PropertyVectorSet        = util.PropertyVectorSet
 	PropertyVectorGet        = util.PropertyVectorGet
+	GetGLibTypeConstants     = util.GetGLibTypeConstants
 )
