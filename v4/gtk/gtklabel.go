@@ -406,7 +406,7 @@ func (x *Label) GetLayout() *pango.Layout {
 	return cls
 }
 
-var xLabelGetLayoutOffsets func(uintptr, int, int)
+var xLabelGetLayoutOffsets func(uintptr, uintptr, uintptr)
 
 // Obtains the coordinates where the label will draw its Pango layout.
 //
@@ -415,9 +415,9 @@ var xLabelGetLayoutOffsets func(uintptr, int, int)
 // of the label is clicked. Remember when using the [class@Pango.Layout]
 // functions you need to convert to and from pixels using `PANGO_PIXELS()`
 // or [const@Pango.SCALE].
-func (x *Label) GetLayoutOffsets(XVar int, YVar int) {
+func (x *Label) GetLayoutOffsets(XVar *int, YVar *int) {
 
-	xLabelGetLayoutOffsets(x.GoPointer(), XVar, YVar)
+	xLabelGetLayoutOffsets(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)))
 
 }
 
@@ -496,14 +496,14 @@ func (x *Label) GetSelectable() bool {
 	return cret
 }
 
-var xLabelGetSelectionBounds func(uintptr, int, int) bool
+var xLabelGetSelectionBounds func(uintptr, uintptr, uintptr) bool
 
 // Gets the selected range of characters in the label.
 //
 // The returned @start and @end positions are in characters.
-func (x *Label) GetSelectionBounds(StartVar int, EndVar int) bool {
+func (x *Label) GetSelectionBounds(StartVar *int, EndVar *int) bool {
 
-	cret := xLabelGetSelectionBounds(x.GoPointer(), StartVar, EndVar)
+	cret := xLabelGetSelectionBounds(x.GoPointer(), uintptr(unsafe.Pointer(StartVar)), uintptr(unsafe.Pointer(EndVar)))
 	return cret
 }
 
@@ -1134,9 +1134,9 @@ func (x *Label) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *Label) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *Label) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 

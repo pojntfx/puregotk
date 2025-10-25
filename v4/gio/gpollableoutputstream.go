@@ -155,12 +155,12 @@ func (x *PollableOutputStreamInterface) GetWriteNonblocking() func(PollableOutpu
 // Does a vectored non-blocking write, or returns
 //
 //	%G_POLLABLE_RETURN_WOULD_BLOCK
-func (x *PollableOutputStreamInterface) OverrideWritevNonblocking(cb func(PollableOutputStream, []OutputVector, uint, uint) PollableReturn) {
+func (x *PollableOutputStreamInterface) OverrideWritevNonblocking(cb func(PollableOutputStream, []OutputVector, uint, *uint) PollableReturn) {
 	if cb == nil {
 		x.xWritevNonblocking = 0
 	} else {
-		x.xWritevNonblocking = purego.NewCallback(func(StreamVarp uintptr, VectorsVarp []OutputVector, NVectorsVarp uint, BytesWrittenVarp uint) PollableReturn {
-			return cb(&PollableOutputStreamBase{Ptr: StreamVarp}, VectorsVarp, NVectorsVarp, BytesWrittenVarp)
+		x.xWritevNonblocking = purego.NewCallback(func(StreamVarp uintptr, VectorsVarp []OutputVector, NVectorsVarp uint, BytesWrittenVarp uintptr) PollableReturn {
+			return cb(&PollableOutputStreamBase{Ptr: StreamVarp}, VectorsVarp, NVectorsVarp, (*uint)(unsafe.Pointer(BytesWrittenVarp)))
 		})
 	}
 }
@@ -169,14 +169,14 @@ func (x *PollableOutputStreamInterface) OverrideWritevNonblocking(cb func(Pollab
 // Does a vectored non-blocking write, or returns
 //
 //	%G_POLLABLE_RETURN_WOULD_BLOCK
-func (x *PollableOutputStreamInterface) GetWritevNonblocking() func(PollableOutputStream, []OutputVector, uint, uint) PollableReturn {
+func (x *PollableOutputStreamInterface) GetWritevNonblocking() func(PollableOutputStream, []OutputVector, uint, *uint) PollableReturn {
 	if x.xWritevNonblocking == 0 {
 		return nil
 	}
-	var rawCallback func(StreamVarp uintptr, VectorsVarp []OutputVector, NVectorsVarp uint, BytesWrittenVarp uint) PollableReturn
+	var rawCallback func(StreamVarp uintptr, VectorsVarp []OutputVector, NVectorsVarp uint, BytesWrittenVarp uintptr) PollableReturn
 	purego.RegisterFunc(&rawCallback, x.xWritevNonblocking)
-	return func(StreamVar PollableOutputStream, VectorsVar []OutputVector, NVectorsVar uint, BytesWrittenVar uint) PollableReturn {
-		return rawCallback(StreamVar.GoPointer(), VectorsVar, NVectorsVar, BytesWrittenVar)
+	return func(StreamVar PollableOutputStream, VectorsVar []OutputVector, NVectorsVar uint, BytesWrittenVar *uint) PollableReturn {
+		return rawCallback(StreamVar.GoPointer(), VectorsVar, NVectorsVar, uintptr(unsafe.Pointer(BytesWrittenVar)))
 	}
 }
 
@@ -196,7 +196,7 @@ type PollableOutputStream interface {
 	CreateSource(CancellableVar *Cancellable) *glib.Source
 	IsWritable() bool
 	WriteNonblocking(BufferVar []byte, CountVar uint, CancellableVar *Cancellable) (int, error)
-	WritevNonblocking(VectorsVar []OutputVector, NVectorsVar uint, BytesWrittenVar uint, CancellableVar *Cancellable) (PollableReturn, error)
+	WritevNonblocking(VectorsVar []OutputVector, NVectorsVar uint, BytesWrittenVar *uint, CancellableVar *Cancellable) (PollableReturn, error)
 }
 
 var xPollableOutputStreamGLibType func() types.GType
@@ -315,10 +315,10 @@ func (x *PollableOutputStreamBase) WriteNonblocking(BufferVar []byte, CountVar u
 //
 // The behaviour of this method is undefined if
 // g_pollable_output_stream_can_poll() returns %FALSE for @stream.
-func (x *PollableOutputStreamBase) WritevNonblocking(VectorsVar []OutputVector, NVectorsVar uint, BytesWrittenVar uint, CancellableVar *Cancellable) (PollableReturn, error) {
+func (x *PollableOutputStreamBase) WritevNonblocking(VectorsVar []OutputVector, NVectorsVar uint, BytesWrittenVar *uint, CancellableVar *Cancellable) (PollableReturn, error) {
 	var cerr *glib.Error
 
-	cret := XGPollableOutputStreamWritevNonblocking(x.GoPointer(), VectorsVar, NVectorsVar, BytesWrittenVar, CancellableVar.GoPointer(), &cerr)
+	cret := XGPollableOutputStreamWritevNonblocking(x.GoPointer(), VectorsVar, NVectorsVar, uintptr(unsafe.Pointer(BytesWrittenVar)), CancellableVar.GoPointer(), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -330,7 +330,7 @@ var XGPollableOutputStreamCanPoll func(uintptr) bool
 var XGPollableOutputStreamCreateSource func(uintptr, uintptr) *glib.Source
 var XGPollableOutputStreamIsWritable func(uintptr) bool
 var XGPollableOutputStreamWriteNonblocking func(uintptr, []byte, uint, uintptr, **glib.Error) int
-var XGPollableOutputStreamWritevNonblocking func(uintptr, []OutputVector, uint, uint, uintptr, **glib.Error) PollableReturn
+var XGPollableOutputStreamWritevNonblocking func(uintptr, []OutputVector, uint, uintptr, uintptr, **glib.Error) PollableReturn
 
 func init() {
 	core.SetPackageName("GIO", "gio-2.0")

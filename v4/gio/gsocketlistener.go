@@ -274,7 +274,7 @@ func (x *SocketListener) Accept(SourceObjectVar **gobject.Object, CancellableVar
 	var cls *SocketConnection
 	var cerr *glib.Error
 
-	cret := xSocketListenerAccept(x.GoPointer(), *gobject.ConvertPtr(SourceObjectVar), CancellableVar.GoPointer(), &cerr)
+	cret := xSocketListenerAccept(x.GoPointer(), uintptr(unsafe.Pointer(SourceObjectVar)), CancellableVar.GoPointer(), &cerr)
 
 	if cret == 0 {
 		return nil, cerr
@@ -308,7 +308,7 @@ func (x *SocketListener) AcceptFinish(ResultVar AsyncResult, SourceObjectVar **g
 	var cls *SocketConnection
 	var cerr *glib.Error
 
-	cret := xSocketListenerAcceptFinish(x.GoPointer(), ResultVar.GoPointer(), *gobject.ConvertPtr(SourceObjectVar), &cerr)
+	cret := xSocketListenerAcceptFinish(x.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(SourceObjectVar)), &cerr)
 
 	if cret == 0 {
 		return nil, cerr
@@ -342,7 +342,7 @@ func (x *SocketListener) AcceptSocket(SourceObjectVar **gobject.Object, Cancella
 	var cls *Socket
 	var cerr *glib.Error
 
-	cret := xSocketListenerAcceptSocket(x.GoPointer(), *gobject.ConvertPtr(SourceObjectVar), CancellableVar.GoPointer(), &cerr)
+	cret := xSocketListenerAcceptSocket(x.GoPointer(), uintptr(unsafe.Pointer(SourceObjectVar)), CancellableVar.GoPointer(), &cerr)
 
 	if cret == 0 {
 		return nil, cerr
@@ -376,7 +376,7 @@ func (x *SocketListener) AcceptSocketFinish(ResultVar AsyncResult, SourceObjectV
 	var cls *Socket
 	var cerr *glib.Error
 
-	cret := xSocketListenerAcceptSocketFinish(x.GoPointer(), ResultVar.GoPointer(), *gobject.ConvertPtr(SourceObjectVar), &cerr)
+	cret := xSocketListenerAcceptSocketFinish(x.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(SourceObjectVar)), &cerr)
 
 	if cret == 0 {
 		return nil, cerr
@@ -418,7 +418,7 @@ var xSocketListenerAddAddress func(uintptr, uintptr, SocketType, SocketProtocol,
 func (x *SocketListener) AddAddress(AddressVar *SocketAddress, TypeVar SocketType, ProtocolVar SocketProtocol, SourceObjectVar *gobject.Object, EffectiveAddressVar **SocketAddress) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xSocketListenerAddAddress(x.GoPointer(), AddressVar.GoPointer(), TypeVar, ProtocolVar, SourceObjectVar.GoPointer(), *gobject.ConvertPtr(EffectiveAddressVar), &cerr)
+	cret := xSocketListenerAddAddress(x.GoPointer(), AddressVar.GoPointer(), TypeVar, ProtocolVar, SourceObjectVar.GoPointer(), uintptr(unsafe.Pointer(EffectiveAddressVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

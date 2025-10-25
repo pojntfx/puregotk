@@ -107,9 +107,9 @@ var xHashTableIterNext func(uintptr, uintptr, uintptr) bool
 // Advances @iter and retrieves the key and/or value that are now
 // pointed to as a result of this advancement. If %FALSE is returned,
 // @key and @value are not set, and the iterator becomes invalid.
-func (x *HashTableIter) Next(KeyVar uintptr, ValueVar uintptr) bool {
+func (x *HashTableIter) Next(KeyVar *uintptr, ValueVar *uintptr) bool {
 
-	cret := xHashTableIterNext(x.GoPointer(), KeyVar, ValueVar)
+	cret := xHashTableIterNext(x.GoPointer(), uintptr(unsafe.Pointer(KeyVar)), uintptr(unsafe.Pointer(ValueVar)))
 	return cret
 }
 
@@ -415,9 +415,9 @@ var xHashTableLookupExtended func(*HashTable, uintptr, uintptr, uintptr) bool
 // You can actually pass %NULL for @lookup_key to test
 // whether the %NULL key exists, provided the hash and equal functions
 // of @hash_table are %NULL-safe.
-func HashTableLookupExtended(HashTableVar *HashTable, LookupKeyVar uintptr, OrigKeyVar uintptr, ValueVar uintptr) bool {
+func HashTableLookupExtended(HashTableVar *HashTable, LookupKeyVar uintptr, OrigKeyVar *uintptr, ValueVar *uintptr) bool {
 
-	cret := xHashTableLookupExtended(HashTableVar, LookupKeyVar, OrigKeyVar, ValueVar)
+	cret := xHashTableLookupExtended(HashTableVar, LookupKeyVar, uintptr(unsafe.Pointer(OrigKeyVar)), uintptr(unsafe.Pointer(ValueVar)))
 	return cret
 }
 
@@ -566,9 +566,9 @@ var xHashTableStealExtended func(*HashTable, uintptr, uintptr, uintptr) bool
 // their keys, for example by using g_hash_table_add(). Before 2.82, when
 // stealing both the key and the value from such a dictionary, the value was
 // %NULL. Since 2.82, the returned value and key will be the same.
-func HashTableStealExtended(HashTableVar *HashTable, LookupKeyVar uintptr, StolenKeyVar uintptr, StolenValueVar uintptr) bool {
+func HashTableStealExtended(HashTableVar *HashTable, LookupKeyVar uintptr, StolenKeyVar *uintptr, StolenValueVar *uintptr) bool {
 
-	cret := xHashTableStealExtended(HashTableVar, LookupKeyVar, StolenKeyVar, StolenValueVar)
+	cret := xHashTableStealExtended(HashTableVar, LookupKeyVar, uintptr(unsafe.Pointer(StolenKeyVar)), uintptr(unsafe.Pointer(StolenValueVar)))
 	return cret
 }
 

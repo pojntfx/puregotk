@@ -166,12 +166,12 @@ func (x *ApplicationClass) GetCommandLine() func(*Application, *ApplicationComma
 //	g_application_run() for more information. Also see the
 //	#GApplication::handle-local-options signal, which is a simpler
 //	alternative to handling some commandline options locally
-func (x *ApplicationClass) OverrideLocalCommandLine(cb func(*Application, []string, int) bool) {
+func (x *ApplicationClass) OverrideLocalCommandLine(cb func(*Application, []string, *int) bool) {
 	if cb == nil {
 		x.xLocalCommandLine = 0
 	} else {
-		x.xLocalCommandLine = purego.NewCallback(func(ApplicationVarp uintptr, ArgumentsVarp []string, ExitStatusVarp int) bool {
-			return cb(ApplicationNewFromInternalPtr(ApplicationVarp), ArgumentsVarp, ExitStatusVarp)
+		x.xLocalCommandLine = purego.NewCallback(func(ApplicationVarp uintptr, ArgumentsVarp []string, ExitStatusVarp uintptr) bool {
+			return cb(ApplicationNewFromInternalPtr(ApplicationVarp), ArgumentsVarp, (*int)(unsafe.Pointer(ExitStatusVarp)))
 		})
 	}
 }
@@ -183,14 +183,14 @@ func (x *ApplicationClass) OverrideLocalCommandLine(cb func(*Application, []stri
 //	g_application_run() for more information. Also see the
 //	#GApplication::handle-local-options signal, which is a simpler
 //	alternative to handling some commandline options locally
-func (x *ApplicationClass) GetLocalCommandLine() func(*Application, []string, int) bool {
+func (x *ApplicationClass) GetLocalCommandLine() func(*Application, []string, *int) bool {
 	if x.xLocalCommandLine == 0 {
 		return nil
 	}
-	var rawCallback func(ApplicationVarp uintptr, ArgumentsVarp []string, ExitStatusVarp int) bool
+	var rawCallback func(ApplicationVarp uintptr, ArgumentsVarp []string, ExitStatusVarp uintptr) bool
 	purego.RegisterFunc(&rawCallback, x.xLocalCommandLine)
-	return func(ApplicationVar *Application, ArgumentsVar []string, ExitStatusVar int) bool {
-		return rawCallback(ApplicationVar.GoPointer(), ArgumentsVar, ExitStatusVar)
+	return func(ApplicationVar *Application, ArgumentsVar []string, ExitStatusVar *int) bool {
+		return rawCallback(ApplicationVar.GoPointer(), ArgumentsVar, uintptr(unsafe.Pointer(ExitStatusVar)))
 	}
 }
 
@@ -1847,9 +1847,9 @@ func (x *Application) ListActions() []string {
 // fields (as indicated by having a non-`NULL` reference passed in) are
 // filled.  If the action doesn’t exist, `FALSE` is returned and the
 // fields may or may not have been modified.
-func (x *Application) QueryAction(ActionNameVar string, EnabledVar bool, ParameterTypeVar **glib.VariantType, StateTypeVar **glib.VariantType, StateHintVar **glib.Variant, StateVar **glib.Variant) bool {
+func (x *Application) QueryAction(ActionNameVar string, EnabledVar *bool, ParameterTypeVar **glib.VariantType, StateTypeVar **glib.VariantType, StateHintVar **glib.Variant, StateVar **glib.Variant) bool {
 
-	cret := XGActionGroupQueryAction(x.GoPointer(), ActionNameVar, EnabledVar, ParameterTypeVar, StateTypeVar, StateHintVar, StateVar)
+	cret := XGActionGroupQueryAction(x.GoPointer(), ActionNameVar, uintptr(unsafe.Pointer(EnabledVar)), uintptr(unsafe.Pointer(ParameterTypeVar)), uintptr(unsafe.Pointer(StateTypeVar)), uintptr(unsafe.Pointer(StateHintVar)), uintptr(unsafe.Pointer(StateVar)))
 	return cret
 }
 

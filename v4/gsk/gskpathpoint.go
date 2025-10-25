@@ -81,7 +81,7 @@ func (x *PathPoint) Free() {
 
 }
 
-var xPathPointGetCurvature func(uintptr, *Path, PathDirection, *graphene.Point) float32
+var xPathPointGetCurvature func(uintptr, *Path, PathDirection, uintptr) float32
 
 // Calculates the curvature of the path at the point.
 //
@@ -107,7 +107,7 @@ var xPathPointGetCurvature func(uintptr, *Path, PathDirection, *graphene.Point) 
 // &lt;/picture&gt;
 func (x *PathPoint) GetCurvature(PathVar *Path, DirectionVar PathDirection, CenterVar *graphene.Point) float32 {
 
-	cret := xPathPointGetCurvature(x.GoPointer(), PathVar, DirectionVar, CenterVar)
+	cret := xPathPointGetCurvature(x.GoPointer(), PathVar, DirectionVar, uintptr(unsafe.Pointer(CenterVar)))
 	return cret
 }
 
@@ -121,12 +121,12 @@ func (x *PathPoint) GetDistance(MeasureVar *PathMeasure) float32 {
 	return cret
 }
 
-var xPathPointGetPosition func(uintptr, *Path, *graphene.Point)
+var xPathPointGetPosition func(uintptr, *Path, uintptr)
 
 // Gets the position of the point.
 func (x *PathPoint) GetPosition(PathVar *Path, PositionVar *graphene.Point) {
 
-	xPathPointGetPosition(x.GoPointer(), PathVar, PositionVar)
+	xPathPointGetPosition(x.GoPointer(), PathVar, uintptr(unsafe.Pointer(PositionVar)))
 
 }
 
@@ -144,7 +144,7 @@ func (x *PathPoint) GetRotation(PathVar *Path, DirectionVar PathDirection) float
 	return cret
 }
 
-var xPathPointGetTangent func(uintptr, *Path, PathDirection, *graphene.Vec2)
+var xPathPointGetTangent func(uintptr, *Path, PathDirection, uintptr)
 
 // Gets the tangent of the path at the point.
 //
@@ -162,7 +162,7 @@ var xPathPointGetTangent func(uintptr, *Path, PathDirection, *graphene.Vec2)
 // convenient to use.
 func (x *PathPoint) GetTangent(PathVar *Path, DirectionVar PathDirection, TangentVar *graphene.Vec2) {
 
-	xPathPointGetTangent(x.GoPointer(), PathVar, DirectionVar, TangentVar)
+	xPathPointGetTangent(x.GoPointer(), PathVar, DirectionVar, uintptr(unsafe.Pointer(TangentVar)))
 
 }
 

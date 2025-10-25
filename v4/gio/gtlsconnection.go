@@ -264,7 +264,7 @@ func (x *TlsConnection) GetCertificate() *TlsCertificate {
 	return cls
 }
 
-var xTlsConnectionGetChannelBindingData func(uintptr, TlsChannelBindingType, []byte, **glib.Error) bool
+var xTlsConnectionGetChannelBindingData func(uintptr, TlsChannelBindingType, uintptr, **glib.Error) bool
 
 // Query the TLS backend for TLS channel binding data of @type for @conn.
 //
@@ -279,10 +279,10 @@ var xTlsConnectionGetChannelBindingData func(uintptr, TlsChannelBindingType, []b
 // will be available though.  That could happen if TLS connection does not
 // support @type or the binding data is not available yet due to additional
 // negotiation or input required.
-func (x *TlsConnection) GetChannelBindingData(TypeVar TlsChannelBindingType, DataVar []byte) (bool, error) {
+func (x *TlsConnection) GetChannelBindingData(TypeVar TlsChannelBindingType, DataVar *[]byte) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xTlsConnectionGetChannelBindingData(x.GoPointer(), TypeVar, DataVar, &cerr)
+	cret := xTlsConnectionGetChannelBindingData(x.GoPointer(), TypeVar, uintptr(unsafe.Pointer(DataVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

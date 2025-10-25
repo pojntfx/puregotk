@@ -274,7 +274,7 @@ func (x *Path) ForeachIntersection(Path2Var *Path, FuncVar *PathIntersectionFunc
 	return cret
 }
 
-var xPathGetBounds func(uintptr, *graphene.Rect) bool
+var xPathGetBounds func(uintptr, uintptr) bool
 
 // Computes the bounds of the given path.
 //
@@ -292,23 +292,23 @@ var xPathGetBounds func(uintptr, *graphene.Rect) bool
 // the zero rectangle but true will be returned.
 func (x *Path) GetBounds(BoundsVar *graphene.Rect) bool {
 
-	cret := xPathGetBounds(x.GoPointer(), BoundsVar)
+	cret := xPathGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(BoundsVar)))
 	return cret
 }
 
-var xPathGetClosestPoint func(uintptr, *graphene.Point, float32, *PathPoint, float32) bool
+var xPathGetClosestPoint func(uintptr, *graphene.Point, float32, uintptr, uintptr) bool
 
 // Computes the closest point on the path to the given point.
 //
 // If there is no point closer than the given threshold,
 // false is returned.
-func (x *Path) GetClosestPoint(PointVar *graphene.Point, ThresholdVar float32, ResultVar *PathPoint, DistanceVar float32) bool {
+func (x *Path) GetClosestPoint(PointVar *graphene.Point, ThresholdVar float32, ResultVar *PathPoint, DistanceVar *float32) bool {
 
-	cret := xPathGetClosestPoint(x.GoPointer(), PointVar, ThresholdVar, ResultVar, DistanceVar)
+	cret := xPathGetClosestPoint(x.GoPointer(), PointVar, ThresholdVar, uintptr(unsafe.Pointer(ResultVar)), uintptr(unsafe.Pointer(DistanceVar)))
 	return cret
 }
 
-var xPathGetEndPoint func(uintptr, *PathPoint) bool
+var xPathGetEndPoint func(uintptr, uintptr) bool
 
 // Gets the end point of the path.
 //
@@ -316,11 +316,11 @@ var xPathGetEndPoint func(uintptr, *PathPoint) bool
 // is returned in this case.
 func (x *Path) GetEndPoint(ResultVar *PathPoint) bool {
 
-	cret := xPathGetEndPoint(x.GoPointer(), ResultVar)
+	cret := xPathGetEndPoint(x.GoPointer(), uintptr(unsafe.Pointer(ResultVar)))
 	return cret
 }
 
-var xPathGetStartPoint func(uintptr, *PathPoint) bool
+var xPathGetStartPoint func(uintptr, uintptr) bool
 
 // Gets the start point of the path.
 //
@@ -328,11 +328,11 @@ var xPathGetStartPoint func(uintptr, *PathPoint) bool
 // is returned in this case.
 func (x *Path) GetStartPoint(ResultVar *PathPoint) bool {
 
-	cret := xPathGetStartPoint(x.GoPointer(), ResultVar)
+	cret := xPathGetStartPoint(x.GoPointer(), uintptr(unsafe.Pointer(ResultVar)))
 	return cret
 }
 
-var xPathGetStrokeBounds func(uintptr, *Stroke, *graphene.Rect) bool
+var xPathGetStrokeBounds func(uintptr, *Stroke, uintptr) bool
 
 // Computes the bounds for stroking the given path with the
 // given parameters.
@@ -343,7 +343,7 @@ var xPathGetStrokeBounds func(uintptr, *Stroke, *graphene.Rect) bool
 // like miters.
 func (x *Path) GetStrokeBounds(StrokeVar *Stroke, BoundsVar *graphene.Rect) bool {
 
-	cret := xPathGetStrokeBounds(x.GoPointer(), StrokeVar, BoundsVar)
+	cret := xPathGetStrokeBounds(x.GoPointer(), StrokeVar, uintptr(unsafe.Pointer(BoundsVar)))
 	return cret
 }
 
@@ -999,14 +999,14 @@ func (x *PathMeasure) GetPath() *Path {
 	return cret
 }
 
-var xPathMeasureGetPoint func(uintptr, float32, *PathPoint) bool
+var xPathMeasureGetPoint func(uintptr, float32, uintptr) bool
 
 // Gets the point at the given distance into the path.
 //
 // An empty path has no points, so false is returned in that case.
 func (x *PathMeasure) GetPoint(DistanceVar float32, ResultVar *PathPoint) bool {
 
-	cret := xPathMeasureGetPoint(x.GoPointer(), DistanceVar, ResultVar)
+	cret := xPathMeasureGetPoint(x.GoPointer(), DistanceVar, uintptr(unsafe.Pointer(ResultVar)))
 	return cret
 }
 
@@ -1081,12 +1081,12 @@ func (x *Stroke) Free() {
 
 }
 
-var xStrokeGetDash func(uintptr, uint) uintptr
+var xStrokeGetDash func(uintptr, uintptr) uintptr
 
 // Gets the dash array in use.
-func (x *Stroke) GetDash(NDashVar uint) uintptr {
+func (x *Stroke) GetDash(NDashVar *uint) uintptr {
 
-	cret := xStrokeGetDash(x.GoPointer(), NDashVar)
+	cret := xStrokeGetDash(x.GoPointer(), uintptr(unsafe.Pointer(NDashVar)))
 	return cret
 }
 
@@ -1447,7 +1447,7 @@ func (x *Transform) Skew(SkewXVar float32, SkewYVar float32) *Transform {
 	return cret
 }
 
-var xTransformTo2d func(uintptr, float32, float32, float32, float32, float32, float32)
+var xTransformTo2d func(uintptr, uintptr, uintptr, uintptr, uintptr, uintptr, uintptr)
 
 // Converts a transform to a 2D transformation matrix.
 //
@@ -1473,13 +1473,13 @@ var xTransformTo2d func(uintptr, float32, float32, float32, float32, float32, fl
 // This function can be used to convert between a `GskTransform`
 // and a matrix type from other 2D drawing libraries, in particular
 // Cairo.
-func (x *Transform) To2d(OutXxVar float32, OutYxVar float32, OutXyVar float32, OutYyVar float32, OutDxVar float32, OutDyVar float32) {
+func (x *Transform) To2d(OutXxVar *float32, OutYxVar *float32, OutXyVar *float32, OutYyVar *float32, OutDxVar *float32, OutDyVar *float32) {
 
-	xTransformTo2d(x.GoPointer(), OutXxVar, OutYxVar, OutXyVar, OutYyVar, OutDxVar, OutDyVar)
+	xTransformTo2d(x.GoPointer(), uintptr(unsafe.Pointer(OutXxVar)), uintptr(unsafe.Pointer(OutYxVar)), uintptr(unsafe.Pointer(OutXyVar)), uintptr(unsafe.Pointer(OutYyVar)), uintptr(unsafe.Pointer(OutDxVar)), uintptr(unsafe.Pointer(OutDyVar)))
 
 }
 
-var xTransformTo2dComponents func(uintptr, float32, float32, float32, float32, float32, float32, float32)
+var xTransformTo2dComponents func(uintptr, uintptr, uintptr, uintptr, uintptr, uintptr, uintptr, uintptr)
 
 // Converts a transform to 2D transformation factors.
 //
@@ -1499,13 +1499,13 @@ var xTransformTo2dComponents func(uintptr, float32, float32, float32, float32, f
 //	gsk_transform_get_category() &gt;= GSK_TRANSFORM_CATEGORY_2D
 //
 // to check.
-func (x *Transform) To2dComponents(OutSkewXVar float32, OutSkewYVar float32, OutScaleXVar float32, OutScaleYVar float32, OutAngleVar float32, OutDxVar float32, OutDyVar float32) {
+func (x *Transform) To2dComponents(OutSkewXVar *float32, OutSkewYVar *float32, OutScaleXVar *float32, OutScaleYVar *float32, OutAngleVar *float32, OutDxVar *float32, OutDyVar *float32) {
 
-	xTransformTo2dComponents(x.GoPointer(), OutSkewXVar, OutSkewYVar, OutScaleXVar, OutScaleYVar, OutAngleVar, OutDxVar, OutDyVar)
+	xTransformTo2dComponents(x.GoPointer(), uintptr(unsafe.Pointer(OutSkewXVar)), uintptr(unsafe.Pointer(OutSkewYVar)), uintptr(unsafe.Pointer(OutScaleXVar)), uintptr(unsafe.Pointer(OutScaleYVar)), uintptr(unsafe.Pointer(OutAngleVar)), uintptr(unsafe.Pointer(OutDxVar)), uintptr(unsafe.Pointer(OutDyVar)))
 
 }
 
-var xTransformToAffine func(uintptr, float32, float32, float32, float32)
+var xTransformToAffine func(uintptr, uintptr, uintptr, uintptr, uintptr)
 
 // Converts a transform to 2D affine transformation factors.
 //
@@ -1524,20 +1524,20 @@ var xTransformToAffine func(uintptr, float32, float32, float32, float32)
 //	gsk_transform_get_category() &gt;= GSK_TRANSFORM_CATEGORY_2D_AFFINE
 //
 // to check.
-func (x *Transform) ToAffine(OutScaleXVar float32, OutScaleYVar float32, OutDxVar float32, OutDyVar float32) {
+func (x *Transform) ToAffine(OutScaleXVar *float32, OutScaleYVar *float32, OutDxVar *float32, OutDyVar *float32) {
 
-	xTransformToAffine(x.GoPointer(), OutScaleXVar, OutScaleYVar, OutDxVar, OutDyVar)
+	xTransformToAffine(x.GoPointer(), uintptr(unsafe.Pointer(OutScaleXVar)), uintptr(unsafe.Pointer(OutScaleYVar)), uintptr(unsafe.Pointer(OutDxVar)), uintptr(unsafe.Pointer(OutDyVar)))
 
 }
 
-var xTransformToMatrix func(uintptr, *graphene.Matrix)
+var xTransformToMatrix func(uintptr, uintptr)
 
 // Computes the 4x4 matrix for the transform.
 //
 // The previous value of @out_matrix will be ignored.
 func (x *Transform) ToMatrix(OutMatrixVar *graphene.Matrix) {
 
-	xTransformToMatrix(x.GoPointer(), OutMatrixVar)
+	xTransformToMatrix(x.GoPointer(), uintptr(unsafe.Pointer(OutMatrixVar)))
 
 }
 
@@ -1554,7 +1554,7 @@ func (x *Transform) ToString() string {
 	return cret
 }
 
-var xTransformToTranslate func(uintptr, float32, float32)
+var xTransformToTranslate func(uintptr, uintptr, uintptr)
 
 // Converts a transform to a translation operation.
 //
@@ -1564,9 +1564,9 @@ var xTransformToTranslate func(uintptr, float32, float32)
 //	gsk_transform_get_category() &gt;= GSK_TRANSFORM_CATEGORY_2D_TRANSLATE
 //
 // to check.
-func (x *Transform) ToTranslate(OutDxVar float32, OutDyVar float32) {
+func (x *Transform) ToTranslate(OutDxVar *float32, OutDyVar *float32) {
 
-	xTransformToTranslate(x.GoPointer(), OutDxVar, OutDyVar)
+	xTransformToTranslate(x.GoPointer(), uintptr(unsafe.Pointer(OutDxVar)), uintptr(unsafe.Pointer(OutDyVar)))
 
 }
 
@@ -1582,23 +1582,23 @@ func (x *Transform) Transform(OtherVar *Transform) *Transform {
 	return cret
 }
 
-var xTransformTransformBounds func(uintptr, *graphene.Rect, *graphene.Rect)
+var xTransformTransformBounds func(uintptr, *graphene.Rect, uintptr)
 
 // Transforms a rectangle using the given transform.
 //
 // The result is the bounding box containing the coplanar quad.
 func (x *Transform) TransformBounds(RectVar *graphene.Rect, OutRectVar *graphene.Rect) {
 
-	xTransformTransformBounds(x.GoPointer(), RectVar, OutRectVar)
+	xTransformTransformBounds(x.GoPointer(), RectVar, uintptr(unsafe.Pointer(OutRectVar)))
 
 }
 
-var xTransformTransformPoint func(uintptr, *graphene.Point, *graphene.Point)
+var xTransformTransformPoint func(uintptr, *graphene.Point, uintptr)
 
 // Transforms a point using the given transform.
 func (x *Transform) TransformPoint(PointVar *graphene.Point, OutPointVar *graphene.Point) {
 
-	xTransformTransformPoint(x.GoPointer(), PointVar, OutPointVar)
+	xTransformTransformPoint(x.GoPointer(), PointVar, uintptr(unsafe.Pointer(OutPointVar)))
 
 }
 

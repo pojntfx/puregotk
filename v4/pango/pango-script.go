@@ -49,7 +49,7 @@ func (x *ScriptIter) Free() {
 
 }
 
-var xScriptIterGetRange func(uintptr, string, string, *Script)
+var xScriptIterGetRange func(uintptr, uintptr, uintptr, uintptr)
 
 // Gets information about the range to which @iter currently points.
 //
@@ -60,9 +60,9 @@ var xScriptIterGetRange func(uintptr, string, string, *Script)
 // as `PangoScript`, as of Pango 1.18, this function simply returns
 // `GUnicodeScript` values. Callers must be prepared to handle unknown
 // values.
-func (x *ScriptIter) GetRange(StartVar string, EndVar string, ScriptVar *Script) {
+func (x *ScriptIter) GetRange(StartVar *string, EndVar *string, ScriptVar *Script) {
 
-	xScriptIterGetRange(x.GoPointer(), StartVar, EndVar, ScriptVar)
+	xScriptIterGetRange(x.GoPointer(), uintptr(unsafe.Pointer(StartVar)), uintptr(unsafe.Pointer(EndVar)), uintptr(unsafe.Pointer(ScriptVar)))
 
 }
 

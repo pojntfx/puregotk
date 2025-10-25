@@ -2,6 +2,8 @@
 package gio
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
@@ -619,14 +621,14 @@ func (x *DBusMessage) SetUnixFdList(FdListVar *UnixFDList) {
 
 }
 
-var xDBusMessageToBlob func(uintptr, uint, DBusCapabilityFlags, **glib.Error) uintptr
+var xDBusMessageToBlob func(uintptr, uintptr, DBusCapabilityFlags, **glib.Error) uintptr
 
 // Serializes @message to a blob. The byte order returned by
 // g_dbus_message_get_byte_order() will be used.
-func (x *DBusMessage) ToBlob(OutSizeVar uint, CapabilitiesVar DBusCapabilityFlags) (uintptr, error) {
+func (x *DBusMessage) ToBlob(OutSizeVar *uint, CapabilitiesVar DBusCapabilityFlags) (uintptr, error) {
 	var cerr *glib.Error
 
-	cret := xDBusMessageToBlob(x.GoPointer(), OutSizeVar, CapabilitiesVar, &cerr)
+	cret := xDBusMessageToBlob(x.GoPointer(), uintptr(unsafe.Pointer(OutSizeVar)), CapabilitiesVar, &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

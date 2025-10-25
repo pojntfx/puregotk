@@ -355,7 +355,7 @@ func (x *WidgetClass) InstallPropertyAction(ActionNameVar string, PropertyNameVa
 
 }
 
-var xWidgetClassQueryAction func(uintptr, uint, types.GType, string, **glib.VariantType, string) bool
+var xWidgetClassQueryAction func(uintptr, uint, uintptr, uintptr, uintptr, uintptr) bool
 
 // Returns details about an action that has been
 // installed for @widget_class.
@@ -366,9 +366,9 @@ var xWidgetClassQueryAction func(uintptr, uint, types.GType, string, **glib.Vari
 // Note that this function will also return actions defined
 // by parent classes. You can identify those by looking
 // at @owner.
-func (x *WidgetClass) QueryAction(IndexVar uint, OwnerVar types.GType, ActionNameVar string, ParameterTypeVar **glib.VariantType, PropertyNameVar string) bool {
+func (x *WidgetClass) QueryAction(IndexVar uint, OwnerVar *types.GType, ActionNameVar *string, ParameterTypeVar **glib.VariantType, PropertyNameVar *string) bool {
 
-	cret := xWidgetClassQueryAction(x.GoPointer(), IndexVar, OwnerVar, ActionNameVar, ParameterTypeVar, PropertyNameVar)
+	cret := xWidgetClassQueryAction(x.GoPointer(), IndexVar, uintptr(unsafe.Pointer(OwnerVar)), uintptr(unsafe.Pointer(ActionNameVar)), uintptr(unsafe.Pointer(ParameterTypeVar)), uintptr(unsafe.Pointer(PropertyNameVar)))
 	return cret
 }
 
@@ -871,12 +871,12 @@ func (x *WidgetClass) GetGetRequestMode() func(*Widget) SizeRequestMode {
 //	Depending on the orientation parameter, the passed for_size can be
 //	interpreted as width or height. A widget will never be allocated less
 //	than its minimum size.
-func (x *WidgetClass) OverrideMeasure(cb func(*Widget, Orientation, int, int, int, int, int)) {
+func (x *WidgetClass) OverrideMeasure(cb func(*Widget, Orientation, int, *int, *int, *int, *int)) {
 	if cb == nil {
 		x.xMeasure = 0
 	} else {
-		x.xMeasure = purego.NewCallback(func(WidgetVarp uintptr, OrientationVarp Orientation, ForSizeVarp int, MinimumVarp int, NaturalVarp int, MinimumBaselineVarp int, NaturalBaselineVarp int) {
-			cb(WidgetNewFromInternalPtr(WidgetVarp), OrientationVarp, ForSizeVarp, MinimumVarp, NaturalVarp, MinimumBaselineVarp, NaturalBaselineVarp)
+		x.xMeasure = purego.NewCallback(func(WidgetVarp uintptr, OrientationVarp Orientation, ForSizeVarp int, MinimumVarp uintptr, NaturalVarp uintptr, MinimumBaselineVarp uintptr, NaturalBaselineVarp uintptr) {
+			cb(WidgetNewFromInternalPtr(WidgetVarp), OrientationVarp, ForSizeVarp, (*int)(unsafe.Pointer(MinimumVarp)), (*int)(unsafe.Pointer(NaturalVarp)), (*int)(unsafe.Pointer(MinimumBaselineVarp)), (*int)(unsafe.Pointer(NaturalBaselineVarp)))
 		})
 	}
 }
@@ -888,14 +888,14 @@ func (x *WidgetClass) OverrideMeasure(cb func(*Widget, Orientation, int, int, in
 //	Depending on the orientation parameter, the passed for_size can be
 //	interpreted as width or height. A widget will never be allocated less
 //	than its minimum size.
-func (x *WidgetClass) GetMeasure() func(*Widget, Orientation, int, int, int, int, int) {
+func (x *WidgetClass) GetMeasure() func(*Widget, Orientation, int, *int, *int, *int, *int) {
 	if x.xMeasure == 0 {
 		return nil
 	}
-	var rawCallback func(WidgetVarp uintptr, OrientationVarp Orientation, ForSizeVarp int, MinimumVarp int, NaturalVarp int, MinimumBaselineVarp int, NaturalBaselineVarp int)
+	var rawCallback func(WidgetVarp uintptr, OrientationVarp Orientation, ForSizeVarp int, MinimumVarp uintptr, NaturalVarp uintptr, MinimumBaselineVarp uintptr, NaturalBaselineVarp uintptr)
 	purego.RegisterFunc(&rawCallback, x.xMeasure)
-	return func(WidgetVar *Widget, OrientationVar Orientation, ForSizeVar int, MinimumVar int, NaturalVar int, MinimumBaselineVar int, NaturalBaselineVar int) {
-		rawCallback(WidgetVar.GoPointer(), OrientationVar, ForSizeVar, MinimumVar, NaturalVar, MinimumBaselineVar, NaturalBaselineVar)
+	return func(WidgetVar *Widget, OrientationVar Orientation, ForSizeVar int, MinimumVar *int, NaturalVar *int, MinimumBaselineVar *int, NaturalBaselineVar *int) {
+		rawCallback(WidgetVar.GoPointer(), OrientationVar, ForSizeVar, uintptr(unsafe.Pointer(MinimumVar)), uintptr(unsafe.Pointer(NaturalVar)), uintptr(unsafe.Pointer(MinimumBaselineVar)), uintptr(unsafe.Pointer(NaturalBaselineVar)))
 	}
 }
 
@@ -1883,7 +1883,7 @@ func (x *Widget) ChildFocus(DirectionVar DirectionType) bool {
 	return cret
 }
 
-var xWidgetComputeBounds func(uintptr, uintptr, *graphene.Rect) bool
+var xWidgetComputeBounds func(uintptr, uintptr, uintptr) bool
 
 // Computes the bounds for @widget in the coordinate space of @target.
 //
@@ -1899,7 +1899,7 @@ var xWidgetComputeBounds func(uintptr, uintptr, *graphene.Rect) bool
 // It is valid for @widget and @target to be the same widget.
 func (x *Widget) ComputeBounds(TargetVar *Widget, OutBoundsVar *graphene.Rect) bool {
 
-	cret := xWidgetComputeBounds(x.GoPointer(), TargetVar.GoPointer(), OutBoundsVar)
+	cret := xWidgetComputeBounds(x.GoPointer(), TargetVar.GoPointer(), uintptr(unsafe.Pointer(OutBoundsVar)))
 	return cret
 }
 
@@ -1924,7 +1924,7 @@ func (x *Widget) ComputeExpand(OrientationVar Orientation) bool {
 	return cret
 }
 
-var xWidgetComputePoint func(uintptr, uintptr, *graphene.Point, *graphene.Point) bool
+var xWidgetComputePoint func(uintptr, uintptr, *graphene.Point, uintptr) bool
 
 // Translates the given @point in @widget's coordinates to coordinates
 // in @target’s coordinate system.
@@ -1934,11 +1934,11 @@ var xWidgetComputePoint func(uintptr, uintptr, *graphene.Point, *graphene.Point)
 // to (0, 0) and false is returned.
 func (x *Widget) ComputePoint(TargetVar *Widget, PointVar *graphene.Point, OutPointVar *graphene.Point) bool {
 
-	cret := xWidgetComputePoint(x.GoPointer(), TargetVar.GoPointer(), PointVar, OutPointVar)
+	cret := xWidgetComputePoint(x.GoPointer(), TargetVar.GoPointer(), PointVar, uintptr(unsafe.Pointer(OutPointVar)))
 	return cret
 }
 
-var xWidgetComputeTransform func(uintptr, uintptr, *graphene.Matrix) bool
+var xWidgetComputeTransform func(uintptr, uintptr, uintptr) bool
 
 // Computes a matrix suitable to describe a transformation from
 // @widget's coordinate system into @target's coordinate system.
@@ -1951,7 +1951,7 @@ var xWidgetComputeTransform func(uintptr, uintptr, *graphene.Matrix) bool
 // system [overview](coordinates.html).
 func (x *Widget) ComputeTransform(TargetVar *Widget, OutTransformVar *graphene.Matrix) bool {
 
-	cret := xWidgetComputeTransform(x.GoPointer(), TargetVar.GoPointer(), OutTransformVar)
+	cret := xWidgetComputeTransform(x.GoPointer(), TargetVar.GoPointer(), uintptr(unsafe.Pointer(OutTransformVar)))
 	return cret
 }
 
@@ -2109,7 +2109,7 @@ func (x *Widget) GetAllocatedWidth() int {
 	return cret
 }
 
-var xWidgetGetAllocation func(uintptr, *Allocation)
+var xWidgetGetAllocation func(uintptr, uintptr)
 
 // Retrieves the widget’s allocation.
 //
@@ -2128,7 +2128,7 @@ var xWidgetGetAllocation func(uintptr, *Allocation)
 // widget assigned.
 func (x *Widget) GetAllocation(AllocationVar *Allocation) {
 
-	xWidgetGetAllocation(x.GoPointer(), AllocationVar)
+	xWidgetGetAllocation(x.GoPointer(), uintptr(unsafe.Pointer(AllocationVar)))
 
 }
 
@@ -2229,7 +2229,7 @@ func (x *Widget) GetClipboard() *gdk.Clipboard {
 	return cls
 }
 
-var xWidgetGetColor func(uintptr, *gdk.RGBA)
+var xWidgetGetColor func(uintptr, uintptr)
 
 // Gets the current foreground color for the widget’s style.
 //
@@ -2238,7 +2238,7 @@ var xWidgetGetColor func(uintptr, *gdk.RGBA)
 // with the foreground color.
 func (x *Widget) GetColor(ColorVar *gdk.RGBA) {
 
-	xWidgetGetColor(x.GoPointer(), ColorVar)
+	xWidgetGetColor(x.GoPointer(), uintptr(unsafe.Pointer(ColorVar)))
 
 }
 
@@ -2731,7 +2731,7 @@ func (x *Widget) GetParent() *Widget {
 	return cls
 }
 
-var xWidgetGetPreferredSize func(uintptr, *Requisition, *Requisition)
+var xWidgetGetPreferredSize func(uintptr, uintptr, uintptr)
 
 // Retrieves the minimum and natural size of a widget, taking
 // into account the widget’s preference for height-for-width management.
@@ -2749,7 +2749,7 @@ var xWidgetGetPreferredSize func(uintptr, *Requisition, *Requisition)
 // Use [method@Gtk.Widget.measure] if you want to support baseline alignment.
 func (x *Widget) GetPreferredSize(MinimumSizeVar *Requisition, NaturalSizeVar *Requisition) {
 
-	xWidgetGetPreferredSize(x.GoPointer(), MinimumSizeVar, NaturalSizeVar)
+	xWidgetGetPreferredSize(x.GoPointer(), uintptr(unsafe.Pointer(MinimumSizeVar)), uintptr(unsafe.Pointer(NaturalSizeVar)))
 
 }
 
@@ -2933,7 +2933,7 @@ func (x *Widget) GetSize(OrientationVar Orientation) int {
 	return cret
 }
 
-var xWidgetGetSizeRequest func(uintptr, int, int)
+var xWidgetGetSizeRequest func(uintptr, uintptr, uintptr)
 
 // Gets the size request that was explicitly set for the widget.
 //
@@ -2945,9 +2945,9 @@ var xWidgetGetSizeRequest func(uintptr, int, int)
 //
 // To get the size a widget will actually request, call
 // [method@Gtk.Widget.measure] instead of this function.
-func (x *Widget) GetSizeRequest(WidthVar int, HeightVar int) {
+func (x *Widget) GetSizeRequest(WidthVar *int, HeightVar *int) {
 
-	xWidgetGetSizeRequest(x.GoPointer(), WidthVar, HeightVar)
+	xWidgetGetSizeRequest(x.GoPointer(), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 
 }
 
@@ -3426,7 +3426,7 @@ func (x *Widget) Map() {
 
 }
 
-var xWidgetMeasure func(uintptr, Orientation, int, int, int, int, int)
+var xWidgetMeasure func(uintptr, Orientation, int, uintptr, uintptr, uintptr, uintptr)
 
 // Measures @widget in the orientation @orientation and for the given @for_size.
 //
@@ -3436,9 +3436,9 @@ var xWidgetMeasure func(uintptr, Orientation, int, int, int, int, int)
 //
 // See [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management) for
 // a more details on implementing `GtkWidgetClass.measure()`.
-func (x *Widget) Measure(OrientationVar Orientation, ForSizeVar int, MinimumVar int, NaturalVar int, MinimumBaselineVar int, NaturalBaselineVar int) {
+func (x *Widget) Measure(OrientationVar Orientation, ForSizeVar int, MinimumVar *int, NaturalVar *int, MinimumBaselineVar *int, NaturalBaselineVar *int) {
 
-	xWidgetMeasure(x.GoPointer(), OrientationVar, ForSizeVar, MinimumVar, NaturalVar, MinimumBaselineVar, NaturalBaselineVar)
+	xWidgetMeasure(x.GoPointer(), OrientationVar, ForSizeVar, uintptr(unsafe.Pointer(MinimumVar)), uintptr(unsafe.Pointer(NaturalVar)), uintptr(unsafe.Pointer(MinimumBaselineVar)), uintptr(unsafe.Pointer(NaturalBaselineVar)))
 
 }
 
@@ -4293,7 +4293,7 @@ func (x *Widget) SnapshotChild(ChildVar *Widget, SnapshotVar *Snapshot) {
 
 }
 
-var xWidgetTranslateCoordinates func(uintptr, uintptr, float64, float64, float64, float64) bool
+var xWidgetTranslateCoordinates func(uintptr, uintptr, float64, float64, uintptr, uintptr) bool
 
 // Translates coordinates relative to @src_widget’s allocation
 // to coordinates relative to @dest_widget’s allocations.
@@ -4301,9 +4301,9 @@ var xWidgetTranslateCoordinates func(uintptr, uintptr, float64, float64, float64
 // In order to perform this operation, both widget must share
 // a common ancestor. If that is not the case, @dest_x and @dest_y
 // are set to 0 and false is returned.
-func (x *Widget) TranslateCoordinates(DestWidgetVar *Widget, SrcXVar float64, SrcYVar float64, DestXVar float64, DestYVar float64) bool {
+func (x *Widget) TranslateCoordinates(DestWidgetVar *Widget, SrcXVar float64, SrcYVar float64, DestXVar *float64, DestYVar *float64) bool {
 
-	cret := xWidgetTranslateCoordinates(x.GoPointer(), DestWidgetVar.GoPointer(), SrcXVar, SrcYVar, DestXVar, DestYVar)
+	cret := xWidgetTranslateCoordinates(x.GoPointer(), DestWidgetVar.GoPointer(), SrcXVar, SrcYVar, uintptr(unsafe.Pointer(DestXVar)), uintptr(unsafe.Pointer(DestYVar)))
 	return cret
 }
 
@@ -4742,9 +4742,9 @@ func (x *Widget) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *Widget) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *Widget) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 

@@ -676,7 +676,7 @@ var xDBusConnectionCallWithUnixFdListFinish func(uintptr, uintptr, uintptr, **gl
 func (x *DBusConnection) CallWithUnixFdListFinish(OutFdListVar **UnixFDList, ResVar AsyncResult) (*glib.Variant, error) {
 	var cerr *glib.Error
 
-	cret := xDBusConnectionCallWithUnixFdListFinish(x.GoPointer(), *gobject.ConvertPtr(OutFdListVar), ResVar.GoPointer(), &cerr)
+	cret := xDBusConnectionCallWithUnixFdListFinish(x.GoPointer(), uintptr(unsafe.Pointer(OutFdListVar)), ResVar.GoPointer(), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -694,7 +694,7 @@ var xDBusConnectionCallWithUnixFdListSync func(uintptr, string, string, string, 
 func (x *DBusConnection) CallWithUnixFdListSync(BusNameVar string, ObjectPathVar string, InterfaceNameVar string, MethodNameVar string, ParametersVar *glib.Variant, ReplyTypeVar *glib.VariantType, FlagsVar DBusCallFlags, TimeoutMsecVar int, FdListVar *UnixFDList, OutFdListVar **UnixFDList, CancellableVar *Cancellable) (*glib.Variant, error) {
 	var cerr *glib.Error
 
-	cret := xDBusConnectionCallWithUnixFdListSync(x.GoPointer(), BusNameVar, ObjectPathVar, InterfaceNameVar, MethodNameVar, ParametersVar, ReplyTypeVar, FlagsVar, TimeoutMsecVar, FdListVar.GoPointer(), *gobject.ConvertPtr(OutFdListVar), CancellableVar.GoPointer(), &cerr)
+	cret := xDBusConnectionCallWithUnixFdListSync(x.GoPointer(), BusNameVar, ObjectPathVar, InterfaceNameVar, MethodNameVar, ParametersVar, ReplyTypeVar, FlagsVar, TimeoutMsecVar, FdListVar.GoPointer(), uintptr(unsafe.Pointer(OutFdListVar)), CancellableVar.GoPointer(), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1179,7 +1179,7 @@ func (x *DBusConnection) RemoveFilter(FilterIdVar uint) {
 
 }
 
-var xDBusConnectionSendMessage func(uintptr, uintptr, DBusSendMessageFlags, uint32, **glib.Error) bool
+var xDBusConnectionSendMessage func(uintptr, uintptr, DBusSendMessageFlags, uintptr, **glib.Error) bool
 
 // Asynchronously sends @message to the peer represented by @connection.
 //
@@ -1203,10 +1203,10 @@ var xDBusConnectionSendMessage func(uintptr, uintptr, DBusSendMessageFlags, uint
 //
 // Note that @message must be unlocked, unless @flags contain the
 // %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.
-func (x *DBusConnection) SendMessage(MessageVar *DBusMessage, FlagsVar DBusSendMessageFlags, OutSerialVar uint32) (bool, error) {
+func (x *DBusConnection) SendMessage(MessageVar *DBusMessage, FlagsVar DBusSendMessageFlags, OutSerialVar *uint32) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xDBusConnectionSendMessage(x.GoPointer(), MessageVar.GoPointer(), FlagsVar, OutSerialVar, &cerr)
+	cret := xDBusConnectionSendMessage(x.GoPointer(), MessageVar.GoPointer(), FlagsVar, uintptr(unsafe.Pointer(OutSerialVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1214,7 +1214,7 @@ func (x *DBusConnection) SendMessage(MessageVar *DBusMessage, FlagsVar DBusSendM
 
 }
 
-var xDBusConnectionSendMessageWithReply func(uintptr, uintptr, DBusSendMessageFlags, int, uint32, uintptr, uintptr, uintptr)
+var xDBusConnectionSendMessageWithReply func(uintptr, uintptr, DBusSendMessageFlags, int, uintptr, uintptr, uintptr, uintptr)
 
 // Asynchronously sends @message to the peer represented by @connection.
 //
@@ -1246,9 +1246,9 @@ var xDBusConnectionSendMessageWithReply func(uintptr, uintptr, DBusSendMessageFl
 // and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
 // for an example of how to use this low-level API to send and receive
 // UNIX file descriptors.
-func (x *DBusConnection) SendMessageWithReply(MessageVar *DBusMessage, FlagsVar DBusSendMessageFlags, TimeoutMsecVar int, OutSerialVar uint32, CancellableVar *Cancellable, CallbackVar *AsyncReadyCallback, UserDataVar uintptr) {
+func (x *DBusConnection) SendMessageWithReply(MessageVar *DBusMessage, FlagsVar DBusSendMessageFlags, TimeoutMsecVar int, OutSerialVar *uint32, CancellableVar *Cancellable, CallbackVar *AsyncReadyCallback, UserDataVar uintptr) {
 
-	xDBusConnectionSendMessageWithReply(x.GoPointer(), MessageVar.GoPointer(), FlagsVar, TimeoutMsecVar, OutSerialVar, CancellableVar.GoPointer(), glib.NewCallbackNullable(CallbackVar), UserDataVar)
+	xDBusConnectionSendMessageWithReply(x.GoPointer(), MessageVar.GoPointer(), FlagsVar, TimeoutMsecVar, uintptr(unsafe.Pointer(OutSerialVar)), CancellableVar.GoPointer(), glib.NewCallbackNullable(CallbackVar), UserDataVar)
 
 }
 
@@ -1283,7 +1283,7 @@ func (x *DBusConnection) SendMessageWithReplyFinish(ResVar AsyncResult) (*DBusMe
 
 }
 
-var xDBusConnectionSendMessageWithReplySync func(uintptr, uintptr, DBusSendMessageFlags, int, uint32, uintptr, **glib.Error) uintptr
+var xDBusConnectionSendMessageWithReplySync func(uintptr, uintptr, DBusSendMessageFlags, int, uintptr, uintptr, **glib.Error) uintptr
 
 // Synchronously sends @message to the peer represented by @connection
 // and blocks the calling thread until a reply is received or the
@@ -1316,11 +1316,11 @@ var xDBusConnectionSendMessageWithReplySync func(uintptr, uintptr, DBusSendMessa
 //
 // Note that @message must be unlocked, unless @flags contain the
 // %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.
-func (x *DBusConnection) SendMessageWithReplySync(MessageVar *DBusMessage, FlagsVar DBusSendMessageFlags, TimeoutMsecVar int, OutSerialVar uint32, CancellableVar *Cancellable) (*DBusMessage, error) {
+func (x *DBusConnection) SendMessageWithReplySync(MessageVar *DBusMessage, FlagsVar DBusSendMessageFlags, TimeoutMsecVar int, OutSerialVar *uint32, CancellableVar *Cancellable) (*DBusMessage, error) {
 	var cls *DBusMessage
 	var cerr *glib.Error
 
-	cret := xDBusConnectionSendMessageWithReplySync(x.GoPointer(), MessageVar.GoPointer(), FlagsVar, TimeoutMsecVar, OutSerialVar, CancellableVar.GoPointer(), &cerr)
+	cret := xDBusConnectionSendMessageWithReplySync(x.GoPointer(), MessageVar.GoPointer(), FlagsVar, TimeoutMsecVar, uintptr(unsafe.Pointer(OutSerialVar)), CancellableVar.GoPointer(), &cerr)
 
 	if cret == 0 {
 		return nil, cerr

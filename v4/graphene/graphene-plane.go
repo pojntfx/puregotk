@@ -80,13 +80,13 @@ func (x *Plane) GetConstant() float32 {
 	return cret
 }
 
-var xPlaneGetNormal func(uintptr, *Vec3)
+var xPlaneGetNormal func(uintptr, uintptr)
 
 // Retrieves the normal vector pointing towards the origin of the
 // given #graphene_plane_t.
 func (x *Plane) GetNormal(NormalVar *Vec3) {
 
-	xPlaneGetNormal(x.GoPointer(), NormalVar)
+	xPlaneGetNormal(x.GoPointer(), uintptr(unsafe.Pointer(NormalVar)))
 
 }
 
@@ -143,27 +143,27 @@ func (x *Plane) InitFromVec4(SrcVar *Vec4) *Plane {
 	return cret
 }
 
-var xPlaneNegate func(uintptr, *Plane)
+var xPlaneNegate func(uintptr, uintptr)
 
 // Negates the normal vector and constant of a #graphene_plane_t, effectively
 // mirroring the plane across the origin.
 func (x *Plane) Negate(ResVar *Plane) {
 
-	xPlaneNegate(x.GoPointer(), ResVar)
+	xPlaneNegate(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xPlaneNormalize func(uintptr, *Plane)
+var xPlaneNormalize func(uintptr, uintptr)
 
 // Normalizes the vector of the given #graphene_plane_t,
 // and adjusts the constant accordingly.
 func (x *Plane) Normalize(ResVar *Plane) {
 
-	xPlaneNormalize(x.GoPointer(), ResVar)
+	xPlaneNormalize(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xPlaneTransform func(uintptr, *Matrix, *Matrix, *Plane)
+var xPlaneTransform func(uintptr, *Matrix, *Matrix, uintptr)
 
 // Transforms a #graphene_plane_t @p using the given @matrix
 // and @normal_matrix.
@@ -175,7 +175,7 @@ var xPlaneTransform func(uintptr, *Matrix, *Matrix, *Plane)
 // recomputing it every time.
 func (x *Plane) Transform(MatrixVar *Matrix, NormalMatrixVar *Matrix, ResVar *Plane) {
 
-	xPlaneTransform(x.GoPointer(), MatrixVar, NormalMatrixVar, ResVar)
+	xPlaneTransform(x.GoPointer(), MatrixVar, NormalMatrixVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 

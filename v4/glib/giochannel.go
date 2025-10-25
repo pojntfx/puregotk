@@ -247,15 +247,15 @@ func (x *IOChannel) GetFlags() IOFlags {
 	return cret
 }
 
-var xIOChannelGetLineTerm func(uintptr, int) string
+var xIOChannelGetLineTerm func(uintptr, uintptr) string
 
 // This returns the string that #GIOChannel uses to determine
 // where in the file a line break occurs. A value of %NULL
 // indicates autodetection. Since 2.84, the return value is always
 // nul-terminated.
-func (x *IOChannel) GetLineTerm(LengthVar int) string {
+func (x *IOChannel) GetLineTerm(LengthVar *int) string {
 
-	cret := xIOChannelGetLineTerm(x.GoPointer(), LengthVar)
+	cret := xIOChannelGetLineTerm(x.GoPointer(), uintptr(unsafe.Pointer(LengthVar)))
 	return cret
 }
 
@@ -281,13 +281,13 @@ func (x *IOChannel) Read(BufVar string, CountVar uint, BytesReadVar uint) IOErro
 	return cret
 }
 
-var xIOChannelReadChars func(uintptr, []byte, uint, uint, **Error) IOStatus
+var xIOChannelReadChars func(uintptr, uintptr, uint, uintptr, **Error) IOStatus
 
 // Replacement for g_io_channel_read() with the new API.
-func (x *IOChannel) ReadChars(BufVar []byte, CountVar uint, BytesReadVar uint) (IOStatus, error) {
+func (x *IOChannel) ReadChars(BufVar *[]byte, CountVar uint, BytesReadVar *uint) (IOStatus, error) {
 	var cerr *Error
 
-	cret := xIOChannelReadChars(x.GoPointer(), BufVar, CountVar, BytesReadVar, &cerr)
+	cret := xIOChannelReadChars(x.GoPointer(), uintptr(unsafe.Pointer(BufVar)), CountVar, uintptr(unsafe.Pointer(BytesReadVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -295,16 +295,16 @@ func (x *IOChannel) ReadChars(BufVar []byte, CountVar uint, BytesReadVar uint) (
 
 }
 
-var xIOChannelReadLine func(uintptr, string, uint, uint, **Error) IOStatus
+var xIOChannelReadLine func(uintptr, uintptr, uintptr, uintptr, **Error) IOStatus
 
 // Reads a line, including the terminating character(s),
 // from a #GIOChannel into a newly-allocated string.
 // @str_return will contain allocated memory if the return
 // is %G_IO_STATUS_NORMAL.
-func (x *IOChannel) ReadLine(StrReturnVar string, LengthVar uint, TerminatorPosVar uint) (IOStatus, error) {
+func (x *IOChannel) ReadLine(StrReturnVar *string, LengthVar *uint, TerminatorPosVar *uint) (IOStatus, error) {
 	var cerr *Error
 
-	cret := xIOChannelReadLine(x.GoPointer(), StrReturnVar, LengthVar, TerminatorPosVar, &cerr)
+	cret := xIOChannelReadLine(x.GoPointer(), uintptr(unsafe.Pointer(StrReturnVar)), uintptr(unsafe.Pointer(LengthVar)), uintptr(unsafe.Pointer(TerminatorPosVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -326,13 +326,13 @@ func (x *IOChannel) ReadLineString(BufferVar *String, TerminatorPosVar uint) (IO
 
 }
 
-var xIOChannelReadToEnd func(uintptr, []byte, uint, **Error) IOStatus
+var xIOChannelReadToEnd func(uintptr, uintptr, uintptr, **Error) IOStatus
 
 // Reads all the remaining data from the file.
-func (x *IOChannel) ReadToEnd(StrReturnVar []byte, LengthVar uint) (IOStatus, error) {
+func (x *IOChannel) ReadToEnd(StrReturnVar *[]byte, LengthVar *uint) (IOStatus, error) {
 	var cerr *Error
 
-	cret := xIOChannelReadToEnd(x.GoPointer(), StrReturnVar, LengthVar, &cerr)
+	cret := xIOChannelReadToEnd(x.GoPointer(), uintptr(unsafe.Pointer(StrReturnVar)), uintptr(unsafe.Pointer(LengthVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -340,14 +340,14 @@ func (x *IOChannel) ReadToEnd(StrReturnVar []byte, LengthVar uint) (IOStatus, er
 
 }
 
-var xIOChannelReadUnichar func(uintptr, uint32, **Error) IOStatus
+var xIOChannelReadUnichar func(uintptr, uintptr, **Error) IOStatus
 
 // Reads a Unicode character from @channel.
 // This function cannot be called on a channel with %NULL encoding.
-func (x *IOChannel) ReadUnichar(ThecharVar uint32) (IOStatus, error) {
+func (x *IOChannel) ReadUnichar(ThecharVar *uint32) (IOStatus, error) {
 	var cerr *Error
 
-	cret := xIOChannelReadUnichar(x.GoPointer(), ThecharVar, &cerr)
+	cret := xIOChannelReadUnichar(x.GoPointer(), uintptr(unsafe.Pointer(ThecharVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -555,7 +555,7 @@ func (x *IOChannel) Write(BufVar string, CountVar uint, BytesWrittenVar uint) IO
 	return cret
 }
 
-var xIOChannelWriteChars func(uintptr, []byte, int, uint, **Error) IOStatus
+var xIOChannelWriteChars func(uintptr, []byte, int, uintptr, **Error) IOStatus
 
 // Replacement for g_io_channel_write() with the new API.
 //
@@ -563,10 +563,10 @@ var xIOChannelWriteChars func(uintptr, []byte, int, uint, **Error) IOStatus
 // mixing of reading and writing is not allowed. A call to g_io_channel_write_chars ()
 // may only be made on a channel from which data has been read in the
 // cases described in the documentation for g_io_channel_set_encoding ().
-func (x *IOChannel) WriteChars(BufVar []byte, CountVar int, BytesWrittenVar uint) (IOStatus, error) {
+func (x *IOChannel) WriteChars(BufVar []byte, CountVar int, BytesWrittenVar *uint) (IOStatus, error) {
 	var cerr *Error
 
-	cret := xIOChannelWriteChars(x.GoPointer(), BufVar, CountVar, BytesWrittenVar, &cerr)
+	cret := xIOChannelWriteChars(x.GoPointer(), BufVar, CountVar, uintptr(unsafe.Pointer(BytesWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

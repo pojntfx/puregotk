@@ -97,12 +97,12 @@ func (x *CellAreaContextClass) GetReset() func(*CellAreaContext) {
 // Returns the aligned height for the given
 //
 //	width that context must store while collecting sizes for it’s rows.
-func (x *CellAreaContextClass) OverrideGetPreferredHeightForWidth(cb func(*CellAreaContext, int, int, int)) {
+func (x *CellAreaContextClass) OverrideGetPreferredHeightForWidth(cb func(*CellAreaContext, int, *int, *int)) {
 	if cb == nil {
 		x.xGetPreferredHeightForWidth = 0
 	} else {
-		x.xGetPreferredHeightForWidth = purego.NewCallback(func(ContextVarp uintptr, WidthVarp int, MinimumHeightVarp int, NaturalHeightVarp int) {
-			cb(CellAreaContextNewFromInternalPtr(ContextVarp), WidthVarp, MinimumHeightVarp, NaturalHeightVarp)
+		x.xGetPreferredHeightForWidth = purego.NewCallback(func(ContextVarp uintptr, WidthVarp int, MinimumHeightVarp uintptr, NaturalHeightVarp uintptr) {
+			cb(CellAreaContextNewFromInternalPtr(ContextVarp), WidthVarp, (*int)(unsafe.Pointer(MinimumHeightVarp)), (*int)(unsafe.Pointer(NaturalHeightVarp)))
 		})
 	}
 }
@@ -111,14 +111,14 @@ func (x *CellAreaContextClass) OverrideGetPreferredHeightForWidth(cb func(*CellA
 // Returns the aligned height for the given
 //
 //	width that context must store while collecting sizes for it’s rows.
-func (x *CellAreaContextClass) GetGetPreferredHeightForWidth() func(*CellAreaContext, int, int, int) {
+func (x *CellAreaContextClass) GetGetPreferredHeightForWidth() func(*CellAreaContext, int, *int, *int) {
 	if x.xGetPreferredHeightForWidth == 0 {
 		return nil
 	}
-	var rawCallback func(ContextVarp uintptr, WidthVarp int, MinimumHeightVarp int, NaturalHeightVarp int)
+	var rawCallback func(ContextVarp uintptr, WidthVarp int, MinimumHeightVarp uintptr, NaturalHeightVarp uintptr)
 	purego.RegisterFunc(&rawCallback, x.xGetPreferredHeightForWidth)
-	return func(ContextVar *CellAreaContext, WidthVar int, MinimumHeightVar int, NaturalHeightVar int) {
-		rawCallback(ContextVar.GoPointer(), WidthVar, MinimumHeightVar, NaturalHeightVar)
+	return func(ContextVar *CellAreaContext, WidthVar int, MinimumHeightVar *int, NaturalHeightVar *int) {
+		rawCallback(ContextVar.GoPointer(), WidthVar, uintptr(unsafe.Pointer(MinimumHeightVar)), uintptr(unsafe.Pointer(NaturalHeightVar)))
 	}
 }
 
@@ -126,12 +126,12 @@ func (x *CellAreaContextClass) GetGetPreferredHeightForWidth() func(*CellAreaCon
 // Returns the aligned width for the given
 //
 //	height that context must store while collecting sizes for it’s rows.
-func (x *CellAreaContextClass) OverrideGetPreferredWidthForHeight(cb func(*CellAreaContext, int, int, int)) {
+func (x *CellAreaContextClass) OverrideGetPreferredWidthForHeight(cb func(*CellAreaContext, int, *int, *int)) {
 	if cb == nil {
 		x.xGetPreferredWidthForHeight = 0
 	} else {
-		x.xGetPreferredWidthForHeight = purego.NewCallback(func(ContextVarp uintptr, HeightVarp int, MinimumWidthVarp int, NaturalWidthVarp int) {
-			cb(CellAreaContextNewFromInternalPtr(ContextVarp), HeightVarp, MinimumWidthVarp, NaturalWidthVarp)
+		x.xGetPreferredWidthForHeight = purego.NewCallback(func(ContextVarp uintptr, HeightVarp int, MinimumWidthVarp uintptr, NaturalWidthVarp uintptr) {
+			cb(CellAreaContextNewFromInternalPtr(ContextVarp), HeightVarp, (*int)(unsafe.Pointer(MinimumWidthVarp)), (*int)(unsafe.Pointer(NaturalWidthVarp)))
 		})
 	}
 }
@@ -140,14 +140,14 @@ func (x *CellAreaContextClass) OverrideGetPreferredWidthForHeight(cb func(*CellA
 // Returns the aligned width for the given
 //
 //	height that context must store while collecting sizes for it’s rows.
-func (x *CellAreaContextClass) GetGetPreferredWidthForHeight() func(*CellAreaContext, int, int, int) {
+func (x *CellAreaContextClass) GetGetPreferredWidthForHeight() func(*CellAreaContext, int, *int, *int) {
 	if x.xGetPreferredWidthForHeight == 0 {
 		return nil
 	}
-	var rawCallback func(ContextVarp uintptr, HeightVarp int, MinimumWidthVarp int, NaturalWidthVarp int)
+	var rawCallback func(ContextVarp uintptr, HeightVarp int, MinimumWidthVarp uintptr, NaturalWidthVarp uintptr)
 	purego.RegisterFunc(&rawCallback, x.xGetPreferredWidthForHeight)
-	return func(ContextVar *CellAreaContext, HeightVar int, MinimumWidthVar int, NaturalWidthVar int) {
-		rawCallback(ContextVar.GoPointer(), HeightVar, MinimumWidthVar, NaturalWidthVar)
+	return func(ContextVar *CellAreaContext, HeightVar int, MinimumWidthVar *int, NaturalWidthVar *int) {
+		rawCallback(ContextVar.GoPointer(), HeightVar, uintptr(unsafe.Pointer(MinimumWidthVar)), uintptr(unsafe.Pointer(NaturalWidthVar)))
 	}
 }
 
@@ -205,16 +205,16 @@ func (x *CellAreaContext) Allocate(WidthVar int, HeightVar int) {
 
 }
 
-var xCellAreaContextGetAllocation func(uintptr, int, int)
+var xCellAreaContextGetAllocation func(uintptr, uintptr, uintptr)
 
 // Fetches the current allocation size for @context.
 //
 // If the context was not allocated in width or height, or if the
 // context was recently reset with gtk_cell_area_context_reset(),
 // the returned value will be -1.
-func (x *CellAreaContext) GetAllocation(WidthVar int, HeightVar int) {
+func (x *CellAreaContext) GetAllocation(WidthVar *int, HeightVar *int) {
 
-	xCellAreaContextGetAllocation(x.GoPointer(), WidthVar, HeightVar)
+	xCellAreaContextGetAllocation(x.GoPointer(), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 
 }
 
@@ -244,55 +244,55 @@ func (x *CellAreaContext) GetArea() *CellArea {
 	return cls
 }
 
-var xCellAreaContextGetPreferredHeight func(uintptr, int, int)
+var xCellAreaContextGetPreferredHeight func(uintptr, uintptr, uintptr)
 
 // Gets the accumulative preferred height for all rows which have been
 // requested with this context.
 //
 // After gtk_cell_area_context_reset() is called and/or before ever
 // requesting the size of a `GtkCellArea`, the returned values are 0.
-func (x *CellAreaContext) GetPreferredHeight(MinimumHeightVar int, NaturalHeightVar int) {
+func (x *CellAreaContext) GetPreferredHeight(MinimumHeightVar *int, NaturalHeightVar *int) {
 
-	xCellAreaContextGetPreferredHeight(x.GoPointer(), MinimumHeightVar, NaturalHeightVar)
+	xCellAreaContextGetPreferredHeight(x.GoPointer(), uintptr(unsafe.Pointer(MinimumHeightVar)), uintptr(unsafe.Pointer(NaturalHeightVar)))
 
 }
 
-var xCellAreaContextGetPreferredHeightForWidth func(uintptr, int, int, int)
+var xCellAreaContextGetPreferredHeightForWidth func(uintptr, int, uintptr, uintptr)
 
 // Gets the accumulative preferred height for @width for all rows
 // which have been requested for the same said @width with this context.
 //
 // After gtk_cell_area_context_reset() is called and/or before ever
 // requesting the size of a `GtkCellArea`, the returned values are -1.
-func (x *CellAreaContext) GetPreferredHeightForWidth(WidthVar int, MinimumHeightVar int, NaturalHeightVar int) {
+func (x *CellAreaContext) GetPreferredHeightForWidth(WidthVar int, MinimumHeightVar *int, NaturalHeightVar *int) {
 
-	xCellAreaContextGetPreferredHeightForWidth(x.GoPointer(), WidthVar, MinimumHeightVar, NaturalHeightVar)
+	xCellAreaContextGetPreferredHeightForWidth(x.GoPointer(), WidthVar, uintptr(unsafe.Pointer(MinimumHeightVar)), uintptr(unsafe.Pointer(NaturalHeightVar)))
 
 }
 
-var xCellAreaContextGetPreferredWidth func(uintptr, int, int)
+var xCellAreaContextGetPreferredWidth func(uintptr, uintptr, uintptr)
 
 // Gets the accumulative preferred width for all rows which have been
 // requested with this context.
 //
 // After gtk_cell_area_context_reset() is called and/or before ever
 // requesting the size of a `GtkCellArea`, the returned values are 0.
-func (x *CellAreaContext) GetPreferredWidth(MinimumWidthVar int, NaturalWidthVar int) {
+func (x *CellAreaContext) GetPreferredWidth(MinimumWidthVar *int, NaturalWidthVar *int) {
 
-	xCellAreaContextGetPreferredWidth(x.GoPointer(), MinimumWidthVar, NaturalWidthVar)
+	xCellAreaContextGetPreferredWidth(x.GoPointer(), uintptr(unsafe.Pointer(MinimumWidthVar)), uintptr(unsafe.Pointer(NaturalWidthVar)))
 
 }
 
-var xCellAreaContextGetPreferredWidthForHeight func(uintptr, int, int, int)
+var xCellAreaContextGetPreferredWidthForHeight func(uintptr, int, uintptr, uintptr)
 
 // Gets the accumulative preferred width for @height for all rows which
 // have been requested for the same said @height with this context.
 //
 // After gtk_cell_area_context_reset() is called and/or before ever
 // requesting the size of a `GtkCellArea`, the returned values are -1.
-func (x *CellAreaContext) GetPreferredWidthForHeight(HeightVar int, MinimumWidthVar int, NaturalWidthVar int) {
+func (x *CellAreaContext) GetPreferredWidthForHeight(HeightVar int, MinimumWidthVar *int, NaturalWidthVar *int) {
 
-	xCellAreaContextGetPreferredWidthForHeight(x.GoPointer(), HeightVar, MinimumWidthVar, NaturalWidthVar)
+	xCellAreaContextGetPreferredWidthForHeight(x.GoPointer(), HeightVar, uintptr(unsafe.Pointer(MinimumWidthVar)), uintptr(unsafe.Pointer(NaturalWidthVar)))
 
 }
 

@@ -174,7 +174,7 @@ func NewTextWithBuffer(BufferVar *EntryBuffer) *Text {
 	return cls
 }
 
-var xTextComputeCursorExtents func(uintptr, uint, *graphene.Rect, *graphene.Rect)
+var xTextComputeCursorExtents func(uintptr, uint, uintptr, uintptr)
 
 // Determines the positions of the strong and weak cursors for a
 // given character position.
@@ -188,7 +188,7 @@ var xTextComputeCursorExtents func(uintptr, uint, *graphene.Rect, *graphene.Rect
 // The rectangle positions are in widget coordinates.
 func (x *Text) ComputeCursorExtents(PositionVar uint, StrongVar *graphene.Rect, WeakVar *graphene.Rect) {
 
-	xTextComputeCursorExtents(x.GoPointer(), PositionVar, StrongVar, WeakVar)
+	xTextComputeCursorExtents(x.GoPointer(), PositionVar, uintptr(unsafe.Pointer(StrongVar)), uintptr(unsafe.Pointer(WeakVar)))
 
 }
 
@@ -944,9 +944,9 @@ func (x *Text) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *Text) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *Text) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -1354,9 +1354,9 @@ func (x *Text) GetPosition() int {
 // and %FALSE will be returned.
 //
 // Note that positions are specified in characters, not bytes.
-func (x *Text) GetSelectionBounds(StartPosVar int, EndPosVar int) bool {
+func (x *Text) GetSelectionBounds(StartPosVar *int, EndPosVar *int) bool {
 
-	cret := XGtkEditableGetSelectionBounds(x.GoPointer(), StartPosVar, EndPosVar)
+	cret := XGtkEditableGetSelectionBounds(x.GoPointer(), uintptr(unsafe.Pointer(StartPosVar)), uintptr(unsafe.Pointer(EndPosVar)))
 	return cret
 }
 

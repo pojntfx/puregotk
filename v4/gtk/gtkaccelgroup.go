@@ -2,6 +2,8 @@
 package gtk
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/gdk"
@@ -77,7 +79,7 @@ func AcceleratorNameWithKeycode(DisplayVar *gdk.Display, AcceleratorKeyVar uint,
 	return cret
 }
 
-var xAcceleratorParse func(string, uint, *gdk.ModifierType) bool
+var xAcceleratorParse func(string, uintptr, uintptr) bool
 
 // Parses a string representing an accelerator.
 //
@@ -102,13 +104,13 @@ var xAcceleratorParse func(string, uint, *gdk.ModifierType) bool
 //
 // If the parse operation fails, @accelerator_key and @accelerator_mods will
 // be set to 0 (zero).
-func AcceleratorParse(AcceleratorVar string, AcceleratorKeyVar uint, AcceleratorModsVar *gdk.ModifierType) bool {
+func AcceleratorParse(AcceleratorVar string, AcceleratorKeyVar *uint, AcceleratorModsVar *gdk.ModifierType) bool {
 
-	cret := xAcceleratorParse(AcceleratorVar, AcceleratorKeyVar, AcceleratorModsVar)
+	cret := xAcceleratorParse(AcceleratorVar, uintptr(unsafe.Pointer(AcceleratorKeyVar)), uintptr(unsafe.Pointer(AcceleratorModsVar)))
 	return cret
 }
 
-var xAcceleratorParseWithKeycode func(string, uintptr, uint, []uint, *gdk.ModifierType) bool
+var xAcceleratorParseWithKeycode func(string, uintptr, uintptr, uintptr, uintptr) bool
 
 // Parses a string representing an accelerator.
 //
@@ -124,9 +126,9 @@ var xAcceleratorParseWithKeycode func(string, uintptr, uint, []uint, *gdk.Modifi
 //
 // If the parse fails, @accelerator_key, @accelerator_mods and
 // @accelerator_codes will be set to 0 (zero).
-func AcceleratorParseWithKeycode(AcceleratorVar string, DisplayVar *gdk.Display, AcceleratorKeyVar uint, AcceleratorCodesVar []uint, AcceleratorModsVar *gdk.ModifierType) bool {
+func AcceleratorParseWithKeycode(AcceleratorVar string, DisplayVar *gdk.Display, AcceleratorKeyVar *uint, AcceleratorCodesVar *[]uint, AcceleratorModsVar *gdk.ModifierType) bool {
 
-	cret := xAcceleratorParseWithKeycode(AcceleratorVar, DisplayVar.GoPointer(), AcceleratorKeyVar, AcceleratorCodesVar, AcceleratorModsVar)
+	cret := xAcceleratorParseWithKeycode(AcceleratorVar, DisplayVar.GoPointer(), uintptr(unsafe.Pointer(AcceleratorKeyVar)), uintptr(unsafe.Pointer(AcceleratorCodesVar)), uintptr(unsafe.Pointer(AcceleratorModsVar)))
 	return cret
 }
 

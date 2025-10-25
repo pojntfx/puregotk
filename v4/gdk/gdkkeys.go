@@ -2,18 +2,20 @@
 package gdk
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
-var xKeyvalConvertCase func(uint, uint, uint)
+var xKeyvalConvertCase func(uint, uintptr, uintptr)
 
 // Obtains the upper- and lower-case versions of the keyval @symbol.
 //
 // Examples of keyvals are `GDK_KEY_a`, `GDK_KEY_Enter`, `GDK_KEY_F1`, etc.
-func KeyvalConvertCase(SymbolVar uint, LowerVar uint, UpperVar uint) {
+func KeyvalConvertCase(SymbolVar uint, LowerVar *uint, UpperVar *uint) {
 
-	xKeyvalConvertCase(SymbolVar, LowerVar, UpperVar)
+	xKeyvalConvertCase(SymbolVar, uintptr(unsafe.Pointer(LowerVar)), uintptr(unsafe.Pointer(UpperVar)))
 
 }
 

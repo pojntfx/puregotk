@@ -2,6 +2,8 @@
 package gdk
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/gio"
@@ -29,13 +31,13 @@ func ContentDeserializeAsync(StreamVar *gio.InputStream, MimeTypeVar string, Typ
 
 }
 
-var xContentDeserializeFinish func(uintptr, *gobject.Value, **glib.Error) bool
+var xContentDeserializeFinish func(uintptr, uintptr, **glib.Error) bool
 
 // Finishes a content deserialization operation.
 func ContentDeserializeFinish(ResultVar gio.AsyncResult, ValueVar *gobject.Value) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xContentDeserializeFinish(ResultVar.GoPointer(), ValueVar, &cerr)
+	cret := xContentDeserializeFinish(ResultVar.GoPointer(), uintptr(unsafe.Pointer(ValueVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

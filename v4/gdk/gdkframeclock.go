@@ -193,7 +193,7 @@ func (x *FrameClock) GetHistoryStart() int64 {
 	return cret
 }
 
-var xFrameClockGetRefreshInfo func(uintptr, int64, int64, int64)
+var xFrameClockGetRefreshInfo func(uintptr, int64, uintptr, uintptr)
 
 // Predicts a presentation time, based on history.
 //
@@ -202,9 +202,9 @@ var xFrameClockGetRefreshInfo func(uintptr, int64, int64, int64)
 // presentation times are separated by the refresh interval,
 // predicts a presentation time that is a multiple of the refresh
 // interval after the last presentation time, and later than @base_time.
-func (x *FrameClock) GetRefreshInfo(BaseTimeVar int64, RefreshIntervalReturnVar int64, PresentationTimeReturnVar int64) {
+func (x *FrameClock) GetRefreshInfo(BaseTimeVar int64, RefreshIntervalReturnVar *int64, PresentationTimeReturnVar *int64) {
 
-	xFrameClockGetRefreshInfo(x.GoPointer(), BaseTimeVar, RefreshIntervalReturnVar, PresentationTimeReturnVar)
+	xFrameClockGetRefreshInfo(x.GoPointer(), BaseTimeVar, uintptr(unsafe.Pointer(RefreshIntervalReturnVar)), uintptr(unsafe.Pointer(PresentationTimeReturnVar)))
 
 }
 

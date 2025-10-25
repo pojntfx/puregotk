@@ -92,20 +92,20 @@ func (x *TreeSelection) GetSelectFunction() uintptr {
 	return cret
 }
 
-var xTreeSelectionGetSelected func(uintptr, *uintptr, *TreeIter) bool
+var xTreeSelectionGetSelected func(uintptr, uintptr, uintptr) bool
 
 // Sets @iter to the currently selected node if @selection is set to
 // %GTK_SELECTION_SINGLE or %GTK_SELECTION_BROWSE.  @iter may be NULL if you
 // just want to test if @selection has any selected nodes.  @model is filled
 // with the current model as a convenience.  This function will not work if you
 // use @selection is %GTK_SELECTION_MULTIPLE.
-func (x *TreeSelection) GetSelected(ModelVar *TreeModel, IterVar *TreeIter) bool {
+func (x *TreeSelection) GetSelected(ModelVar **TreeModel, IterVar *TreeIter) bool {
 
-	cret := xTreeSelectionGetSelected(x.GoPointer(), gobject.ConvertPtr(ModelVar), IterVar)
+	cret := xTreeSelectionGetSelected(x.GoPointer(), uintptr(unsafe.Pointer(ModelVar)), uintptr(unsafe.Pointer(IterVar)))
 	return cret
 }
 
-var xTreeSelectionGetSelectedRows func(uintptr, *uintptr) *glib.List
+var xTreeSelectionGetSelectedRows func(uintptr, uintptr) *glib.List
 
 // Creates a list of path of all selected rows. Additionally, if you are
 // planning on modifying the model after calling this function, you may
@@ -117,9 +117,9 @@ var xTreeSelectionGetSelectedRows func(uintptr, *uintptr) *glib.List
 // ```c
 // g_list_free_full (list, (GDestroyNotify) gtk_tree_path_free);
 // ```
-func (x *TreeSelection) GetSelectedRows(ModelVar *TreeModel) *glib.List {
+func (x *TreeSelection) GetSelectedRows(ModelVar **TreeModel) *glib.List {
 
-	cret := xTreeSelectionGetSelectedRows(x.GoPointer(), gobject.ConvertPtr(ModelVar))
+	cret := xTreeSelectionGetSelectedRows(x.GoPointer(), uintptr(unsafe.Pointer(ModelVar)))
 	return cret
 }
 

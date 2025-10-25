@@ -88,12 +88,12 @@ func (x *IconIface) GetEqual() func(Icon, Icon) bool {
 // Serializes a #GIcon into tokens. The tokens must not
 // contain any whitespace. Don't implement if the #GIcon can't be
 // serialized (Since 2.20).
-func (x *IconIface) OverrideToTokens(cb func(Icon, []string, int) bool) {
+func (x *IconIface) OverrideToTokens(cb func(Icon, *[]string, *int) bool) {
 	if cb == nil {
 		x.xToTokens = 0
 	} else {
-		x.xToTokens = purego.NewCallback(func(IconVarp uintptr, TokensVarp []string, OutVersionVarp int) bool {
-			return cb(&IconBase{Ptr: IconVarp}, TokensVarp, OutVersionVarp)
+		x.xToTokens = purego.NewCallback(func(IconVarp uintptr, TokensVarp uintptr, OutVersionVarp uintptr) bool {
+			return cb(&IconBase{Ptr: IconVarp}, (*[]string)(unsafe.Pointer(TokensVarp)), (*int)(unsafe.Pointer(OutVersionVarp)))
 		})
 	}
 }
@@ -102,14 +102,14 @@ func (x *IconIface) OverrideToTokens(cb func(Icon, []string, int) bool) {
 // Serializes a #GIcon into tokens. The tokens must not
 // contain any whitespace. Don't implement if the #GIcon can't be
 // serialized (Since 2.20).
-func (x *IconIface) GetToTokens() func(Icon, []string, int) bool {
+func (x *IconIface) GetToTokens() func(Icon, *[]string, *int) bool {
 	if x.xToTokens == 0 {
 		return nil
 	}
-	var rawCallback func(IconVarp uintptr, TokensVarp []string, OutVersionVarp int) bool
+	var rawCallback func(IconVarp uintptr, TokensVarp uintptr, OutVersionVarp uintptr) bool
 	purego.RegisterFunc(&rawCallback, x.xToTokens)
-	return func(IconVar Icon, TokensVar []string, OutVersionVar int) bool {
-		return rawCallback(IconVar.GoPointer(), TokensVar, OutVersionVar)
+	return func(IconVar Icon, TokensVar *[]string, OutVersionVar *int) bool {
+		return rawCallback(IconVar.GoPointer(), uintptr(unsafe.Pointer(TokensVar)), uintptr(unsafe.Pointer(OutVersionVar)))
 	}
 }
 

@@ -43,24 +43,24 @@ func Vec2Alloc() *Vec2 {
 	return cret
 }
 
-var xVec2Add func(uintptr, *Vec2, *Vec2)
+var xVec2Add func(uintptr, *Vec2, uintptr)
 
 // Adds each component of the two passed vectors and places
 // each result into the components of @res.
 func (x *Vec2) Add(BVar *Vec2, ResVar *Vec2) {
 
-	xVec2Add(x.GoPointer(), BVar, ResVar)
+	xVec2Add(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec2Divide func(uintptr, *Vec2, *Vec2)
+var xVec2Divide func(uintptr, *Vec2, uintptr)
 
 // Divides each component of the first operand @a by the corresponding
 // component of the second operand @b, and places the results into the
 // vector @res.
 func (x *Vec2) Divide(BVar *Vec2, ResVar *Vec2) {
 
-	xVec2Divide(x.GoPointer(), BVar, ResVar)
+	xVec2Divide(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -138,12 +138,12 @@ func (x *Vec2) InitFromVec2(SrcVar *Vec2) *Vec2 {
 	return cret
 }
 
-var xVec2Interpolate func(uintptr, *Vec2, float64, *Vec2)
+var xVec2Interpolate func(uintptr, *Vec2, float64, uintptr)
 
 // Linearly interpolates @v1 and @v2 using the given @factor.
 func (x *Vec2) Interpolate(V2Var *Vec2, FactorVar float64, ResVar *Vec2) {
 
-	xVec2Interpolate(x.GoPointer(), V2Var, FactorVar, ResVar)
+	xVec2Interpolate(x.GoPointer(), V2Var, FactorVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -156,33 +156,33 @@ func (x *Vec2) Length() float32 {
 	return cret
 }
 
-var xVec2Max func(uintptr, *Vec2, *Vec2)
+var xVec2Max func(uintptr, *Vec2, uintptr)
 
 // Compares the two given vectors and places the maximum
 // values of each component into @res.
 func (x *Vec2) Max(BVar *Vec2, ResVar *Vec2) {
 
-	xVec2Max(x.GoPointer(), BVar, ResVar)
+	xVec2Max(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec2Min func(uintptr, *Vec2, *Vec2)
+var xVec2Min func(uintptr, *Vec2, uintptr)
 
 // Compares the two given vectors and places the minimum
 // values of each component into @res.
 func (x *Vec2) Min(BVar *Vec2, ResVar *Vec2) {
 
-	xVec2Min(x.GoPointer(), BVar, ResVar)
+	xVec2Min(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec2Multiply func(uintptr, *Vec2, *Vec2)
+var xVec2Multiply func(uintptr, *Vec2, uintptr)
 
 // Multiplies each component of the two passed vectors and places
 // each result into the components of @res.
 func (x *Vec2) Multiply(BVar *Vec2, ResVar *Vec2) {
 
-	xVec2Multiply(x.GoPointer(), BVar, ResVar)
+	xVec2Multiply(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -196,50 +196,50 @@ func (x *Vec2) Near(V2Var *Vec2, EpsilonVar float32) bool {
 	return cret
 }
 
-var xVec2Negate func(uintptr, *Vec2)
+var xVec2Negate func(uintptr, uintptr)
 
 // Negates the given #graphene_vec2_t.
 func (x *Vec2) Negate(ResVar *Vec2) {
 
-	xVec2Negate(x.GoPointer(), ResVar)
+	xVec2Negate(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec2Normalize func(uintptr, *Vec2)
+var xVec2Normalize func(uintptr, uintptr)
 
 // Computes the normalized vector for the given vector @v.
 func (x *Vec2) Normalize(ResVar *Vec2) {
 
-	xVec2Normalize(x.GoPointer(), ResVar)
+	xVec2Normalize(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec2Scale func(uintptr, float32, *Vec2)
+var xVec2Scale func(uintptr, float32, uintptr)
 
 // Multiplies all components of the given vector with the given scalar @factor.
 func (x *Vec2) Scale(FactorVar float32, ResVar *Vec2) {
 
-	xVec2Scale(x.GoPointer(), FactorVar, ResVar)
+	xVec2Scale(x.GoPointer(), FactorVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec2Subtract func(uintptr, *Vec2, *Vec2)
+var xVec2Subtract func(uintptr, *Vec2, uintptr)
 
 // Subtracts from each component of the first operand @a the
 // corresponding component of the second operand @b and places
 // each result into the components of @res.
 func (x *Vec2) Subtract(BVar *Vec2, ResVar *Vec2) {
 
-	xVec2Subtract(x.GoPointer(), BVar, ResVar)
+	xVec2Subtract(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec2ToFloat func(uintptr, [2]float32)
+var xVec2ToFloat func(uintptr, uintptr)
 
 // Stores the components of @v into an array.
-func (x *Vec2) ToFloat(DestVar [2]float32) {
+func (x *Vec2) ToFloat(DestVar *[2]float32) {
 
-	xVec2ToFloat(x.GoPointer(), DestVar)
+	xVec2ToFloat(x.GoPointer(), uintptr(unsafe.Pointer(DestVar)))
 
 }
 

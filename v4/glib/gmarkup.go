@@ -104,15 +104,15 @@ func (x *MarkupParseContext) GetElementStack() *SList {
 	return cret
 }
 
-var xMarkupParseContextGetPosition func(uintptr, int, int)
+var xMarkupParseContextGetPosition func(uintptr, uintptr, uintptr)
 
 // Retrieves the current line number and the number of the character on
 // that line. Intended for use in error messages; there are no strict
 // semantics for what constitutes the "current" line number other than
 // "the best number we could come up with for error messages."
-func (x *MarkupParseContext) GetPosition(LineNumberVar int, CharNumberVar int) {
+func (x *MarkupParseContext) GetPosition(LineNumberVar *int, CharNumberVar *int) {
 
-	xMarkupParseContextGetPosition(x.GoPointer(), LineNumberVar, CharNumberVar)
+	xMarkupParseContextGetPosition(x.GoPointer(), uintptr(unsafe.Pointer(LineNumberVar)), uintptr(unsafe.Pointer(CharNumberVar)))
 
 }
 

@@ -435,7 +435,7 @@ func NewSettingsSchemaSourceFromDirectory(DirectoryVar string, ParentVar *Settin
 
 }
 
-var xSettingsSchemaSourceListSchemas func(uintptr, bool, []string, []string)
+var xSettingsSchemaSourceListSchemas func(uintptr, bool, uintptr, uintptr)
 
 // Lists the schemas in a given source.
 //
@@ -449,9 +449,9 @@ var xSettingsSchemaSourceListSchemas func(uintptr, bool, []string, []string)
 //
 // Do not call this function from normal programs.  This is designed for
 // use by database editors, commandline tools, etc.
-func (x *SettingsSchemaSource) ListSchemas(RecursiveVar bool, NonRelocatableVar []string, RelocatableVar []string) {
+func (x *SettingsSchemaSource) ListSchemas(RecursiveVar bool, NonRelocatableVar *[]string, RelocatableVar *[]string) {
 
-	xSettingsSchemaSourceListSchemas(x.GoPointer(), RecursiveVar, NonRelocatableVar, RelocatableVar)
+	xSettingsSchemaSourceListSchemas(x.GoPointer(), RecursiveVar, uintptr(unsafe.Pointer(NonRelocatableVar)), uintptr(unsafe.Pointer(RelocatableVar)))
 
 }
 

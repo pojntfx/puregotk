@@ -418,9 +418,9 @@ func (c *Texture) SetGoPointer(ptr uintptr) {
 // and @specified_height are known, but it is useful to call this
 // function in GtkWidget:measure implementations to compute the
 // other dimension when only one dimension is given.
-func (x *Texture) ComputeConcreteSize(SpecifiedWidthVar float64, SpecifiedHeightVar float64, DefaultWidthVar float64, DefaultHeightVar float64, ConcreteWidthVar float64, ConcreteHeightVar float64) {
+func (x *Texture) ComputeConcreteSize(SpecifiedWidthVar float64, SpecifiedHeightVar float64, DefaultWidthVar float64, DefaultHeightVar float64, ConcreteWidthVar *float64, ConcreteHeightVar *float64) {
 
-	XGdkPaintableComputeConcreteSize(x.GoPointer(), SpecifiedWidthVar, SpecifiedHeightVar, DefaultWidthVar, DefaultHeightVar, ConcreteWidthVar, ConcreteHeightVar)
+	XGdkPaintableComputeConcreteSize(x.GoPointer(), SpecifiedWidthVar, SpecifiedHeightVar, DefaultWidthVar, DefaultHeightVar, uintptr(unsafe.Pointer(ConcreteWidthVar)), uintptr(unsafe.Pointer(ConcreteHeightVar)))
 
 }
 
@@ -601,11 +601,11 @@ func (x *Texture) ToString() string {
 
 // Loads a loadable icon. For the asynchronous version of this function,
 // see g_loadable_icon_load_async().
-func (x *Texture) Load(SizeVar int, TypeVar string, CancellableVar *gio.Cancellable) (*gio.InputStream, error) {
+func (x *Texture) Load(SizeVar int, TypeVar *string, CancellableVar *gio.Cancellable) (*gio.InputStream, error) {
 	var cls *gio.InputStream
 	var cerr *glib.Error
 
-	cret := gio.XGLoadableIconLoad(x.GoPointer(), SizeVar, TypeVar, CancellableVar.GoPointer(), &cerr)
+	cret := gio.XGLoadableIconLoad(x.GoPointer(), SizeVar, uintptr(unsafe.Pointer(TypeVar)), CancellableVar.GoPointer(), &cerr)
 
 	if cret == 0 {
 		return nil, cerr
@@ -629,11 +629,11 @@ func (x *Texture) LoadAsync(SizeVar int, CancellableVar *gio.Cancellable, Callba
 }
 
 // Finishes an asynchronous icon load started in g_loadable_icon_load_async().
-func (x *Texture) LoadFinish(ResVar gio.AsyncResult, TypeVar string) (*gio.InputStream, error) {
+func (x *Texture) LoadFinish(ResVar gio.AsyncResult, TypeVar *string) (*gio.InputStream, error) {
 	var cls *gio.InputStream
 	var cerr *glib.Error
 
-	cret := gio.XGLoadableIconLoadFinish(x.GoPointer(), ResVar.GoPointer(), TypeVar, &cerr)
+	cret := gio.XGLoadableIconLoadFinish(x.GoPointer(), ResVar.GoPointer(), uintptr(unsafe.Pointer(TypeVar)), &cerr)
 
 	if cret == 0 {
 		return nil, cerr

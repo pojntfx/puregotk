@@ -526,12 +526,12 @@ func (x *ObjectClass) InstallProperty(PropertyIdVar uint, PspecVar *ParamSpec) {
 
 }
 
-var xObjectClassListProperties func(uintptr, uint) uintptr
+var xObjectClassListProperties func(uintptr, uintptr) uintptr
 
 // Get an array of #GParamSpec* for all properties of a class.
-func (x *ObjectClass) ListProperties(NPropertiesVar uint) uintptr {
+func (x *ObjectClass) ListProperties(NPropertiesVar *uint) uintptr {
 
-	cret := xObjectClassListProperties(x.GoPointer(), NPropertiesVar)
+	cret := xObjectClassListProperties(x.GoPointer(), uintptr(unsafe.Pointer(NPropertiesVar)))
 	return cret
 }
 
@@ -1738,7 +1738,7 @@ var xObjectReplaceData func(uintptr, string, uintptr, uintptr, uintptr, uintptr)
 // for @key.
 func (x *Object) ReplaceData(KeyVar string, OldvalVar uintptr, NewvalVar uintptr, DestroyVar *glib.DestroyNotify, OldDestroyVar *glib.DestroyNotify) bool {
 
-	cret := xObjectReplaceData(x.GoPointer(), KeyVar, OldvalVar, NewvalVar, glib.NewCallbackNullable(DestroyVar), glib.NewCallback(OldDestroyVar))
+	cret := xObjectReplaceData(x.GoPointer(), KeyVar, OldvalVar, NewvalVar, glib.NewCallbackNullable(DestroyVar), uintptr(unsafe.Pointer(OldDestroyVar)))
 	return cret
 }
 
@@ -1759,7 +1759,7 @@ var xObjectReplaceQdata func(uintptr, glib.Quark, uintptr, uintptr, uintptr, uin
 // should not destroy the object in the normal way.
 func (x *Object) ReplaceQdata(QuarkVar glib.Quark, OldvalVar uintptr, NewvalVar uintptr, DestroyVar *glib.DestroyNotify, OldDestroyVar *glib.DestroyNotify) bool {
 
-	cret := xObjectReplaceQdata(x.GoPointer(), QuarkVar, OldvalVar, NewvalVar, glib.NewCallbackNullable(DestroyVar), glib.NewCallback(OldDestroyVar))
+	cret := xObjectReplaceQdata(x.GoPointer(), QuarkVar, OldvalVar, NewvalVar, glib.NewCallbackNullable(DestroyVar), uintptr(unsafe.Pointer(OldDestroyVar)))
 	return cret
 }
 
@@ -2177,15 +2177,15 @@ func ObjectInterfaceInstallProperty(GIfaceVar *TypeInterface, PspecVar *ParamSpe
 
 }
 
-var xObjectInterfaceListProperties func(*TypeInterface, uint) uintptr
+var xObjectInterfaceListProperties func(*TypeInterface, uintptr) uintptr
 
 // Lists the properties of an interface.Generally, the interface
 // vtable passed in as @g_iface will be the default vtable from
 // g_type_default_interface_ref(), or, if you know the interface has
 // already been loaded, g_type_default_interface_peek().
-func ObjectInterfaceListProperties(GIfaceVar *TypeInterface, NPropertiesPVar uint) uintptr {
+func ObjectInterfaceListProperties(GIfaceVar *TypeInterface, NPropertiesPVar *uint) uintptr {
 
-	cret := xObjectInterfaceListProperties(GIfaceVar, NPropertiesPVar)
+	cret := xObjectInterfaceListProperties(GIfaceVar, uintptr(unsafe.Pointer(NPropertiesPVar)))
 	return cret
 }
 

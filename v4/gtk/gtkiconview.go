@@ -187,7 +187,7 @@ func (x *IconView) GetActivateOnSingleClick() bool {
 	return cret
 }
 
-var xIconViewGetCellRect func(uintptr, *TreePath, uintptr, *gdk.Rectangle) bool
+var xIconViewGetCellRect func(uintptr, *TreePath, uintptr, uintptr) bool
 
 // Fills the bounding rectangle in widget coordinates for the cell specified by
 // @path and @cell. If @cell is %NULL the main cell area is used.
@@ -195,7 +195,7 @@ var xIconViewGetCellRect func(uintptr, *TreePath, uintptr, *gdk.Rectangle) bool
 // This function is only valid if @icon_view is realized.
 func (x *IconView) GetCellRect(PathVar *TreePath, CellVar *CellRenderer, RectVar *gdk.Rectangle) bool {
 
-	cret := xIconViewGetCellRect(x.GoPointer(), PathVar, CellVar.GoPointer(), RectVar)
+	cret := xIconViewGetCellRect(x.GoPointer(), PathVar, CellVar.GoPointer(), uintptr(unsafe.Pointer(RectVar)))
 	return cret
 }
 
@@ -217,7 +217,7 @@ func (x *IconView) GetColumns() int {
 	return cret
 }
 
-var xIconViewGetCursor func(uintptr, **TreePath, uintptr) bool
+var xIconViewGetCursor func(uintptr, uintptr, uintptr) bool
 
 // Fills in @path and @cell with the current cursor path and cell.
 // If the cursor isn’t currently set, then *@path will be %NULL.
@@ -226,34 +226,34 @@ var xIconViewGetCursor func(uintptr, **TreePath, uintptr) bool
 // The returned `GtkTreePath` must be freed with gtk_tree_path_free().
 func (x *IconView) GetCursor(PathVar **TreePath, CellVar **CellRenderer) bool {
 
-	cret := xIconViewGetCursor(x.GoPointer(), PathVar, *gobject.ConvertPtr(CellVar))
+	cret := xIconViewGetCursor(x.GoPointer(), uintptr(unsafe.Pointer(PathVar)), uintptr(unsafe.Pointer(CellVar)))
 	return cret
 }
 
-var xIconViewGetDestItemAtPos func(uintptr, int, int, **TreePath, *IconViewDropPosition) bool
+var xIconViewGetDestItemAtPos func(uintptr, int, int, uintptr, uintptr) bool
 
 // Determines the destination item for a given position.
 func (x *IconView) GetDestItemAtPos(DragXVar int, DragYVar int, PathVar **TreePath, PosVar *IconViewDropPosition) bool {
 
-	cret := xIconViewGetDestItemAtPos(x.GoPointer(), DragXVar, DragYVar, PathVar, PosVar)
+	cret := xIconViewGetDestItemAtPos(x.GoPointer(), DragXVar, DragYVar, uintptr(unsafe.Pointer(PathVar)), uintptr(unsafe.Pointer(PosVar)))
 	return cret
 }
 
-var xIconViewGetDragDestItem func(uintptr, **TreePath, *IconViewDropPosition)
+var xIconViewGetDragDestItem func(uintptr, uintptr, uintptr)
 
 // Gets information about the item that is highlighted for feedback.
 func (x *IconView) GetDragDestItem(PathVar **TreePath, PosVar *IconViewDropPosition) {
 
-	xIconViewGetDragDestItem(x.GoPointer(), PathVar, PosVar)
+	xIconViewGetDragDestItem(x.GoPointer(), uintptr(unsafe.Pointer(PathVar)), uintptr(unsafe.Pointer(PosVar)))
 
 }
 
-var xIconViewGetItemAtPos func(uintptr, int, int, **TreePath, uintptr) bool
+var xIconViewGetItemAtPos func(uintptr, int, int, uintptr, uintptr) bool
 
 // Gets the path and cell for the icon at the given position.
 func (x *IconView) GetItemAtPos(XVar int, YVar int, PathVar **TreePath, CellVar **CellRenderer) bool {
 
-	cret := xIconViewGetItemAtPos(x.GoPointer(), XVar, YVar, PathVar, *gobject.ConvertPtr(CellVar))
+	cret := xIconViewGetItemAtPos(x.GoPointer(), XVar, YVar, uintptr(unsafe.Pointer(PathVar)), uintptr(unsafe.Pointer(CellVar)))
 	return cret
 }
 
@@ -440,7 +440,7 @@ func (x *IconView) GetTooltipColumn() int {
 	return cret
 }
 
-var xIconViewGetTooltipContext func(uintptr, int, int, bool, *uintptr, **TreePath, *TreeIter) bool
+var xIconViewGetTooltipContext func(uintptr, int, int, bool, uintptr, uintptr, uintptr) bool
 
 // This function is supposed to be used in a `GtkWidget::query-tooltip`
 // signal handler for `GtkIconView`. The @x, @y and @keyboard_tip values
@@ -452,13 +452,13 @@ var xIconViewGetTooltipContext func(uintptr, int, int, bool, *uintptr, **TreePat
 // tooltips the item returned will be the cursor item. When %TRUE, then any of
 // @model, @path and @iter which have been provided will be set to point to
 // that row and the corresponding model.
-func (x *IconView) GetTooltipContext(XVar int, YVar int, KeyboardTipVar bool, ModelVar *TreeModel, PathVar **TreePath, IterVar *TreeIter) bool {
+func (x *IconView) GetTooltipContext(XVar int, YVar int, KeyboardTipVar bool, ModelVar **TreeModel, PathVar **TreePath, IterVar *TreeIter) bool {
 
-	cret := xIconViewGetTooltipContext(x.GoPointer(), XVar, YVar, KeyboardTipVar, gobject.ConvertPtr(ModelVar), PathVar, IterVar)
+	cret := xIconViewGetTooltipContext(x.GoPointer(), XVar, YVar, KeyboardTipVar, uintptr(unsafe.Pointer(ModelVar)), uintptr(unsafe.Pointer(PathVar)), uintptr(unsafe.Pointer(IterVar)))
 	return cret
 }
 
-var xIconViewGetVisibleRange func(uintptr, **TreePath, **TreePath) bool
+var xIconViewGetVisibleRange func(uintptr, uintptr, uintptr) bool
 
 // Sets @start_path and @end_path to be the first and last visible path.
 // Note that there may be invisible paths in between.
@@ -466,7 +466,7 @@ var xIconViewGetVisibleRange func(uintptr, **TreePath, **TreePath) bool
 // Both paths should be freed with gtk_tree_path_free() after use.
 func (x *IconView) GetVisibleRange(StartPathVar **TreePath, EndPathVar **TreePath) bool {
 
-	cret := xIconViewGetVisibleRange(x.GoPointer(), StartPathVar, EndPathVar)
+	cret := xIconViewGetVisibleRange(x.GoPointer(), uintptr(unsafe.Pointer(StartPathVar)), uintptr(unsafe.Pointer(EndPathVar)))
 	return cret
 }
 
@@ -1100,9 +1100,9 @@ func (x *IconView) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *IconView) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *IconView) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -1441,7 +1441,7 @@ func (x *IconView) SetCellDataFunc(CellVar *CellRenderer, FuncVar *CellLayoutDat
 // overshoot indication, at the right position.
 func (x *IconView) GetBorder(BorderVar *Border) bool {
 
-	cret := XGtkScrollableGetBorder(x.GoPointer(), BorderVar)
+	cret := XGtkScrollableGetBorder(x.GoPointer(), uintptr(unsafe.Pointer(BorderVar)))
 	return cret
 }
 

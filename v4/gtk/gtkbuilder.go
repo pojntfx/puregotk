@@ -897,7 +897,7 @@ func (x *Builder) SetTranslationDomain(DomainVar string) {
 
 }
 
-var xBuilderValueFromString func(uintptr, uintptr, string, *gobject.Value, **glib.Error) bool
+var xBuilderValueFromString func(uintptr, uintptr, string, uintptr, **glib.Error) bool
 
 // Demarshals a value from a string.
 //
@@ -913,7 +913,7 @@ var xBuilderValueFromString func(uintptr, uintptr, string, *gobject.Value, **gli
 func (x *Builder) ValueFromString(PspecVar *gobject.ParamSpec, StringVar string, ValueVar *gobject.Value) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xBuilderValueFromString(x.GoPointer(), PspecVar.GoPointer(), StringVar, ValueVar, &cerr)
+	cret := xBuilderValueFromString(x.GoPointer(), PspecVar.GoPointer(), StringVar, uintptr(unsafe.Pointer(ValueVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -921,7 +921,7 @@ func (x *Builder) ValueFromString(PspecVar *gobject.ParamSpec, StringVar string,
 
 }
 
-var xBuilderValueFromStringType func(uintptr, types.GType, string, *gobject.Value, **glib.Error) bool
+var xBuilderValueFromStringType func(uintptr, types.GType, string, uintptr, **glib.Error) bool
 
 // Demarshals a value from a string.
 //
@@ -936,7 +936,7 @@ var xBuilderValueFromStringType func(uintptr, types.GType, string, *gobject.Valu
 func (x *Builder) ValueFromStringType(TypeVar types.GType, StringVar string, ValueVar *gobject.Value) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xBuilderValueFromStringType(x.GoPointer(), TypeVar, StringVar, ValueVar, &cerr)
+	cret := xBuilderValueFromStringType(x.GoPointer(), TypeVar, StringVar, uintptr(unsafe.Pointer(ValueVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

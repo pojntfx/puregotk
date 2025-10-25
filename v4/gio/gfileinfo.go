@@ -857,12 +857,12 @@ func (x *FileInfo) GetAttributeByteString(AttributeVar string) string {
 	return cret
 }
 
-var xFileInfoGetAttributeData func(uintptr, string, *FileAttributeType, uintptr, *FileAttributeStatus) bool
+var xFileInfoGetAttributeData func(uintptr, string, uintptr, uintptr, uintptr) bool
 
 // Gets the attribute type, value and status for an attribute key.
-func (x *FileInfo) GetAttributeData(AttributeVar string, TypeVar *FileAttributeType, ValuePpVar uintptr, StatusVar *FileAttributeStatus) bool {
+func (x *FileInfo) GetAttributeData(AttributeVar string, TypeVar *FileAttributeType, ValuePpVar *uintptr, StatusVar *FileAttributeStatus) bool {
 
-	cret := xFileInfoGetAttributeData(x.GoPointer(), AttributeVar, TypeVar, ValuePpVar, StatusVar)
+	cret := xFileInfoGetAttributeData(x.GoPointer(), AttributeVar, uintptr(unsafe.Pointer(TypeVar)), uintptr(unsafe.Pointer(ValuePpVar)), uintptr(unsafe.Pointer(StatusVar)))
 	return cret
 }
 
@@ -1145,7 +1145,7 @@ func (x *FileInfo) GetModificationDateTime() *glib.DateTime {
 	return cret
 }
 
-var xFileInfoGetModificationTime func(uintptr, *glib.TimeVal)
+var xFileInfoGetModificationTime func(uintptr, uintptr)
 
 // Gets the modification time of the current @info and sets it
 // in @result.
@@ -1155,7 +1155,7 @@ var xFileInfoGetModificationTime func(uintptr, *glib.TimeVal)
 // provided it will be used too.
 func (x *FileInfo) GetModificationTime(ResultVar *glib.TimeVal) {
 
-	xFileInfoGetModificationTime(x.GoPointer(), ResultVar)
+	xFileInfoGetModificationTime(x.GoPointer(), uintptr(unsafe.Pointer(ResultVar)))
 
 }
 

@@ -340,15 +340,15 @@ func TreeCreateRowDragContent(TreeModelVar TreeModel, PathVar *TreePath) *gdk.Co
 	return cls
 }
 
-var xTreeGetRowDragData func(*gobject.Value, *uintptr, **TreePath) bool
+var xTreeGetRowDragData func(*gobject.Value, uintptr, uintptr) bool
 
 // Obtains a @tree_model and @path from value of target type
 // %GTK_TYPE_TREE_ROW_DATA.
 //
 // The returned path must be freed with gtk_tree_path_free().
-func TreeGetRowDragData(ValueVar *gobject.Value, TreeModelVar *TreeModel, PathVar **TreePath) bool {
+func TreeGetRowDragData(ValueVar *gobject.Value, TreeModelVar **TreeModel, PathVar **TreePath) bool {
 
-	cret := xTreeGetRowDragData(ValueVar, gobject.ConvertPtr(TreeModelVar), PathVar)
+	cret := xTreeGetRowDragData(ValueVar, uintptr(unsafe.Pointer(TreeModelVar)), uintptr(unsafe.Pointer(PathVar)))
 	return cret
 }
 

@@ -178,9 +178,9 @@ var xTreeLookupExtended func(uintptr, uintptr, uintptr, uintptr) bool
 // associated value. This is useful if you need to free the memory
 // allocated for the original key, for example before calling
 // g_tree_remove().
-func (x *Tree) LookupExtended(LookupKeyVar uintptr, OrigKeyVar uintptr, ValueVar uintptr) bool {
+func (x *Tree) LookupExtended(LookupKeyVar uintptr, OrigKeyVar *uintptr, ValueVar *uintptr) bool {
 
-	cret := xTreeLookupExtended(x.GoPointer(), LookupKeyVar, OrigKeyVar, ValueVar)
+	cret := xTreeLookupExtended(x.GoPointer(), LookupKeyVar, uintptr(unsafe.Pointer(OrigKeyVar)), uintptr(unsafe.Pointer(ValueVar)))
 	return cret
 }
 

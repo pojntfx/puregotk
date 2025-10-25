@@ -336,7 +336,7 @@ func (x *Entry) GetIconActivatable(IconPosVar EntryIconPosition) bool {
 	return cret
 }
 
-var xEntryGetIconArea func(uintptr, EntryIconPosition, *gdk.Rectangle)
+var xEntryGetIconArea func(uintptr, EntryIconPosition, uintptr)
 
 // Gets the area where entry’s icon at @icon_pos is drawn.
 //
@@ -349,7 +349,7 @@ var xEntryGetIconArea func(uintptr, EntryIconPosition, *gdk.Rectangle)
 // relative to @entry's allocation.
 func (x *Entry) GetIconArea(IconPosVar EntryIconPosition, IconAreaVar *gdk.Rectangle) {
 
-	xEntryGetIconArea(x.GoPointer(), IconPosVar, IconAreaVar)
+	xEntryGetIconArea(x.GoPointer(), IconPosVar, uintptr(unsafe.Pointer(IconAreaVar)))
 
 }
 
@@ -1116,9 +1116,9 @@ func (x *Entry) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *Entry) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *Entry) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -1512,9 +1512,9 @@ func (x *Entry) GetPosition() int {
 // and %FALSE will be returned.
 //
 // Note that positions are specified in characters, not bytes.
-func (x *Entry) GetSelectionBounds(StartPosVar int, EndPosVar int) bool {
+func (x *Entry) GetSelectionBounds(StartPosVar *int, EndPosVar *int) bool {
 
-	cret := XGtkEditableGetSelectionBounds(x.GoPointer(), StartPosVar, EndPosVar)
+	cret := XGtkEditableGetSelectionBounds(x.GoPointer(), uintptr(unsafe.Pointer(StartPosVar)), uintptr(unsafe.Pointer(EndPosVar)))
 	return cret
 }
 

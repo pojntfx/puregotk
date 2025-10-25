@@ -286,7 +286,7 @@ func (x *PaintableInterface) GetGetIntrinsicAspectRatio() func(Paintable) float6
 type Paintable interface {
 	GoPointer() uintptr
 	SetGoPointer(uintptr)
-	ComputeConcreteSize(SpecifiedWidthVar float64, SpecifiedHeightVar float64, DefaultWidthVar float64, DefaultHeightVar float64, ConcreteWidthVar float64, ConcreteHeightVar float64)
+	ComputeConcreteSize(SpecifiedWidthVar float64, SpecifiedHeightVar float64, DefaultWidthVar float64, DefaultHeightVar float64, ConcreteWidthVar *float64, ConcreteHeightVar *float64)
 	GetCurrentImage() *PaintableBase
 	GetFlags() PaintableFlags
 	GetIntrinsicAspectRatio() float64
@@ -328,9 +328,9 @@ func (x *PaintableBase) SetGoPointer(ptr uintptr) {
 // and @specified_height are known, but it is useful to call this
 // function in GtkWidget:measure implementations to compute the
 // other dimension when only one dimension is given.
-func (x *PaintableBase) ComputeConcreteSize(SpecifiedWidthVar float64, SpecifiedHeightVar float64, DefaultWidthVar float64, DefaultHeightVar float64, ConcreteWidthVar float64, ConcreteHeightVar float64) {
+func (x *PaintableBase) ComputeConcreteSize(SpecifiedWidthVar float64, SpecifiedHeightVar float64, DefaultWidthVar float64, DefaultHeightVar float64, ConcreteWidthVar *float64, ConcreteHeightVar *float64) {
 
-	XGdkPaintableComputeConcreteSize(x.GoPointer(), SpecifiedWidthVar, SpecifiedHeightVar, DefaultWidthVar, DefaultHeightVar, ConcreteWidthVar, ConcreteHeightVar)
+	XGdkPaintableComputeConcreteSize(x.GoPointer(), SpecifiedWidthVar, SpecifiedHeightVar, DefaultWidthVar, DefaultHeightVar, uintptr(unsafe.Pointer(ConcreteWidthVar)), uintptr(unsafe.Pointer(ConcreteHeightVar)))
 
 }
 
@@ -462,7 +462,7 @@ func (x *PaintableBase) Snapshot(SnapshotVar *Snapshot, WidthVar float64, Height
 
 }
 
-var XGdkPaintableComputeConcreteSize func(uintptr, float64, float64, float64, float64, float64, float64)
+var XGdkPaintableComputeConcreteSize func(uintptr, float64, float64, float64, float64, uintptr, uintptr)
 var XGdkPaintableGetCurrentImage func(uintptr) uintptr
 var XGdkPaintableGetFlags func(uintptr) PaintableFlags
 var XGdkPaintableGetIntrinsicAspectRatio func(uintptr) float64

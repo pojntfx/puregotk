@@ -41,12 +41,12 @@ func QuadAlloc() *Quad {
 	return cret
 }
 
-var xQuadBounds func(uintptr, *Rect)
+var xQuadBounds func(uintptr, uintptr)
 
 // Computes the bounding rectangle of @q and places it into @r.
 func (x *Quad) Bounds(RVar *Rect) {
 
-	xQuadBounds(x.GoPointer(), RVar)
+	xQuadBounds(x.GoPointer(), uintptr(unsafe.Pointer(RVar)))
 
 }
 

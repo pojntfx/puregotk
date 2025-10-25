@@ -64,21 +64,21 @@ func NewConstraintGuide() *ConstraintGuide {
 	return cls
 }
 
-var xConstraintGuideGetMaxSize func(uintptr, int, int)
+var xConstraintGuideGetMaxSize func(uintptr, uintptr, uintptr)
 
 // Gets the maximum size of @guide.
-func (x *ConstraintGuide) GetMaxSize(WidthVar int, HeightVar int) {
+func (x *ConstraintGuide) GetMaxSize(WidthVar *int, HeightVar *int) {
 
-	xConstraintGuideGetMaxSize(x.GoPointer(), WidthVar, HeightVar)
+	xConstraintGuideGetMaxSize(x.GoPointer(), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 
 }
 
-var xConstraintGuideGetMinSize func(uintptr, int, int)
+var xConstraintGuideGetMinSize func(uintptr, uintptr, uintptr)
 
 // Gets the minimum size of @guide.
-func (x *ConstraintGuide) GetMinSize(WidthVar int, HeightVar int) {
+func (x *ConstraintGuide) GetMinSize(WidthVar *int, HeightVar *int) {
 
-	xConstraintGuideGetMinSize(x.GoPointer(), WidthVar, HeightVar)
+	xConstraintGuideGetMinSize(x.GoPointer(), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 
 }
 
@@ -91,12 +91,12 @@ func (x *ConstraintGuide) GetName() string {
 	return cret
 }
 
-var xConstraintGuideGetNatSize func(uintptr, int, int)
+var xConstraintGuideGetNatSize func(uintptr, uintptr, uintptr)
 
 // Gets the natural size of @guide.
-func (x *ConstraintGuide) GetNatSize(WidthVar int, HeightVar int) {
+func (x *ConstraintGuide) GetNatSize(WidthVar *int, HeightVar *int) {
 
-	xConstraintGuideGetNatSize(x.GoPointer(), WidthVar, HeightVar)
+	xConstraintGuideGetNatSize(x.GoPointer(), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 
 }
 

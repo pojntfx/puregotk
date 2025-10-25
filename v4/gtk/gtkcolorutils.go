@@ -2,31 +2,33 @@
 package gtk
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
-var xHsvToRgb func(float32, float32, float32, float32, float32, float32)
+var xHsvToRgb func(float32, float32, float32, uintptr, uintptr, uintptr)
 
 // Converts a color from HSV space to RGB.
 //
 // Input values must be in the [0.0, 1.0] range;
 // output values will be in the same range.
-func HsvToRgb(HVar float32, SVar float32, VVar float32, RVar float32, GVar float32, BVar float32) {
+func HsvToRgb(HVar float32, SVar float32, VVar float32, RVar *float32, GVar *float32, BVar *float32) {
 
-	xHsvToRgb(HVar, SVar, VVar, RVar, GVar, BVar)
+	xHsvToRgb(HVar, SVar, VVar, uintptr(unsafe.Pointer(RVar)), uintptr(unsafe.Pointer(GVar)), uintptr(unsafe.Pointer(BVar)))
 
 }
 
-var xRgbToHsv func(float32, float32, float32, float32, float32, float32)
+var xRgbToHsv func(float32, float32, float32, uintptr, uintptr, uintptr)
 
 // Converts a color from RGB space to HSV.
 //
 // Input values must be in the [0.0, 1.0] range;
 // output values will be in the same range.
-func RgbToHsv(RVar float32, GVar float32, BVar float32, HVar float32, SVar float32, VVar float32) {
+func RgbToHsv(RVar float32, GVar float32, BVar float32, HVar *float32, SVar *float32, VVar *float32) {
 
-	xRgbToHsv(RVar, GVar, BVar, HVar, SVar, VVar)
+	xRgbToHsv(RVar, GVar, BVar, uintptr(unsafe.Pointer(HVar)), uintptr(unsafe.Pointer(SVar)), uintptr(unsafe.Pointer(VVar)))
 
 }
 

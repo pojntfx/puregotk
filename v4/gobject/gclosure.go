@@ -257,12 +257,12 @@ func (x *Closure) Invalidate() {
 
 }
 
-var xClosureInvoke func(uintptr, *Value, uint, []Value, uintptr)
+var xClosureInvoke func(uintptr, uintptr, uint, []Value, uintptr)
 
 // Invokes the closure, i.e. executes the callback represented by the @closure.
 func (x *Closure) Invoke(ReturnValueVar *Value, NParamValuesVar uint, ParamValuesVar []Value, InvocationHintVar uintptr) {
 
-	xClosureInvoke(x.GoPointer(), ReturnValueVar, NParamValuesVar, ParamValuesVar, InvocationHintVar)
+	xClosureInvoke(x.GoPointer(), uintptr(unsafe.Pointer(ReturnValueVar)), NParamValuesVar, ParamValuesVar, InvocationHintVar)
 
 }
 

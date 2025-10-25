@@ -104,7 +104,7 @@ const (
 	USEC_PER_SEC int = 1000000
 )
 
-var xTimeValFromIso8601 func(string, *TimeVal) bool
+var xTimeValFromIso8601 func(string, uintptr) bool
 
 // Converts a string containing an ISO 8601 encoded date and time
 // to a #GTimeVal and puts it into @time_.
@@ -125,7 +125,7 @@ var xTimeValFromIso8601 func(string, *TimeVal) bool
 // ]|
 func TimeValFromIso8601(IsoDateVar string, TimeVar *TimeVal) bool {
 
-	cret := xTimeValFromIso8601(IsoDateVar, TimeVar)
+	cret := xTimeValFromIso8601(IsoDateVar, uintptr(unsafe.Pointer(TimeVar)))
 	return cret
 }
 

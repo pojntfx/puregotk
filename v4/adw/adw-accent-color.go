@@ -2,6 +2,8 @@
 package adw
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/gdk"
@@ -39,18 +41,18 @@ const (
 	AccentColorSlateValue AccentColor = 8
 )
 
-var xAccentColorToRgba func(AccentColor, *gdk.RGBA)
+var xAccentColorToRgba func(AccentColor, uintptr)
 
 // Converts @self to a `GdkRGBA` representing its background color.
 //
 // The matching foreground color is white.
 func AccentColorToRgba(SelfVar AccentColor, RgbaVar *gdk.RGBA) {
 
-	xAccentColorToRgba(SelfVar, RgbaVar)
+	xAccentColorToRgba(SelfVar, uintptr(unsafe.Pointer(RgbaVar)))
 
 }
 
-var xAccentColorToStandaloneRgba func(AccentColor, bool, *gdk.RGBA)
+var xAccentColorToStandaloneRgba func(AccentColor, bool, uintptr)
 
 // Converts @self to a `GdkRGBA` representing its standalone color.
 //
@@ -58,11 +60,11 @@ var xAccentColorToStandaloneRgba func(AccentColor, bool, *gdk.RGBA)
 // background, ensuring contrast.
 func AccentColorToStandaloneRgba(SelfVar AccentColor, DarkVar bool, RgbaVar *gdk.RGBA) {
 
-	xAccentColorToStandaloneRgba(SelfVar, DarkVar, RgbaVar)
+	xAccentColorToStandaloneRgba(SelfVar, DarkVar, uintptr(unsafe.Pointer(RgbaVar)))
 
 }
 
-var xRgbaToStandalone func(*gdk.RGBA, bool, *gdk.RGBA)
+var xRgbaToStandalone func(*gdk.RGBA, bool, uintptr)
 
 // Adjusts @rgba to be suitable as a standalone color.
 //
@@ -70,7 +72,7 @@ var xRgbaToStandalone func(*gdk.RGBA, bool, *gdk.RGBA)
 // background, ensuring contrast.
 func RgbaToStandalone(RgbaVar *gdk.RGBA, DarkVar bool, StandaloneRgbaVar *gdk.RGBA) {
 
-	xRgbaToStandalone(RgbaVar, DarkVar, StandaloneRgbaVar)
+	xRgbaToStandalone(RgbaVar, DarkVar, uintptr(unsafe.Pointer(StandaloneRgbaVar)))
 
 }
 

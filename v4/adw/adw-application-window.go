@@ -449,9 +449,9 @@ func (x *ApplicationWindow) ListActions() []string {
 // fields (as indicated by having a non-`NULL` reference passed in) are
 // filled.  If the action doesn’t exist, `FALSE` is returned and the
 // fields may or may not have been modified.
-func (x *ApplicationWindow) QueryAction(ActionNameVar string, EnabledVar bool, ParameterTypeVar **glib.VariantType, StateTypeVar **glib.VariantType, StateHintVar **glib.Variant, StateVar **glib.Variant) bool {
+func (x *ApplicationWindow) QueryAction(ActionNameVar string, EnabledVar *bool, ParameterTypeVar **glib.VariantType, StateTypeVar **glib.VariantType, StateHintVar **glib.Variant, StateVar **glib.Variant) bool {
 
-	cret := gio.XGActionGroupQueryAction(x.GoPointer(), ActionNameVar, EnabledVar, ParameterTypeVar, StateTypeVar, StateHintVar, StateVar)
+	cret := gio.XGActionGroupQueryAction(x.GoPointer(), ActionNameVar, uintptr(unsafe.Pointer(EnabledVar)), uintptr(unsafe.Pointer(ParameterTypeVar)), uintptr(unsafe.Pointer(StateTypeVar)), uintptr(unsafe.Pointer(StateHintVar)), uintptr(unsafe.Pointer(StateVar)))
 	return cret
 }
 
@@ -630,9 +630,9 @@ func (x *ApplicationWindow) GetAtContext() *gtk.ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *ApplicationWindow) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *ApplicationWindow) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := gtk.XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := gtk.XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -885,9 +885,9 @@ func (x *ApplicationWindow) GetSurface() *gdk.Surface {
 //
 // This is the translation from @self's surface coordinates into
 // @self's widget coordinates.
-func (x *ApplicationWindow) GetSurfaceTransform(XVar float64, YVar float64) {
+func (x *ApplicationWindow) GetSurfaceTransform(XVar *float64, YVar *float64) {
 
-	gtk.XGtkNativeGetSurfaceTransform(x.GoPointer(), XVar, YVar)
+	gtk.XGtkNativeGetSurfaceTransform(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)))
 
 }
 

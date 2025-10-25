@@ -59,12 +59,12 @@ func PointAlloc() *Point {
 	return cret
 }
 
-var xPointDistance func(uintptr, *Point, float32, float32) float32
+var xPointDistance func(uintptr, *Point, uintptr, uintptr) float32
 
 // Computes the distance between @a and @b.
-func (x *Point) Distance(BVar *Point, DXVar float32, DYVar float32) float32 {
+func (x *Point) Distance(BVar *Point, DXVar *float32, DYVar *float32) float32 {
 
-	cret := xPointDistance(x.GoPointer(), BVar, DXVar, DYVar)
+	cret := xPointDistance(x.GoPointer(), BVar, uintptr(unsafe.Pointer(DXVar)), uintptr(unsafe.Pointer(DYVar)))
 	return cret
 }
 
@@ -120,13 +120,13 @@ func (x *Point) InitFromVec2(SrcVar *Vec2) *Point {
 	return cret
 }
 
-var xPointInterpolate func(uintptr, *Point, float64, *Point)
+var xPointInterpolate func(uintptr, *Point, float64, uintptr)
 
 // Linearly interpolates the coordinates of @a and @b using the
 // given @factor.
 func (x *Point) Interpolate(BVar *Point, FactorVar float64, ResVar *Point) {
 
-	xPointInterpolate(x.GoPointer(), BVar, FactorVar, ResVar)
+	xPointInterpolate(x.GoPointer(), BVar, FactorVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -140,13 +140,13 @@ func (x *Point) Near(BVar *Point, EpsilonVar float32) bool {
 	return cret
 }
 
-var xPointToVec2 func(uintptr, *Vec2)
+var xPointToVec2 func(uintptr, uintptr)
 
 // Stores the coordinates of the given #graphene_point_t into a
 // #graphene_vec2_t.
 func (x *Point) ToVec2(VVar *Vec2) {
 
-	xPointToVec2(x.GoPointer(), VVar)
+	xPointToVec2(x.GoPointer(), uintptr(unsafe.Pointer(VVar)))
 
 }
 

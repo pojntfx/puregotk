@@ -2,6 +2,8 @@
 package glib
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 )
@@ -51,7 +53,7 @@ func Sprintf(StringVar string, FormatVar string, varArgs ...interface{}) int {
 	return cret
 }
 
-var xVasprintf func(string, string, []interface{}) int
+var xVasprintf func(uintptr, string, []interface{}) int
 
 // An implementation of the GNU `vasprintf()` function which supports
 // positional parameters, as specified in the Single Unix Specification.
@@ -64,9 +66,9 @@ var xVasprintf func(string, string, []interface{}) int
 // multibyte representation is available for the given character.
 //
 // `glib/gprintf.h` must be explicitly included in order to use this function.
-func Vasprintf(StringVar string, FormatVar string, ArgsVar []interface{}) int {
+func Vasprintf(StringVar *string, FormatVar string, ArgsVar []interface{}) int {
 
-	cret := xVasprintf(StringVar, FormatVar, ArgsVar)
+	cret := xVasprintf(uintptr(unsafe.Pointer(StringVar)), FormatVar, ArgsVar)
 	return cret
 }
 

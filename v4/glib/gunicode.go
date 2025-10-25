@@ -2,6 +2,8 @@
 package glib
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
@@ -613,15 +615,15 @@ const (
 	GUnicodeSpaceSeparatorValue UnicodeType = 29
 )
 
-var xUcs4ToUtf16 func([]uint32, int32, int32, int32, **Error) uint16
+var xUcs4ToUtf16 func([]uint32, int32, uintptr, uintptr, **Error) uint16
 
 // Convert a string from UCS-4 to UTF-16.
 //
 // A nul character (U+0000) will be added to the result after the converted text.
-func Ucs4ToUtf16(StrVar []uint32, LenVar int32, ItemsReadVar int32, ItemsWrittenVar int32) (uint16, error) {
+func Ucs4ToUtf16(StrVar []uint32, LenVar int32, ItemsReadVar *int32, ItemsWrittenVar *int32) (uint16, error) {
 	var cerr *Error
 
-	cret := xUcs4ToUtf16(StrVar, LenVar, ItemsReadVar, ItemsWrittenVar, &cerr)
+	cret := xUcs4ToUtf16(StrVar, LenVar, uintptr(unsafe.Pointer(ItemsReadVar)), uintptr(unsafe.Pointer(ItemsWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -629,16 +631,16 @@ func Ucs4ToUtf16(StrVar []uint32, LenVar int32, ItemsReadVar int32, ItemsWritten
 
 }
 
-var xUcs4ToUtf8 func([]uint32, int32, int32, int32, **Error) string
+var xUcs4ToUtf8 func([]uint32, int32, uintptr, uintptr, **Error) string
 
 // Convert a string from a 32-bit fixed width representation as UCS-4.
 // to UTF-8.
 //
 // The result will be terminated with a nul byte.
-func Ucs4ToUtf8(StrVar []uint32, LenVar int32, ItemsReadVar int32, ItemsWrittenVar int32) (string, error) {
+func Ucs4ToUtf8(StrVar []uint32, LenVar int32, ItemsReadVar *int32, ItemsWrittenVar *int32) (string, error) {
 	var cerr *Error
 
-	cret := xUcs4ToUtf8(StrVar, LenVar, ItemsReadVar, ItemsWrittenVar, &cerr)
+	cret := xUcs4ToUtf8(StrVar, LenVar, uintptr(unsafe.Pointer(ItemsReadVar)), uintptr(unsafe.Pointer(ItemsWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -669,7 +671,7 @@ func UnicharCombiningClass(UcVar uint32) int {
 	return cret
 }
 
-var xUnicharCompose func(uint32, uint32, uint32) bool
+var xUnicharCompose func(uint32, uint32, uintptr) bool
 
 // Performs a single composition step of the
 // Unicode canonical composition algorithm.
@@ -687,13 +689,13 @@ var xUnicharCompose func(uint32, uint32, uint32) bool
 // See
 // [UAX#15](http://unicode.org/reports/tr15/)
 // for details.
-func UnicharCompose(AVar uint32, BVar uint32, ChVar uint32) bool {
+func UnicharCompose(AVar uint32, BVar uint32, ChVar *uint32) bool {
 
-	cret := xUnicharCompose(AVar, BVar, ChVar)
+	cret := xUnicharCompose(AVar, BVar, uintptr(unsafe.Pointer(ChVar)))
 	return cret
 }
 
-var xUnicharDecompose func(uint32, uint32, uint32) bool
+var xUnicharDecompose func(uint32, uintptr, uintptr) bool
 
 // Performs a single decomposition step of the
 // Unicode canonical decomposition algorithm.
@@ -718,9 +720,9 @@ var xUnicharDecompose func(uint32, uint32, uint32) bool
 // See
 // [UAX#15](http://unicode.org/reports/tr15/)
 // for details.
-func UnicharDecompose(ChVar uint32, AVar uint32, BVar uint32) bool {
+func UnicharDecompose(ChVar uint32, AVar *uint32, BVar *uint32) bool {
 
-	cret := xUnicharDecompose(ChVar, AVar, BVar)
+	cret := xUnicharDecompose(ChVar, uintptr(unsafe.Pointer(AVar)), uintptr(unsafe.Pointer(BVar)))
 	return cret
 }
 
@@ -734,7 +736,7 @@ func UnicharDigitValue(CVar uint32) int {
 	return cret
 }
 
-var xUnicharFullyDecompose func(uint32, bool, uint32, uint) uint
+var xUnicharFullyDecompose func(uint32, bool, uintptr, uint) uint
 
 // Computes the canonical or compatibility decomposition of a
 // Unicode character.  For compatibility decomposition,
@@ -755,13 +757,13 @@ var xUnicharFullyDecompose func(uint32, bool, uint32, uint) uint
 // See
 // [UAX#15](http://unicode.org/reports/tr15/)
 // for details.
-func UnicharFullyDecompose(ChVar uint32, CompatVar bool, ResultVar uint32, ResultLenVar uint) uint {
+func UnicharFullyDecompose(ChVar uint32, CompatVar bool, ResultVar *uint32, ResultLenVar uint) uint {
 
-	cret := xUnicharFullyDecompose(ChVar, CompatVar, ResultVar, ResultLenVar)
+	cret := xUnicharFullyDecompose(ChVar, CompatVar, uintptr(unsafe.Pointer(ResultVar)), ResultLenVar)
 	return cret
 }
 
-var xUnicharGetMirrorChar func(uint32, uint32) bool
+var xUnicharGetMirrorChar func(uint32, uintptr) bool
 
 // In Unicode, some characters are "mirrored". This means that their
 // images are mirrored horizontally in text that is laid out from right
@@ -772,9 +774,9 @@ var xUnicharGetMirrorChar func(uint32, uint32) bool
 // character that typically has a glyph that is the mirror image of @ch's
 // glyph and @mirrored_ch is set, it puts that character in the address
 // pointed to by @mirrored_ch.  Otherwise the original character is put.
-func UnicharGetMirrorChar(ChVar uint32, MirroredChVar uint32) bool {
+func UnicharGetMirrorChar(ChVar uint32, MirroredChVar *uint32) bool {
 
-	cret := xUnicharGetMirrorChar(ChVar, MirroredChVar)
+	cret := xUnicharGetMirrorChar(ChVar, uintptr(unsafe.Pointer(MirroredChVar)))
 	return cret
 }
 
@@ -1003,12 +1005,12 @@ func UnicharIszerowidth(CVar uint32) bool {
 	return cret
 }
 
-var xUnicharToUtf8 func(uint32, string) int
+var xUnicharToUtf8 func(uint32, uintptr) int
 
 // Converts a single character to UTF-8.
-func UnicharToUtf8(CVar uint32, OutbufVar string) int {
+func UnicharToUtf8(CVar uint32, OutbufVar *string) int {
 
-	cret := xUnicharToUtf8(CVar, OutbufVar)
+	cret := xUnicharToUtf8(CVar, uintptr(unsafe.Pointer(OutbufVar)))
 	return cret
 }
 
@@ -1125,15 +1127,15 @@ func UnicodeScriptToIso15924(ScriptVar UnicodeScript) uint32 {
 	return cret
 }
 
-var xUtf16ToUcs4 func([]uint16, int32, int32, int32, **Error) uint32
+var xUtf16ToUcs4 func([]uint16, int32, uintptr, uintptr, **Error) uint32
 
 // Convert a string from UTF-16 to UCS-4.
 //
 // The result will be nul-terminated.
-func Utf16ToUcs4(StrVar []uint16, LenVar int32, ItemsReadVar int32, ItemsWrittenVar int32) (uint32, error) {
+func Utf16ToUcs4(StrVar []uint16, LenVar int32, ItemsReadVar *int32, ItemsWrittenVar *int32) (uint32, error) {
 	var cerr *Error
 
-	cret := xUtf16ToUcs4(StrVar, LenVar, ItemsReadVar, ItemsWrittenVar, &cerr)
+	cret := xUtf16ToUcs4(StrVar, LenVar, uintptr(unsafe.Pointer(ItemsReadVar)), uintptr(unsafe.Pointer(ItemsWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1141,7 +1143,7 @@ func Utf16ToUcs4(StrVar []uint16, LenVar int32, ItemsReadVar int32, ItemsWritten
 
 }
 
-var xUtf16ToUtf8 func([]uint16, int32, int32, int32, **Error) string
+var xUtf16ToUtf8 func([]uint16, int32, uintptr, uintptr, **Error) string
 
 // Convert a string from UTF-16 to UTF-8.
 //
@@ -1157,10 +1159,10 @@ var xUtf16ToUtf8 func([]uint16, int32, int32, int32, **Error) string
 // validation done by this function is to ensure that the input can
 // be correctly interpreted as UTF-16, i.e. it doesn’t contain
 // unpaired surrogates or partial character sequences.
-func Utf16ToUtf8(StrVar []uint16, LenVar int32, ItemsReadVar int32, ItemsWrittenVar int32) (string, error) {
+func Utf16ToUtf8(StrVar []uint16, LenVar int32, ItemsReadVar *int32, ItemsWrittenVar *int32) (string, error) {
 	var cerr *Error
 
-	cret := xUtf16ToUtf8(StrVar, LenVar, ItemsReadVar, ItemsWrittenVar, &cerr)
+	cret := xUtf16ToUtf8(StrVar, LenVar, uintptr(unsafe.Pointer(ItemsReadVar)), uintptr(unsafe.Pointer(ItemsWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1524,16 +1526,16 @@ func Utf8Substring(StrVar string, StartPosVar int32, EndPosVar int32) string {
 	return cret
 }
 
-var xUtf8ToUcs4 func(string, int32, int32, int32, **Error) uint32
+var xUtf8ToUcs4 func(string, int32, uintptr, uintptr, **Error) uint32
 
 // Convert a string from UTF-8 to a 32-bit fixed width representation as UCS-4.
 //
 // A trailing nul character (U+0000) will be added to the string after the
 // converted text.
-func Utf8ToUcs4(StrVar string, LenVar int32, ItemsReadVar int32, ItemsWrittenVar int32) (uint32, error) {
+func Utf8ToUcs4(StrVar string, LenVar int32, ItemsReadVar *int32, ItemsWrittenVar *int32) (uint32, error) {
 	var cerr *Error
 
-	cret := xUtf8ToUcs4(StrVar, LenVar, ItemsReadVar, ItemsWrittenVar, &cerr)
+	cret := xUtf8ToUcs4(StrVar, LenVar, uintptr(unsafe.Pointer(ItemsReadVar)), uintptr(unsafe.Pointer(ItemsWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1541,7 +1543,7 @@ func Utf8ToUcs4(StrVar string, LenVar int32, ItemsReadVar int32, ItemsWrittenVar
 
 }
 
-var xUtf8ToUcs4Fast func(string, int32, int32) uint32
+var xUtf8ToUcs4Fast func(string, int32, uintptr) uint32
 
 // Convert a string from UTF-8 to a 32-bit fixed width
 // representation as UCS-4, assuming valid UTF-8 input.
@@ -1549,21 +1551,21 @@ var xUtf8ToUcs4Fast func(string, int32, int32) uint32
 // This function is roughly twice as fast as [func@GLib.utf8_to_ucs4]
 // but does no error checking on the input. A trailing nul character (U+0000)
 // will be added to the string after the converted text.
-func Utf8ToUcs4Fast(StrVar string, LenVar int32, ItemsWrittenVar int32) uint32 {
+func Utf8ToUcs4Fast(StrVar string, LenVar int32, ItemsWrittenVar *int32) uint32 {
 
-	cret := xUtf8ToUcs4Fast(StrVar, LenVar, ItemsWrittenVar)
+	cret := xUtf8ToUcs4Fast(StrVar, LenVar, uintptr(unsafe.Pointer(ItemsWrittenVar)))
 	return cret
 }
 
-var xUtf8ToUtf16 func(string, int32, int32, int32, **Error) uint16
+var xUtf8ToUtf16 func(string, int32, uintptr, uintptr, **Error) uint16
 
 // Convert a string from UTF-8 to UTF-16.
 //
 // A nul character (U+0000) will be added to the result after the converted text.
-func Utf8ToUtf16(StrVar string, LenVar int32, ItemsReadVar int32, ItemsWrittenVar int32) (uint16, error) {
+func Utf8ToUtf16(StrVar string, LenVar int32, ItemsReadVar *int32, ItemsWrittenVar *int32) (uint16, error) {
 	var cerr *Error
 
-	cret := xUtf8ToUtf16(StrVar, LenVar, ItemsReadVar, ItemsWrittenVar, &cerr)
+	cret := xUtf8ToUtf16(StrVar, LenVar, uintptr(unsafe.Pointer(ItemsReadVar)), uintptr(unsafe.Pointer(ItemsWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1584,7 +1586,7 @@ func Utf8TruncateMiddle(StringVar string, TruncateLengthVar uint) string {
 	return cret
 }
 
-var xUtf8Validate func([]byte, int, []byte) bool
+var xUtf8Validate func([]byte, int, uintptr) bool
 
 // Validates UTF-8 encoded text.
 //
@@ -1603,21 +1605,21 @@ var xUtf8Validate func([]byte, int, []byte) bool
 // routines require valid UTF-8 as input; so data read from a file
 // or the network should be checked with `g_utf8_validate()` before
 // doing anything else with it.
-func Utf8Validate(StrVar []byte, MaxLenVar int, EndVar []byte) bool {
+func Utf8Validate(StrVar []byte, MaxLenVar int, EndVar *[]byte) bool {
 
-	cret := xUtf8Validate(StrVar, MaxLenVar, EndVar)
+	cret := xUtf8Validate(StrVar, MaxLenVar, uintptr(unsafe.Pointer(EndVar)))
 	return cret
 }
 
-var xUtf8ValidateLen func([]byte, uint, []byte) bool
+var xUtf8ValidateLen func([]byte, uint, uintptr) bool
 
 // Validates UTF-8 encoded text.
 //
 // As with [func@GLib.utf8_validate], but @max_len must be set, and hence this
 // function will always return `FALSE` if any of the bytes of @str are nul.
-func Utf8ValidateLen(StrVar []byte, MaxLenVar uint, EndVar []byte) bool {
+func Utf8ValidateLen(StrVar []byte, MaxLenVar uint, EndVar *[]byte) bool {
 
-	cret := xUtf8ValidateLen(StrVar, MaxLenVar, EndVar)
+	cret := xUtf8ValidateLen(StrVar, MaxLenVar, uintptr(unsafe.Pointer(EndVar)))
 	return cret
 }
 

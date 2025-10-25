@@ -2,11 +2,13 @@
 package glib
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
-var xGetCharset func(string) bool
+var xGetCharset func(uintptr) bool
 
 // Obtains the character set for the [current locale](running.html#locale);
 // you might use this character set as an argument to g_convert(), to convert
@@ -29,9 +31,9 @@ var xGetCharset func(string) bool
 //
 // The string returned in @charset is not allocated, and should not be
 // freed.
-func GetCharset(CharsetVar string) bool {
+func GetCharset(CharsetVar *string) bool {
 
-	cret := xGetCharset(CharsetVar)
+	cret := xGetCharset(uintptr(unsafe.Pointer(CharsetVar)))
 	return cret
 }
 
@@ -44,7 +46,7 @@ func GetCodeset() string {
 	return cret
 }
 
-var xGetConsoleCharset func(string) bool
+var xGetConsoleCharset func(uintptr) bool
 
 // Obtains the character set used by the console attached to the process,
 // which is suitable for printing output to the terminal.
@@ -63,9 +65,9 @@ var xGetConsoleCharset func(string) bool
 //
 // The string returned in @charset is not allocated, and should not be
 // freed.
-func GetConsoleCharset(CharsetVar string) bool {
+func GetConsoleCharset(CharsetVar *string) bool {
 
-	cret := xGetConsoleCharset(CharsetVar)
+	cret := xGetConsoleCharset(uintptr(unsafe.Pointer(CharsetVar)))
 	return cret
 }
 

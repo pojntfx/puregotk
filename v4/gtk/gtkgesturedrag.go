@@ -61,29 +61,29 @@ func NewGestureDrag() *GestureDrag {
 	return cls
 }
 
-var xGestureDragGetOffset func(uintptr, float64, float64) bool
+var xGestureDragGetOffset func(uintptr, uintptr, uintptr) bool
 
 // Gets the offset from the start point.
 //
 // If the @gesture is active, this function returns %TRUE and
 // fills in @x and @y with the coordinates of the current point,
 // as an offset to the starting drag point.
-func (x *GestureDrag) GetOffset(XVar float64, YVar float64) bool {
+func (x *GestureDrag) GetOffset(XVar *float64, YVar *float64) bool {
 
-	cret := xGestureDragGetOffset(x.GoPointer(), XVar, YVar)
+	cret := xGestureDragGetOffset(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)))
 	return cret
 }
 
-var xGestureDragGetStartPoint func(uintptr, float64, float64) bool
+var xGestureDragGetStartPoint func(uintptr, uintptr, uintptr) bool
 
 // Gets the point where the drag started.
 //
 // If the @gesture is active, this function returns %TRUE
 // and fills in @x and @y with the drag start coordinates,
 // in widget-relative coordinates.
-func (x *GestureDrag) GetStartPoint(XVar float64, YVar float64) bool {
+func (x *GestureDrag) GetStartPoint(XVar *float64, YVar *float64) bool {
 
-	cret := xGestureDragGetStartPoint(x.GoPointer(), XVar, YVar)
+	cret := xGestureDragGetStartPoint(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)))
 	return cret
 }
 

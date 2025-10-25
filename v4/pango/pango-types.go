@@ -56,7 +56,7 @@ func (x *Language) GetSampleString() string {
 	return cret
 }
 
-var xLanguageGetScripts func(uintptr, int) uintptr
+var xLanguageGetScripts func(uintptr, uintptr) uintptr
 
 // Determines the scripts used to to write @language.
 //
@@ -81,9 +81,9 @@ var xLanguageGetScripts func(uintptr, int) uintptr
 // Note: while the return value is declared as `PangoScript`, the
 // returned values are from the `GUnicodeScript` enumeration, which
 // may have more values. Callers need to handle unknown values.
-func (x *Language) GetScripts(NumScriptsVar int) uintptr {
+func (x *Language) GetScripts(NumScriptsVar *int) uintptr {
 
-	cret := xLanguageGetScripts(x.GoPointer(), NumScriptsVar)
+	cret := xLanguageGetScripts(x.GoPointer(), uintptr(unsafe.Pointer(NumScriptsVar)))
 	return cret
 }
 

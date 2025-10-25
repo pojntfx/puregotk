@@ -965,13 +965,13 @@ func (x *TextBuffer) EndUserAction() {
 
 }
 
-var xTextBufferGetBounds func(uintptr, *TextIter, *TextIter)
+var xTextBufferGetBounds func(uintptr, uintptr, uintptr)
 
 // Retrieves the first and last iterators in the buffer, i.e. the
 // entire buffer lies within the range [@start,@end).
 func (x *TextBuffer) GetBounds(StartVar *TextIter, EndVar *TextIter) {
 
-	xTextBufferGetBounds(x.GoPointer(), StartVar, EndVar)
+	xTextBufferGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(StartVar)), uintptr(unsafe.Pointer(EndVar)))
 
 }
 
@@ -1022,7 +1022,7 @@ func (x *TextBuffer) GetEnableUndo() bool {
 	return cret
 }
 
-var xTextBufferGetEndIter func(uintptr, *TextIter)
+var xTextBufferGetEndIter func(uintptr, uintptr)
 
 // Initializes @iter with the “end iterator,” one past the last valid
 // character in the text buffer.
@@ -1034,7 +1034,7 @@ var xTextBufferGetEndIter func(uintptr, *TextIter)
 // character position 0) to the end iterator.
 func (x *TextBuffer) GetEndIter(IterVar *TextIter) {
 
-	xTextBufferGetEndIter(x.GoPointer(), IterVar)
+	xTextBufferGetEndIter(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)))
 
 }
 
@@ -1068,16 +1068,16 @@ func (x *TextBuffer) GetInsert() *TextMark {
 	return cls
 }
 
-var xTextBufferGetIterAtChildAnchor func(uintptr, *TextIter, uintptr)
+var xTextBufferGetIterAtChildAnchor func(uintptr, uintptr, uintptr)
 
 // Obtains the location of @anchor within @buffer.
 func (x *TextBuffer) GetIterAtChildAnchor(IterVar *TextIter, AnchorVar *TextChildAnchor) {
 
-	xTextBufferGetIterAtChildAnchor(x.GoPointer(), IterVar, AnchorVar.GoPointer())
+	xTextBufferGetIterAtChildAnchor(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), AnchorVar.GoPointer())
 
 }
 
-var xTextBufferGetIterAtLine func(uintptr, *TextIter, int) bool
+var xTextBufferGetIterAtLine func(uintptr, uintptr, int) bool
 
 // Initializes @iter to the start of the given line.
 //
@@ -1085,11 +1085,11 @@ var xTextBufferGetIterAtLine func(uintptr, *TextIter, int) bool
 // in the @buffer, the end iterator is returned.
 func (x *TextBuffer) GetIterAtLine(IterVar *TextIter, LineNumberVar int) bool {
 
-	cret := xTextBufferGetIterAtLine(x.GoPointer(), IterVar, LineNumberVar)
+	cret := xTextBufferGetIterAtLine(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), LineNumberVar)
 	return cret
 }
 
-var xTextBufferGetIterAtLineIndex func(uintptr, *TextIter, int, int) bool
+var xTextBufferGetIterAtLineIndex func(uintptr, uintptr, int, int) bool
 
 // Obtains an iterator pointing to @byte_index within the given line.
 //
@@ -1101,11 +1101,11 @@ var xTextBufferGetIterAtLineIndex func(uintptr, *TextIter, int, int) bool
 // end of the line, the iterator at the end of the line is returned.
 func (x *TextBuffer) GetIterAtLineIndex(IterVar *TextIter, LineNumberVar int, ByteIndexVar int) bool {
 
-	cret := xTextBufferGetIterAtLineIndex(x.GoPointer(), IterVar, LineNumberVar, ByteIndexVar)
+	cret := xTextBufferGetIterAtLineIndex(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), LineNumberVar, ByteIndexVar)
 	return cret
 }
 
-var xTextBufferGetIterAtLineOffset func(uintptr, *TextIter, int, int) bool
+var xTextBufferGetIterAtLineOffset func(uintptr, uintptr, int, int) bool
 
 // Obtains an iterator pointing to @char_offset within the given line.
 //
@@ -1117,20 +1117,20 @@ var xTextBufferGetIterAtLineOffset func(uintptr, *TextIter, int, int) bool
 // end of the line, the iterator at the end of the line is returned.
 func (x *TextBuffer) GetIterAtLineOffset(IterVar *TextIter, LineNumberVar int, CharOffsetVar int) bool {
 
-	cret := xTextBufferGetIterAtLineOffset(x.GoPointer(), IterVar, LineNumberVar, CharOffsetVar)
+	cret := xTextBufferGetIterAtLineOffset(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), LineNumberVar, CharOffsetVar)
 	return cret
 }
 
-var xTextBufferGetIterAtMark func(uintptr, *TextIter, uintptr)
+var xTextBufferGetIterAtMark func(uintptr, uintptr, uintptr)
 
 // Initializes @iter with the current position of @mark.
 func (x *TextBuffer) GetIterAtMark(IterVar *TextIter, MarkVar *TextMark) {
 
-	xTextBufferGetIterAtMark(x.GoPointer(), IterVar, MarkVar.GoPointer())
+	xTextBufferGetIterAtMark(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), MarkVar.GoPointer())
 
 }
 
-var xTextBufferGetIterAtOffset func(uintptr, *TextIter, int)
+var xTextBufferGetIterAtOffset func(uintptr, uintptr, int)
 
 // Initializes @iter to a position @char_offset chars from the start
 // of the entire buffer.
@@ -1140,7 +1140,7 @@ var xTextBufferGetIterAtOffset func(uintptr, *TextIter, int)
 // the iterator one past the last valid character in the buffer.
 func (x *TextBuffer) GetIterAtOffset(IterVar *TextIter, CharOffsetVar int) {
 
-	xTextBufferGetIterAtOffset(x.GoPointer(), IterVar, CharOffsetVar)
+	xTextBufferGetIterAtOffset(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), CharOffsetVar)
 
 }
 
@@ -1227,7 +1227,7 @@ func (x *TextBuffer) GetSelectionBound() *TextMark {
 	return cls
 }
 
-var xTextBufferGetSelectionBounds func(uintptr, *TextIter, *TextIter) bool
+var xTextBufferGetSelectionBounds func(uintptr, uintptr, uintptr) bool
 
 // Returns %TRUE if some text is selected; places the bounds
 // of the selection in @start and @end.
@@ -1238,7 +1238,7 @@ var xTextBufferGetSelectionBounds func(uintptr, *TextIter, *TextIter) bool
 // return value still indicates whether text is selected.
 func (x *TextBuffer) GetSelectionBounds(StartVar *TextIter, EndVar *TextIter) bool {
 
-	cret := xTextBufferGetSelectionBounds(x.GoPointer(), StartVar, EndVar)
+	cret := xTextBufferGetSelectionBounds(x.GoPointer(), uintptr(unsafe.Pointer(StartVar)), uintptr(unsafe.Pointer(EndVar)))
 	return cret
 }
 
@@ -1279,7 +1279,7 @@ func (x *TextBuffer) GetSlice(StartVar *TextIter, EndVar *TextIter, IncludeHidde
 	return cret
 }
 
-var xTextBufferGetStartIter func(uintptr, *TextIter)
+var xTextBufferGetStartIter func(uintptr, uintptr)
 
 // Initialized @iter with the first position in the text buffer.
 //
@@ -1287,7 +1287,7 @@ var xTextBufferGetStartIter func(uintptr, *TextIter)
 // to get the iter at character offset 0.
 func (x *TextBuffer) GetStartIter(IterVar *TextIter) {
 
-	xTextBufferGetStartIter(x.GoPointer(), IterVar)
+	xTextBufferGetStartIter(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)))
 
 }
 

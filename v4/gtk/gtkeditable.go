@@ -178,25 +178,25 @@ func (x *EditableInterface) GetDoDeleteText() func(Editable, int, int) {
 }
 
 // OverrideGetSelectionBounds sets the callback function.
-func (x *EditableInterface) OverrideGetSelectionBounds(cb func(Editable, int, int) bool) {
+func (x *EditableInterface) OverrideGetSelectionBounds(cb func(Editable, *int, *int) bool) {
 	if cb == nil {
 		x.xGetSelectionBounds = 0
 	} else {
-		x.xGetSelectionBounds = purego.NewCallback(func(EditableVarp uintptr, StartPosVarp int, EndPosVarp int) bool {
-			return cb(&EditableBase{Ptr: EditableVarp}, StartPosVarp, EndPosVarp)
+		x.xGetSelectionBounds = purego.NewCallback(func(EditableVarp uintptr, StartPosVarp uintptr, EndPosVarp uintptr) bool {
+			return cb(&EditableBase{Ptr: EditableVarp}, (*int)(unsafe.Pointer(StartPosVarp)), (*int)(unsafe.Pointer(EndPosVarp)))
 		})
 	}
 }
 
 // GetGetSelectionBounds gets the callback function.
-func (x *EditableInterface) GetGetSelectionBounds() func(Editable, int, int) bool {
+func (x *EditableInterface) GetGetSelectionBounds() func(Editable, *int, *int) bool {
 	if x.xGetSelectionBounds == 0 {
 		return nil
 	}
-	var rawCallback func(EditableVarp uintptr, StartPosVarp int, EndPosVarp int) bool
+	var rawCallback func(EditableVarp uintptr, StartPosVarp uintptr, EndPosVarp uintptr) bool
 	purego.RegisterFunc(&rawCallback, x.xGetSelectionBounds)
-	return func(EditableVar Editable, StartPosVar int, EndPosVar int) bool {
-		return rawCallback(EditableVar.GoPointer(), StartPosVar, EndPosVar)
+	return func(EditableVar Editable, StartPosVar *int, EndPosVar *int) bool {
+		return rawCallback(EditableVar.GoPointer(), uintptr(unsafe.Pointer(StartPosVar)), uintptr(unsafe.Pointer(EndPosVar)))
 	}
 }
 
@@ -412,7 +412,7 @@ type Editable interface {
 	GetEnableUndo() bool
 	GetMaxWidthChars() int
 	GetPosition() int
-	GetSelectionBounds(StartPosVar int, EndPosVar int) bool
+	GetSelectionBounds(StartPosVar *int, EndPosVar *int) bool
 	GetText() string
 	GetWidthChars() int
 	InitDelegate()
@@ -600,9 +600,9 @@ func (x *EditableBase) GetPosition() int {
 // and %FALSE will be returned.
 //
 // Note that positions are specified in characters, not bytes.
-func (x *EditableBase) GetSelectionBounds(StartPosVar int, EndPosVar int) bool {
+func (x *EditableBase) GetSelectionBounds(StartPosVar *int, EndPosVar *int) bool {
 
-	cret := XGtkEditableGetSelectionBounds(x.GoPointer(), StartPosVar, EndPosVar)
+	cret := XGtkEditableGetSelectionBounds(x.GoPointer(), uintptr(unsafe.Pointer(StartPosVar)), uintptr(unsafe.Pointer(EndPosVar)))
 	return cret
 }
 
@@ -743,7 +743,7 @@ var XGtkEditableGetEditable func(uintptr) bool
 var XGtkEditableGetEnableUndo func(uintptr) bool
 var XGtkEditableGetMaxWidthChars func(uintptr) int
 var XGtkEditableGetPosition func(uintptr) int
-var XGtkEditableGetSelectionBounds func(uintptr, int, int) bool
+var XGtkEditableGetSelectionBounds func(uintptr, uintptr, uintptr) bool
 var XGtkEditableGetText func(uintptr) string
 var XGtkEditableGetWidthChars func(uintptr) int
 var XGtkEditableInitDelegate func(uintptr)

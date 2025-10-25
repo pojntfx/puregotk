@@ -2,6 +2,8 @@
 package glib
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 )
@@ -28,16 +30,16 @@ func BitLock(AddressVar uintptr, LockBitVar int) {
 
 }
 
-var xBitLockAndGet func(uintptr, uint, int)
+var xBitLockAndGet func(uintptr, uint, uintptr)
 
 // Sets the indicated @lock_bit in @address and atomically returns the new value.
 //
 // This is like [func@GLib.bit_lock], except it can atomically return the new value at
 // @address (right after obtaining the lock). Thus the value returned in @out_val
 // always has the @lock_bit set.
-func BitLockAndGet(AddressVar uintptr, LockBitVar uint, OutValVar int) {
+func BitLockAndGet(AddressVar uintptr, LockBitVar uint, OutValVar *int) {
 
-	xBitLockAndGet(AddressVar, LockBitVar, OutValVar)
+	xBitLockAndGet(AddressVar, LockBitVar, uintptr(unsafe.Pointer(OutValVar)))
 
 }
 
@@ -117,9 +119,9 @@ var xPointerBitLockAndGet func(uintptr, uint, uintptr)
 //
 // For portability reasons, you may only lock on the bottom 32 bits of
 // the pointer.
-func PointerBitLockAndGet(AddressVar uintptr, LockBitVar uint, OutPtrVar uintptr) {
+func PointerBitLockAndGet(AddressVar uintptr, LockBitVar uint, OutPtrVar *uintptr) {
 
-	xPointerBitLockAndGet(AddressVar, LockBitVar, OutPtrVar)
+	xPointerBitLockAndGet(AddressVar, LockBitVar, uintptr(unsafe.Pointer(OutPtrVar)))
 
 }
 

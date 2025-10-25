@@ -74,7 +74,7 @@ func (x *ListStore) Append(ItemVar *gobject.Object) {
 
 }
 
-var xListStoreFind func(uintptr, uintptr, uint) bool
+var xListStoreFind func(uintptr, uintptr, uintptr) bool
 
 // Looks up the given @item in the list store by looping over the items until
 // the first occurrence of @item. If @item was not found, then @position will
@@ -82,13 +82,13 @@ var xListStoreFind func(uintptr, uintptr, uint) bool
 //
 // If you need to compare the two items with a custom comparison function, use
 // g_list_store_find_with_equal_func() with a custom #GEqualFunc instead.
-func (x *ListStore) Find(ItemVar *gobject.Object, PositionVar uint) bool {
+func (x *ListStore) Find(ItemVar *gobject.Object, PositionVar *uint) bool {
 
-	cret := xListStoreFind(x.GoPointer(), ItemVar.GoPointer(), PositionVar)
+	cret := xListStoreFind(x.GoPointer(), ItemVar.GoPointer(), uintptr(unsafe.Pointer(PositionVar)))
 	return cret
 }
 
-var xListStoreFindWithEqualFunc func(uintptr, uintptr, uintptr, uint) bool
+var xListStoreFindWithEqualFunc func(uintptr, uintptr, uintptr, uintptr) bool
 
 // Looks up the given @item in the list store by looping over the items and
 // comparing them with @equal_func until the first occurrence of @item which
@@ -98,13 +98,13 @@ var xListStoreFindWithEqualFunc func(uintptr, uintptr, uintptr, uint) bool
 // @item is always passed as second parameter to @equal_func.
 //
 // Since GLib 2.76 it is possible to pass `NULL` for @item.
-func (x *ListStore) FindWithEqualFunc(ItemVar *gobject.Object, EqualFuncVar *glib.EqualFunc, PositionVar uint) bool {
+func (x *ListStore) FindWithEqualFunc(ItemVar *gobject.Object, EqualFuncVar *glib.EqualFunc, PositionVar *uint) bool {
 
-	cret := xListStoreFindWithEqualFunc(x.GoPointer(), ItemVar.GoPointer(), glib.NewCallback(EqualFuncVar), PositionVar)
+	cret := xListStoreFindWithEqualFunc(x.GoPointer(), ItemVar.GoPointer(), glib.NewCallback(EqualFuncVar), uintptr(unsafe.Pointer(PositionVar)))
 	return cret
 }
 
-var xListStoreFindWithEqualFuncFull func(uintptr, uintptr, uintptr, uintptr, uint) bool
+var xListStoreFindWithEqualFuncFull func(uintptr, uintptr, uintptr, uintptr, uintptr) bool
 
 // Like g_list_store_find_with_equal_func() but with an additional @user_data
 // that is passed to @equal_func.
@@ -112,9 +112,9 @@ var xListStoreFindWithEqualFuncFull func(uintptr, uintptr, uintptr, uintptr, uin
 // @item is always passed as second parameter to @equal_func.
 //
 // Since GLib 2.76 it is possible to pass `NULL` for @item.
-func (x *ListStore) FindWithEqualFuncFull(ItemVar *gobject.Object, EqualFuncVar *glib.EqualFuncFull, UserDataVar uintptr, PositionVar uint) bool {
+func (x *ListStore) FindWithEqualFuncFull(ItemVar *gobject.Object, EqualFuncVar *glib.EqualFuncFull, UserDataVar uintptr, PositionVar *uint) bool {
 
-	cret := xListStoreFindWithEqualFuncFull(x.GoPointer(), ItemVar.GoPointer(), glib.NewCallback(EqualFuncVar), UserDataVar, PositionVar)
+	cret := xListStoreFindWithEqualFuncFull(x.GoPointer(), ItemVar.GoPointer(), glib.NewCallback(EqualFuncVar), UserDataVar, uintptr(unsafe.Pointer(PositionVar)))
 	return cret
 }
 

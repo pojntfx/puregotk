@@ -86,7 +86,7 @@ func (x *ColumnViewSorter) GetNSortColumns() uint {
 	return cret
 }
 
-var xColumnViewSorterGetNthSortColumn func(uintptr, uint, *SortType) uintptr
+var xColumnViewSorterGetNthSortColumn func(uintptr, uint, uintptr) uintptr
 
 // Gets the @position'th sort column and its associated sort order.
 //
@@ -95,7 +95,7 @@ var xColumnViewSorterGetNthSortColumn func(uintptr, uint, *SortType) uintptr
 func (x *ColumnViewSorter) GetNthSortColumn(PositionVar uint, SortOrderVar *SortType) *ColumnViewColumn {
 	var cls *ColumnViewColumn
 
-	cret := xColumnViewSorterGetNthSortColumn(x.GoPointer(), PositionVar, SortOrderVar)
+	cret := xColumnViewSorterGetNthSortColumn(x.GoPointer(), PositionVar, uintptr(unsafe.Pointer(SortOrderVar)))
 
 	if cret == 0 {
 		return nil

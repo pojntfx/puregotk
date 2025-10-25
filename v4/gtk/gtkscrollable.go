@@ -28,8 +28,8 @@ func (x *ScrollableInterface) OverrideGetBorder(cb func(Scrollable, *Border) boo
 	if cb == nil {
 		x.xGetBorder = 0
 	} else {
-		x.xGetBorder = purego.NewCallback(func(ScrollableVarp uintptr, BorderVarp *Border) bool {
-			return cb(&ScrollableBase{Ptr: ScrollableVarp}, BorderVarp)
+		x.xGetBorder = purego.NewCallback(func(ScrollableVarp uintptr, BorderVarp uintptr) bool {
+			return cb(&ScrollableBase{Ptr: ScrollableVarp}, (*Border)(unsafe.Pointer(BorderVarp)))
 		})
 	}
 }
@@ -39,10 +39,10 @@ func (x *ScrollableInterface) GetGetBorder() func(Scrollable, *Border) bool {
 	if x.xGetBorder == 0 {
 		return nil
 	}
-	var rawCallback func(ScrollableVarp uintptr, BorderVarp *Border) bool
+	var rawCallback func(ScrollableVarp uintptr, BorderVarp uintptr) bool
 	purego.RegisterFunc(&rawCallback, x.xGetBorder)
 	return func(ScrollableVar Scrollable, BorderVar *Border) bool {
-		return rawCallback(ScrollableVar.GoPointer(), BorderVar)
+		return rawCallback(ScrollableVar.GoPointer(), uintptr(unsafe.Pointer(BorderVar)))
 	}
 }
 
@@ -117,7 +117,7 @@ func (x *ScrollableBase) SetGoPointer(ptr uintptr) {
 // overshoot indication, at the right position.
 func (x *ScrollableBase) GetBorder(BorderVar *Border) bool {
 
-	cret := XGtkScrollableGetBorder(x.GoPointer(), BorderVar)
+	cret := XGtkScrollableGetBorder(x.GoPointer(), uintptr(unsafe.Pointer(BorderVar)))
 	return cret
 }
 
@@ -199,7 +199,7 @@ func (x *ScrollableBase) SetVscrollPolicy(PolicyVar ScrollablePolicy) {
 
 }
 
-var XGtkScrollableGetBorder func(uintptr, *Border) bool
+var XGtkScrollableGetBorder func(uintptr, uintptr) bool
 var XGtkScrollableGetHadjustment func(uintptr) uintptr
 var XGtkScrollableGetHscrollPolicy func(uintptr) ScrollablePolicy
 var XGtkScrollableGetVadjustment func(uintptr) uintptr

@@ -2,6 +2,8 @@
 package glib
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 )
@@ -19,7 +21,7 @@ const (
 	GShellErrorFailedValue ShellError = 2
 )
 
-var xShellParseArgv func(string, int, []string, **Error) bool
+var xShellParseArgv func(string, uintptr, uintptr, **Error) bool
 
 // Parses a command line into an argument vector, in much the same way
 // the shell would, but without many of the expansions the shell would
@@ -39,10 +41,10 @@ var xShellParseArgv func(string, int, []string, **Error) bool
 // successfully.
 //
 // Free the returned vector with g_strfreev().
-func ShellParseArgv(CommandLineVar string, ArgcpVar int, ArgvpVar []string) (bool, error) {
+func ShellParseArgv(CommandLineVar string, ArgcpVar *int, ArgvpVar *[]string) (bool, error) {
 	var cerr *Error
 
-	cret := xShellParseArgv(CommandLineVar, ArgcpVar, ArgvpVar, &cerr)
+	cret := xShellParseArgv(CommandLineVar, uintptr(unsafe.Pointer(ArgcpVar)), uintptr(unsafe.Pointer(ArgvpVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

@@ -87,7 +87,7 @@ func (x *Matrix) GetFontScaleFactor() float64 {
 	return cret
 }
 
-var xMatrixGetFontScaleFactors func(uintptr, float64, float64)
+var xMatrixGetFontScaleFactors func(uintptr, uintptr, uintptr)
 
 // Calculates the scale factor of a matrix on the width and height of the font.
 //
@@ -96,9 +96,9 @@ var xMatrixGetFontScaleFactors func(uintptr, float64, float64)
 // vector that the X coordinate is mapped to.
 //
 // Note that output numbers will always be non-negative.
-func (x *Matrix) GetFontScaleFactors(XscaleVar float64, YscaleVar float64) {
+func (x *Matrix) GetFontScaleFactors(XscaleVar *float64, YscaleVar *float64) {
 
-	xMatrixGetFontScaleFactors(x.GoPointer(), XscaleVar, YscaleVar)
+	xMatrixGetFontScaleFactors(x.GoPointer(), uintptr(unsafe.Pointer(XscaleVar)), uintptr(unsafe.Pointer(YscaleVar)))
 
 }
 

@@ -33,26 +33,26 @@ func (x *TlsPasswordClass) GoPointer() uintptr {
 
 // OverrideGetValue sets the callback function.
 // virtual method for g_tls_password_get_value()
-func (x *TlsPasswordClass) OverrideGetValue(cb func(*TlsPassword, uint) uintptr) {
+func (x *TlsPasswordClass) OverrideGetValue(cb func(*TlsPassword, *uint) uintptr) {
 	if cb == nil {
 		x.xGetValue = 0
 	} else {
-		x.xGetValue = purego.NewCallback(func(PasswordVarp uintptr, LengthVarp uint) uintptr {
-			return cb(TlsPasswordNewFromInternalPtr(PasswordVarp), LengthVarp)
+		x.xGetValue = purego.NewCallback(func(PasswordVarp uintptr, LengthVarp uintptr) uintptr {
+			return cb(TlsPasswordNewFromInternalPtr(PasswordVarp), (*uint)(unsafe.Pointer(LengthVarp)))
 		})
 	}
 }
 
 // GetGetValue gets the callback function.
 // virtual method for g_tls_password_get_value()
-func (x *TlsPasswordClass) GetGetValue() func(*TlsPassword, uint) uintptr {
+func (x *TlsPasswordClass) GetGetValue() func(*TlsPassword, *uint) uintptr {
 	if x.xGetValue == 0 {
 		return nil
 	}
-	var rawCallback func(PasswordVarp uintptr, LengthVarp uint) uintptr
+	var rawCallback func(PasswordVarp uintptr, LengthVarp uintptr) uintptr
 	purego.RegisterFunc(&rawCallback, x.xGetValue)
-	return func(PasswordVar *TlsPassword, LengthVar uint) uintptr {
-		return rawCallback(PasswordVar.GoPointer(), LengthVar)
+	return func(PasswordVar *TlsPassword, LengthVar *uint) uintptr {
+		return rawCallback(PasswordVar.GoPointer(), uintptr(unsafe.Pointer(LengthVar)))
 	}
 }
 
@@ -170,16 +170,16 @@ func (x *TlsPassword) GetFlags() TlsPasswordFlags {
 	return cret
 }
 
-var xTlsPasswordGetValue func(uintptr, uint) uintptr
+var xTlsPasswordGetValue func(uintptr, uintptr) uintptr
 
 // Get the password value. If @length is not %NULL then it will be
 // filled in with the length of the password value. (Note that the
 // password value is not nul-terminated, so you can only pass %NULL
 // for @length in contexts where you know the password will have a
 // certain fixed length.)
-func (x *TlsPassword) GetValue(LengthVar uint) uintptr {
+func (x *TlsPassword) GetValue(LengthVar *uint) uintptr {
 
-	cret := xTlsPasswordGetValue(x.GoPointer(), LengthVar)
+	cret := xTlsPasswordGetValue(x.GoPointer(), uintptr(unsafe.Pointer(LengthVar)))
 	return cret
 }
 

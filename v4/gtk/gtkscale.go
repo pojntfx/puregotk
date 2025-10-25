@@ -33,25 +33,25 @@ func (x *ScaleClass) GoPointer() uintptr {
 }
 
 // OverrideGetLayoutOffsets sets the callback function.
-func (x *ScaleClass) OverrideGetLayoutOffsets(cb func(*Scale, int, int)) {
+func (x *ScaleClass) OverrideGetLayoutOffsets(cb func(*Scale, *int, *int)) {
 	if cb == nil {
 		x.xGetLayoutOffsets = 0
 	} else {
-		x.xGetLayoutOffsets = purego.NewCallback(func(ScaleVarp uintptr, XVarp int, YVarp int) {
-			cb(ScaleNewFromInternalPtr(ScaleVarp), XVarp, YVarp)
+		x.xGetLayoutOffsets = purego.NewCallback(func(ScaleVarp uintptr, XVarp uintptr, YVarp uintptr) {
+			cb(ScaleNewFromInternalPtr(ScaleVarp), (*int)(unsafe.Pointer(XVarp)), (*int)(unsafe.Pointer(YVarp)))
 		})
 	}
 }
 
 // GetGetLayoutOffsets gets the callback function.
-func (x *ScaleClass) GetGetLayoutOffsets() func(*Scale, int, int) {
+func (x *ScaleClass) GetGetLayoutOffsets() func(*Scale, *int, *int) {
 	if x.xGetLayoutOffsets == 0 {
 		return nil
 	}
-	var rawCallback func(ScaleVarp uintptr, XVarp int, YVarp int)
+	var rawCallback func(ScaleVarp uintptr, XVarp uintptr, YVarp uintptr)
 	purego.RegisterFunc(&rawCallback, x.xGetLayoutOffsets)
-	return func(ScaleVar *Scale, XVar int, YVar int) {
-		rawCallback(ScaleVar.GoPointer(), XVar, YVar)
+	return func(ScaleVar *Scale, XVar *int, YVar *int) {
+		rawCallback(ScaleVar.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)))
 	}
 }
 
@@ -285,7 +285,7 @@ func (x *Scale) GetLayout() *pango.Layout {
 	return cls
 }
 
-var xScaleGetLayoutOffsets func(uintptr, int, int)
+var xScaleGetLayoutOffsets func(uintptr, uintptr, uintptr)
 
 // Obtains the coordinates where the scale will draw the
 // `PangoLayout` representing the text in the scale.
@@ -295,9 +295,9 @@ var xScaleGetLayoutOffsets func(uintptr, int, int)
 //
 // If the [property@Gtk.Scale:draw-value] property is %FALSE, the return
 // values are undefined.
-func (x *Scale) GetLayoutOffsets(XVar int, YVar int) {
+func (x *Scale) GetLayoutOffsets(XVar *int, YVar *int) {
 
-	xScaleGetLayoutOffsets(x.GoPointer(), XVar, YVar)
+	xScaleGetLayoutOffsets(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)))
 
 }
 
@@ -446,9 +446,9 @@ func (x *Scale) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *Scale) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *Scale) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 

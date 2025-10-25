@@ -168,7 +168,7 @@ func (x *FontDialog) ChooseFontAndFeatures(ParentVar *Window, InitialValueVar *p
 
 }
 
-var xFontDialogChooseFontAndFeaturesFinish func(uintptr, uintptr, **pango.FontDescription, string, **pango.Language, **glib.Error) bool
+var xFontDialogChooseFontAndFeaturesFinish func(uintptr, uintptr, uintptr, uintptr, uintptr, **glib.Error) bool
 
 // Finishes the [method@Gtk.FontDialog.choose_font_and_features] call.
 //
@@ -177,10 +177,10 @@ var xFontDialogChooseFontAndFeaturesFinish func(uintptr, uintptr, **pango.FontDe
 //
 // Note that this function returns a [error@Gtk.DialogError.DISMISSED]
 // error if the user cancels the dialog.
-func (x *FontDialog) ChooseFontAndFeaturesFinish(ResultVar gio.AsyncResult, FontDescVar **pango.FontDescription, FontFeaturesVar string, LanguageVar **pango.Language) (bool, error) {
+func (x *FontDialog) ChooseFontAndFeaturesFinish(ResultVar gio.AsyncResult, FontDescVar **pango.FontDescription, FontFeaturesVar *string, LanguageVar **pango.Language) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xFontDialogChooseFontAndFeaturesFinish(x.GoPointer(), ResultVar.GoPointer(), FontDescVar, FontFeaturesVar, LanguageVar, &cerr)
+	cret := xFontDialogChooseFontAndFeaturesFinish(x.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(FontDescVar)), uintptr(unsafe.Pointer(FontFeaturesVar)), uintptr(unsafe.Pointer(LanguageVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

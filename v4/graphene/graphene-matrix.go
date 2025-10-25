@@ -39,7 +39,7 @@ func MatrixAlloc() *Matrix {
 	return cret
 }
 
-var xMatrixDecompose func(uintptr, *Vec3, *Vec3, *Quaternion, *Vec3, *Vec4) bool
+var xMatrixDecompose func(uintptr, uintptr, uintptr, uintptr, uintptr, uintptr) bool
 
 // Decomposes a transformation matrix into its component transformations.
 //
@@ -50,7 +50,7 @@ var xMatrixDecompose func(uintptr, *Vec3, *Vec3, *Quaternion, *Vec3, *Vec4) bool
 // [available online](http://web.archive.org/web/20150512160205/http://tog.acm.org/resources/GraphicsGems/gemsii/unmatrix.c).
 func (x *Matrix) Decompose(TranslateVar *Vec3, ScaleVar *Vec3, RotateVar *Quaternion, ShearVar *Vec3, PerspectiveVar *Vec4) bool {
 
-	cret := xMatrixDecompose(x.GoPointer(), TranslateVar, ScaleVar, RotateVar, ShearVar, PerspectiveVar)
+	cret := xMatrixDecompose(x.GoPointer(), uintptr(unsafe.Pointer(TranslateVar)), uintptr(unsafe.Pointer(ScaleVar)), uintptr(unsafe.Pointer(RotateVar)), uintptr(unsafe.Pointer(ShearVar)), uintptr(unsafe.Pointer(PerspectiveVar)))
 	return cret
 }
 
@@ -114,12 +114,12 @@ func (x *Matrix) Free() {
 
 }
 
-var xMatrixGetRow func(uintptr, uint, *Vec4)
+var xMatrixGetRow func(uintptr, uint, uintptr)
 
 // Retrieves the given row vector at @index_ inside a matrix.
 func (x *Matrix) GetRow(IndexVar uint, ResVar *Vec4) {
 
-	xMatrixGetRow(x.GoPointer(), IndexVar, ResVar)
+	xMatrixGetRow(x.GoPointer(), IndexVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -340,7 +340,7 @@ func (x *Matrix) InitTranslate(PVar *Point3D) *Matrix {
 	return cret
 }
 
-var xMatrixInterpolate func(uintptr, *Matrix, float64, *Matrix)
+var xMatrixInterpolate func(uintptr, *Matrix, float64, uintptr)
 
 // Linearly interpolates the two given #graphene_matrix_t by
 // interpolating the decomposed transformations separately.
@@ -350,16 +350,16 @@ var xMatrixInterpolate func(uintptr, *Matrix, float64, *Matrix)
 // will return an identity matrix.
 func (x *Matrix) Interpolate(BVar *Matrix, FactorVar float64, ResVar *Matrix) {
 
-	xMatrixInterpolate(x.GoPointer(), BVar, FactorVar, ResVar)
+	xMatrixInterpolate(x.GoPointer(), BVar, FactorVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixInverse func(uintptr, *Matrix) bool
+var xMatrixInverse func(uintptr, uintptr) bool
 
 // Inverts the given matrix.
 func (x *Matrix) Inverse(ResVar *Matrix) bool {
 
-	cret := xMatrixInverse(x.GoPointer(), ResVar)
+	cret := xMatrixInverse(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 	return cret
 }
 
@@ -400,7 +400,7 @@ func (x *Matrix) IsSingular() bool {
 	return cret
 }
 
-var xMatrixMultiply func(uintptr, *Matrix, *Matrix)
+var xMatrixMultiply func(uintptr, *Matrix, uintptr)
 
 // Multiplies two #graphene_matrix_t.
 //
@@ -408,7 +408,7 @@ var xMatrixMultiply func(uintptr, *Matrix, *Matrix)
 // The product of this multiplication is (@a × @b)
 func (x *Matrix) Multiply(BVar *Matrix, ResVar *Matrix) {
 
-	xMatrixMultiply(x.GoPointer(), BVar, ResVar)
+	xMatrixMultiply(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -423,21 +423,21 @@ func (x *Matrix) Near(BVar *Matrix, EpsilonVar float32) bool {
 	return cret
 }
 
-var xMatrixNormalize func(uintptr, *Matrix)
+var xMatrixNormalize func(uintptr, uintptr)
 
 // Normalizes the given #graphene_matrix_t.
 func (x *Matrix) Normalize(ResVar *Matrix) {
 
-	xMatrixNormalize(x.GoPointer(), ResVar)
+	xMatrixNormalize(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixPerspective func(uintptr, float32, *Matrix)
+var xMatrixPerspective func(uintptr, float32, uintptr)
 
 // Applies a perspective of @depth to the matrix.
 func (x *Matrix) Perspective(DepthVar float32, ResVar *Matrix) {
 
-	xMatrixPerspective(x.GoPointer(), DepthVar, ResVar)
+	xMatrixPerspective(x.GoPointer(), DepthVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -453,27 +453,27 @@ func (x *Matrix) Print() {
 
 }
 
-var xMatrixProjectPoint func(uintptr, *Point, *Point)
+var xMatrixProjectPoint func(uintptr, *Point, uintptr)
 
 // Projects a #graphene_point_t using the matrix @m.
 func (x *Matrix) ProjectPoint(PVar *Point, ResVar *Point) {
 
-	xMatrixProjectPoint(x.GoPointer(), PVar, ResVar)
+	xMatrixProjectPoint(x.GoPointer(), PVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixProjectRect func(uintptr, *Rect, *Quad)
+var xMatrixProjectRect func(uintptr, *Rect, uintptr)
 
 // Projects all corners of a #graphene_rect_t using the given matrix.
 //
 // See also: graphene_matrix_project_point()
 func (x *Matrix) ProjectRect(RVar *Rect, ResVar *Quad) {
 
-	xMatrixProjectRect(x.GoPointer(), RVar, ResVar)
+	xMatrixProjectRect(x.GoPointer(), RVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixProjectRectBounds func(uintptr, *Rect, *Rect)
+var xMatrixProjectRectBounds func(uintptr, *Rect, uintptr)
 
 // Projects a #graphene_rect_t using the given matrix.
 //
@@ -481,7 +481,7 @@ var xMatrixProjectRectBounds func(uintptr, *Rect, *Rect)
 // of fully containing the projected rectangle.
 func (x *Matrix) ProjectRectBounds(RVar *Rect, ResVar *Rect) {
 
-	xMatrixProjectRectBounds(x.GoPointer(), RVar, ResVar)
+	xMatrixProjectRectBounds(x.GoPointer(), RVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -597,7 +597,7 @@ func (x *Matrix) SkewYz(FactorVar float32) {
 
 }
 
-var xMatrixTo2d func(uintptr, float64, float64, float64, float64, float64, float64) bool
+var xMatrixTo2d func(uintptr, uintptr, uintptr, uintptr, uintptr, uintptr, uintptr) bool
 
 // Converts a #graphene_matrix_t to an affine transformation
 // matrix, if the given matrix is compatible.
@@ -614,23 +614,23 @@ var xMatrixTo2d func(uintptr, float64, float64, float64, float64, float64, float
 //
 // This function can be used to convert between a #graphene_matrix_t
 // and an affine matrix type from other libraries.
-func (x *Matrix) To2d(XxVar float64, YxVar float64, XyVar float64, YyVar float64, X0Var float64, Y0Var float64) bool {
+func (x *Matrix) To2d(XxVar *float64, YxVar *float64, XyVar *float64, YyVar *float64, X0Var *float64, Y0Var *float64) bool {
 
-	cret := xMatrixTo2d(x.GoPointer(), XxVar, YxVar, XyVar, YyVar, X0Var, Y0Var)
+	cret := xMatrixTo2d(x.GoPointer(), uintptr(unsafe.Pointer(XxVar)), uintptr(unsafe.Pointer(YxVar)), uintptr(unsafe.Pointer(XyVar)), uintptr(unsafe.Pointer(YyVar)), uintptr(unsafe.Pointer(X0Var)), uintptr(unsafe.Pointer(Y0Var)))
 	return cret
 }
 
-var xMatrixToFloat func(uintptr, [16]float32)
+var xMatrixToFloat func(uintptr, uintptr)
 
 // Converts a #graphene_matrix_t to an array of floating point
 // values.
-func (x *Matrix) ToFloat(VVar [16]float32) {
+func (x *Matrix) ToFloat(VVar *[16]float32) {
 
-	xMatrixToFloat(x.GoPointer(), VVar)
+	xMatrixToFloat(x.GoPointer(), uintptr(unsafe.Pointer(VVar)))
 
 }
 
-var xMatrixTransformBounds func(uintptr, *Rect, *Rect)
+var xMatrixTransformBounds func(uintptr, *Rect, uintptr)
 
 // Transforms each corner of a #graphene_rect_t using the given matrix @m.
 //
@@ -640,11 +640,11 @@ var xMatrixTransformBounds func(uintptr, *Rect, *Rect)
 // See also: graphene_matrix_transform_point()
 func (x *Matrix) TransformBounds(RVar *Rect, ResVar *Rect) {
 
-	xMatrixTransformBounds(x.GoPointer(), RVar, ResVar)
+	xMatrixTransformBounds(x.GoPointer(), RVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixTransformBox func(uintptr, *Box, *Box)
+var xMatrixTransformBox func(uintptr, *Box, uintptr)
 
 // Transforms the vertices of a #graphene_box_t using the given matrix @m.
 //
@@ -652,11 +652,11 @@ var xMatrixTransformBox func(uintptr, *Box, *Box)
 // vertices.
 func (x *Matrix) TransformBox(BVar *Box, ResVar *Box) {
 
-	xMatrixTransformBox(x.GoPointer(), BVar, ResVar)
+	xMatrixTransformBox(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixTransformPoint func(uintptr, *Point, *Point)
+var xMatrixTransformPoint func(uintptr, *Point, uintptr)
 
 // Transforms the given #graphene_point_t using the matrix @m.
 //
@@ -667,11 +667,11 @@ var xMatrixTransformPoint func(uintptr, *Point, *Point)
 // See also: graphene_simd4x4f_point3_mul()
 func (x *Matrix) TransformPoint(PVar *Point, ResVar *Point) {
 
-	xMatrixTransformPoint(x.GoPointer(), PVar, ResVar)
+	xMatrixTransformPoint(x.GoPointer(), PVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixTransformPoint3d func(uintptr, *Point3D, *Point3D)
+var xMatrixTransformPoint3d func(uintptr, *Point3D, uintptr)
 
 // Transforms the given #graphene_point3d_t using the matrix @m.
 //
@@ -682,20 +682,20 @@ var xMatrixTransformPoint3d func(uintptr, *Point3D, *Point3D)
 // See also: graphene_simd4x4f_point3_mul()
 func (x *Matrix) TransformPoint3d(PVar *Point3D, ResVar *Point3D) {
 
-	xMatrixTransformPoint3d(x.GoPointer(), PVar, ResVar)
+	xMatrixTransformPoint3d(x.GoPointer(), PVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixTransformRay func(uintptr, *Ray, *Ray)
+var xMatrixTransformRay func(uintptr, *Ray, uintptr)
 
 // Transform a #graphene_ray_t using the given matrix @m.
 func (x *Matrix) TransformRay(RVar *Ray, ResVar *Ray) {
 
-	xMatrixTransformRay(x.GoPointer(), RVar, ResVar)
+	xMatrixTransformRay(x.GoPointer(), RVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixTransformRect func(uintptr, *Rect, *Quad)
+var xMatrixTransformRect func(uintptr, *Rect, uintptr)
 
 // Transforms each corner of a #graphene_rect_t using the given matrix @m.
 //
@@ -704,21 +704,21 @@ var xMatrixTransformRect func(uintptr, *Rect, *Quad)
 // See also: graphene_matrix_transform_point()
 func (x *Matrix) TransformRect(RVar *Rect, ResVar *Quad) {
 
-	xMatrixTransformRect(x.GoPointer(), RVar, ResVar)
+	xMatrixTransformRect(x.GoPointer(), RVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixTransformSphere func(uintptr, *Sphere, *Sphere)
+var xMatrixTransformSphere func(uintptr, *Sphere, uintptr)
 
 // Transforms a #graphene_sphere_t using the given matrix @m. The
 // result is the bounding sphere containing the transformed sphere.
 func (x *Matrix) TransformSphere(SVar *Sphere, ResVar *Sphere) {
 
-	xMatrixTransformSphere(x.GoPointer(), SVar, ResVar)
+	xMatrixTransformSphere(x.GoPointer(), SVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixTransformVec3 func(uintptr, *Vec3, *Vec3)
+var xMatrixTransformVec3 func(uintptr, *Vec3, uintptr)
 
 // Transforms the given #graphene_vec3_t using the matrix @m.
 //
@@ -729,18 +729,18 @@ var xMatrixTransformVec3 func(uintptr, *Vec3, *Vec3)
 // See also: graphene_simd4x4f_vec3_mul()
 func (x *Matrix) TransformVec3(VVar *Vec3, ResVar *Vec3) {
 
-	xMatrixTransformVec3(x.GoPointer(), VVar, ResVar)
+	xMatrixTransformVec3(x.GoPointer(), VVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixTransformVec4 func(uintptr, *Vec4, *Vec4)
+var xMatrixTransformVec4 func(uintptr, *Vec4, uintptr)
 
 // Transforms the given #graphene_vec4_t using the matrix @m.
 //
 // See also: graphene_simd4x4f_vec4_mul()
 func (x *Matrix) TransformVec4(VVar *Vec4, ResVar *Vec4) {
 
-	xMatrixTransformVec4(x.GoPointer(), VVar, ResVar)
+	xMatrixTransformVec4(x.GoPointer(), VVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -757,42 +757,42 @@ func (x *Matrix) Translate(PosVar *Point3D) {
 
 }
 
-var xMatrixTranspose func(uintptr, *Matrix)
+var xMatrixTranspose func(uintptr, uintptr)
 
 // Transposes the given matrix.
 func (x *Matrix) Transpose(ResVar *Matrix) {
 
-	xMatrixTranspose(x.GoPointer(), ResVar)
+	xMatrixTranspose(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixUnprojectPoint3d func(uintptr, *Matrix, *Point3D, *Point3D)
+var xMatrixUnprojectPoint3d func(uintptr, *Matrix, *Point3D, uintptr)
 
 // Unprojects the given @point using the @projection matrix and
 // a @modelview matrix.
 func (x *Matrix) UnprojectPoint3d(ModelviewVar *Matrix, PointVar *Point3D, ResVar *Point3D) {
 
-	xMatrixUnprojectPoint3d(x.GoPointer(), ModelviewVar, PointVar, ResVar)
+	xMatrixUnprojectPoint3d(x.GoPointer(), ModelviewVar, PointVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixUntransformBounds func(uintptr, *Rect, *Rect, *Rect)
+var xMatrixUntransformBounds func(uintptr, *Rect, *Rect, uintptr)
 
 // Undoes the transformation on the corners of a #graphene_rect_t using the
 // given matrix, within the given axis aligned rectangular @bounds.
 func (x *Matrix) UntransformBounds(RVar *Rect, BoundsVar *Rect, ResVar *Rect) {
 
-	xMatrixUntransformBounds(x.GoPointer(), RVar, BoundsVar, ResVar)
+	xMatrixUntransformBounds(x.GoPointer(), RVar, BoundsVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xMatrixUntransformPoint func(uintptr, *Point, *Rect, *Point) bool
+var xMatrixUntransformPoint func(uintptr, *Point, *Rect, uintptr) bool
 
 // Undoes the transformation of a #graphene_point_t using the
 // given matrix, within the given axis aligned rectangular @bounds.
 func (x *Matrix) UntransformPoint(PVar *Point, BoundsVar *Rect, ResVar *Point) bool {
 
-	cret := xMatrixUntransformPoint(x.GoPointer(), PVar, BoundsVar, ResVar)
+	cret := xMatrixUntransformPoint(x.GoPointer(), PVar, BoundsVar, uintptr(unsafe.Pointer(ResVar)))
 	return cret
 }
 

@@ -377,26 +377,26 @@ func (x *ActionGroupInterface) GetActionStateChanged() func(ActionGroup, string,
 
 // OverrideQueryAction sets the callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.query_action]
-func (x *ActionGroupInterface) OverrideQueryAction(cb func(ActionGroup, string, bool, **glib.VariantType, **glib.VariantType, **glib.Variant, **glib.Variant) bool) {
+func (x *ActionGroupInterface) OverrideQueryAction(cb func(ActionGroup, string, *bool, **glib.VariantType, **glib.VariantType, **glib.Variant, **glib.Variant) bool) {
 	if cb == nil {
 		x.xQueryAction = 0
 	} else {
-		x.xQueryAction = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string, EnabledVarp bool, ParameterTypeVarp **glib.VariantType, StateTypeVarp **glib.VariantType, StateHintVarp **glib.Variant, StateVarp **glib.Variant) bool {
-			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp, EnabledVarp, ParameterTypeVarp, StateTypeVarp, StateHintVarp, StateVarp)
+		x.xQueryAction = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string, EnabledVarp uintptr, ParameterTypeVarp uintptr, StateTypeVarp uintptr, StateHintVarp uintptr, StateVarp uintptr) bool {
+			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp, (*bool)(unsafe.Pointer(EnabledVarp)), (**glib.VariantType)(unsafe.Pointer(ParameterTypeVarp)), (**glib.VariantType)(unsafe.Pointer(StateTypeVarp)), (**glib.Variant)(unsafe.Pointer(StateHintVarp)), (**glib.Variant)(unsafe.Pointer(StateVarp)))
 		})
 	}
 }
 
 // GetQueryAction gets the callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.query_action]
-func (x *ActionGroupInterface) GetQueryAction() func(ActionGroup, string, bool, **glib.VariantType, **glib.VariantType, **glib.Variant, **glib.Variant) bool {
+func (x *ActionGroupInterface) GetQueryAction() func(ActionGroup, string, *bool, **glib.VariantType, **glib.VariantType, **glib.Variant, **glib.Variant) bool {
 	if x.xQueryAction == 0 {
 		return nil
 	}
-	var rawCallback func(ActionGroupVarp uintptr, ActionNameVarp string, EnabledVarp bool, ParameterTypeVarp **glib.VariantType, StateTypeVarp **glib.VariantType, StateHintVarp **glib.Variant, StateVarp **glib.Variant) bool
+	var rawCallback func(ActionGroupVarp uintptr, ActionNameVarp string, EnabledVarp uintptr, ParameterTypeVarp uintptr, StateTypeVarp uintptr, StateHintVarp uintptr, StateVarp uintptr) bool
 	purego.RegisterFunc(&rawCallback, x.xQueryAction)
-	return func(ActionGroupVar ActionGroup, ActionNameVar string, EnabledVar bool, ParameterTypeVar **glib.VariantType, StateTypeVar **glib.VariantType, StateHintVar **glib.Variant, StateVar **glib.Variant) bool {
-		return rawCallback(ActionGroupVar.GoPointer(), ActionNameVar, EnabledVar, ParameterTypeVar, StateTypeVar, StateHintVar, StateVar)
+	return func(ActionGroupVar ActionGroup, ActionNameVar string, EnabledVar *bool, ParameterTypeVar **glib.VariantType, StateTypeVar **glib.VariantType, StateHintVar **glib.Variant, StateVar **glib.Variant) bool {
+		return rawCallback(ActionGroupVar.GoPointer(), ActionNameVar, uintptr(unsafe.Pointer(EnabledVar)), uintptr(unsafe.Pointer(ParameterTypeVar)), uintptr(unsafe.Pointer(StateTypeVar)), uintptr(unsafe.Pointer(StateHintVar)), uintptr(unsafe.Pointer(StateVar)))
 	}
 }
 
@@ -460,7 +460,7 @@ type ActionGroup interface {
 	GetActionStateType(ActionNameVar string) *glib.VariantType
 	HasAction(ActionNameVar string) bool
 	ListActions() []string
-	QueryAction(ActionNameVar string, EnabledVar bool, ParameterTypeVar **glib.VariantType, StateTypeVar **glib.VariantType, StateHintVar **glib.Variant, StateVar **glib.Variant) bool
+	QueryAction(ActionNameVar string, EnabledVar *bool, ParameterTypeVar **glib.VariantType, StateTypeVar **glib.VariantType, StateHintVar **glib.Variant, StateVar **glib.Variant) bool
 }
 
 var xActionGroupGLibType func() types.GType
@@ -709,9 +709,9 @@ func (x *ActionGroupBase) ListActions() []string {
 // fields (as indicated by having a non-`NULL` reference passed in) are
 // filled.  If the action doesn’t exist, `FALSE` is returned and the
 // fields may or may not have been modified.
-func (x *ActionGroupBase) QueryAction(ActionNameVar string, EnabledVar bool, ParameterTypeVar **glib.VariantType, StateTypeVar **glib.VariantType, StateHintVar **glib.Variant, StateVar **glib.Variant) bool {
+func (x *ActionGroupBase) QueryAction(ActionNameVar string, EnabledVar *bool, ParameterTypeVar **glib.VariantType, StateTypeVar **glib.VariantType, StateHintVar **glib.Variant, StateVar **glib.Variant) bool {
 
-	cret := XGActionGroupQueryAction(x.GoPointer(), ActionNameVar, EnabledVar, ParameterTypeVar, StateTypeVar, StateHintVar, StateVar)
+	cret := XGActionGroupQueryAction(x.GoPointer(), ActionNameVar, uintptr(unsafe.Pointer(EnabledVar)), uintptr(unsafe.Pointer(ParameterTypeVar)), uintptr(unsafe.Pointer(StateTypeVar)), uintptr(unsafe.Pointer(StateHintVar)), uintptr(unsafe.Pointer(StateVar)))
 	return cret
 }
 
@@ -728,7 +728,7 @@ var XGActionGroupGetActionStateHint func(uintptr, string) *glib.Variant
 var XGActionGroupGetActionStateType func(uintptr, string) *glib.VariantType
 var XGActionGroupHasAction func(uintptr, string) bool
 var XGActionGroupListActions func(uintptr) []string
-var XGActionGroupQueryAction func(uintptr, string, bool, **glib.VariantType, **glib.VariantType, **glib.Variant, **glib.Variant) bool
+var XGActionGroupQueryAction func(uintptr, string, uintptr, uintptr, uintptr, uintptr, uintptr) bool
 
 func init() {
 	core.SetPackageName("GIO", "gio-2.0")

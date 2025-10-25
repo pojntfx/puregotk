@@ -269,17 +269,17 @@ func (x *Device) GetSource() InputSource {
 	return cret
 }
 
-var xDeviceGetSurfaceAtPosition func(uintptr, float64, float64) uintptr
+var xDeviceGetSurfaceAtPosition func(uintptr, uintptr, uintptr) uintptr
 
 // Obtains the surface underneath @device, returning the location of the
 // device in @win_x and @win_y.
 //
 // Returns %NULL if the surface tree under @device is not known to GDK
 // (for example, belongs to another application).
-func (x *Device) GetSurfaceAtPosition(WinXVar float64, WinYVar float64) *Surface {
+func (x *Device) GetSurfaceAtPosition(WinXVar *float64, WinYVar *float64) *Surface {
 	var cls *Surface
 
-	cret := xDeviceGetSurfaceAtPosition(x.GoPointer(), WinXVar, WinYVar)
+	cret := xDeviceGetSurfaceAtPosition(x.GoPointer(), uintptr(unsafe.Pointer(WinXVar)), uintptr(unsafe.Pointer(WinYVar)))
 
 	if cret == 0 {
 		return nil

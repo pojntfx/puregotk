@@ -242,15 +242,15 @@ func (x *Surface) GetDeviceCursor(DeviceVar *Device) *Cursor {
 	return cls
 }
 
-var xSurfaceGetDevicePosition func(uintptr, uintptr, float64, float64, *ModifierType) bool
+var xSurfaceGetDevicePosition func(uintptr, uintptr, uintptr, uintptr, uintptr) bool
 
 // Obtains the current device position and modifier state.
 //
 // The position is given in coordinates relative to the upper
 // left corner of @surface.
-func (x *Surface) GetDevicePosition(DeviceVar *Device, XVar float64, YVar float64, MaskVar *ModifierType) bool {
+func (x *Surface) GetDevicePosition(DeviceVar *Device, XVar *float64, YVar *float64, MaskVar *ModifierType) bool {
 
-	cret := xSurfaceGetDevicePosition(x.GoPointer(), DeviceVar.GoPointer(), XVar, YVar, MaskVar)
+	cret := xSurfaceGetDevicePosition(x.GoPointer(), DeviceVar.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(MaskVar)))
 	return cret
 }
 

@@ -451,7 +451,7 @@ func (x *Window) GetDecorated() bool {
 	return cret
 }
 
-var xWindowGetDefaultSize func(uintptr, int, int)
+var xWindowGetDefaultSize func(uintptr, uintptr, uintptr)
 
 // Gets the default size of the window.
 //
@@ -461,9 +461,9 @@ var xWindowGetDefaultSize func(uintptr, int, int)
 //
 // This function is the recommended way for [saving window state
 // across restarts of applications](https://developer.gnome.org/documentation/tutorials/save-state.html).
-func (x *Window) GetDefaultSize(WidthVar int, HeightVar int) {
+func (x *Window) GetDefaultSize(WidthVar *int, HeightVar *int) {
 
-	xWindowGetDefaultSize(x.GoPointer(), WidthVar, HeightVar)
+	xWindowGetDefaultSize(x.GoPointer(), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 
 }
 
@@ -1404,9 +1404,9 @@ func (x *Window) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *Window) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *Window) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -1659,9 +1659,9 @@ func (x *Window) GetSurface() *gdk.Surface {
 //
 // This is the translation from @self's surface coordinates into
 // @self's widget coordinates.
-func (x *Window) GetSurfaceTransform(XVar float64, YVar float64) {
+func (x *Window) GetSurfaceTransform(XVar *float64, YVar *float64) {
 
-	XGtkNativeGetSurfaceTransform(x.GoPointer(), XVar, YVar)
+	XGtkNativeGetSurfaceTransform(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)))
 
 }
 

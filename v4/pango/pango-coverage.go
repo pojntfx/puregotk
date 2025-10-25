@@ -2,6 +2,8 @@
 package pango
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/gobject"
@@ -142,12 +144,12 @@ func (x *Coverage) Set(IndexVar int, LevelVar CoverageLevel) {
 
 }
 
-var xCoverageToBytes func(uintptr, []byte, int)
+var xCoverageToBytes func(uintptr, uintptr, uintptr)
 
 // Convert a `PangoCoverage` structure into a flat binary format.
-func (x *Coverage) ToBytes(BytesVar []byte, NBytesVar int) {
+func (x *Coverage) ToBytes(BytesVar *[]byte, NBytesVar *int) {
 
-	xCoverageToBytes(x.GoPointer(), BytesVar, NBytesVar)
+	xCoverageToBytes(x.GoPointer(), uintptr(unsafe.Pointer(BytesVar)), uintptr(unsafe.Pointer(NBytesVar)))
 
 }
 

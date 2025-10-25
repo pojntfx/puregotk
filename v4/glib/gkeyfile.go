@@ -211,7 +211,7 @@ func (x *KeyFile) GetBoolean(GroupNameVar string, KeyVar string) (bool, error) {
 
 }
 
-var xKeyFileGetBooleanList func(uintptr, string, string, uint, **Error) uintptr
+var xKeyFileGetBooleanList func(uintptr, string, string, uintptr, **Error) uintptr
 
 // Returns the values associated with @key under @group_name as
 // booleans.
@@ -219,10 +219,10 @@ var xKeyFileGetBooleanList func(uintptr, string, string, uint, **Error) uintptr
 // If @key cannot be found then [error@GLib.KeyFileError.KEY_NOT_FOUND] is
 // returned. Likewise, if the values associated with @key cannot be interpreted
 // as booleans then [error@GLib.KeyFileError.INVALID_VALUE] is returned.
-func (x *KeyFile) GetBooleanList(GroupNameVar string, KeyVar string, LengthVar uint) (uintptr, error) {
+func (x *KeyFile) GetBooleanList(GroupNameVar string, KeyVar string, LengthVar *uint) (uintptr, error) {
 	var cerr *Error
 
-	cret := xKeyFileGetBooleanList(x.GoPointer(), GroupNameVar, KeyVar, LengthVar, &cerr)
+	cret := xKeyFileGetBooleanList(x.GoPointer(), GroupNameVar, KeyVar, uintptr(unsafe.Pointer(LengthVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -270,7 +270,7 @@ func (x *KeyFile) GetDouble(GroupNameVar string, KeyVar string) (float64, error)
 
 }
 
-var xKeyFileGetDoubleList func(uintptr, string, string, uint, **Error) uintptr
+var xKeyFileGetDoubleList func(uintptr, string, string, uintptr, **Error) uintptr
 
 // Returns the values associated with @key under @group_name as
 // doubles.
@@ -278,10 +278,10 @@ var xKeyFileGetDoubleList func(uintptr, string, string, uint, **Error) uintptr
 // If @key cannot be found then [error@GLib.KeyFileError.KEY_NOT_FOUND] is
 // returned. Likewise, if the values associated with @key cannot be interpreted
 // as doubles then [error@GLib.KeyFileError.INVALID_VALUE] is returned.
-func (x *KeyFile) GetDoubleList(GroupNameVar string, KeyVar string, LengthVar uint) (uintptr, error) {
+func (x *KeyFile) GetDoubleList(GroupNameVar string, KeyVar string, LengthVar *uint) (uintptr, error) {
 	var cerr *Error
 
-	cret := xKeyFileGetDoubleList(x.GoPointer(), GroupNameVar, KeyVar, LengthVar, &cerr)
+	cret := xKeyFileGetDoubleList(x.GoPointer(), GroupNameVar, KeyVar, uintptr(unsafe.Pointer(LengthVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -289,15 +289,15 @@ func (x *KeyFile) GetDoubleList(GroupNameVar string, KeyVar string, LengthVar ui
 
 }
 
-var xKeyFileGetGroups func(uintptr, uint) []string
+var xKeyFileGetGroups func(uintptr, uintptr) []string
 
 // Returns all groups in the key file loaded with @key_file.
 //
 // The array of returned groups will be `NULL`-terminated, so
 // @length may optionally be `NULL`.
-func (x *KeyFile) GetGroups(LengthVar uint) []string {
+func (x *KeyFile) GetGroups(LengthVar *uint) []string {
 
-	cret := xKeyFileGetGroups(x.GoPointer(), LengthVar)
+	cret := xKeyFileGetGroups(x.GoPointer(), uintptr(unsafe.Pointer(LengthVar)))
 	return cret
 }
 
@@ -339,7 +339,7 @@ func (x *KeyFile) GetInteger(GroupNameVar string, KeyVar string) (int, error) {
 
 }
 
-var xKeyFileGetIntegerList func(uintptr, string, string, uint, **Error) uintptr
+var xKeyFileGetIntegerList func(uintptr, string, string, uintptr, **Error) uintptr
 
 // Returns the values associated with @key under @group_name as
 // integers.
@@ -348,10 +348,10 @@ var xKeyFileGetIntegerList func(uintptr, string, string, uint, **Error) uintptr
 // returned. Likewise, if the values associated with @key cannot be interpreted
 // as integers, or are out of range for `gint`, then
 // [error@GLib.KeyFileError.INVALID_VALUE] is returned.
-func (x *KeyFile) GetIntegerList(GroupNameVar string, KeyVar string, LengthVar uint) (uintptr, error) {
+func (x *KeyFile) GetIntegerList(GroupNameVar string, KeyVar string, LengthVar *uint) (uintptr, error) {
 	var cerr *Error
 
-	cret := xKeyFileGetIntegerList(x.GoPointer(), GroupNameVar, KeyVar, LengthVar, &cerr)
+	cret := xKeyFileGetIntegerList(x.GoPointer(), GroupNameVar, KeyVar, uintptr(unsafe.Pointer(LengthVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -359,17 +359,17 @@ func (x *KeyFile) GetIntegerList(GroupNameVar string, KeyVar string, LengthVar u
 
 }
 
-var xKeyFileGetKeys func(uintptr, string, uint, **Error) []string
+var xKeyFileGetKeys func(uintptr, string, uintptr, **Error) []string
 
 // Returns all keys for the group name @group_name.
 //
 // The array of returned keys will be `NULL`-terminated, so @length may
 // optionally be `NULL`. If the @group_name cannot be found,
 // [error@GLib.KeyFileError.GROUP_NOT_FOUND] is returned.
-func (x *KeyFile) GetKeys(GroupNameVar string, LengthVar uint) ([]string, error) {
+func (x *KeyFile) GetKeys(GroupNameVar string, LengthVar *uint) ([]string, error) {
 	var cerr *Error
 
-	cret := xKeyFileGetKeys(x.GoPointer(), GroupNameVar, LengthVar, &cerr)
+	cret := xKeyFileGetKeys(x.GoPointer(), GroupNameVar, uintptr(unsafe.Pointer(LengthVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -423,7 +423,7 @@ func (x *KeyFile) GetLocaleString(GroupNameVar string, KeyVar string, LocaleVar 
 
 }
 
-var xKeyFileGetLocaleStringList func(uintptr, string, string, string, uint, **Error) []string
+var xKeyFileGetLocaleStringList func(uintptr, string, string, string, uintptr, **Error) []string
 
 // Returns the values associated with @key under @group_name
 // translated in the given @locale if available.
@@ -443,10 +443,10 @@ var xKeyFileGetLocaleStringList func(uintptr, string, string, string, uint, **Er
 // can be found then the untranslated values are returned. The
 // returned array is `NULL`-terminated, so @length may optionally
 // be `NULL`.
-func (x *KeyFile) GetLocaleStringList(GroupNameVar string, KeyVar string, LocaleVar string, LengthVar uint) ([]string, error) {
+func (x *KeyFile) GetLocaleStringList(GroupNameVar string, KeyVar string, LocaleVar string, LengthVar *uint) ([]string, error) {
 	var cerr *Error
 
-	cret := xKeyFileGetLocaleStringList(x.GoPointer(), GroupNameVar, KeyVar, LocaleVar, LengthVar, &cerr)
+	cret := xKeyFileGetLocaleStringList(x.GoPointer(), GroupNameVar, KeyVar, LocaleVar, uintptr(unsafe.Pointer(LengthVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -484,17 +484,17 @@ func (x *KeyFile) GetString(GroupNameVar string, KeyVar string) (string, error) 
 
 }
 
-var xKeyFileGetStringList func(uintptr, string, string, uint, **Error) []string
+var xKeyFileGetStringList func(uintptr, string, string, uintptr, **Error) []string
 
 // Returns the values associated with @key under @group_name.
 //
 // If the key cannot be found, [error@GLib.KeyFileError.KEY_NOT_FOUND] is
 // returned. If the @group_name cannot be found,
 // [error@GLib.KeyFileError.GROUP_NOT_FOUND] is returned.
-func (x *KeyFile) GetStringList(GroupNameVar string, KeyVar string, LengthVar uint) ([]string, error) {
+func (x *KeyFile) GetStringList(GroupNameVar string, KeyVar string, LengthVar *uint) ([]string, error) {
 	var cerr *Error
 
-	cret := xKeyFileGetStringList(x.GoPointer(), GroupNameVar, KeyVar, LengthVar, &cerr)
+	cret := xKeyFileGetStringList(x.GoPointer(), GroupNameVar, KeyVar, uintptr(unsafe.Pointer(LengthVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -606,7 +606,7 @@ func (x *KeyFile) LoadFromData(DataVar string, LengthVar uint, FlagsVar KeyFileF
 
 }
 
-var xKeyFileLoadFromDataDirs func(uintptr, string, string, KeyFileFlags, **Error) bool
+var xKeyFileLoadFromDataDirs func(uintptr, string, uintptr, KeyFileFlags, **Error) bool
 
 // Looks for a key file named @file in the paths returned from
 // [func@GLib.get_user_data_dir] and [func@GLib.get_system_data_dirs].
@@ -617,10 +617,10 @@ var xKeyFileLoadFromDataDirs func(uintptr, string, string, KeyFileFlags, **Error
 //
 // If the file could not be loaded then either a [error@GLib.FileError] or
 // [error@GLib.KeyFileError] is returned.
-func (x *KeyFile) LoadFromDataDirs(FileVar string, FullPathVar string, FlagsVar KeyFileFlags) (bool, error) {
+func (x *KeyFile) LoadFromDataDirs(FileVar string, FullPathVar *string, FlagsVar KeyFileFlags) (bool, error) {
 	var cerr *Error
 
-	cret := xKeyFileLoadFromDataDirs(x.GoPointer(), FileVar, FullPathVar, FlagsVar, &cerr)
+	cret := xKeyFileLoadFromDataDirs(x.GoPointer(), FileVar, uintptr(unsafe.Pointer(FullPathVar)), FlagsVar, &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -628,7 +628,7 @@ func (x *KeyFile) LoadFromDataDirs(FileVar string, FullPathVar string, FlagsVar 
 
 }
 
-var xKeyFileLoadFromDirs func(uintptr, string, []string, string, KeyFileFlags, **Error) bool
+var xKeyFileLoadFromDirs func(uintptr, string, []string, uintptr, KeyFileFlags, **Error) bool
 
 // Looks for a key file named @file in the paths specified in @search_dirs,
 // loads the file into @key_file and returns the file’s full path in @full_path.
@@ -645,10 +645,10 @@ var xKeyFileLoadFromDirs func(uintptr, string, []string, string, KeyFileFlags, *
 // the file is found but the OS returns an error when opening or reading the
 // file, a [error@GLib.FileError] is returned. If there is a problem parsing the
 // file, a [error@GLib.KeyFileError] is returned.
-func (x *KeyFile) LoadFromDirs(FileVar string, SearchDirsVar []string, FullPathVar string, FlagsVar KeyFileFlags) (bool, error) {
+func (x *KeyFile) LoadFromDirs(FileVar string, SearchDirsVar []string, FullPathVar *string, FlagsVar KeyFileFlags) (bool, error) {
 	var cerr *Error
 
-	cret := xKeyFileLoadFromDirs(x.GoPointer(), FileVar, SearchDirsVar, FullPathVar, FlagsVar, &cerr)
+	cret := xKeyFileLoadFromDirs(x.GoPointer(), FileVar, SearchDirsVar, uintptr(unsafe.Pointer(FullPathVar)), FlagsVar, &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -949,15 +949,15 @@ func (x *KeyFile) SetValue(GroupNameVar string, KeyVar string, ValueVar string) 
 
 }
 
-var xKeyFileToData func(uintptr, uint, **Error) string
+var xKeyFileToData func(uintptr, uintptr, **Error) string
 
 // Outputs @key_file as a string.
 //
 // Note that this function never reports an error.
-func (x *KeyFile) ToData(LengthVar uint) (string, error) {
+func (x *KeyFile) ToData(LengthVar *uint) (string, error) {
 	var cerr *Error
 
-	cret := xKeyFileToData(x.GoPointer(), LengthVar, &cerr)
+	cret := xKeyFileToData(x.GoPointer(), uintptr(unsafe.Pointer(LengthVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

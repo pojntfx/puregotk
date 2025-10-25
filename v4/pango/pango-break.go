@@ -51,31 +51,31 @@ func (x *LogAttr) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-var xAttrBreak func(string, int, *AttrList, int, []LogAttr, int)
+var xAttrBreak func(string, int, *AttrList, int, uintptr, int)
 
 // Apply customization from attributes to the breaks in @attrs.
 //
 // The line breaks are assumed to have been produced
 // by [func@Pango.default_break] and [func@Pango.tailor_break].
-func AttrBreak(TextVar string, LengthVar int, AttrListVar *AttrList, OffsetVar int, AttrsVar []LogAttr, AttrsLenVar int) {
+func AttrBreak(TextVar string, LengthVar int, AttrListVar *AttrList, OffsetVar int, AttrsVar *[]LogAttr, AttrsLenVar int) {
 
-	xAttrBreak(TextVar, LengthVar, AttrListVar, OffsetVar, AttrsVar, AttrsLenVar)
+	xAttrBreak(TextVar, LengthVar, AttrListVar, OffsetVar, uintptr(unsafe.Pointer(AttrsVar)), AttrsLenVar)
 
 }
 
-var xBreak func(string, int, *Analysis, []LogAttr, int)
+var xBreak func(string, int, *Analysis, uintptr, int)
 
 // Determines possible line, word, and character breaks
 // for a string of Unicode text with a single analysis.
 //
 // For most purposes you may want to use [func@Pango.get_log_attrs].
-func Break(TextVar string, LengthVar int, AnalysisVar *Analysis, AttrsVar []LogAttr, AttrsLenVar int) {
+func Break(TextVar string, LengthVar int, AnalysisVar *Analysis, AttrsVar *[]LogAttr, AttrsLenVar int) {
 
-	xBreak(TextVar, LengthVar, AnalysisVar, AttrsVar, AttrsLenVar)
+	xBreak(TextVar, LengthVar, AnalysisVar, uintptr(unsafe.Pointer(AttrsVar)), AttrsLenVar)
 
 }
 
-var xDefaultBreak func(string, int, *Analysis, []LogAttr, int)
+var xDefaultBreak func(string, int, *Analysis, uintptr, int)
 
 // This is the default break algorithm.
 //
@@ -86,13 +86,13 @@ var xDefaultBreak func(string, int, *Analysis, []LogAttr, int)
 // See [func@Pango.tailor_break] for language-specific breaks.
 //
 // See [func@Pango.attr_break] for attribute-based customization.
-func DefaultBreak(TextVar string, LengthVar int, AnalysisVar *Analysis, AttrsVar []LogAttr, AttrsLenVar int) {
+func DefaultBreak(TextVar string, LengthVar int, AnalysisVar *Analysis, AttrsVar *[]LogAttr, AttrsLenVar int) {
 
-	xDefaultBreak(TextVar, LengthVar, AnalysisVar, AttrsVar, AttrsLenVar)
+	xDefaultBreak(TextVar, LengthVar, AnalysisVar, uintptr(unsafe.Pointer(AttrsVar)), AttrsLenVar)
 
 }
 
-var xGetLogAttrs func(string, int, int, *Language, []LogAttr, int)
+var xGetLogAttrs func(string, int, int, *Language, uintptr, int)
 
 // Computes a `PangoLogAttr` for each character in @text.
 //
@@ -103,13 +103,13 @@ var xGetLogAttrs func(string, int, int, *Language, []LogAttr, int)
 // logical attributes can't be computed without context
 // (for example you need to see spaces on either side of
 // a word to know the word is a word).
-func GetLogAttrs(TextVar string, LengthVar int, LevelVar int, LanguageVar *Language, AttrsVar []LogAttr, AttrsLenVar int) {
+func GetLogAttrs(TextVar string, LengthVar int, LevelVar int, LanguageVar *Language, AttrsVar *[]LogAttr, AttrsLenVar int) {
 
-	xGetLogAttrs(TextVar, LengthVar, LevelVar, LanguageVar, AttrsVar, AttrsLenVar)
+	xGetLogAttrs(TextVar, LengthVar, LevelVar, LanguageVar, uintptr(unsafe.Pointer(AttrsVar)), AttrsLenVar)
 
 }
 
-var xTailorBreak func(string, int, *Analysis, int, []LogAttr, int)
+var xTailorBreak func(string, int, *Analysis, int, uintptr, int)
 
 // Apply language-specific tailoring to the breaks in @attrs.
 //
@@ -120,9 +120,9 @@ var xTailorBreak func(string, int, *Analysis, int, []LogAttr, int)
 //
 // Note that it is better to pass -1 for @offset and use [func@Pango.attr_break]
 // to apply attributes to the whole paragraph.
-func TailorBreak(TextVar string, LengthVar int, AnalysisVar *Analysis, OffsetVar int, AttrsVar []LogAttr, AttrsLenVar int) {
+func TailorBreak(TextVar string, LengthVar int, AnalysisVar *Analysis, OffsetVar int, AttrsVar *[]LogAttr, AttrsLenVar int) {
 
-	xTailorBreak(TextVar, LengthVar, AnalysisVar, OffsetVar, AttrsVar, AttrsLenVar)
+	xTailorBreak(TextVar, LengthVar, AnalysisVar, OffsetVar, uintptr(unsafe.Pointer(AttrsVar)), AttrsLenVar)
 
 }
 

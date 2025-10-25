@@ -268,16 +268,16 @@ func (x *Popover) GetMnemonicsVisible() bool {
 	return cret
 }
 
-var xPopoverGetOffset func(uintptr, int, int)
+var xPopoverGetOffset func(uintptr, uintptr, uintptr)
 
 // Gets the offset previous set with [method@Gtk.Popover.set_offset].
-func (x *Popover) GetOffset(XOffsetVar int, YOffsetVar int) {
+func (x *Popover) GetOffset(XOffsetVar *int, YOffsetVar *int) {
 
-	xPopoverGetOffset(x.GoPointer(), XOffsetVar, YOffsetVar)
+	xPopoverGetOffset(x.GoPointer(), uintptr(unsafe.Pointer(XOffsetVar)), uintptr(unsafe.Pointer(YOffsetVar)))
 
 }
 
-var xPopoverGetPointingTo func(uintptr, *gdk.Rectangle) bool
+var xPopoverGetPointingTo func(uintptr, uintptr) bool
 
 // Gets the rectangle that the popover points to.
 //
@@ -287,7 +287,7 @@ var xPopoverGetPointingTo func(uintptr, *gdk.Rectangle) bool
 // widget coordinates.
 func (x *Popover) GetPointingTo(RectVar *gdk.Rectangle) bool {
 
-	cret := xPopoverGetPointingTo(x.GoPointer(), RectVar)
+	cret := xPopoverGetPointingTo(x.GoPointer(), uintptr(unsafe.Pointer(RectVar)))
 	return cret
 }
 
@@ -558,9 +558,9 @@ func (x *Popover) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *Popover) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *Popover) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -813,9 +813,9 @@ func (x *Popover) GetSurface() *gdk.Surface {
 //
 // This is the translation from @self's surface coordinates into
 // @self's widget coordinates.
-func (x *Popover) GetSurfaceTransform(XVar float64, YVar float64) {
+func (x *Popover) GetSurfaceTransform(XVar *float64, YVar *float64) {
 
-	XGtkNativeGetSurfaceTransform(x.GoPointer(), XVar, YVar)
+	XGtkNativeGetSurfaceTransform(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)))
 
 }
 

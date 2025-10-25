@@ -40,21 +40,21 @@ func Point3DAlloc() *Point3D {
 	return cret
 }
 
-var xPoint3DCross func(uintptr, *Point3D, *Point3D)
+var xPoint3DCross func(uintptr, *Point3D, uintptr)
 
 // Computes the cross product of the two given #graphene_point3d_t.
 func (x *Point3D) Cross(BVar *Point3D, ResVar *Point3D) {
 
-	xPoint3DCross(x.GoPointer(), BVar, ResVar)
+	xPoint3DCross(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xPoint3DDistance func(uintptr, *Point3D, *Vec3) float32
+var xPoint3DDistance func(uintptr, *Point3D, uintptr) float32
 
 // Computes the distance between the two given #graphene_point3d_t.
 func (x *Point3D) Distance(BVar *Point3D, DeltaVar *Vec3) float32 {
 
-	cret := xPoint3DDistance(x.GoPointer(), BVar, DeltaVar)
+	cret := xPoint3DDistance(x.GoPointer(), BVar, uintptr(unsafe.Pointer(DeltaVar)))
 	return cret
 }
 
@@ -114,13 +114,13 @@ func (x *Point3D) InitFromVec3(VVar *Vec3) *Point3D {
 	return cret
 }
 
-var xPoint3DInterpolate func(uintptr, *Point3D, float64, *Point3D)
+var xPoint3DInterpolate func(uintptr, *Point3D, float64, uintptr)
 
 // Linearly interpolates each component of @a and @b using the
 // provided @factor, and places the result in @res.
 func (x *Point3D) Interpolate(BVar *Point3D, FactorVar float64, ResVar *Point3D) {
 
-	xPoint3DInterpolate(x.GoPointer(), BVar, FactorVar, ResVar)
+	xPoint3DInterpolate(x.GoPointer(), BVar, FactorVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -144,17 +144,17 @@ func (x *Point3D) Near(BVar *Point3D, EpsilonVar float32) bool {
 	return cret
 }
 
-var xPoint3DNormalize func(uintptr, *Point3D)
+var xPoint3DNormalize func(uintptr, uintptr)
 
 // Computes the normalization of the vector represented by the
 // coordinates of the given #graphene_point3d_t.
 func (x *Point3D) Normalize(ResVar *Point3D) {
 
-	xPoint3DNormalize(x.GoPointer(), ResVar)
+	xPoint3DNormalize(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xPoint3DNormalizeViewport func(uintptr, *Rect, float32, float32, *Point3D)
+var xPoint3DNormalizeViewport func(uintptr, *Rect, float32, float32, uintptr)
 
 // Normalizes the coordinates of a #graphene_point3d_t using the
 // given viewport and clipping planes.
@@ -163,27 +163,27 @@ var xPoint3DNormalizeViewport func(uintptr, *Rect, float32, float32, *Point3D)
 // in the [ -1, 1 ] range.
 func (x *Point3D) NormalizeViewport(ViewportVar *Rect, ZNearVar float32, ZFarVar float32, ResVar *Point3D) {
 
-	xPoint3DNormalizeViewport(x.GoPointer(), ViewportVar, ZNearVar, ZFarVar, ResVar)
+	xPoint3DNormalizeViewport(x.GoPointer(), ViewportVar, ZNearVar, ZFarVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xPoint3DScale func(uintptr, float32, *Point3D)
+var xPoint3DScale func(uintptr, float32, uintptr)
 
 // Scales the coordinates of the given #graphene_point3d_t by
 // the given @factor.
 func (x *Point3D) Scale(FactorVar float32, ResVar *Point3D) {
 
-	xPoint3DScale(x.GoPointer(), FactorVar, ResVar)
+	xPoint3DScale(x.GoPointer(), FactorVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xPoint3DToVec3 func(uintptr, *Vec3)
+var xPoint3DToVec3 func(uintptr, uintptr)
 
 // Stores the coordinates of a #graphene_point3d_t into a
 // #graphene_vec3_t.
 func (x *Point3D) ToVec3(VVar *Vec3) {
 
-	xPoint3DToVec3(x.GoPointer(), VVar)
+	xPoint3DToVec3(x.GoPointer(), uintptr(unsafe.Pointer(VVar)))
 
 }
 

@@ -157,25 +157,25 @@ func (x *TreeViewColumn) AddAttribute(CellRendererVar *CellRenderer, AttributeVa
 
 }
 
-var xTreeViewColumnCellGetPosition func(uintptr, uintptr, int, int) bool
+var xTreeViewColumnCellGetPosition func(uintptr, uintptr, uintptr, uintptr) bool
 
 // Obtains the horizontal position and size of a cell in a column.
 //
 // If the  cell is not found in the column, @start_pos and @width
 // are not changed and %FALSE is returned.
-func (x *TreeViewColumn) CellGetPosition(CellRendererVar *CellRenderer, XOffsetVar int, WidthVar int) bool {
+func (x *TreeViewColumn) CellGetPosition(CellRendererVar *CellRenderer, XOffsetVar *int, WidthVar *int) bool {
 
-	cret := xTreeViewColumnCellGetPosition(x.GoPointer(), CellRendererVar.GoPointer(), XOffsetVar, WidthVar)
+	cret := xTreeViewColumnCellGetPosition(x.GoPointer(), CellRendererVar.GoPointer(), uintptr(unsafe.Pointer(XOffsetVar)), uintptr(unsafe.Pointer(WidthVar)))
 	return cret
 }
 
-var xTreeViewColumnCellGetSize func(uintptr, int, int, int, int)
+var xTreeViewColumnCellGetSize func(uintptr, uintptr, uintptr, uintptr, uintptr)
 
 // Obtains the width and height needed to render the column.  This is used
 // primarily by the `GtkTreeView`.
-func (x *TreeViewColumn) CellGetSize(XOffsetVar int, YOffsetVar int, WidthVar int, HeightVar int) {
+func (x *TreeViewColumn) CellGetSize(XOffsetVar *int, YOffsetVar *int, WidthVar *int, HeightVar *int) {
 
-	xTreeViewColumnCellGetSize(x.GoPointer(), XOffsetVar, YOffsetVar, WidthVar, HeightVar)
+	xTreeViewColumnCellGetSize(x.GoPointer(), uintptr(unsafe.Pointer(XOffsetVar)), uintptr(unsafe.Pointer(YOffsetVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 
 }
 

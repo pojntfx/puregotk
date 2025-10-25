@@ -299,7 +299,7 @@ type TypeValueCollectFunc func(*Value, uint, []TypeCValue, uint) string
 // |[&lt;!-- language="C" --&gt;
 // dest_value-&gt;data[0].v_pointer = g_strdup (src_value-&gt;data[0].v_pointer);
 // ]|
-type TypeValueCopyFunc func(*Value, *Value)
+type TypeValueCopyFunc func(*Value, uintptr)
 
 // Frees any old contents that might be left in the `value-&gt;data` array of
 // the given value.
@@ -953,13 +953,13 @@ func TypeCheckValueHolds(ValueVar *Value, TypeVar types.GType) bool {
 	return cret
 }
 
-var xTypeChildren func(types.GType, uint) uintptr
+var xTypeChildren func(types.GType, uintptr) uintptr
 
 // Return a newly allocated and 0-terminated array of type IDs, listing
 // the child types of @type.
-func TypeChildren(TypeVar types.GType, NChildrenVar uint) uintptr {
+func TypeChildren(TypeVar types.GType, NChildrenVar *uint) uintptr {
 
-	cret := xTypeChildren(TypeVar, NChildrenVar)
+	cret := xTypeChildren(TypeVar, uintptr(unsafe.Pointer(NChildrenVar)))
 	return cret
 }
 
@@ -1313,22 +1313,22 @@ func TypeInterfacePeek(InstanceClassVar *TypeClass, IfaceTypeVar types.GType) *T
 	return cret
 }
 
-var xTypeInterfacePrerequisites func(types.GType, uint) uintptr
+var xTypeInterfacePrerequisites func(types.GType, uintptr) uintptr
 
 // Returns the prerequisites of an interfaces type.
-func TypeInterfacePrerequisites(InterfaceTypeVar types.GType, NPrerequisitesVar uint) uintptr {
+func TypeInterfacePrerequisites(InterfaceTypeVar types.GType, NPrerequisitesVar *uint) uintptr {
 
-	cret := xTypeInterfacePrerequisites(InterfaceTypeVar, NPrerequisitesVar)
+	cret := xTypeInterfacePrerequisites(InterfaceTypeVar, uintptr(unsafe.Pointer(NPrerequisitesVar)))
 	return cret
 }
 
-var xTypeInterfaces func(types.GType, uint) uintptr
+var xTypeInterfaces func(types.GType, uintptr) uintptr
 
 // Return a newly allocated and 0-terminated array of type IDs, listing
 // the interface types that @type conforms to.
-func TypeInterfaces(TypeVar types.GType, NInterfacesVar uint) uintptr {
+func TypeInterfaces(TypeVar types.GType, NInterfacesVar *uint) uintptr {
 
-	cret := xTypeInterfaces(TypeVar, NInterfacesVar)
+	cret := xTypeInterfaces(TypeVar, uintptr(unsafe.Pointer(NInterfacesVar)))
 	return cret
 }
 
@@ -1407,7 +1407,7 @@ func TypeQname(TypeVar types.GType) glib.Quark {
 	return cret
 }
 
-var xNewTypeQuery func(types.GType, *TypeQuery)
+var xNewTypeQuery func(types.GType, uintptr)
 
 // Queries the type system for information about a specific type.
 //
@@ -1421,7 +1421,7 @@ var xNewTypeQuery func(types.GType, *TypeQuery)
 // it only supported static types.
 func NewTypeQuery(TypeVar types.GType, QueryVar *TypeQuery) {
 
-	xNewTypeQuery(TypeVar, QueryVar)
+	xNewTypeQuery(TypeVar, uintptr(unsafe.Pointer(QueryVar)))
 
 }
 

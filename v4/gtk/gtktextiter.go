@@ -175,7 +175,7 @@ func (x *TextIter) BackwardLines(CountVar int) bool {
 	return cret
 }
 
-var xTextIterBackwardSearch func(uintptr, string, TextSearchFlags, *TextIter, *TextIter, *TextIter) bool
+var xTextIterBackwardSearch func(uintptr, string, TextSearchFlags, uintptr, uintptr, *TextIter) bool
 
 // Same as [method@Gtk.TextIter.forward_search], but moves backward.
 //
@@ -183,7 +183,7 @@ var xTextIterBackwardSearch func(uintptr, string, TextSearchFlags, *TextIter, *T
 // even if there is a possible @match_start before or at @iter.
 func (x *TextIter) BackwardSearch(StrVar string, FlagsVar TextSearchFlags, MatchStartVar *TextIter, MatchEndVar *TextIter, LimitVar *TextIter) bool {
 
-	cret := xTextIterBackwardSearch(x.GoPointer(), StrVar, FlagsVar, MatchStartVar, MatchEndVar, LimitVar)
+	cret := xTextIterBackwardSearch(x.GoPointer(), StrVar, FlagsVar, uintptr(unsafe.Pointer(MatchStartVar)), uintptr(unsafe.Pointer(MatchEndVar)), LimitVar)
 	return cret
 }
 
@@ -587,7 +587,7 @@ func (x *TextIter) ForwardLines(CountVar int) bool {
 	return cret
 }
 
-var xTextIterForwardSearch func(uintptr, string, TextSearchFlags, *TextIter, *TextIter, *TextIter) bool
+var xTextIterForwardSearch func(uintptr, string, TextSearchFlags, uintptr, uintptr, *TextIter) bool
 
 // Searches forward for @str.
 //
@@ -601,7 +601,7 @@ var xTextIterForwardSearch func(uintptr, string, TextSearchFlags, *TextIter, *Te
 // even if there is a possible @match_end after or at @iter.
 func (x *TextIter) ForwardSearch(StrVar string, FlagsVar TextSearchFlags, MatchStartVar *TextIter, MatchEndVar *TextIter, LimitVar *TextIter) bool {
 
-	cret := xTextIterForwardSearch(x.GoPointer(), StrVar, FlagsVar, MatchStartVar, MatchEndVar, LimitVar)
+	cret := xTextIterForwardSearch(x.GoPointer(), StrVar, FlagsVar, uintptr(unsafe.Pointer(MatchStartVar)), uintptr(unsafe.Pointer(MatchEndVar)), LimitVar)
 	return cret
 }
 

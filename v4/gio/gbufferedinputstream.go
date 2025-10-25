@@ -386,14 +386,14 @@ func (x *BufferedInputStream) Peek(BufferVar []byte, OffsetVar uint, CountVar ui
 	return cret
 }
 
-var xBufferedInputStreamPeekBuffer func(uintptr, uint) uintptr
+var xBufferedInputStreamPeekBuffer func(uintptr, uintptr) uintptr
 
 // Returns the buffer with the currently available bytes. The returned
 // buffer must not be modified and will become invalid when reading from
 // the stream or filling the buffer.
-func (x *BufferedInputStream) PeekBuffer(CountVar uint) uintptr {
+func (x *BufferedInputStream) PeekBuffer(CountVar *uint) uintptr {
 
-	cret := xBufferedInputStreamPeekBuffer(x.GoPointer(), CountVar)
+	cret := xBufferedInputStreamPeekBuffer(x.GoPointer(), uintptr(unsafe.Pointer(CountVar)))
 	return cret
 }
 

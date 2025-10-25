@@ -21,7 +21,7 @@ import (
 //
 // This function may fail and return `NULL`, in which case
 // the fallback cursor will be used.
-type CursorGetTextureCallback func(uintptr, int, float64, int, int, int, int, uintptr) uintptr
+type CursorGetTextureCallback func(uintptr, int, float64, uintptr, uintptr, uintptr, uintptr, uintptr) uintptr
 
 // Used to create and destroy cursors.
 //

@@ -2,6 +2,8 @@
 package gio
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
@@ -133,7 +135,7 @@ func NewSubprocessv(ArgvVar []string, FlagsVar SubprocessFlags) (*Subprocess, er
 
 }
 
-var xSubprocessCommunicate func(uintptr, *glib.Bytes, uintptr, **glib.Bytes, **glib.Bytes, **glib.Error) bool
+var xSubprocessCommunicate func(uintptr, *glib.Bytes, uintptr, uintptr, uintptr, **glib.Error) bool
 
 // Communicate with the subprocess until it terminates, and all input
 // and output has been completed.
@@ -179,7 +181,7 @@ var xSubprocessCommunicate func(uintptr, *glib.Bytes, uintptr, **glib.Bytes, **g
 func (x *Subprocess) Communicate(StdinBufVar *glib.Bytes, CancellableVar *Cancellable, StdoutBufVar **glib.Bytes, StderrBufVar **glib.Bytes) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xSubprocessCommunicate(x.GoPointer(), StdinBufVar, CancellableVar.GoPointer(), StdoutBufVar, StderrBufVar, &cerr)
+	cret := xSubprocessCommunicate(x.GoPointer(), StdinBufVar, CancellableVar.GoPointer(), uintptr(unsafe.Pointer(StdoutBufVar)), uintptr(unsafe.Pointer(StderrBufVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -197,13 +199,13 @@ func (x *Subprocess) CommunicateAsync(StdinBufVar *glib.Bytes, CancellableVar *C
 
 }
 
-var xSubprocessCommunicateFinish func(uintptr, uintptr, **glib.Bytes, **glib.Bytes, **glib.Error) bool
+var xSubprocessCommunicateFinish func(uintptr, uintptr, uintptr, uintptr, **glib.Error) bool
 
 // Complete an invocation of g_subprocess_communicate_async().
 func (x *Subprocess) CommunicateFinish(ResultVar AsyncResult, StdoutBufVar **glib.Bytes, StderrBufVar **glib.Bytes) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xSubprocessCommunicateFinish(x.GoPointer(), ResultVar.GoPointer(), StdoutBufVar, StderrBufVar, &cerr)
+	cret := xSubprocessCommunicateFinish(x.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(StdoutBufVar)), uintptr(unsafe.Pointer(StderrBufVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -211,17 +213,17 @@ func (x *Subprocess) CommunicateFinish(ResultVar AsyncResult, StdoutBufVar **gli
 
 }
 
-var xSubprocessCommunicateUtf8 func(uintptr, string, uintptr, string, string, **glib.Error) bool
+var xSubprocessCommunicateUtf8 func(uintptr, string, uintptr, uintptr, uintptr, **glib.Error) bool
 
 // Like g_subprocess_communicate(), but validates the output of the
 // process as UTF-8, and returns it as a regular NUL terminated string.
 //
 // On error, @stdout_buf and @stderr_buf will be set to undefined values and
 // should not be used.
-func (x *Subprocess) CommunicateUtf8(StdinBufVar string, CancellableVar *Cancellable, StdoutBufVar string, StderrBufVar string) (bool, error) {
+func (x *Subprocess) CommunicateUtf8(StdinBufVar string, CancellableVar *Cancellable, StdoutBufVar *string, StderrBufVar *string) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xSubprocessCommunicateUtf8(x.GoPointer(), StdinBufVar, CancellableVar.GoPointer(), StdoutBufVar, StderrBufVar, &cerr)
+	cret := xSubprocessCommunicateUtf8(x.GoPointer(), StdinBufVar, CancellableVar.GoPointer(), uintptr(unsafe.Pointer(StdoutBufVar)), uintptr(unsafe.Pointer(StderrBufVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -239,13 +241,13 @@ func (x *Subprocess) CommunicateUtf8Async(StdinBufVar string, CancellableVar *Ca
 
 }
 
-var xSubprocessCommunicateUtf8Finish func(uintptr, uintptr, string, string, **glib.Error) bool
+var xSubprocessCommunicateUtf8Finish func(uintptr, uintptr, uintptr, uintptr, **glib.Error) bool
 
 // Complete an invocation of g_subprocess_communicate_utf8_async().
-func (x *Subprocess) CommunicateUtf8Finish(ResultVar AsyncResult, StdoutBufVar string, StderrBufVar string) (bool, error) {
+func (x *Subprocess) CommunicateUtf8Finish(ResultVar AsyncResult, StdoutBufVar *string, StderrBufVar *string) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xSubprocessCommunicateUtf8Finish(x.GoPointer(), ResultVar.GoPointer(), StdoutBufVar, StderrBufVar, &cerr)
+	cret := xSubprocessCommunicateUtf8Finish(x.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(StdoutBufVar)), uintptr(unsafe.Pointer(StderrBufVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

@@ -2,6 +2,8 @@
 package glib
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 )
@@ -64,7 +66,7 @@ func AtomicIntCompareAndExchange(AtomicVar uintptr, OldvalVar int, NewvalVar int
 	return cret
 }
 
-var xAtomicIntCompareAndExchangeFull func(uintptr, int, int, int) bool
+var xAtomicIntCompareAndExchangeFull func(uintptr, int, int, uintptr) bool
 
 // Compares @atomic to @oldval and, if equal, sets it to @newval.
 // If @atomic was not equal to @oldval then no change occurs.
@@ -78,9 +80,9 @@ var xAtomicIntCompareAndExchangeFull func(uintptr, int, int, int) bool
 // This call acts as a full compiler and hardware memory barrier.
 //
 // See also g_atomic_int_compare_and_exchange()
-func AtomicIntCompareAndExchangeFull(AtomicVar uintptr, OldvalVar int, NewvalVar int, PrevalVar int) bool {
+func AtomicIntCompareAndExchangeFull(AtomicVar uintptr, OldvalVar int, NewvalVar int, PrevalVar *int) bool {
 
-	cret := xAtomicIntCompareAndExchangeFull(AtomicVar, OldvalVar, NewvalVar, PrevalVar)
+	cret := xAtomicIntCompareAndExchangeFull(AtomicVar, OldvalVar, NewvalVar, uintptr(unsafe.Pointer(PrevalVar)))
 	return cret
 }
 
@@ -287,9 +289,9 @@ var xAtomicPointerCompareAndExchangeFull func(uintptr, uintptr, uintptr, uintptr
 // This call acts as a full compiler and hardware memory barrier.
 //
 // See also g_atomic_pointer_compare_and_exchange()
-func AtomicPointerCompareAndExchangeFull(AtomicVar uintptr, OldvalVar uintptr, NewvalVar uintptr, PrevalVar uintptr) bool {
+func AtomicPointerCompareAndExchangeFull(AtomicVar uintptr, OldvalVar uintptr, NewvalVar uintptr, PrevalVar *uintptr) bool {
 
-	cret := xAtomicPointerCompareAndExchangeFull(AtomicVar, OldvalVar, NewvalVar, PrevalVar)
+	cret := xAtomicPointerCompareAndExchangeFull(AtomicVar, OldvalVar, NewvalVar, uintptr(unsafe.Pointer(PrevalVar)))
 	return cret
 }
 

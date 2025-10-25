@@ -210,8 +210,8 @@ func (x *ContentProviderClass) OverrideGetValue(cb func(*ContentProvider, *gobje
 	if cb == nil {
 		x.xGetValue = 0
 	} else {
-		x.xGetValue = purego.NewCallback(func(ProviderVarp uintptr, ValueVarp *gobject.Value) bool {
-			return cb(ContentProviderNewFromInternalPtr(ProviderVarp), ValueVarp)
+		x.xGetValue = purego.NewCallback(func(ProviderVarp uintptr, ValueVarp uintptr) bool {
+			return cb(ContentProviderNewFromInternalPtr(ProviderVarp), (*gobject.Value)(unsafe.Pointer(ValueVarp)))
 		})
 	}
 }
@@ -221,10 +221,10 @@ func (x *ContentProviderClass) GetGetValue() func(*ContentProvider, *gobject.Val
 	if x.xGetValue == 0 {
 		return nil
 	}
-	var rawCallback func(ProviderVarp uintptr, ValueVarp *gobject.Value) bool
+	var rawCallback func(ProviderVarp uintptr, ValueVarp uintptr) bool
 	purego.RegisterFunc(&rawCallback, x.xGetValue)
 	return func(ProviderVar *ContentProvider, ValueVar *gobject.Value) bool {
-		return rawCallback(ProviderVar.GoPointer(), ValueVar)
+		return rawCallback(ProviderVar.GoPointer(), uintptr(unsafe.Pointer(ValueVar)))
 	}
 }
 
@@ -347,7 +347,7 @@ func (x *ContentProvider) ContentChanged() {
 
 }
 
-var xContentProviderGetValue func(uintptr, *gobject.Value, **glib.Error) bool
+var xContentProviderGetValue func(uintptr, uintptr, **glib.Error) bool
 
 // Gets the contents of @provider stored in @value.
 //
@@ -359,7 +359,7 @@ var xContentProviderGetValue func(uintptr, *gobject.Value, **glib.Error) bool
 func (x *ContentProvider) GetValue(ValueVar *gobject.Value) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xContentProviderGetValue(x.GoPointer(), ValueVar, &cerr)
+	cret := xContentProviderGetValue(x.GoPointer(), uintptr(unsafe.Pointer(ValueVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

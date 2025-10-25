@@ -528,7 +528,7 @@ func (x *FileEnumerator) IsClosed() bool {
 	return cret
 }
 
-var xFileEnumeratorIterate func(uintptr, uintptr, *uintptr, uintptr, **glib.Error) bool
+var xFileEnumeratorIterate func(uintptr, uintptr, uintptr, uintptr, **glib.Error) bool
 
 // This is a version of g_file_enumerator_next_file() that's easier to
 // use correctly from C programs.  With g_file_enumerator_next_file(),
@@ -571,10 +571,10 @@ var xFileEnumeratorIterate func(uintptr, uintptr, *uintptr, uintptr, **glib.Erro
 //	g_object_unref (direnum); // Note: frees the last @info
 //
 // ]|
-func (x *FileEnumerator) Iterate(OutInfoVar **FileInfo, OutChildVar *File, CancellableVar *Cancellable) (bool, error) {
+func (x *FileEnumerator) Iterate(OutInfoVar **FileInfo, OutChildVar **File, CancellableVar *Cancellable) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xFileEnumeratorIterate(x.GoPointer(), *gobject.ConvertPtr(OutInfoVar), gobject.ConvertPtr(OutChildVar), CancellableVar.GoPointer(), &cerr)
+	cret := xFileEnumeratorIterate(x.GoPointer(), uintptr(unsafe.Pointer(OutInfoVar)), uintptr(unsafe.Pointer(OutChildVar)), CancellableVar.GoPointer(), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

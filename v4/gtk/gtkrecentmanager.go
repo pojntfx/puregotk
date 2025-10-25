@@ -108,25 +108,25 @@ func (x *RecentInfo) GetAge() int {
 	return cret
 }
 
-var xRecentInfoGetApplicationInfo func(uintptr, string, string, uint, **glib.DateTime) bool
+var xRecentInfoGetApplicationInfo func(uintptr, string, uintptr, uintptr, uintptr) bool
 
 // Gets the data regarding the application that has registered the resource
 // pointed by @info.
 //
 // If the command line contains any escape characters defined inside the
 // storage specification, they will be expanded.
-func (x *RecentInfo) GetApplicationInfo(AppNameVar string, AppExecVar string, CountVar uint, StampVar **glib.DateTime) bool {
+func (x *RecentInfo) GetApplicationInfo(AppNameVar string, AppExecVar *string, CountVar *uint, StampVar **glib.DateTime) bool {
 
-	cret := xRecentInfoGetApplicationInfo(x.GoPointer(), AppNameVar, AppExecVar, CountVar, StampVar)
+	cret := xRecentInfoGetApplicationInfo(x.GoPointer(), AppNameVar, uintptr(unsafe.Pointer(AppExecVar)), uintptr(unsafe.Pointer(CountVar)), uintptr(unsafe.Pointer(StampVar)))
 	return cret
 }
 
-var xRecentInfoGetApplications func(uintptr, uint) []string
+var xRecentInfoGetApplications func(uintptr, uintptr) []string
 
 // Retrieves the list of applications that have registered this resource.
-func (x *RecentInfo) GetApplications(LengthVar uint) []string {
+func (x *RecentInfo) GetApplications(LengthVar *uint) []string {
 
-	cret := xRecentInfoGetApplications(x.GoPointer(), LengthVar)
+	cret := xRecentInfoGetApplications(x.GoPointer(), uintptr(unsafe.Pointer(LengthVar)))
 	return cret
 }
 
@@ -167,15 +167,15 @@ func (x *RecentInfo) GetGicon() *gio.IconBase {
 	return cls
 }
 
-var xRecentInfoGetGroups func(uintptr, uint) []string
+var xRecentInfoGetGroups func(uintptr, uintptr) []string
 
 // Returns all groups registered for the recently used item @info.
 //
 // The array of returned group names will be %NULL terminated, so
 // length might optionally be %NULL.
-func (x *RecentInfo) GetGroups(LengthVar uint) []string {
+func (x *RecentInfo) GetGroups(LengthVar *uint) []string {
 
-	cret := xRecentInfoGetGroups(x.GoPointer(), LengthVar)
+	cret := xRecentInfoGetGroups(x.GoPointer(), uintptr(unsafe.Pointer(LengthVar)))
 	return cret
 }
 

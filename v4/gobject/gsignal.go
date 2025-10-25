@@ -565,14 +565,14 @@ func SignalIsValidName(NameVar string) bool {
 	return cret
 }
 
-var xSignalListIds func(types.GType, uint) uintptr
+var xSignalListIds func(types.GType, uintptr) uintptr
 
 // Lists the signals by id that a certain instance or interface type
 // created. Further information about the signals can be acquired through
 // g_signal_query().
-func SignalListIds(ItypeVar types.GType, NIdsVar uint) uintptr {
+func SignalListIds(ItypeVar types.GType, NIdsVar *uint) uintptr {
 
-	cret := xSignalListIds(ItypeVar, NIdsVar)
+	cret := xSignalListIds(ItypeVar, uintptr(unsafe.Pointer(NIdsVar)))
 	return cret
 }
 
@@ -721,17 +721,17 @@ func SignalOverrideClassHandler(SignalNameVar string, InstanceTypeVar types.GTyp
 
 }
 
-var xSignalParseName func(string, types.GType, uint, *glib.Quark, bool) bool
+var xSignalParseName func(string, types.GType, uintptr, uintptr, bool) bool
 
 // Internal function to parse a signal name into its @signal_id
 // and @detail quark.
-func SignalParseName(DetailedSignalVar string, ItypeVar types.GType, SignalIdPVar uint, DetailPVar *glib.Quark, ForceDetailQuarkVar bool) bool {
+func SignalParseName(DetailedSignalVar string, ItypeVar types.GType, SignalIdPVar *uint, DetailPVar *glib.Quark, ForceDetailQuarkVar bool) bool {
 
-	cret := xSignalParseName(DetailedSignalVar, ItypeVar, SignalIdPVar, DetailPVar, ForceDetailQuarkVar)
+	cret := xSignalParseName(DetailedSignalVar, ItypeVar, uintptr(unsafe.Pointer(SignalIdPVar)), uintptr(unsafe.Pointer(DetailPVar)), ForceDetailQuarkVar)
 	return cret
 }
 
-var xNewSignalQuery func(uint, *SignalQuery)
+var xNewSignalQuery func(uint, uintptr)
 
 // Queries the signal system for in-depth information about a
 // specific signal. This function will fill in a user-provided
@@ -741,7 +741,7 @@ var xNewSignalQuery func(uint, *SignalQuery)
 // be considered constant and have to be left untouched.
 func NewSignalQuery(SignalIdVar uint, QueryVar *SignalQuery) {
 
-	xNewSignalQuery(SignalIdVar, QueryVar)
+	xNewSignalQuery(SignalIdVar, uintptr(unsafe.Pointer(QueryVar)))
 
 }
 

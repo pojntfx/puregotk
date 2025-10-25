@@ -2,6 +2,8 @@
 package gtk
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 )
@@ -23,13 +25,13 @@ func TestInit(ArgcpVar int, ArgvpVar []string, varArgs ...interface{}) {
 
 }
 
-var xTestListAllTypes func(uint) uintptr
+var xTestListAllTypes func(uintptr) uintptr
 
 // Return the type ids that have been registered after
 // calling gtk_test_register_all_types().
-func TestListAllTypes(NTypesVar uint) uintptr {
+func TestListAllTypes(NTypesVar *uint) uintptr {
 
-	cret := xTestListAllTypes(NTypesVar)
+	cret := xTestListAllTypes(uintptr(unsafe.Pointer(NTypesVar)))
 	return cret
 }
 

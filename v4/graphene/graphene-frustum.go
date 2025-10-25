@@ -69,12 +69,12 @@ func (x *Frustum) Free() {
 
 }
 
-var xFrustumGetPlanes func(uintptr, [6]Plane)
+var xFrustumGetPlanes func(uintptr, uintptr)
 
 // Retrieves the planes that define the given #graphene_frustum_t.
-func (x *Frustum) GetPlanes(PlanesVar [6]Plane) {
+func (x *Frustum) GetPlanes(PlanesVar *[6]Plane) {
 
-	xFrustumGetPlanes(x.GoPointer(), PlanesVar)
+	xFrustumGetPlanes(x.GoPointer(), uintptr(unsafe.Pointer(PlanesVar)))
 
 }
 

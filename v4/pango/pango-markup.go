@@ -2,12 +2,14 @@
 package pango
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 )
 
-var xMarkupParserFinish func(*glib.MarkupParseContext, **AttrList, string, uint32, **glib.Error) bool
+var xMarkupParserFinish func(*glib.MarkupParseContext, uintptr, uintptr, uintptr, **glib.Error) bool
 
 // Finishes parsing markup.
 //
@@ -15,10 +17,10 @@ var xMarkupParserFinish func(*glib.MarkupParseContext, **AttrList, string, uint3
 // use this function to get the list of attributes and text out of the
 // markup. This function will not free @context, use [method@GLib.MarkupParseContext.free]
 // to do so.
-func MarkupParserFinish(ContextVar *glib.MarkupParseContext, AttrListVar **AttrList, TextVar string, AccelCharVar uint32) (bool, error) {
+func MarkupParserFinish(ContextVar *glib.MarkupParseContext, AttrListVar **AttrList, TextVar *string, AccelCharVar *uint32) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xMarkupParserFinish(ContextVar, AttrListVar, TextVar, AccelCharVar, &cerr)
+	cret := xMarkupParserFinish(ContextVar, uintptr(unsafe.Pointer(AttrListVar)), uintptr(unsafe.Pointer(TextVar)), uintptr(unsafe.Pointer(AccelCharVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -56,7 +58,7 @@ func MarkupParserNew(AccelMarkerVar uint32) *glib.MarkupParseContext {
 	return cret
 }
 
-var xParseMarkup func(string, int, uint32, **AttrList, string, uint32, **glib.Error) bool
+var xParseMarkup func(string, int, uint32, uintptr, uintptr, uintptr, **glib.Error) bool
 
 // Parses marked-up text to create a plain-text string and an attribute list.
 //
@@ -75,10 +77,10 @@ var xParseMarkup func(string, int, uint32, **AttrList, string, uint32, **glib.Er
 //
 // If any error happens, none of the output arguments are touched except
 // for @error.
-func ParseMarkup(MarkupTextVar string, LengthVar int, AccelMarkerVar uint32, AttrListVar **AttrList, TextVar string, AccelCharVar uint32) (bool, error) {
+func ParseMarkup(MarkupTextVar string, LengthVar int, AccelMarkerVar uint32, AttrListVar **AttrList, TextVar *string, AccelCharVar *uint32) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xParseMarkup(MarkupTextVar, LengthVar, AccelMarkerVar, AttrListVar, TextVar, AccelCharVar, &cerr)
+	cret := xParseMarkup(MarkupTextVar, LengthVar, AccelMarkerVar, uintptr(unsafe.Pointer(AttrListVar)), uintptr(unsafe.Pointer(TextVar)), uintptr(unsafe.Pointer(AccelCharVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

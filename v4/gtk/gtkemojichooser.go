@@ -190,9 +190,9 @@ func (x *EmojiChooser) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *EmojiChooser) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *EmojiChooser) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -445,9 +445,9 @@ func (x *EmojiChooser) GetSurface() *gdk.Surface {
 //
 // This is the translation from @self's surface coordinates into
 // @self's widget coordinates.
-func (x *EmojiChooser) GetSurfaceTransform(XVar float64, YVar float64) {
+func (x *EmojiChooser) GetSurfaceTransform(XVar *float64, YVar *float64) {
 
-	XGtkNativeGetSurfaceTransform(x.GoPointer(), XVar, YVar)
+	XGtkNativeGetSurfaceTransform(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)))
 
 }
 

@@ -229,12 +229,12 @@ func (x *LevelBar) GetMode() LevelBarMode {
 	return cret
 }
 
-var xLevelBarGetOffsetValue func(uintptr, string, float64) bool
+var xLevelBarGetOffsetValue func(uintptr, string, uintptr) bool
 
 // Fetches the value specified for the offset marker @name in @self.
-func (x *LevelBar) GetOffsetValue(NameVar string, ValueVar float64) bool {
+func (x *LevelBar) GetOffsetValue(NameVar string, ValueVar *float64) bool {
 
-	cret := xLevelBarGetOffsetValue(x.GoPointer(), NameVar, ValueVar)
+	cret := xLevelBarGetOffsetValue(x.GoPointer(), NameVar, uintptr(unsafe.Pointer(ValueVar)))
 	return cret
 }
 
@@ -405,9 +405,9 @@ func (x *LevelBar) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *LevelBar) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *LevelBar) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 

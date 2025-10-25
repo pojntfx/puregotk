@@ -95,12 +95,12 @@ func (x *PrintJob) GetNumCopies() int {
 	return cret
 }
 
-var xPrintJobGetPageRanges func(uintptr, int) uintptr
+var xPrintJobGetPageRanges func(uintptr, uintptr) uintptr
 
 // Gets the page ranges for this job.
-func (x *PrintJob) GetPageRanges(NRangesVar int) uintptr {
+func (x *PrintJob) GetPageRanges(NRangesVar *int) uintptr {
 
-	cret := xPrintJobGetPageRanges(x.GoPointer(), NRangesVar)
+	cret := xPrintJobGetPageRanges(x.GoPointer(), uintptr(unsafe.Pointer(NRangesVar)))
 	return cret
 }
 

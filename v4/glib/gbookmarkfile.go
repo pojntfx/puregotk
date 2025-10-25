@@ -168,7 +168,7 @@ func (x *BookmarkFile) GetAddedDateTime(UriVar string) (*DateTime, error) {
 
 }
 
-var xBookmarkFileGetAppInfo func(uintptr, string, string, string, uint, int, **Error) bool
+var xBookmarkFileGetAppInfo func(uintptr, string, string, uintptr, uintptr, uintptr, **Error) bool
 
 // Gets the registration information of @app_name for the bookmark for
 // @uri.  See g_bookmark_file_set_application_info() for more information about
@@ -183,10 +183,10 @@ var xBookmarkFileGetAppInfo func(uintptr, string, string, string, uint, int, **E
 // %G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED. In the event that unquoting
 // the command line fails, an error of the %G_SHELL_ERROR domain is
 // set and %FALSE is returned.
-func (x *BookmarkFile) GetAppInfo(UriVar string, NameVar string, ExecVar string, CountVar uint, StampVar int) (bool, error) {
+func (x *BookmarkFile) GetAppInfo(UriVar string, NameVar string, ExecVar *string, CountVar *uint, StampVar *int) (bool, error) {
 	var cerr *Error
 
-	cret := xBookmarkFileGetAppInfo(x.GoPointer(), UriVar, NameVar, ExecVar, CountVar, StampVar, &cerr)
+	cret := xBookmarkFileGetAppInfo(x.GoPointer(), UriVar, NameVar, uintptr(unsafe.Pointer(ExecVar)), uintptr(unsafe.Pointer(CountVar)), uintptr(unsafe.Pointer(StampVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -194,7 +194,7 @@ func (x *BookmarkFile) GetAppInfo(UriVar string, NameVar string, ExecVar string,
 
 }
 
-var xBookmarkFileGetApplicationInfo func(uintptr, string, string, string, uint, **DateTime, **Error) bool
+var xBookmarkFileGetApplicationInfo func(uintptr, string, string, uintptr, uintptr, uintptr, **Error) bool
 
 // Gets the registration information of @app_name for the bookmark for
 // @uri.  See g_bookmark_file_set_application_info() for more information about
@@ -209,10 +209,10 @@ var xBookmarkFileGetApplicationInfo func(uintptr, string, string, string, uint, 
 // %G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED. In the event that unquoting
 // the command line fails, an error of the %G_SHELL_ERROR domain is
 // set and %FALSE is returned.
-func (x *BookmarkFile) GetApplicationInfo(UriVar string, NameVar string, ExecVar string, CountVar uint, StampVar **DateTime) (bool, error) {
+func (x *BookmarkFile) GetApplicationInfo(UriVar string, NameVar string, ExecVar *string, CountVar *uint, StampVar **DateTime) (bool, error) {
 	var cerr *Error
 
-	cret := xBookmarkFileGetApplicationInfo(x.GoPointer(), UriVar, NameVar, ExecVar, CountVar, StampVar, &cerr)
+	cret := xBookmarkFileGetApplicationInfo(x.GoPointer(), UriVar, NameVar, uintptr(unsafe.Pointer(ExecVar)), uintptr(unsafe.Pointer(CountVar)), uintptr(unsafe.Pointer(StampVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -220,17 +220,17 @@ func (x *BookmarkFile) GetApplicationInfo(UriVar string, NameVar string, ExecVar
 
 }
 
-var xBookmarkFileGetApplications func(uintptr, string, uint, **Error) []string
+var xBookmarkFileGetApplications func(uintptr, string, uintptr, **Error) []string
 
 // Retrieves the names of the applications that have registered the
 // bookmark for @uri.
 //
 // In the event the URI cannot be found, %NULL is returned and
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
-func (x *BookmarkFile) GetApplications(UriVar string, LengthVar uint) ([]string, error) {
+func (x *BookmarkFile) GetApplications(UriVar string, LengthVar *uint) ([]string, error) {
 	var cerr *Error
 
-	cret := xBookmarkFileGetApplications(x.GoPointer(), UriVar, LengthVar, &cerr)
+	cret := xBookmarkFileGetApplications(x.GoPointer(), UriVar, uintptr(unsafe.Pointer(LengthVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -255,7 +255,7 @@ func (x *BookmarkFile) GetDescription(UriVar string) (string, error) {
 
 }
 
-var xBookmarkFileGetGroups func(uintptr, string, uint, **Error) []string
+var xBookmarkFileGetGroups func(uintptr, string, uintptr, **Error) []string
 
 // Retrieves the list of group names of the bookmark for @uri.
 //
@@ -264,10 +264,10 @@ var xBookmarkFileGetGroups func(uintptr, string, uint, **Error) []string
 //
 // The returned array is %NULL terminated, so @length may optionally
 // be %NULL.
-func (x *BookmarkFile) GetGroups(UriVar string, LengthVar uint) ([]string, error) {
+func (x *BookmarkFile) GetGroups(UriVar string, LengthVar *uint) ([]string, error) {
 	var cerr *Error
 
-	cret := xBookmarkFileGetGroups(x.GoPointer(), UriVar, LengthVar, &cerr)
+	cret := xBookmarkFileGetGroups(x.GoPointer(), UriVar, uintptr(unsafe.Pointer(LengthVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -275,16 +275,16 @@ func (x *BookmarkFile) GetGroups(UriVar string, LengthVar uint) ([]string, error
 
 }
 
-var xBookmarkFileGetIcon func(uintptr, string, string, string, **Error) bool
+var xBookmarkFileGetIcon func(uintptr, string, uintptr, uintptr, **Error) bool
 
 // Gets the icon of the bookmark for @uri.
 //
 // In the event the URI cannot be found, %FALSE is returned and
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
-func (x *BookmarkFile) GetIcon(UriVar string, HrefVar string, MimeTypeVar string) (bool, error) {
+func (x *BookmarkFile) GetIcon(UriVar string, HrefVar *string, MimeTypeVar *string) (bool, error) {
 	var cerr *Error
 
-	cret := xBookmarkFileGetIcon(x.GoPointer(), UriVar, HrefVar, MimeTypeVar, &cerr)
+	cret := xBookmarkFileGetIcon(x.GoPointer(), UriVar, uintptr(unsafe.Pointer(HrefVar)), uintptr(unsafe.Pointer(MimeTypeVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -392,14 +392,14 @@ func (x *BookmarkFile) GetTitle(UriVar string) (string, error) {
 
 }
 
-var xBookmarkFileGetUris func(uintptr, uint) []string
+var xBookmarkFileGetUris func(uintptr, uintptr) []string
 
 // Returns all URIs of the bookmarks in the bookmark file @bookmark.
 // The array of returned URIs will be %NULL-terminated, so @length may
 // optionally be %NULL.
-func (x *BookmarkFile) GetUris(LengthVar uint) []string {
+func (x *BookmarkFile) GetUris(LengthVar *uint) []string {
 
-	cret := xBookmarkFileGetUris(x.GoPointer(), LengthVar)
+	cret := xBookmarkFileGetUris(x.GoPointer(), uintptr(unsafe.Pointer(LengthVar)))
 	return cret
 }
 
@@ -498,17 +498,17 @@ func (x *BookmarkFile) LoadFromData(DataVar []byte, LengthVar uint) (bool, error
 
 }
 
-var xBookmarkFileLoadFromDataDirs func(uintptr, string, string, **Error) bool
+var xBookmarkFileLoadFromDataDirs func(uintptr, string, uintptr, **Error) bool
 
 // This function looks for a desktop bookmark file named @file in the
 // paths returned from g_get_user_data_dir() and g_get_system_data_dirs(),
 // loads the file into @bookmark and returns the file's full path in
 // @full_path.  If the file could not be loaded then @error is
 // set to either a #GFileError or #GBookmarkFileError.
-func (x *BookmarkFile) LoadFromDataDirs(FileVar string, FullPathVar string) (bool, error) {
+func (x *BookmarkFile) LoadFromDataDirs(FileVar string, FullPathVar *string) (bool, error) {
 	var cerr *Error
 
-	cret := xBookmarkFileLoadFromDataDirs(x.GoPointer(), FileVar, FullPathVar, &cerr)
+	cret := xBookmarkFileLoadFromDataDirs(x.GoPointer(), FileVar, uintptr(unsafe.Pointer(FullPathVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -849,13 +849,13 @@ func (x *BookmarkFile) SetVisitedDateTime(UriVar string, VisitedVar *DateTime) {
 
 }
 
-var xBookmarkFileToData func(uintptr, uint, **Error) uintptr
+var xBookmarkFileToData func(uintptr, uintptr, **Error) uintptr
 
 // This function outputs @bookmark as a string.
-func (x *BookmarkFile) ToData(LengthVar uint) (uintptr, error) {
+func (x *BookmarkFile) ToData(LengthVar *uint) (uintptr, error) {
 	var cerr *Error
 
-	cret := xBookmarkFileToData(x.GoPointer(), LengthVar, &cerr)
+	cret := xBookmarkFileToData(x.GoPointer(), uintptr(unsafe.Pointer(LengthVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

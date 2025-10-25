@@ -118,12 +118,12 @@ func (x *PollableInputStreamInterface) GetCreateSource() func(PollableInputStrea
 // Does a non-blocking read or returns
 //
 //	%G_IO_ERROR_WOULD_BLOCK
-func (x *PollableInputStreamInterface) OverrideReadNonblocking(cb func(PollableInputStream, []byte, uint) int) {
+func (x *PollableInputStreamInterface) OverrideReadNonblocking(cb func(PollableInputStream, *[]byte, uint) int) {
 	if cb == nil {
 		x.xReadNonblocking = 0
 	} else {
-		x.xReadNonblocking = purego.NewCallback(func(StreamVarp uintptr, BufferVarp []byte, CountVarp uint) int {
-			return cb(&PollableInputStreamBase{Ptr: StreamVarp}, BufferVarp, CountVarp)
+		x.xReadNonblocking = purego.NewCallback(func(StreamVarp uintptr, BufferVarp uintptr, CountVarp uint) int {
+			return cb(&PollableInputStreamBase{Ptr: StreamVarp}, (*[]byte)(unsafe.Pointer(BufferVarp)), CountVarp)
 		})
 	}
 }
@@ -132,14 +132,14 @@ func (x *PollableInputStreamInterface) OverrideReadNonblocking(cb func(PollableI
 // Does a non-blocking read or returns
 //
 //	%G_IO_ERROR_WOULD_BLOCK
-func (x *PollableInputStreamInterface) GetReadNonblocking() func(PollableInputStream, []byte, uint) int {
+func (x *PollableInputStreamInterface) GetReadNonblocking() func(PollableInputStream, *[]byte, uint) int {
 	if x.xReadNonblocking == 0 {
 		return nil
 	}
-	var rawCallback func(StreamVarp uintptr, BufferVarp []byte, CountVarp uint) int
+	var rawCallback func(StreamVarp uintptr, BufferVarp uintptr, CountVarp uint) int
 	purego.RegisterFunc(&rawCallback, x.xReadNonblocking)
-	return func(StreamVar PollableInputStream, BufferVar []byte, CountVar uint) int {
-		return rawCallback(StreamVar.GoPointer(), BufferVar, CountVar)
+	return func(StreamVar PollableInputStream, BufferVar *[]byte, CountVar uint) int {
+		return rawCallback(StreamVar.GoPointer(), uintptr(unsafe.Pointer(BufferVar)), CountVar)
 	}
 }
 
@@ -158,7 +158,7 @@ type PollableInputStream interface {
 	CanPoll() bool
 	CreateSource(CancellableVar *Cancellable) *glib.Source
 	IsReadable() bool
-	ReadNonblocking(BufferVar []byte, CountVar uint, CancellableVar *Cancellable) (int, error)
+	ReadNonblocking(BufferVar *[]byte, CountVar uint, CancellableVar *Cancellable) (int, error)
 }
 
 var xPollableInputStreamGLibType func() types.GType
@@ -243,10 +243,10 @@ func (x *PollableInputStreamBase) IsReadable() bool {
 //
 // The behaviour of this method is undefined if
 // g_pollable_input_stream_can_poll() returns %FALSE for @stream.
-func (x *PollableInputStreamBase) ReadNonblocking(BufferVar []byte, CountVar uint, CancellableVar *Cancellable) (int, error) {
+func (x *PollableInputStreamBase) ReadNonblocking(BufferVar *[]byte, CountVar uint, CancellableVar *Cancellable) (int, error) {
 	var cerr *glib.Error
 
-	cret := XGPollableInputStreamReadNonblocking(x.GoPointer(), BufferVar, CountVar, CancellableVar.GoPointer(), &cerr)
+	cret := XGPollableInputStreamReadNonblocking(x.GoPointer(), uintptr(unsafe.Pointer(BufferVar)), CountVar, CancellableVar.GoPointer(), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -257,7 +257,7 @@ func (x *PollableInputStreamBase) ReadNonblocking(BufferVar []byte, CountVar uin
 var XGPollableInputStreamCanPoll func(uintptr) bool
 var XGPollableInputStreamCreateSource func(uintptr, uintptr) *glib.Source
 var XGPollableInputStreamIsReadable func(uintptr) bool
-var XGPollableInputStreamReadNonblocking func(uintptr, []byte, uint, uintptr, **glib.Error) int
+var XGPollableInputStreamReadNonblocking func(uintptr, uintptr, uint, uintptr, **glib.Error) int
 
 func init() {
 	core.SetPackageName("GIO", "gio-2.0")

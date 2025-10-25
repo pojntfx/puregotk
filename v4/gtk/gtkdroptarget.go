@@ -190,14 +190,14 @@ func (x *DropTarget) GetFormats() *gdk.ContentFormats {
 	return cret
 }
 
-var xDropTargetGetGtypes func(uintptr, uint) uintptr
+var xDropTargetGetGtypes func(uintptr, uintptr) uintptr
 
 // Gets the list of supported `GType`s that can be dropped on the target.
 //
 // If no types have been set, `NULL` will be returned.
-func (x *DropTarget) GetGtypes(NTypesVar uint) uintptr {
+func (x *DropTarget) GetGtypes(NTypesVar *uint) uintptr {
 
-	cret := xDropTargetGetGtypes(x.GoPointer(), NTypesVar)
+	cret := xDropTargetGetGtypes(x.GoPointer(), uintptr(unsafe.Pointer(NTypesVar)))
 	return cret
 }
 

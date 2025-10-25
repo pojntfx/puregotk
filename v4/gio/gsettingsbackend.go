@@ -595,7 +595,7 @@ func (c *SettingsBackend) SetGoPointer(ptr uintptr) {
 	c.Ptr = ptr
 }
 
-var xSettingsBackendFlattenTree func(*glib.Tree, string, []string, uintptr)
+var xSettingsBackendFlattenTree func(*glib.Tree, uintptr, uintptr, uintptr)
 
 // Calculate the longest common prefix of all keys in a tree and write
 // out an array of the key names relative to that prefix and,
@@ -604,9 +604,9 @@ var xSettingsBackendFlattenTree func(*glib.Tree, string, []string, uintptr)
 // You must free the value returned in @path, @keys and @values using
 // g_free().  You should not attempt to free or unref the contents of
 // @keys or @values.
-func SettingsBackendFlattenTree(TreeVar *glib.Tree, PathVar string, KeysVar []string, ValuesVar uintptr) {
+func SettingsBackendFlattenTree(TreeVar *glib.Tree, PathVar *string, KeysVar *[]string, ValuesVar *uintptr) {
 
-	xSettingsBackendFlattenTree(TreeVar, PathVar, KeysVar, ValuesVar)
+	xSettingsBackendFlattenTree(TreeVar, uintptr(unsafe.Pointer(PathVar)), uintptr(unsafe.Pointer(KeysVar)), uintptr(unsafe.Pointer(ValuesVar)))
 
 }
 

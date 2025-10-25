@@ -219,7 +219,7 @@ func (x *Euler) InitWithOrder(XVar float32, YVar float32, ZVar float32, OrderVar
 	return cret
 }
 
-var xEulerReorder func(uintptr, EulerOrder, *Euler)
+var xEulerReorder func(uintptr, EulerOrder, uintptr)
 
 // Reorders a #graphene_euler_t using @order.
 //
@@ -228,11 +228,11 @@ var xEulerReorder func(uintptr, EulerOrder, *Euler)
 // #graphene_euler_t.
 func (x *Euler) Reorder(OrderVar EulerOrder, ResVar *Euler) {
 
-	xEulerReorder(x.GoPointer(), OrderVar, ResVar)
+	xEulerReorder(x.GoPointer(), OrderVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xEulerToMatrix func(uintptr, *Matrix)
+var xEulerToMatrix func(uintptr, uintptr)
 
 // Converts a #graphene_euler_t into a transformation matrix expressing
 // the extrinsic composition of rotations described by the Euler angles.
@@ -252,26 +252,26 @@ var xEulerToMatrix func(uintptr, *Matrix)
 // between Euler-based, quaternion-based, and angle-axis-based rotations.
 func (x *Euler) ToMatrix(ResVar *Matrix) {
 
-	xEulerToMatrix(x.GoPointer(), ResVar)
+	xEulerToMatrix(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xEulerToQuaternion func(uintptr, *Quaternion)
+var xEulerToQuaternion func(uintptr, uintptr)
 
 // Converts a #graphene_euler_t into a #graphene_quaternion_t.
 func (x *Euler) ToQuaternion(ResVar *Quaternion) {
 
-	xEulerToQuaternion(x.GoPointer(), ResVar)
+	xEulerToQuaternion(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xEulerToVec3 func(uintptr, *Vec3)
+var xEulerToVec3 func(uintptr, uintptr)
 
 // Retrieves the angles of a #graphene_euler_t and initializes a
 // #graphene_vec3_t with them.
 func (x *Euler) ToVec3(ResVar *Vec3) {
 
-	xEulerToVec3(x.GoPointer(), ResVar)
+	xEulerToVec3(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 

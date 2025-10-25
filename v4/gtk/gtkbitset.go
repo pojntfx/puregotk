@@ -54,63 +54,63 @@ func (x *BitsetIter) IsValid() bool {
 	return cret
 }
 
-var xBitsetIterNext func(uintptr, uint) bool
+var xBitsetIterNext func(uintptr, uintptr) bool
 
 // Moves @iter to the next value in the set.
 //
 // If it was already pointing to the last value in the set,
 // %FALSE is returned and @iter is invalidated.
-func (x *BitsetIter) Next(ValueVar uint) bool {
+func (x *BitsetIter) Next(ValueVar *uint) bool {
 
-	cret := xBitsetIterNext(x.GoPointer(), ValueVar)
+	cret := xBitsetIterNext(x.GoPointer(), uintptr(unsafe.Pointer(ValueVar)))
 	return cret
 }
 
-var xBitsetIterPrevious func(uintptr, uint) bool
+var xBitsetIterPrevious func(uintptr, uintptr) bool
 
 // Moves @iter to the previous value in the set.
 //
 // If it was already pointing to the first value in the set,
 // %FALSE is returned and @iter is invalidated.
-func (x *BitsetIter) Previous(ValueVar uint) bool {
+func (x *BitsetIter) Previous(ValueVar *uint) bool {
 
-	cret := xBitsetIterPrevious(x.GoPointer(), ValueVar)
+	cret := xBitsetIterPrevious(x.GoPointer(), uintptr(unsafe.Pointer(ValueVar)))
 	return cret
 }
 
-var xBitsetIterInitAt func(*BitsetIter, *Bitset, uint, uint) bool
+var xBitsetIterInitAt func(uintptr, *Bitset, uint, uintptr) bool
 
 // Initializes @iter to point to @target.
 //
 // If @target is not found, finds the next value after it.
 // If no value &gt;= @target exists in @set, this function returns %FALSE.
-func BitsetIterInitAt(IterVar *BitsetIter, SetVar *Bitset, TargetVar uint, ValueVar uint) bool {
+func BitsetIterInitAt(IterVar *BitsetIter, SetVar *Bitset, TargetVar uint, ValueVar *uint) bool {
 
-	cret := xBitsetIterInitAt(IterVar, SetVar, TargetVar, ValueVar)
+	cret := xBitsetIterInitAt(uintptr(unsafe.Pointer(IterVar)), SetVar, TargetVar, uintptr(unsafe.Pointer(ValueVar)))
 	return cret
 }
 
-var xBitsetIterInitFirst func(*BitsetIter, *Bitset, uint) bool
+var xBitsetIterInitFirst func(uintptr, *Bitset, uintptr) bool
 
 // Initializes an iterator for @set and points it to the first
 // value in @set.
 //
 // If @set is empty, %FALSE is returned and @value is set to %G_MAXUINT.
-func BitsetIterInitFirst(IterVar *BitsetIter, SetVar *Bitset, ValueVar uint) bool {
+func BitsetIterInitFirst(IterVar *BitsetIter, SetVar *Bitset, ValueVar *uint) bool {
 
-	cret := xBitsetIterInitFirst(IterVar, SetVar, ValueVar)
+	cret := xBitsetIterInitFirst(uintptr(unsafe.Pointer(IterVar)), SetVar, uintptr(unsafe.Pointer(ValueVar)))
 	return cret
 }
 
-var xBitsetIterInitLast func(*BitsetIter, *Bitset, uint) bool
+var xBitsetIterInitLast func(uintptr, *Bitset, uintptr) bool
 
 // Initializes an iterator for @set and points it to the last
 // value in @set.
 //
 // If @set is empty, %FALSE is returned.
-func BitsetIterInitLast(IterVar *BitsetIter, SetVar *Bitset, ValueVar uint) bool {
+func BitsetIterInitLast(IterVar *BitsetIter, SetVar *Bitset, ValueVar *uint) bool {
 
-	cret := xBitsetIterInitLast(IterVar, SetVar, ValueVar)
+	cret := xBitsetIterInitLast(uintptr(unsafe.Pointer(IterVar)), SetVar, uintptr(unsafe.Pointer(ValueVar)))
 	return cret
 }
 

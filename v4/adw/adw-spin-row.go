@@ -329,18 +329,18 @@ func (c *SpinRow) SetGoPointer(ptr uintptr) {
 // The default conversion uses [func@GLib.strtod].
 //
 // See [signal@Gtk.SpinButton::input].
-func (x *SpinRow) ConnectInput(cb *func(SpinRow, float64) int) uint32 {
+func (x *SpinRow) ConnectInput(cb *func(SpinRow, *float64) int) uint32 {
 	cbPtr := uintptr(unsafe.Pointer(cb))
 	if cbRefPtr, ok := glib.GetCallback(cbPtr); ok {
 		return gobject.SignalConnect(x.GoPointer(), "input", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, NewValueVarp float64) int {
+	fcb := func(clsPtr uintptr, NewValueVarp uintptr) int {
 		fa := SpinRow{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		return cbFn(fa, NewValueVarp)
+		return cbFn(fa, (*float64)(unsafe.Pointer(NewValueVarp)))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)
@@ -449,9 +449,9 @@ func (x *SpinRow) GetAtContext() *gtk.ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *SpinRow) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *SpinRow) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := gtk.XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := gtk.XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -905,9 +905,9 @@ func (x *SpinRow) GetPosition() int {
 // and %FALSE will be returned.
 //
 // Note that positions are specified in characters, not bytes.
-func (x *SpinRow) GetSelectionBounds(StartPosVar int, EndPosVar int) bool {
+func (x *SpinRow) GetSelectionBounds(StartPosVar *int, EndPosVar *int) bool {
 
-	cret := gtk.XGtkEditableGetSelectionBounds(x.GoPointer(), StartPosVar, EndPosVar)
+	cret := gtk.XGtkEditableGetSelectionBounds(x.GoPointer(), uintptr(unsafe.Pointer(StartPosVar)), uintptr(unsafe.Pointer(EndPosVar)))
 	return cret
 }
 

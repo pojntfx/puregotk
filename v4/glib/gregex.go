@@ -126,7 +126,7 @@ func (x *MatchInfo) FetchNamed(NameVar string) string {
 	return cret
 }
 
-var xMatchInfoFetchNamedPos func(uintptr, string, int, int) bool
+var xMatchInfoFetchNamedPos func(uintptr, string, uintptr, uintptr) bool
 
 // Retrieves the position in bytes of the capturing parentheses named @name.
 //
@@ -136,13 +136,13 @@ var xMatchInfoFetchNamedPos func(uintptr, string, int, int) bool
 //
 // As @end_pos is set to the byte after the final byte of the match (on success),
 // the length of the match can be calculated as `end_pos - start_pos`.
-func (x *MatchInfo) FetchNamedPos(NameVar string, StartPosVar int, EndPosVar int) bool {
+func (x *MatchInfo) FetchNamedPos(NameVar string, StartPosVar *int, EndPosVar *int) bool {
 
-	cret := xMatchInfoFetchNamedPos(x.GoPointer(), NameVar, StartPosVar, EndPosVar)
+	cret := xMatchInfoFetchNamedPos(x.GoPointer(), NameVar, uintptr(unsafe.Pointer(StartPosVar)), uintptr(unsafe.Pointer(EndPosVar)))
 	return cret
 }
 
-var xMatchInfoFetchPos func(uintptr, int, int, int) bool
+var xMatchInfoFetchPos func(uintptr, int, uintptr, uintptr) bool
 
 // Returns the start and end positions (in bytes) of a successfully matching
 // capture parenthesis.
@@ -351,9 +351,9 @@ var xMatchInfoFetchPos func(uintptr, int, int, int) bool
 // 2         &lt;a&gt;                       1            0                  3
 // 3         N/A                       0            2147483647         2147483647
 // ```
-func (x *MatchInfo) FetchPos(MatchNumVar int, StartPosVar int, EndPosVar int) bool {
+func (x *MatchInfo) FetchPos(MatchNumVar int, StartPosVar *int, EndPosVar *int) bool {
 
-	cret := xMatchInfoFetchPos(x.GoPointer(), MatchNumVar, StartPosVar, EndPosVar)
+	cret := xMatchInfoFetchPos(x.GoPointer(), MatchNumVar, uintptr(unsafe.Pointer(StartPosVar)), uintptr(unsafe.Pointer(EndPosVar)))
 	return cret
 }
 
@@ -739,7 +739,7 @@ func (x *Regex) GetStringNumber(NameVar string) int {
 	return cret
 }
 
-var xRegexMatch func(uintptr, string, RegexMatchFlags, **MatchInfo) bool
+var xRegexMatch func(uintptr, string, RegexMatchFlags, uintptr) bool
 
 // Scans for a match in @string for the pattern in @regex.
 // The @match_options are combined with the match options specified
@@ -785,11 +785,11 @@ var xRegexMatch func(uintptr, string, RegexMatchFlags, **MatchInfo) bool
 // freeing or modifying @string then the behaviour is undefined.
 func (x *Regex) Match(StringVar string, MatchOptionsVar RegexMatchFlags, MatchInfoVar **MatchInfo) bool {
 
-	cret := xRegexMatch(x.GoPointer(), StringVar, MatchOptionsVar, MatchInfoVar)
+	cret := xRegexMatch(x.GoPointer(), StringVar, MatchOptionsVar, uintptr(unsafe.Pointer(MatchInfoVar)))
 	return cret
 }
 
-var xRegexMatchAll func(uintptr, string, RegexMatchFlags, **MatchInfo) bool
+var xRegexMatchAll func(uintptr, string, RegexMatchFlags, uintptr) bool
 
 // Using the standard algorithm for regular expression matching only
 // the longest match in the string is retrieved. This function uses
@@ -807,11 +807,11 @@ var xRegexMatchAll func(uintptr, string, RegexMatchFlags, **MatchInfo) bool
 // freeing or modifying @string then the behaviour is undefined.
 func (x *Regex) MatchAll(StringVar string, MatchOptionsVar RegexMatchFlags, MatchInfoVar **MatchInfo) bool {
 
-	cret := xRegexMatchAll(x.GoPointer(), StringVar, MatchOptionsVar, MatchInfoVar)
+	cret := xRegexMatchAll(x.GoPointer(), StringVar, MatchOptionsVar, uintptr(unsafe.Pointer(MatchInfoVar)))
 	return cret
 }
 
-var xRegexMatchAllFull func(uintptr, []string, int, int, RegexMatchFlags, **MatchInfo, **Error) bool
+var xRegexMatchAllFull func(uintptr, []string, int, int, RegexMatchFlags, uintptr, **Error) bool
 
 // Using the standard algorithm for regular expression matching only
 // the longest match in the @string is retrieved, it is not possible
@@ -854,7 +854,7 @@ var xRegexMatchAllFull func(uintptr, []string, int, int, RegexMatchFlags, **Matc
 func (x *Regex) MatchAllFull(StringVar []string, StringLenVar int, StartPositionVar int, MatchOptionsVar RegexMatchFlags, MatchInfoVar **MatchInfo) (bool, error) {
 	var cerr *Error
 
-	cret := xRegexMatchAllFull(x.GoPointer(), StringVar, StringLenVar, StartPositionVar, MatchOptionsVar, MatchInfoVar, &cerr)
+	cret := xRegexMatchAllFull(x.GoPointer(), StringVar, StringLenVar, StartPositionVar, MatchOptionsVar, uintptr(unsafe.Pointer(MatchInfoVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -862,7 +862,7 @@ func (x *Regex) MatchAllFull(StringVar []string, StringLenVar int, StartPosition
 
 }
 
-var xRegexMatchFull func(uintptr, []string, int, int, RegexMatchFlags, **MatchInfo, **Error) bool
+var xRegexMatchFull func(uintptr, []string, int, int, RegexMatchFlags, uintptr, **Error) bool
 
 // Scans for a match in @string for the pattern in @regex.
 // The @match_options are combined with the match options specified
@@ -920,7 +920,7 @@ var xRegexMatchFull func(uintptr, []string, int, int, RegexMatchFlags, **MatchIn
 func (x *Regex) MatchFull(StringVar []string, StringLenVar int, StartPositionVar int, MatchOptionsVar RegexMatchFlags, MatchInfoVar **MatchInfo) (bool, error) {
 	var cerr *Error
 
-	cret := xRegexMatchFull(x.GoPointer(), StringVar, StringLenVar, StartPositionVar, MatchOptionsVar, MatchInfoVar, &cerr)
+	cret := xRegexMatchFull(x.GoPointer(), StringVar, StringLenVar, StartPositionVar, MatchOptionsVar, uintptr(unsafe.Pointer(MatchInfoVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1474,7 +1474,7 @@ const (
 	GRegexErrorCharacterValueTooLargeValue RegexError = 176
 )
 
-var xRegexCheckReplacement func(string, bool, **Error) bool
+var xRegexCheckReplacement func(string, uintptr, **Error) bool
 
 // Checks whether @replacement is a valid replacement string
 // (see g_regex_replace()), i.e. that all escape sequences in
@@ -1485,10 +1485,10 @@ var xRegexCheckReplacement func(string, bool, **Error) bool
 // does not contain references and may be evaluated without information
 // about actual match, but '\0\1' (whole match followed by first
 // subpattern) requires valid #GMatchInfo object.
-func RegexCheckReplacement(ReplacementVar string, HasReferencesVar bool) (bool, error) {
+func RegexCheckReplacement(ReplacementVar string, HasReferencesVar *bool) (bool, error) {
 	var cerr *Error
 
-	cret := xRegexCheckReplacement(ReplacementVar, HasReferencesVar, &cerr)
+	cret := xRegexCheckReplacement(ReplacementVar, uintptr(unsafe.Pointer(HasReferencesVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

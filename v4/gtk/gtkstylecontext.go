@@ -267,21 +267,21 @@ func (x *StyleContext) AddProvider(ProviderVar StyleProvider, PriorityVar uint) 
 
 }
 
-var xStyleContextGetBorder func(uintptr, *Border)
+var xStyleContextGetBorder func(uintptr, uintptr)
 
 // Gets the border for a given state as a `GtkBorder`.
 func (x *StyleContext) GetBorder(BorderVar *Border) {
 
-	xStyleContextGetBorder(x.GoPointer(), BorderVar)
+	xStyleContextGetBorder(x.GoPointer(), uintptr(unsafe.Pointer(BorderVar)))
 
 }
 
-var xStyleContextGetColor func(uintptr, *gdk.RGBA)
+var xStyleContextGetColor func(uintptr, uintptr)
 
 // Gets the foreground color for a given state.
 func (x *StyleContext) GetColor(ColorVar *gdk.RGBA) {
 
-	xStyleContextGetColor(x.GoPointer(), ColorVar)
+	xStyleContextGetColor(x.GoPointer(), uintptr(unsafe.Pointer(ColorVar)))
 
 }
 
@@ -302,21 +302,21 @@ func (x *StyleContext) GetDisplay() *gdk.Display {
 	return cls
 }
 
-var xStyleContextGetMargin func(uintptr, *Border)
+var xStyleContextGetMargin func(uintptr, uintptr)
 
 // Gets the margin for a given state as a `GtkBorder`.
 func (x *StyleContext) GetMargin(MarginVar *Border) {
 
-	xStyleContextGetMargin(x.GoPointer(), MarginVar)
+	xStyleContextGetMargin(x.GoPointer(), uintptr(unsafe.Pointer(MarginVar)))
 
 }
 
-var xStyleContextGetPadding func(uintptr, *Border)
+var xStyleContextGetPadding func(uintptr, uintptr)
 
 // Gets the padding for a given state as a `GtkBorder`.
 func (x *StyleContext) GetPadding(PaddingVar *Border) {
 
-	xStyleContextGetPadding(x.GoPointer(), PaddingVar)
+	xStyleContextGetPadding(x.GoPointer(), uintptr(unsafe.Pointer(PaddingVar)))
 
 }
 
@@ -354,12 +354,12 @@ func (x *StyleContext) HasClass(ClassNameVar string) bool {
 	return cret
 }
 
-var xStyleContextLookupColor func(uintptr, string, *gdk.RGBA) bool
+var xStyleContextLookupColor func(uintptr, string, uintptr) bool
 
 // Looks up and resolves a color name in the @context color map.
 func (x *StyleContext) LookupColor(ColorNameVar string, ColorVar *gdk.RGBA) bool {
 
-	cret := xStyleContextLookupColor(x.GoPointer(), ColorNameVar, ColorVar)
+	cret := xStyleContextLookupColor(x.GoPointer(), ColorNameVar, uintptr(unsafe.Pointer(ColorVar)))
 	return cret
 }
 

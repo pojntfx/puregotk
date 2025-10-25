@@ -2,6 +2,8 @@
 package pango
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
@@ -93,14 +95,14 @@ func FindBaseDir(TextVar string, LengthVar int) Direction {
 	return cret
 }
 
-var xGetMirrorChar func(uint32, uint32) bool
+var xGetMirrorChar func(uint32, uintptr) bool
 
 // Returns the mirrored character of a Unicode character.
 //
 // Mirror characters are determined by the Unicode mirrored property.
-func GetMirrorChar(ChVar uint32, MirroredChVar uint32) bool {
+func GetMirrorChar(ChVar uint32, MirroredChVar *uint32) bool {
 
-	cret := xGetMirrorChar(ChVar, MirroredChVar)
+	cret := xGetMirrorChar(ChVar, uintptr(unsafe.Pointer(MirroredChVar)))
 	return cret
 }
 

@@ -25,7 +25,7 @@ func (x *ToplevelSize) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-var xToplevelSizeGetBounds func(uintptr, int, int)
+var xToplevelSizeGetBounds func(uintptr, uintptr, uintptr)
 
 // Retrieves the bounds the toplevel is placed within.
 //
@@ -34,9 +34,9 @@ var xToplevelSizeGetBounds func(uintptr, int, int)
 // be equivalent to the dimensions of the work area or the monitor on which the
 // window is being presented on, or something else that limits the way a
 // toplevel can be presented.
-func (x *ToplevelSize) GetBounds(BoundsWidthVar int, BoundsHeightVar int) {
+func (x *ToplevelSize) GetBounds(BoundsWidthVar *int, BoundsHeightVar *int) {
 
-	xToplevelSizeGetBounds(x.GoPointer(), BoundsWidthVar, BoundsHeightVar)
+	xToplevelSizeGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(BoundsWidthVar)), uintptr(unsafe.Pointer(BoundsHeightVar)))
 
 }
 

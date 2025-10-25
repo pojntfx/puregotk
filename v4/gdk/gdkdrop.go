@@ -2,6 +2,8 @@
 package gdk
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/gio"
@@ -165,7 +167,7 @@ func (x *Drop) ReadAsync(MimeTypesVar []string, IoPriorityVar int, CancellableVa
 
 }
 
-var xDropReadFinish func(uintptr, uintptr, string, **glib.Error) uintptr
+var xDropReadFinish func(uintptr, uintptr, uintptr, **glib.Error) uintptr
 
 // Finishes an async drop read operation.
 //
@@ -175,11 +177,11 @@ var xDropReadFinish func(uintptr, uintptr, string, **glib.Error) uintptr
 // g_input_stream_read_bytes_async().
 //
 // See [method@Gdk.Drop.read_async].
-func (x *Drop) ReadFinish(ResultVar gio.AsyncResult, OutMimeTypeVar string) (*gio.InputStream, error) {
+func (x *Drop) ReadFinish(ResultVar gio.AsyncResult, OutMimeTypeVar *string) (*gio.InputStream, error) {
 	var cls *gio.InputStream
 	var cerr *glib.Error
 
-	cret := xDropReadFinish(x.GoPointer(), ResultVar.GoPointer(), OutMimeTypeVar, &cerr)
+	cret := xDropReadFinish(x.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(OutMimeTypeVar)), &cerr)
 
 	if cret == 0 {
 		return nil, cerr

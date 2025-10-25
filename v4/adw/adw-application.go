@@ -364,9 +364,9 @@ func (x *Application) ListActions() []string {
 // fields (as indicated by having a non-`NULL` reference passed in) are
 // filled.  If the action doesn’t exist, `FALSE` is returned and the
 // fields may or may not have been modified.
-func (x *Application) QueryAction(ActionNameVar string, EnabledVar bool, ParameterTypeVar **glib.VariantType, StateTypeVar **glib.VariantType, StateHintVar **glib.Variant, StateVar **glib.Variant) bool {
+func (x *Application) QueryAction(ActionNameVar string, EnabledVar *bool, ParameterTypeVar **glib.VariantType, StateTypeVar **glib.VariantType, StateHintVar **glib.Variant, StateVar **glib.Variant) bool {
 
-	cret := gio.XGActionGroupQueryAction(x.GoPointer(), ActionNameVar, EnabledVar, ParameterTypeVar, StateTypeVar, StateHintVar, StateVar)
+	cret := gio.XGActionGroupQueryAction(x.GoPointer(), ActionNameVar, uintptr(unsafe.Pointer(EnabledVar)), uintptr(unsafe.Pointer(ParameterTypeVar)), uintptr(unsafe.Pointer(StateTypeVar)), uintptr(unsafe.Pointer(StateHintVar)), uintptr(unsafe.Pointer(StateVar)))
 	return cret
 }
 

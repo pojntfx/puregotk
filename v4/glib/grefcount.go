@@ -2,6 +2,8 @@
 package glib
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 )
@@ -78,12 +80,12 @@ func AtomicRefCountInc(ArcVar int) {
 
 }
 
-var xAtomicRefCountInit func(int)
+var xAtomicRefCountInit func(uintptr)
 
 // Initializes a reference count variable to 1.
-func AtomicRefCountInit(ArcVar int) {
+func AtomicRefCountInit(ArcVar *int) {
 
-	xAtomicRefCountInit(ArcVar)
+	xAtomicRefCountInit(uintptr(unsafe.Pointer(ArcVar)))
 
 }
 
@@ -118,12 +120,12 @@ func RefCountInc(RcVar int) {
 
 }
 
-var xRefCountInit func(int)
+var xRefCountInit func(uintptr)
 
 // Initializes a reference count variable to 1.
-func RefCountInit(RcVar int) {
+func RefCountInit(RcVar *int) {
 
-	xRefCountInit(RcVar)
+	xRefCountInit(uintptr(unsafe.Pointer(RcVar)))
 
 }
 

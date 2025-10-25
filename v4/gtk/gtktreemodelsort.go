@@ -179,14 +179,14 @@ func (x *TreeModelSort) ClearCache() {
 
 }
 
-var xTreeModelSortConvertChildIterToIter func(uintptr, *TreeIter, *TreeIter) bool
+var xTreeModelSortConvertChildIterToIter func(uintptr, uintptr, *TreeIter) bool
 
 // Sets @sort_iter to point to the row in @tree_model_sort that corresponds to
 // the row pointed at by @child_iter.  If @sort_iter was not set, %FALSE
 // is returned.  Note: a boolean is only returned since 2.14.
 func (x *TreeModelSort) ConvertChildIterToIter(SortIterVar *TreeIter, ChildIterVar *TreeIter) bool {
 
-	cret := xTreeModelSortConvertChildIterToIter(x.GoPointer(), SortIterVar, ChildIterVar)
+	cret := xTreeModelSortConvertChildIterToIter(x.GoPointer(), uintptr(unsafe.Pointer(SortIterVar)), ChildIterVar)
 	return cret
 }
 
@@ -202,12 +202,12 @@ func (x *TreeModelSort) ConvertChildPathToPath(ChildPathVar *TreePath) *TreePath
 	return cret
 }
 
-var xTreeModelSortConvertIterToChildIter func(uintptr, *TreeIter, *TreeIter)
+var xTreeModelSortConvertIterToChildIter func(uintptr, uintptr, *TreeIter)
 
 // Sets @child_iter to point to the row pointed to by @sorted_iter.
 func (x *TreeModelSort) ConvertIterToChildIter(ChildIterVar *TreeIter, SortedIterVar *TreeIter) {
 
-	xTreeModelSortConvertIterToChildIter(x.GoPointer(), ChildIterVar, SortedIterVar)
+	xTreeModelSortConvertIterToChildIter(x.GoPointer(), uintptr(unsafe.Pointer(ChildIterVar)), SortedIterVar)
 
 }
 
@@ -380,7 +380,7 @@ func (x *TreeModelSort) GetFlags() TreeModelFlags {
 // iterator and %FALSE is returned.
 func (x *TreeModelSort) GetIter(IterVar *TreeIter, PathVar *TreePath) bool {
 
-	cret := XGtkTreeModelGetIter(x.GoPointer(), IterVar, PathVar)
+	cret := XGtkTreeModelGetIter(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), PathVar)
 	return cret
 }
 
@@ -390,7 +390,7 @@ func (x *TreeModelSort) GetIter(IterVar *TreeIter, PathVar *TreePath) bool {
 // Returns %FALSE if the tree is empty, %TRUE otherwise.
 func (x *TreeModelSort) GetIterFirst(IterVar *TreeIter) bool {
 
-	cret := XGtkTreeModelGetIterFirst(x.GoPointer(), IterVar)
+	cret := XGtkTreeModelGetIterFirst(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)))
 	return cret
 }
 
@@ -400,7 +400,7 @@ func (x *TreeModelSort) GetIterFirst(IterVar *TreeIter) bool {
 // Otherwise, @iter is left invalid and %FALSE is returned.
 func (x *TreeModelSort) GetIterFromString(IterVar *TreeIter, PathStringVar string) bool {
 
-	cret := XGtkTreeModelGetIterFromString(x.GoPointer(), IterVar, PathStringVar)
+	cret := XGtkTreeModelGetIterFromString(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), PathStringVar)
 	return cret
 }
 
@@ -447,7 +447,7 @@ func (x *TreeModelSort) GetValist(IterVar *TreeIter, VarArgsVar []interface{}) {
 // to free any allocated memory.
 func (x *TreeModelSort) GetValue(IterVar *TreeIter, ColumnVar int, ValueVar *gobject.Value) {
 
-	XGtkTreeModelGetValue(x.GoPointer(), IterVar, ColumnVar, ValueVar)
+	XGtkTreeModelGetValue(x.GoPointer(), IterVar, ColumnVar, uintptr(unsafe.Pointer(ValueVar)))
 
 }
 
@@ -461,7 +461,7 @@ func (x *TreeModelSort) GetValue(IterVar *TreeIter, ColumnVar int, ValueVar *gob
 // `gtk_tree_model_get_iter_first (tree_model, iter);`
 func (x *TreeModelSort) IterChildren(IterVar *TreeIter, ParentVar *TreeIter) bool {
 
-	cret := XGtkTreeModelIterChildren(x.GoPointer(), IterVar, ParentVar)
+	cret := XGtkTreeModelIterChildren(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ParentVar)
 	return cret
 }
 
@@ -501,7 +501,7 @@ func (x *TreeModelSort) IterNext(IterVar *TreeIter) bool {
 // is set.
 func (x *TreeModelSort) IterNthChild(IterVar *TreeIter, ParentVar *TreeIter, NVar int) bool {
 
-	cret := XGtkTreeModelIterNthChild(x.GoPointer(), IterVar, ParentVar, NVar)
+	cret := XGtkTreeModelIterNthChild(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ParentVar, NVar)
 	return cret
 }
 
@@ -516,7 +516,7 @@ func (x *TreeModelSort) IterNthChild(IterVar *TreeIter, ParentVar *TreeIter, NVa
 // and @iter cannot point to the same memory location.
 func (x *TreeModelSort) IterParent(IterVar *TreeIter, ChildVar *TreeIter) bool {
 
-	cret := XGtkTreeModelIterParent(x.GoPointer(), IterVar, ChildVar)
+	cret := XGtkTreeModelIterParent(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ChildVar)
 	return cret
 }
 
@@ -641,9 +641,9 @@ func (x *TreeModelSort) UnrefNode(IterVar *TreeIter) {
 // order. It returns %TRUE unless the @sort_column_id is
 // %GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID or
 // %GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID.
-func (x *TreeModelSort) GetSortColumnId(SortColumnIdVar int, OrderVar *SortType) bool {
+func (x *TreeModelSort) GetSortColumnId(SortColumnIdVar *int, OrderVar *SortType) bool {
 
-	cret := XGtkTreeSortableGetSortColumnId(x.GoPointer(), SortColumnIdVar, OrderVar)
+	cret := XGtkTreeSortableGetSortColumnId(x.GoPointer(), uintptr(unsafe.Pointer(SortColumnIdVar)), uintptr(unsafe.Pointer(OrderVar)))
 	return cret
 }
 

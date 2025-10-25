@@ -87,7 +87,7 @@ const (
 	GConvertErrorEmbeddedNulValue ConvertError = 7
 )
 
-var xConvert func([]byte, int, string, string, uint, uint, **Error) uintptr
+var xConvert func([]byte, int, string, string, uintptr, uintptr, **Error) uintptr
 
 // Converts a string from one character set to another.
 //
@@ -103,10 +103,10 @@ var xConvert func([]byte, int, string, string, uint, uint, **Error) uintptr
 //
 // Using extensions such as "//TRANSLIT" may not work (or may not work
 // well) on many platforms.  Consider using g_str_to_ascii() instead.
-func Convert(StrVar []byte, LenVar int, ToCodesetVar string, FromCodesetVar string, BytesReadVar uint, BytesWrittenVar uint) (uintptr, error) {
+func Convert(StrVar []byte, LenVar int, ToCodesetVar string, FromCodesetVar string, BytesReadVar *uint, BytesWrittenVar *uint) (uintptr, error) {
 	var cerr *Error
 
-	cret := xConvert(StrVar, LenVar, ToCodesetVar, FromCodesetVar, BytesReadVar, BytesWrittenVar, &cerr)
+	cret := xConvert(StrVar, LenVar, ToCodesetVar, FromCodesetVar, uintptr(unsafe.Pointer(BytesReadVar)), uintptr(unsafe.Pointer(BytesWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -114,7 +114,7 @@ func Convert(StrVar []byte, LenVar int, ToCodesetVar string, FromCodesetVar stri
 
 }
 
-var xConvertWithFallback func([]byte, int, string, string, string, uint, uint, **Error) uintptr
+var xConvertWithFallback func([]byte, int, string, string, string, uintptr, uintptr, **Error) uintptr
 
 // Converts a string from one character set to another, possibly
 // including fallback sequences for characters not representable
@@ -133,10 +133,10 @@ var xConvertWithFallback func([]byte, int, string, string, string, uint, uint, *
 // this is the GNU C converter for CP1255 which does not emit a base
 // character until it knows that the next character is not a mark that
 // could combine with the base character.)
-func ConvertWithFallback(StrVar []byte, LenVar int, ToCodesetVar string, FromCodesetVar string, FallbackVar string, BytesReadVar uint, BytesWrittenVar uint) (uintptr, error) {
+func ConvertWithFallback(StrVar []byte, LenVar int, ToCodesetVar string, FromCodesetVar string, FallbackVar string, BytesReadVar *uint, BytesWrittenVar *uint) (uintptr, error) {
 	var cerr *Error
 
-	cret := xConvertWithFallback(StrVar, LenVar, ToCodesetVar, FromCodesetVar, FallbackVar, BytesReadVar, BytesWrittenVar, &cerr)
+	cret := xConvertWithFallback(StrVar, LenVar, ToCodesetVar, FromCodesetVar, FallbackVar, uintptr(unsafe.Pointer(BytesReadVar)), uintptr(unsafe.Pointer(BytesWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -144,7 +144,7 @@ func ConvertWithFallback(StrVar []byte, LenVar int, ToCodesetVar string, FromCod
 
 }
 
-var xConvertWithIconv func([]byte, int, uintptr, uint, uint, **Error) uintptr
+var xConvertWithIconv func([]byte, int, uintptr, uintptr, uintptr, **Error) uintptr
 
 // Converts a string from one character set to another.
 //
@@ -165,10 +165,10 @@ var xConvertWithIconv func([]byte, int, uintptr, uint, uint, **Error) uintptr
 // this is the same error code as is returned for an invalid byte sequence in
 // the input character set. To get defined behaviour for conversion of
 // unrepresentable characters, use g_convert_with_fallback().
-func ConvertWithIconv(StrVar []byte, LenVar int, ConverterVar uintptr, BytesReadVar uint, BytesWrittenVar uint) (uintptr, error) {
+func ConvertWithIconv(StrVar []byte, LenVar int, ConverterVar uintptr, BytesReadVar *uint, BytesWrittenVar *uint) (uintptr, error) {
 	var cerr *Error
 
-	cret := xConvertWithIconv(StrVar, LenVar, ConverterVar, BytesReadVar, BytesWrittenVar, &cerr)
+	cret := xConvertWithIconv(StrVar, LenVar, ConverterVar, uintptr(unsafe.Pointer(BytesReadVar)), uintptr(unsafe.Pointer(BytesWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -223,7 +223,7 @@ func FilenameDisplayName(FilenameVar string) string {
 	return cret
 }
 
-var xFilenameFromUri func(string, string, **Error) string
+var xFilenameFromUri func(string, uintptr, **Error) string
 
 // Converts an escaped ASCII-encoded URI to a local filename in the
 // encoding used for filenames.
@@ -232,10 +232,10 @@ var xFilenameFromUri func(string, string, **Error) string
 // but are not part of the resulting filename.
 // We take inspiration from https://url.spec.whatwg.org/#file-state,
 // but we don't support the entire standard.
-func FilenameFromUri(UriVar string, HostnameVar string) (string, error) {
+func FilenameFromUri(UriVar string, HostnameVar *string) (string, error) {
 	var cerr *Error
 
-	cret := xFilenameFromUri(UriVar, HostnameVar, &cerr)
+	cret := xFilenameFromUri(UriVar, uintptr(unsafe.Pointer(HostnameVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -243,7 +243,7 @@ func FilenameFromUri(UriVar string, HostnameVar string) (string, error) {
 
 }
 
-var xFilenameFromUtf8 func(string, int, uint, uint, **Error) string
+var xFilenameFromUtf8 func(string, int, uintptr, uintptr, **Error) string
 
 // Converts a string from UTF-8 to the encoding GLib uses for
 // filenames. Note that on Windows GLib uses UTF-8 for filenames;
@@ -255,10 +255,10 @@ var xFilenameFromUtf8 func(string, int, uint, uint, **Error) string
 // in error %G_CONVERT_ERROR_ILLEGAL_SEQUENCE. If the filename encoding is
 // not UTF-8 and the conversion output contains a nul character, the error
 // %G_CONVERT_ERROR_EMBEDDED_NUL is set and the function returns %NULL.
-func FilenameFromUtf8(Utf8stringVar string, LenVar int, BytesReadVar uint, BytesWrittenVar uint) (string, error) {
+func FilenameFromUtf8(Utf8stringVar string, LenVar int, BytesReadVar *uint, BytesWrittenVar *uint) (string, error) {
 	var cerr *Error
 
-	cret := xFilenameFromUtf8(Utf8stringVar, LenVar, BytesReadVar, BytesWrittenVar, &cerr)
+	cret := xFilenameFromUtf8(Utf8stringVar, LenVar, uintptr(unsafe.Pointer(BytesReadVar)), uintptr(unsafe.Pointer(BytesWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -281,7 +281,7 @@ func FilenameToUri(FilenameVar string, HostnameVar string) (string, error) {
 
 }
 
-var xFilenameToUtf8 func(string, int, uint, uint, **Error) string
+var xFilenameToUtf8 func(string, int, uintptr, uintptr, **Error) string
 
 // Converts a string which is in the encoding used by GLib for
 // filenames into a UTF-8 string. Note that on Windows GLib uses UTF-8
@@ -295,10 +295,10 @@ var xFilenameToUtf8 func(string, int, uint, uint, **Error) string
 // nul character, the error %G_CONVERT_ERROR_EMBEDDED_NUL is set and the
 // function returns %NULL. Use g_convert() to produce output that
 // may contain embedded nul characters.
-func FilenameToUtf8(OpsysstringVar string, LenVar int, BytesReadVar uint, BytesWrittenVar uint) (string, error) {
+func FilenameToUtf8(OpsysstringVar string, LenVar int, BytesReadVar *uint, BytesWrittenVar *uint) (string, error) {
 	var cerr *Error
 
-	cret := xFilenameToUtf8(OpsysstringVar, LenVar, BytesReadVar, BytesWrittenVar, &cerr)
+	cret := xFilenameToUtf8(OpsysstringVar, LenVar, uintptr(unsafe.Pointer(BytesReadVar)), uintptr(unsafe.Pointer(BytesWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -306,7 +306,7 @@ func FilenameToUtf8(OpsysstringVar string, LenVar int, BytesReadVar uint, BytesW
 
 }
 
-var xGetFilenameCharsets func([]string) bool
+var xGetFilenameCharsets func(uintptr) bool
 
 // Determines the preferred character sets used for filenames.
 // The first character set from the @charsets is the filename encoding, the
@@ -332,9 +332,9 @@ var xGetFilenameCharsets func([]string) bool
 // Note that on Unix, regardless of the locale character set or
 // `G_FILENAME_ENCODING` value, the actual file names present
 // on a system might be in any random encoding or just gibberish.
-func GetFilenameCharsets(FilenameCharsetsVar []string) bool {
+func GetFilenameCharsets(FilenameCharsetsVar *[]string) bool {
 
-	cret := xGetFilenameCharsets(FilenameCharsetsVar)
+	cret := xGetFilenameCharsets(uintptr(unsafe.Pointer(FilenameCharsetsVar)))
 	return cret
 }
 
@@ -376,7 +376,7 @@ func IconvOpen(ToCodesetVar string, FromCodesetVar string) uintptr {
 	return cret
 }
 
-var xLocaleFromUtf8 func(string, int, uint, uint, **Error) uintptr
+var xLocaleFromUtf8 func(string, int, uintptr, uintptr, **Error) uintptr
 
 // Converts a string from UTF-8 to the encoding used for strings by
 // the C runtime (usually the same as that used by the operating
@@ -387,10 +387,10 @@ var xLocaleFromUtf8 func(string, int, uint, uint, **Error) uintptr
 // argument is positive. A nul character found inside the string will result
 // in error %G_CONVERT_ERROR_ILLEGAL_SEQUENCE. Use g_convert() to convert
 // input that may contain embedded nul characters.
-func LocaleFromUtf8(Utf8stringVar string, LenVar int, BytesReadVar uint, BytesWrittenVar uint) (uintptr, error) {
+func LocaleFromUtf8(Utf8stringVar string, LenVar int, BytesReadVar *uint, BytesWrittenVar *uint) (uintptr, error) {
 	var cerr *Error
 
-	cret := xLocaleFromUtf8(Utf8stringVar, LenVar, BytesReadVar, BytesWrittenVar, &cerr)
+	cret := xLocaleFromUtf8(Utf8stringVar, LenVar, uintptr(unsafe.Pointer(BytesReadVar)), uintptr(unsafe.Pointer(BytesWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -398,7 +398,7 @@ func LocaleFromUtf8(Utf8stringVar string, LenVar int, BytesReadVar uint, BytesWr
 
 }
 
-var xLocaleToUtf8 func([]byte, int, uint, uint, **Error) string
+var xLocaleToUtf8 func([]byte, int, uintptr, uintptr, **Error) string
 
 // Converts a string which is in the encoding used for strings by
 // the C runtime (usually the same as that used by the operating
@@ -411,10 +411,10 @@ var xLocaleToUtf8 func([]byte, int, uint, uint, **Error) string
 // the %G_CONVERT_ERROR_ILLEGAL_SEQUENCE error for backward compatibility with
 // earlier versions of this library. Use g_convert() to produce output that
 // may contain embedded nul characters.
-func LocaleToUtf8(OpsysstringVar []byte, LenVar int, BytesReadVar uint, BytesWrittenVar uint) (string, error) {
+func LocaleToUtf8(OpsysstringVar []byte, LenVar int, BytesReadVar *uint, BytesWrittenVar *uint) (string, error) {
 	var cerr *Error
 
-	cret := xLocaleToUtf8(OpsysstringVar, LenVar, BytesReadVar, BytesWrittenVar, &cerr)
+	cret := xLocaleToUtf8(OpsysstringVar, LenVar, uintptr(unsafe.Pointer(BytesReadVar)), uintptr(unsafe.Pointer(BytesWrittenVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

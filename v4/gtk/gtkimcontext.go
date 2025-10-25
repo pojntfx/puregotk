@@ -272,12 +272,12 @@ func (x *IMContextClass) GetSetClientWidget() func(*IMContext, *Widget) {
 //	position. Any input method which composes complex characters or any
 //	other compositions from multiple sequential key presses should override
 //	this method to provide feedback.
-func (x *IMContextClass) OverrideGetPreeditString(cb func(*IMContext, string, **pango.AttrList, int)) {
+func (x *IMContextClass) OverrideGetPreeditString(cb func(*IMContext, *string, **pango.AttrList, *int)) {
 	if cb == nil {
 		x.xGetPreeditString = 0
 	} else {
-		x.xGetPreeditString = purego.NewCallback(func(ContextVarp uintptr, StrVarp string, AttrsVarp **pango.AttrList, CursorPosVarp int) {
-			cb(IMContextNewFromInternalPtr(ContextVarp), StrVarp, AttrsVarp, CursorPosVarp)
+		x.xGetPreeditString = purego.NewCallback(func(ContextVarp uintptr, StrVarp uintptr, AttrsVarp uintptr, CursorPosVarp uintptr) {
+			cb(IMContextNewFromInternalPtr(ContextVarp), (*string)(unsafe.Pointer(StrVarp)), (**pango.AttrList)(unsafe.Pointer(AttrsVarp)), (*int)(unsafe.Pointer(CursorPosVarp)))
 		})
 	}
 }
@@ -289,14 +289,14 @@ func (x *IMContextClass) OverrideGetPreeditString(cb func(*IMContext, string, **
 //	position. Any input method which composes complex characters or any
 //	other compositions from multiple sequential key presses should override
 //	this method to provide feedback.
-func (x *IMContextClass) GetGetPreeditString() func(*IMContext, string, **pango.AttrList, int) {
+func (x *IMContextClass) GetGetPreeditString() func(*IMContext, *string, **pango.AttrList, *int) {
 	if x.xGetPreeditString == 0 {
 		return nil
 	}
-	var rawCallback func(ContextVarp uintptr, StrVarp string, AttrsVarp **pango.AttrList, CursorPosVarp int)
+	var rawCallback func(ContextVarp uintptr, StrVarp uintptr, AttrsVarp uintptr, CursorPosVarp uintptr)
 	purego.RegisterFunc(&rawCallback, x.xGetPreeditString)
-	return func(ContextVar *IMContext, StrVar string, AttrsVar **pango.AttrList, CursorPosVar int) {
-		rawCallback(ContextVar.GoPointer(), StrVar, AttrsVar, CursorPosVar)
+	return func(ContextVar *IMContext, StrVar *string, AttrsVar **pango.AttrList, CursorPosVar *int) {
+		rawCallback(ContextVar.GoPointer(), uintptr(unsafe.Pointer(StrVar)), uintptr(unsafe.Pointer(AttrsVar)), uintptr(unsafe.Pointer(CursorPosVar)))
 	}
 }
 
@@ -543,12 +543,12 @@ func (x *IMContextClass) GetSetSurrounding() func(*IMContext, string, int, int) 
 //	The base implementation emits [signal@Gtk.IMContext::retrieve-surrounding]
 //	and records the context received by the subsequent invocation of
 //	[vfunc@Gtk.IMContext.get_surrounding].
-func (x *IMContextClass) OverrideGetSurrounding(cb func(*IMContext, string, int) bool) {
+func (x *IMContextClass) OverrideGetSurrounding(cb func(*IMContext, *string, *int) bool) {
 	if cb == nil {
 		x.xGetSurrounding = 0
 	} else {
-		x.xGetSurrounding = purego.NewCallback(func(ContextVarp uintptr, TextVarp string, CursorIndexVarp int) bool {
-			return cb(IMContextNewFromInternalPtr(ContextVarp), TextVarp, CursorIndexVarp)
+		x.xGetSurrounding = purego.NewCallback(func(ContextVarp uintptr, TextVarp uintptr, CursorIndexVarp uintptr) bool {
+			return cb(IMContextNewFromInternalPtr(ContextVarp), (*string)(unsafe.Pointer(TextVarp)), (*int)(unsafe.Pointer(CursorIndexVarp)))
 		})
 	}
 }
@@ -561,14 +561,14 @@ func (x *IMContextClass) OverrideGetSurrounding(cb func(*IMContext, string, int)
 //	The base implementation emits [signal@Gtk.IMContext::retrieve-surrounding]
 //	and records the context received by the subsequent invocation of
 //	[vfunc@Gtk.IMContext.get_surrounding].
-func (x *IMContextClass) GetGetSurrounding() func(*IMContext, string, int) bool {
+func (x *IMContextClass) GetGetSurrounding() func(*IMContext, *string, *int) bool {
 	if x.xGetSurrounding == 0 {
 		return nil
 	}
-	var rawCallback func(ContextVarp uintptr, TextVarp string, CursorIndexVarp int) bool
+	var rawCallback func(ContextVarp uintptr, TextVarp uintptr, CursorIndexVarp uintptr) bool
 	purego.RegisterFunc(&rawCallback, x.xGetSurrounding)
-	return func(ContextVar *IMContext, TextVar string, CursorIndexVar int) bool {
-		return rawCallback(ContextVar.GoPointer(), TextVar, CursorIndexVar)
+	return func(ContextVar *IMContext, TextVar *string, CursorIndexVar *int) bool {
+		return rawCallback(ContextVar.GoPointer(), uintptr(unsafe.Pointer(TextVar)), uintptr(unsafe.Pointer(CursorIndexVar)))
 	}
 }
 
@@ -620,12 +620,12 @@ func (x *IMContextClass) GetSetSurroundingWithSelection() func(*IMContext, strin
 //	behavior. The base implementation emits
 //	[signal@Gtk.IMContext::retrieve-surrounding] and records the context
 //	received by the subsequent invocation of [vfunc@Gtk.IMContext.get_surrounding].
-func (x *IMContextClass) OverrideGetSurroundingWithSelection(cb func(*IMContext, string, int, int) bool) {
+func (x *IMContextClass) OverrideGetSurroundingWithSelection(cb func(*IMContext, *string, *int, *int) bool) {
 	if cb == nil {
 		x.xGetSurroundingWithSelection = 0
 	} else {
-		x.xGetSurroundingWithSelection = purego.NewCallback(func(ContextVarp uintptr, TextVarp string, CursorIndexVarp int, AnchorIndexVarp int) bool {
-			return cb(IMContextNewFromInternalPtr(ContextVarp), TextVarp, CursorIndexVarp, AnchorIndexVarp)
+		x.xGetSurroundingWithSelection = purego.NewCallback(func(ContextVarp uintptr, TextVarp uintptr, CursorIndexVarp uintptr, AnchorIndexVarp uintptr) bool {
+			return cb(IMContextNewFromInternalPtr(ContextVarp), (*string)(unsafe.Pointer(TextVarp)), (*int)(unsafe.Pointer(CursorIndexVarp)), (*int)(unsafe.Pointer(AnchorIndexVarp)))
 		})
 	}
 }
@@ -639,14 +639,14 @@ func (x *IMContextClass) OverrideGetSurroundingWithSelection(cb func(*IMContext,
 //	behavior. The base implementation emits
 //	[signal@Gtk.IMContext::retrieve-surrounding] and records the context
 //	received by the subsequent invocation of [vfunc@Gtk.IMContext.get_surrounding].
-func (x *IMContextClass) GetGetSurroundingWithSelection() func(*IMContext, string, int, int) bool {
+func (x *IMContextClass) GetGetSurroundingWithSelection() func(*IMContext, *string, *int, *int) bool {
 	if x.xGetSurroundingWithSelection == 0 {
 		return nil
 	}
-	var rawCallback func(ContextVarp uintptr, TextVarp string, CursorIndexVarp int, AnchorIndexVarp int) bool
+	var rawCallback func(ContextVarp uintptr, TextVarp uintptr, CursorIndexVarp uintptr, AnchorIndexVarp uintptr) bool
 	purego.RegisterFunc(&rawCallback, x.xGetSurroundingWithSelection)
-	return func(ContextVar *IMContext, TextVar string, CursorIndexVar int, AnchorIndexVar int) bool {
-		return rawCallback(ContextVar.GoPointer(), TextVar, CursorIndexVar, AnchorIndexVar)
+	return func(ContextVar *IMContext, TextVar *string, CursorIndexVar *int, AnchorIndexVar *int) bool {
+		return rawCallback(ContextVar.GoPointer(), uintptr(unsafe.Pointer(TextVar)), uintptr(unsafe.Pointer(CursorIndexVar)), uintptr(unsafe.Pointer(AnchorIndexVar)))
 	}
 }
 
@@ -898,19 +898,19 @@ func (x *IMContext) FocusOut() {
 
 }
 
-var xIMContextGetPreeditString func(uintptr, string, **pango.AttrList, int)
+var xIMContextGetPreeditString func(uintptr, uintptr, uintptr, uintptr)
 
 // Retrieve the current preedit string for the input context,
 // and a list of attributes to apply to the string.
 //
 // This string should be displayed inserted at the insertion point.
-func (x *IMContext) GetPreeditString(StrVar string, AttrsVar **pango.AttrList, CursorPosVar int) {
+func (x *IMContext) GetPreeditString(StrVar *string, AttrsVar **pango.AttrList, CursorPosVar *int) {
 
-	xIMContextGetPreeditString(x.GoPointer(), StrVar, AttrsVar, CursorPosVar)
+	xIMContextGetPreeditString(x.GoPointer(), uintptr(unsafe.Pointer(StrVar)), uintptr(unsafe.Pointer(AttrsVar)), uintptr(unsafe.Pointer(CursorPosVar)))
 
 }
 
-var xIMContextGetSurrounding func(uintptr, string, int) bool
+var xIMContextGetSurrounding func(uintptr, uintptr, uintptr) bool
 
 // Retrieves context around the insertion point.
 //
@@ -927,13 +927,13 @@ var xIMContextGetSurrounding func(uintptr, string, int) bool
 // Note that there is no obligation for a widget to respond to the
 // `::retrieve-surrounding` signal, so input methods must be prepared to
 // function without context.
-func (x *IMContext) GetSurrounding(TextVar string, CursorIndexVar int) bool {
+func (x *IMContext) GetSurrounding(TextVar *string, CursorIndexVar *int) bool {
 
-	cret := xIMContextGetSurrounding(x.GoPointer(), TextVar, CursorIndexVar)
+	cret := xIMContextGetSurrounding(x.GoPointer(), uintptr(unsafe.Pointer(TextVar)), uintptr(unsafe.Pointer(CursorIndexVar)))
 	return cret
 }
 
-var xIMContextGetSurroundingWithSelection func(uintptr, string, int, int) bool
+var xIMContextGetSurroundingWithSelection func(uintptr, uintptr, uintptr, uintptr) bool
 
 // Retrieves context around the insertion point.
 //
@@ -950,9 +950,9 @@ var xIMContextGetSurroundingWithSelection func(uintptr, string, int, int) bool
 // Note that there is no obligation for a widget to respond to the
 // `::retrieve-surrounding` signal, so input methods must be prepared to
 // function without context.
-func (x *IMContext) GetSurroundingWithSelection(TextVar string, CursorIndexVar int, AnchorIndexVar int) bool {
+func (x *IMContext) GetSurroundingWithSelection(TextVar *string, CursorIndexVar *int, AnchorIndexVar *int) bool {
 
-	cret := xIMContextGetSurroundingWithSelection(x.GoPointer(), TextVar, CursorIndexVar, AnchorIndexVar)
+	cret := xIMContextGetSurroundingWithSelection(x.GoPointer(), uintptr(unsafe.Pointer(TextVar)), uintptr(unsafe.Pointer(CursorIndexVar)), uintptr(unsafe.Pointer(AnchorIndexVar)))
 	return cret
 }
 

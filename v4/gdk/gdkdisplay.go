@@ -336,7 +336,7 @@ func (x *Display) ListSeats() *glib.List {
 	return cret
 }
 
-var xDisplayMapKeycode func(uintptr, uint, uintptr, []uint, int) bool
+var xDisplayMapKeycode func(uintptr, uint, uintptr, uintptr, uintptr) bool
 
 // Returns the keyvals bound to @keycode.
 //
@@ -347,13 +347,13 @@ var xDisplayMapKeycode func(uintptr, uint, uintptr, []uint, int) bool
 // keyboard group and level.
 //
 // Free the returned arrays with g_free().
-func (x *Display) MapKeycode(KeycodeVar uint, KeysVar uintptr, KeyvalsVar []uint, NEntriesVar int) bool {
+func (x *Display) MapKeycode(KeycodeVar uint, KeysVar *uintptr, KeyvalsVar *[]uint, NEntriesVar *int) bool {
 
-	cret := xDisplayMapKeycode(x.GoPointer(), KeycodeVar, KeysVar, KeyvalsVar, NEntriesVar)
+	cret := xDisplayMapKeycode(x.GoPointer(), KeycodeVar, uintptr(unsafe.Pointer(KeysVar)), uintptr(unsafe.Pointer(KeyvalsVar)), uintptr(unsafe.Pointer(NEntriesVar)))
 	return cret
 }
 
-var xDisplayMapKeyval func(uintptr, uint, uintptr, int) bool
+var xDisplayMapKeyval func(uintptr, uint, uintptr, uintptr) bool
 
 // Obtains a list of keycode/group/level combinations that will
 // generate @keyval.
@@ -370,9 +370,9 @@ var xDisplayMapKeyval func(uintptr, uint, uintptr, int) bool
 // keyboard group. The level is computed from the modifier mask.
 //
 // The returned array should be freed with g_free().
-func (x *Display) MapKeyval(KeyvalVar uint, KeysVar uintptr, NKeysVar int) bool {
+func (x *Display) MapKeyval(KeyvalVar uint, KeysVar *uintptr, NKeysVar *int) bool {
 
-	cret := xDisplayMapKeyval(x.GoPointer(), KeyvalVar, KeysVar, NKeysVar)
+	cret := xDisplayMapKeyval(x.GoPointer(), KeyvalVar, uintptr(unsafe.Pointer(KeysVar)), uintptr(unsafe.Pointer(NKeysVar)))
 	return cret
 }
 
@@ -471,7 +471,7 @@ func (x *Display) Sync() {
 
 }
 
-var xDisplayTranslateKey func(uintptr, uint, ModifierType, int, uint, int, int, *ModifierType) bool
+var xDisplayTranslateKey func(uintptr, uint, ModifierType, int, uintptr, uintptr, uintptr, uintptr) bool
 
 // Translates the contents of a `GdkEventKey` into a keyval, effective group,
 // and level.
@@ -492,9 +492,9 @@ var xDisplayTranslateKey func(uintptr, uint, ModifierType, int, uint, int, int, 
 // This function should rarely be needed, since `GdkEventKey` already
 // contains the translated keyval. It is exported for the benefit of
 // virtualized test environments.
-func (x *Display) TranslateKey(KeycodeVar uint, StateVar ModifierType, GroupVar int, KeyvalVar uint, EffectiveGroupVar int, LevelVar int, ConsumedVar *ModifierType) bool {
+func (x *Display) TranslateKey(KeycodeVar uint, StateVar ModifierType, GroupVar int, KeyvalVar *uint, EffectiveGroupVar *int, LevelVar *int, ConsumedVar *ModifierType) bool {
 
-	cret := xDisplayTranslateKey(x.GoPointer(), KeycodeVar, StateVar, GroupVar, KeyvalVar, EffectiveGroupVar, LevelVar, ConsumedVar)
+	cret := xDisplayTranslateKey(x.GoPointer(), KeycodeVar, StateVar, GroupVar, uintptr(unsafe.Pointer(KeyvalVar)), uintptr(unsafe.Pointer(EffectiveGroupVar)), uintptr(unsafe.Pointer(LevelVar)), uintptr(unsafe.Pointer(ConsumedVar)))
 	return cret
 }
 

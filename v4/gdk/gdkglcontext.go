@@ -2,6 +2,8 @@
 package gdk
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
@@ -141,7 +143,7 @@ func (x *GLContext) GetForwardCompatible() bool {
 	return cret
 }
 
-var xGLContextGetRequiredVersion func(uintptr, int, int)
+var xGLContextGetRequiredVersion func(uintptr, uintptr, uintptr)
 
 // Retrieves required OpenGL version set as a requirement for the @context
 // realization. It will not change even if a greater OpenGL version is supported
@@ -149,9 +151,9 @@ var xGLContextGetRequiredVersion func(uintptr, int, int)
 // [method@Gdk.GLContext.get_version] for the real version in use.
 //
 // See [method@Gdk.GLContext.set_required_version].
-func (x *GLContext) GetRequiredVersion(MajorVar int, MinorVar int) {
+func (x *GLContext) GetRequiredVersion(MajorVar *int, MinorVar *int) {
 
-	xGLContextGetRequiredVersion(x.GoPointer(), MajorVar, MinorVar)
+	xGLContextGetRequiredVersion(x.GoPointer(), uintptr(unsafe.Pointer(MajorVar)), uintptr(unsafe.Pointer(MinorVar)))
 
 }
 
@@ -201,14 +203,14 @@ func (x *GLContext) GetUseEs() bool {
 	return cret
 }
 
-var xGLContextGetVersion func(uintptr, int, int)
+var xGLContextGetVersion func(uintptr, uintptr, uintptr)
 
 // Retrieves the OpenGL version of the @context.
 //
 // The @context must be realized prior to calling this function.
-func (x *GLContext) GetVersion(MajorVar int, MinorVar int) {
+func (x *GLContext) GetVersion(MajorVar *int, MinorVar *int) {
 
-	xGLContextGetVersion(x.GoPointer(), MajorVar, MinorVar)
+	xGLContextGetVersion(x.GoPointer(), uintptr(unsafe.Pointer(MajorVar)), uintptr(unsafe.Pointer(MinorVar)))
 
 }
 

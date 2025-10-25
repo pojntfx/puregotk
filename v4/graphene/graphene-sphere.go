@@ -78,22 +78,22 @@ func (x *Sphere) Free() {
 
 }
 
-var xSphereGetBoundingBox func(uintptr, *Box)
+var xSphereGetBoundingBox func(uintptr, uintptr)
 
 // Computes the bounding box capable of containing the
 // given #graphene_sphere_t.
 func (x *Sphere) GetBoundingBox(BoxVar *Box) {
 
-	xSphereGetBoundingBox(x.GoPointer(), BoxVar)
+	xSphereGetBoundingBox(x.GoPointer(), uintptr(unsafe.Pointer(BoxVar)))
 
 }
 
-var xSphereGetCenter func(uintptr, *Point3D)
+var xSphereGetCenter func(uintptr, uintptr)
 
 // Retrieves the coordinates of the center of a #graphene_sphere_t.
 func (x *Sphere) GetCenter(CenterVar *Point3D) {
 
-	xSphereGetCenter(x.GoPointer(), CenterVar)
+	xSphereGetCenter(x.GoPointer(), uintptr(unsafe.Pointer(CenterVar)))
 
 }
 
@@ -150,13 +150,13 @@ func (x *Sphere) IsEmpty() bool {
 	return cret
 }
 
-var xSphereTranslate func(uintptr, *Point3D, *Sphere)
+var xSphereTranslate func(uintptr, *Point3D, uintptr)
 
 // Translates the center of the given #graphene_sphere_t using the @point
 // coordinates as the delta of the translation.
 func (x *Sphere) Translate(PointVar *Point3D, ResVar *Sphere) {
 
-	xSphereTranslate(x.GoPointer(), PointVar, ResVar)
+	xSphereTranslate(x.GoPointer(), PointVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 

@@ -202,9 +202,9 @@ func (x *EditableLabel) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *EditableLabel) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *EditableLabel) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -575,9 +575,9 @@ func (x *EditableLabel) GetPosition() int {
 // and %FALSE will be returned.
 //
 // Note that positions are specified in characters, not bytes.
-func (x *EditableLabel) GetSelectionBounds(StartPosVar int, EndPosVar int) bool {
+func (x *EditableLabel) GetSelectionBounds(StartPosVar *int, EndPosVar *int) bool {
 
-	cret := XGtkEditableGetSelectionBounds(x.GoPointer(), StartPosVar, EndPosVar)
+	cret := XGtkEditableGetSelectionBounds(x.GoPointer(), uintptr(unsafe.Pointer(StartPosVar)), uintptr(unsafe.Pointer(EndPosVar)))
 	return cret
 }
 

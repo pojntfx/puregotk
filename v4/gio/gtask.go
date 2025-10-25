@@ -849,7 +849,7 @@ func (x *Task) PropagatePointer() (uintptr, error) {
 
 }
 
-var xTaskPropagateValue func(uintptr, *gobject.Value, **glib.Error) bool
+var xTaskPropagateValue func(uintptr, uintptr, **glib.Error) bool
 
 // Gets the result of @task as a #GValue, and transfers ownership of
 // that value to the caller. As with g_task_return_value(), this is
@@ -864,7 +864,7 @@ var xTaskPropagateValue func(uintptr, *gobject.Value, **glib.Error) bool
 func (x *Task) PropagateValue(ValueVar *gobject.Value) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xTaskPropagateValue(x.GoPointer(), ValueVar, &cerr)
+	cret := xTaskPropagateValue(x.GoPointer(), uintptr(unsafe.Pointer(ValueVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

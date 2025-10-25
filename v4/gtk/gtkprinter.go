@@ -200,7 +200,7 @@ func (x *Printer) GetDescription() string {
 	return cret
 }
 
-var xPrinterGetHardMargins func(uintptr, float64, float64, float64, float64) bool
+var xPrinterGetHardMargins func(uintptr, uintptr, uintptr, uintptr, uintptr) bool
 
 // Retrieve the hard margins of @printer.
 //
@@ -210,13 +210,13 @@ var xPrinterGetHardMargins func(uintptr, float64, float64, float64, float64) boo
 // Note: This will not succeed unless the printer’s details are
 // available, see [method@Gtk.Printer.has_details] and
 // [method@Gtk.Printer.request_details].
-func (x *Printer) GetHardMargins(TopVar float64, BottomVar float64, LeftVar float64, RightVar float64) bool {
+func (x *Printer) GetHardMargins(TopVar *float64, BottomVar *float64, LeftVar *float64, RightVar *float64) bool {
 
-	cret := xPrinterGetHardMargins(x.GoPointer(), TopVar, BottomVar, LeftVar, RightVar)
+	cret := xPrinterGetHardMargins(x.GoPointer(), uintptr(unsafe.Pointer(TopVar)), uintptr(unsafe.Pointer(BottomVar)), uintptr(unsafe.Pointer(LeftVar)), uintptr(unsafe.Pointer(RightVar)))
 	return cret
 }
 
-var xPrinterGetHardMarginsForPaperSize func(uintptr, *PaperSize, float64, float64, float64, float64) bool
+var xPrinterGetHardMarginsForPaperSize func(uintptr, *PaperSize, uintptr, uintptr, uintptr, uintptr) bool
 
 // Retrieve the hard margins of @printer for @paper_size.
 //
@@ -226,9 +226,9 @@ var xPrinterGetHardMarginsForPaperSize func(uintptr, *PaperSize, float64, float6
 // Note: This will not succeed unless the printer’s details are
 // available, see [method@Gtk.Printer.has_details] and
 // [method@Gtk.Printer.request_details].
-func (x *Printer) GetHardMarginsForPaperSize(PaperSizeVar *PaperSize, TopVar float64, BottomVar float64, LeftVar float64, RightVar float64) bool {
+func (x *Printer) GetHardMarginsForPaperSize(PaperSizeVar *PaperSize, TopVar *float64, BottomVar *float64, LeftVar *float64, RightVar *float64) bool {
 
-	cret := xPrinterGetHardMarginsForPaperSize(x.GoPointer(), PaperSizeVar, TopVar, BottomVar, LeftVar, RightVar)
+	cret := xPrinterGetHardMarginsForPaperSize(x.GoPointer(), PaperSizeVar, uintptr(unsafe.Pointer(TopVar)), uintptr(unsafe.Pointer(BottomVar)), uintptr(unsafe.Pointer(LeftVar)), uintptr(unsafe.Pointer(RightVar)))
 	return cret
 }
 

@@ -81,12 +81,12 @@ func (x *FontMapClass) GetLoadFont() func(*FontMap, *Context, *FontDescription) 
 // OverrideListFamilies sets the callback function.
 // A function to list available font families. See
 // pango_font_map_list_families().
-func (x *FontMapClass) OverrideListFamilies(cb func(*FontMap, uintptr, int)) {
+func (x *FontMapClass) OverrideListFamilies(cb func(*FontMap, *uintptr, *int)) {
 	if cb == nil {
 		x.xListFamilies = 0
 	} else {
-		x.xListFamilies = purego.NewCallback(func(FontmapVarp uintptr, FamiliesVarp uintptr, NFamiliesVarp int) {
-			cb(FontMapNewFromInternalPtr(FontmapVarp), FamiliesVarp, NFamiliesVarp)
+		x.xListFamilies = purego.NewCallback(func(FontmapVarp uintptr, FamiliesVarp uintptr, NFamiliesVarp uintptr) {
+			cb(FontMapNewFromInternalPtr(FontmapVarp), (*uintptr)(unsafe.Pointer(FamiliesVarp)), (*int)(unsafe.Pointer(NFamiliesVarp)))
 		})
 	}
 }
@@ -94,14 +94,14 @@ func (x *FontMapClass) OverrideListFamilies(cb func(*FontMap, uintptr, int)) {
 // GetListFamilies gets the callback function.
 // A function to list available font families. See
 // pango_font_map_list_families().
-func (x *FontMapClass) GetListFamilies() func(*FontMap, uintptr, int) {
+func (x *FontMapClass) GetListFamilies() func(*FontMap, *uintptr, *int) {
 	if x.xListFamilies == 0 {
 		return nil
 	}
-	var rawCallback func(FontmapVarp uintptr, FamiliesVarp uintptr, NFamiliesVarp int)
+	var rawCallback func(FontmapVarp uintptr, FamiliesVarp uintptr, NFamiliesVarp uintptr)
 	purego.RegisterFunc(&rawCallback, x.xListFamilies)
-	return func(FontmapVar *FontMap, FamiliesVar uintptr, NFamiliesVar int) {
-		rawCallback(FontmapVar.GoPointer(), FamiliesVar, NFamiliesVar)
+	return func(FontmapVar *FontMap, FamiliesVar *uintptr, NFamiliesVar *int) {
+		rawCallback(FontmapVar.GoPointer(), uintptr(unsafe.Pointer(FamiliesVar)), uintptr(unsafe.Pointer(NFamiliesVar)))
 	}
 }
 
@@ -374,7 +374,7 @@ func (x *FontMap) GetSerial() uint {
 	return cret
 }
 
-var xFontMapListFamilies func(uintptr, uintptr, int)
+var xFontMapListFamilies func(uintptr, uintptr, uintptr)
 
 // List all families for a fontmap.
 //
@@ -382,9 +382,9 @@ var xFontMapListFamilies func(uintptr, uintptr, int)
 //
 // `PangoFontMap` also implemented the [iface@Gio.ListModel] interface
 // for enumerating families.
-func (x *FontMap) ListFamilies(FamiliesVar uintptr, NFamiliesVar int) {
+func (x *FontMap) ListFamilies(FamiliesVar *uintptr, NFamiliesVar *int) {
 
-	xFontMapListFamilies(x.GoPointer(), FamiliesVar, NFamiliesVar)
+	xFontMapListFamilies(x.GoPointer(), uintptr(unsafe.Pointer(FamiliesVar)), uintptr(unsafe.Pointer(NFamiliesVar)))
 
 }
 

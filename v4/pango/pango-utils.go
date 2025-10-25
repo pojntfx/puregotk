@@ -2,13 +2,15 @@
 package pango
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-var xFindParagraphBoundary func(string, int, int, int)
+var xFindParagraphBoundary func(string, int, uintptr, uintptr)
 
 // Locates a paragraph boundary in @text.
 //
@@ -24,9 +26,9 @@ var xFindParagraphBoundary func(string, int, int, int)
 // If no delimiters are found, both @paragraph_delimiter_index
 // and @next_paragraph_start are filled with the length of @text
 // (an index one off the end).
-func FindParagraphBoundary(TextVar string, LengthVar int, ParagraphDelimiterIndexVar int, NextParagraphStartVar int) {
+func FindParagraphBoundary(TextVar string, LengthVar int, ParagraphDelimiterIndexVar *int, NextParagraphStartVar *int) {
 
-	xFindParagraphBoundary(TextVar, LengthVar, ParagraphDelimiterIndexVar, NextParagraphStartVar)
+	xFindParagraphBoundary(TextVar, LengthVar, uintptr(unsafe.Pointer(ParagraphDelimiterIndexVar)), uintptr(unsafe.Pointer(NextParagraphStartVar)))
 
 }
 
@@ -59,7 +61,7 @@ func Log2visGetEmbeddingLevels(TextVar string, LengthVar int, PbaseDirVar *Direc
 	return cret
 }
 
-var xParseEnum func(types.GType, string, int, bool, string) bool
+var xParseEnum func(types.GType, string, uintptr, bool, uintptr) bool
 
 // Parses an enum type and stores the result in @value.
 //
@@ -71,13 +73,13 @@ var xParseEnum func(types.GType, string, int, bool, string) bool
 //
 // If failed and @possible_values is not %NULL, returned string should
 // be freed using g_free().
-func ParseEnum(TypeVar types.GType, StrVar string, ValueVar int, WarnVar bool, PossibleValuesVar string) bool {
+func ParseEnum(TypeVar types.GType, StrVar string, ValueVar *int, WarnVar bool, PossibleValuesVar *string) bool {
 
-	cret := xParseEnum(TypeVar, StrVar, ValueVar, WarnVar, PossibleValuesVar)
+	cret := xParseEnum(TypeVar, StrVar, uintptr(unsafe.Pointer(ValueVar)), WarnVar, uintptr(unsafe.Pointer(PossibleValuesVar)))
 	return cret
 }
 
-var xParseStretch func(string, *Stretch, bool) bool
+var xParseStretch func(string, uintptr, bool) bool
 
 // Parses a font stretch.
 //
@@ -88,11 +90,11 @@ var xParseStretch func(string, *Stretch, bool) bool
 // ignored and the '_' characters may be omitted.
 func ParseStretch(StrVar string, StretchVar *Stretch, WarnVar bool) bool {
 
-	cret := xParseStretch(StrVar, StretchVar, WarnVar)
+	cret := xParseStretch(StrVar, uintptr(unsafe.Pointer(StretchVar)), WarnVar)
 	return cret
 }
 
-var xParseStyle func(string, *Style, bool) bool
+var xParseStyle func(string, uintptr, bool) bool
 
 // Parses a font style.
 //
@@ -101,11 +103,11 @@ var xParseStyle func(string, *Style, bool) bool
 // ignored.
 func ParseStyle(StrVar string, StyleVar *Style, WarnVar bool) bool {
 
-	cret := xParseStyle(StrVar, StyleVar, WarnVar)
+	cret := xParseStyle(StrVar, uintptr(unsafe.Pointer(StyleVar)), WarnVar)
 	return cret
 }
 
-var xParseVariant func(string, *Variant, bool) bool
+var xParseVariant func(string, uintptr, bool) bool
 
 // Parses a font variant.
 //
@@ -114,11 +116,11 @@ var xParseVariant func(string, *Variant, bool) bool
 // case variations being ignored.
 func ParseVariant(StrVar string, VariantVar *Variant, WarnVar bool) bool {
 
-	cret := xParseVariant(StrVar, VariantVar, WarnVar)
+	cret := xParseVariant(StrVar, uintptr(unsafe.Pointer(VariantVar)), WarnVar)
 	return cret
 }
 
-var xParseWeight func(string, *Weight, bool) bool
+var xParseWeight func(string, uintptr, bool) bool
 
 // Parses a font weight.
 //
@@ -127,7 +129,7 @@ var xParseWeight func(string, *Weight, bool) bool
 // and integers. Case variations are ignored.
 func ParseWeight(StrVar string, WeightVar *Weight, WarnVar bool) bool {
 
-	cret := xParseWeight(StrVar, WeightVar, WarnVar)
+	cret := xParseWeight(StrVar, uintptr(unsafe.Pointer(WeightVar)), WarnVar)
 	return cret
 }
 
@@ -163,14 +165,14 @@ func ReadLine(StreamVar uintptr, StrVar *glib.String) int {
 	return cret
 }
 
-var xScanInt func(string, int) bool
+var xScanInt func(string, uintptr) bool
 
 // Scans an integer.
 //
 // Leading white space is skipped.
-func ScanInt(PosVar string, OutVar int) bool {
+func ScanInt(PosVar string, OutVar *int) bool {
 
-	cret := xScanInt(PosVar, OutVar)
+	cret := xScanInt(PosVar, uintptr(unsafe.Pointer(OutVar)))
 	return cret
 }
 

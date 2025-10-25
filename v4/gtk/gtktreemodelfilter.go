@@ -19,7 +19,7 @@ import (
 //
 // Since this function is called for each data access, it’s not a
 // particularly efficient operation.
-type TreeModelFilterModifyFunc func(uintptr, *TreeIter, *gobject.Value, int, uintptr)
+type TreeModelFilterModifyFunc func(uintptr, *TreeIter, uintptr, int, uintptr)
 
 // A function which decides whether the row indicated by @iter is visible.
 type TreeModelFilterVisibleFunc func(uintptr, *TreeIter, uintptr) bool
@@ -205,14 +205,14 @@ func (x *TreeModelFilter) ClearCache() {
 
 }
 
-var xTreeModelFilterConvertChildIterToIter func(uintptr, *TreeIter, *TreeIter) bool
+var xTreeModelFilterConvertChildIterToIter func(uintptr, uintptr, *TreeIter) bool
 
 // Sets @filter_iter to point to the row in @filter that corresponds to the
 // row pointed at by @child_iter.  If @filter_iter was not set, %FALSE is
 // returned.
 func (x *TreeModelFilter) ConvertChildIterToIter(FilterIterVar *TreeIter, ChildIterVar *TreeIter) bool {
 
-	cret := xTreeModelFilterConvertChildIterToIter(x.GoPointer(), FilterIterVar, ChildIterVar)
+	cret := xTreeModelFilterConvertChildIterToIter(x.GoPointer(), uintptr(unsafe.Pointer(FilterIterVar)), ChildIterVar)
 	return cret
 }
 
@@ -229,12 +229,12 @@ func (x *TreeModelFilter) ConvertChildPathToPath(ChildPathVar *TreePath) *TreePa
 	return cret
 }
 
-var xTreeModelFilterConvertIterToChildIter func(uintptr, *TreeIter, *TreeIter)
+var xTreeModelFilterConvertIterToChildIter func(uintptr, uintptr, *TreeIter)
 
 // Sets @child_iter to point to the row pointed to by @filter_iter.
 func (x *TreeModelFilter) ConvertIterToChildIter(ChildIterVar *TreeIter, FilterIterVar *TreeIter) {
 
-	xTreeModelFilterConvertIterToChildIter(x.GoPointer(), ChildIterVar, FilterIterVar)
+	xTreeModelFilterConvertIterToChildIter(x.GoPointer(), uintptr(unsafe.Pointer(ChildIterVar)), FilterIterVar)
 
 }
 
@@ -472,7 +472,7 @@ func (x *TreeModelFilter) GetFlags() TreeModelFlags {
 // iterator and %FALSE is returned.
 func (x *TreeModelFilter) GetIter(IterVar *TreeIter, PathVar *TreePath) bool {
 
-	cret := XGtkTreeModelGetIter(x.GoPointer(), IterVar, PathVar)
+	cret := XGtkTreeModelGetIter(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), PathVar)
 	return cret
 }
 
@@ -482,7 +482,7 @@ func (x *TreeModelFilter) GetIter(IterVar *TreeIter, PathVar *TreePath) bool {
 // Returns %FALSE if the tree is empty, %TRUE otherwise.
 func (x *TreeModelFilter) GetIterFirst(IterVar *TreeIter) bool {
 
-	cret := XGtkTreeModelGetIterFirst(x.GoPointer(), IterVar)
+	cret := XGtkTreeModelGetIterFirst(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)))
 	return cret
 }
 
@@ -492,7 +492,7 @@ func (x *TreeModelFilter) GetIterFirst(IterVar *TreeIter) bool {
 // Otherwise, @iter is left invalid and %FALSE is returned.
 func (x *TreeModelFilter) GetIterFromString(IterVar *TreeIter, PathStringVar string) bool {
 
-	cret := XGtkTreeModelGetIterFromString(x.GoPointer(), IterVar, PathStringVar)
+	cret := XGtkTreeModelGetIterFromString(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), PathStringVar)
 	return cret
 }
 
@@ -539,7 +539,7 @@ func (x *TreeModelFilter) GetValist(IterVar *TreeIter, VarArgsVar []interface{})
 // to free any allocated memory.
 func (x *TreeModelFilter) GetValue(IterVar *TreeIter, ColumnVar int, ValueVar *gobject.Value) {
 
-	XGtkTreeModelGetValue(x.GoPointer(), IterVar, ColumnVar, ValueVar)
+	XGtkTreeModelGetValue(x.GoPointer(), IterVar, ColumnVar, uintptr(unsafe.Pointer(ValueVar)))
 
 }
 
@@ -553,7 +553,7 @@ func (x *TreeModelFilter) GetValue(IterVar *TreeIter, ColumnVar int, ValueVar *g
 // `gtk_tree_model_get_iter_first (tree_model, iter);`
 func (x *TreeModelFilter) IterChildren(IterVar *TreeIter, ParentVar *TreeIter) bool {
 
-	cret := XGtkTreeModelIterChildren(x.GoPointer(), IterVar, ParentVar)
+	cret := XGtkTreeModelIterChildren(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ParentVar)
 	return cret
 }
 
@@ -593,7 +593,7 @@ func (x *TreeModelFilter) IterNext(IterVar *TreeIter) bool {
 // is set.
 func (x *TreeModelFilter) IterNthChild(IterVar *TreeIter, ParentVar *TreeIter, NVar int) bool {
 
-	cret := XGtkTreeModelIterNthChild(x.GoPointer(), IterVar, ParentVar, NVar)
+	cret := XGtkTreeModelIterNthChild(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ParentVar, NVar)
 	return cret
 }
 
@@ -608,7 +608,7 @@ func (x *TreeModelFilter) IterNthChild(IterVar *TreeIter, ParentVar *TreeIter, N
 // and @iter cannot point to the same memory location.
 func (x *TreeModelFilter) IterParent(IterVar *TreeIter, ChildVar *TreeIter) bool {
 
-	cret := XGtkTreeModelIterParent(x.GoPointer(), IterVar, ChildVar)
+	cret := XGtkTreeModelIterParent(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ChildVar)
 	return cret
 }
 

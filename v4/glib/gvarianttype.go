@@ -625,7 +625,7 @@ func VariantTypeStringIsValid(TypeStringVar string) bool {
 	return cret
 }
 
-var xVariantTypeStringScan func(string, string, string) bool
+var xVariantTypeStringScan func(string, string, uintptr) bool
 
 // Scan for a single complete and valid GVariant type string in @string.
 //
@@ -641,9 +641,9 @@ var xVariantTypeStringScan func(string, string, string) bool
 //
 // For the simple case of checking if a string is a valid type string,
 // see [func@GLib.VariantType.string_is_valid].
-func VariantTypeStringScan(StringVar string, LimitVar string, EndptrVar string) bool {
+func VariantTypeStringScan(StringVar string, LimitVar string, EndptrVar *string) bool {
 
-	cret := xVariantTypeStringScan(StringVar, LimitVar, EndptrVar)
+	cret := xVariantTypeStringScan(StringVar, LimitVar, uintptr(unsafe.Pointer(EndptrVar)))
 	return cret
 }
 

@@ -876,7 +876,7 @@ func (x *Socket) GetMulticastTtl() uint {
 	return cret
 }
 
-var xSocketGetOption func(uintptr, int, int, int, **glib.Error) bool
+var xSocketGetOption func(uintptr, int, int, uintptr, **glib.Error) bool
 
 // Gets the value of an integer-valued option on @socket, as with
 // getsockopt(). (If you need to fetch a  non-integer-valued option,
@@ -891,10 +891,10 @@ var xSocketGetOption func(uintptr, int, int, int, **glib.Error) bool
 // Note that even for socket options that are a single byte in size,
 // @value is still a pointer to a #gint variable, not a #guchar;
 // g_socket_get_option() will handle the conversion internally.
-func (x *Socket) GetOption(LevelVar int, OptnameVar int, ValueVar int) (bool, error) {
+func (x *Socket) GetOption(LevelVar int, OptnameVar int, ValueVar *int) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xSocketGetOption(x.GoPointer(), LevelVar, OptnameVar, ValueVar, &cerr)
+	cret := xSocketGetOption(x.GoPointer(), LevelVar, OptnameVar, uintptr(unsafe.Pointer(ValueVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1104,7 +1104,7 @@ func (x *Socket) Listen() (bool, error) {
 
 }
 
-var xSocketReceive func(uintptr, []byte, uint, uintptr, **glib.Error) int
+var xSocketReceive func(uintptr, uintptr, uint, uintptr, **glib.Error) int
 
 // Receive data (up to @size bytes) from a socket. This is mainly used by
 // connection-oriented sockets; it is identical to g_socket_receive_from()
@@ -1129,10 +1129,10 @@ var xSocketReceive func(uintptr, []byte, uint, uintptr, **glib.Error) int
 // %G_IO_IN condition.
 //
 // On error -1 is returned and @error is set accordingly.
-func (x *Socket) Receive(BufferVar []byte, SizeVar uint, CancellableVar *Cancellable) (int, error) {
+func (x *Socket) Receive(BufferVar *[]byte, SizeVar uint, CancellableVar *Cancellable) (int, error) {
 	var cerr *glib.Error
 
-	cret := xSocketReceive(x.GoPointer(), BufferVar, SizeVar, CancellableVar.GoPointer(), &cerr)
+	cret := xSocketReceive(x.GoPointer(), uintptr(unsafe.Pointer(BufferVar)), SizeVar, CancellableVar.GoPointer(), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1181,7 +1181,7 @@ var xSocketReceiveBytesFrom func(uintptr, uintptr, uint, int64, uintptr, **glib.
 func (x *Socket) ReceiveBytesFrom(AddressVar **SocketAddress, SizeVar uint, TimeoutUsVar int64, CancellableVar *Cancellable) (*glib.Bytes, error) {
 	var cerr *glib.Error
 
-	cret := xSocketReceiveBytesFrom(x.GoPointer(), *gobject.ConvertPtr(AddressVar), SizeVar, TimeoutUsVar, CancellableVar.GoPointer(), &cerr)
+	cret := xSocketReceiveBytesFrom(x.GoPointer(), uintptr(unsafe.Pointer(AddressVar)), SizeVar, TimeoutUsVar, CancellableVar.GoPointer(), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1189,7 +1189,7 @@ func (x *Socket) ReceiveBytesFrom(AddressVar **SocketAddress, SizeVar uint, Time
 
 }
 
-var xSocketReceiveFrom func(uintptr, uintptr, []byte, uint, uintptr, **glib.Error) int
+var xSocketReceiveFrom func(uintptr, uintptr, uintptr, uint, uintptr, **glib.Error) int
 
 // Receive data (up to @size bytes) from a socket.
 //
@@ -1198,10 +1198,10 @@ var xSocketReceiveFrom func(uintptr, uintptr, []byte, uint, uintptr, **glib.Erro
 // @address is owned by the caller.
 //
 // See g_socket_receive() for additional information.
-func (x *Socket) ReceiveFrom(AddressVar **SocketAddress, BufferVar []byte, SizeVar uint, CancellableVar *Cancellable) (int, error) {
+func (x *Socket) ReceiveFrom(AddressVar **SocketAddress, BufferVar *[]byte, SizeVar uint, CancellableVar *Cancellable) (int, error) {
 	var cerr *glib.Error
 
-	cret := xSocketReceiveFrom(x.GoPointer(), *gobject.ConvertPtr(AddressVar), BufferVar, SizeVar, CancellableVar.GoPointer(), &cerr)
+	cret := xSocketReceiveFrom(x.GoPointer(), uintptr(unsafe.Pointer(AddressVar)), uintptr(unsafe.Pointer(BufferVar)), SizeVar, CancellableVar.GoPointer(), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1209,7 +1209,7 @@ func (x *Socket) ReceiveFrom(AddressVar **SocketAddress, BufferVar []byte, SizeV
 
 }
 
-var xSocketReceiveMessage func(uintptr, uintptr, []InputVector, int, uintptr, int, int, uintptr, **glib.Error) int
+var xSocketReceiveMessage func(uintptr, uintptr, []InputVector, int, uintptr, uintptr, int, uintptr, **glib.Error) int
 
 // Receive data from a socket.  For receiving multiple messages, see
 // g_socket_receive_messages(); for easier use, see
@@ -1270,10 +1270,10 @@ var xSocketReceiveMessage func(uintptr, uintptr, []InputVector, int, uintptr, in
 // %G_IO_IN condition.
 //
 // On error -1 is returned and @error is set accordingly.
-func (x *Socket) ReceiveMessage(AddressVar **SocketAddress, VectorsVar []InputVector, NumVectorsVar int, MessagesVar uintptr, NumMessagesVar int, FlagsVar int, CancellableVar *Cancellable) (int, error) {
+func (x *Socket) ReceiveMessage(AddressVar **SocketAddress, VectorsVar []InputVector, NumVectorsVar int, MessagesVar *uintptr, NumMessagesVar *int, FlagsVar int, CancellableVar *Cancellable) (int, error) {
 	var cerr *glib.Error
 
-	cret := xSocketReceiveMessage(x.GoPointer(), *gobject.ConvertPtr(AddressVar), VectorsVar, NumVectorsVar, MessagesVar, NumMessagesVar, FlagsVar, CancellableVar.GoPointer(), &cerr)
+	cret := xSocketReceiveMessage(x.GoPointer(), uintptr(unsafe.Pointer(AddressVar)), VectorsVar, NumVectorsVar, uintptr(unsafe.Pointer(MessagesVar)), uintptr(unsafe.Pointer(NumMessagesVar)), FlagsVar, CancellableVar.GoPointer(), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1342,15 +1342,15 @@ func (x *Socket) ReceiveMessages(MessagesVar []InputMessage, NumMessagesVar uint
 
 }
 
-var xSocketReceiveWithBlocking func(uintptr, []byte, uint, bool, uintptr, **glib.Error) int
+var xSocketReceiveWithBlocking func(uintptr, uintptr, uint, bool, uintptr, **glib.Error) int
 
 // This behaves exactly the same as g_socket_receive(), except that
 // the choice of blocking or non-blocking behavior is determined by
 // the @blocking argument rather than by @socket's properties.
-func (x *Socket) ReceiveWithBlocking(BufferVar []byte, SizeVar uint, BlockingVar bool, CancellableVar *Cancellable) (int, error) {
+func (x *Socket) ReceiveWithBlocking(BufferVar *[]byte, SizeVar uint, BlockingVar bool, CancellableVar *Cancellable) (int, error) {
 	var cerr *glib.Error
 
-	cret := xSocketReceiveWithBlocking(x.GoPointer(), BufferVar, SizeVar, BlockingVar, CancellableVar.GoPointer(), &cerr)
+	cret := xSocketReceiveWithBlocking(x.GoPointer(), uintptr(unsafe.Pointer(BufferVar)), SizeVar, BlockingVar, CancellableVar.GoPointer(), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1440,7 +1440,7 @@ func (x *Socket) SendMessage(AddressVar *SocketAddress, VectorsVar []OutputVecto
 
 }
 
-var xSocketSendMessageWithTimeout func(uintptr, uintptr, []OutputVector, int, uintptr, int, int, int64, uint, uintptr, **glib.Error) PollableReturn
+var xSocketSendMessageWithTimeout func(uintptr, uintptr, []OutputVector, int, uintptr, int, int, int64, uintptr, uintptr, **glib.Error) PollableReturn
 
 // This behaves exactly the same as g_socket_send_message(), except that
 // the choice of timeout behavior is determined by the @timeout_us argument
@@ -1449,10 +1449,10 @@ var xSocketSendMessageWithTimeout func(uintptr, uintptr, []OutputVector, int, ui
 // On error %G_POLLABLE_RETURN_FAILED is returned and @error is set accordingly, or
 // if the socket is currently not writable %G_POLLABLE_RETURN_WOULD_BLOCK is
 // returned. @bytes_written will contain 0 in both cases.
-func (x *Socket) SendMessageWithTimeout(AddressVar *SocketAddress, VectorsVar []OutputVector, NumVectorsVar int, MessagesVar uintptr, NumMessagesVar int, FlagsVar int, TimeoutUsVar int64, BytesWrittenVar uint, CancellableVar *Cancellable) (PollableReturn, error) {
+func (x *Socket) SendMessageWithTimeout(AddressVar *SocketAddress, VectorsVar []OutputVector, NumVectorsVar int, MessagesVar uintptr, NumMessagesVar int, FlagsVar int, TimeoutUsVar int64, BytesWrittenVar *uint, CancellableVar *Cancellable) (PollableReturn, error) {
 	var cerr *glib.Error
 
-	cret := xSocketSendMessageWithTimeout(x.GoPointer(), AddressVar.GoPointer(), VectorsVar, NumVectorsVar, MessagesVar, NumMessagesVar, FlagsVar, TimeoutUsVar, BytesWrittenVar, CancellableVar.GoPointer(), &cerr)
+	cret := xSocketSendMessageWithTimeout(x.GoPointer(), AddressVar.GoPointer(), VectorsVar, NumVectorsVar, MessagesVar, NumMessagesVar, FlagsVar, TimeoutUsVar, uintptr(unsafe.Pointer(BytesWrittenVar)), CancellableVar.GoPointer(), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

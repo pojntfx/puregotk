@@ -2,6 +2,8 @@
 package gio
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
@@ -78,7 +80,7 @@ func PollableStreamWrite(StreamVar *OutputStream, BufferVar []byte, CountVar uin
 
 }
 
-var xPollableStreamWriteAll func(uintptr, []byte, uint, bool, uint, uintptr, **glib.Error) bool
+var xPollableStreamWriteAll func(uintptr, []byte, uint, bool, uintptr, uintptr, **glib.Error) bool
 
 // Tries to write @count bytes to @stream, as with
 // g_output_stream_write_all(), but using g_pollable_stream_write()
@@ -98,10 +100,10 @@ var xPollableStreamWriteAll func(uintptr, []byte, uint, bool, uint, uintptr, **g
 // g_pollable_output_stream_can_poll() returns %TRUE or else the
 // behavior is undefined. If @blocking is %TRUE, then @stream does not
 // need to be a #GPollableOutputStream.
-func PollableStreamWriteAll(StreamVar *OutputStream, BufferVar []byte, CountVar uint, BlockingVar bool, BytesWrittenVar uint, CancellableVar *Cancellable) (bool, error) {
+func PollableStreamWriteAll(StreamVar *OutputStream, BufferVar []byte, CountVar uint, BlockingVar bool, BytesWrittenVar *uint, CancellableVar *Cancellable) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xPollableStreamWriteAll(StreamVar.GoPointer(), BufferVar, CountVar, BlockingVar, BytesWrittenVar, CancellableVar.GoPointer(), &cerr)
+	cret := xPollableStreamWriteAll(StreamVar.GoPointer(), BufferVar, CountVar, BlockingVar, uintptr(unsafe.Pointer(BytesWrittenVar)), CancellableVar.GoPointer(), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

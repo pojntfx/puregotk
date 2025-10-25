@@ -178,14 +178,14 @@ func (x *RenderNode) Draw(CrVar *cairo.Context) {
 
 }
 
-var xRenderNodeGetBounds func(uintptr, *graphene.Rect)
+var xRenderNodeGetBounds func(uintptr, uintptr)
 
 // Retrieves the boundaries of the @node.
 //
 // The node will not draw outside of its boundaries.
 func (x *RenderNode) GetBounds(BoundsVar *graphene.Rect) {
 
-	xRenderNodeGetBounds(x.GoPointer(), BoundsVar)
+	xRenderNodeGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(BoundsVar)))
 
 }
 
@@ -198,7 +198,7 @@ func (x *RenderNode) GetNodeType() RenderNodeType {
 	return cret
 }
 
-var xRenderNodeGetOpaqueRect func(uintptr, *graphene.Rect) bool
+var xRenderNodeGetOpaqueRect func(uintptr, uintptr) bool
 
 // Gets an opaque rectangle inside the node that GTK can determine to
 // be fully opaque.
@@ -210,7 +210,7 @@ var xRenderNodeGetOpaqueRect func(uintptr, *graphene.Rect) bool
 // The rectangle will be fully contained in the bounds of the node.
 func (x *RenderNode) GetOpaqueRect(OutOpaqueVar *graphene.Rect) bool {
 
-	cret := xRenderNodeGetOpaqueRect(x.GoPointer(), OutOpaqueVar)
+	cret := xRenderNodeGetOpaqueRect(x.GoPointer(), uintptr(unsafe.Pointer(OutOpaqueVar)))
 	return cret
 }
 

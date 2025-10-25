@@ -2,6 +2,8 @@
 package gdkpixbuf
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/gio"
@@ -859,7 +861,7 @@ func (x *Pixbuf) GetPixels() uintptr {
 	return cret
 }
 
-var xPixbufGetPixelsWithLength func(uintptr, uint) uintptr
+var xPixbufGetPixelsWithLength func(uintptr, uintptr) uintptr
 
 // Queries a pointer to the pixel data of a pixbuf.
 //
@@ -868,9 +870,9 @@ var xPixbufGetPixelsWithLength func(uintptr, uint) uintptr
 //
 // Please see the section on [image data](class.Pixbuf.html#image-data) for information
 // about how the pixel data is stored in memory.
-func (x *Pixbuf) GetPixelsWithLength(LengthVar uint) uintptr {
+func (x *Pixbuf) GetPixelsWithLength(LengthVar *uint) uintptr {
 
-	cret := xPixbufGetPixelsWithLength(x.GoPointer(), LengthVar)
+	cret := xPixbufGetPixelsWithLength(x.GoPointer(), uintptr(unsafe.Pointer(LengthVar)))
 	return cret
 }
 
@@ -1088,7 +1090,7 @@ func (x *Pixbuf) Save(FilenameVar string, TypeVar string, ErrorVar **glib.Error,
 	return cret
 }
 
-var xPixbufSaveToBuffer func(uintptr, []byte, uint, string, **glib.Error, ...interface{}) bool
+var xPixbufSaveToBuffer func(uintptr, uintptr, uintptr, string, **glib.Error, ...interface{}) bool
 
 // Saves pixbuf to a new buffer in format `type`, which is currently "jpeg",
 // "png", "tiff", "ico" or "bmp".
@@ -1104,13 +1106,13 @@ var xPixbufSaveToBuffer func(uintptr, []byte, uint, string, **glib.Error, ...int
 // domain.
 //
 // See `gdk_pixbuf_save()` for more details.
-func (x *Pixbuf) SaveToBuffer(BufferVar []byte, BufferSizeVar uint, TypeVar string, ErrorVar **glib.Error, varArgs ...interface{}) bool {
+func (x *Pixbuf) SaveToBuffer(BufferVar *[]byte, BufferSizeVar *uint, TypeVar string, ErrorVar **glib.Error, varArgs ...interface{}) bool {
 
-	cret := xPixbufSaveToBuffer(x.GoPointer(), BufferVar, BufferSizeVar, TypeVar, ErrorVar, varArgs...)
+	cret := xPixbufSaveToBuffer(x.GoPointer(), uintptr(unsafe.Pointer(BufferVar)), uintptr(unsafe.Pointer(BufferSizeVar)), TypeVar, ErrorVar, varArgs...)
 	return cret
 }
 
-var xPixbufSaveToBufferv func(uintptr, []byte, uint, string, []string, []string, **glib.Error) bool
+var xPixbufSaveToBufferv func(uintptr, uintptr, uintptr, string, []string, []string, **glib.Error) bool
 
 // Vector version of `gdk_pixbuf_save_to_buffer()`.
 //
@@ -1118,10 +1120,10 @@ var xPixbufSaveToBufferv func(uintptr, []byte, uint, string, []string, []string,
 // "tiff", "png", "ico" or "bmp".
 //
 // See [method@GdkPixbuf.Pixbuf.save_to_buffer] for more details.
-func (x *Pixbuf) SaveToBufferv(BufferVar []byte, BufferSizeVar uint, TypeVar string, OptionKeysVar []string, OptionValuesVar []string) (bool, error) {
+func (x *Pixbuf) SaveToBufferv(BufferVar *[]byte, BufferSizeVar *uint, TypeVar string, OptionKeysVar []string, OptionValuesVar []string) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xPixbufSaveToBufferv(x.GoPointer(), BufferVar, BufferSizeVar, TypeVar, OptionKeysVar, OptionValuesVar, &cerr)
+	cret := xPixbufSaveToBufferv(x.GoPointer(), uintptr(unsafe.Pointer(BufferVar)), uintptr(unsafe.Pointer(BufferSizeVar)), TypeVar, OptionKeysVar, OptionValuesVar, &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -1396,11 +1398,11 @@ func (x *Pixbuf) ToString() string {
 
 // Loads a loadable icon. For the asynchronous version of this function,
 // see g_loadable_icon_load_async().
-func (x *Pixbuf) Load(SizeVar int, TypeVar string, CancellableVar *gio.Cancellable) (*gio.InputStream, error) {
+func (x *Pixbuf) Load(SizeVar int, TypeVar *string, CancellableVar *gio.Cancellable) (*gio.InputStream, error) {
 	var cls *gio.InputStream
 	var cerr *glib.Error
 
-	cret := gio.XGLoadableIconLoad(x.GoPointer(), SizeVar, TypeVar, CancellableVar.GoPointer(), &cerr)
+	cret := gio.XGLoadableIconLoad(x.GoPointer(), SizeVar, uintptr(unsafe.Pointer(TypeVar)), CancellableVar.GoPointer(), &cerr)
 
 	if cret == 0 {
 		return nil, cerr
@@ -1424,11 +1426,11 @@ func (x *Pixbuf) LoadAsync(SizeVar int, CancellableVar *gio.Cancellable, Callbac
 }
 
 // Finishes an asynchronous icon load started in g_loadable_icon_load_async().
-func (x *Pixbuf) LoadFinish(ResVar gio.AsyncResult, TypeVar string) (*gio.InputStream, error) {
+func (x *Pixbuf) LoadFinish(ResVar gio.AsyncResult, TypeVar *string) (*gio.InputStream, error) {
 	var cls *gio.InputStream
 	var cerr *glib.Error
 
-	cret := gio.XGLoadableIconLoadFinish(x.GoPointer(), ResVar.GoPointer(), TypeVar, &cerr)
+	cret := gio.XGLoadableIconLoadFinish(x.GoPointer(), ResVar.GoPointer(), uintptr(unsafe.Pointer(TypeVar)), &cerr)
 
 	if cret == 0 {
 		return nil, cerr
@@ -1455,12 +1457,12 @@ func PixbufCalculateRowstride(ColorspaceVar Colorspace, HasAlphaVar bool, BitsPe
 	return cret
 }
 
-var xPixbufGetFileInfo func(string, int, int) *PixbufFormat
+var xPixbufGetFileInfo func(string, uintptr, uintptr) *PixbufFormat
 
 // Parses an image file far enough to determine its format and size.
-func PixbufGetFileInfo(FilenameVar string, WidthVar int, HeightVar int) *PixbufFormat {
+func PixbufGetFileInfo(FilenameVar string, WidthVar *int, HeightVar *int) *PixbufFormat {
 
-	cret := xPixbufGetFileInfo(FilenameVar, WidthVar, HeightVar)
+	cret := xPixbufGetFileInfo(FilenameVar, uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -1481,14 +1483,14 @@ func PixbufGetFileInfoAsync(FilenameVar string, CancellableVar *gio.Cancellable,
 
 }
 
-var xPixbufGetFileInfoFinish func(uintptr, int, int, **glib.Error) *PixbufFormat
+var xPixbufGetFileInfoFinish func(uintptr, uintptr, uintptr, **glib.Error) *PixbufFormat
 
 // Finishes an asynchronous pixbuf parsing operation started with
 // gdk_pixbuf_get_file_info_async().
-func PixbufGetFileInfoFinish(AsyncResultVar gio.AsyncResult, WidthVar int, HeightVar int) (*PixbufFormat, error) {
+func PixbufGetFileInfoFinish(AsyncResultVar gio.AsyncResult, WidthVar *int, HeightVar *int) (*PixbufFormat, error) {
 	var cerr *glib.Error
 
-	cret := xPixbufGetFileInfoFinish(AsyncResultVar.GoPointer(), WidthVar, HeightVar, &cerr)
+	cret := xPixbufGetFileInfoFinish(AsyncResultVar.GoPointer(), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

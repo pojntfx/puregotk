@@ -202,7 +202,7 @@ func PrefixErrorLiteral(ErrVar **Error, PrefixVar string) {
 
 }
 
-var xPropagateError func(**Error, *Error)
+var xPropagateError func(uintptr, *Error)
 
 // If @dest is %NULL, free @src; otherwise, moves @src into `*dest`.
 // The error variable @dest points to must be %NULL.
@@ -214,7 +214,7 @@ var xPropagateError func(**Error, *Error)
 // after calling this function on it.
 func PropagateError(DestVar **Error, SrcVar *Error) {
 
-	xPropagateError(DestVar, SrcVar)
+	xPropagateError(uintptr(unsafe.Pointer(DestVar)), SrcVar)
 
 }
 
@@ -229,17 +229,17 @@ func PropagatePrefixedError(DestVar **Error, SrcVar *Error, FormatVar string, va
 
 }
 
-var xSetError func(**Error, Quark, int, string, ...interface{})
+var xSetError func(uintptr, Quark, int, string, ...interface{})
 
 // Does nothing if @err is %NULL; if @err is non-%NULL, then `*err`
 // must be %NULL. A new #GError is created and assigned to `*err`.
 func SetError(ErrVar **Error, DomainVar Quark, CodeVar int, FormatVar string, varArgs ...interface{}) {
 
-	xSetError(ErrVar, DomainVar, CodeVar, FormatVar, varArgs...)
+	xSetError(uintptr(unsafe.Pointer(ErrVar)), DomainVar, CodeVar, FormatVar, varArgs...)
 
 }
 
-var xSetErrorLiteral func(**Error, Quark, int, string)
+var xSetErrorLiteral func(uintptr, Quark, int, string)
 
 // Does nothing if @err is %NULL; if @err is non-%NULL, then `*err`
 // must be %NULL. A new #GError is created and assigned to `*err`.
@@ -248,7 +248,7 @@ var xSetErrorLiteral func(**Error, Quark, int, string)
 // that could include printf() escape sequences.
 func SetErrorLiteral(ErrVar **Error, DomainVar Quark, CodeVar int, MessageVar string) {
 
-	xSetErrorLiteral(ErrVar, DomainVar, CodeVar, MessageVar)
+	xSetErrorLiteral(uintptr(unsafe.Pointer(ErrVar)), DomainVar, CodeVar, MessageVar)
 
 }
 

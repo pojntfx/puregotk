@@ -109,7 +109,7 @@ func (x *Monitor) GetDisplay() *Display {
 	return cls
 }
 
-var xMonitorGetGeometry func(uintptr, *Rectangle)
+var xMonitorGetGeometry func(uintptr, uintptr)
 
 // Retrieves the size and position of the monitor within the
 // display coordinate space.
@@ -118,7 +118,7 @@ var xMonitorGetGeometry func(uintptr, *Rectangle)
 // ”device pixels” (see [method@Gdk.Monitor.get_scale]).
 func (x *Monitor) GetGeometry(GeometryVar *Rectangle) {
 
-	xMonitorGetGeometry(x.GoPointer(), GeometryVar)
+	xMonitorGetGeometry(x.GoPointer(), uintptr(unsafe.Pointer(GeometryVar)))
 
 }
 

@@ -80,7 +80,7 @@ func (x *FlagsValue) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-var xEnumCompleteTypeInfo func(types.GType, *TypeInfo, []EnumValue)
+var xEnumCompleteTypeInfo func(types.GType, uintptr, []EnumValue)
 
 // This function is meant to be called from the `complete_type_info`
 // function of a #GTypePlugin implementation, as in the following
@@ -107,7 +107,7 @@ var xEnumCompleteTypeInfo func(types.GType, *TypeInfo, []EnumValue)
 // ]|
 func EnumCompleteTypeInfo(GEnumTypeVar types.GType, InfoVar *TypeInfo, ConstValuesVar []EnumValue) {
 
-	xEnumCompleteTypeInfo(GEnumTypeVar, InfoVar, ConstValuesVar)
+	xEnumCompleteTypeInfo(GEnumTypeVar, uintptr(unsafe.Pointer(InfoVar)), ConstValuesVar)
 
 }
 
@@ -163,14 +163,14 @@ func EnumToString(GEnumTypeVar types.GType, ValueVar int) string {
 	return cret
 }
 
-var xFlagsCompleteTypeInfo func(types.GType, *TypeInfo, []FlagsValue)
+var xFlagsCompleteTypeInfo func(types.GType, uintptr, []FlagsValue)
 
 // This function is meant to be called from the complete_type_info()
 // function of a #GTypePlugin implementation, see the example for
 // g_enum_complete_type_info() above.
 func FlagsCompleteTypeInfo(GFlagsTypeVar types.GType, InfoVar *TypeInfo, ConstValuesVar []FlagsValue) {
 
-	xFlagsCompleteTypeInfo(GFlagsTypeVar, InfoVar, ConstValuesVar)
+	xFlagsCompleteTypeInfo(GFlagsTypeVar, uintptr(unsafe.Pointer(InfoVar)), ConstValuesVar)
 
 }
 

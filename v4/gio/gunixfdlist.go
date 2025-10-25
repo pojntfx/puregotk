@@ -284,7 +284,7 @@ func (x *UnixFDList) GetLength() int {
 	return cret
 }
 
-var xUnixFDListPeekFds func(uintptr, int) uintptr
+var xUnixFDListPeekFds func(uintptr, uintptr) uintptr
 
 // Returns the array of file descriptors that is contained in this
 // object.
@@ -299,13 +299,13 @@ var xUnixFDListPeekFds func(uintptr, int) uintptr
 //
 // This function never returns %NULL. In case there are no file
 // descriptors contained in @list, an empty array is returned.
-func (x *UnixFDList) PeekFds(LengthVar int) uintptr {
+func (x *UnixFDList) PeekFds(LengthVar *int) uintptr {
 
-	cret := xUnixFDListPeekFds(x.GoPointer(), LengthVar)
+	cret := xUnixFDListPeekFds(x.GoPointer(), uintptr(unsafe.Pointer(LengthVar)))
 	return cret
 }
 
-var xUnixFDListStealFds func(uintptr, int) uintptr
+var xUnixFDListStealFds func(uintptr, uintptr) uintptr
 
 // Returns the array of file descriptors that is contained in this
 // object.
@@ -325,9 +325,9 @@ var xUnixFDListStealFds func(uintptr, int) uintptr
 //
 // This function never returns %NULL. In case there are no file
 // descriptors contained in @list, an empty array is returned.
-func (x *UnixFDList) StealFds(LengthVar int) uintptr {
+func (x *UnixFDList) StealFds(LengthVar *int) uintptr {
 
-	cret := xUnixFDListStealFds(x.GoPointer(), LengthVar)
+	cret := xUnixFDListStealFds(x.GoPointer(), uintptr(unsafe.Pointer(LengthVar)))
 	return cret
 }
 

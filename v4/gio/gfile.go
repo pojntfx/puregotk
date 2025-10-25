@@ -1367,7 +1367,7 @@ func (x *FileIface) GetSetAttributesFinish() func(File, AsyncResult, **FileInfo)
 	var rawCallback func(FileVarp uintptr, ResultVarp uintptr, InfoVarp uintptr) bool
 	purego.RegisterFunc(&rawCallback, x.xSetAttributesFinish)
 	return func(FileVar File, ResultVar AsyncResult, InfoVar **FileInfo) bool {
-		return rawCallback(FileVar.GoPointer(), ResultVar.GoPointer(), *gobject.ConvertPtr(InfoVar))
+		return rawCallback(FileVar.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(InfoVar)))
 	}
 }
 
@@ -3028,26 +3028,26 @@ func (x *FileIface) GetPollMountableFinish() func(File, AsyncResult) bool {
 
 // OverrideMeasureDiskUsage sets the callback function.
 // Recursively measures the disk usage of @file. Since 2.38
-func (x *FileIface) OverrideMeasureDiskUsage(cb func(File, FileMeasureFlags, *Cancellable, *FileMeasureProgressCallback, uintptr, uint64, uint64, uint64) bool) {
+func (x *FileIface) OverrideMeasureDiskUsage(cb func(File, FileMeasureFlags, *Cancellable, *FileMeasureProgressCallback, uintptr, *uint64, *uint64, *uint64) bool) {
 	if cb == nil {
 		x.xMeasureDiskUsage = 0
 	} else {
-		x.xMeasureDiskUsage = purego.NewCallback(func(FileVarp uintptr, FlagsVarp FileMeasureFlags, CancellableVarp uintptr, ProgressCallbackVarp uintptr, ProgressDataVarp uintptr, DiskUsageVarp uint64, NumDirsVarp uint64, NumFilesVarp uint64) bool {
-			return cb(&FileBase{Ptr: FileVarp}, FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp), (*FileMeasureProgressCallback)(unsafe.Pointer(ProgressCallbackVarp)), ProgressDataVarp, DiskUsageVarp, NumDirsVarp, NumFilesVarp)
+		x.xMeasureDiskUsage = purego.NewCallback(func(FileVarp uintptr, FlagsVarp FileMeasureFlags, CancellableVarp uintptr, ProgressCallbackVarp uintptr, ProgressDataVarp uintptr, DiskUsageVarp uintptr, NumDirsVarp uintptr, NumFilesVarp uintptr) bool {
+			return cb(&FileBase{Ptr: FileVarp}, FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp), (*FileMeasureProgressCallback)(unsafe.Pointer(ProgressCallbackVarp)), ProgressDataVarp, (*uint64)(unsafe.Pointer(DiskUsageVarp)), (*uint64)(unsafe.Pointer(NumDirsVarp)), (*uint64)(unsafe.Pointer(NumFilesVarp)))
 		})
 	}
 }
 
 // GetMeasureDiskUsage gets the callback function.
 // Recursively measures the disk usage of @file. Since 2.38
-func (x *FileIface) GetMeasureDiskUsage() func(File, FileMeasureFlags, *Cancellable, *FileMeasureProgressCallback, uintptr, uint64, uint64, uint64) bool {
+func (x *FileIface) GetMeasureDiskUsage() func(File, FileMeasureFlags, *Cancellable, *FileMeasureProgressCallback, uintptr, *uint64, *uint64, *uint64) bool {
 	if x.xMeasureDiskUsage == 0 {
 		return nil
 	}
-	var rawCallback func(FileVarp uintptr, FlagsVarp FileMeasureFlags, CancellableVarp uintptr, ProgressCallbackVarp uintptr, ProgressDataVarp uintptr, DiskUsageVarp uint64, NumDirsVarp uint64, NumFilesVarp uint64) bool
+	var rawCallback func(FileVarp uintptr, FlagsVarp FileMeasureFlags, CancellableVarp uintptr, ProgressCallbackVarp uintptr, ProgressDataVarp uintptr, DiskUsageVarp uintptr, NumDirsVarp uintptr, NumFilesVarp uintptr) bool
 	purego.RegisterFunc(&rawCallback, x.xMeasureDiskUsage)
-	return func(FileVar File, FlagsVar FileMeasureFlags, CancellableVar *Cancellable, ProgressCallbackVar *FileMeasureProgressCallback, ProgressDataVar uintptr, DiskUsageVar uint64, NumDirsVar uint64, NumFilesVar uint64) bool {
-		return rawCallback(FileVar.GoPointer(), FlagsVar, CancellableVar.GoPointer(), glib.NewCallbackNullable(ProgressCallbackVar), ProgressDataVar, DiskUsageVar, NumDirsVar, NumFilesVar)
+	return func(FileVar File, FlagsVar FileMeasureFlags, CancellableVar *Cancellable, ProgressCallbackVar *FileMeasureProgressCallback, ProgressDataVar uintptr, DiskUsageVar *uint64, NumDirsVar *uint64, NumFilesVar *uint64) bool {
+		return rawCallback(FileVar.GoPointer(), FlagsVar, CancellableVar.GoPointer(), glib.NewCallbackNullable(ProgressCallbackVar), ProgressDataVar, uintptr(unsafe.Pointer(DiskUsageVar)), uintptr(unsafe.Pointer(NumDirsVar)), uintptr(unsafe.Pointer(NumFilesVar)))
 	}
 }
 
@@ -3078,26 +3078,26 @@ func (x *FileIface) GetMeasureDiskUsageAsync() func(File, FileMeasureFlags, int,
 
 // OverrideMeasureDiskUsageFinish sets the callback function.
 // Finishes an asynchronous recursive measurement of the disk usage of @file. Since 2.38
-func (x *FileIface) OverrideMeasureDiskUsageFinish(cb func(File, AsyncResult, uint64, uint64, uint64) bool) {
+func (x *FileIface) OverrideMeasureDiskUsageFinish(cb func(File, AsyncResult, *uint64, *uint64, *uint64) bool) {
 	if cb == nil {
 		x.xMeasureDiskUsageFinish = 0
 	} else {
-		x.xMeasureDiskUsageFinish = purego.NewCallback(func(FileVarp uintptr, ResultVarp uintptr, DiskUsageVarp uint64, NumDirsVarp uint64, NumFilesVarp uint64) bool {
-			return cb(&FileBase{Ptr: FileVarp}, &AsyncResultBase{Ptr: ResultVarp}, DiskUsageVarp, NumDirsVarp, NumFilesVarp)
+		x.xMeasureDiskUsageFinish = purego.NewCallback(func(FileVarp uintptr, ResultVarp uintptr, DiskUsageVarp uintptr, NumDirsVarp uintptr, NumFilesVarp uintptr) bool {
+			return cb(&FileBase{Ptr: FileVarp}, &AsyncResultBase{Ptr: ResultVarp}, (*uint64)(unsafe.Pointer(DiskUsageVarp)), (*uint64)(unsafe.Pointer(NumDirsVarp)), (*uint64)(unsafe.Pointer(NumFilesVarp)))
 		})
 	}
 }
 
 // GetMeasureDiskUsageFinish gets the callback function.
 // Finishes an asynchronous recursive measurement of the disk usage of @file. Since 2.38
-func (x *FileIface) GetMeasureDiskUsageFinish() func(File, AsyncResult, uint64, uint64, uint64) bool {
+func (x *FileIface) GetMeasureDiskUsageFinish() func(File, AsyncResult, *uint64, *uint64, *uint64) bool {
 	if x.xMeasureDiskUsageFinish == 0 {
 		return nil
 	}
-	var rawCallback func(FileVarp uintptr, ResultVarp uintptr, DiskUsageVarp uint64, NumDirsVarp uint64, NumFilesVarp uint64) bool
+	var rawCallback func(FileVarp uintptr, ResultVarp uintptr, DiskUsageVarp uintptr, NumDirsVarp uintptr, NumFilesVarp uintptr) bool
 	purego.RegisterFunc(&rawCallback, x.xMeasureDiskUsageFinish)
-	return func(FileVar File, ResultVar AsyncResult, DiskUsageVar uint64, NumDirsVar uint64, NumFilesVar uint64) bool {
-		return rawCallback(FileVar.GoPointer(), ResultVar.GoPointer(), DiskUsageVar, NumDirsVar, NumFilesVar)
+	return func(FileVar File, ResultVar AsyncResult, DiskUsageVar *uint64, NumDirsVar *uint64, NumFilesVar *uint64) bool {
+		return rawCallback(FileVar.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(DiskUsageVar)), uintptr(unsafe.Pointer(NumDirsVar)), uintptr(unsafe.Pointer(NumFilesVar)))
 	}
 }
 
@@ -3264,14 +3264,14 @@ type File interface {
 	HasUriScheme(UriSchemeVar string) bool
 	Hash() uint
 	IsNative() bool
-	LoadBytes(CancellableVar *Cancellable, EtagOutVar string) (*glib.Bytes, error)
+	LoadBytes(CancellableVar *Cancellable, EtagOutVar *string) (*glib.Bytes, error)
 	LoadBytesAsync(CancellableVar *Cancellable, CallbackVar *AsyncReadyCallback, UserDataVar uintptr)
-	LoadBytesFinish(ResultVar AsyncResult, EtagOutVar string) (*glib.Bytes, error)
-	LoadContents(CancellableVar *Cancellable, ContentsVar []string, LengthVar uint, EtagOutVar string) (bool, error)
+	LoadBytesFinish(ResultVar AsyncResult, EtagOutVar *string) (*glib.Bytes, error)
+	LoadContents(CancellableVar *Cancellable, ContentsVar *[]string, LengthVar *uint, EtagOutVar *string) (bool, error)
 	LoadContentsAsync(CancellableVar *Cancellable, CallbackVar *AsyncReadyCallback, UserDataVar uintptr)
-	LoadContentsFinish(ResVar AsyncResult, ContentsVar []string, LengthVar uint, EtagOutVar string) (bool, error)
+	LoadContentsFinish(ResVar AsyncResult, ContentsVar *[]string, LengthVar *uint, EtagOutVar *string) (bool, error)
 	LoadPartialContentsAsync(CancellableVar *Cancellable, ReadMoreCallbackVar *FileReadMoreCallback, CallbackVar *AsyncReadyCallback, UserDataVar uintptr)
-	LoadPartialContentsFinish(ResVar AsyncResult, ContentsVar []string, LengthVar uint, EtagOutVar string) (bool, error)
+	LoadPartialContentsFinish(ResVar AsyncResult, ContentsVar *[]string, LengthVar *uint, EtagOutVar *string) (bool, error)
 	MakeDirectory(CancellableVar *Cancellable) (bool, error)
 	MakeDirectoryAsync(IoPriorityVar int, CancellableVar *Cancellable, CallbackVar *AsyncReadyCallback, UserDataVar uintptr)
 	MakeDirectoryFinish(ResultVar AsyncResult) (bool, error)
@@ -3279,9 +3279,9 @@ type File interface {
 	MakeSymbolicLink(SymlinkValueVar string, CancellableVar *Cancellable) (bool, error)
 	MakeSymbolicLinkAsync(SymlinkValueVar string, IoPriorityVar int, CancellableVar *Cancellable, CallbackVar *AsyncReadyCallback, UserDataVar uintptr)
 	MakeSymbolicLinkFinish(ResultVar AsyncResult) (bool, error)
-	MeasureDiskUsage(FlagsVar FileMeasureFlags, CancellableVar *Cancellable, ProgressCallbackVar *FileMeasureProgressCallback, ProgressDataVar uintptr, DiskUsageVar uint64, NumDirsVar uint64, NumFilesVar uint64) (bool, error)
+	MeasureDiskUsage(FlagsVar FileMeasureFlags, CancellableVar *Cancellable, ProgressCallbackVar *FileMeasureProgressCallback, ProgressDataVar uintptr, DiskUsageVar *uint64, NumDirsVar *uint64, NumFilesVar *uint64) (bool, error)
 	MeasureDiskUsageAsync(FlagsVar FileMeasureFlags, IoPriorityVar int, CancellableVar *Cancellable, ProgressCallbackVar *FileMeasureProgressCallback, ProgressDataVar uintptr, CallbackVar *AsyncReadyCallback, UserDataVar uintptr)
-	MeasureDiskUsageFinish(ResultVar AsyncResult, DiskUsageVar uint64, NumDirsVar uint64, NumFilesVar uint64) (bool, error)
+	MeasureDiskUsageFinish(ResultVar AsyncResult, DiskUsageVar *uint64, NumDirsVar *uint64, NumFilesVar *uint64) (bool, error)
 	Monitor(FlagsVar FileMonitorFlags, CancellableVar *Cancellable) (*FileMonitor, error)
 	MonitorDirectory(FlagsVar FileMonitorFlags, CancellableVar *Cancellable) (*FileMonitor, error)
 	MonitorFile(FlagsVar FileMonitorFlags, CancellableVar *Cancellable) (*FileMonitor, error)
@@ -3317,10 +3317,10 @@ type File interface {
 	ReadFinish(ResVar AsyncResult) (*FileInputStream, error)
 	Replace(EtagVar string, MakeBackupVar bool, FlagsVar FileCreateFlags, CancellableVar *Cancellable) (*FileOutputStream, error)
 	ReplaceAsync(EtagVar string, MakeBackupVar bool, FlagsVar FileCreateFlags, IoPriorityVar int, CancellableVar *Cancellable, CallbackVar *AsyncReadyCallback, UserDataVar uintptr)
-	ReplaceContents(ContentsVar string, LengthVar uint, EtagVar string, MakeBackupVar bool, FlagsVar FileCreateFlags, NewEtagVar string, CancellableVar *Cancellable) (bool, error)
+	ReplaceContents(ContentsVar string, LengthVar uint, EtagVar string, MakeBackupVar bool, FlagsVar FileCreateFlags, NewEtagVar *string, CancellableVar *Cancellable) (bool, error)
 	ReplaceContentsAsync(ContentsVar string, LengthVar uint, EtagVar string, MakeBackupVar bool, FlagsVar FileCreateFlags, CancellableVar *Cancellable, CallbackVar *AsyncReadyCallback, UserDataVar uintptr)
 	ReplaceContentsBytesAsync(ContentsVar *glib.Bytes, EtagVar string, MakeBackupVar bool, FlagsVar FileCreateFlags, CancellableVar *Cancellable, CallbackVar *AsyncReadyCallback, UserDataVar uintptr)
-	ReplaceContentsFinish(ResVar AsyncResult, NewEtagVar string) (bool, error)
+	ReplaceContentsFinish(ResVar AsyncResult, NewEtagVar *string) (bool, error)
 	ReplaceFinish(ResVar AsyncResult) (*FileOutputStream, error)
 	ReplaceReadwrite(EtagVar string, MakeBackupVar bool, FlagsVar FileCreateFlags, CancellableVar *Cancellable) (*FileIOStream, error)
 	ReplaceReadwriteAsync(EtagVar string, MakeBackupVar bool, FlagsVar FileCreateFlags, IoPriorityVar int, CancellableVar *Cancellable, CallbackVar *AsyncReadyCallback, UserDataVar uintptr)
@@ -4227,10 +4227,10 @@ func (x *FileBase) IsNative() bool {
 // The data contained in the resulting #GBytes is always zero-terminated, but
 // this is not included in the #GBytes length. The resulting #GBytes should be
 // freed with g_bytes_unref() when no longer in use.
-func (x *FileBase) LoadBytes(CancellableVar *Cancellable, EtagOutVar string) (*glib.Bytes, error) {
+func (x *FileBase) LoadBytes(CancellableVar *Cancellable, EtagOutVar *string) (*glib.Bytes, error) {
 	var cerr *glib.Error
 
-	cret := XGFileLoadBytes(x.GoPointer(), CancellableVar.GoPointer(), EtagOutVar, &cerr)
+	cret := XGFileLoadBytes(x.GoPointer(), CancellableVar.GoPointer(), uintptr(unsafe.Pointer(EtagOutVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -4263,10 +4263,10 @@ func (x *FileBase) LoadBytesAsync(CancellableVar *Cancellable, CallbackVar *Asyn
 // freed with g_bytes_unref() when no longer in use.
 //
 // See g_file_load_bytes() for more information.
-func (x *FileBase) LoadBytesFinish(ResultVar AsyncResult, EtagOutVar string) (*glib.Bytes, error) {
+func (x *FileBase) LoadBytesFinish(ResultVar AsyncResult, EtagOutVar *string) (*glib.Bytes, error) {
 	var cerr *glib.Error
 
-	cret := XGFileLoadBytesFinish(x.GoPointer(), ResultVar.GoPointer(), EtagOutVar, &cerr)
+	cret := XGFileLoadBytesFinish(x.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(EtagOutVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -4282,10 +4282,10 @@ func (x *FileBase) LoadBytesFinish(ResultVar AsyncResult, EtagOutVar string) (*g
 // If @cancellable is not %NULL, then the operation can be cancelled by
 // triggering the cancellable object from another thread. If the operation
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
-func (x *FileBase) LoadContents(CancellableVar *Cancellable, ContentsVar []string, LengthVar uint, EtagOutVar string) (bool, error) {
+func (x *FileBase) LoadContents(CancellableVar *Cancellable, ContentsVar *[]string, LengthVar *uint, EtagOutVar *string) (bool, error) {
 	var cerr *glib.Error
 
-	cret := XGFileLoadContents(x.GoPointer(), CancellableVar.GoPointer(), ContentsVar, LengthVar, EtagOutVar, &cerr)
+	cret := XGFileLoadContents(x.GoPointer(), CancellableVar.GoPointer(), uintptr(unsafe.Pointer(ContentsVar)), uintptr(unsafe.Pointer(LengthVar)), uintptr(unsafe.Pointer(EtagOutVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -4317,10 +4317,10 @@ func (x *FileBase) LoadContentsAsync(CancellableVar *Cancellable, CallbackVar *A
 // size of the @contents string. The @contents should be freed with
 // g_free() when no longer needed. If @etag_out is present, it will be
 // set to the new entity tag for the @file.
-func (x *FileBase) LoadContentsFinish(ResVar AsyncResult, ContentsVar []string, LengthVar uint, EtagOutVar string) (bool, error) {
+func (x *FileBase) LoadContentsFinish(ResVar AsyncResult, ContentsVar *[]string, LengthVar *uint, EtagOutVar *string) (bool, error) {
 	var cerr *glib.Error
 
-	cret := XGFileLoadContentsFinish(x.GoPointer(), ResVar.GoPointer(), ContentsVar, LengthVar, EtagOutVar, &cerr)
+	cret := XGFileLoadContentsFinish(x.GoPointer(), ResVar.GoPointer(), uintptr(unsafe.Pointer(ContentsVar)), uintptr(unsafe.Pointer(LengthVar)), uintptr(unsafe.Pointer(EtagOutVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -4350,10 +4350,10 @@ func (x *FileBase) LoadPartialContentsAsync(CancellableVar *Cancellable, ReadMor
 // zero-terminated, but this is not included in the resultant @length.
 // The returned @contents should be freed with g_free() when no longer
 // needed.
-func (x *FileBase) LoadPartialContentsFinish(ResVar AsyncResult, ContentsVar []string, LengthVar uint, EtagOutVar string) (bool, error) {
+func (x *FileBase) LoadPartialContentsFinish(ResVar AsyncResult, ContentsVar *[]string, LengthVar *uint, EtagOutVar *string) (bool, error) {
 	var cerr *glib.Error
 
-	cret := XGFileLoadPartialContentsFinish(x.GoPointer(), ResVar.GoPointer(), ContentsVar, LengthVar, EtagOutVar, &cerr)
+	cret := XGFileLoadPartialContentsFinish(x.GoPointer(), ResVar.GoPointer(), uintptr(unsafe.Pointer(ContentsVar)), uintptr(unsafe.Pointer(LengthVar)), uintptr(unsafe.Pointer(EtagOutVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -4490,10 +4490,10 @@ func (x *FileBase) MakeSymbolicLinkFinish(ResultVar AsyncResult) (bool, error) {
 // periodic progress updates while scanning.  See the documentation for
 // #GFileMeasureProgressCallback for information about when and how the
 // callback will be invoked.
-func (x *FileBase) MeasureDiskUsage(FlagsVar FileMeasureFlags, CancellableVar *Cancellable, ProgressCallbackVar *FileMeasureProgressCallback, ProgressDataVar uintptr, DiskUsageVar uint64, NumDirsVar uint64, NumFilesVar uint64) (bool, error) {
+func (x *FileBase) MeasureDiskUsage(FlagsVar FileMeasureFlags, CancellableVar *Cancellable, ProgressCallbackVar *FileMeasureProgressCallback, ProgressDataVar uintptr, DiskUsageVar *uint64, NumDirsVar *uint64, NumFilesVar *uint64) (bool, error) {
 	var cerr *glib.Error
 
-	cret := XGFileMeasureDiskUsage(x.GoPointer(), FlagsVar, CancellableVar.GoPointer(), glib.NewCallbackNullable(ProgressCallbackVar), ProgressDataVar, DiskUsageVar, NumDirsVar, NumFilesVar, &cerr)
+	cret := XGFileMeasureDiskUsage(x.GoPointer(), FlagsVar, CancellableVar.GoPointer(), glib.NewCallbackNullable(ProgressCallbackVar), ProgressDataVar, uintptr(unsafe.Pointer(DiskUsageVar)), uintptr(unsafe.Pointer(NumDirsVar)), uintptr(unsafe.Pointer(NumFilesVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -4514,10 +4514,10 @@ func (x *FileBase) MeasureDiskUsageAsync(FlagsVar FileMeasureFlags, IoPriorityVa
 // Collects the results from an earlier call to
 // g_file_measure_disk_usage_async().  See g_file_measure_disk_usage() for
 // more information.
-func (x *FileBase) MeasureDiskUsageFinish(ResultVar AsyncResult, DiskUsageVar uint64, NumDirsVar uint64, NumFilesVar uint64) (bool, error) {
+func (x *FileBase) MeasureDiskUsageFinish(ResultVar AsyncResult, DiskUsageVar *uint64, NumDirsVar *uint64, NumFilesVar *uint64) (bool, error) {
 	var cerr *glib.Error
 
-	cret := XGFileMeasureDiskUsageFinish(x.GoPointer(), ResultVar.GoPointer(), DiskUsageVar, NumDirsVar, NumFilesVar, &cerr)
+	cret := XGFileMeasureDiskUsageFinish(x.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(DiskUsageVar)), uintptr(unsafe.Pointer(NumDirsVar)), uintptr(unsafe.Pointer(NumFilesVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -5329,10 +5329,10 @@ func (x *FileBase) ReplaceAsync(EtagVar string, MakeBackupVar bool, FlagsVar Fil
 //
 // The returned @new_etag can be used to verify that the file hasn't
 // changed the next time it is saved over.
-func (x *FileBase) ReplaceContents(ContentsVar string, LengthVar uint, EtagVar string, MakeBackupVar bool, FlagsVar FileCreateFlags, NewEtagVar string, CancellableVar *Cancellable) (bool, error) {
+func (x *FileBase) ReplaceContents(ContentsVar string, LengthVar uint, EtagVar string, MakeBackupVar bool, FlagsVar FileCreateFlags, NewEtagVar *string, CancellableVar *Cancellable) (bool, error) {
 	var cerr *glib.Error
 
-	cret := XGFileReplaceContents(x.GoPointer(), ContentsVar, LengthVar, EtagVar, MakeBackupVar, FlagsVar, NewEtagVar, CancellableVar.GoPointer(), &cerr)
+	cret := XGFileReplaceContents(x.GoPointer(), ContentsVar, LengthVar, EtagVar, MakeBackupVar, FlagsVar, uintptr(unsafe.Pointer(NewEtagVar)), CancellableVar.GoPointer(), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -5382,10 +5382,10 @@ func (x *FileBase) ReplaceContentsBytesAsync(ContentsVar *glib.Bytes, EtagVar st
 // Finishes an asynchronous replace of the given @file. See
 // g_file_replace_contents_async(). Sets @new_etag to the new entity
 // tag for the document, if present.
-func (x *FileBase) ReplaceContentsFinish(ResVar AsyncResult, NewEtagVar string) (bool, error) {
+func (x *FileBase) ReplaceContentsFinish(ResVar AsyncResult, NewEtagVar *string) (bool, error) {
 	var cerr *glib.Error
 
-	cret := XGFileReplaceContentsFinish(x.GoPointer(), ResVar.GoPointer(), NewEtagVar, &cerr)
+	cret := XGFileReplaceContentsFinish(x.GoPointer(), ResVar.GoPointer(), uintptr(unsafe.Pointer(NewEtagVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -5636,7 +5636,7 @@ func (x *FileBase) SetAttributesAsync(InfoVar *FileInfo, FlagsVar FileQueryInfoF
 func (x *FileBase) SetAttributesFinish(ResultVar AsyncResult, InfoVar **FileInfo) (bool, error) {
 	var cerr *glib.Error
 
-	cret := XGFileSetAttributesFinish(x.GoPointer(), ResultVar.GoPointer(), *gobject.ConvertPtr(InfoVar), &cerr)
+	cret := XGFileSetAttributesFinish(x.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(InfoVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -5955,14 +5955,14 @@ var XGFileHasPrefix func(uintptr, uintptr) bool
 var XGFileHasUriScheme func(uintptr, string) bool
 var XGFileHash func(uintptr) uint
 var XGFileIsNative func(uintptr) bool
-var XGFileLoadBytes func(uintptr, uintptr, string, **glib.Error) *glib.Bytes
+var XGFileLoadBytes func(uintptr, uintptr, uintptr, **glib.Error) *glib.Bytes
 var XGFileLoadBytesAsync func(uintptr, uintptr, uintptr, uintptr)
-var XGFileLoadBytesFinish func(uintptr, uintptr, string, **glib.Error) *glib.Bytes
-var XGFileLoadContents func(uintptr, uintptr, []string, uint, string, **glib.Error) bool
+var XGFileLoadBytesFinish func(uintptr, uintptr, uintptr, **glib.Error) *glib.Bytes
+var XGFileLoadContents func(uintptr, uintptr, uintptr, uintptr, uintptr, **glib.Error) bool
 var XGFileLoadContentsAsync func(uintptr, uintptr, uintptr, uintptr)
-var XGFileLoadContentsFinish func(uintptr, uintptr, []string, uint, string, **glib.Error) bool
+var XGFileLoadContentsFinish func(uintptr, uintptr, uintptr, uintptr, uintptr, **glib.Error) bool
 var XGFileLoadPartialContentsAsync func(uintptr, uintptr, uintptr, uintptr, uintptr)
-var XGFileLoadPartialContentsFinish func(uintptr, uintptr, []string, uint, string, **glib.Error) bool
+var XGFileLoadPartialContentsFinish func(uintptr, uintptr, uintptr, uintptr, uintptr, **glib.Error) bool
 var XGFileMakeDirectory func(uintptr, uintptr, **glib.Error) bool
 var XGFileMakeDirectoryAsync func(uintptr, int, uintptr, uintptr, uintptr)
 var XGFileMakeDirectoryFinish func(uintptr, uintptr, **glib.Error) bool
@@ -5970,9 +5970,9 @@ var XGFileMakeDirectoryWithParents func(uintptr, uintptr, **glib.Error) bool
 var XGFileMakeSymbolicLink func(uintptr, string, uintptr, **glib.Error) bool
 var XGFileMakeSymbolicLinkAsync func(uintptr, string, int, uintptr, uintptr, uintptr)
 var XGFileMakeSymbolicLinkFinish func(uintptr, uintptr, **glib.Error) bool
-var XGFileMeasureDiskUsage func(uintptr, FileMeasureFlags, uintptr, uintptr, uintptr, uint64, uint64, uint64, **glib.Error) bool
+var XGFileMeasureDiskUsage func(uintptr, FileMeasureFlags, uintptr, uintptr, uintptr, uintptr, uintptr, uintptr, **glib.Error) bool
 var XGFileMeasureDiskUsageAsync func(uintptr, FileMeasureFlags, int, uintptr, uintptr, uintptr, uintptr, uintptr)
-var XGFileMeasureDiskUsageFinish func(uintptr, uintptr, uint64, uint64, uint64, **glib.Error) bool
+var XGFileMeasureDiskUsageFinish func(uintptr, uintptr, uintptr, uintptr, uintptr, **glib.Error) bool
 var XGFileMonitor func(uintptr, FileMonitorFlags, uintptr, **glib.Error) uintptr
 var XGFileMonitorDirectory func(uintptr, FileMonitorFlags, uintptr, **glib.Error) uintptr
 var XGFileMonitorFile func(uintptr, FileMonitorFlags, uintptr, **glib.Error) uintptr
@@ -6008,10 +6008,10 @@ var XGFileReadAsync func(uintptr, int, uintptr, uintptr, uintptr)
 var XGFileReadFinish func(uintptr, uintptr, **glib.Error) uintptr
 var XGFileReplace func(uintptr, string, bool, FileCreateFlags, uintptr, **glib.Error) uintptr
 var XGFileReplaceAsync func(uintptr, string, bool, FileCreateFlags, int, uintptr, uintptr, uintptr)
-var XGFileReplaceContents func(uintptr, string, uint, string, bool, FileCreateFlags, string, uintptr, **glib.Error) bool
+var XGFileReplaceContents func(uintptr, string, uint, string, bool, FileCreateFlags, uintptr, uintptr, **glib.Error) bool
 var XGFileReplaceContentsAsync func(uintptr, string, uint, string, bool, FileCreateFlags, uintptr, uintptr, uintptr)
 var XGFileReplaceContentsBytesAsync func(uintptr, *glib.Bytes, string, bool, FileCreateFlags, uintptr, uintptr, uintptr)
-var XGFileReplaceContentsFinish func(uintptr, uintptr, string, **glib.Error) bool
+var XGFileReplaceContentsFinish func(uintptr, uintptr, uintptr, **glib.Error) bool
 var XGFileReplaceFinish func(uintptr, uintptr, **glib.Error) uintptr
 var XGFileReplaceReadwrite func(uintptr, string, bool, FileCreateFlags, uintptr, **glib.Error) uintptr
 var XGFileReplaceReadwriteAsync func(uintptr, string, bool, FileCreateFlags, int, uintptr, uintptr, uintptr)
@@ -6171,7 +6171,7 @@ func FileNewTmp(TmplVar string, IostreamVar **FileIOStream) (*FileBase, error) {
 	var cls *FileBase
 	var cerr *glib.Error
 
-	cret := xFileNewTmp(TmplVar, *gobject.ConvertPtr(IostreamVar), &cerr)
+	cret := xFileNewTmp(TmplVar, uintptr(unsafe.Pointer(IostreamVar)), &cerr)
 
 	if cret == 0 {
 		return nil, cerr
@@ -6243,7 +6243,7 @@ func FileNewTmpFinish(ResultVar AsyncResult, IostreamVar **FileIOStream) (*FileB
 	var cls *FileBase
 	var cerr *glib.Error
 
-	cret := xFileNewTmpFinish(ResultVar.GoPointer(), *gobject.ConvertPtr(IostreamVar), &cerr)
+	cret := xFileNewTmpFinish(ResultVar.GoPointer(), uintptr(unsafe.Pointer(IostreamVar)), &cerr)
 
 	if cret == 0 {
 		return nil, cerr

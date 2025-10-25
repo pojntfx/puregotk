@@ -67,14 +67,14 @@ func (x *ToplevelLayout) Equal(OtherVar *ToplevelLayout) bool {
 	return cret
 }
 
-var xToplevelLayoutGetFullscreen func(uintptr, bool) bool
+var xToplevelLayoutGetFullscreen func(uintptr, uintptr) bool
 
 // If the layout specifies whether to the toplevel should go fullscreen,
 // the value pointed to by @fullscreen is set to true if it should go
 // fullscreen, or false, if it should go unfullscreen.
-func (x *ToplevelLayout) GetFullscreen(FullscreenVar bool) bool {
+func (x *ToplevelLayout) GetFullscreen(FullscreenVar *bool) bool {
 
-	cret := xToplevelLayoutGetFullscreen(x.GoPointer(), FullscreenVar)
+	cret := xToplevelLayoutGetFullscreen(x.GoPointer(), uintptr(unsafe.Pointer(FullscreenVar)))
 	return cret
 }
 
@@ -96,14 +96,14 @@ func (x *ToplevelLayout) GetFullscreenMonitor() *Monitor {
 	return cls
 }
 
-var xToplevelLayoutGetMaximized func(uintptr, bool) bool
+var xToplevelLayoutGetMaximized func(uintptr, uintptr) bool
 
 // If the layout specifies whether to the toplevel should go maximized,
 // the value pointed to by @maximized is set to true if it should go
 // maximized, or false, if it should go unmaximized.
-func (x *ToplevelLayout) GetMaximized(MaximizedVar bool) bool {
+func (x *ToplevelLayout) GetMaximized(MaximizedVar *bool) bool {
 
-	cret := xToplevelLayoutGetMaximized(x.GoPointer(), MaximizedVar)
+	cret := xToplevelLayoutGetMaximized(x.GoPointer(), uintptr(unsafe.Pointer(MaximizedVar)))
 	return cret
 }
 

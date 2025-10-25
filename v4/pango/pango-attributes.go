@@ -258,13 +258,13 @@ func (x *AttrIterator) GetAttrs() *glib.SList {
 	return cret
 }
 
-var xAttrIteratorGetFont func(uintptr, *FontDescription, **Language, **glib.SList)
+var xAttrIteratorGetFont func(uintptr, *FontDescription, uintptr, uintptr)
 
 // Get the font and other attributes at the current
 // iterator position.
 func (x *AttrIterator) GetFont(DescVar *FontDescription, LanguageVar **Language, ExtraAttrsVar **glib.SList) {
 
-	xAttrIteratorGetFont(x.GoPointer(), DescVar, LanguageVar, ExtraAttrsVar)
+	xAttrIteratorGetFont(x.GoPointer(), DescVar, uintptr(unsafe.Pointer(LanguageVar)), uintptr(unsafe.Pointer(ExtraAttrsVar)))
 
 }
 
@@ -277,7 +277,7 @@ func (x *AttrIterator) Next() bool {
 	return cret
 }
 
-var xAttrIteratorRange func(uintptr, int, int)
+var xAttrIteratorRange func(uintptr, uintptr, uintptr)
 
 // Get the range of the current segment.
 //
@@ -285,9 +285,9 @@ var xAttrIteratorRange func(uintptr, int, int)
 // like the values in `PangoAttribute`. To deal with this API
 // oversight, stored return values that wouldn't fit into
 // a signed integer are clamped to %G_MAXINT.
-func (x *AttrIterator) Range(StartVar int, EndVar int) {
+func (x *AttrIterator) Range(StartVar *int, EndVar *int) {
 
-	xAttrIteratorRange(x.GoPointer(), StartVar, EndVar)
+	xAttrIteratorRange(x.GoPointer(), uintptr(unsafe.Pointer(StartVar)), uintptr(unsafe.Pointer(EndVar)))
 
 }
 

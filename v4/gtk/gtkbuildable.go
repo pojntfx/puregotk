@@ -229,12 +229,12 @@ func (x *BuildableIface) GetConstructChild() func(Buildable, *Builder, string) *
 //	`GtkWidget` implements this to parse accessible attributes specified
 //	in `&lt;accessibility&gt;` elements.
 //	Note that @user_data must be freed in @custom_tag_end or @custom_finished.
-func (x *BuildableIface) OverrideCustomTagStart(cb func(Buildable, *Builder, *gobject.Object, string, *BuildableParser, uintptr) bool) {
+func (x *BuildableIface) OverrideCustomTagStart(cb func(Buildable, *Builder, *gobject.Object, string, *BuildableParser, *uintptr) bool) {
 	if cb == nil {
 		x.xCustomTagStart = 0
 	} else {
-		x.xCustomTagStart = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, ChildVarp uintptr, TagnameVarp string, ParserVarp *BuildableParser, DataVarp uintptr) bool {
-			return cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), gobject.ObjectNewFromInternalPtr(ChildVarp), TagnameVarp, ParserVarp, DataVarp)
+		x.xCustomTagStart = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, ChildVarp uintptr, TagnameVarp string, ParserVarp uintptr, DataVarp uintptr) bool {
+			return cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), gobject.ObjectNewFromInternalPtr(ChildVarp), TagnameVarp, (*BuildableParser)(unsafe.Pointer(ParserVarp)), (*uintptr)(unsafe.Pointer(DataVarp)))
 		})
 	}
 }
@@ -247,14 +247,14 @@ func (x *BuildableIface) OverrideCustomTagStart(cb func(Buildable, *Builder, *go
 //	`GtkWidget` implements this to parse accessible attributes specified
 //	in `&lt;accessibility&gt;` elements.
 //	Note that @user_data must be freed in @custom_tag_end or @custom_finished.
-func (x *BuildableIface) GetCustomTagStart() func(Buildable, *Builder, *gobject.Object, string, *BuildableParser, uintptr) bool {
+func (x *BuildableIface) GetCustomTagStart() func(Buildable, *Builder, *gobject.Object, string, *BuildableParser, *uintptr) bool {
 	if x.xCustomTagStart == 0 {
 		return nil
 	}
-	var rawCallback func(BuildableVarp uintptr, BuilderVarp uintptr, ChildVarp uintptr, TagnameVarp string, ParserVarp *BuildableParser, DataVarp uintptr) bool
+	var rawCallback func(BuildableVarp uintptr, BuilderVarp uintptr, ChildVarp uintptr, TagnameVarp string, ParserVarp uintptr, DataVarp uintptr) bool
 	purego.RegisterFunc(&rawCallback, x.xCustomTagStart)
-	return func(BuildableVar Buildable, BuilderVar *Builder, ChildVar *gobject.Object, TagnameVar string, ParserVar *BuildableParser, DataVar uintptr) bool {
-		return rawCallback(BuildableVar.GoPointer(), BuilderVar.GoPointer(), ChildVar.GoPointer(), TagnameVar, ParserVar, DataVar)
+	return func(BuildableVar Buildable, BuilderVar *Builder, ChildVar *gobject.Object, TagnameVar string, ParserVar *BuildableParser, DataVar *uintptr) bool {
+		return rawCallback(BuildableVar.GoPointer(), BuilderVar.GoPointer(), ChildVar.GoPointer(), TagnameVar, uintptr(unsafe.Pointer(ParserVar)), uintptr(unsafe.Pointer(DataVar)))
 	}
 }
 
@@ -437,15 +437,15 @@ func (x *BuildableParseContext) GetElementStack() []string {
 	return cret
 }
 
-var xBuildableParseContextGetPosition func(uintptr, int, int)
+var xBuildableParseContextGetPosition func(uintptr, uintptr, uintptr)
 
 // Retrieves the current line number and the number of the character on
 // that line. Intended for use in error messages; there are no strict
 // semantics for what constitutes the "current" line number other than
 // "the best number we could come up with for error messages."
-func (x *BuildableParseContext) GetPosition(LineNumberVar int, CharNumberVar int) {
+func (x *BuildableParseContext) GetPosition(LineNumberVar *int, CharNumberVar *int) {
 
-	xBuildableParseContextGetPosition(x.GoPointer(), LineNumberVar, CharNumberVar)
+	xBuildableParseContextGetPosition(x.GoPointer(), uintptr(unsafe.Pointer(LineNumberVar)), uintptr(unsafe.Pointer(CharNumberVar)))
 
 }
 

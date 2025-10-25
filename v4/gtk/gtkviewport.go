@@ -2,6 +2,8 @@
 package gtk
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/gobject"
@@ -188,9 +190,9 @@ func (x *Viewport) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *Viewport) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *Viewport) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -417,7 +419,7 @@ func (x *Viewport) GetBuildableId() string {
 // overshoot indication, at the right position.
 func (x *Viewport) GetBorder(BorderVar *Border) bool {
 
-	cret := XGtkScrollableGetBorder(x.GoPointer(), BorderVar)
+	cret := XGtkScrollableGetBorder(x.GoPointer(), uintptr(unsafe.Pointer(BorderVar)))
 	return cret
 }
 

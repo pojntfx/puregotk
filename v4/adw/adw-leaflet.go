@@ -599,9 +599,9 @@ func (x *Leaflet) GetProgress() float64 {
 //
 // Each snap point represents a progress value that is considered acceptable to
 // end the swipe on.
-func (x *Leaflet) GetSnapPoints(NSnapPointsVar int) uintptr {
+func (x *Leaflet) GetSnapPoints(NSnapPointsVar *int) uintptr {
 
-	cret := XAdwSwipeableGetSnapPoints(x.GoPointer(), NSnapPointsVar)
+	cret := XAdwSwipeableGetSnapPoints(x.GoPointer(), uintptr(unsafe.Pointer(NSnapPointsVar)))
 	return cret
 }
 
@@ -616,7 +616,7 @@ func (x *Leaflet) GetSnapPoints(NSnapPointsVar int) uintptr {
 // @self, allowing swipes from anywhere.
 func (x *Leaflet) GetSwipeArea(NavigationDirectionVar NavigationDirection, IsDragVar bool, RectVar *gdk.Rectangle) {
 
-	XAdwSwipeableGetSwipeArea(x.GoPointer(), NavigationDirectionVar, IsDragVar, RectVar)
+	XAdwSwipeableGetSwipeArea(x.GoPointer(), NavigationDirectionVar, IsDragVar, uintptr(unsafe.Pointer(RectVar)))
 
 }
 
@@ -677,9 +677,9 @@ func (x *Leaflet) GetAtContext() *gtk.ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *Leaflet) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *Leaflet) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := gtk.XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := gtk.XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 

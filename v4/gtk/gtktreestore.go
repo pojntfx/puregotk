@@ -131,7 +131,7 @@ func NewTreeStorev(NColumnsVar int, TypesVar []types.GType) *TreeStore {
 	return cls
 }
 
-var xTreeStoreAppend func(uintptr, *TreeIter, *TreeIter)
+var xTreeStoreAppend func(uintptr, uintptr, *TreeIter)
 
 // Appends a new row to @tree_store.
 //
@@ -143,7 +143,7 @@ var xTreeStoreAppend func(uintptr, *TreeIter, *TreeIter)
 // gtk_tree_store_set() or gtk_tree_store_set_value().
 func (x *TreeStore) Append(IterVar *TreeIter, ParentVar *TreeIter) {
 
-	xTreeStoreAppend(x.GoPointer(), IterVar, ParentVar)
+	xTreeStoreAppend(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ParentVar)
 
 }
 
@@ -156,7 +156,7 @@ func (x *TreeStore) Clear() {
 
 }
 
-var xTreeStoreInsert func(uintptr, *TreeIter, *TreeIter, int)
+var xTreeStoreInsert func(uintptr, uintptr, *TreeIter, int)
 
 // Creates a new row at @position.
 //
@@ -171,11 +171,11 @@ var xTreeStoreInsert func(uintptr, *TreeIter, *TreeIter, int)
 // need to call gtk_tree_store_set() or gtk_tree_store_set_value().
 func (x *TreeStore) Insert(IterVar *TreeIter, ParentVar *TreeIter, PositionVar int) {
 
-	xTreeStoreInsert(x.GoPointer(), IterVar, ParentVar, PositionVar)
+	xTreeStoreInsert(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ParentVar, PositionVar)
 
 }
 
-var xTreeStoreInsertAfter func(uintptr, *TreeIter, *TreeIter, *TreeIter)
+var xTreeStoreInsertAfter func(uintptr, uintptr, *TreeIter, *TreeIter)
 
 // Inserts a new row after @sibling.
 //
@@ -192,11 +192,11 @@ var xTreeStoreInsertAfter func(uintptr, *TreeIter, *TreeIter, *TreeIter)
 // gtk_tree_store_set() or gtk_tree_store_set_value().
 func (x *TreeStore) InsertAfter(IterVar *TreeIter, ParentVar *TreeIter, SiblingVar *TreeIter) {
 
-	xTreeStoreInsertAfter(x.GoPointer(), IterVar, ParentVar, SiblingVar)
+	xTreeStoreInsertAfter(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ParentVar, SiblingVar)
 
 }
 
-var xTreeStoreInsertBefore func(uintptr, *TreeIter, *TreeIter, *TreeIter)
+var xTreeStoreInsertBefore func(uintptr, uintptr, *TreeIter, *TreeIter)
 
 // Inserts a new row before @sibling.
 //
@@ -213,11 +213,11 @@ var xTreeStoreInsertBefore func(uintptr, *TreeIter, *TreeIter, *TreeIter)
 // gtk_tree_store_set() or gtk_tree_store_set_value().
 func (x *TreeStore) InsertBefore(IterVar *TreeIter, ParentVar *TreeIter, SiblingVar *TreeIter) {
 
-	xTreeStoreInsertBefore(x.GoPointer(), IterVar, ParentVar, SiblingVar)
+	xTreeStoreInsertBefore(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ParentVar, SiblingVar)
 
 }
 
-var xTreeStoreInsertWithValues func(uintptr, *TreeIter, *TreeIter, int, ...interface{})
+var xTreeStoreInsertWithValues func(uintptr, uintptr, *TreeIter, int, ...interface{})
 
 // Creates a new row at the given @position.
 //
@@ -247,11 +247,11 @@ var xTreeStoreInsertWithValues func(uintptr, *TreeIter, *TreeIter, int, ...inter
 // generally be preferred when inserting rows in a sorted tree store.
 func (x *TreeStore) InsertWithValues(IterVar *TreeIter, ParentVar *TreeIter, PositionVar int, varArgs ...interface{}) {
 
-	xTreeStoreInsertWithValues(x.GoPointer(), IterVar, ParentVar, PositionVar, varArgs...)
+	xTreeStoreInsertWithValues(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ParentVar, PositionVar, varArgs...)
 
 }
 
-var xTreeStoreInsertWithValuesv func(uintptr, *TreeIter, *TreeIter, int, []int, []gobject.Value, int)
+var xTreeStoreInsertWithValuesv func(uintptr, uintptr, *TreeIter, int, []int, []gobject.Value, int)
 
 // A variant of gtk_tree_store_insert_with_values() which takes
 // the columns and values as two arrays, instead of varargs.
@@ -259,7 +259,7 @@ var xTreeStoreInsertWithValuesv func(uintptr, *TreeIter, *TreeIter, int, []int, 
 // This function is mainly intended for language bindings.
 func (x *TreeStore) InsertWithValuesv(IterVar *TreeIter, ParentVar *TreeIter, PositionVar int, ColumnsVar []int, ValuesVar []gobject.Value, NValuesVar int) {
 
-	xTreeStoreInsertWithValuesv(x.GoPointer(), IterVar, ParentVar, PositionVar, ColumnsVar, ValuesVar, NValuesVar)
+	xTreeStoreInsertWithValuesv(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ParentVar, PositionVar, ColumnsVar, ValuesVar, NValuesVar)
 
 }
 
@@ -326,7 +326,7 @@ func (x *TreeStore) MoveBefore(IterVar *TreeIter, PositionVar *TreeIter) {
 
 }
 
-var xTreeStorePrepend func(uintptr, *TreeIter, *TreeIter)
+var xTreeStorePrepend func(uintptr, uintptr, *TreeIter)
 
 // Prepends a new row to @tree_store.
 //
@@ -337,7 +337,7 @@ var xTreeStorePrepend func(uintptr, *TreeIter, *TreeIter)
 // call gtk_tree_store_set() or gtk_tree_store_set_value().
 func (x *TreeStore) Prepend(IterVar *TreeIter, ParentVar *TreeIter) {
 
-	xTreeStorePrepend(x.GoPointer(), IterVar, ParentVar)
+	xTreeStorePrepend(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ParentVar)
 
 }
 
@@ -600,7 +600,7 @@ func (x *TreeStore) GetFlags() TreeModelFlags {
 // iterator and %FALSE is returned.
 func (x *TreeStore) GetIter(IterVar *TreeIter, PathVar *TreePath) bool {
 
-	cret := XGtkTreeModelGetIter(x.GoPointer(), IterVar, PathVar)
+	cret := XGtkTreeModelGetIter(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), PathVar)
 	return cret
 }
 
@@ -610,7 +610,7 @@ func (x *TreeStore) GetIter(IterVar *TreeIter, PathVar *TreePath) bool {
 // Returns %FALSE if the tree is empty, %TRUE otherwise.
 func (x *TreeStore) GetIterFirst(IterVar *TreeIter) bool {
 
-	cret := XGtkTreeModelGetIterFirst(x.GoPointer(), IterVar)
+	cret := XGtkTreeModelGetIterFirst(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)))
 	return cret
 }
 
@@ -620,7 +620,7 @@ func (x *TreeStore) GetIterFirst(IterVar *TreeIter) bool {
 // Otherwise, @iter is left invalid and %FALSE is returned.
 func (x *TreeStore) GetIterFromString(IterVar *TreeIter, PathStringVar string) bool {
 
-	cret := XGtkTreeModelGetIterFromString(x.GoPointer(), IterVar, PathStringVar)
+	cret := XGtkTreeModelGetIterFromString(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), PathStringVar)
 	return cret
 }
 
@@ -667,7 +667,7 @@ func (x *TreeStore) GetValist(IterVar *TreeIter, VarArgsVar []interface{}) {
 // to free any allocated memory.
 func (x *TreeStore) GetValue(IterVar *TreeIter, ColumnVar int, ValueVar *gobject.Value) {
 
-	XGtkTreeModelGetValue(x.GoPointer(), IterVar, ColumnVar, ValueVar)
+	XGtkTreeModelGetValue(x.GoPointer(), IterVar, ColumnVar, uintptr(unsafe.Pointer(ValueVar)))
 
 }
 
@@ -681,7 +681,7 @@ func (x *TreeStore) GetValue(IterVar *TreeIter, ColumnVar int, ValueVar *gobject
 // `gtk_tree_model_get_iter_first (tree_model, iter);`
 func (x *TreeStore) IterChildren(IterVar *TreeIter, ParentVar *TreeIter) bool {
 
-	cret := XGtkTreeModelIterChildren(x.GoPointer(), IterVar, ParentVar)
+	cret := XGtkTreeModelIterChildren(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ParentVar)
 	return cret
 }
 
@@ -721,7 +721,7 @@ func (x *TreeStore) IterNext(IterVar *TreeIter) bool {
 // is set.
 func (x *TreeStore) IterNthChild(IterVar *TreeIter, ParentVar *TreeIter, NVar int) bool {
 
-	cret := XGtkTreeModelIterNthChild(x.GoPointer(), IterVar, ParentVar, NVar)
+	cret := XGtkTreeModelIterNthChild(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ParentVar, NVar)
 	return cret
 }
 
@@ -736,7 +736,7 @@ func (x *TreeStore) IterNthChild(IterVar *TreeIter, ParentVar *TreeIter, NVar in
 // and @iter cannot point to the same memory location.
 func (x *TreeStore) IterParent(IterVar *TreeIter, ChildVar *TreeIter) bool {
 
-	cret := XGtkTreeModelIterParent(x.GoPointer(), IterVar, ChildVar)
+	cret := XGtkTreeModelIterParent(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), ChildVar)
 	return cret
 }
 
@@ -861,9 +861,9 @@ func (x *TreeStore) UnrefNode(IterVar *TreeIter) {
 // order. It returns %TRUE unless the @sort_column_id is
 // %GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID or
 // %GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID.
-func (x *TreeStore) GetSortColumnId(SortColumnIdVar int, OrderVar *SortType) bool {
+func (x *TreeStore) GetSortColumnId(SortColumnIdVar *int, OrderVar *SortType) bool {
 
-	cret := XGtkTreeSortableGetSortColumnId(x.GoPointer(), SortColumnIdVar, OrderVar)
+	cret := XGtkTreeSortableGetSortColumnId(x.GoPointer(), uintptr(unsafe.Pointer(SortColumnIdVar)), uintptr(unsafe.Pointer(OrderVar)))
 	return cret
 }
 

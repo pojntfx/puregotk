@@ -298,14 +298,14 @@ func (x *ComboBox) GetActiveId() string {
 	return cret
 }
 
-var xComboBoxGetActiveIter func(uintptr, *TreeIter) bool
+var xComboBoxGetActiveIter func(uintptr, uintptr) bool
 
 // Sets @iter to point to the currently active item.
 //
 // If no item is active, @iter is left unchanged.
 func (x *ComboBox) GetActiveIter(IterVar *TreeIter) bool {
 
-	cret := xComboBoxGetActiveIter(x.GoPointer(), IterVar)
+	cret := xComboBoxGetActiveIter(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)))
 	return cret
 }
 
@@ -807,9 +807,9 @@ func (x *ComboBox) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *ComboBox) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *ComboBox) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 

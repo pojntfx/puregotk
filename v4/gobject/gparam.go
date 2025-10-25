@@ -220,13 +220,13 @@ func (x *ParamSpecPool) Insert(PspecVar *ParamSpec, OwnerTypeVar types.GType) {
 
 }
 
-var xParamSpecPoolList func(uintptr, types.GType, uint) uintptr
+var xParamSpecPoolList func(uintptr, types.GType, uintptr) uintptr
 
 // Gets an array of all #GParamSpecs owned by @owner_type in
 // the pool.
-func (x *ParamSpecPool) List(OwnerTypeVar types.GType, NPspecsPVar uint) uintptr {
+func (x *ParamSpecPool) List(OwnerTypeVar types.GType, NPspecsPVar *uint) uintptr {
 
-	cret := xParamSpecPoolList(x.GoPointer(), OwnerTypeVar, NPspecsPVar)
+	cret := xParamSpecPoolList(x.GoPointer(), OwnerTypeVar, uintptr(unsafe.Pointer(NPspecsPVar)))
 	return cret
 }
 

@@ -716,12 +716,12 @@ func (x *TextView) BackwardDisplayLineStart(IterVar *TextIter) bool {
 	return cret
 }
 
-var xTextViewBufferToWindowCoords func(uintptr, TextWindowType, int, int, int, int)
+var xTextViewBufferToWindowCoords func(uintptr, TextWindowType, int, int, uintptr, uintptr)
 
 // Converts buffer coordinates to window coordinates.
-func (x *TextView) BufferToWindowCoords(WinVar TextWindowType, BufferXVar int, BufferYVar int, WindowXVar int, WindowYVar int) {
+func (x *TextView) BufferToWindowCoords(WinVar TextWindowType, BufferXVar int, BufferYVar int, WindowXVar *int, WindowYVar *int) {
 
-	xTextViewBufferToWindowCoords(x.GoPointer(), WinVar, BufferXVar, BufferYVar, WindowXVar, WindowYVar)
+	xTextViewBufferToWindowCoords(x.GoPointer(), WinVar, BufferXVar, BufferYVar, uintptr(unsafe.Pointer(WindowXVar)), uintptr(unsafe.Pointer(WindowYVar)))
 
 }
 
@@ -799,7 +799,7 @@ func (x *TextView) GetBuffer() *TextBuffer {
 	return cls
 }
 
-var xTextViewGetCursorLocations func(uintptr, *TextIter, *gdk.Rectangle, *gdk.Rectangle)
+var xTextViewGetCursorLocations func(uintptr, *TextIter, uintptr, uintptr)
 
 // Determine the positions of the strong and weak cursors if the
 // insertion point is at @iter.
@@ -823,7 +823,7 @@ var xTextViewGetCursorLocations func(uintptr, *TextIter, *gdk.Rectangle, *gdk.Re
 // coordinates to coordinates for one of the windows in the text view.
 func (x *TextView) GetCursorLocations(IterVar *TextIter, StrongVar *gdk.Rectangle, WeakVar *gdk.Rectangle) {
 
-	xTextViewGetCursorLocations(x.GoPointer(), IterVar, StrongVar, WeakVar)
+	xTextViewGetCursorLocations(x.GoPointer(), IterVar, uintptr(unsafe.Pointer(StrongVar)), uintptr(unsafe.Pointer(WeakVar)))
 
 }
 
@@ -917,7 +917,7 @@ func (x *TextView) GetInputPurpose() InputPurpose {
 	return cret
 }
 
-var xTextViewGetIterAtLocation func(uintptr, *TextIter, int, int) bool
+var xTextViewGetIterAtLocation func(uintptr, uintptr, int, int) bool
 
 // Retrieves the iterator at buffer coordinates @x and @y.
 //
@@ -927,11 +927,11 @@ var xTextViewGetIterAtLocation func(uintptr, *TextIter, int, int) bool
 // [method@Gtk.TextView.window_to_buffer_coords].
 func (x *TextView) GetIterAtLocation(IterVar *TextIter, XVar int, YVar int) bool {
 
-	cret := xTextViewGetIterAtLocation(x.GoPointer(), IterVar, XVar, YVar)
+	cret := xTextViewGetIterAtLocation(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), XVar, YVar)
 	return cret
 }
 
-var xTextViewGetIterAtPosition func(uintptr, *TextIter, int, int, int) bool
+var xTextViewGetIterAtPosition func(uintptr, uintptr, uintptr, int, int) bool
 
 // Retrieves the iterator pointing to the character at buffer
 // coordinates @x and @y.
@@ -943,13 +943,13 @@ var xTextViewGetIterAtPosition func(uintptr, *TextIter, int, int, int) bool
 //
 // Note that this is different from [method@Gtk.TextView.get_iter_at_location],
 // which returns cursor locations, i.e. positions between characters.
-func (x *TextView) GetIterAtPosition(IterVar *TextIter, TrailingVar int, XVar int, YVar int) bool {
+func (x *TextView) GetIterAtPosition(IterVar *TextIter, TrailingVar *int, XVar int, YVar int) bool {
 
-	cret := xTextViewGetIterAtPosition(x.GoPointer(), IterVar, TrailingVar, XVar, YVar)
+	cret := xTextViewGetIterAtPosition(x.GoPointer(), uintptr(unsafe.Pointer(IterVar)), uintptr(unsafe.Pointer(TrailingVar)), XVar, YVar)
 	return cret
 }
 
-var xTextViewGetIterLocation func(uintptr, *TextIter, *gdk.Rectangle)
+var xTextViewGetIterLocation func(uintptr, *TextIter, uintptr)
 
 // Gets a rectangle which roughly contains the character at @iter.
 //
@@ -958,7 +958,7 @@ var xTextViewGetIterLocation func(uintptr, *TextIter, *gdk.Rectangle)
 // coordinates to coordinates for one of the windows in the text view.
 func (x *TextView) GetIterLocation(IterVar *TextIter, LocationVar *gdk.Rectangle) {
 
-	xTextViewGetIterLocation(x.GoPointer(), IterVar, LocationVar)
+	xTextViewGetIterLocation(x.GoPointer(), IterVar, uintptr(unsafe.Pointer(LocationVar)))
 
 }
 
@@ -984,7 +984,7 @@ func (x *TextView) GetLeftMargin() int {
 	return cret
 }
 
-var xTextViewGetLineAtY func(uintptr, *TextIter, int, int)
+var xTextViewGetLineAtY func(uintptr, uintptr, int, uintptr)
 
 // Gets the `GtkTextIter` at the start of the line containing
 // the coordinate @y.
@@ -993,22 +993,22 @@ var xTextViewGetLineAtY func(uintptr, *TextIter, int, int)
 // [method@Gtk.TextView.window_to_buffer_coords]. If non-%NULL,
 // @line_top will be filled with the coordinate of the top edge
 // of the line.
-func (x *TextView) GetLineAtY(TargetIterVar *TextIter, YVar int, LineTopVar int) {
+func (x *TextView) GetLineAtY(TargetIterVar *TextIter, YVar int, LineTopVar *int) {
 
-	xTextViewGetLineAtY(x.GoPointer(), TargetIterVar, YVar, LineTopVar)
+	xTextViewGetLineAtY(x.GoPointer(), uintptr(unsafe.Pointer(TargetIterVar)), YVar, uintptr(unsafe.Pointer(LineTopVar)))
 
 }
 
-var xTextViewGetLineYrange func(uintptr, *TextIter, int, int)
+var xTextViewGetLineYrange func(uintptr, *TextIter, uintptr, uintptr)
 
 // Gets the y coordinate of the top of the line containing @iter,
 // and the height of the line.
 //
 // The coordinate is a buffer coordinate; convert to window
 // coordinates with [method@Gtk.TextView.buffer_to_window_coords].
-func (x *TextView) GetLineYrange(IterVar *TextIter, YVar int, HeightVar int) {
+func (x *TextView) GetLineYrange(IterVar *TextIter, YVar *int, HeightVar *int) {
 
-	xTextViewGetLineYrange(x.GoPointer(), IterVar, YVar, HeightVar)
+	xTextViewGetLineYrange(x.GoPointer(), IterVar, uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(HeightVar)))
 
 }
 
@@ -1137,7 +1137,7 @@ func (x *TextView) GetTopMargin() int {
 	return cret
 }
 
-var xTextViewGetVisibleOffset func(uintptr, float64, float64)
+var xTextViewGetVisibleOffset func(uintptr, uintptr, uintptr)
 
 // Gets the X,Y offset in buffer coordinates of the top-left corner of
 // the textview's text contents.
@@ -1148,13 +1148,13 @@ var xTextViewGetVisibleOffset func(uintptr, float64, float64)
 //
 // You might want this when making ulterior widgets align with quantized
 // device pixels of the textview contents such as line numbers.
-func (x *TextView) GetVisibleOffset(XOffsetVar float64, YOffsetVar float64) {
+func (x *TextView) GetVisibleOffset(XOffsetVar *float64, YOffsetVar *float64) {
 
-	xTextViewGetVisibleOffset(x.GoPointer(), XOffsetVar, YOffsetVar)
+	xTextViewGetVisibleOffset(x.GoPointer(), uintptr(unsafe.Pointer(XOffsetVar)), uintptr(unsafe.Pointer(YOffsetVar)))
 
 }
 
-var xTextViewGetVisibleRect func(uintptr, *gdk.Rectangle)
+var xTextViewGetVisibleRect func(uintptr, uintptr)
 
 // Fills @visible_rect with the currently-visible
 // region of the buffer, in buffer coordinates.
@@ -1163,7 +1163,7 @@ var xTextViewGetVisibleRect func(uintptr, *gdk.Rectangle)
 // [method@Gtk.TextView.buffer_to_window_coords].
 func (x *TextView) GetVisibleRect(VisibleRectVar *gdk.Rectangle) {
 
-	xTextViewGetVisibleRect(x.GoPointer(), VisibleRectVar)
+	xTextViewGetVisibleRect(x.GoPointer(), uintptr(unsafe.Pointer(VisibleRectVar)))
 
 }
 
@@ -1619,13 +1619,13 @@ func (x *TextView) StartsDisplayLine(IterVar *TextIter) bool {
 	return cret
 }
 
-var xTextViewWindowToBufferCoords func(uintptr, TextWindowType, int, int, int, int)
+var xTextViewWindowToBufferCoords func(uintptr, TextWindowType, int, int, uintptr, uintptr)
 
 // Converts coordinates on the window identified by @win to buffer
 // coordinates.
-func (x *TextView) WindowToBufferCoords(WinVar TextWindowType, WindowXVar int, WindowYVar int, BufferXVar int, BufferYVar int) {
+func (x *TextView) WindowToBufferCoords(WinVar TextWindowType, WindowXVar int, WindowYVar int, BufferXVar *int, BufferYVar *int) {
 
-	xTextViewWindowToBufferCoords(x.GoPointer(), WinVar, WindowXVar, WindowYVar, BufferXVar, BufferYVar)
+	xTextViewWindowToBufferCoords(x.GoPointer(), WinVar, WindowXVar, WindowYVar, uintptr(unsafe.Pointer(BufferXVar)), uintptr(unsafe.Pointer(BufferYVar)))
 
 }
 
@@ -2102,9 +2102,9 @@ func (x *TextView) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *TextView) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *TextView) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -2368,7 +2368,7 @@ func (x *TextView) GetBuildableId() string {
 // overshoot indication, at the right position.
 func (x *TextView) GetBorder(BorderVar *Border) bool {
 
-	cret := XGtkScrollableGetBorder(x.GoPointer(), BorderVar)
+	cret := XGtkScrollableGetBorder(x.GoPointer(), uintptr(unsafe.Pointer(BorderVar)))
 	return cret
 }
 

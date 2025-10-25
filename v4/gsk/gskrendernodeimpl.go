@@ -2,6 +2,8 @@
 package gsk
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/cairo"
@@ -589,12 +591,12 @@ func (x *ConicGradientNode) GetCenter() *graphene.Point {
 	return cret
 }
 
-var xConicGradientNodeGetColorStops func(uintptr, uint) uintptr
+var xConicGradientNodeGetColorStops func(uintptr, uintptr) uintptr
 
 // Retrieves the color stops in the gradient.
-func (x *ConicGradientNode) GetColorStops(NStopsVar uint) uintptr {
+func (x *ConicGradientNode) GetColorStops(NStopsVar *uint) uintptr {
 
-	cret := xConicGradientNodeGetColorStops(x.GoPointer(), NStopsVar)
+	cret := xConicGradientNodeGetColorStops(x.GoPointer(), uintptr(unsafe.Pointer(NStopsVar)))
 	return cret
 }
 
@@ -1191,12 +1193,12 @@ func NewLinearGradientNode(BoundsVar *graphene.Rect, StartVar *graphene.Point, E
 	return cls
 }
 
-var xLinearGradientNodeGetColorStops func(uintptr, uint) uintptr
+var xLinearGradientNodeGetColorStops func(uintptr, uintptr) uintptr
 
 // Retrieves the color stops in the gradient.
-func (x *LinearGradientNode) GetColorStops(NStopsVar uint) uintptr {
+func (x *LinearGradientNode) GetColorStops(NStopsVar *uint) uintptr {
 
-	cret := xLinearGradientNodeGetColorStops(x.GoPointer(), NStopsVar)
+	cret := xLinearGradientNodeGetColorStops(x.GoPointer(), uintptr(unsafe.Pointer(NStopsVar)))
 	return cret
 }
 
@@ -1548,12 +1550,12 @@ func (x *RadialGradientNode) GetCenter() *graphene.Point {
 	return cret
 }
 
-var xRadialGradientNodeGetColorStops func(uintptr, uint) uintptr
+var xRadialGradientNodeGetColorStops func(uintptr, uintptr) uintptr
 
 // Retrieves the color stops in the gradient.
-func (x *RadialGradientNode) GetColorStops(NStopsVar uint) uintptr {
+func (x *RadialGradientNode) GetColorStops(NStopsVar *uint) uintptr {
 
-	cret := xRadialGradientNodeGetColorStops(x.GoPointer(), NStopsVar)
+	cret := xRadialGradientNodeGetColorStops(x.GoPointer(), uintptr(unsafe.Pointer(NStopsVar)))
 	return cret
 }
 
@@ -2154,12 +2156,12 @@ func (x *TextNode) GetFont() *pango.Font {
 	return cls
 }
 
-var xTextNodeGetGlyphs func(uintptr, uint) uintptr
+var xTextNodeGetGlyphs func(uintptr, uintptr) uintptr
 
 // Retrieves the glyph information in the @node.
-func (x *TextNode) GetGlyphs(NGlyphsVar uint) uintptr {
+func (x *TextNode) GetGlyphs(NGlyphsVar *uint) uintptr {
 
-	cret := xTextNodeGetGlyphs(x.GoPointer(), NGlyphsVar)
+	cret := xTextNodeGetGlyphs(x.GoPointer(), uintptr(unsafe.Pointer(NGlyphsVar)))
 	return cret
 }
 

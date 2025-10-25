@@ -2,6 +2,8 @@
 package gio
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
@@ -115,11 +117,11 @@ func (x *BytesIcon) ToString() string {
 
 // Loads a loadable icon. For the asynchronous version of this function,
 // see g_loadable_icon_load_async().
-func (x *BytesIcon) Load(SizeVar int, TypeVar string, CancellableVar *Cancellable) (*InputStream, error) {
+func (x *BytesIcon) Load(SizeVar int, TypeVar *string, CancellableVar *Cancellable) (*InputStream, error) {
 	var cls *InputStream
 	var cerr *glib.Error
 
-	cret := XGLoadableIconLoad(x.GoPointer(), SizeVar, TypeVar, CancellableVar.GoPointer(), &cerr)
+	cret := XGLoadableIconLoad(x.GoPointer(), SizeVar, uintptr(unsafe.Pointer(TypeVar)), CancellableVar.GoPointer(), &cerr)
 
 	if cret == 0 {
 		return nil, cerr
@@ -143,11 +145,11 @@ func (x *BytesIcon) LoadAsync(SizeVar int, CancellableVar *Cancellable, Callback
 }
 
 // Finishes an asynchronous icon load started in g_loadable_icon_load_async().
-func (x *BytesIcon) LoadFinish(ResVar AsyncResult, TypeVar string) (*InputStream, error) {
+func (x *BytesIcon) LoadFinish(ResVar AsyncResult, TypeVar *string) (*InputStream, error) {
 	var cls *InputStream
 	var cerr *glib.Error
 
-	cret := XGLoadableIconLoadFinish(x.GoPointer(), ResVar.GoPointer(), TypeVar, &cerr)
+	cret := XGLoadableIconLoadFinish(x.GoPointer(), ResVar.GoPointer(), uintptr(unsafe.Pointer(TypeVar)), &cerr)
 
 	if cret == 0 {
 		return nil, cerr

@@ -322,7 +322,7 @@ type DtlsConnection interface {
 	CloseFinish(ResultVar AsyncResult) (bool, error)
 	EmitAcceptCertificate(PeerCertVar *TlsCertificate, ErrorsVar TlsCertificateFlags) bool
 	GetCertificate() *TlsCertificate
-	GetChannelBindingData(TypeVar TlsChannelBindingType, DataVar []byte) (bool, error)
+	GetChannelBindingData(TypeVar TlsChannelBindingType, DataVar *[]byte) (bool, error)
 	GetCiphersuiteName() string
 	GetDatabase() *TlsDatabase
 	GetInteraction() *TlsInteraction
@@ -455,10 +455,10 @@ func (x *DtlsConnectionBase) GetCertificate() *TlsCertificate {
 // will be available though.  That could happen if TLS connection does not
 // support @type or the binding data is not available yet due to additional
 // negotiation or input required.
-func (x *DtlsConnectionBase) GetChannelBindingData(TypeVar TlsChannelBindingType, DataVar []byte) (bool, error) {
+func (x *DtlsConnectionBase) GetChannelBindingData(TypeVar TlsChannelBindingType, DataVar *[]byte) (bool, error) {
 	var cerr *glib.Error
 
-	cret := XGDtlsConnectionGetChannelBindingData(x.GoPointer(), TypeVar, DataVar, &cerr)
+	cret := XGDtlsConnectionGetChannelBindingData(x.GoPointer(), TypeVar, uintptr(unsafe.Pointer(DataVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}
@@ -800,7 +800,7 @@ var XGDtlsConnectionCloseAsync func(uintptr, int, uintptr, uintptr, uintptr)
 var XGDtlsConnectionCloseFinish func(uintptr, uintptr, **glib.Error) bool
 var XGDtlsConnectionEmitAcceptCertificate func(uintptr, uintptr, TlsCertificateFlags) bool
 var XGDtlsConnectionGetCertificate func(uintptr) uintptr
-var XGDtlsConnectionGetChannelBindingData func(uintptr, TlsChannelBindingType, []byte, **glib.Error) bool
+var XGDtlsConnectionGetChannelBindingData func(uintptr, TlsChannelBindingType, uintptr, **glib.Error) bool
 var XGDtlsConnectionGetCiphersuiteName func(uintptr) string
 var XGDtlsConnectionGetDatabase func(uintptr) uintptr
 var XGDtlsConnectionGetInteraction func(uintptr) uintptr

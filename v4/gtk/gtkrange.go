@@ -228,7 +228,7 @@ func (x *Range) GetInverted() bool {
 	return cret
 }
 
-var xRangeGetRangeRect func(uintptr, *gdk.Rectangle)
+var xRangeGetRangeRect func(uintptr, uintptr)
 
 // This function returns the area that contains the range’s trough,
 // in coordinates relative to @range's origin.
@@ -236,7 +236,7 @@ var xRangeGetRangeRect func(uintptr, *gdk.Rectangle)
 // This function is useful mainly for `GtkRange` subclasses.
 func (x *Range) GetRangeRect(RangeRectVar *gdk.Rectangle) {
 
-	xRangeGetRangeRect(x.GoPointer(), RangeRectVar)
+	xRangeGetRangeRect(x.GoPointer(), uintptr(unsafe.Pointer(RangeRectVar)))
 
 }
 
@@ -270,15 +270,15 @@ func (x *Range) GetShowFillLevel() bool {
 	return cret
 }
 
-var xRangeGetSliderRange func(uintptr, int, int)
+var xRangeGetSliderRange func(uintptr, uintptr, uintptr)
 
 // This function returns sliders range along the long dimension,
 // in widget-&gt;window coordinates.
 //
 // This function is useful mainly for `GtkRange` subclasses.
-func (x *Range) GetSliderRange(SliderStartVar int, SliderEndVar int) {
+func (x *Range) GetSliderRange(SliderStartVar *int, SliderEndVar *int) {
 
-	xRangeGetSliderRange(x.GoPointer(), SliderStartVar, SliderEndVar)
+	xRangeGetSliderRange(x.GoPointer(), uintptr(unsafe.Pointer(SliderStartVar)), uintptr(unsafe.Pointer(SliderEndVar)))
 
 }
 
@@ -621,9 +621,9 @@ func (x *Range) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *Range) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *Range) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 

@@ -268,17 +268,17 @@ func (x *FileDialog) OpenMultipleTextFiles(ParentVar *Window, CancellableVar *gi
 
 }
 
-var xFileDialogOpenMultipleTextFilesFinish func(uintptr, uintptr, string, **glib.Error) uintptr
+var xFileDialogOpenMultipleTextFilesFinish func(uintptr, uintptr, uintptr, **glib.Error) uintptr
 
 // Finishes the [method@Gtk.FileDialog.open] call.
 //
 // Note that this function returns a [error@Gtk.DialogError.DISMISSED]
 // error if the user cancels the dialog.
-func (x *FileDialog) OpenMultipleTextFilesFinish(ResultVar gio.AsyncResult, EncodingVar string) (*gio.ListModelBase, error) {
+func (x *FileDialog) OpenMultipleTextFilesFinish(ResultVar gio.AsyncResult, EncodingVar *string) (*gio.ListModelBase, error) {
 	var cls *gio.ListModelBase
 	var cerr *glib.Error
 
-	cret := xFileDialogOpenMultipleTextFilesFinish(x.GoPointer(), ResultVar.GoPointer(), EncodingVar, &cerr)
+	cret := xFileDialogOpenMultipleTextFilesFinish(x.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(EncodingVar)), &cerr)
 
 	if cret == 0 {
 		return nil, cerr
@@ -307,7 +307,7 @@ func (x *FileDialog) OpenTextFile(ParentVar *Window, CancellableVar *gio.Cancell
 
 }
 
-var xFileDialogOpenTextFileFinish func(uintptr, uintptr, string, **glib.Error) uintptr
+var xFileDialogOpenTextFileFinish func(uintptr, uintptr, uintptr, **glib.Error) uintptr
 
 // Finishes the [method@Gtk.FileDialog.open_text_file] call
 // and returns the resulting file and text encoding.
@@ -319,11 +319,11 @@ var xFileDialogOpenTextFileFinish func(uintptr, uintptr, string, **glib.Error) u
 //
 // Note that this function returns a [error@Gtk.DialogError.DISMISSED]
 // error if the user cancels the dialog.
-func (x *FileDialog) OpenTextFileFinish(ResultVar gio.AsyncResult, EncodingVar string) (*gio.FileBase, error) {
+func (x *FileDialog) OpenTextFileFinish(ResultVar gio.AsyncResult, EncodingVar *string) (*gio.FileBase, error) {
 	var cls *gio.FileBase
 	var cerr *glib.Error
 
-	cret := xFileDialogOpenTextFileFinish(x.GoPointer(), ResultVar.GoPointer(), EncodingVar, &cerr)
+	cret := xFileDialogOpenTextFileFinish(x.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(EncodingVar)), &cerr)
 
 	if cret == 0 {
 		return nil, cerr
@@ -390,7 +390,7 @@ func (x *FileDialog) SaveTextFile(ParentVar *Window, CancellableVar *gio.Cancell
 
 }
 
-var xFileDialogSaveTextFileFinish func(uintptr, uintptr, string, string, **glib.Error) uintptr
+var xFileDialogSaveTextFileFinish func(uintptr, uintptr, uintptr, uintptr, **glib.Error) uintptr
 
 // Finishes the [method@Gtk.FileDialog.save_text_file] call
 // and returns the resulting file, text encoding and line endings.
@@ -405,11 +405,11 @@ var xFileDialogSaveTextFileFinish func(uintptr, uintptr, string, string, **glib.
 //
 // Note that this function returns a [error@Gtk.DialogError.DISMISSED]
 // error if the user cancels the dialog.
-func (x *FileDialog) SaveTextFileFinish(ResultVar gio.AsyncResult, EncodingVar string, LineEndingVar string) (*gio.FileBase, error) {
+func (x *FileDialog) SaveTextFileFinish(ResultVar gio.AsyncResult, EncodingVar *string, LineEndingVar *string) (*gio.FileBase, error) {
 	var cls *gio.FileBase
 	var cerr *glib.Error
 
-	cret := xFileDialogSaveTextFileFinish(x.GoPointer(), ResultVar.GoPointer(), EncodingVar, LineEndingVar, &cerr)
+	cret := xFileDialogSaveTextFileFinish(x.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(EncodingVar)), uintptr(unsafe.Pointer(LineEndingVar)), &cerr)
 
 	if cret == 0 {
 		return nil, cerr

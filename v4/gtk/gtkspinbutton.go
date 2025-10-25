@@ -318,15 +318,15 @@ func (x *SpinButton) GetDigits() uint {
 	return cret
 }
 
-var xSpinButtonGetIncrements func(uintptr, float64, float64)
+var xSpinButtonGetIncrements func(uintptr, uintptr, uintptr)
 
 // Gets the current step and page the increments
 // used by @spin_button.
 //
 // See [method@Gtk.SpinButton.set_increments].
-func (x *SpinButton) GetIncrements(StepVar float64, PageVar float64) {
+func (x *SpinButton) GetIncrements(StepVar *float64, PageVar *float64) {
 
-	xSpinButtonGetIncrements(x.GoPointer(), StepVar, PageVar)
+	xSpinButtonGetIncrements(x.GoPointer(), uintptr(unsafe.Pointer(StepVar)), uintptr(unsafe.Pointer(PageVar)))
 
 }
 
@@ -339,14 +339,14 @@ func (x *SpinButton) GetNumeric() bool {
 	return cret
 }
 
-var xSpinButtonGetRange func(uintptr, float64, float64)
+var xSpinButtonGetRange func(uintptr, uintptr, uintptr)
 
 // Gets the range allowed for @spin_button.
 //
 // See [method@Gtk.SpinButton.set_range].
-func (x *SpinButton) GetRange(MinVar float64, MaxVar float64) {
+func (x *SpinButton) GetRange(MinVar *float64, MaxVar *float64) {
 
-	xSpinButtonGetRange(x.GoPointer(), MinVar, MaxVar)
+	xSpinButtonGetRange(x.GoPointer(), uintptr(unsafe.Pointer(MinVar)), uintptr(unsafe.Pointer(MaxVar)))
 
 }
 
@@ -609,18 +609,18 @@ func (x *SpinButton) ConnectChangeValue(cb *func(SpinButton, ScrollType)) uint32
 // new value.
 //
 // The default conversion uses g_strtod().
-func (x *SpinButton) ConnectInput(cb *func(SpinButton, float64) int) uint32 {
+func (x *SpinButton) ConnectInput(cb *func(SpinButton, *float64) int) uint32 {
 	cbPtr := uintptr(unsafe.Pointer(cb))
 	if cbRefPtr, ok := glib.GetCallback(cbPtr); ok {
 		return gobject.SignalConnect(x.GoPointer(), "input", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, NewValueVarp float64) int {
+	fcb := func(clsPtr uintptr, NewValueVarp uintptr) int {
 		fa := SpinButton{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		return cbFn(fa, NewValueVarp)
+		return cbFn(fa, (*float64)(unsafe.Pointer(NewValueVarp)))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)
@@ -769,9 +769,9 @@ func (x *SpinButton) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *SpinButton) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *SpinButton) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -1172,9 +1172,9 @@ func (x *SpinButton) GetPosition() int {
 // and %FALSE will be returned.
 //
 // Note that positions are specified in characters, not bytes.
-func (x *SpinButton) GetSelectionBounds(StartPosVar int, EndPosVar int) bool {
+func (x *SpinButton) GetSelectionBounds(StartPosVar *int, EndPosVar *int) bool {
 
-	cret := XGtkEditableGetSelectionBounds(x.GoPointer(), StartPosVar, EndPosVar)
+	cret := XGtkEditableGetSelectionBounds(x.GoPointer(), uintptr(unsafe.Pointer(StartPosVar)), uintptr(unsafe.Pointer(EndPosVar)))
 	return cret
 }
 

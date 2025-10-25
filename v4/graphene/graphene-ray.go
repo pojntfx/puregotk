@@ -61,22 +61,22 @@ func (x *Ray) Free() {
 
 }
 
-var xRayGetClosestPointToPoint func(uintptr, *Point3D, *Point3D)
+var xRayGetClosestPointToPoint func(uintptr, *Point3D, uintptr)
 
 // Computes the point on the given #graphene_ray_t that is closest to the
 // given point @p.
 func (x *Ray) GetClosestPointToPoint(PVar *Point3D, ResVar *Point3D) {
 
-	xRayGetClosestPointToPoint(x.GoPointer(), PVar, ResVar)
+	xRayGetClosestPointToPoint(x.GoPointer(), PVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xRayGetDirection func(uintptr, *Vec3)
+var xRayGetDirection func(uintptr, uintptr)
 
 // Retrieves the direction of the given #graphene_ray_t.
 func (x *Ray) GetDirection(DirectionVar *Vec3) {
 
-	xRayGetDirection(x.GoPointer(), DirectionVar)
+	xRayGetDirection(x.GoPointer(), uintptr(unsafe.Pointer(DirectionVar)))
 
 }
 
@@ -106,22 +106,22 @@ func (x *Ray) GetDistanceToPoint(PVar *Point3D) float32 {
 	return cret
 }
 
-var xRayGetOrigin func(uintptr, *Point3D)
+var xRayGetOrigin func(uintptr, uintptr)
 
 // Retrieves the origin of the given #graphene_ray_t.
 func (x *Ray) GetOrigin(OriginVar *Point3D) {
 
-	xRayGetOrigin(x.GoPointer(), OriginVar)
+	xRayGetOrigin(x.GoPointer(), uintptr(unsafe.Pointer(OriginVar)))
 
 }
 
-var xRayGetPositionAt func(uintptr, float32, *Point3D)
+var xRayGetPositionAt func(uintptr, float32, uintptr)
 
 // Retrieves the coordinates of a point at the distance @t along the
 // given #graphene_ray_t.
 func (x *Ray) GetPositionAt(TVar float32, PositionVar *Point3D) {
 
-	xRayGetPositionAt(x.GoPointer(), TVar, PositionVar)
+	xRayGetPositionAt(x.GoPointer(), TVar, uintptr(unsafe.Pointer(PositionVar)))
 
 }
 
@@ -154,33 +154,33 @@ func (x *Ray) InitFromVec3(OriginVar *Vec3, DirectionVar *Vec3) *Ray {
 	return cret
 }
 
-var xRayIntersectBox func(uintptr, *Box, float32) RayIntersectionKind
+var xRayIntersectBox func(uintptr, *Box, uintptr) RayIntersectionKind
 
 // Intersects the given #graphene_ray_t @r with the given
 // #graphene_box_t @b.
-func (x *Ray) IntersectBox(BVar *Box, TOutVar float32) RayIntersectionKind {
+func (x *Ray) IntersectBox(BVar *Box, TOutVar *float32) RayIntersectionKind {
 
-	cret := xRayIntersectBox(x.GoPointer(), BVar, TOutVar)
+	cret := xRayIntersectBox(x.GoPointer(), BVar, uintptr(unsafe.Pointer(TOutVar)))
 	return cret
 }
 
-var xRayIntersectSphere func(uintptr, *Sphere, float32) RayIntersectionKind
+var xRayIntersectSphere func(uintptr, *Sphere, uintptr) RayIntersectionKind
 
 // Intersects the given #graphene_ray_t @r with the given
 // #graphene_sphere_t @s.
-func (x *Ray) IntersectSphere(SVar *Sphere, TOutVar float32) RayIntersectionKind {
+func (x *Ray) IntersectSphere(SVar *Sphere, TOutVar *float32) RayIntersectionKind {
 
-	cret := xRayIntersectSphere(x.GoPointer(), SVar, TOutVar)
+	cret := xRayIntersectSphere(x.GoPointer(), SVar, uintptr(unsafe.Pointer(TOutVar)))
 	return cret
 }
 
-var xRayIntersectTriangle func(uintptr, *Triangle, float32) RayIntersectionKind
+var xRayIntersectTriangle func(uintptr, *Triangle, uintptr) RayIntersectionKind
 
 // Intersects the given #graphene_ray_t @r with the given
 // #graphene_triangle_t @t.
-func (x *Ray) IntersectTriangle(TVar *Triangle, TOutVar float32) RayIntersectionKind {
+func (x *Ray) IntersectTriangle(TVar *Triangle, TOutVar *float32) RayIntersectionKind {
 
-	cret := xRayIntersectTriangle(x.GoPointer(), TVar, TOutVar)
+	cret := xRayIntersectTriangle(x.GoPointer(), TVar, uintptr(unsafe.Pointer(TOutVar)))
 	return cret
 }
 

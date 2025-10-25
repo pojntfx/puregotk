@@ -78,101 +78,101 @@ func (x *CellRendererClass) GetGetRequestMode() func(*CellRenderer) SizeRequestM
 
 // OverrideGetPreferredWidth sets the callback function.
 // Called to get a renderer’s natural width.
-func (x *CellRendererClass) OverrideGetPreferredWidth(cb func(*CellRenderer, *Widget, int, int)) {
+func (x *CellRendererClass) OverrideGetPreferredWidth(cb func(*CellRenderer, *Widget, *int, *int)) {
 	if cb == nil {
 		x.xGetPreferredWidth = 0
 	} else {
-		x.xGetPreferredWidth = purego.NewCallback(func(CellVarp uintptr, WidgetVarp uintptr, MinimumSizeVarp int, NaturalSizeVarp int) {
-			cb(CellRendererNewFromInternalPtr(CellVarp), WidgetNewFromInternalPtr(WidgetVarp), MinimumSizeVarp, NaturalSizeVarp)
+		x.xGetPreferredWidth = purego.NewCallback(func(CellVarp uintptr, WidgetVarp uintptr, MinimumSizeVarp uintptr, NaturalSizeVarp uintptr) {
+			cb(CellRendererNewFromInternalPtr(CellVarp), WidgetNewFromInternalPtr(WidgetVarp), (*int)(unsafe.Pointer(MinimumSizeVarp)), (*int)(unsafe.Pointer(NaturalSizeVarp)))
 		})
 	}
 }
 
 // GetGetPreferredWidth gets the callback function.
 // Called to get a renderer’s natural width.
-func (x *CellRendererClass) GetGetPreferredWidth() func(*CellRenderer, *Widget, int, int) {
+func (x *CellRendererClass) GetGetPreferredWidth() func(*CellRenderer, *Widget, *int, *int) {
 	if x.xGetPreferredWidth == 0 {
 		return nil
 	}
-	var rawCallback func(CellVarp uintptr, WidgetVarp uintptr, MinimumSizeVarp int, NaturalSizeVarp int)
+	var rawCallback func(CellVarp uintptr, WidgetVarp uintptr, MinimumSizeVarp uintptr, NaturalSizeVarp uintptr)
 	purego.RegisterFunc(&rawCallback, x.xGetPreferredWidth)
-	return func(CellVar *CellRenderer, WidgetVar *Widget, MinimumSizeVar int, NaturalSizeVar int) {
-		rawCallback(CellVar.GoPointer(), WidgetVar.GoPointer(), MinimumSizeVar, NaturalSizeVar)
+	return func(CellVar *CellRenderer, WidgetVar *Widget, MinimumSizeVar *int, NaturalSizeVar *int) {
+		rawCallback(CellVar.GoPointer(), WidgetVar.GoPointer(), uintptr(unsafe.Pointer(MinimumSizeVar)), uintptr(unsafe.Pointer(NaturalSizeVar)))
 	}
 }
 
 // OverrideGetPreferredHeightForWidth sets the callback function.
 // Called to get a renderer’s natural height for width.
-func (x *CellRendererClass) OverrideGetPreferredHeightForWidth(cb func(*CellRenderer, *Widget, int, int, int)) {
+func (x *CellRendererClass) OverrideGetPreferredHeightForWidth(cb func(*CellRenderer, *Widget, int, *int, *int)) {
 	if cb == nil {
 		x.xGetPreferredHeightForWidth = 0
 	} else {
-		x.xGetPreferredHeightForWidth = purego.NewCallback(func(CellVarp uintptr, WidgetVarp uintptr, WidthVarp int, MinimumHeightVarp int, NaturalHeightVarp int) {
-			cb(CellRendererNewFromInternalPtr(CellVarp), WidgetNewFromInternalPtr(WidgetVarp), WidthVarp, MinimumHeightVarp, NaturalHeightVarp)
+		x.xGetPreferredHeightForWidth = purego.NewCallback(func(CellVarp uintptr, WidgetVarp uintptr, WidthVarp int, MinimumHeightVarp uintptr, NaturalHeightVarp uintptr) {
+			cb(CellRendererNewFromInternalPtr(CellVarp), WidgetNewFromInternalPtr(WidgetVarp), WidthVarp, (*int)(unsafe.Pointer(MinimumHeightVarp)), (*int)(unsafe.Pointer(NaturalHeightVarp)))
 		})
 	}
 }
 
 // GetGetPreferredHeightForWidth gets the callback function.
 // Called to get a renderer’s natural height for width.
-func (x *CellRendererClass) GetGetPreferredHeightForWidth() func(*CellRenderer, *Widget, int, int, int) {
+func (x *CellRendererClass) GetGetPreferredHeightForWidth() func(*CellRenderer, *Widget, int, *int, *int) {
 	if x.xGetPreferredHeightForWidth == 0 {
 		return nil
 	}
-	var rawCallback func(CellVarp uintptr, WidgetVarp uintptr, WidthVarp int, MinimumHeightVarp int, NaturalHeightVarp int)
+	var rawCallback func(CellVarp uintptr, WidgetVarp uintptr, WidthVarp int, MinimumHeightVarp uintptr, NaturalHeightVarp uintptr)
 	purego.RegisterFunc(&rawCallback, x.xGetPreferredHeightForWidth)
-	return func(CellVar *CellRenderer, WidgetVar *Widget, WidthVar int, MinimumHeightVar int, NaturalHeightVar int) {
-		rawCallback(CellVar.GoPointer(), WidgetVar.GoPointer(), WidthVar, MinimumHeightVar, NaturalHeightVar)
+	return func(CellVar *CellRenderer, WidgetVar *Widget, WidthVar int, MinimumHeightVar *int, NaturalHeightVar *int) {
+		rawCallback(CellVar.GoPointer(), WidgetVar.GoPointer(), WidthVar, uintptr(unsafe.Pointer(MinimumHeightVar)), uintptr(unsafe.Pointer(NaturalHeightVar)))
 	}
 }
 
 // OverrideGetPreferredHeight sets the callback function.
 // Called to get a renderer’s natural height.
-func (x *CellRendererClass) OverrideGetPreferredHeight(cb func(*CellRenderer, *Widget, int, int)) {
+func (x *CellRendererClass) OverrideGetPreferredHeight(cb func(*CellRenderer, *Widget, *int, *int)) {
 	if cb == nil {
 		x.xGetPreferredHeight = 0
 	} else {
-		x.xGetPreferredHeight = purego.NewCallback(func(CellVarp uintptr, WidgetVarp uintptr, MinimumSizeVarp int, NaturalSizeVarp int) {
-			cb(CellRendererNewFromInternalPtr(CellVarp), WidgetNewFromInternalPtr(WidgetVarp), MinimumSizeVarp, NaturalSizeVarp)
+		x.xGetPreferredHeight = purego.NewCallback(func(CellVarp uintptr, WidgetVarp uintptr, MinimumSizeVarp uintptr, NaturalSizeVarp uintptr) {
+			cb(CellRendererNewFromInternalPtr(CellVarp), WidgetNewFromInternalPtr(WidgetVarp), (*int)(unsafe.Pointer(MinimumSizeVarp)), (*int)(unsafe.Pointer(NaturalSizeVarp)))
 		})
 	}
 }
 
 // GetGetPreferredHeight gets the callback function.
 // Called to get a renderer’s natural height.
-func (x *CellRendererClass) GetGetPreferredHeight() func(*CellRenderer, *Widget, int, int) {
+func (x *CellRendererClass) GetGetPreferredHeight() func(*CellRenderer, *Widget, *int, *int) {
 	if x.xGetPreferredHeight == 0 {
 		return nil
 	}
-	var rawCallback func(CellVarp uintptr, WidgetVarp uintptr, MinimumSizeVarp int, NaturalSizeVarp int)
+	var rawCallback func(CellVarp uintptr, WidgetVarp uintptr, MinimumSizeVarp uintptr, NaturalSizeVarp uintptr)
 	purego.RegisterFunc(&rawCallback, x.xGetPreferredHeight)
-	return func(CellVar *CellRenderer, WidgetVar *Widget, MinimumSizeVar int, NaturalSizeVar int) {
-		rawCallback(CellVar.GoPointer(), WidgetVar.GoPointer(), MinimumSizeVar, NaturalSizeVar)
+	return func(CellVar *CellRenderer, WidgetVar *Widget, MinimumSizeVar *int, NaturalSizeVar *int) {
+		rawCallback(CellVar.GoPointer(), WidgetVar.GoPointer(), uintptr(unsafe.Pointer(MinimumSizeVar)), uintptr(unsafe.Pointer(NaturalSizeVar)))
 	}
 }
 
 // OverrideGetPreferredWidthForHeight sets the callback function.
 // Called to get a renderer’s natural width for height.
-func (x *CellRendererClass) OverrideGetPreferredWidthForHeight(cb func(*CellRenderer, *Widget, int, int, int)) {
+func (x *CellRendererClass) OverrideGetPreferredWidthForHeight(cb func(*CellRenderer, *Widget, int, *int, *int)) {
 	if cb == nil {
 		x.xGetPreferredWidthForHeight = 0
 	} else {
-		x.xGetPreferredWidthForHeight = purego.NewCallback(func(CellVarp uintptr, WidgetVarp uintptr, HeightVarp int, MinimumWidthVarp int, NaturalWidthVarp int) {
-			cb(CellRendererNewFromInternalPtr(CellVarp), WidgetNewFromInternalPtr(WidgetVarp), HeightVarp, MinimumWidthVarp, NaturalWidthVarp)
+		x.xGetPreferredWidthForHeight = purego.NewCallback(func(CellVarp uintptr, WidgetVarp uintptr, HeightVarp int, MinimumWidthVarp uintptr, NaturalWidthVarp uintptr) {
+			cb(CellRendererNewFromInternalPtr(CellVarp), WidgetNewFromInternalPtr(WidgetVarp), HeightVarp, (*int)(unsafe.Pointer(MinimumWidthVarp)), (*int)(unsafe.Pointer(NaturalWidthVarp)))
 		})
 	}
 }
 
 // GetGetPreferredWidthForHeight gets the callback function.
 // Called to get a renderer’s natural width for height.
-func (x *CellRendererClass) GetGetPreferredWidthForHeight() func(*CellRenderer, *Widget, int, int, int) {
+func (x *CellRendererClass) GetGetPreferredWidthForHeight() func(*CellRenderer, *Widget, int, *int, *int) {
 	if x.xGetPreferredWidthForHeight == 0 {
 		return nil
 	}
-	var rawCallback func(CellVarp uintptr, WidgetVarp uintptr, HeightVarp int, MinimumWidthVarp int, NaturalWidthVarp int)
+	var rawCallback func(CellVarp uintptr, WidgetVarp uintptr, HeightVarp int, MinimumWidthVarp uintptr, NaturalWidthVarp uintptr)
 	purego.RegisterFunc(&rawCallback, x.xGetPreferredWidthForHeight)
-	return func(CellVar *CellRenderer, WidgetVar *Widget, HeightVar int, MinimumWidthVar int, NaturalWidthVar int) {
-		rawCallback(CellVar.GoPointer(), WidgetVar.GoPointer(), HeightVar, MinimumWidthVar, NaturalWidthVar)
+	return func(CellVar *CellRenderer, WidgetVar *Widget, HeightVar int, MinimumWidthVar *int, NaturalWidthVar *int) {
+		rawCallback(CellVar.GoPointer(), WidgetVar.GoPointer(), HeightVar, uintptr(unsafe.Pointer(MinimumWidthVar)), uintptr(unsafe.Pointer(NaturalWidthVar)))
 	}
 }
 
@@ -182,8 +182,8 @@ func (x *CellRendererClass) OverrideGetAlignedArea(cb func(*CellRenderer, *Widge
 	if cb == nil {
 		x.xGetAlignedArea = 0
 	} else {
-		x.xGetAlignedArea = purego.NewCallback(func(CellVarp uintptr, WidgetVarp uintptr, FlagsVarp CellRendererState, CellAreaVarp *gdk.Rectangle, AlignedAreaVarp *gdk.Rectangle) {
-			cb(CellRendererNewFromInternalPtr(CellVarp), WidgetNewFromInternalPtr(WidgetVarp), FlagsVarp, CellAreaVarp, AlignedAreaVarp)
+		x.xGetAlignedArea = purego.NewCallback(func(CellVarp uintptr, WidgetVarp uintptr, FlagsVarp CellRendererState, CellAreaVarp *gdk.Rectangle, AlignedAreaVarp uintptr) {
+			cb(CellRendererNewFromInternalPtr(CellVarp), WidgetNewFromInternalPtr(WidgetVarp), FlagsVarp, CellAreaVarp, (*gdk.Rectangle)(unsafe.Pointer(AlignedAreaVarp)))
 		})
 	}
 }
@@ -194,10 +194,10 @@ func (x *CellRendererClass) GetGetAlignedArea() func(*CellRenderer, *Widget, Cel
 	if x.xGetAlignedArea == 0 {
 		return nil
 	}
-	var rawCallback func(CellVarp uintptr, WidgetVarp uintptr, FlagsVarp CellRendererState, CellAreaVarp *gdk.Rectangle, AlignedAreaVarp *gdk.Rectangle)
+	var rawCallback func(CellVarp uintptr, WidgetVarp uintptr, FlagsVarp CellRendererState, CellAreaVarp *gdk.Rectangle, AlignedAreaVarp uintptr)
 	purego.RegisterFunc(&rawCallback, x.xGetAlignedArea)
 	return func(CellVar *CellRenderer, WidgetVar *Widget, FlagsVar CellRendererState, CellAreaVar *gdk.Rectangle, AlignedAreaVar *gdk.Rectangle) {
-		rawCallback(CellVar.GoPointer(), WidgetVar.GoPointer(), FlagsVar, CellAreaVar, AlignedAreaVar)
+		rawCallback(CellVar.GoPointer(), WidgetVar.GoPointer(), FlagsVar, CellAreaVar, uintptr(unsafe.Pointer(AlignedAreaVar)))
 	}
 }
 
@@ -466,31 +466,31 @@ func (x *CellRenderer) Activate(EventVar *gdk.Event, WidgetVar *Widget, PathVar 
 	return cret
 }
 
-var xCellRendererGetAlignedArea func(uintptr, uintptr, CellRendererState, *gdk.Rectangle, *gdk.Rectangle)
+var xCellRendererGetAlignedArea func(uintptr, uintptr, CellRendererState, *gdk.Rectangle, uintptr)
 
 // Gets the aligned area used by @cell inside @cell_area. Used for finding
 // the appropriate edit and focus rectangle.
 func (x *CellRenderer) GetAlignedArea(WidgetVar *Widget, FlagsVar CellRendererState, CellAreaVar *gdk.Rectangle, AlignedAreaVar *gdk.Rectangle) {
 
-	xCellRendererGetAlignedArea(x.GoPointer(), WidgetVar.GoPointer(), FlagsVar, CellAreaVar, AlignedAreaVar)
+	xCellRendererGetAlignedArea(x.GoPointer(), WidgetVar.GoPointer(), FlagsVar, CellAreaVar, uintptr(unsafe.Pointer(AlignedAreaVar)))
 
 }
 
-var xCellRendererGetAlignment func(uintptr, float32, float32)
+var xCellRendererGetAlignment func(uintptr, uintptr, uintptr)
 
 // Fills in @xalign and @yalign with the appropriate values of @cell.
-func (x *CellRenderer) GetAlignment(XalignVar float32, YalignVar float32) {
+func (x *CellRenderer) GetAlignment(XalignVar *float32, YalignVar *float32) {
 
-	xCellRendererGetAlignment(x.GoPointer(), XalignVar, YalignVar)
+	xCellRendererGetAlignment(x.GoPointer(), uintptr(unsafe.Pointer(XalignVar)), uintptr(unsafe.Pointer(YalignVar)))
 
 }
 
-var xCellRendererGetFixedSize func(uintptr, int, int)
+var xCellRendererGetFixedSize func(uintptr, uintptr, uintptr)
 
 // Fills in @width and @height with the appropriate size of @cell.
-func (x *CellRenderer) GetFixedSize(WidthVar int, HeightVar int) {
+func (x *CellRenderer) GetFixedSize(WidthVar *int, HeightVar *int) {
 
-	xCellRendererGetFixedSize(x.GoPointer(), WidthVar, HeightVar)
+	xCellRendererGetFixedSize(x.GoPointer(), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 
 }
 
@@ -512,60 +512,60 @@ func (x *CellRenderer) GetIsExpander() bool {
 	return cret
 }
 
-var xCellRendererGetPadding func(uintptr, int, int)
+var xCellRendererGetPadding func(uintptr, uintptr, uintptr)
 
 // Fills in @xpad and @ypad with the appropriate values of @cell.
-func (x *CellRenderer) GetPadding(XpadVar int, YpadVar int) {
+func (x *CellRenderer) GetPadding(XpadVar *int, YpadVar *int) {
 
-	xCellRendererGetPadding(x.GoPointer(), XpadVar, YpadVar)
+	xCellRendererGetPadding(x.GoPointer(), uintptr(unsafe.Pointer(XpadVar)), uintptr(unsafe.Pointer(YpadVar)))
 
 }
 
-var xCellRendererGetPreferredHeight func(uintptr, uintptr, int, int)
+var xCellRendererGetPreferredHeight func(uintptr, uintptr, uintptr, uintptr)
 
 // Retrieves a renderer’s natural size when rendered to @widget.
-func (x *CellRenderer) GetPreferredHeight(WidgetVar *Widget, MinimumSizeVar int, NaturalSizeVar int) {
+func (x *CellRenderer) GetPreferredHeight(WidgetVar *Widget, MinimumSizeVar *int, NaturalSizeVar *int) {
 
-	xCellRendererGetPreferredHeight(x.GoPointer(), WidgetVar.GoPointer(), MinimumSizeVar, NaturalSizeVar)
+	xCellRendererGetPreferredHeight(x.GoPointer(), WidgetVar.GoPointer(), uintptr(unsafe.Pointer(MinimumSizeVar)), uintptr(unsafe.Pointer(NaturalSizeVar)))
 
 }
 
-var xCellRendererGetPreferredHeightForWidth func(uintptr, uintptr, int, int, int)
+var xCellRendererGetPreferredHeightForWidth func(uintptr, uintptr, int, uintptr, uintptr)
 
 // Retrieves a cell renderers’s minimum and natural height if it were rendered to
 // @widget with the specified @width.
-func (x *CellRenderer) GetPreferredHeightForWidth(WidgetVar *Widget, WidthVar int, MinimumHeightVar int, NaturalHeightVar int) {
+func (x *CellRenderer) GetPreferredHeightForWidth(WidgetVar *Widget, WidthVar int, MinimumHeightVar *int, NaturalHeightVar *int) {
 
-	xCellRendererGetPreferredHeightForWidth(x.GoPointer(), WidgetVar.GoPointer(), WidthVar, MinimumHeightVar, NaturalHeightVar)
+	xCellRendererGetPreferredHeightForWidth(x.GoPointer(), WidgetVar.GoPointer(), WidthVar, uintptr(unsafe.Pointer(MinimumHeightVar)), uintptr(unsafe.Pointer(NaturalHeightVar)))
 
 }
 
-var xCellRendererGetPreferredSize func(uintptr, uintptr, *Requisition, *Requisition)
+var xCellRendererGetPreferredSize func(uintptr, uintptr, uintptr, uintptr)
 
 // Retrieves the minimum and natural size of a cell taking
 // into account the widget’s preference for height-for-width management.
 func (x *CellRenderer) GetPreferredSize(WidgetVar *Widget, MinimumSizeVar *Requisition, NaturalSizeVar *Requisition) {
 
-	xCellRendererGetPreferredSize(x.GoPointer(), WidgetVar.GoPointer(), MinimumSizeVar, NaturalSizeVar)
+	xCellRendererGetPreferredSize(x.GoPointer(), WidgetVar.GoPointer(), uintptr(unsafe.Pointer(MinimumSizeVar)), uintptr(unsafe.Pointer(NaturalSizeVar)))
 
 }
 
-var xCellRendererGetPreferredWidth func(uintptr, uintptr, int, int)
+var xCellRendererGetPreferredWidth func(uintptr, uintptr, uintptr, uintptr)
 
 // Retrieves a renderer’s natural size when rendered to @widget.
-func (x *CellRenderer) GetPreferredWidth(WidgetVar *Widget, MinimumSizeVar int, NaturalSizeVar int) {
+func (x *CellRenderer) GetPreferredWidth(WidgetVar *Widget, MinimumSizeVar *int, NaturalSizeVar *int) {
 
-	xCellRendererGetPreferredWidth(x.GoPointer(), WidgetVar.GoPointer(), MinimumSizeVar, NaturalSizeVar)
+	xCellRendererGetPreferredWidth(x.GoPointer(), WidgetVar.GoPointer(), uintptr(unsafe.Pointer(MinimumSizeVar)), uintptr(unsafe.Pointer(NaturalSizeVar)))
 
 }
 
-var xCellRendererGetPreferredWidthForHeight func(uintptr, uintptr, int, int, int)
+var xCellRendererGetPreferredWidthForHeight func(uintptr, uintptr, int, uintptr, uintptr)
 
 // Retrieves a cell renderers’s minimum and natural width if it were rendered to
 // @widget with the specified @height.
-func (x *CellRenderer) GetPreferredWidthForHeight(WidgetVar *Widget, HeightVar int, MinimumWidthVar int, NaturalWidthVar int) {
+func (x *CellRenderer) GetPreferredWidthForHeight(WidgetVar *Widget, HeightVar int, MinimumWidthVar *int, NaturalWidthVar *int) {
 
-	xCellRendererGetPreferredWidthForHeight(x.GoPointer(), WidgetVar.GoPointer(), HeightVar, MinimumWidthVar, NaturalWidthVar)
+	xCellRendererGetPreferredWidthForHeight(x.GoPointer(), WidgetVar.GoPointer(), HeightVar, uintptr(unsafe.Pointer(MinimumWidthVar)), uintptr(unsafe.Pointer(NaturalWidthVar)))
 
 }
 

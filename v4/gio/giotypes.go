@@ -776,7 +776,7 @@ func (x *Resource) EnumerateChildren(PathVar string, LookupFlagsVar ResourceLook
 
 }
 
-var xResourceGetInfo func(uintptr, string, ResourceLookupFlags, uint, uint32, **glib.Error) bool
+var xResourceGetInfo func(uintptr, string, ResourceLookupFlags, uintptr, uintptr, **glib.Error) bool
 
 // Looks for a file at the specified @path in the resource and
 // if found returns information about it.
@@ -785,10 +785,10 @@ var xResourceGetInfo func(uintptr, string, ResourceLookupFlags, uint, uint32, **
 //
 // The only error this can return is %G_RESOURCE_ERROR_NOT_FOUND, if @path was
 // not found in @resource.
-func (x *Resource) GetInfo(PathVar string, LookupFlagsVar ResourceLookupFlags, SizeVar uint, FlagsVar uint32) (bool, error) {
+func (x *Resource) GetInfo(PathVar string, LookupFlagsVar ResourceLookupFlags, SizeVar *uint, FlagsVar *uint32) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xResourceGetInfo(x.GoPointer(), PathVar, LookupFlagsVar, SizeVar, FlagsVar, &cerr)
+	cret := xResourceGetInfo(x.GoPointer(), PathVar, LookupFlagsVar, uintptr(unsafe.Pointer(SizeVar)), uintptr(unsafe.Pointer(FlagsVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

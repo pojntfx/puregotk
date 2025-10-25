@@ -78,7 +78,7 @@ func (x *Triangle) GetArea() float32 {
 	return cret
 }
 
-var xTriangleGetBarycoords func(uintptr, *Point3D, *Vec2) bool
+var xTriangleGetBarycoords func(uintptr, *Point3D, uintptr) bool
 
 // Computes the [barycentric coordinates](http://en.wikipedia.org/wiki/Barycentric_coordinate_system)
 // of the given point @p.
@@ -98,20 +98,20 @@ var xTriangleGetBarycoords func(uintptr, *Point3D, *Vec2) bool
 //   - `res.y = v`
 func (x *Triangle) GetBarycoords(PVar *Point3D, ResVar *Vec2) bool {
 
-	cret := xTriangleGetBarycoords(x.GoPointer(), PVar, ResVar)
+	cret := xTriangleGetBarycoords(x.GoPointer(), PVar, uintptr(unsafe.Pointer(ResVar)))
 	return cret
 }
 
-var xTriangleGetBoundingBox func(uintptr, *Box)
+var xTriangleGetBoundingBox func(uintptr, uintptr)
 
 // Computes the bounding box of the given #graphene_triangle_t.
 func (x *Triangle) GetBoundingBox(ResVar *Box) {
 
-	xTriangleGetBoundingBox(x.GoPointer(), ResVar)
+	xTriangleGetBoundingBox(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xTriangleGetMidpoint func(uintptr, *Point3D)
+var xTriangleGetMidpoint func(uintptr, uintptr)
 
 // Computes the coordinates of the midpoint of the given #graphene_triangle_t.
 //
@@ -119,39 +119,39 @@ var xTriangleGetMidpoint func(uintptr, *Point3D)
 // of the triangle, i.e. the intersection of its medians.
 func (x *Triangle) GetMidpoint(ResVar *Point3D) {
 
-	xTriangleGetMidpoint(x.GoPointer(), ResVar)
+	xTriangleGetMidpoint(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xTriangleGetNormal func(uintptr, *Vec3)
+var xTriangleGetNormal func(uintptr, uintptr)
 
 // Computes the normal vector of the given #graphene_triangle_t.
 func (x *Triangle) GetNormal(ResVar *Vec3) {
 
-	xTriangleGetNormal(x.GoPointer(), ResVar)
+	xTriangleGetNormal(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xTriangleGetPlane func(uintptr, *Plane)
+var xTriangleGetPlane func(uintptr, uintptr)
 
 // Computes the plane based on the vertices of the given #graphene_triangle_t.
 func (x *Triangle) GetPlane(ResVar *Plane) {
 
-	xTriangleGetPlane(x.GoPointer(), ResVar)
+	xTriangleGetPlane(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xTriangleGetPoints func(uintptr, *Point3D, *Point3D, *Point3D)
+var xTriangleGetPoints func(uintptr, uintptr, uintptr, uintptr)
 
 // Retrieves the three vertices of the given #graphene_triangle_t and returns
 // their coordinates as #graphene_point3d_t.
 func (x *Triangle) GetPoints(AVar *Point3D, BVar *Point3D, CVar *Point3D) {
 
-	xTriangleGetPoints(x.GoPointer(), AVar, BVar, CVar)
+	xTriangleGetPoints(x.GoPointer(), uintptr(unsafe.Pointer(AVar)), uintptr(unsafe.Pointer(BVar)), uintptr(unsafe.Pointer(CVar)))
 
 }
 
-var xTriangleGetUv func(uintptr, *Point3D, *Vec2, *Vec2, *Vec2, *Vec2) bool
+var xTriangleGetUv func(uintptr, *Point3D, *Vec2, *Vec2, *Vec2, uintptr) bool
 
 // Computes the UV coordinates of the given point @p.
 //
@@ -167,16 +167,16 @@ var xTriangleGetUv func(uintptr, *Point3D, *Vec2, *Vec2, *Vec2, *Vec2) bool
 // See also: graphene_triangle_get_barycoords()
 func (x *Triangle) GetUv(PVar *Point3D, UvAVar *Vec2, UvBVar *Vec2, UvCVar *Vec2, ResVar *Vec2) bool {
 
-	cret := xTriangleGetUv(x.GoPointer(), PVar, UvAVar, UvBVar, UvCVar, ResVar)
+	cret := xTriangleGetUv(x.GoPointer(), PVar, UvAVar, UvBVar, UvCVar, uintptr(unsafe.Pointer(ResVar)))
 	return cret
 }
 
-var xTriangleGetVertices func(uintptr, *Vec3, *Vec3, *Vec3)
+var xTriangleGetVertices func(uintptr, uintptr, uintptr, uintptr)
 
 // Retrieves the three vertices of the given #graphene_triangle_t.
 func (x *Triangle) GetVertices(AVar *Vec3, BVar *Vec3, CVar *Vec3) {
 
-	xTriangleGetVertices(x.GoPointer(), AVar, BVar, CVar)
+	xTriangleGetVertices(x.GoPointer(), uintptr(unsafe.Pointer(AVar)), uintptr(unsafe.Pointer(BVar)), uintptr(unsafe.Pointer(CVar)))
 
 }
 

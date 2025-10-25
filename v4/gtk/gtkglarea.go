@@ -365,14 +365,14 @@ func (x *GLArea) GetHasStencilBuffer() bool {
 	return cret
 }
 
-var xGLAreaGetRequiredVersion func(uintptr, int, int)
+var xGLAreaGetRequiredVersion func(uintptr, uintptr, uintptr)
 
 // Retrieves the required version of OpenGL.
 //
 // See [method@Gtk.GLArea.set_required_version].
-func (x *GLArea) GetRequiredVersion(MajorVar int, MinorVar int) {
+func (x *GLArea) GetRequiredVersion(MajorVar *int, MinorVar *int) {
 
-	xGLAreaGetRequiredVersion(x.GoPointer(), MajorVar, MinorVar)
+	xGLAreaGetRequiredVersion(x.GoPointer(), uintptr(unsafe.Pointer(MajorVar)), uintptr(unsafe.Pointer(MinorVar)))
 
 }
 
@@ -664,9 +664,9 @@ func (x *GLArea) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *GLArea) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *GLArea) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 

@@ -126,7 +126,7 @@ func GestureNewFromInternalPtr(ptr uintptr) *Gesture {
 	return cls
 }
 
-var xGestureGetBoundingBox func(uintptr, *gdk.Rectangle) bool
+var xGestureGetBoundingBox func(uintptr, uintptr) bool
 
 // If there are touch sequences being currently handled by @gesture,
 // returns %TRUE and fills in @rect with the bounding box containing
@@ -141,20 +141,20 @@ var xGestureGetBoundingBox func(uintptr, *gdk.Rectangle) bool
 // regardless of the number of touchpoints.
 func (x *Gesture) GetBoundingBox(RectVar *gdk.Rectangle) bool {
 
-	cret := xGestureGetBoundingBox(x.GoPointer(), RectVar)
+	cret := xGestureGetBoundingBox(x.GoPointer(), uintptr(unsafe.Pointer(RectVar)))
 	return cret
 }
 
-var xGestureGetBoundingBoxCenter func(uintptr, float64, float64) bool
+var xGestureGetBoundingBoxCenter func(uintptr, uintptr, uintptr) bool
 
 // If there are touch sequences being currently handled by @gesture,
 // returns %TRUE and fills in @x and @y with the center of the bounding
 // box containing all active touches.
 //
 // Otherwise, %FALSE will be returned.
-func (x *Gesture) GetBoundingBoxCenter(XVar float64, YVar float64) bool {
+func (x *Gesture) GetBoundingBoxCenter(XVar *float64, YVar *float64) bool {
 
-	cret := xGestureGetBoundingBoxCenter(x.GoPointer(), XVar, YVar)
+	cret := xGestureGetBoundingBoxCenter(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)))
 	return cret
 }
 
@@ -217,16 +217,16 @@ func (x *Gesture) GetLastUpdatedSequence() *gdk.EventSequence {
 	return cret
 }
 
-var xGestureGetPoint func(uintptr, *gdk.EventSequence, float64, float64) bool
+var xGestureGetPoint func(uintptr, *gdk.EventSequence, uintptr, uintptr) bool
 
 // If @sequence is currently being interpreted by @gesture,
 // returns %TRUE and fills in @x and @y with the last coordinates
 // stored for that event sequence.
 //
 // The coordinates are always relative to the widget allocation.
-func (x *Gesture) GetPoint(SequenceVar *gdk.EventSequence, XVar float64, YVar float64) bool {
+func (x *Gesture) GetPoint(SequenceVar *gdk.EventSequence, XVar *float64, YVar *float64) bool {
 
-	cret := xGestureGetPoint(x.GoPointer(), SequenceVar, XVar, YVar)
+	cret := xGestureGetPoint(x.GoPointer(), SequenceVar, uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)))
 	return cret
 }
 

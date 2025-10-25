@@ -43,32 +43,32 @@ func Vec3Alloc() *Vec3 {
 	return cret
 }
 
-var xVec3Add func(uintptr, *Vec3, *Vec3)
+var xVec3Add func(uintptr, *Vec3, uintptr)
 
 // Adds each component of the two given vectors.
 func (x *Vec3) Add(BVar *Vec3, ResVar *Vec3) {
 
-	xVec3Add(x.GoPointer(), BVar, ResVar)
+	xVec3Add(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec3Cross func(uintptr, *Vec3, *Vec3)
+var xVec3Cross func(uintptr, *Vec3, uintptr)
 
 // Computes the cross product of the two given vectors.
 func (x *Vec3) Cross(BVar *Vec3, ResVar *Vec3) {
 
-	xVec3Cross(x.GoPointer(), BVar, ResVar)
+	xVec3Cross(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec3Divide func(uintptr, *Vec3, *Vec3)
+var xVec3Divide func(uintptr, *Vec3, uintptr)
 
 // Divides each component of the first operand @a by the corresponding
 // component of the second operand @b, and places the results into the
 // vector @res.
 func (x *Vec3) Divide(BVar *Vec3, ResVar *Vec3) {
 
-	xVec3Divide(x.GoPointer(), BVar, ResVar)
+	xVec3Divide(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -108,53 +108,53 @@ func (x *Vec3) GetX() float32 {
 	return cret
 }
 
-var xVec3GetXy func(uintptr, *Vec2)
+var xVec3GetXy func(uintptr, uintptr)
 
 // Creates a #graphene_vec2_t that contains the first and second
 // components of the given #graphene_vec3_t.
 func (x *Vec3) GetXy(ResVar *Vec2) {
 
-	xVec3GetXy(x.GoPointer(), ResVar)
+	xVec3GetXy(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec3GetXy0 func(uintptr, *Vec3)
+var xVec3GetXy0 func(uintptr, uintptr)
 
 // Creates a #graphene_vec3_t that contains the first two components of
 // the given #graphene_vec3_t, and the third component set to 0.
 func (x *Vec3) GetXy0(ResVar *Vec3) {
 
-	xVec3GetXy0(x.GoPointer(), ResVar)
+	xVec3GetXy0(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec3GetXyz0 func(uintptr, *Vec4)
+var xVec3GetXyz0 func(uintptr, uintptr)
 
 // Converts a #graphene_vec3_t in a #graphene_vec4_t using 0.0
 // as the value for the fourth component of the resulting vector.
 func (x *Vec3) GetXyz0(ResVar *Vec4) {
 
-	xVec3GetXyz0(x.GoPointer(), ResVar)
+	xVec3GetXyz0(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec3GetXyz1 func(uintptr, *Vec4)
+var xVec3GetXyz1 func(uintptr, uintptr)
 
 // Converts a #graphene_vec3_t in a #graphene_vec4_t using 1.0
 // as the value for the fourth component of the resulting vector.
 func (x *Vec3) GetXyz1(ResVar *Vec4) {
 
-	xVec3GetXyz1(x.GoPointer(), ResVar)
+	xVec3GetXyz1(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec3GetXyzw func(uintptr, float32, *Vec4)
+var xVec3GetXyzw func(uintptr, float32, uintptr)
 
 // Converts a #graphene_vec3_t in a #graphene_vec4_t using @w as
 // the value of the fourth component of the resulting vector.
 func (x *Vec3) GetXyzw(WVar float32, ResVar *Vec4) {
 
-	xVec3GetXyzw(x.GoPointer(), WVar, ResVar)
+	xVec3GetXyzw(x.GoPointer(), WVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -206,12 +206,12 @@ func (x *Vec3) InitFromVec3(SrcVar *Vec3) *Vec3 {
 	return cret
 }
 
-var xVec3Interpolate func(uintptr, *Vec3, float64, *Vec3)
+var xVec3Interpolate func(uintptr, *Vec3, float64, uintptr)
 
 // Linearly interpolates @v1 and @v2 using the given @factor.
 func (x *Vec3) Interpolate(V2Var *Vec3, FactorVar float64, ResVar *Vec3) {
 
-	xVec3Interpolate(x.GoPointer(), V2Var, FactorVar, ResVar)
+	xVec3Interpolate(x.GoPointer(), V2Var, FactorVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -224,32 +224,32 @@ func (x *Vec3) Length() float32 {
 	return cret
 }
 
-var xVec3Max func(uintptr, *Vec3, *Vec3)
+var xVec3Max func(uintptr, *Vec3, uintptr)
 
 // Compares each component of the two given vectors and creates a
 // vector that contains the maximum values.
 func (x *Vec3) Max(BVar *Vec3, ResVar *Vec3) {
 
-	xVec3Max(x.GoPointer(), BVar, ResVar)
+	xVec3Max(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec3Min func(uintptr, *Vec3, *Vec3)
+var xVec3Min func(uintptr, *Vec3, uintptr)
 
 // Compares each component of the two given vectors and creates a
 // vector that contains the minimum values.
 func (x *Vec3) Min(BVar *Vec3, ResVar *Vec3) {
 
-	xVec3Min(x.GoPointer(), BVar, ResVar)
+	xVec3Min(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec3Multiply func(uintptr, *Vec3, *Vec3)
+var xVec3Multiply func(uintptr, *Vec3, uintptr)
 
 // Multiplies each component of the two given vectors.
 func (x *Vec3) Multiply(BVar *Vec3, ResVar *Vec3) {
 
-	xVec3Multiply(x.GoPointer(), BVar, ResVar)
+	xVec3Multiply(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -263,50 +263,50 @@ func (x *Vec3) Near(V2Var *Vec3, EpsilonVar float32) bool {
 	return cret
 }
 
-var xVec3Negate func(uintptr, *Vec3)
+var xVec3Negate func(uintptr, uintptr)
 
 // Negates the given #graphene_vec3_t.
 func (x *Vec3) Negate(ResVar *Vec3) {
 
-	xVec3Negate(x.GoPointer(), ResVar)
+	xVec3Negate(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec3Normalize func(uintptr, *Vec3)
+var xVec3Normalize func(uintptr, uintptr)
 
 // Normalizes the given #graphene_vec3_t.
 func (x *Vec3) Normalize(ResVar *Vec3) {
 
-	xVec3Normalize(x.GoPointer(), ResVar)
+	xVec3Normalize(x.GoPointer(), uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec3Scale func(uintptr, float32, *Vec3)
+var xVec3Scale func(uintptr, float32, uintptr)
 
 // Multiplies all components of the given vector with the given scalar @factor.
 func (x *Vec3) Scale(FactorVar float32, ResVar *Vec3) {
 
-	xVec3Scale(x.GoPointer(), FactorVar, ResVar)
+	xVec3Scale(x.GoPointer(), FactorVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec3Subtract func(uintptr, *Vec3, *Vec3)
+var xVec3Subtract func(uintptr, *Vec3, uintptr)
 
 // Subtracts from each component of the first operand @a the
 // corresponding component of the second operand @b and places
 // each result into the components of @res.
 func (x *Vec3) Subtract(BVar *Vec3, ResVar *Vec3) {
 
-	xVec3Subtract(x.GoPointer(), BVar, ResVar)
+	xVec3Subtract(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xVec3ToFloat func(uintptr, [3]float32)
+var xVec3ToFloat func(uintptr, uintptr)
 
 // Copies the components of a #graphene_vec3_t into the given array.
-func (x *Vec3) ToFloat(DestVar [3]float32) {
+func (x *Vec3) ToFloat(DestVar *[3]float32) {
 
-	xVec3ToFloat(x.GoPointer(), DestVar)
+	xVec3ToFloat(x.GoPointer(), uintptr(unsafe.Pointer(DestVar)))
 
 }
 

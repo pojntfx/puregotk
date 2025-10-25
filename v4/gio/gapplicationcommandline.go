@@ -383,7 +383,7 @@ func (x *ApplicationCommandLine) Done() {
 
 }
 
-var xApplicationCommandLineGetArguments func(uintptr, int) []string
+var xApplicationCommandLineGetArguments func(uintptr, uintptr) []string
 
 // Gets the list of arguments that was passed on the command line.
 //
@@ -396,9 +396,9 @@ var xApplicationCommandLineGetArguments func(uintptr, int) []string
 //
 // The return value is %NULL-terminated and should be freed using
 // g_strfreev().
-func (x *ApplicationCommandLine) GetArguments(ArgcVar int) []string {
+func (x *ApplicationCommandLine) GetArguments(ArgcVar *int) []string {
 
-	cret := xApplicationCommandLineGetArguments(x.GoPointer(), ArgcVar)
+	cret := xApplicationCommandLineGetArguments(x.GoPointer(), uintptr(unsafe.Pointer(ArgcVar)))
 	return cret
 }
 

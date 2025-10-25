@@ -186,27 +186,27 @@ func (x *ContentFormats) ContainMimeType(MimeTypeVar string) bool {
 	return cret
 }
 
-var xContentFormatsGetGtypes func(uintptr, uint) uintptr
+var xContentFormatsGetGtypes func(uintptr, uintptr) uintptr
 
 // Gets the `GType`s included in @formats.
 //
 // Note that @formats may not contain any `GType`s, in particular when
 // they are empty. In that case %NULL will be returned.
-func (x *ContentFormats) GetGtypes(NGtypesVar uint) uintptr {
+func (x *ContentFormats) GetGtypes(NGtypesVar *uint) uintptr {
 
-	cret := xContentFormatsGetGtypes(x.GoPointer(), NGtypesVar)
+	cret := xContentFormatsGetGtypes(x.GoPointer(), uintptr(unsafe.Pointer(NGtypesVar)))
 	return cret
 }
 
-var xContentFormatsGetMimeTypes func(uintptr, uint) []string
+var xContentFormatsGetMimeTypes func(uintptr, uintptr) []string
 
 // Gets the mime types included in @formats.
 //
 // Note that @formats may not contain any mime types, in particular
 // when they are empty. In that case %NULL will be returned.
-func (x *ContentFormats) GetMimeTypes(NMimeTypesVar uint) []string {
+func (x *ContentFormats) GetMimeTypes(NMimeTypesVar *uint) []string {
 
-	cret := xContentFormatsGetMimeTypes(x.GoPointer(), NMimeTypesVar)
+	cret := xContentFormatsGetMimeTypes(x.GoPointer(), uintptr(unsafe.Pointer(NMimeTypesVar)))
 	return cret
 }
 
@@ -400,13 +400,13 @@ func (x *DmabufFormats) Equal(Formats2Var *DmabufFormats) bool {
 	return cret
 }
 
-var xDmabufFormatsGetFormat func(uintptr, uint, uint32, uint64)
+var xDmabufFormatsGetFormat func(uintptr, uint, uintptr, uintptr)
 
 // Gets the fourcc code and modifier for a format
 // that is contained in @formats.
-func (x *DmabufFormats) GetFormat(IdxVar uint, FourccVar uint32, ModifierVar uint64) {
+func (x *DmabufFormats) GetFormat(IdxVar uint, FourccVar *uint32, ModifierVar *uint64) {
 
-	xDmabufFormatsGetFormat(x.GoPointer(), IdxVar, FourccVar, ModifierVar)
+	xDmabufFormatsGetFormat(x.GoPointer(), IdxVar, uintptr(unsafe.Pointer(FourccVar)), uintptr(unsafe.Pointer(ModifierVar)))
 
 }
 
@@ -515,7 +515,7 @@ func (x *Rectangle) Equal(Rect2Var *Rectangle) bool {
 	return cret
 }
 
-var xRectangleIntersect func(uintptr, *Rectangle, *Rectangle) bool
+var xRectangleIntersect func(uintptr, *Rectangle, uintptr) bool
 
 // Calculates the intersection of two rectangles.
 //
@@ -526,11 +526,11 @@ var xRectangleIntersect func(uintptr, *Rectangle, *Rectangle) bool
 // itself, pass %NULL for @dest.
 func (x *Rectangle) Intersect(Src2Var *Rectangle, DestVar *Rectangle) bool {
 
-	cret := xRectangleIntersect(x.GoPointer(), Src2Var, DestVar)
+	cret := xRectangleIntersect(x.GoPointer(), Src2Var, uintptr(unsafe.Pointer(DestVar)))
 	return cret
 }
 
-var xRectangleUnion func(uintptr, *Rectangle, *Rectangle)
+var xRectangleUnion func(uintptr, *Rectangle, uintptr)
 
 // Calculates the union of two rectangles.
 //
@@ -542,7 +542,7 @@ var xRectangleUnion func(uintptr, *Rectangle, *Rectangle)
 // zero width or height).
 func (x *Rectangle) Union(Src2Var *Rectangle, DestVar *Rectangle) {
 
-	xRectangleUnion(x.GoPointer(), Src2Var, DestVar)
+	xRectangleUnion(x.GoPointer(), Src2Var, uintptr(unsafe.Pointer(DestVar)))
 
 }
 
@@ -592,7 +592,7 @@ func (x *TextureDownloader) Copy() *TextureDownloader {
 	return cret
 }
 
-var xTextureDownloaderDownloadBytes func(uintptr, uint) *glib.Bytes
+var xTextureDownloaderDownloadBytes func(uintptr, uintptr) *glib.Bytes
 
 // Downloads the given texture pixels into a `GBytes`. The rowstride will
 // be stored in the stride value.
@@ -604,22 +604,22 @@ var xTextureDownloaderDownloadBytes func(uintptr, uint) *glib.Bytes
 //
 // This function cannot be used with a multiplanar format. Use
 // [method@Gdk.TextureDownloader.download_bytes_with_planes] for that purpose.
-func (x *TextureDownloader) DownloadBytes(OutStrideVar uint) *glib.Bytes {
+func (x *TextureDownloader) DownloadBytes(OutStrideVar *uint) *glib.Bytes {
 
-	cret := xTextureDownloaderDownloadBytes(x.GoPointer(), OutStrideVar)
+	cret := xTextureDownloaderDownloadBytes(x.GoPointer(), uintptr(unsafe.Pointer(OutStrideVar)))
 	return cret
 }
 
-var xTextureDownloaderDownloadBytesWithPlanes func(uintptr, [4]uint, [4]uint) *glib.Bytes
+var xTextureDownloaderDownloadBytesWithPlanes func(uintptr, uintptr, uintptr) *glib.Bytes
 
 // Downloads the given texture pixels into a `GBytes`. The offsets and
 // strides of the resulting buffer will be stored in the respective values.
 //
 // If the format does have less than 4 planes, the remaining offsets and strides will be
 // set to `0`.
-func (x *TextureDownloader) DownloadBytesWithPlanes(OutOffsetsVar [4]uint, OutStridesVar [4]uint) *glib.Bytes {
+func (x *TextureDownloader) DownloadBytesWithPlanes(OutOffsetsVar *[4]uint, OutStridesVar *[4]uint) *glib.Bytes {
 
-	cret := xTextureDownloaderDownloadBytesWithPlanes(x.GoPointer(), OutOffsetsVar, OutStridesVar)
+	cret := xTextureDownloaderDownloadBytesWithPlanes(x.GoPointer(), uintptr(unsafe.Pointer(OutOffsetsVar)), uintptr(unsafe.Pointer(OutStridesVar)))
 	return cret
 }
 

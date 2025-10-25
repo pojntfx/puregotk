@@ -88,7 +88,7 @@ type SourceFuncsFinalizeFunc func(*Source)
 //
 // Since 2.36 this may be `NULL`, in which case the effect is as if the
 // function always returns `FALSE` with a timeout of `-1`.
-type SourceFuncsPrepareFunc func(*Source, int) bool
+type SourceFuncsPrepareFunc func(*Source, uintptr) bool
 
 // A source function that is only called once before being removed from the main
 // context automatically.
@@ -355,7 +355,7 @@ func (x *MainContext) PopThreadDefault() {
 
 }
 
-var xMainContextPrepare func(uintptr, int) bool
+var xMainContextPrepare func(uintptr, uintptr) bool
 
 // Prepares to poll sources within a main loop.
 //
@@ -364,9 +364,9 @@ var xMainContextPrepare func(uintptr, int) bool
 //
 // You must have successfully acquired the context with
 // [method@GLib.MainContext.acquire] before you may call this function.
-func (x *MainContext) Prepare(PriorityVar int) bool {
+func (x *MainContext) Prepare(PriorityVar *int) bool {
 
-	cret := xMainContextPrepare(x.GoPointer(), PriorityVar)
+	cret := xMainContextPrepare(x.GoPointer(), uintptr(unsafe.Pointer(PriorityVar)))
 	return cret
 }
 
@@ -465,7 +465,7 @@ func (x *MainContext) PusherNew() *MainContextPusher {
 	return cret
 }
 
-var xMainContextQuery func(uintptr, int, int, []PollFD, int) int
+var xMainContextQuery func(uintptr, int, uintptr, uintptr, int) int
 
 // Determines information necessary to poll this main loop.
 //
@@ -476,9 +476,9 @@ var xMainContextQuery func(uintptr, int, int, []PollFD, int) int
 //
 // You must have successfully acquired the context with
 // [method@GLib.MainContext.acquire] before you may call this function.
-func (x *MainContext) Query(MaxPriorityVar int, TimeoutVar int, FdsVar []PollFD, NFdsVar int) int {
+func (x *MainContext) Query(MaxPriorityVar int, TimeoutVar *int, FdsVar *[]PollFD, NFdsVar int) int {
 
-	cret := xMainContextQuery(x.GoPointer(), MaxPriorityVar, TimeoutVar, FdsVar, NFdsVar)
+	cret := xMainContextQuery(x.GoPointer(), MaxPriorityVar, uintptr(unsafe.Pointer(TimeoutVar)), uintptr(unsafe.Pointer(FdsVar)), NFdsVar)
 	return cret
 }
 

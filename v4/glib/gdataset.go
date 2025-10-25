@@ -159,7 +159,7 @@ var xDatalistIdReplaceData func(**Data, Quark, uintptr, uintptr, uintptr, uintpt
 // should not destroy the object in the normal way.
 func DatalistIdReplaceData(DatalistVar **Data, KeyIdVar Quark, OldvalVar uintptr, NewvalVar uintptr, DestroyVar *DestroyNotify, OldDestroyVar *DestroyNotify) bool {
 
-	cret := xDatalistIdReplaceData(DatalistVar, KeyIdVar, OldvalVar, NewvalVar, NewCallbackNullable(DestroyVar), NewCallback(OldDestroyVar))
+	cret := xDatalistIdReplaceData(DatalistVar, KeyIdVar, OldvalVar, NewvalVar, NewCallbackNullable(DestroyVar), uintptr(unsafe.Pointer(OldDestroyVar)))
 	return cret
 }
 

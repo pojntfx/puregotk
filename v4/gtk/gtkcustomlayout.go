@@ -15,7 +15,7 @@ import (
 type CustomAllocateFunc func(uintptr, int, int, int)
 
 // A function to be used by `GtkCustomLayout` to measure a widget.
-type CustomMeasureFunc func(uintptr, Orientation, int, int, int, int, int)
+type CustomMeasureFunc func(uintptr, Orientation, int, uintptr, uintptr, uintptr, uintptr)
 
 // Queries a widget for its preferred size request mode.
 type CustomRequestModeFunc func(uintptr) SizeRequestMode

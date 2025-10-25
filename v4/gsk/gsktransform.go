@@ -2,11 +2,13 @@
 package gsk
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 )
 
-var xTransformParse func(string, **Transform) bool
+var xTransformParse func(string, uintptr) bool
 
 // Parses a given into a transform.
 //
@@ -17,7 +19,7 @@ var xTransformParse func(string, **Transform) bool
 // is returned and `NULL` is put in @out_transform.
 func TransformParse(StringVar string, OutTransformVar **Transform) bool {
 
-	cret := xTransformParse(StringVar, OutTransformVar)
+	cret := xTransformParse(StringVar, uintptr(unsafe.Pointer(OutTransformVar)))
 	return cret
 }
 

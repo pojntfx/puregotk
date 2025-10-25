@@ -290,12 +290,12 @@ func (x *Grid) InsertRow(PositionVar int) {
 
 }
 
-var xGridQueryChild func(uintptr, uintptr, int, int, int, int)
+var xGridQueryChild func(uintptr, uintptr, uintptr, uintptr, uintptr, uintptr)
 
 // Queries the attach points and spans of @child inside the given `GtkGrid`.
-func (x *Grid) QueryChild(ChildVar *Widget, ColumnVar int, RowVar int, WidthVar int, HeightVar int) {
+func (x *Grid) QueryChild(ChildVar *Widget, ColumnVar *int, RowVar *int, WidthVar *int, HeightVar *int) {
 
-	xGridQueryChild(x.GoPointer(), ChildVar.GoPointer(), ColumnVar, RowVar, WidthVar, HeightVar)
+	xGridQueryChild(x.GoPointer(), ChildVar.GoPointer(), uintptr(unsafe.Pointer(ColumnVar)), uintptr(unsafe.Pointer(RowVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 
 }
 
@@ -468,9 +468,9 @@ func (x *Grid) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *Grid) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *Grid) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 

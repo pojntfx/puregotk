@@ -2,6 +2,8 @@
 package gio
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
@@ -96,7 +98,7 @@ func DbusGvalueToGvariant(GvalueVar *gobject.Value, TypeVar *glib.VariantType) *
 	return cret
 }
 
-var xDbusGvariantToGvalue func(*glib.Variant, *gobject.Value)
+var xDbusGvariantToGvalue func(*glib.Variant, uintptr)
 
 // Converts a #GVariant to a #GValue. If @value is floating, it is consumed.
 //
@@ -111,7 +113,7 @@ var xDbusGvariantToGvalue func(*glib.Variant, *gobject.Value)
 // @out_gvalue.
 func DbusGvariantToGvalue(ValueVar *glib.Variant, OutGvalueVar *gobject.Value) {
 
-	xDbusGvariantToGvalue(ValueVar, OutGvalueVar)
+	xDbusGvariantToGvalue(ValueVar, uintptr(unsafe.Pointer(OutGvalueVar)))
 
 }
 

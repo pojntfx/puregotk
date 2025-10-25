@@ -2,6 +2,8 @@
 package gio
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/glib"
@@ -108,15 +110,15 @@ func ContentTypeGetSymbolicIcon(TypeVar string) *IconBase {
 	return cls
 }
 
-var xContentTypeGuess func(string, []byte, uint, bool) string
+var xContentTypeGuess func(string, []byte, uint, uintptr) string
 
 // Guesses the content type based on example data. If the function is
 // uncertain, @result_uncertain will be set to %TRUE. Either @filename
 // or @data may be %NULL, in which case the guess will be based solely
 // on the other argument.
-func ContentTypeGuess(FilenameVar string, DataVar []byte, DataSizeVar uint, ResultUncertainVar bool) string {
+func ContentTypeGuess(FilenameVar string, DataVar []byte, DataSizeVar uint, ResultUncertainVar *bool) string {
 
-	cret := xContentTypeGuess(FilenameVar, DataVar, DataSizeVar, ResultUncertainVar)
+	cret := xContentTypeGuess(FilenameVar, DataVar, DataSizeVar, uintptr(unsafe.Pointer(ResultUncertainVar)))
 	return cret
 }
 

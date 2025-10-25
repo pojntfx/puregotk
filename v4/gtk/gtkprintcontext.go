@@ -2,6 +2,8 @@
 package gtk
 
 import (
+	"unsafe"
+
 	"github.com/jwijenbergh/purego"
 	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/cairo"
@@ -162,13 +164,13 @@ func (x *PrintContext) GetDpiY() float64 {
 	return cret
 }
 
-var xPrintContextGetHardMargins func(uintptr, float64, float64, float64, float64) bool
+var xPrintContextGetHardMargins func(uintptr, uintptr, uintptr, uintptr, uintptr) bool
 
 // Obtains the hardware printer margins of the `GtkPrintContext`,
 // in units.
-func (x *PrintContext) GetHardMargins(TopVar float64, BottomVar float64, LeftVar float64, RightVar float64) bool {
+func (x *PrintContext) GetHardMargins(TopVar *float64, BottomVar *float64, LeftVar *float64, RightVar *float64) bool {
 
-	cret := xPrintContextGetHardMargins(x.GoPointer(), TopVar, BottomVar, LeftVar, RightVar)
+	cret := xPrintContextGetHardMargins(x.GoPointer(), uintptr(unsafe.Pointer(TopVar)), uintptr(unsafe.Pointer(BottomVar)), uintptr(unsafe.Pointer(LeftVar)), uintptr(unsafe.Pointer(RightVar)))
 	return cret
 }
 

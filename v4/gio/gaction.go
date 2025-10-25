@@ -446,7 +446,7 @@ func ActionNameIsValid(ActionNameVar string) bool {
 	return cret
 }
 
-var xActionParseDetailedName func(string, string, **glib.Variant, **glib.Error) bool
+var xActionParseDetailedName func(string, uintptr, uintptr, **glib.Error) bool
 
 // Parses a detailed action name into its separate name and target
 // components.
@@ -478,10 +478,10 @@ var xActionParseDetailedName func(string, string, **glib.Variant, **glib.Error) 
 // returned in @target_value, as the @detailed_name may not contain a target.
 //
 // If returned, the [type@GLib.Variant] in @target_value is guaranteed to not be floating.
-func ActionParseDetailedName(DetailedNameVar string, ActionNameVar string, TargetValueVar **glib.Variant) (bool, error) {
+func ActionParseDetailedName(DetailedNameVar string, ActionNameVar *string, TargetValueVar **glib.Variant) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xActionParseDetailedName(DetailedNameVar, ActionNameVar, TargetValueVar, &cerr)
+	cret := xActionParseDetailedName(DetailedNameVar, uintptr(unsafe.Pointer(ActionNameVar)), uintptr(unsafe.Pointer(TargetValueVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

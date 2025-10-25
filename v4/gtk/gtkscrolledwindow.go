@@ -311,7 +311,7 @@ func (x *ScrolledWindow) GetPlacement() CornerType {
 	return cret
 }
 
-var xScrolledWindowGetPolicy func(uintptr, *PolicyType, *PolicyType)
+var xScrolledWindowGetPolicy func(uintptr, uintptr, uintptr)
 
 // Retrieves the current policy values for the horizontal and vertical
 // scrollbars.
@@ -319,7 +319,7 @@ var xScrolledWindowGetPolicy func(uintptr, *PolicyType, *PolicyType)
 // See [method@Gtk.ScrolledWindow.set_policy].
 func (x *ScrolledWindow) GetPolicy(HscrollbarPolicyVar *PolicyType, VscrollbarPolicyVar *PolicyType) {
 
-	xScrolledWindowGetPolicy(x.GoPointer(), HscrollbarPolicyVar, VscrollbarPolicyVar)
+	xScrolledWindowGetPolicy(x.GoPointer(), uintptr(unsafe.Pointer(HscrollbarPolicyVar)), uintptr(unsafe.Pointer(VscrollbarPolicyVar)))
 
 }
 
@@ -743,9 +743,9 @@ func (x *ScrolledWindow) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *ScrolledWindow) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *ScrolledWindow) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 

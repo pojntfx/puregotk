@@ -72,7 +72,7 @@ func (x *Color) Parse(SpecVar string) bool {
 	return cret
 }
 
-var xColorParseWithAlpha func(uintptr, uint16, string) bool
+var xColorParseWithAlpha func(uintptr, uintptr, string) bool
 
 // Fill in the fields of a color from a string specification.
 //
@@ -89,9 +89,9 @@ var xColorParseWithAlpha func(uintptr, uint16, string) bool
 // to the value specified by the hex digits for `a`. If no alpha
 // component is found in @spec, @alpha is set to 0xffff (for a
 // solid color).
-func (x *Color) ParseWithAlpha(AlphaVar uint16, SpecVar string) bool {
+func (x *Color) ParseWithAlpha(AlphaVar *uint16, SpecVar string) bool {
 
-	cret := xColorParseWithAlpha(x.GoPointer(), AlphaVar, SpecVar)
+	cret := xColorParseWithAlpha(x.GoPointer(), uintptr(unsafe.Pointer(AlphaVar)), SpecVar)
 	return cret
 }
 

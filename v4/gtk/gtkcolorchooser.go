@@ -36,8 +36,8 @@ func (x *ColorChooserInterface) OverrideGetRgba(cb func(ColorChooser, *gdk.RGBA)
 	if cb == nil {
 		x.xGetRgba = 0
 	} else {
-		x.xGetRgba = purego.NewCallback(func(ChooserVarp uintptr, ColorVarp *gdk.RGBA) {
-			cb(&ColorChooserBase{Ptr: ChooserVarp}, ColorVarp)
+		x.xGetRgba = purego.NewCallback(func(ChooserVarp uintptr, ColorVarp uintptr) {
+			cb(&ColorChooserBase{Ptr: ChooserVarp}, (*gdk.RGBA)(unsafe.Pointer(ColorVarp)))
 		})
 	}
 }
@@ -47,10 +47,10 @@ func (x *ColorChooserInterface) GetGetRgba() func(ColorChooser, *gdk.RGBA) {
 	if x.xGetRgba == 0 {
 		return nil
 	}
-	var rawCallback func(ChooserVarp uintptr, ColorVarp *gdk.RGBA)
+	var rawCallback func(ChooserVarp uintptr, ColorVarp uintptr)
 	purego.RegisterFunc(&rawCallback, x.xGetRgba)
 	return func(ChooserVar ColorChooser, ColorVar *gdk.RGBA) {
-		rawCallback(ChooserVar.GoPointer(), ColorVar)
+		rawCallback(ChooserVar.GoPointer(), uintptr(unsafe.Pointer(ColorVar)))
 	}
 }
 
@@ -188,7 +188,7 @@ func (x *ColorChooserBase) AddPalette(OrientationVar Orientation, ColorsPerLineV
 // Gets the currently-selected color.
 func (x *ColorChooserBase) GetRgba(ColorVar *gdk.RGBA) {
 
-	XGtkColorChooserGetRgba(x.GoPointer(), ColorVar)
+	XGtkColorChooserGetRgba(x.GoPointer(), uintptr(unsafe.Pointer(ColorVar)))
 
 }
 
@@ -214,7 +214,7 @@ func (x *ColorChooserBase) SetUseAlpha(UseAlphaVar bool) {
 }
 
 var XGtkColorChooserAddPalette func(uintptr, Orientation, int, int, []gdk.RGBA)
-var XGtkColorChooserGetRgba func(uintptr, *gdk.RGBA)
+var XGtkColorChooserGetRgba func(uintptr, uintptr)
 var XGtkColorChooserGetUseAlpha func(uintptr) bool
 var XGtkColorChooserSetRgba func(uintptr, *gdk.RGBA)
 var XGtkColorChooserSetUseAlpha func(uintptr, bool)

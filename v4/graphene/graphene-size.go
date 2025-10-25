@@ -77,22 +77,22 @@ func (x *Size) InitFromSize(SrcVar *Size) *Size {
 	return cret
 }
 
-var xSizeInterpolate func(uintptr, *Size, float64, *Size)
+var xSizeInterpolate func(uintptr, *Size, float64, uintptr)
 
 // Linearly interpolates the two given #graphene_size_t using the given
 // interpolation @factor.
 func (x *Size) Interpolate(BVar *Size, FactorVar float64, ResVar *Size) {
 
-	xSizeInterpolate(x.GoPointer(), BVar, FactorVar, ResVar)
+	xSizeInterpolate(x.GoPointer(), BVar, FactorVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xSizeScale func(uintptr, float32, *Size)
+var xSizeScale func(uintptr, float32, uintptr)
 
 // Scales the components of a #graphene_size_t using the given @factor.
 func (x *Size) Scale(FactorVar float32, ResVar *Size) {
 
-	xSizeScale(x.GoPointer(), FactorVar, ResVar)
+	xSizeScale(x.GoPointer(), FactorVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 

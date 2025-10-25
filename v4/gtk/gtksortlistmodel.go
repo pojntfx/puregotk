@@ -330,9 +330,9 @@ func (x *SortListModel) ItemsChanged(PositionVar uint, RemovedVar uint, AddedVar
 //
 // If the position is larger than the number of items, a single
 // range from n_items to G_MAXUINT will be returned.
-func (x *SortListModel) GetSection(PositionVar uint, OutStartVar uint, OutEndVar uint) {
+func (x *SortListModel) GetSection(PositionVar uint, OutStartVar *uint, OutEndVar *uint) {
 
-	XGtkSectionModelGetSection(x.GoPointer(), PositionVar, OutStartVar, OutEndVar)
+	XGtkSectionModelGetSection(x.GoPointer(), PositionVar, uintptr(unsafe.Pointer(OutStartVar)), uintptr(unsafe.Pointer(OutEndVar)))
 
 }
 

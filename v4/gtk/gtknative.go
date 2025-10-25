@@ -40,7 +40,7 @@ type Native interface {
 	SetGoPointer(uintptr)
 	GetRenderer() *gsk.Renderer
 	GetSurface() *gdk.Surface
-	GetSurfaceTransform(XVar float64, YVar float64)
+	GetSurfaceTransform(XVar *float64, YVar *float64)
 	Realize()
 	Unrealize()
 }
@@ -100,9 +100,9 @@ func (x *NativeBase) GetSurface() *gdk.Surface {
 //
 // This is the translation from @self's surface coordinates into
 // @self's widget coordinates.
-func (x *NativeBase) GetSurfaceTransform(XVar float64, YVar float64) {
+func (x *NativeBase) GetSurfaceTransform(XVar *float64, YVar *float64) {
 
-	XGtkNativeGetSurfaceTransform(x.GoPointer(), XVar, YVar)
+	XGtkNativeGetSurfaceTransform(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)))
 
 }
 
@@ -126,7 +126,7 @@ func (x *NativeBase) Unrealize() {
 
 var XGtkNativeGetRenderer func(uintptr) uintptr
 var XGtkNativeGetSurface func(uintptr) uintptr
-var XGtkNativeGetSurfaceTransform func(uintptr, float64, float64)
+var XGtkNativeGetSurfaceTransform func(uintptr, uintptr, uintptr)
 var XGtkNativeRealize func(uintptr)
 var XGtkNativeUnrealize func(uintptr)
 

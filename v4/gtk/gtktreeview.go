@@ -630,61 +630,61 @@ func (x *TreeView) ColumnsAutosize() {
 
 }
 
-var xTreeViewConvertBinWindowToTreeCoords func(uintptr, int, int, int, int)
+var xTreeViewConvertBinWindowToTreeCoords func(uintptr, int, int, uintptr, uintptr)
 
 // Converts bin_window coordinates to coordinates for the
 // tree (the full scrollable area of the tree).
-func (x *TreeView) ConvertBinWindowToTreeCoords(BxVar int, ByVar int, TxVar int, TyVar int) {
+func (x *TreeView) ConvertBinWindowToTreeCoords(BxVar int, ByVar int, TxVar *int, TyVar *int) {
 
-	xTreeViewConvertBinWindowToTreeCoords(x.GoPointer(), BxVar, ByVar, TxVar, TyVar)
+	xTreeViewConvertBinWindowToTreeCoords(x.GoPointer(), BxVar, ByVar, uintptr(unsafe.Pointer(TxVar)), uintptr(unsafe.Pointer(TyVar)))
 
 }
 
-var xTreeViewConvertBinWindowToWidgetCoords func(uintptr, int, int, int, int)
+var xTreeViewConvertBinWindowToWidgetCoords func(uintptr, int, int, uintptr, uintptr)
 
 // Converts bin_window coordinates to widget relative coordinates.
-func (x *TreeView) ConvertBinWindowToWidgetCoords(BxVar int, ByVar int, WxVar int, WyVar int) {
+func (x *TreeView) ConvertBinWindowToWidgetCoords(BxVar int, ByVar int, WxVar *int, WyVar *int) {
 
-	xTreeViewConvertBinWindowToWidgetCoords(x.GoPointer(), BxVar, ByVar, WxVar, WyVar)
+	xTreeViewConvertBinWindowToWidgetCoords(x.GoPointer(), BxVar, ByVar, uintptr(unsafe.Pointer(WxVar)), uintptr(unsafe.Pointer(WyVar)))
 
 }
 
-var xTreeViewConvertTreeToBinWindowCoords func(uintptr, int, int, int, int)
+var xTreeViewConvertTreeToBinWindowCoords func(uintptr, int, int, uintptr, uintptr)
 
 // Converts tree coordinates (coordinates in full scrollable area of the tree)
 // to bin_window coordinates.
-func (x *TreeView) ConvertTreeToBinWindowCoords(TxVar int, TyVar int, BxVar int, ByVar int) {
+func (x *TreeView) ConvertTreeToBinWindowCoords(TxVar int, TyVar int, BxVar *int, ByVar *int) {
 
-	xTreeViewConvertTreeToBinWindowCoords(x.GoPointer(), TxVar, TyVar, BxVar, ByVar)
+	xTreeViewConvertTreeToBinWindowCoords(x.GoPointer(), TxVar, TyVar, uintptr(unsafe.Pointer(BxVar)), uintptr(unsafe.Pointer(ByVar)))
 
 }
 
-var xTreeViewConvertTreeToWidgetCoords func(uintptr, int, int, int, int)
+var xTreeViewConvertTreeToWidgetCoords func(uintptr, int, int, uintptr, uintptr)
 
 // Converts tree coordinates (coordinates in full scrollable area of the tree)
 // to widget coordinates.
-func (x *TreeView) ConvertTreeToWidgetCoords(TxVar int, TyVar int, WxVar int, WyVar int) {
+func (x *TreeView) ConvertTreeToWidgetCoords(TxVar int, TyVar int, WxVar *int, WyVar *int) {
 
-	xTreeViewConvertTreeToWidgetCoords(x.GoPointer(), TxVar, TyVar, WxVar, WyVar)
+	xTreeViewConvertTreeToWidgetCoords(x.GoPointer(), TxVar, TyVar, uintptr(unsafe.Pointer(WxVar)), uintptr(unsafe.Pointer(WyVar)))
 
 }
 
-var xTreeViewConvertWidgetToBinWindowCoords func(uintptr, int, int, int, int)
+var xTreeViewConvertWidgetToBinWindowCoords func(uintptr, int, int, uintptr, uintptr)
 
 // Converts widget coordinates to coordinates for the bin_window.
-func (x *TreeView) ConvertWidgetToBinWindowCoords(WxVar int, WyVar int, BxVar int, ByVar int) {
+func (x *TreeView) ConvertWidgetToBinWindowCoords(WxVar int, WyVar int, BxVar *int, ByVar *int) {
 
-	xTreeViewConvertWidgetToBinWindowCoords(x.GoPointer(), WxVar, WyVar, BxVar, ByVar)
+	xTreeViewConvertWidgetToBinWindowCoords(x.GoPointer(), WxVar, WyVar, uintptr(unsafe.Pointer(BxVar)), uintptr(unsafe.Pointer(ByVar)))
 
 }
 
-var xTreeViewConvertWidgetToTreeCoords func(uintptr, int, int, int, int)
+var xTreeViewConvertWidgetToTreeCoords func(uintptr, int, int, uintptr, uintptr)
 
 // Converts widget coordinates to coordinates for the
 // tree (the full scrollable area of the tree).
-func (x *TreeView) ConvertWidgetToTreeCoords(WxVar int, WyVar int, TxVar int, TyVar int) {
+func (x *TreeView) ConvertWidgetToTreeCoords(WxVar int, WyVar int, TxVar *int, TyVar *int) {
 
-	xTreeViewConvertWidgetToTreeCoords(x.GoPointer(), WxVar, WyVar, TxVar, TyVar)
+	xTreeViewConvertWidgetToTreeCoords(x.GoPointer(), WxVar, WyVar, uintptr(unsafe.Pointer(TxVar)), uintptr(unsafe.Pointer(TyVar)))
 
 }
 
@@ -762,7 +762,7 @@ func (x *TreeView) GetActivateOnSingleClick() bool {
 	return cret
 }
 
-var xTreeViewGetBackgroundArea func(uintptr, *TreePath, uintptr, *gdk.Rectangle)
+var xTreeViewGetBackgroundArea func(uintptr, *TreePath, uintptr, uintptr)
 
 // Fills the bounding rectangle in bin_window coordinates for the cell at the
 // row specified by @path and the column specified by @column.  If @path is
@@ -775,11 +775,11 @@ var xTreeViewGetBackgroundArea func(uintptr, *TreePath, uintptr, *gdk.Rectangle)
 // itself, excluding surrounding borders and the tree expander area.
 func (x *TreeView) GetBackgroundArea(PathVar *TreePath, ColumnVar *TreeViewColumn, RectVar *gdk.Rectangle) {
 
-	xTreeViewGetBackgroundArea(x.GoPointer(), PathVar, ColumnVar.GoPointer(), RectVar)
+	xTreeViewGetBackgroundArea(x.GoPointer(), PathVar, ColumnVar.GoPointer(), uintptr(unsafe.Pointer(RectVar)))
 
 }
 
-var xTreeViewGetCellArea func(uintptr, *TreePath, uintptr, *gdk.Rectangle)
+var xTreeViewGetCellArea func(uintptr, *TreePath, uintptr, uintptr)
 
 // Fills the bounding rectangle in bin_window coordinates for the cell at the
 // row specified by @path and the column specified by @column.  If @path is
@@ -792,7 +792,7 @@ var xTreeViewGetCellArea func(uintptr, *TreePath, uintptr, *gdk.Rectangle)
 // realized.
 func (x *TreeView) GetCellArea(PathVar *TreePath, ColumnVar *TreeViewColumn, RectVar *gdk.Rectangle) {
 
-	xTreeViewGetCellArea(x.GoPointer(), PathVar, ColumnVar.GoPointer(), RectVar)
+	xTreeViewGetCellArea(x.GoPointer(), PathVar, ColumnVar.GoPointer(), uintptr(unsafe.Pointer(RectVar)))
 
 }
 
@@ -823,7 +823,7 @@ func (x *TreeView) GetColumns() *glib.List {
 	return cret
 }
 
-var xTreeViewGetCursor func(uintptr, **TreePath, uintptr)
+var xTreeViewGetCursor func(uintptr, uintptr, uintptr)
 
 // Fills in @path and @focus_column with the current path and focus column.  If
 // the cursor isn’t currently set, then *@path will be %NULL.  If no column
@@ -833,11 +833,11 @@ var xTreeViewGetCursor func(uintptr, **TreePath, uintptr)
 // you are done with it.
 func (x *TreeView) GetCursor(PathVar **TreePath, FocusColumnVar **TreeViewColumn) {
 
-	xTreeViewGetCursor(x.GoPointer(), PathVar, *gobject.ConvertPtr(FocusColumnVar))
+	xTreeViewGetCursor(x.GoPointer(), uintptr(unsafe.Pointer(PathVar)), uintptr(unsafe.Pointer(FocusColumnVar)))
 
 }
 
-var xTreeViewGetDestRowAtPos func(uintptr, int, int, **TreePath, *TreeViewDropPosition) bool
+var xTreeViewGetDestRowAtPos func(uintptr, int, int, uintptr, uintptr) bool
 
 // Determines the destination row for a given position.  @drag_x and
 // @drag_y are expected to be in widget coordinates.  This function is only
@@ -845,16 +845,16 @@ var xTreeViewGetDestRowAtPos func(uintptr, int, int, **TreePath, *TreeViewDropPo
 // return %FALSE if @tree_view is not realized or does not have a model.
 func (x *TreeView) GetDestRowAtPos(DragXVar int, DragYVar int, PathVar **TreePath, PosVar *TreeViewDropPosition) bool {
 
-	cret := xTreeViewGetDestRowAtPos(x.GoPointer(), DragXVar, DragYVar, PathVar, PosVar)
+	cret := xTreeViewGetDestRowAtPos(x.GoPointer(), DragXVar, DragYVar, uintptr(unsafe.Pointer(PathVar)), uintptr(unsafe.Pointer(PosVar)))
 	return cret
 }
 
-var xTreeViewGetDragDestRow func(uintptr, **TreePath, *TreeViewDropPosition)
+var xTreeViewGetDragDestRow func(uintptr, uintptr, uintptr)
 
 // Gets information about the row that is highlighted for feedback.
 func (x *TreeView) GetDragDestRow(PathVar **TreePath, PosVar *TreeViewDropPosition) {
 
-	xTreeViewGetDragDestRow(x.GoPointer(), PathVar, PosVar)
+	xTreeViewGetDragDestRow(x.GoPointer(), uintptr(unsafe.Pointer(PathVar)), uintptr(unsafe.Pointer(PosVar)))
 
 }
 
@@ -987,7 +987,7 @@ func (x *TreeView) GetNColumns() uint {
 	return cret
 }
 
-var xTreeViewGetPathAtPos func(uintptr, int, int, **TreePath, uintptr, int, int) bool
+var xTreeViewGetPathAtPos func(uintptr, int, int, uintptr, uintptr, uintptr, uintptr) bool
 
 // Finds the path at the point (@x, @y), relative to bin_window coordinates.
 // That is, @x and @y are relative to an events coordinates. Widget-relative
@@ -1005,9 +1005,9 @@ var xTreeViewGetPathAtPos func(uintptr, int, int, **TreePath, uintptr, int, int)
 // For converting widget coordinates (eg. the ones you get from
 // GtkWidget::query-tooltip), please see
 // gtk_tree_view_convert_widget_to_bin_window_coords().
-func (x *TreeView) GetPathAtPos(XVar int, YVar int, PathVar **TreePath, ColumnVar **TreeViewColumn, CellXVar int, CellYVar int) bool {
+func (x *TreeView) GetPathAtPos(XVar int, YVar int, PathVar **TreePath, ColumnVar **TreeViewColumn, CellXVar *int, CellYVar *int) bool {
 
-	cret := xTreeViewGetPathAtPos(x.GoPointer(), XVar, YVar, PathVar, *gobject.ConvertPtr(ColumnVar), CellXVar, CellYVar)
+	cret := xTreeViewGetPathAtPos(x.GoPointer(), XVar, YVar, uintptr(unsafe.Pointer(PathVar)), uintptr(unsafe.Pointer(ColumnVar)), uintptr(unsafe.Pointer(CellXVar)), uintptr(unsafe.Pointer(CellYVar)))
 	return cret
 }
 
@@ -1114,7 +1114,7 @@ func (x *TreeView) GetTooltipColumn() int {
 	return cret
 }
 
-var xTreeViewGetTooltipContext func(uintptr, int, int, bool, *uintptr, **TreePath, *TreeIter) bool
+var xTreeViewGetTooltipContext func(uintptr, int, int, bool, uintptr, uintptr, uintptr) bool
 
 // This function is supposed to be used in a ::query-tooltip
 // signal handler for `GtkTreeView`. The @x, @y and @keyboard_tip values
@@ -1127,13 +1127,13 @@ var xTreeViewGetTooltipContext func(uintptr, int, int, bool, *uintptr, **TreePat
 // @model, @path and @iter which have been provided will be set to point to
 // that row and the corresponding model. @x and @y will always be converted
 // to be relative to @tree_view’s bin_window if @keyboard_tooltip is %FALSE.
-func (x *TreeView) GetTooltipContext(XVar int, YVar int, KeyboardTipVar bool, ModelVar *TreeModel, PathVar **TreePath, IterVar *TreeIter) bool {
+func (x *TreeView) GetTooltipContext(XVar int, YVar int, KeyboardTipVar bool, ModelVar **TreeModel, PathVar **TreePath, IterVar *TreeIter) bool {
 
-	cret := xTreeViewGetTooltipContext(x.GoPointer(), XVar, YVar, KeyboardTipVar, gobject.ConvertPtr(ModelVar), PathVar, IterVar)
+	cret := xTreeViewGetTooltipContext(x.GoPointer(), XVar, YVar, KeyboardTipVar, uintptr(unsafe.Pointer(ModelVar)), uintptr(unsafe.Pointer(PathVar)), uintptr(unsafe.Pointer(IterVar)))
 	return cret
 }
 
-var xTreeViewGetVisibleRange func(uintptr, **TreePath, **TreePath) bool
+var xTreeViewGetVisibleRange func(uintptr, uintptr, uintptr) bool
 
 // Sets @start_path and @end_path to be the first and last visible path.
 // Note that there may be invisible paths in between.
@@ -1141,11 +1141,11 @@ var xTreeViewGetVisibleRange func(uintptr, **TreePath, **TreePath) bool
 // The paths should be freed with gtk_tree_path_free() after use.
 func (x *TreeView) GetVisibleRange(StartPathVar **TreePath, EndPathVar **TreePath) bool {
 
-	cret := xTreeViewGetVisibleRange(x.GoPointer(), StartPathVar, EndPathVar)
+	cret := xTreeViewGetVisibleRange(x.GoPointer(), uintptr(unsafe.Pointer(StartPathVar)), uintptr(unsafe.Pointer(EndPathVar)))
 	return cret
 }
 
-var xTreeViewGetVisibleRect func(uintptr, *gdk.Rectangle)
+var xTreeViewGetVisibleRect func(uintptr, uintptr)
 
 // Fills @visible_rect with the currently-visible region of the
 // buffer, in tree coordinates. Convert to bin_window coordinates with
@@ -1154,7 +1154,7 @@ var xTreeViewGetVisibleRect func(uintptr, *gdk.Rectangle)
 // scrollable area of the tree.
 func (x *TreeView) GetVisibleRect(VisibleRectVar *gdk.Rectangle) {
 
-	xTreeViewGetVisibleRect(x.GoPointer(), VisibleRectVar)
+	xTreeViewGetVisibleRect(x.GoPointer(), uintptr(unsafe.Pointer(VisibleRectVar)))
 
 }
 
@@ -1197,7 +1197,7 @@ func (x *TreeView) InsertColumnWithDataFunc(PositionVar int, TitleVar string, Ce
 	return cret
 }
 
-var xTreeViewIsBlankAtPos func(uintptr, int, int, **TreePath, uintptr, int, int) bool
+var xTreeViewIsBlankAtPos func(uintptr, int, int, uintptr, uintptr, uintptr, uintptr) bool
 
 // Determine whether the point (@x, @y) in @tree_view is blank, that is no
 // cell content nor an expander arrow is drawn at the location. If so, the
@@ -1216,9 +1216,9 @@ var xTreeViewIsBlankAtPos func(uintptr, int, int, **TreePath, uintptr, int, int)
 // The @path, @column, @cell_x and @cell_y arguments will be filled in
 // likewise as for gtk_tree_view_get_path_at_pos().  Please see
 // gtk_tree_view_get_path_at_pos() for more information.
-func (x *TreeView) IsBlankAtPos(XVar int, YVar int, PathVar **TreePath, ColumnVar **TreeViewColumn, CellXVar int, CellYVar int) bool {
+func (x *TreeView) IsBlankAtPos(XVar int, YVar int, PathVar **TreePath, ColumnVar **TreeViewColumn, CellXVar *int, CellYVar *int) bool {
 
-	cret := xTreeViewIsBlankAtPos(x.GoPointer(), XVar, YVar, PathVar, *gobject.ConvertPtr(ColumnVar), CellXVar, CellYVar)
+	cret := xTreeViewIsBlankAtPos(x.GoPointer(), XVar, YVar, uintptr(unsafe.Pointer(PathVar)), uintptr(unsafe.Pointer(ColumnVar)), uintptr(unsafe.Pointer(CellXVar)), uintptr(unsafe.Pointer(CellYVar)))
 	return cret
 }
 
@@ -2073,9 +2073,9 @@ func (x *TreeView) GetAtContext() *ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *TreeView) GetBounds(XVar int, YVar int, WidthVar int, HeightVar int) bool {
+func (x *TreeView) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
 
-	cret := XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
+	cret := XGtkAccessibleGetBounds(x.GoPointer(), uintptr(unsafe.Pointer(XVar)), uintptr(unsafe.Pointer(YVar)), uintptr(unsafe.Pointer(WidthVar)), uintptr(unsafe.Pointer(HeightVar)))
 	return cret
 }
 
@@ -2302,7 +2302,7 @@ func (x *TreeView) GetBuildableId() string {
 // overshoot indication, at the right position.
 func (x *TreeView) GetBorder(BorderVar *Border) bool {
 
-	cret := XGtkScrollableGetBorder(x.GoPointer(), BorderVar)
+	cret := XGtkScrollableGetBorder(x.GoPointer(), uintptr(unsafe.Pointer(BorderVar)))
 	return cret
 }
 

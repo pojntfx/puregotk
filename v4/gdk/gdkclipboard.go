@@ -118,16 +118,16 @@ func (x *Clipboard) ReadAsync(MimeTypesVar []string, IoPriorityVar int, Cancella
 
 }
 
-var xClipboardReadFinish func(uintptr, uintptr, string, **glib.Error) uintptr
+var xClipboardReadFinish func(uintptr, uintptr, uintptr, **glib.Error) uintptr
 
 // Finishes an asynchronous clipboard read.
 //
 // See [method@Gdk.Clipboard.read_async].
-func (x *Clipboard) ReadFinish(ResultVar gio.AsyncResult, OutMimeTypeVar string) (*gio.InputStream, error) {
+func (x *Clipboard) ReadFinish(ResultVar gio.AsyncResult, OutMimeTypeVar *string) (*gio.InputStream, error) {
 	var cls *gio.InputStream
 	var cerr *glib.Error
 
-	cret := xClipboardReadFinish(x.GoPointer(), ResultVar.GoPointer(), OutMimeTypeVar, &cerr)
+	cret := xClipboardReadFinish(x.GoPointer(), ResultVar.GoPointer(), uintptr(unsafe.Pointer(OutMimeTypeVar)), &cerr)
 
 	if cret == 0 {
 		return nil, cerr

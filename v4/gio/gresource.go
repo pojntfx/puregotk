@@ -124,16 +124,16 @@ func ResourcesEnumerateChildren(PathVar string, LookupFlagsVar ResourceLookupFla
 
 }
 
-var xResourcesGetInfo func(string, ResourceLookupFlags, uint, uint32, **glib.Error) bool
+var xResourcesGetInfo func(string, ResourceLookupFlags, uintptr, uintptr, **glib.Error) bool
 
 // Looks for a file at the specified @path in the set of
 // globally registered resources and if found returns information about it.
 //
 // @lookup_flags controls the behaviour of the lookup.
-func ResourcesGetInfo(PathVar string, LookupFlagsVar ResourceLookupFlags, SizeVar uint, FlagsVar uint32) (bool, error) {
+func ResourcesGetInfo(PathVar string, LookupFlagsVar ResourceLookupFlags, SizeVar *uint, FlagsVar *uint32) (bool, error) {
 	var cerr *glib.Error
 
-	cret := xResourcesGetInfo(PathVar, LookupFlagsVar, SizeVar, FlagsVar, &cerr)
+	cret := xResourcesGetInfo(PathVar, LookupFlagsVar, uintptr(unsafe.Pointer(SizeVar)), uintptr(unsafe.Pointer(FlagsVar)), &cerr)
 	if cerr == nil {
 		return cret, nil
 	}

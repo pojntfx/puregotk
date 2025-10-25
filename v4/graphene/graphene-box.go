@@ -69,16 +69,16 @@ func (x *Box) Equal(BVar *Box) bool {
 	return cret
 }
 
-var xBoxExpand func(uintptr, *Point3D, *Box)
+var xBoxExpand func(uintptr, *Point3D, uintptr)
 
 // Expands the dimensions of @box to include the coordinates at @point.
 func (x *Box) Expand(PointVar *Point3D, ResVar *Box) {
 
-	xBoxExpand(x.GoPointer(), PointVar, ResVar)
+	xBoxExpand(x.GoPointer(), PointVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xBoxExpandScalar func(uintptr, float32, *Box)
+var xBoxExpandScalar func(uintptr, float32, uintptr)
 
 // Expands the dimensions of @box by the given @scalar value.
 //
@@ -86,17 +86,17 @@ var xBoxExpandScalar func(uintptr, float32, *Box)
 // negative, the #graphene_box_t will shrink.
 func (x *Box) ExpandScalar(ScalarVar float32, ResVar *Box) {
 
-	xBoxExpandScalar(x.GoPointer(), ScalarVar, ResVar)
+	xBoxExpandScalar(x.GoPointer(), ScalarVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
-var xBoxExpandVec3 func(uintptr, *Vec3, *Box)
+var xBoxExpandVec3 func(uintptr, *Vec3, uintptr)
 
 // Expands the dimensions of @box to include the coordinates of the
 // given vector.
 func (x *Box) ExpandVec3(VecVar *Vec3, ResVar *Box) {
 
-	xBoxExpandVec3(x.GoPointer(), VecVar, ResVar)
+	xBoxExpandVec3(x.GoPointer(), VecVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
@@ -109,22 +109,22 @@ func (x *Box) Free() {
 
 }
 
-var xBoxGetBoundingSphere func(uintptr, *Sphere)
+var xBoxGetBoundingSphere func(uintptr, uintptr)
 
 // Computes the bounding #graphene_sphere_t capable of containing the given
 // #graphene_box_t.
 func (x *Box) GetBoundingSphere(SphereVar *Sphere) {
 
-	xBoxGetBoundingSphere(x.GoPointer(), SphereVar)
+	xBoxGetBoundingSphere(x.GoPointer(), uintptr(unsafe.Pointer(SphereVar)))
 
 }
 
-var xBoxGetCenter func(uintptr, *Point3D)
+var xBoxGetCenter func(uintptr, uintptr)
 
 // Retrieves the coordinates of the center of a #graphene_box_t.
 func (x *Box) GetCenter(CenterVar *Point3D) {
 
-	xBoxGetCenter(x.GoPointer(), CenterVar)
+	xBoxGetCenter(x.GoPointer(), uintptr(unsafe.Pointer(CenterVar)))
 
 }
 
@@ -146,42 +146,42 @@ func (x *Box) GetHeight() float32 {
 	return cret
 }
 
-var xBoxGetMax func(uintptr, *Point3D)
+var xBoxGetMax func(uintptr, uintptr)
 
 // Retrieves the coordinates of the maximum point of the given
 // #graphene_box_t.
 func (x *Box) GetMax(MaxVar *Point3D) {
 
-	xBoxGetMax(x.GoPointer(), MaxVar)
+	xBoxGetMax(x.GoPointer(), uintptr(unsafe.Pointer(MaxVar)))
 
 }
 
-var xBoxGetMin func(uintptr, *Point3D)
+var xBoxGetMin func(uintptr, uintptr)
 
 // Retrieves the coordinates of the minimum point of the given
 // #graphene_box_t.
 func (x *Box) GetMin(MinVar *Point3D) {
 
-	xBoxGetMin(x.GoPointer(), MinVar)
+	xBoxGetMin(x.GoPointer(), uintptr(unsafe.Pointer(MinVar)))
 
 }
 
-var xBoxGetSize func(uintptr, *Vec3)
+var xBoxGetSize func(uintptr, uintptr)
 
 // Retrieves the size of the box on all three axes, and stores
 // it into the given @size vector.
 func (x *Box) GetSize(SizeVar *Vec3) {
 
-	xBoxGetSize(x.GoPointer(), SizeVar)
+	xBoxGetSize(x.GoPointer(), uintptr(unsafe.Pointer(SizeVar)))
 
 }
 
-var xBoxGetVertices func(uintptr, [8]Vec3)
+var xBoxGetVertices func(uintptr, uintptr)
 
 // Computes the vertices of the given #graphene_box_t.
-func (x *Box) GetVertices(VerticesVar [8]Vec3) {
+func (x *Box) GetVertices(VerticesVar *[8]Vec3) {
 
-	xBoxGetVertices(x.GoPointer(), VerticesVar)
+	xBoxGetVertices(x.GoPointer(), uintptr(unsafe.Pointer(VerticesVar)))
 
 }
 
@@ -249,7 +249,7 @@ func (x *Box) InitFromVectors(NVectorsVar uint, VectorsVar []Vec3) *Box {
 	return cret
 }
 
-var xBoxIntersection func(uintptr, *Box, *Box) bool
+var xBoxIntersection func(uintptr, *Box, uintptr) bool
 
 // Intersects the two given #graphene_box_t.
 //
@@ -257,16 +257,16 @@ var xBoxIntersection func(uintptr, *Box, *Box) bool
 // initialized with graphene_box_empty().
 func (x *Box) Intersection(BVar *Box, ResVar *Box) bool {
 
-	cret := xBoxIntersection(x.GoPointer(), BVar, ResVar)
+	cret := xBoxIntersection(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 	return cret
 }
 
-var xBoxUnion func(uintptr, *Box, *Box)
+var xBoxUnion func(uintptr, *Box, uintptr)
 
 // Unions the two given #graphene_box_t.
 func (x *Box) Union(BVar *Box, ResVar *Box) {
 
-	xBoxUnion(x.GoPointer(), BVar, ResVar)
+	xBoxUnion(x.GoPointer(), BVar, uintptr(unsafe.Pointer(ResVar)))
 
 }
 
