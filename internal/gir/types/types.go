@@ -727,7 +727,7 @@ func (p *Property) Template(ns string, kinds KindMap) PropertyTemplate {
 	var (
 		goType                           = p.AnyType.Translate(ns, kinds)
 		cName                            = p.Name
-		gvalueType, setMethod, getMethod = mapGoTypeToGValue(goType)
+		gvalueType, setMethod, getMethod = mapGoTypeToGValue(goType, ns, kinds)
 	)
 
 	return PropertyTemplate{
@@ -743,8 +743,9 @@ func (p *Property) Template(ns string, kinds KindMap) PropertyTemplate {
 	}
 }
 
-func mapGoTypeToGValue(goType string) (gvalueType, setMethod, getMethod string) {
-	switch strings.TrimPrefix(goType, "*") {
+func mapGoTypeToGValue(goType string, ns string, kinds KindMap) (gvalueType, setMethod, getMethod string) {
+	// Primitive types
+	switch goType {
 	case "bool":
 		return "TypeBooleanVal", "SetBoolean", "GetBoolean"
 	case "byte":
@@ -777,6 +778,13 @@ func mapGoTypeToGValue(goType string) (gvalueType, setMethod, getMethod string) 
 		return "BoxedByteArray", "SetBoxed", "GetBoxed"
 	case "[]uintptr":
 		return "BoxedPtrArray", "SetBoxed", "GetBoxed"
+	}
+
+	// Complex types
+	kind := kinds.Kind(ns, goType)
+	switch kind {
+	case EnumsType, BitfieldsType:
+		return "TypeEnumVal", "SetEnum", "GetEnum" // These are just ints internally
 	default:
 		return "", "", ""
 	}

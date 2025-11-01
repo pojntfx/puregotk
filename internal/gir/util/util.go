@@ -220,6 +220,12 @@ func PropertyScalarSet(notGObject bool, gvalueType, setMethod string) string {
 	if notGObject {
 		prefix = "gobject."
 	}
+
+	// For enums, we need to cast to int
+	if gvalueType == "TypeEnumVal" {
+		return prefix + gvalueType + ")\n\tv." + setMethod + "(int(value)"
+	}
+
 	return prefix + gvalueType + ")\n\tv." + setMethod + "(value"
 }
 

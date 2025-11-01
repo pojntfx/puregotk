@@ -50,15 +50,13 @@ func (p *Pass) collectTypes(r types.Repository) {
 		p.Types.Add(ns.Name, rec.Name, types.RecordsType, rec)
 	}
 	for _, en := range ns.Enums {
-		// TODO: This probably shouldn't be aliastype, but we should make dedicated types
-		p.Types.Add(ns.Name, en.Name, types.AliasType, en)
+		p.Types.Add(ns.Name, en.Name, types.EnumsType, en)
 	}
 	for _, cb := range ns.Callbacks {
 		p.Types.Add(ns.Name, cb.Name, types.CallbackType, cb)
 	}
 	for _, b := range ns.Bitfields {
-		// TODO: This probably shouldn't be aliastype, but we should make dedicated types
-		p.Types.Add(ns.Name, b.Name, types.AliasType, b)
+		p.Types.Add(ns.Name, b.Name, types.BitfieldsType, b)
 	}
 	for _, inter := range ns.Interfaces {
 		p.Types.Add(ns.Name, inter.Name, types.InterfacesType, inter)

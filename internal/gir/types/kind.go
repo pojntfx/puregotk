@@ -16,6 +16,8 @@ const (
 	InterfacesType
 	RecordsType
 	SliceType
+	EnumsType
+	BitfieldsType
 	OtherType
 )
 
