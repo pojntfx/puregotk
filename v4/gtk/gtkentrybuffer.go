@@ -55,8 +55,8 @@ func (x *EntryBufferClass) OverrideInsertedText(cb func(*EntryBuffer, uint, stri
 	if cb == nil {
 		x.xInsertedText = 0
 	} else {
-		x.xInsertedText = purego.NewCallback(func(BufferVarp uintptr, PositionVarp uint, CharsVarp string, NCharsVarp uint) {
-			cb(EntryBufferNewFromInternalPtr(BufferVarp), PositionVarp, CharsVarp, NCharsVarp)
+		x.xInsertedText = purego.NewCallback(func(BufferVarp uintptr, PositionVarp uint, CharsVarp uintptr, NCharsVarp uint) {
+			cb(EntryBufferNewFromInternalPtr(BufferVarp), PositionVarp, core.GoString(CharsVarp), NCharsVarp)
 		})
 	}
 }
@@ -147,8 +147,8 @@ func (x *EntryBufferClass) OverrideInsertText(cb func(*EntryBuffer, uint, string
 	if cb == nil {
 		x.xInsertText = 0
 	} else {
-		x.xInsertText = purego.NewCallback(func(BufferVarp uintptr, PositionVarp uint, CharsVarp string, NCharsVarp uint) uint {
-			return cb(EntryBufferNewFromInternalPtr(BufferVarp), PositionVarp, CharsVarp, NCharsVarp)
+		x.xInsertText = purego.NewCallback(func(BufferVarp uintptr, PositionVarp uint, CharsVarp uintptr, NCharsVarp uint) uint {
+			return cb(EntryBufferNewFromInternalPtr(BufferVarp), PositionVarp, core.GoString(CharsVarp), NCharsVarp)
 		})
 	}
 }
@@ -621,12 +621,12 @@ func (x *EntryBuffer) ConnectInsertedText(cb *func(EntryBuffer, uint, string, ui
 		return gobject.SignalConnect(x.GoPointer(), "inserted-text", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, PositionVarp uint, CharsVarp string, NCharsVarp uint) {
+	fcb := func(clsPtr uintptr, PositionVarp uint, CharsVarp uintptr, NCharsVarp uint) {
 		fa := EntryBuffer{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, PositionVarp, CharsVarp, NCharsVarp)
+		cbFn(fa, PositionVarp, core.GoString(CharsVarp), NCharsVarp)
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

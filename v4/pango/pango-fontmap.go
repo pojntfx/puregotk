@@ -199,8 +199,8 @@ func (x *FontMapClass) OverrideGetFamily(cb func(*FontMap, string) *FontFamily) 
 	if cb == nil {
 		x.xGetFamily = 0
 	} else {
-		x.xGetFamily = purego.NewCallback(func(FontmapVarp uintptr, NameVarp string) uintptr {
-			ret := cb(FontMapNewFromInternalPtr(FontmapVarp), NameVarp)
+		x.xGetFamily = purego.NewCallback(func(FontmapVarp uintptr, NameVarp uintptr) uintptr {
+			ret := cb(FontMapNewFromInternalPtr(FontmapVarp), core.GoString(NameVarp))
 			if ret == nil {
 				return 0
 			}

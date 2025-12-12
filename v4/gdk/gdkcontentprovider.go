@@ -164,8 +164,8 @@ func (x *ContentProviderClass) OverrideWriteMimeTypeAsync(cb func(*ContentProvid
 	if cb == nil {
 		x.xWriteMimeTypeAsync = 0
 	} else {
-		x.xWriteMimeTypeAsync = purego.NewCallback(func(ProviderVarp uintptr, MimeTypeVarp string, StreamVarp uintptr, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(ContentProviderNewFromInternalPtr(ProviderVarp), MimeTypeVarp, gio.OutputStreamNewFromInternalPtr(StreamVarp), IoPriorityVarp, gio.CancellableNewFromInternalPtr(CancellableVarp), (*gio.AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xWriteMimeTypeAsync = purego.NewCallback(func(ProviderVarp uintptr, MimeTypeVarp uintptr, StreamVarp uintptr, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(ContentProviderNewFromInternalPtr(ProviderVarp), core.GoString(MimeTypeVarp), gio.OutputStreamNewFromInternalPtr(StreamVarp), IoPriorityVarp, gio.CancellableNewFromInternalPtr(CancellableVarp), (*gio.AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }

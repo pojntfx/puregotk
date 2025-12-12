@@ -56,8 +56,8 @@ func (x *ActionGroupInterface) OverrideHasAction(cb func(ActionGroup, string) bo
 	if cb == nil {
 		x.xHasAction = 0
 	} else {
-		x.xHasAction = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string) bool {
-			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp)
+		x.xHasAction = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp uintptr) bool {
+			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, core.GoString(ActionNameVarp))
 		})
 	}
 }
@@ -106,8 +106,8 @@ func (x *ActionGroupInterface) OverrideGetActionEnabled(cb func(ActionGroup, str
 	if cb == nil {
 		x.xGetActionEnabled = 0
 	} else {
-		x.xGetActionEnabled = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string) bool {
-			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp)
+		x.xGetActionEnabled = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp uintptr) bool {
+			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, core.GoString(ActionNameVarp))
 		})
 	}
 }
@@ -131,8 +131,8 @@ func (x *ActionGroupInterface) OverrideGetActionParameterType(cb func(ActionGrou
 	if cb == nil {
 		x.xGetActionParameterType = 0
 	} else {
-		x.xGetActionParameterType = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string) *glib.VariantType {
-			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp)
+		x.xGetActionParameterType = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp uintptr) *glib.VariantType {
+			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, core.GoString(ActionNameVarp))
 		})
 	}
 }
@@ -156,8 +156,8 @@ func (x *ActionGroupInterface) OverrideGetActionStateType(cb func(ActionGroup, s
 	if cb == nil {
 		x.xGetActionStateType = 0
 	} else {
-		x.xGetActionStateType = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string) *glib.VariantType {
-			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp)
+		x.xGetActionStateType = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp uintptr) *glib.VariantType {
+			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, core.GoString(ActionNameVarp))
 		})
 	}
 }
@@ -181,8 +181,8 @@ func (x *ActionGroupInterface) OverrideGetActionStateHint(cb func(ActionGroup, s
 	if cb == nil {
 		x.xGetActionStateHint = 0
 	} else {
-		x.xGetActionStateHint = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string) *glib.Variant {
-			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp)
+		x.xGetActionStateHint = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp uintptr) *glib.Variant {
+			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, core.GoString(ActionNameVarp))
 		})
 	}
 }
@@ -206,8 +206,8 @@ func (x *ActionGroupInterface) OverrideGetActionState(cb func(ActionGroup, strin
 	if cb == nil {
 		x.xGetActionState = 0
 	} else {
-		x.xGetActionState = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string) *glib.Variant {
-			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp)
+		x.xGetActionState = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp uintptr) *glib.Variant {
+			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, core.GoString(ActionNameVarp))
 		})
 	}
 }
@@ -231,8 +231,8 @@ func (x *ActionGroupInterface) OverrideChangeActionState(cb func(ActionGroup, st
 	if cb == nil {
 		x.xChangeActionState = 0
 	} else {
-		x.xChangeActionState = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string, ValueVarp *glib.Variant) {
-			cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp, ValueVarp)
+		x.xChangeActionState = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp uintptr, ValueVarp *glib.Variant) {
+			cb(&ActionGroupBase{Ptr: ActionGroupVarp}, core.GoString(ActionNameVarp), ValueVarp)
 		})
 	}
 }
@@ -256,8 +256,8 @@ func (x *ActionGroupInterface) OverrideActivateAction(cb func(ActionGroup, strin
 	if cb == nil {
 		x.xActivateAction = 0
 	} else {
-		x.xActivateAction = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string, ParameterVarp *glib.Variant) {
-			cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp, ParameterVarp)
+		x.xActivateAction = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp uintptr, ParameterVarp *glib.Variant) {
+			cb(&ActionGroupBase{Ptr: ActionGroupVarp}, core.GoString(ActionNameVarp), ParameterVarp)
 		})
 	}
 }
@@ -281,8 +281,8 @@ func (x *ActionGroupInterface) OverrideActionAdded(cb func(ActionGroup, string))
 	if cb == nil {
 		x.xActionAdded = 0
 	} else {
-		x.xActionAdded = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string) {
-			cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp)
+		x.xActionAdded = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp uintptr) {
+			cb(&ActionGroupBase{Ptr: ActionGroupVarp}, core.GoString(ActionNameVarp))
 		})
 	}
 }
@@ -306,8 +306,8 @@ func (x *ActionGroupInterface) OverrideActionRemoved(cb func(ActionGroup, string
 	if cb == nil {
 		x.xActionRemoved = 0
 	} else {
-		x.xActionRemoved = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string) {
-			cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp)
+		x.xActionRemoved = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp uintptr) {
+			cb(&ActionGroupBase{Ptr: ActionGroupVarp}, core.GoString(ActionNameVarp))
 		})
 	}
 }
@@ -331,8 +331,8 @@ func (x *ActionGroupInterface) OverrideActionEnabledChanged(cb func(ActionGroup,
 	if cb == nil {
 		x.xActionEnabledChanged = 0
 	} else {
-		x.xActionEnabledChanged = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string, EnabledVarp bool) {
-			cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp, EnabledVarp)
+		x.xActionEnabledChanged = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp uintptr, EnabledVarp bool) {
+			cb(&ActionGroupBase{Ptr: ActionGroupVarp}, core.GoString(ActionNameVarp), EnabledVarp)
 		})
 	}
 }
@@ -356,8 +356,8 @@ func (x *ActionGroupInterface) OverrideActionStateChanged(cb func(ActionGroup, s
 	if cb == nil {
 		x.xActionStateChanged = 0
 	} else {
-		x.xActionStateChanged = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string, StateVarp *glib.Variant) {
-			cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp, StateVarp)
+		x.xActionStateChanged = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp uintptr, StateVarp *glib.Variant) {
+			cb(&ActionGroupBase{Ptr: ActionGroupVarp}, core.GoString(ActionNameVarp), StateVarp)
 		})
 	}
 }
@@ -381,8 +381,8 @@ func (x *ActionGroupInterface) OverrideQueryAction(cb func(ActionGroup, string, 
 	if cb == nil {
 		x.xQueryAction = 0
 	} else {
-		x.xQueryAction = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp string, EnabledVarp *bool, ParameterTypeVarp **glib.VariantType, StateTypeVarp **glib.VariantType, StateHintVarp **glib.Variant, StateVarp **glib.Variant) bool {
-			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, ActionNameVarp, EnabledVarp, ParameterTypeVarp, StateTypeVarp, StateHintVarp, StateVarp)
+		x.xQueryAction = purego.NewCallback(func(ActionGroupVarp uintptr, ActionNameVarp uintptr, EnabledVarp *bool, ParameterTypeVarp **glib.VariantType, StateTypeVarp **glib.VariantType, StateHintVarp **glib.Variant, StateVarp **glib.Variant) bool {
+			return cb(&ActionGroupBase{Ptr: ActionGroupVarp}, core.GoString(ActionNameVarp), EnabledVarp, ParameterTypeVarp, StateTypeVarp, StateHintVarp, StateVarp)
 		})
 	}
 }

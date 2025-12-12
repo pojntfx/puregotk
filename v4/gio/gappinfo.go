@@ -419,8 +419,8 @@ func (x *AppInfoIface) OverrideSetAsDefaultForType(cb func(AppInfo, string) bool
 	if cb == nil {
 		x.xSetAsDefaultForType = 0
 	} else {
-		x.xSetAsDefaultForType = purego.NewCallback(func(AppinfoVarp uintptr, ContentTypeVarp string) bool {
-			return cb(&AppInfoBase{Ptr: AppinfoVarp}, ContentTypeVarp)
+		x.xSetAsDefaultForType = purego.NewCallback(func(AppinfoVarp uintptr, ContentTypeVarp uintptr) bool {
+			return cb(&AppInfoBase{Ptr: AppinfoVarp}, core.GoString(ContentTypeVarp))
 		})
 	}
 }
@@ -448,8 +448,8 @@ func (x *AppInfoIface) OverrideSetAsDefaultForExtension(cb func(AppInfo, string)
 	if cb == nil {
 		x.xSetAsDefaultForExtension = 0
 	} else {
-		x.xSetAsDefaultForExtension = purego.NewCallback(func(AppinfoVarp uintptr, ExtensionVarp string) bool {
-			return cb(&AppInfoBase{Ptr: AppinfoVarp}, ExtensionVarp)
+		x.xSetAsDefaultForExtension = purego.NewCallback(func(AppinfoVarp uintptr, ExtensionVarp uintptr) bool {
+			return cb(&AppInfoBase{Ptr: AppinfoVarp}, core.GoString(ExtensionVarp))
 		})
 	}
 }
@@ -477,8 +477,8 @@ func (x *AppInfoIface) OverrideAddSupportsType(cb func(AppInfo, string) bool) {
 	if cb == nil {
 		x.xAddSupportsType = 0
 	} else {
-		x.xAddSupportsType = purego.NewCallback(func(AppinfoVarp uintptr, ContentTypeVarp string) bool {
-			return cb(&AppInfoBase{Ptr: AppinfoVarp}, ContentTypeVarp)
+		x.xAddSupportsType = purego.NewCallback(func(AppinfoVarp uintptr, ContentTypeVarp uintptr) bool {
+			return cb(&AppInfoBase{Ptr: AppinfoVarp}, core.GoString(ContentTypeVarp))
 		})
 	}
 }
@@ -535,8 +535,8 @@ func (x *AppInfoIface) OverrideRemoveSupportsType(cb func(AppInfo, string) bool)
 	if cb == nil {
 		x.xRemoveSupportsType = 0
 	} else {
-		x.xRemoveSupportsType = purego.NewCallback(func(AppinfoVarp uintptr, ContentTypeVarp string) bool {
-			return cb(&AppInfoBase{Ptr: AppinfoVarp}, ContentTypeVarp)
+		x.xRemoveSupportsType = purego.NewCallback(func(AppinfoVarp uintptr, ContentTypeVarp uintptr) bool {
+			return cb(&AppInfoBase{Ptr: AppinfoVarp}, core.GoString(ContentTypeVarp))
 		})
 	}
 }
@@ -672,8 +672,8 @@ func (x *AppInfoIface) OverrideSetAsLastUsedForType(cb func(AppInfo, string) boo
 	if cb == nil {
 		x.xSetAsLastUsedForType = 0
 	} else {
-		x.xSetAsLastUsedForType = purego.NewCallback(func(AppinfoVarp uintptr, ContentTypeVarp string) bool {
-			return cb(&AppInfoBase{Ptr: AppinfoVarp}, ContentTypeVarp)
+		x.xSetAsLastUsedForType = purego.NewCallback(func(AppinfoVarp uintptr, ContentTypeVarp uintptr) bool {
+			return cb(&AppInfoBase{Ptr: AppinfoVarp}, core.GoString(ContentTypeVarp))
 		})
 	}
 }
@@ -857,8 +857,8 @@ func (x *AppLaunchContextClass) OverrideLaunchFailed(cb func(*AppLaunchContext, 
 	if cb == nil {
 		x.xLaunchFailed = 0
 	} else {
-		x.xLaunchFailed = purego.NewCallback(func(ContextVarp uintptr, StartupNotifyIdVarp string) {
-			cb(AppLaunchContextNewFromInternalPtr(ContextVarp), StartupNotifyIdVarp)
+		x.xLaunchFailed = purego.NewCallback(func(ContextVarp uintptr, StartupNotifyIdVarp uintptr) {
+			cb(AppLaunchContextNewFromInternalPtr(ContextVarp), core.GoString(StartupNotifyIdVarp))
 		})
 	}
 }
@@ -1947,12 +1947,12 @@ func (x *AppLaunchContext) ConnectLaunchFailed(cb *func(AppLaunchContext, string
 		return gobject.SignalConnect(x.GoPointer(), "launch-failed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, StartupNotifyIdVarp string) {
+	fcb := func(clsPtr uintptr, StartupNotifyIdVarp uintptr) {
 		fa := AppLaunchContext{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, StartupNotifyIdVarp)
+		cbFn(fa, core.GoString(StartupNotifyIdVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

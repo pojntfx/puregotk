@@ -200,12 +200,12 @@ func (x *CellRendererToggle) ConnectToggled(cb *func(CellRendererToggle, string)
 		return gobject.SignalConnect(x.GoPointer(), "toggled", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, PathVarp string) {
+	fcb := func(clsPtr uintptr, PathVarp uintptr) {
 		fa := CellRendererToggle{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, PathVarp)
+		cbFn(fa, core.GoString(PathVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

@@ -120,12 +120,12 @@ func (x *EmojiChooser) ConnectEmojiPicked(cb *func(EmojiChooser, string)) uint32
 		return gobject.SignalConnect(x.GoPointer(), "emoji-picked", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, TextVarp string) {
+	fcb := func(clsPtr uintptr, TextVarp uintptr) {
 		fa := EmojiChooser{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, TextVarp)
+		cbFn(fa, core.GoString(TextVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

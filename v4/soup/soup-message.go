@@ -956,12 +956,12 @@ func (x *Message) ConnectContentSniffed(cb *func(Message, string, uintptr)) uint
 		return gobject.SignalConnect(x.GoPointer(), "content-sniffed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, TypeVarp string, ParamsVarp uintptr) {
+	fcb := func(clsPtr uintptr, TypeVarp uintptr, ParamsVarp uintptr) {
 		fa := Message{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, TypeVarp, ParamsVarp)
+		cbFn(fa, core.GoString(TypeVarp), ParamsVarp)
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

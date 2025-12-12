@@ -6,6 +6,7 @@ import (
 	"unsafe"
 
 	"github.com/jwijenbergh/purego"
+	"github.com/jwijenbergh/puregotk/pkg/core"
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
@@ -26,8 +27,8 @@ func (x *NativeVolumeMonitorClass) OverrideGetMountForMountPath(cb func(string, 
 	if cb == nil {
 		x.xGetMountForMountPath = 0
 	} else {
-		x.xGetMountForMountPath = purego.NewCallback(func(MountPathVarp string, CancellableVarp uintptr) uintptr {
-			ret := cb(MountPathVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xGetMountForMountPath = purego.NewCallback(func(MountPathVarp uintptr, CancellableVarp uintptr) uintptr {
+			ret := cb(core.GoString(MountPathVarp), CancellableNewFromInternalPtr(CancellableVarp))
 			if ret == nil {
 				return 0
 			}

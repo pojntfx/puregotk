@@ -32,8 +32,8 @@ func (x *RemoteActionGroupInterface) OverrideActivateActionFull(cb func(RemoteAc
 	if cb == nil {
 		x.xActivateActionFull = 0
 	} else {
-		x.xActivateActionFull = purego.NewCallback(func(RemoteVarp uintptr, ActionNameVarp string, ParameterVarp *glib.Variant, PlatformDataVarp *glib.Variant) {
-			cb(&RemoteActionGroupBase{Ptr: RemoteVarp}, ActionNameVarp, ParameterVarp, PlatformDataVarp)
+		x.xActivateActionFull = purego.NewCallback(func(RemoteVarp uintptr, ActionNameVarp uintptr, ParameterVarp *glib.Variant, PlatformDataVarp *glib.Variant) {
+			cb(&RemoteActionGroupBase{Ptr: RemoteVarp}, core.GoString(ActionNameVarp), ParameterVarp, PlatformDataVarp)
 		})
 	}
 }
@@ -57,8 +57,8 @@ func (x *RemoteActionGroupInterface) OverrideChangeActionStateFull(cb func(Remot
 	if cb == nil {
 		x.xChangeActionStateFull = 0
 	} else {
-		x.xChangeActionStateFull = purego.NewCallback(func(RemoteVarp uintptr, ActionNameVarp string, ValueVarp *glib.Variant, PlatformDataVarp *glib.Variant) {
-			cb(&RemoteActionGroupBase{Ptr: RemoteVarp}, ActionNameVarp, ValueVarp, PlatformDataVarp)
+		x.xChangeActionStateFull = purego.NewCallback(func(RemoteVarp uintptr, ActionNameVarp uintptr, ValueVarp *glib.Variant, PlatformDataVarp *glib.Variant) {
+			cb(&RemoteActionGroupBase{Ptr: RemoteVarp}, core.GoString(ActionNameVarp), ValueVarp, PlatformDataVarp)
 		})
 	}
 }

@@ -39,8 +39,8 @@ func (x *ApplicationCommandLineClass) OverridePrintLiteral(cb func(*ApplicationC
 	if cb == nil {
 		x.xPrintLiteral = 0
 	} else {
-		x.xPrintLiteral = purego.NewCallback(func(CmdlineVarp uintptr, MessageVarp string) {
-			cb(ApplicationCommandLineNewFromInternalPtr(CmdlineVarp), MessageVarp)
+		x.xPrintLiteral = purego.NewCallback(func(CmdlineVarp uintptr, MessageVarp uintptr) {
+			cb(ApplicationCommandLineNewFromInternalPtr(CmdlineVarp), core.GoString(MessageVarp))
 		})
 	}
 }
@@ -62,8 +62,8 @@ func (x *ApplicationCommandLineClass) OverridePrinterrLiteral(cb func(*Applicati
 	if cb == nil {
 		x.xPrinterrLiteral = 0
 	} else {
-		x.xPrinterrLiteral = purego.NewCallback(func(CmdlineVarp uintptr, MessageVarp string) {
-			cb(ApplicationCommandLineNewFromInternalPtr(CmdlineVarp), MessageVarp)
+		x.xPrinterrLiteral = purego.NewCallback(func(CmdlineVarp uintptr, MessageVarp uintptr) {
+			cb(ApplicationCommandLineNewFromInternalPtr(CmdlineVarp), core.GoString(MessageVarp))
 		})
 	}
 }

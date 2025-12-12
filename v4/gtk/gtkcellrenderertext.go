@@ -31,8 +31,8 @@ func (x *CellRendererTextClass) OverrideEdited(cb func(*CellRendererText, string
 	if cb == nil {
 		x.xEdited = 0
 	} else {
-		x.xEdited = purego.NewCallback(func(CellRendererTextVarp uintptr, PathVarp string, NewTextVarp string) {
-			cb(CellRendererTextNewFromInternalPtr(CellRendererTextVarp), PathVarp, NewTextVarp)
+		x.xEdited = purego.NewCallback(func(CellRendererTextVarp uintptr, PathVarp uintptr, NewTextVarp uintptr) {
+			cb(CellRendererTextNewFromInternalPtr(CellRendererTextVarp), core.GoString(PathVarp), core.GoString(NewTextVarp))
 		})
 	}
 }
@@ -732,12 +732,12 @@ func (x *CellRendererText) ConnectEdited(cb *func(CellRendererText, string, stri
 		return gobject.SignalConnect(x.GoPointer(), "edited", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, PathVarp string, NewTextVarp string) {
+	fcb := func(clsPtr uintptr, PathVarp uintptr, NewTextVarp uintptr) {
 		fa := CellRendererText{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, PathVarp, NewTextVarp)
+		cbFn(fa, core.GoString(PathVarp), core.GoString(NewTextVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

@@ -51,8 +51,8 @@ func (x *SettingsBackendClass) OverrideRead(cb func(*SettingsBackend, string, *g
 	if cb == nil {
 		x.xRead = 0
 	} else {
-		x.xRead = purego.NewCallback(func(BackendVarp uintptr, KeyVarp string, ExpectedTypeVarp *glib.VariantType, DefaultValueVarp bool) *glib.Variant {
-			return cb(SettingsBackendNewFromInternalPtr(BackendVarp), KeyVarp, ExpectedTypeVarp, DefaultValueVarp)
+		x.xRead = purego.NewCallback(func(BackendVarp uintptr, KeyVarp uintptr, ExpectedTypeVarp *glib.VariantType, DefaultValueVarp bool) *glib.Variant {
+			return cb(SettingsBackendNewFromInternalPtr(BackendVarp), core.GoString(KeyVarp), ExpectedTypeVarp, DefaultValueVarp)
 		})
 	}
 }
@@ -76,8 +76,8 @@ func (x *SettingsBackendClass) OverrideGetWritable(cb func(*SettingsBackend, str
 	if cb == nil {
 		x.xGetWritable = 0
 	} else {
-		x.xGetWritable = purego.NewCallback(func(BackendVarp uintptr, KeyVarp string) bool {
-			return cb(SettingsBackendNewFromInternalPtr(BackendVarp), KeyVarp)
+		x.xGetWritable = purego.NewCallback(func(BackendVarp uintptr, KeyVarp uintptr) bool {
+			return cb(SettingsBackendNewFromInternalPtr(BackendVarp), core.GoString(KeyVarp))
 		})
 	}
 }
@@ -101,8 +101,8 @@ func (x *SettingsBackendClass) OverrideWrite(cb func(*SettingsBackend, string, *
 	if cb == nil {
 		x.xWrite = 0
 	} else {
-		x.xWrite = purego.NewCallback(func(BackendVarp uintptr, KeyVarp string, ValueVarp *glib.Variant, OriginTagVarp uintptr) bool {
-			return cb(SettingsBackendNewFromInternalPtr(BackendVarp), KeyVarp, ValueVarp, OriginTagVarp)
+		x.xWrite = purego.NewCallback(func(BackendVarp uintptr, KeyVarp uintptr, ValueVarp *glib.Variant, OriginTagVarp uintptr) bool {
+			return cb(SettingsBackendNewFromInternalPtr(BackendVarp), core.GoString(KeyVarp), ValueVarp, OriginTagVarp)
 		})
 	}
 }
@@ -151,8 +151,8 @@ func (x *SettingsBackendClass) OverrideReset(cb func(*SettingsBackend, string, u
 	if cb == nil {
 		x.xReset = 0
 	} else {
-		x.xReset = purego.NewCallback(func(BackendVarp uintptr, KeyVarp string, OriginTagVarp uintptr) {
-			cb(SettingsBackendNewFromInternalPtr(BackendVarp), KeyVarp, OriginTagVarp)
+		x.xReset = purego.NewCallback(func(BackendVarp uintptr, KeyVarp uintptr, OriginTagVarp uintptr) {
+			cb(SettingsBackendNewFromInternalPtr(BackendVarp), core.GoString(KeyVarp), OriginTagVarp)
 		})
 	}
 }
@@ -176,8 +176,8 @@ func (x *SettingsBackendClass) OverrideSubscribe(cb func(*SettingsBackend, strin
 	if cb == nil {
 		x.xSubscribe = 0
 	} else {
-		x.xSubscribe = purego.NewCallback(func(BackendVarp uintptr, NameVarp string) {
-			cb(SettingsBackendNewFromInternalPtr(BackendVarp), NameVarp)
+		x.xSubscribe = purego.NewCallback(func(BackendVarp uintptr, NameVarp uintptr) {
+			cb(SettingsBackendNewFromInternalPtr(BackendVarp), core.GoString(NameVarp))
 		})
 	}
 }
@@ -201,8 +201,8 @@ func (x *SettingsBackendClass) OverrideUnsubscribe(cb func(*SettingsBackend, str
 	if cb == nil {
 		x.xUnsubscribe = 0
 	} else {
-		x.xUnsubscribe = purego.NewCallback(func(BackendVarp uintptr, NameVarp string) {
-			cb(SettingsBackendNewFromInternalPtr(BackendVarp), NameVarp)
+		x.xUnsubscribe = purego.NewCallback(func(BackendVarp uintptr, NameVarp uintptr) {
+			cb(SettingsBackendNewFromInternalPtr(BackendVarp), core.GoString(NameVarp))
 		})
 	}
 }
@@ -251,8 +251,8 @@ func (x *SettingsBackendClass) OverrideGetPermission(cb func(*SettingsBackend, s
 	if cb == nil {
 		x.xGetPermission = 0
 	} else {
-		x.xGetPermission = purego.NewCallback(func(BackendVarp uintptr, PathVarp string) uintptr {
-			ret := cb(SettingsBackendNewFromInternalPtr(BackendVarp), PathVarp)
+		x.xGetPermission = purego.NewCallback(func(BackendVarp uintptr, PathVarp uintptr) uintptr {
+			ret := cb(SettingsBackendNewFromInternalPtr(BackendVarp), core.GoString(PathVarp))
 			if ret == nil {
 				return 0
 			}
@@ -286,8 +286,8 @@ func (x *SettingsBackendClass) OverrideReadUserValue(cb func(*SettingsBackend, s
 	if cb == nil {
 		x.xReadUserValue = 0
 	} else {
-		x.xReadUserValue = purego.NewCallback(func(BackendVarp uintptr, KeyVarp string, ExpectedTypeVarp *glib.VariantType) *glib.Variant {
-			return cb(SettingsBackendNewFromInternalPtr(BackendVarp), KeyVarp, ExpectedTypeVarp)
+		x.xReadUserValue = purego.NewCallback(func(BackendVarp uintptr, KeyVarp uintptr, ExpectedTypeVarp *glib.VariantType) *glib.Variant {
+			return cb(SettingsBackendNewFromInternalPtr(BackendVarp), core.GoString(KeyVarp), ExpectedTypeVarp)
 		})
 	}
 }

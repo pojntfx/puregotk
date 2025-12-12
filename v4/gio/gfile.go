@@ -347,8 +347,8 @@ func (x *FileIface) OverrideHasUriScheme(cb func(File, string) bool) {
 	if cb == nil {
 		x.xHasUriScheme = 0
 	} else {
-		x.xHasUriScheme = purego.NewCallback(func(FileVarp uintptr, UriSchemeVarp string) bool {
-			return cb(&FileBase{Ptr: FileVarp}, UriSchemeVarp)
+		x.xHasUriScheme = purego.NewCallback(func(FileVarp uintptr, UriSchemeVarp uintptr) bool {
+			return cb(&FileBase{Ptr: FileVarp}, core.GoString(UriSchemeVarp))
 		})
 	}
 }
@@ -582,8 +582,8 @@ func (x *FileIface) OverrideResolveRelativePath(cb func(File, string) *FileBase)
 	if cb == nil {
 		x.xResolveRelativePath = 0
 	} else {
-		x.xResolveRelativePath = purego.NewCallback(func(FileVarp uintptr, RelativePathVarp string) uintptr {
-			ret := cb(&FileBase{Ptr: FileVarp}, RelativePathVarp)
+		x.xResolveRelativePath = purego.NewCallback(func(FileVarp uintptr, RelativePathVarp uintptr) uintptr {
+			ret := cb(&FileBase{Ptr: FileVarp}, core.GoString(RelativePathVarp))
 			if ret == nil {
 				return 0
 			}
@@ -617,8 +617,8 @@ func (x *FileIface) OverrideGetChildForDisplayName(cb func(File, string) *FileBa
 	if cb == nil {
 		x.xGetChildForDisplayName = 0
 	} else {
-		x.xGetChildForDisplayName = purego.NewCallback(func(FileVarp uintptr, DisplayNameVarp string) uintptr {
-			ret := cb(&FileBase{Ptr: FileVarp}, DisplayNameVarp)
+		x.xGetChildForDisplayName = purego.NewCallback(func(FileVarp uintptr, DisplayNameVarp uintptr) uintptr {
+			ret := cb(&FileBase{Ptr: FileVarp}, core.GoString(DisplayNameVarp))
 			if ret == nil {
 				return 0
 			}
@@ -652,8 +652,8 @@ func (x *FileIface) OverrideEnumerateChildren(cb func(File, string, FileQueryInf
 	if cb == nil {
 		x.xEnumerateChildren = 0
 	} else {
-		x.xEnumerateChildren = purego.NewCallback(func(FileVarp uintptr, AttributesVarp string, FlagsVarp FileQueryInfoFlags, CancellableVarp uintptr) uintptr {
-			ret := cb(&FileBase{Ptr: FileVarp}, AttributesVarp, FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xEnumerateChildren = purego.NewCallback(func(FileVarp uintptr, AttributesVarp uintptr, FlagsVarp FileQueryInfoFlags, CancellableVarp uintptr) uintptr {
+			ret := cb(&FileBase{Ptr: FileVarp}, core.GoString(AttributesVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
 			if ret == nil {
 				return 0
 			}
@@ -687,8 +687,8 @@ func (x *FileIface) OverrideEnumerateChildrenAsync(cb func(File, string, FileQue
 	if cb == nil {
 		x.xEnumerateChildrenAsync = 0
 	} else {
-		x.xEnumerateChildrenAsync = purego.NewCallback(func(FileVarp uintptr, AttributesVarp string, FlagsVarp FileQueryInfoFlags, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(&FileBase{Ptr: FileVarp}, AttributesVarp, FlagsVarp, IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xEnumerateChildrenAsync = purego.NewCallback(func(FileVarp uintptr, AttributesVarp uintptr, FlagsVarp FileQueryInfoFlags, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(&FileBase{Ptr: FileVarp}, core.GoString(AttributesVarp), FlagsVarp, IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }
@@ -747,8 +747,8 @@ func (x *FileIface) OverrideQueryInfo(cb func(File, string, FileQueryInfoFlags, 
 	if cb == nil {
 		x.xQueryInfo = 0
 	} else {
-		x.xQueryInfo = purego.NewCallback(func(FileVarp uintptr, AttributesVarp string, FlagsVarp FileQueryInfoFlags, CancellableVarp uintptr) uintptr {
-			ret := cb(&FileBase{Ptr: FileVarp}, AttributesVarp, FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xQueryInfo = purego.NewCallback(func(FileVarp uintptr, AttributesVarp uintptr, FlagsVarp FileQueryInfoFlags, CancellableVarp uintptr) uintptr {
+			ret := cb(&FileBase{Ptr: FileVarp}, core.GoString(AttributesVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
 			if ret == nil {
 				return 0
 			}
@@ -782,8 +782,8 @@ func (x *FileIface) OverrideQueryInfoAsync(cb func(File, string, FileQueryInfoFl
 	if cb == nil {
 		x.xQueryInfoAsync = 0
 	} else {
-		x.xQueryInfoAsync = purego.NewCallback(func(FileVarp uintptr, AttributesVarp string, FlagsVarp FileQueryInfoFlags, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(&FileBase{Ptr: FileVarp}, AttributesVarp, FlagsVarp, IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xQueryInfoAsync = purego.NewCallback(func(FileVarp uintptr, AttributesVarp uintptr, FlagsVarp FileQueryInfoFlags, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(&FileBase{Ptr: FileVarp}, core.GoString(AttributesVarp), FlagsVarp, IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }
@@ -842,8 +842,8 @@ func (x *FileIface) OverrideQueryFilesystemInfo(cb func(File, string, *Cancellab
 	if cb == nil {
 		x.xQueryFilesystemInfo = 0
 	} else {
-		x.xQueryFilesystemInfo = purego.NewCallback(func(FileVarp uintptr, AttributesVarp string, CancellableVarp uintptr) uintptr {
-			ret := cb(&FileBase{Ptr: FileVarp}, AttributesVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xQueryFilesystemInfo = purego.NewCallback(func(FileVarp uintptr, AttributesVarp uintptr, CancellableVarp uintptr) uintptr {
+			ret := cb(&FileBase{Ptr: FileVarp}, core.GoString(AttributesVarp), CancellableNewFromInternalPtr(CancellableVarp))
 			if ret == nil {
 				return 0
 			}
@@ -877,8 +877,8 @@ func (x *FileIface) OverrideQueryFilesystemInfoAsync(cb func(File, string, int, 
 	if cb == nil {
 		x.xQueryFilesystemInfoAsync = 0
 	} else {
-		x.xQueryFilesystemInfoAsync = purego.NewCallback(func(FileVarp uintptr, AttributesVarp string, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(&FileBase{Ptr: FileVarp}, AttributesVarp, IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xQueryFilesystemInfoAsync = purego.NewCallback(func(FileVarp uintptr, AttributesVarp uintptr, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(&FileBase{Ptr: FileVarp}, core.GoString(AttributesVarp), IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }
@@ -1032,8 +1032,8 @@ func (x *FileIface) OverrideSetDisplayName(cb func(File, string, *Cancellable) *
 	if cb == nil {
 		x.xSetDisplayName = 0
 	} else {
-		x.xSetDisplayName = purego.NewCallback(func(FileVarp uintptr, DisplayNameVarp string, CancellableVarp uintptr) uintptr {
-			ret := cb(&FileBase{Ptr: FileVarp}, DisplayNameVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xSetDisplayName = purego.NewCallback(func(FileVarp uintptr, DisplayNameVarp uintptr, CancellableVarp uintptr) uintptr {
+			ret := cb(&FileBase{Ptr: FileVarp}, core.GoString(DisplayNameVarp), CancellableNewFromInternalPtr(CancellableVarp))
 			if ret == nil {
 				return 0
 			}
@@ -1067,8 +1067,8 @@ func (x *FileIface) OverrideSetDisplayNameAsync(cb func(File, string, int, *Canc
 	if cb == nil {
 		x.xSetDisplayNameAsync = 0
 	} else {
-		x.xSetDisplayNameAsync = purego.NewCallback(func(FileVarp uintptr, DisplayNameVarp string, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(&FileBase{Ptr: FileVarp}, DisplayNameVarp, IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xSetDisplayNameAsync = purego.NewCallback(func(FileVarp uintptr, DisplayNameVarp uintptr, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(&FileBase{Ptr: FileVarp}, core.GoString(DisplayNameVarp), IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }
@@ -1277,8 +1277,8 @@ func (x *FileIface) OverrideSetAttribute(cb func(File, string, FileAttributeType
 	if cb == nil {
 		x.xSetAttribute = 0
 	} else {
-		x.xSetAttribute = purego.NewCallback(func(FileVarp uintptr, AttributeVarp string, TypeVarp FileAttributeType, ValuePVarp uintptr, FlagsVarp FileQueryInfoFlags, CancellableVarp uintptr) bool {
-			return cb(&FileBase{Ptr: FileVarp}, AttributeVarp, TypeVarp, ValuePVarp, FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xSetAttribute = purego.NewCallback(func(FileVarp uintptr, AttributeVarp uintptr, TypeVarp FileAttributeType, ValuePVarp uintptr, FlagsVarp FileQueryInfoFlags, CancellableVarp uintptr) bool {
+			return cb(&FileBase{Ptr: FileVarp}, core.GoString(AttributeVarp), TypeVarp, ValuePVarp, FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
 		})
 	}
 }
@@ -1662,8 +1662,8 @@ func (x *FileIface) OverrideReplace(cb func(File, string, bool, FileCreateFlags,
 	if cb == nil {
 		x.xReplace = 0
 	} else {
-		x.xReplace = purego.NewCallback(func(FileVarp uintptr, EtagVarp string, MakeBackupVarp bool, FlagsVarp FileCreateFlags, CancellableVarp uintptr) uintptr {
-			ret := cb(&FileBase{Ptr: FileVarp}, EtagVarp, MakeBackupVarp, FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xReplace = purego.NewCallback(func(FileVarp uintptr, EtagVarp uintptr, MakeBackupVarp bool, FlagsVarp FileCreateFlags, CancellableVarp uintptr) uintptr {
+			ret := cb(&FileBase{Ptr: FileVarp}, core.GoString(EtagVarp), MakeBackupVarp, FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
 			if ret == nil {
 				return 0
 			}
@@ -1697,8 +1697,8 @@ func (x *FileIface) OverrideReplaceAsync(cb func(File, string, bool, FileCreateF
 	if cb == nil {
 		x.xReplaceAsync = 0
 	} else {
-		x.xReplaceAsync = purego.NewCallback(func(FileVarp uintptr, EtagVarp string, MakeBackupVarp bool, FlagsVarp FileCreateFlags, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(&FileBase{Ptr: FileVarp}, EtagVarp, MakeBackupVarp, FlagsVarp, IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xReplaceAsync = purego.NewCallback(func(FileVarp uintptr, EtagVarp uintptr, MakeBackupVarp bool, FlagsVarp FileCreateFlags, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(&FileBase{Ptr: FileVarp}, core.GoString(EtagVarp), MakeBackupVarp, FlagsVarp, IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }
@@ -1984,8 +1984,8 @@ func (x *FileIface) OverrideMakeSymbolicLink(cb func(File, string, *Cancellable)
 	if cb == nil {
 		x.xMakeSymbolicLink = 0
 	} else {
-		x.xMakeSymbolicLink = purego.NewCallback(func(FileVarp uintptr, SymlinkValueVarp string, CancellableVarp uintptr) bool {
-			return cb(&FileBase{Ptr: FileVarp}, SymlinkValueVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xMakeSymbolicLink = purego.NewCallback(func(FileVarp uintptr, SymlinkValueVarp uintptr, CancellableVarp uintptr) bool {
+			return cb(&FileBase{Ptr: FileVarp}, core.GoString(SymlinkValueVarp), CancellableNewFromInternalPtr(CancellableVarp))
 		})
 	}
 }
@@ -2011,8 +2011,8 @@ func (x *FileIface) OverrideMakeSymbolicLinkAsync(cb func(File, string, int, *Ca
 	if cb == nil {
 		x.xMakeSymbolicLinkAsync = 0
 	} else {
-		x.xMakeSymbolicLinkAsync = purego.NewCallback(func(FileVarp uintptr, SymlinkValueVarp string, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(&FileBase{Ptr: FileVarp}, SymlinkValueVarp, IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xMakeSymbolicLinkAsync = purego.NewCallback(func(FileVarp uintptr, SymlinkValueVarp uintptr, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(&FileBase{Ptr: FileVarp}, core.GoString(SymlinkValueVarp), IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }
@@ -2687,8 +2687,8 @@ func (x *FileIface) OverrideReplaceReadwrite(cb func(File, string, bool, FileCre
 	if cb == nil {
 		x.xReplaceReadwrite = 0
 	} else {
-		x.xReplaceReadwrite = purego.NewCallback(func(FileVarp uintptr, EtagVarp string, MakeBackupVarp bool, FlagsVarp FileCreateFlags, CancellableVarp uintptr) uintptr {
-			ret := cb(&FileBase{Ptr: FileVarp}, EtagVarp, MakeBackupVarp, FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xReplaceReadwrite = purego.NewCallback(func(FileVarp uintptr, EtagVarp uintptr, MakeBackupVarp bool, FlagsVarp FileCreateFlags, CancellableVarp uintptr) uintptr {
+			ret := cb(&FileBase{Ptr: FileVarp}, core.GoString(EtagVarp), MakeBackupVarp, FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
 			if ret == nil {
 				return 0
 			}
@@ -2722,8 +2722,8 @@ func (x *FileIface) OverrideReplaceReadwriteAsync(cb func(File, string, bool, Fi
 	if cb == nil {
 		x.xReplaceReadwriteAsync = 0
 	} else {
-		x.xReplaceReadwriteAsync = purego.NewCallback(func(FileVarp uintptr, EtagVarp string, MakeBackupVarp bool, FlagsVarp FileCreateFlags, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(&FileBase{Ptr: FileVarp}, EtagVarp, MakeBackupVarp, FlagsVarp, IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xReplaceReadwriteAsync = purego.NewCallback(func(FileVarp uintptr, EtagVarp uintptr, MakeBackupVarp bool, FlagsVarp FileCreateFlags, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(&FileBase{Ptr: FileVarp}, core.GoString(EtagVarp), MakeBackupVarp, FlagsVarp, IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }

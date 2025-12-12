@@ -625,8 +625,8 @@ func (x *IOFuncs) OverrideIoRead(cb func(*IOChannel, string, uint, uint) IOStatu
 	if cb == nil {
 		x.xIoRead = 0
 	} else {
-		x.xIoRead = purego.NewCallback(func(ChannelVarp *IOChannel, BufVarp string, CountVarp uint, BytesReadVarp uint) IOStatus {
-			return cb(ChannelVarp, BufVarp, CountVarp, BytesReadVarp)
+		x.xIoRead = purego.NewCallback(func(ChannelVarp *IOChannel, BufVarp uintptr, CountVarp uint, BytesReadVarp uint) IOStatus {
+			return cb(ChannelVarp, core.GoString(BufVarp), CountVarp, BytesReadVarp)
 		})
 	}
 }
@@ -658,8 +658,8 @@ func (x *IOFuncs) OverrideIoWrite(cb func(*IOChannel, string, uint, uint) IOStat
 	if cb == nil {
 		x.xIoWrite = 0
 	} else {
-		x.xIoWrite = purego.NewCallback(func(ChannelVarp *IOChannel, BufVarp string, CountVarp uint, BytesWrittenVarp uint) IOStatus {
-			return cb(ChannelVarp, BufVarp, CountVarp, BytesWrittenVarp)
+		x.xIoWrite = purego.NewCallback(func(ChannelVarp *IOChannel, BufVarp uintptr, CountVarp uint, BytesWrittenVarp uint) IOStatus {
+			return cb(ChannelVarp, core.GoString(BufVarp), CountVarp, BytesWrittenVarp)
 		})
 	}
 }

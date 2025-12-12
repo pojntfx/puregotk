@@ -1654,12 +1654,12 @@ func (x *CellArea) ConnectAddEditable(cb *func(CellArea, uintptr, uintptr, uintp
 		return gobject.SignalConnect(x.GoPointer(), "add-editable", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, RendererVarp uintptr, EditableVarp uintptr, CellAreaVarp uintptr, PathVarp string) {
+	fcb := func(clsPtr uintptr, RendererVarp uintptr, EditableVarp uintptr, CellAreaVarp uintptr, PathVarp uintptr) {
 		fa := CellArea{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, RendererVarp, EditableVarp, CellAreaVarp, PathVarp)
+		cbFn(fa, RendererVarp, EditableVarp, CellAreaVarp, core.GoString(PathVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)
@@ -1701,12 +1701,12 @@ func (x *CellArea) ConnectFocusChanged(cb *func(CellArea, uintptr, string)) uint
 		return gobject.SignalConnect(x.GoPointer(), "focus-changed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, RendererVarp uintptr, PathVarp string) {
+	fcb := func(clsPtr uintptr, RendererVarp uintptr, PathVarp uintptr) {
 		fa := CellArea{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, RendererVarp, PathVarp)
+		cbFn(fa, RendererVarp, core.GoString(PathVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

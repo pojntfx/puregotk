@@ -232,8 +232,8 @@ func (x *CellRendererClass) OverrideActivate(cb func(*CellRenderer, *gdk.Event, 
 	if cb == nil {
 		x.xActivate = 0
 	} else {
-		x.xActivate = purego.NewCallback(func(CellVarp uintptr, EventVarp uintptr, WidgetVarp uintptr, PathVarp string, BackgroundAreaVarp *gdk.Rectangle, CellAreaVarp *gdk.Rectangle, FlagsVarp CellRendererState) bool {
-			return cb(CellRendererNewFromInternalPtr(CellVarp), gdk.EventNewFromInternalPtr(EventVarp), WidgetNewFromInternalPtr(WidgetVarp), PathVarp, BackgroundAreaVarp, CellAreaVarp, FlagsVarp)
+		x.xActivate = purego.NewCallback(func(CellVarp uintptr, EventVarp uintptr, WidgetVarp uintptr, PathVarp uintptr, BackgroundAreaVarp *gdk.Rectangle, CellAreaVarp *gdk.Rectangle, FlagsVarp CellRendererState) bool {
+			return cb(CellRendererNewFromInternalPtr(CellVarp), gdk.EventNewFromInternalPtr(EventVarp), WidgetNewFromInternalPtr(WidgetVarp), core.GoString(PathVarp), BackgroundAreaVarp, CellAreaVarp, FlagsVarp)
 		})
 	}
 }
@@ -257,8 +257,8 @@ func (x *CellRendererClass) OverrideStartEditing(cb func(*CellRenderer, *gdk.Eve
 	if cb == nil {
 		x.xStartEditing = 0
 	} else {
-		x.xStartEditing = purego.NewCallback(func(CellVarp uintptr, EventVarp uintptr, WidgetVarp uintptr, PathVarp string, BackgroundAreaVarp *gdk.Rectangle, CellAreaVarp *gdk.Rectangle, FlagsVarp CellRendererState) uintptr {
-			ret := cb(CellRendererNewFromInternalPtr(CellVarp), gdk.EventNewFromInternalPtr(EventVarp), WidgetNewFromInternalPtr(WidgetVarp), PathVarp, BackgroundAreaVarp, CellAreaVarp, FlagsVarp)
+		x.xStartEditing = purego.NewCallback(func(CellVarp uintptr, EventVarp uintptr, WidgetVarp uintptr, PathVarp uintptr, BackgroundAreaVarp *gdk.Rectangle, CellAreaVarp *gdk.Rectangle, FlagsVarp CellRendererState) uintptr {
+			ret := cb(CellRendererNewFromInternalPtr(CellVarp), gdk.EventNewFromInternalPtr(EventVarp), WidgetNewFromInternalPtr(WidgetVarp), core.GoString(PathVarp), BackgroundAreaVarp, CellAreaVarp, FlagsVarp)
 			if ret == nil {
 				return 0
 			}
@@ -317,8 +317,8 @@ func (x *CellRendererClass) OverrideEditingStarted(cb func(*CellRenderer, CellEd
 	if cb == nil {
 		x.xEditingStarted = 0
 	} else {
-		x.xEditingStarted = purego.NewCallback(func(CellVarp uintptr, EditableVarp uintptr, PathVarp string) {
-			cb(CellRendererNewFromInternalPtr(CellVarp), &CellEditableBase{Ptr: EditableVarp}, PathVarp)
+		x.xEditingStarted = purego.NewCallback(func(CellVarp uintptr, EditableVarp uintptr, PathVarp uintptr) {
+			cb(CellRendererNewFromInternalPtr(CellVarp), &CellEditableBase{Ptr: EditableVarp}, core.GoString(PathVarp))
 		})
 	}
 }
@@ -999,12 +999,12 @@ func (x *CellRenderer) ConnectEditingStarted(cb *func(CellRenderer, uintptr, str
 		return gobject.SignalConnect(x.GoPointer(), "editing-started", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, EditableVarp uintptr, PathVarp string) {
+	fcb := func(clsPtr uintptr, EditableVarp uintptr, PathVarp uintptr) {
 		fa := CellRenderer{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, EditableVarp, PathVarp)
+		cbFn(fa, EditableVarp, core.GoString(PathVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

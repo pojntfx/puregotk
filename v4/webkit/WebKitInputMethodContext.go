@@ -155,8 +155,8 @@ func (x *InputMethodContextClass) OverrideCommitted(cb func(*InputMethodContext,
 	if cb == nil {
 		x.xCommitted = 0
 	} else {
-		x.xCommitted = purego.NewCallback(func(ContextVarp uintptr, TextVarp string) {
-			cb(InputMethodContextNewFromInternalPtr(ContextVarp), TextVarp)
+		x.xCommitted = purego.NewCallback(func(ContextVarp uintptr, TextVarp uintptr) {
+			cb(InputMethodContextNewFromInternalPtr(ContextVarp), core.GoString(TextVarp))
 		})
 	}
 }
@@ -399,8 +399,8 @@ func (x *InputMethodContextClass) OverrideNotifySurrounding(cb func(*InputMethod
 	if cb == nil {
 		x.xNotifySurrounding = 0
 	} else {
-		x.xNotifySurrounding = purego.NewCallback(func(ContextVarp uintptr, TextVarp string, LengthVarp uint, CursorIndexVarp uint, SelectionIndexVarp uint) {
-			cb(InputMethodContextNewFromInternalPtr(ContextVarp), TextVarp, LengthVarp, CursorIndexVarp, SelectionIndexVarp)
+		x.xNotifySurrounding = purego.NewCallback(func(ContextVarp uintptr, TextVarp uintptr, LengthVarp uint, CursorIndexVarp uint, SelectionIndexVarp uint) {
+			cb(InputMethodContextNewFromInternalPtr(ContextVarp), core.GoString(TextVarp), LengthVarp, CursorIndexVarp, SelectionIndexVarp)
 		})
 	}
 }
@@ -1100,12 +1100,12 @@ func (x *InputMethodContext) ConnectCommitted(cb *func(InputMethodContext, strin
 		return gobject.SignalConnect(x.GoPointer(), "committed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, TextVarp string) {
+	fcb := func(clsPtr uintptr, TextVarp uintptr) {
 		fa := InputMethodContext{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, TextVarp)
+		cbFn(fa, core.GoString(TextVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

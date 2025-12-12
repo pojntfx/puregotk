@@ -119,8 +119,8 @@ func (x *TextViewClass) OverrideInsertAtCursor(cb func(*TextView, string)) {
 	if cb == nil {
 		x.xInsertAtCursor = 0
 	} else {
-		x.xInsertAtCursor = purego.NewCallback(func(TextViewVarp uintptr, StrVarp string) {
-			cb(TextViewNewFromInternalPtr(TextViewVarp), StrVarp)
+		x.xInsertAtCursor = purego.NewCallback(func(TextViewVarp uintptr, StrVarp uintptr) {
+			cb(TextViewNewFromInternalPtr(TextViewVarp), core.GoString(StrVarp))
 		})
 	}
 }
@@ -2107,12 +2107,12 @@ func (x *TextView) ConnectInsertAtCursor(cb *func(TextView, string)) uint32 {
 		return gobject.SignalConnect(x.GoPointer(), "insert-at-cursor", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, StringVarp string) {
+	fcb := func(clsPtr uintptr, StringVarp uintptr) {
 		fa := TextView{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, StringVarp)
+		cbFn(fa, core.GoString(StringVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)
@@ -2255,12 +2255,12 @@ func (x *TextView) ConnectPreeditChanged(cb *func(TextView, string)) uint32 {
 		return gobject.SignalConnect(x.GoPointer(), "preedit-changed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, PreeditVarp string) {
+	fcb := func(clsPtr uintptr, PreeditVarp uintptr) {
 		fa := TextView{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, PreeditVarp)
+		cbFn(fa, core.GoString(PreeditVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

@@ -231,8 +231,8 @@ func (x *MenuModelClass) OverrideGetItemAttributeValue(cb func(*MenuModel, int, 
 	if cb == nil {
 		x.xGetItemAttributeValue = 0
 	} else {
-		x.xGetItemAttributeValue = purego.NewCallback(func(ModelVarp uintptr, ItemIndexVarp int, AttributeVarp string, ExpectedTypeVarp *glib.VariantType) *glib.Variant {
-			return cb(MenuModelNewFromInternalPtr(ModelVarp), ItemIndexVarp, AttributeVarp, ExpectedTypeVarp)
+		x.xGetItemAttributeValue = purego.NewCallback(func(ModelVarp uintptr, ItemIndexVarp int, AttributeVarp uintptr, ExpectedTypeVarp *glib.VariantType) *glib.Variant {
+			return cb(MenuModelNewFromInternalPtr(ModelVarp), ItemIndexVarp, core.GoString(AttributeVarp), ExpectedTypeVarp)
 		})
 	}
 }
@@ -310,8 +310,8 @@ func (x *MenuModelClass) OverrideGetItemLink(cb func(*MenuModel, int, string) *M
 	if cb == nil {
 		x.xGetItemLink = 0
 	} else {
-		x.xGetItemLink = purego.NewCallback(func(ModelVarp uintptr, ItemIndexVarp int, LinkVarp string) uintptr {
-			ret := cb(MenuModelNewFromInternalPtr(ModelVarp), ItemIndexVarp, LinkVarp)
+		x.xGetItemLink = purego.NewCallback(func(ModelVarp uintptr, ItemIndexVarp int, LinkVarp uintptr) uintptr {
+			ret := cb(MenuModelNewFromInternalPtr(ModelVarp), ItemIndexVarp, core.GoString(LinkVarp))
 			if ret == nil {
 				return 0
 			}

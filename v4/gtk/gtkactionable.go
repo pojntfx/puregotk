@@ -62,8 +62,8 @@ func (x *ActionableInterface) OverrideSetActionName(cb func(Actionable, string))
 	if cb == nil {
 		x.xSetActionName = 0
 	} else {
-		x.xSetActionName = purego.NewCallback(func(ActionableVarp uintptr, ActionNameVarp string) {
-			cb(&ActionableBase{Ptr: ActionableVarp}, ActionNameVarp)
+		x.xSetActionName = purego.NewCallback(func(ActionableVarp uintptr, ActionNameVarp uintptr) {
+			cb(&ActionableBase{Ptr: ActionableVarp}, core.GoString(ActionNameVarp))
 		})
 	}
 }

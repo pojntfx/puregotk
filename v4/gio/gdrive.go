@@ -504,8 +504,8 @@ func (x *DriveIface) OverrideGetIdentifier(cb func(Drive, string) string) {
 	if cb == nil {
 		x.xGetIdentifier = 0
 	} else {
-		x.xGetIdentifier = purego.NewCallback(func(DriveVarp uintptr, KindVarp string) string {
-			return cb(&DriveBase{Ptr: DriveVarp}, KindVarp)
+		x.xGetIdentifier = purego.NewCallback(func(DriveVarp uintptr, KindVarp uintptr) string {
+			return cb(&DriveBase{Ptr: DriveVarp}, core.GoString(KindVarp))
 		})
 	}
 }

@@ -111,8 +111,8 @@ func (x *ApplicationClass) OverrideOpen(cb func(*Application, uintptr, int, stri
 	if cb == nil {
 		x.xOpen = 0
 	} else {
-		x.xOpen = purego.NewCallback(func(ApplicationVarp uintptr, FilesVarp uintptr, NFilesVarp int, HintVarp string) {
-			cb(ApplicationNewFromInternalPtr(ApplicationVarp), FilesVarp, NFilesVarp, HintVarp)
+		x.xOpen = purego.NewCallback(func(ApplicationVarp uintptr, FilesVarp uintptr, NFilesVarp int, HintVarp uintptr) {
+			cb(ApplicationNewFromInternalPtr(ApplicationVarp), FilesVarp, NFilesVarp, core.GoString(HintVarp))
 		})
 	}
 }
@@ -391,8 +391,8 @@ func (x *ApplicationClass) OverrideDbusRegister(cb func(*Application, *DBusConne
 	if cb == nil {
 		x.xDbusRegister = 0
 	} else {
-		x.xDbusRegister = purego.NewCallback(func(ApplicationVarp uintptr, ConnectionVarp uintptr, ObjectPathVarp string) bool {
-			return cb(ApplicationNewFromInternalPtr(ApplicationVarp), DBusConnectionNewFromInternalPtr(ConnectionVarp), ObjectPathVarp)
+		x.xDbusRegister = purego.NewCallback(func(ApplicationVarp uintptr, ConnectionVarp uintptr, ObjectPathVarp uintptr) bool {
+			return cb(ApplicationNewFromInternalPtr(ApplicationVarp), DBusConnectionNewFromInternalPtr(ConnectionVarp), core.GoString(ObjectPathVarp))
 		})
 	}
 }
@@ -426,8 +426,8 @@ func (x *ApplicationClass) OverrideDbusUnregister(cb func(*Application, *DBusCon
 	if cb == nil {
 		x.xDbusUnregister = 0
 	} else {
-		x.xDbusUnregister = purego.NewCallback(func(ApplicationVarp uintptr, ConnectionVarp uintptr, ObjectPathVarp string) {
-			cb(ApplicationNewFromInternalPtr(ApplicationVarp), DBusConnectionNewFromInternalPtr(ConnectionVarp), ObjectPathVarp)
+		x.xDbusUnregister = purego.NewCallback(func(ApplicationVarp uintptr, ConnectionVarp uintptr, ObjectPathVarp uintptr) {
+			cb(ApplicationNewFromInternalPtr(ApplicationVarp), DBusConnectionNewFromInternalPtr(ConnectionVarp), core.GoString(ObjectPathVarp))
 		})
 	}
 }
@@ -1660,12 +1660,12 @@ func (x *Application) ConnectOpen(cb *func(Application, uintptr, int, string)) u
 		return gobject.SignalConnect(x.GoPointer(), "open", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, FilesVarp uintptr, NFilesVarp int, HintVarp string) {
+	fcb := func(clsPtr uintptr, FilesVarp uintptr, NFilesVarp int, HintVarp uintptr) {
 		fa := Application{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, FilesVarp, NFilesVarp, HintVarp)
+		cbFn(fa, FilesVarp, NFilesVarp, core.GoString(HintVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

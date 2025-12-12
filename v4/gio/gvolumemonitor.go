@@ -399,8 +399,8 @@ func (x *VolumeMonitorClass) OverrideGetVolumeForUuid(cb func(*VolumeMonitor, st
 	if cb == nil {
 		x.xGetVolumeForUuid = 0
 	} else {
-		x.xGetVolumeForUuid = purego.NewCallback(func(VolumeMonitorVarp uintptr, UuidVarp string) uintptr {
-			ret := cb(VolumeMonitorNewFromInternalPtr(VolumeMonitorVarp), UuidVarp)
+		x.xGetVolumeForUuid = purego.NewCallback(func(VolumeMonitorVarp uintptr, UuidVarp uintptr) uintptr {
+			ret := cb(VolumeMonitorNewFromInternalPtr(VolumeMonitorVarp), core.GoString(UuidVarp))
 			if ret == nil {
 				return 0
 			}
@@ -432,8 +432,8 @@ func (x *VolumeMonitorClass) OverrideGetMountForUuid(cb func(*VolumeMonitor, str
 	if cb == nil {
 		x.xGetMountForUuid = 0
 	} else {
-		x.xGetMountForUuid = purego.NewCallback(func(VolumeMonitorVarp uintptr, UuidVarp string) uintptr {
-			ret := cb(VolumeMonitorNewFromInternalPtr(VolumeMonitorVarp), UuidVarp)
+		x.xGetMountForUuid = purego.NewCallback(func(VolumeMonitorVarp uintptr, UuidVarp uintptr) uintptr {
+			ret := cb(VolumeMonitorNewFromInternalPtr(VolumeMonitorVarp), core.GoString(UuidVarp))
 			if ret == nil {
 				return 0
 			}

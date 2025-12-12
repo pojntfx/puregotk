@@ -227,12 +227,12 @@ func (x *FileChooserWidget) ConnectLocationPopup(cb *func(FileChooserWidget, str
 		return gobject.SignalConnect(x.GoPointer(), "location-popup", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, PathVarp string) {
+	fcb := func(clsPtr uintptr, PathVarp uintptr) {
 		fa := FileChooserWidget{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, PathVarp)
+		cbFn(fa, core.GoString(PathVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

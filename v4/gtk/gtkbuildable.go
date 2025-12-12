@@ -54,8 +54,8 @@ func (x *BuildableIface) OverrideSetId(cb func(Buildable, string)) {
 	if cb == nil {
 		x.xSetId = 0
 	} else {
-		x.xSetId = purego.NewCallback(func(BuildableVarp uintptr, IdVarp string) {
-			cb(&BuildableBase{Ptr: BuildableVarp}, IdVarp)
+		x.xSetId = purego.NewCallback(func(BuildableVarp uintptr, IdVarp uintptr) {
+			cb(&BuildableBase{Ptr: BuildableVarp}, core.GoString(IdVarp))
 		})
 	}
 }
@@ -117,8 +117,8 @@ func (x *BuildableIface) OverrideAddChild(cb func(Buildable, *Builder, *gobject.
 	if cb == nil {
 		x.xAddChild = 0
 	} else {
-		x.xAddChild = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, ChildVarp uintptr, TypeVarp string) {
-			cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), gobject.ObjectNewFromInternalPtr(ChildVarp), TypeVarp)
+		x.xAddChild = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, ChildVarp uintptr, TypeVarp uintptr) {
+			cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), gobject.ObjectNewFromInternalPtr(ChildVarp), core.GoString(TypeVarp))
 		})
 	}
 }
@@ -152,8 +152,8 @@ func (x *BuildableIface) OverrideSetBuildableProperty(cb func(Buildable, *Builde
 	if cb == nil {
 		x.xSetBuildableProperty = 0
 	} else {
-		x.xSetBuildableProperty = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, NameVarp string, ValueVarp *gobject.Value) {
-			cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), NameVarp, ValueVarp)
+		x.xSetBuildableProperty = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, NameVarp uintptr, ValueVarp *gobject.Value) {
+			cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), core.GoString(NameVarp), ValueVarp)
 		})
 	}
 }
@@ -187,8 +187,8 @@ func (x *BuildableIface) OverrideConstructChild(cb func(Buildable, *Builder, str
 	if cb == nil {
 		x.xConstructChild = 0
 	} else {
-		x.xConstructChild = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, NameVarp string) uintptr {
-			ret := cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), NameVarp)
+		x.xConstructChild = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, NameVarp uintptr) uintptr {
+			ret := cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), core.GoString(NameVarp))
 			if ret == nil {
 				return 0
 			}
@@ -233,8 +233,8 @@ func (x *BuildableIface) OverrideCustomTagStart(cb func(Buildable, *Builder, *go
 	if cb == nil {
 		x.xCustomTagStart = 0
 	} else {
-		x.xCustomTagStart = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, ChildVarp uintptr, TagnameVarp string, ParserVarp *BuildableParser, DataVarp *uintptr) bool {
-			return cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), gobject.ObjectNewFromInternalPtr(ChildVarp), TagnameVarp, ParserVarp, DataVarp)
+		x.xCustomTagStart = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, ChildVarp uintptr, TagnameVarp uintptr, ParserVarp *BuildableParser, DataVarp *uintptr) bool {
+			return cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), gobject.ObjectNewFromInternalPtr(ChildVarp), core.GoString(TagnameVarp), ParserVarp, DataVarp)
 		})
 	}
 }
@@ -266,8 +266,8 @@ func (x *BuildableIface) OverrideCustomTagEnd(cb func(Buildable, *Builder, *gobj
 	if cb == nil {
 		x.xCustomTagEnd = 0
 	} else {
-		x.xCustomTagEnd = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, ChildVarp uintptr, TagnameVarp string, DataVarp uintptr) {
-			cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), gobject.ObjectNewFromInternalPtr(ChildVarp), TagnameVarp, DataVarp)
+		x.xCustomTagEnd = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, ChildVarp uintptr, TagnameVarp uintptr, DataVarp uintptr) {
+			cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), gobject.ObjectNewFromInternalPtr(ChildVarp), core.GoString(TagnameVarp), DataVarp)
 		})
 	}
 }
@@ -295,8 +295,8 @@ func (x *BuildableIface) OverrideCustomFinished(cb func(Buildable, *Builder, *go
 	if cb == nil {
 		x.xCustomFinished = 0
 	} else {
-		x.xCustomFinished = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, ChildVarp uintptr, TagnameVarp string, DataVarp uintptr) {
-			cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), gobject.ObjectNewFromInternalPtr(ChildVarp), TagnameVarp, DataVarp)
+		x.xCustomFinished = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, ChildVarp uintptr, TagnameVarp uintptr, DataVarp uintptr) {
+			cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), gobject.ObjectNewFromInternalPtr(ChildVarp), core.GoString(TagnameVarp), DataVarp)
 		})
 	}
 }
@@ -360,8 +360,8 @@ func (x *BuildableIface) OverrideGetInternalChild(cb func(Buildable, *Builder, s
 	if cb == nil {
 		x.xGetInternalChild = 0
 	} else {
-		x.xGetInternalChild = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, ChildnameVarp string) uintptr {
-			ret := cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), ChildnameVarp)
+		x.xGetInternalChild = purego.NewCallback(func(BuildableVarp uintptr, BuilderVarp uintptr, ChildnameVarp uintptr) uintptr {
+			ret := cb(&BuildableBase{Ptr: BuildableVarp}, BuilderNewFromInternalPtr(BuilderVarp), core.GoString(ChildnameVarp))
 			if ret == nil {
 				return 0
 			}
@@ -532,8 +532,8 @@ func (x *BuildableParser) OverrideStartElement(cb func(*BuildableParseContext, s
 	if cb == nil {
 		x.xStartElement = 0
 	} else {
-		x.xStartElement = purego.NewCallback(func(ContextVarp *BuildableParseContext, ElementNameVarp string, AttributeNamesVarp string, AttributeValuesVarp string, UserDataVarp uintptr) {
-			cb(ContextVarp, ElementNameVarp, AttributeNamesVarp, AttributeValuesVarp, UserDataVarp)
+		x.xStartElement = purego.NewCallback(func(ContextVarp *BuildableParseContext, ElementNameVarp uintptr, AttributeNamesVarp uintptr, AttributeValuesVarp uintptr, UserDataVarp uintptr) {
+			cb(ContextVarp, core.GoString(ElementNameVarp), core.GoString(AttributeNamesVarp), core.GoString(AttributeValuesVarp), UserDataVarp)
 		})
 	}
 }
@@ -557,8 +557,8 @@ func (x *BuildableParser) OverrideEndElement(cb func(*BuildableParseContext, str
 	if cb == nil {
 		x.xEndElement = 0
 	} else {
-		x.xEndElement = purego.NewCallback(func(ContextVarp *BuildableParseContext, ElementNameVarp string, UserDataVarp uintptr) {
-			cb(ContextVarp, ElementNameVarp, UserDataVarp)
+		x.xEndElement = purego.NewCallback(func(ContextVarp *BuildableParseContext, ElementNameVarp uintptr, UserDataVarp uintptr) {
+			cb(ContextVarp, core.GoString(ElementNameVarp), UserDataVarp)
 		})
 	}
 }
@@ -582,8 +582,8 @@ func (x *BuildableParser) OverrideText(cb func(*BuildableParseContext, string, u
 	if cb == nil {
 		x.xText = 0
 	} else {
-		x.xText = purego.NewCallback(func(ContextVarp *BuildableParseContext, TextVarp string, TextLenVarp uint, UserDataVarp uintptr) {
-			cb(ContextVarp, TextVarp, TextLenVarp, UserDataVarp)
+		x.xText = purego.NewCallback(func(ContextVarp *BuildableParseContext, TextVarp uintptr, TextLenVarp uint, UserDataVarp uintptr) {
+			cb(ContextVarp, core.GoString(TextVarp), TextLenVarp, UserDataVarp)
 		})
 	}
 }

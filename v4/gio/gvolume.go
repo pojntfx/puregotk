@@ -435,8 +435,8 @@ func (x *VolumeIface) OverrideGetIdentifier(cb func(Volume, string) string) {
 	if cb == nil {
 		x.xGetIdentifier = 0
 	} else {
-		x.xGetIdentifier = purego.NewCallback(func(VolumeVarp uintptr, KindVarp string) string {
-			return cb(&VolumeBase{Ptr: VolumeVarp}, KindVarp)
+		x.xGetIdentifier = purego.NewCallback(func(VolumeVarp uintptr, KindVarp uintptr) string {
+			return cb(&VolumeBase{Ptr: VolumeVarp}, core.GoString(KindVarp))
 		})
 	}
 }

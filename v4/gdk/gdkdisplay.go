@@ -636,12 +636,12 @@ func (x *Display) ConnectSettingChanged(cb *func(Display, string)) uint32 {
 		return gobject.SignalConnect(x.GoPointer(), "setting-changed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, SettingVarp string) {
+	fcb := func(clsPtr uintptr, SettingVarp uintptr) {
 		fa := Display{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, SettingVarp)
+		cbFn(fa, core.GoString(SettingVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

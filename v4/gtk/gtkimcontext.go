@@ -155,8 +155,8 @@ func (x *IMContextClass) OverrideCommit(cb func(*IMContext, string)) {
 	if cb == nil {
 		x.xCommit = 0
 	} else {
-		x.xCommit = purego.NewCallback(func(ContextVarp uintptr, StrVarp string) {
-			cb(IMContextNewFromInternalPtr(ContextVarp), StrVarp)
+		x.xCommit = purego.NewCallback(func(ContextVarp uintptr, StrVarp uintptr) {
+			cb(IMContextNewFromInternalPtr(ContextVarp), core.GoString(StrVarp))
 		})
 	}
 }
@@ -510,8 +510,8 @@ func (x *IMContextClass) OverrideSetSurrounding(cb func(*IMContext, string, int,
 	if cb == nil {
 		x.xSetSurrounding = 0
 	} else {
-		x.xSetSurrounding = purego.NewCallback(func(ContextVarp uintptr, TextVarp string, LenVarp int, CursorIndexVarp int) {
-			cb(IMContextNewFromInternalPtr(ContextVarp), TextVarp, LenVarp, CursorIndexVarp)
+		x.xSetSurrounding = purego.NewCallback(func(ContextVarp uintptr, TextVarp uintptr, LenVarp int, CursorIndexVarp int) {
+			cb(IMContextNewFromInternalPtr(ContextVarp), core.GoString(TextVarp), LenVarp, CursorIndexVarp)
 		})
 	}
 }
@@ -585,8 +585,8 @@ func (x *IMContextClass) OverrideSetSurroundingWithSelection(cb func(*IMContext,
 	if cb == nil {
 		x.xSetSurroundingWithSelection = 0
 	} else {
-		x.xSetSurroundingWithSelection = purego.NewCallback(func(ContextVarp uintptr, TextVarp string, LenVarp int, CursorIndexVarp int, AnchorIndexVarp int) {
-			cb(IMContextNewFromInternalPtr(ContextVarp), TextVarp, LenVarp, CursorIndexVarp, AnchorIndexVarp)
+		x.xSetSurroundingWithSelection = purego.NewCallback(func(ContextVarp uintptr, TextVarp uintptr, LenVarp int, CursorIndexVarp int, AnchorIndexVarp int) {
+			cb(IMContextNewFromInternalPtr(ContextVarp), core.GoString(TextVarp), LenVarp, CursorIndexVarp, AnchorIndexVarp)
 		})
 	}
 }
@@ -1058,12 +1058,12 @@ func (x *IMContext) ConnectCommit(cb *func(IMContext, string)) uint32 {
 		return gobject.SignalConnect(x.GoPointer(), "commit", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, StrVarp string) {
+	fcb := func(clsPtr uintptr, StrVarp uintptr) {
 		fa := IMContext{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, StrVarp)
+		cbFn(fa, core.GoString(StrVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

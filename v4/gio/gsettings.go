@@ -59,8 +59,8 @@ func (x *SettingsClass) OverrideWritableChanged(cb func(*Settings, string)) {
 	if cb == nil {
 		x.xWritableChanged = 0
 	} else {
-		x.xWritableChanged = purego.NewCallback(func(SettingsVarp uintptr, KeyVarp string) {
-			cb(SettingsNewFromInternalPtr(SettingsVarp), KeyVarp)
+		x.xWritableChanged = purego.NewCallback(func(SettingsVarp uintptr, KeyVarp uintptr) {
+			cb(SettingsNewFromInternalPtr(SettingsVarp), core.GoString(KeyVarp))
 		})
 	}
 }
@@ -82,8 +82,8 @@ func (x *SettingsClass) OverrideChanged(cb func(*Settings, string)) {
 	if cb == nil {
 		x.xChanged = 0
 	} else {
-		x.xChanged = purego.NewCallback(func(SettingsVarp uintptr, KeyVarp string) {
-			cb(SettingsNewFromInternalPtr(SettingsVarp), KeyVarp)
+		x.xChanged = purego.NewCallback(func(SettingsVarp uintptr, KeyVarp uintptr) {
+			cb(SettingsNewFromInternalPtr(SettingsVarp), core.GoString(KeyVarp))
 		})
 	}
 }
@@ -1639,12 +1639,12 @@ func (x *Settings) ConnectChanged(cb *func(Settings, string)) uint32 {
 		return gobject.SignalConnect(x.GoPointer(), "changed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, KeyVarp string) {
+	fcb := func(clsPtr uintptr, KeyVarp uintptr) {
 		fa := Settings{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, KeyVarp)
+		cbFn(fa, core.GoString(KeyVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)
@@ -1704,12 +1704,12 @@ func (x *Settings) ConnectWritableChanged(cb *func(Settings, string)) uint32 {
 		return gobject.SignalConnect(x.GoPointer(), "writable-changed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, KeyVarp string) {
+	fcb := func(clsPtr uintptr, KeyVarp uintptr) {
 		fa := Settings{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, KeyVarp)
+		cbFn(fa, core.GoString(KeyVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

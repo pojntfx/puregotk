@@ -93,8 +93,8 @@ func (x *AuthClass) OverrideAuthenticate(cb func(*Auth, string, string)) {
 	if cb == nil {
 		x.xAuthenticate = 0
 	} else {
-		x.xAuthenticate = purego.NewCallback(func(AuthVarp uintptr, UsernameVarp string, PasswordVarp string) {
-			cb(AuthNewFromInternalPtr(AuthVarp), UsernameVarp, PasswordVarp)
+		x.xAuthenticate = purego.NewCallback(func(AuthVarp uintptr, UsernameVarp uintptr, PasswordVarp uintptr) {
+			cb(AuthNewFromInternalPtr(AuthVarp), core.GoString(UsernameVarp), core.GoString(PasswordVarp))
 		})
 	}
 }

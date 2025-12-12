@@ -275,12 +275,12 @@ func (x *Download) ConnectCreatedDestination(cb *func(Download, string)) uint32 
 		return gobject.SignalConnect(x.GoPointer(), "created-destination", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, DestinationVarp string) {
+	fcb := func(clsPtr uintptr, DestinationVarp uintptr) {
 		fa := Download{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, DestinationVarp)
+		cbFn(fa, core.GoString(DestinationVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)
@@ -305,12 +305,12 @@ func (x *Download) ConnectDecideDestination(cb *func(Download, string) bool) uin
 		return gobject.SignalConnect(x.GoPointer(), "decide-destination", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, SuggestedFilenameVarp string) bool {
+	fcb := func(clsPtr uintptr, SuggestedFilenameVarp uintptr) bool {
 		fa := Download{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		return cbFn(fa, SuggestedFilenameVarp)
+		return cbFn(fa, core.GoString(SuggestedFilenameVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

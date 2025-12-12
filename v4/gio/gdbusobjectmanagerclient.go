@@ -35,8 +35,8 @@ func (x *DBusObjectManagerClientClass) OverrideInterfaceProxySignal(cb func(*DBu
 	if cb == nil {
 		x.xInterfaceProxySignal = 0
 	} else {
-		x.xInterfaceProxySignal = purego.NewCallback(func(ManagerVarp uintptr, ObjectProxyVarp uintptr, InterfaceProxyVarp uintptr, SenderNameVarp string, SignalNameVarp string, ParametersVarp *glib.Variant) {
-			cb(DBusObjectManagerClientNewFromInternalPtr(ManagerVarp), DBusObjectProxyNewFromInternalPtr(ObjectProxyVarp), DBusProxyNewFromInternalPtr(InterfaceProxyVarp), SenderNameVarp, SignalNameVarp, ParametersVarp)
+		x.xInterfaceProxySignal = purego.NewCallback(func(ManagerVarp uintptr, ObjectProxyVarp uintptr, InterfaceProxyVarp uintptr, SenderNameVarp uintptr, SignalNameVarp uintptr, ParametersVarp *glib.Variant) {
+			cb(DBusObjectManagerClientNewFromInternalPtr(ManagerVarp), DBusObjectProxyNewFromInternalPtr(ObjectProxyVarp), DBusProxyNewFromInternalPtr(InterfaceProxyVarp), core.GoString(SenderNameVarp), core.GoString(SignalNameVarp), ParametersVarp)
 		})
 	}
 }
@@ -60,8 +60,8 @@ func (x *DBusObjectManagerClientClass) OverrideInterfaceProxyPropertiesChanged(c
 	if cb == nil {
 		x.xInterfaceProxyPropertiesChanged = 0
 	} else {
-		x.xInterfaceProxyPropertiesChanged = purego.NewCallback(func(ManagerVarp uintptr, ObjectProxyVarp uintptr, InterfaceProxyVarp uintptr, ChangedPropertiesVarp *glib.Variant, InvalidatedPropertiesVarp string) {
-			cb(DBusObjectManagerClientNewFromInternalPtr(ManagerVarp), DBusObjectProxyNewFromInternalPtr(ObjectProxyVarp), DBusProxyNewFromInternalPtr(InterfaceProxyVarp), ChangedPropertiesVarp, InvalidatedPropertiesVarp)
+		x.xInterfaceProxyPropertiesChanged = purego.NewCallback(func(ManagerVarp uintptr, ObjectProxyVarp uintptr, InterfaceProxyVarp uintptr, ChangedPropertiesVarp *glib.Variant, InvalidatedPropertiesVarp uintptr) {
+			cb(DBusObjectManagerClientNewFromInternalPtr(ManagerVarp), DBusObjectProxyNewFromInternalPtr(ObjectProxyVarp), DBusProxyNewFromInternalPtr(InterfaceProxyVarp), ChangedPropertiesVarp, core.GoString(InvalidatedPropertiesVarp))
 		})
 	}
 }
@@ -474,12 +474,12 @@ func (x *DBusObjectManagerClient) ConnectInterfaceProxySignal(cb *func(DBusObjec
 		return gobject.SignalConnect(x.GoPointer(), "interface-proxy-signal", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, ObjectProxyVarp uintptr, InterfaceProxyVarp uintptr, SenderNameVarp string, SignalNameVarp string, ParametersVarp uintptr) {
+	fcb := func(clsPtr uintptr, ObjectProxyVarp uintptr, InterfaceProxyVarp uintptr, SenderNameVarp uintptr, SignalNameVarp uintptr, ParametersVarp uintptr) {
 		fa := DBusObjectManagerClient{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, ObjectProxyVarp, InterfaceProxyVarp, SenderNameVarp, SignalNameVarp, ParametersVarp)
+		cbFn(fa, ObjectProxyVarp, InterfaceProxyVarp, core.GoString(SenderNameVarp), core.GoString(SignalNameVarp), ParametersVarp)
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

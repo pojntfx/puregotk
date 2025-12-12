@@ -875,12 +875,12 @@ func (x *AboutDialog) ConnectActivateLink(cb *func(AboutDialog, string) bool) ui
 		return gobject.SignalConnect(x.GoPointer(), "activate-link", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, UriVarp string) bool {
+	fcb := func(clsPtr uintptr, UriVarp uintptr) bool {
 		fa := AboutDialog{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		return cbFn(fa, UriVarp)
+		return cbFn(fa, core.GoString(UriVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

@@ -162,8 +162,8 @@ func (x *FontChooserIface) OverrideFontActivated(cb func(FontChooser, string)) {
 	if cb == nil {
 		x.xFontActivated = 0
 	} else {
-		x.xFontActivated = purego.NewCallback(func(ChooserVarp uintptr, FontnameVarp string) {
-			cb(&FontChooserBase{Ptr: ChooserVarp}, FontnameVarp)
+		x.xFontActivated = purego.NewCallback(func(ChooserVarp uintptr, FontnameVarp uintptr) {
+			cb(&FontChooserBase{Ptr: ChooserVarp}, core.GoString(FontnameVarp))
 		})
 	}
 }

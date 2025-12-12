@@ -58,8 +58,8 @@ func (x *AuthDomainClass) OverrideAccepts(cb func(*AuthDomain, *ServerMessage, s
 	if cb == nil {
 		x.xAccepts = 0
 	} else {
-		x.xAccepts = purego.NewCallback(func(DomainVarp uintptr, MsgVarp uintptr, HeaderVarp string) string {
-			return cb(AuthDomainNewFromInternalPtr(DomainVarp), ServerMessageNewFromInternalPtr(MsgVarp), HeaderVarp)
+		x.xAccepts = purego.NewCallback(func(DomainVarp uintptr, MsgVarp uintptr, HeaderVarp uintptr) string {
+			return cb(AuthDomainNewFromInternalPtr(DomainVarp), ServerMessageNewFromInternalPtr(MsgVarp), core.GoString(HeaderVarp))
 		})
 	}
 }
@@ -104,8 +104,8 @@ func (x *AuthDomainClass) OverrideCheckPassword(cb func(*AuthDomain, *ServerMess
 	if cb == nil {
 		x.xCheckPassword = 0
 	} else {
-		x.xCheckPassword = purego.NewCallback(func(DomainVarp uintptr, MsgVarp uintptr, UsernameVarp string, PasswordVarp string) bool {
-			return cb(AuthDomainNewFromInternalPtr(DomainVarp), ServerMessageNewFromInternalPtr(MsgVarp), UsernameVarp, PasswordVarp)
+		x.xCheckPassword = purego.NewCallback(func(DomainVarp uintptr, MsgVarp uintptr, UsernameVarp uintptr, PasswordVarp uintptr) bool {
+			return cb(AuthDomainNewFromInternalPtr(DomainVarp), ServerMessageNewFromInternalPtr(MsgVarp), core.GoString(UsernameVarp), core.GoString(PasswordVarp))
 		})
 	}
 }

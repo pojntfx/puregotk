@@ -61,8 +61,8 @@ func (x *TlsDatabaseClass) OverrideVerifyChain(cb func(*TlsDatabase, *TlsCertifi
 	if cb == nil {
 		x.xVerifyChain = 0
 	} else {
-		x.xVerifyChain = purego.NewCallback(func(SelfVarp uintptr, ChainVarp uintptr, PurposeVarp string, IdentityVarp uintptr, InteractionVarp uintptr, FlagsVarp TlsDatabaseVerifyFlags, CancellableVarp uintptr) TlsCertificateFlags {
-			return cb(TlsDatabaseNewFromInternalPtr(SelfVarp), TlsCertificateNewFromInternalPtr(ChainVarp), PurposeVarp, &SocketConnectableBase{Ptr: IdentityVarp}, TlsInteractionNewFromInternalPtr(InteractionVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xVerifyChain = purego.NewCallback(func(SelfVarp uintptr, ChainVarp uintptr, PurposeVarp uintptr, IdentityVarp uintptr, InteractionVarp uintptr, FlagsVarp TlsDatabaseVerifyFlags, CancellableVarp uintptr) TlsCertificateFlags {
+			return cb(TlsDatabaseNewFromInternalPtr(SelfVarp), TlsCertificateNewFromInternalPtr(ChainVarp), core.GoString(PurposeVarp), &SocketConnectableBase{Ptr: IdentityVarp}, TlsInteractionNewFromInternalPtr(InteractionVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
 		})
 	}
 }
@@ -90,8 +90,8 @@ func (x *TlsDatabaseClass) OverrideVerifyChainAsync(cb func(*TlsDatabase, *TlsCe
 	if cb == nil {
 		x.xVerifyChainAsync = 0
 	} else {
-		x.xVerifyChainAsync = purego.NewCallback(func(SelfVarp uintptr, ChainVarp uintptr, PurposeVarp string, IdentityVarp uintptr, InteractionVarp uintptr, FlagsVarp TlsDatabaseVerifyFlags, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(TlsDatabaseNewFromInternalPtr(SelfVarp), TlsCertificateNewFromInternalPtr(ChainVarp), PurposeVarp, &SocketConnectableBase{Ptr: IdentityVarp}, TlsInteractionNewFromInternalPtr(InteractionVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xVerifyChainAsync = purego.NewCallback(func(SelfVarp uintptr, ChainVarp uintptr, PurposeVarp uintptr, IdentityVarp uintptr, InteractionVarp uintptr, FlagsVarp TlsDatabaseVerifyFlags, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(TlsDatabaseNewFromInternalPtr(SelfVarp), TlsCertificateNewFromInternalPtr(ChainVarp), core.GoString(PurposeVarp), &SocketConnectableBase{Ptr: IdentityVarp}, TlsInteractionNewFromInternalPtr(InteractionVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }
@@ -177,8 +177,8 @@ func (x *TlsDatabaseClass) OverrideLookupCertificateForHandle(cb func(*TlsDataba
 	if cb == nil {
 		x.xLookupCertificateForHandle = 0
 	} else {
-		x.xLookupCertificateForHandle = purego.NewCallback(func(SelfVarp uintptr, HandleVarp string, InteractionVarp uintptr, FlagsVarp TlsDatabaseLookupFlags, CancellableVarp uintptr) uintptr {
-			ret := cb(TlsDatabaseNewFromInternalPtr(SelfVarp), HandleVarp, TlsInteractionNewFromInternalPtr(InteractionVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xLookupCertificateForHandle = purego.NewCallback(func(SelfVarp uintptr, HandleVarp uintptr, InteractionVarp uintptr, FlagsVarp TlsDatabaseLookupFlags, CancellableVarp uintptr) uintptr {
+			ret := cb(TlsDatabaseNewFromInternalPtr(SelfVarp), core.GoString(HandleVarp), TlsInteractionNewFromInternalPtr(InteractionVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
 			if ret == nil {
 				return 0
 			}
@@ -216,8 +216,8 @@ func (x *TlsDatabaseClass) OverrideLookupCertificateForHandleAsync(cb func(*TlsD
 	if cb == nil {
 		x.xLookupCertificateForHandleAsync = 0
 	} else {
-		x.xLookupCertificateForHandleAsync = purego.NewCallback(func(SelfVarp uintptr, HandleVarp string, InteractionVarp uintptr, FlagsVarp TlsDatabaseLookupFlags, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(TlsDatabaseNewFromInternalPtr(SelfVarp), HandleVarp, TlsInteractionNewFromInternalPtr(InteractionVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xLookupCertificateForHandleAsync = purego.NewCallback(func(SelfVarp uintptr, HandleVarp uintptr, InteractionVarp uintptr, FlagsVarp TlsDatabaseLookupFlags, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(TlsDatabaseNewFromInternalPtr(SelfVarp), core.GoString(HandleVarp), TlsInteractionNewFromInternalPtr(InteractionVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }

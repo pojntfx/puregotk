@@ -52,8 +52,8 @@ func (x *BuilderScopeInterface) OverrideGetTypeFromName(cb func(BuilderScope, *B
 	if cb == nil {
 		x.xGetTypeFromName = 0
 	} else {
-		x.xGetTypeFromName = purego.NewCallback(func(SelfVarp uintptr, BuilderVarp uintptr, TypeNameVarp string) types.GType {
-			return cb(&BuilderScopeBase{Ptr: SelfVarp}, BuilderNewFromInternalPtr(BuilderVarp), TypeNameVarp)
+		x.xGetTypeFromName = purego.NewCallback(func(SelfVarp uintptr, BuilderVarp uintptr, TypeNameVarp uintptr) types.GType {
+			return cb(&BuilderScopeBase{Ptr: SelfVarp}, BuilderNewFromInternalPtr(BuilderVarp), core.GoString(TypeNameVarp))
 		})
 	}
 }
@@ -87,8 +87,8 @@ func (x *BuilderScopeInterface) OverrideGetTypeFromFunction(cb func(BuilderScope
 	if cb == nil {
 		x.xGetTypeFromFunction = 0
 	} else {
-		x.xGetTypeFromFunction = purego.NewCallback(func(SelfVarp uintptr, BuilderVarp uintptr, FunctionNameVarp string) types.GType {
-			return cb(&BuilderScopeBase{Ptr: SelfVarp}, BuilderNewFromInternalPtr(BuilderVarp), FunctionNameVarp)
+		x.xGetTypeFromFunction = purego.NewCallback(func(SelfVarp uintptr, BuilderVarp uintptr, FunctionNameVarp uintptr) types.GType {
+			return cb(&BuilderScopeBase{Ptr: SelfVarp}, BuilderNewFromInternalPtr(BuilderVarp), core.GoString(FunctionNameVarp))
 		})
 	}
 }
@@ -122,8 +122,8 @@ func (x *BuilderScopeInterface) OverrideCreateClosure(cb func(BuilderScope, *Bui
 	if cb == nil {
 		x.xCreateClosure = 0
 	} else {
-		x.xCreateClosure = purego.NewCallback(func(SelfVarp uintptr, BuilderVarp uintptr, FunctionNameVarp string, FlagsVarp BuilderClosureFlags, ObjectVarp uintptr) *gobject.Closure {
-			return cb(&BuilderScopeBase{Ptr: SelfVarp}, BuilderNewFromInternalPtr(BuilderVarp), FunctionNameVarp, FlagsVarp, gobject.ObjectNewFromInternalPtr(ObjectVarp))
+		x.xCreateClosure = purego.NewCallback(func(SelfVarp uintptr, BuilderVarp uintptr, FunctionNameVarp uintptr, FlagsVarp BuilderClosureFlags, ObjectVarp uintptr) *gobject.Closure {
+			return cb(&BuilderScopeBase{Ptr: SelfVarp}, BuilderNewFromInternalPtr(BuilderVarp), core.GoString(FunctionNameVarp), FlagsVarp, gobject.ObjectNewFromInternalPtr(ObjectVarp))
 		})
 	}
 }

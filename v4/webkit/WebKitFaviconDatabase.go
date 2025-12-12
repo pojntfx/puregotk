@@ -158,12 +158,12 @@ func (x *FaviconDatabase) ConnectFaviconChanged(cb *func(FaviconDatabase, string
 		return gobject.SignalConnect(x.GoPointer(), "favicon-changed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, PageUriVarp string, FaviconUriVarp string) {
+	fcb := func(clsPtr uintptr, PageUriVarp uintptr, FaviconUriVarp uintptr) {
 		fa := FaviconDatabase{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, PageUriVarp, FaviconUriVarp)
+		cbFn(fa, core.GoString(PageUriVarp), core.GoString(FaviconUriVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

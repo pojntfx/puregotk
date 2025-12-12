@@ -94,8 +94,8 @@ func (x *DBusObjectManagerIface) OverrideGetObject(cb func(DBusObjectManager, st
 	if cb == nil {
 		x.xGetObject = 0
 	} else {
-		x.xGetObject = purego.NewCallback(func(ManagerVarp uintptr, ObjectPathVarp string) uintptr {
-			ret := cb(&DBusObjectManagerBase{Ptr: ManagerVarp}, ObjectPathVarp)
+		x.xGetObject = purego.NewCallback(func(ManagerVarp uintptr, ObjectPathVarp uintptr) uintptr {
+			ret := cb(&DBusObjectManagerBase{Ptr: ManagerVarp}, core.GoString(ObjectPathVarp))
 			if ret == nil {
 				return 0
 			}
@@ -129,8 +129,8 @@ func (x *DBusObjectManagerIface) OverrideGetInterface(cb func(DBusObjectManager,
 	if cb == nil {
 		x.xGetInterface = 0
 	} else {
-		x.xGetInterface = purego.NewCallback(func(ManagerVarp uintptr, ObjectPathVarp string, InterfaceNameVarp string) uintptr {
-			ret := cb(&DBusObjectManagerBase{Ptr: ManagerVarp}, ObjectPathVarp, InterfaceNameVarp)
+		x.xGetInterface = purego.NewCallback(func(ManagerVarp uintptr, ObjectPathVarp uintptr, InterfaceNameVarp uintptr) uintptr {
+			ret := cb(&DBusObjectManagerBase{Ptr: ManagerVarp}, core.GoString(ObjectPathVarp), core.GoString(InterfaceNameVarp))
 			if ret == nil {
 				return 0
 			}

@@ -62,8 +62,8 @@ func (x *ProxyResolverInterface) OverrideLookup(cb func(ProxyResolver, string, *
 	if cb == nil {
 		x.xLookup = 0
 	} else {
-		x.xLookup = purego.NewCallback(func(ResolverVarp uintptr, UriVarp string, CancellableVarp uintptr) []string {
-			return cb(&ProxyResolverBase{Ptr: ResolverVarp}, UriVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xLookup = purego.NewCallback(func(ResolverVarp uintptr, UriVarp uintptr, CancellableVarp uintptr) []string {
+			return cb(&ProxyResolverBase{Ptr: ResolverVarp}, core.GoString(UriVarp), CancellableNewFromInternalPtr(CancellableVarp))
 		})
 	}
 }
@@ -89,8 +89,8 @@ func (x *ProxyResolverInterface) OverrideLookupAsync(cb func(ProxyResolver, stri
 	if cb == nil {
 		x.xLookupAsync = 0
 	} else {
-		x.xLookupAsync = purego.NewCallback(func(ResolverVarp uintptr, UriVarp string, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(&ProxyResolverBase{Ptr: ResolverVarp}, UriVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xLookupAsync = purego.NewCallback(func(ResolverVarp uintptr, UriVarp uintptr, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(&ProxyResolverBase{Ptr: ResolverVarp}, core.GoString(UriVarp), CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }

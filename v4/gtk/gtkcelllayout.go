@@ -131,8 +131,8 @@ func (x *CellLayoutIface) OverrideAddAttribute(cb func(CellLayout, *CellRenderer
 	if cb == nil {
 		x.xAddAttribute = 0
 	} else {
-		x.xAddAttribute = purego.NewCallback(func(CellLayoutVarp uintptr, CellVarp uintptr, AttributeVarp string, ColumnVarp int) {
-			cb(&CellLayoutBase{Ptr: CellLayoutVarp}, CellRendererNewFromInternalPtr(CellVarp), AttributeVarp, ColumnVarp)
+		x.xAddAttribute = purego.NewCallback(func(CellLayoutVarp uintptr, CellVarp uintptr, AttributeVarp uintptr, ColumnVarp int) {
+			cb(&CellLayoutBase{Ptr: CellLayoutVarp}, CellRendererNewFromInternalPtr(CellVarp), core.GoString(AttributeVarp), ColumnVarp)
 		})
 	}
 }

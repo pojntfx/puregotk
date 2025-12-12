@@ -1094,8 +1094,8 @@ func (x *FontFamilyClass) OverrideGetFace(cb func(*FontFamily, string) *FontFace
 	if cb == nil {
 		x.xGetFace = 0
 	} else {
-		x.xGetFace = purego.NewCallback(func(FamilyVarp uintptr, NameVarp string) uintptr {
-			ret := cb(FontFamilyNewFromInternalPtr(FamilyVarp), NameVarp)
+		x.xGetFace = purego.NewCallback(func(FamilyVarp uintptr, NameVarp uintptr) uintptr {
+			ret := cb(FontFamilyNewFromInternalPtr(FamilyVarp), core.GoString(NameVarp))
 			if ret == nil {
 				return 0
 			}

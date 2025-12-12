@@ -88,8 +88,8 @@ func (x *DBusObjectIface) OverrideGetInterface(cb func(DBusObject, string) *DBus
 	if cb == nil {
 		x.xGetInterface = 0
 	} else {
-		x.xGetInterface = purego.NewCallback(func(ObjectVarp uintptr, InterfaceNameVarp string) uintptr {
-			ret := cb(&DBusObjectBase{Ptr: ObjectVarp}, InterfaceNameVarp)
+		x.xGetInterface = purego.NewCallback(func(ObjectVarp uintptr, InterfaceNameVarp uintptr) uintptr {
+			ret := cb(&DBusObjectBase{Ptr: ObjectVarp}, core.GoString(InterfaceNameVarp))
 			if ret == nil {
 				return 0
 			}

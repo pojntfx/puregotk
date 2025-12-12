@@ -57,8 +57,8 @@ func (x *MountOperationClass) OverrideAskPassword(cb func(*MountOperation, strin
 	if cb == nil {
 		x.xAskPassword = 0
 	} else {
-		x.xAskPassword = purego.NewCallback(func(OpVarp uintptr, MessageVarp string, DefaultUserVarp string, DefaultDomainVarp string, FlagsVarp AskPasswordFlags) {
-			cb(MountOperationNewFromInternalPtr(OpVarp), MessageVarp, DefaultUserVarp, DefaultDomainVarp, FlagsVarp)
+		x.xAskPassword = purego.NewCallback(func(OpVarp uintptr, MessageVarp uintptr, DefaultUserVarp uintptr, DefaultDomainVarp uintptr, FlagsVarp AskPasswordFlags) {
+			cb(MountOperationNewFromInternalPtr(OpVarp), core.GoString(MessageVarp), core.GoString(DefaultUserVarp), core.GoString(DefaultDomainVarp), FlagsVarp)
 		})
 	}
 }
@@ -80,8 +80,8 @@ func (x *MountOperationClass) OverrideAskQuestion(cb func(*MountOperation, strin
 	if cb == nil {
 		x.xAskQuestion = 0
 	} else {
-		x.xAskQuestion = purego.NewCallback(func(OpVarp uintptr, MessageVarp string, ChoicesVarp []string) {
-			cb(MountOperationNewFromInternalPtr(OpVarp), MessageVarp, ChoicesVarp)
+		x.xAskQuestion = purego.NewCallback(func(OpVarp uintptr, MessageVarp uintptr, ChoicesVarp []string) {
+			cb(MountOperationNewFromInternalPtr(OpVarp), core.GoString(MessageVarp), ChoicesVarp)
 		})
 	}
 }
@@ -149,8 +149,8 @@ func (x *MountOperationClass) OverrideShowProcesses(cb func(*MountOperation, str
 	if cb == nil {
 		x.xShowProcesses = 0
 	} else {
-		x.xShowProcesses = purego.NewCallback(func(OpVarp uintptr, MessageVarp string, ProcessesVarp []glib.Pid, ChoicesVarp []string) {
-			cb(MountOperationNewFromInternalPtr(OpVarp), MessageVarp, ProcessesVarp, ChoicesVarp)
+		x.xShowProcesses = purego.NewCallback(func(OpVarp uintptr, MessageVarp uintptr, ProcessesVarp []glib.Pid, ChoicesVarp []string) {
+			cb(MountOperationNewFromInternalPtr(OpVarp), core.GoString(MessageVarp), ProcessesVarp, ChoicesVarp)
 		})
 	}
 }
@@ -172,8 +172,8 @@ func (x *MountOperationClass) OverrideShowUnmountProgress(cb func(*MountOperatio
 	if cb == nil {
 		x.xShowUnmountProgress = 0
 	} else {
-		x.xShowUnmountProgress = purego.NewCallback(func(OpVarp uintptr, MessageVarp string, TimeLeftVarp int64, BytesLeftVarp int64) {
-			cb(MountOperationNewFromInternalPtr(OpVarp), MessageVarp, TimeLeftVarp, BytesLeftVarp)
+		x.xShowUnmountProgress = purego.NewCallback(func(OpVarp uintptr, MessageVarp uintptr, TimeLeftVarp int64, BytesLeftVarp int64) {
+			cb(MountOperationNewFromInternalPtr(OpVarp), core.GoString(MessageVarp), TimeLeftVarp, BytesLeftVarp)
 		})
 	}
 }
@@ -833,12 +833,12 @@ func (x *MountOperation) ConnectAskPassword(cb *func(MountOperation, string, str
 		return gobject.SignalConnect(x.GoPointer(), "ask-password", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, MessageVarp string, DefaultUserVarp string, DefaultDomainVarp string, FlagsVarp AskPasswordFlags) {
+	fcb := func(clsPtr uintptr, MessageVarp uintptr, DefaultUserVarp uintptr, DefaultDomainVarp uintptr, FlagsVarp AskPasswordFlags) {
 		fa := MountOperation{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, MessageVarp, DefaultUserVarp, DefaultDomainVarp, FlagsVarp)
+		cbFn(fa, core.GoString(MessageVarp), core.GoString(DefaultUserVarp), core.GoString(DefaultDomainVarp), FlagsVarp)
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)
@@ -858,12 +858,12 @@ func (x *MountOperation) ConnectAskQuestion(cb *func(MountOperation, string, []s
 		return gobject.SignalConnect(x.GoPointer(), "ask-question", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, MessageVarp string, ChoicesVarp []string) {
+	fcb := func(clsPtr uintptr, MessageVarp uintptr, ChoicesVarp []string) {
 		fa := MountOperation{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, MessageVarp, ChoicesVarp)
+		cbFn(fa, core.GoString(MessageVarp), ChoicesVarp)
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)
@@ -909,12 +909,12 @@ func (x *MountOperation) ConnectShowProcesses(cb *func(MountOperation, string, [
 		return gobject.SignalConnect(x.GoPointer(), "show-processes", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, MessageVarp string, ProcessesVarp []glib.Pid, ChoicesVarp []string) {
+	fcb := func(clsPtr uintptr, MessageVarp uintptr, ProcessesVarp []glib.Pid, ChoicesVarp []string) {
 		fa := MountOperation{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, MessageVarp, ProcessesVarp, ChoicesVarp)
+		cbFn(fa, core.GoString(MessageVarp), ProcessesVarp, ChoicesVarp)
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)
@@ -944,12 +944,12 @@ func (x *MountOperation) ConnectShowUnmountProgress(cb *func(MountOperation, str
 		return gobject.SignalConnect(x.GoPointer(), "show-unmount-progress", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, MessageVarp string, TimeLeftVarp int64, BytesLeftVarp int64) {
+	fcb := func(clsPtr uintptr, MessageVarp uintptr, TimeLeftVarp int64, BytesLeftVarp int64) {
 		fa := MountOperation{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, MessageVarp, TimeLeftVarp, BytesLeftVarp)
+		cbFn(fa, core.GoString(MessageVarp), TimeLeftVarp, BytesLeftVarp)
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

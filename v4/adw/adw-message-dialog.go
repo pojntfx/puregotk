@@ -35,8 +35,8 @@ func (x *MessageDialogClass) OverrideResponse(cb func(*MessageDialog, string)) {
 	if cb == nil {
 		x.xResponse = 0
 	} else {
-		x.xResponse = purego.NewCallback(func(SelfVarp uintptr, ResponseVarp string) {
-			cb(MessageDialogNewFromInternalPtr(SelfVarp), ResponseVarp)
+		x.xResponse = purego.NewCallback(func(SelfVarp uintptr, ResponseVarp uintptr) {
+			cb(MessageDialogNewFromInternalPtr(SelfVarp), core.GoString(ResponseVarp))
 		})
 	}
 }
@@ -802,12 +802,12 @@ func (x *MessageDialog) ConnectResponse(cb *func(MessageDialog, string)) uint32 
 		return gobject.SignalConnect(x.GoPointer(), "response", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, ResponseVarp string) {
+	fcb := func(clsPtr uintptr, ResponseVarp uintptr) {
 		fa := MessageDialog{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, ResponseVarp)
+		cbFn(fa, core.GoString(ResponseVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

@@ -148,12 +148,12 @@ func (x *DBusAuthObserver) ConnectAllowMechanism(cb *func(DBusAuthObserver, stri
 		return gobject.SignalConnect(x.GoPointer(), "allow-mechanism", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, MechanismVarp string) bool {
+	fcb := func(clsPtr uintptr, MechanismVarp uintptr) bool {
 		fa := DBusAuthObserver{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		return cbFn(fa, MechanismVarp)
+		return cbFn(fa, core.GoString(MechanismVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

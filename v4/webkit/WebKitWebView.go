@@ -172,8 +172,8 @@ func (x *WebViewClass) OverrideLoadFailed(cb func(*WebView, LoadEvent, string, *
 	if cb == nil {
 		x.xLoadFailed = 0
 	} else {
-		x.xLoadFailed = purego.NewCallback(func(WebViewVarp uintptr, LoadEventVarp LoadEvent, FailingUriVarp string, ErrorVarp *glib.Error) bool {
-			return cb(WebViewNewFromInternalPtr(WebViewVarp), LoadEventVarp, FailingUriVarp, ErrorVarp)
+		x.xLoadFailed = purego.NewCallback(func(WebViewVarp uintptr, LoadEventVarp LoadEvent, FailingUriVarp uintptr, ErrorVarp *glib.Error) bool {
+			return cb(WebViewNewFromInternalPtr(WebViewVarp), LoadEventVarp, core.GoString(FailingUriVarp), ErrorVarp)
 		})
 	}
 }
@@ -642,8 +642,8 @@ func (x *WebViewClass) OverrideLoadFailedWithTlsErrors(cb func(*WebView, string,
 	if cb == nil {
 		x.xLoadFailedWithTlsErrors = 0
 	} else {
-		x.xLoadFailedWithTlsErrors = purego.NewCallback(func(WebViewVarp uintptr, FailingUriVarp string, CertificateVarp uintptr, ErrorsVarp gio.TlsCertificateFlags) bool {
-			return cb(WebViewNewFromInternalPtr(WebViewVarp), FailingUriVarp, gio.TlsCertificateNewFromInternalPtr(CertificateVarp), ErrorsVarp)
+		x.xLoadFailedWithTlsErrors = purego.NewCallback(func(WebViewVarp uintptr, FailingUriVarp uintptr, CertificateVarp uintptr, ErrorsVarp gio.TlsCertificateFlags) bool {
+			return cb(WebViewNewFromInternalPtr(WebViewVarp), core.GoString(FailingUriVarp), gio.TlsCertificateNewFromInternalPtr(CertificateVarp), ErrorsVarp)
 		})
 	}
 }
@@ -3701,12 +3701,12 @@ func (x *WebView) ConnectLoadFailed(cb *func(WebView, LoadEvent, string, uintptr
 		return gobject.SignalConnect(x.GoPointer(), "load-failed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, LoadEventVarp LoadEvent, FailingUriVarp string, ErrorVarp uintptr) bool {
+	fcb := func(clsPtr uintptr, LoadEventVarp LoadEvent, FailingUriVarp uintptr, ErrorVarp uintptr) bool {
 		fa := WebView{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		return cbFn(fa, LoadEventVarp, FailingUriVarp, ErrorVarp)
+		return cbFn(fa, LoadEventVarp, core.GoString(FailingUriVarp), ErrorVarp)
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)
@@ -3729,12 +3729,12 @@ func (x *WebView) ConnectLoadFailedWithTlsErrors(cb *func(WebView, string, uintp
 		return gobject.SignalConnect(x.GoPointer(), "load-failed-with-tls-errors", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, FailingUriVarp string, CertificateVarp uintptr, ErrorsVarp gio.TlsCertificateFlags) bool {
+	fcb := func(clsPtr uintptr, FailingUriVarp uintptr, CertificateVarp uintptr, ErrorsVarp gio.TlsCertificateFlags) bool {
 		fa := WebView{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		return cbFn(fa, FailingUriVarp, CertificateVarp, ErrorsVarp)
+		return cbFn(fa, core.GoString(FailingUriVarp), CertificateVarp, ErrorsVarp)
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

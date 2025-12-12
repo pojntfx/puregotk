@@ -335,8 +335,8 @@ func (x *RendererClass) OverrideDrawGlyphItem(cb func(*Renderer, string, *GlyphI
 	if cb == nil {
 		x.xDrawGlyphItem = 0
 	} else {
-		x.xDrawGlyphItem = purego.NewCallback(func(RendererVarp uintptr, TextVarp string, GlyphItemVarp *GlyphItem, XVarp int, YVarp int) {
-			cb(RendererNewFromInternalPtr(RendererVarp), TextVarp, GlyphItemVarp, XVarp, YVarp)
+		x.xDrawGlyphItem = purego.NewCallback(func(RendererVarp uintptr, TextVarp uintptr, GlyphItemVarp *GlyphItem, XVarp int, YVarp int) {
+			cb(RendererNewFromInternalPtr(RendererVarp), core.GoString(TextVarp), GlyphItemVarp, XVarp, YVarp)
 		})
 	}
 }

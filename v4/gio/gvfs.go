@@ -92,8 +92,8 @@ func (x *VfsClass) OverrideGetFileForPath(cb func(*Vfs, string) *FileBase) {
 	if cb == nil {
 		x.xGetFileForPath = 0
 	} else {
-		x.xGetFileForPath = purego.NewCallback(func(VfsVarp uintptr, PathVarp string) uintptr {
-			ret := cb(VfsNewFromInternalPtr(VfsVarp), PathVarp)
+		x.xGetFileForPath = purego.NewCallback(func(VfsVarp uintptr, PathVarp uintptr) uintptr {
+			ret := cb(VfsNewFromInternalPtr(VfsVarp), core.GoString(PathVarp))
 			if ret == nil {
 				return 0
 			}
@@ -125,8 +125,8 @@ func (x *VfsClass) OverrideGetFileForUri(cb func(*Vfs, string) *FileBase) {
 	if cb == nil {
 		x.xGetFileForUri = 0
 	} else {
-		x.xGetFileForUri = purego.NewCallback(func(VfsVarp uintptr, UriVarp string) uintptr {
-			ret := cb(VfsNewFromInternalPtr(VfsVarp), UriVarp)
+		x.xGetFileForUri = purego.NewCallback(func(VfsVarp uintptr, UriVarp uintptr) uintptr {
+			ret := cb(VfsNewFromInternalPtr(VfsVarp), core.GoString(UriVarp))
 			if ret == nil {
 				return 0
 			}
@@ -181,8 +181,8 @@ func (x *VfsClass) OverrideParseName(cb func(*Vfs, string) *FileBase) {
 	if cb == nil {
 		x.xParseName = 0
 	} else {
-		x.xParseName = purego.NewCallback(func(VfsVarp uintptr, ParseNameVarp string) uintptr {
-			ret := cb(VfsNewFromInternalPtr(VfsVarp), ParseNameVarp)
+		x.xParseName = purego.NewCallback(func(VfsVarp uintptr, ParseNameVarp uintptr) uintptr {
+			ret := cb(VfsNewFromInternalPtr(VfsVarp), core.GoString(ParseNameVarp))
 			if ret == nil {
 				return 0
 			}
@@ -214,8 +214,8 @@ func (x *VfsClass) OverrideLocalFileAddInfo(cb func(*Vfs, string, uint64, *FileA
 	if cb == nil {
 		x.xLocalFileAddInfo = 0
 	} else {
-		x.xLocalFileAddInfo = purego.NewCallback(func(VfsVarp uintptr, FilenameVarp string, DeviceVarp uint64, AttributeMatcherVarp *FileAttributeMatcher, InfoVarp uintptr, CancellableVarp uintptr, ExtraDataVarp uintptr, FreeExtraDataVarp uintptr) {
-			cb(VfsNewFromInternalPtr(VfsVarp), FilenameVarp, DeviceVarp, AttributeMatcherVarp, FileInfoNewFromInternalPtr(InfoVarp), CancellableNewFromInternalPtr(CancellableVarp), ExtraDataVarp, (*glib.DestroyNotify)(unsafe.Pointer(FreeExtraDataVarp)))
+		x.xLocalFileAddInfo = purego.NewCallback(func(VfsVarp uintptr, FilenameVarp uintptr, DeviceVarp uint64, AttributeMatcherVarp *FileAttributeMatcher, InfoVarp uintptr, CancellableVarp uintptr, ExtraDataVarp uintptr, FreeExtraDataVarp uintptr) {
+			cb(VfsNewFromInternalPtr(VfsVarp), core.GoString(FilenameVarp), DeviceVarp, AttributeMatcherVarp, FileInfoNewFromInternalPtr(InfoVarp), CancellableNewFromInternalPtr(CancellableVarp), ExtraDataVarp, (*glib.DestroyNotify)(unsafe.Pointer(FreeExtraDataVarp)))
 		})
 	}
 }
@@ -260,8 +260,8 @@ func (x *VfsClass) OverrideLocalFileSetAttributes(cb func(*Vfs, string, *FileInf
 	if cb == nil {
 		x.xLocalFileSetAttributes = 0
 	} else {
-		x.xLocalFileSetAttributes = purego.NewCallback(func(VfsVarp uintptr, FilenameVarp string, InfoVarp uintptr, FlagsVarp FileQueryInfoFlags, CancellableVarp uintptr) bool {
-			return cb(VfsNewFromInternalPtr(VfsVarp), FilenameVarp, FileInfoNewFromInternalPtr(InfoVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xLocalFileSetAttributes = purego.NewCallback(func(VfsVarp uintptr, FilenameVarp uintptr, InfoVarp uintptr, FlagsVarp FileQueryInfoFlags, CancellableVarp uintptr) bool {
+			return cb(VfsNewFromInternalPtr(VfsVarp), core.GoString(FilenameVarp), FileInfoNewFromInternalPtr(InfoVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
 		})
 	}
 }
@@ -283,8 +283,8 @@ func (x *VfsClass) OverrideLocalFileRemoved(cb func(*Vfs, string)) {
 	if cb == nil {
 		x.xLocalFileRemoved = 0
 	} else {
-		x.xLocalFileRemoved = purego.NewCallback(func(VfsVarp uintptr, FilenameVarp string) {
-			cb(VfsNewFromInternalPtr(VfsVarp), FilenameVarp)
+		x.xLocalFileRemoved = purego.NewCallback(func(VfsVarp uintptr, FilenameVarp uintptr) {
+			cb(VfsNewFromInternalPtr(VfsVarp), core.GoString(FilenameVarp))
 		})
 	}
 }
@@ -306,8 +306,8 @@ func (x *VfsClass) OverrideLocalFileMoved(cb func(*Vfs, string, string)) {
 	if cb == nil {
 		x.xLocalFileMoved = 0
 	} else {
-		x.xLocalFileMoved = purego.NewCallback(func(VfsVarp uintptr, SourceVarp string, DestVarp string) {
-			cb(VfsNewFromInternalPtr(VfsVarp), SourceVarp, DestVarp)
+		x.xLocalFileMoved = purego.NewCallback(func(VfsVarp uintptr, SourceVarp uintptr, DestVarp uintptr) {
+			cb(VfsNewFromInternalPtr(VfsVarp), core.GoString(SourceVarp), core.GoString(DestVarp))
 		})
 	}
 }

@@ -68,8 +68,8 @@ func (x *HSTSEnforcerClass) OverrideHasValidPolicy(cb func(*HSTSEnforcer, string
 	if cb == nil {
 		x.xHasValidPolicy = 0
 	} else {
-		x.xHasValidPolicy = purego.NewCallback(func(HstsEnforcerVarp uintptr, DomainVarp string) bool {
-			return cb(HSTSEnforcerNewFromInternalPtr(HstsEnforcerVarp), DomainVarp)
+		x.xHasValidPolicy = purego.NewCallback(func(HstsEnforcerVarp uintptr, DomainVarp uintptr) bool {
+			return cb(HSTSEnforcerNewFromInternalPtr(HstsEnforcerVarp), core.GoString(DomainVarp))
 		})
 	}
 }

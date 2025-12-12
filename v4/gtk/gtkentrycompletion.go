@@ -565,12 +565,12 @@ func (x *EntryCompletion) ConnectInsertPrefix(cb *func(EntryCompletion, string) 
 		return gobject.SignalConnect(x.GoPointer(), "insert-prefix", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, PrefixVarp string) bool {
+	fcb := func(clsPtr uintptr, PrefixVarp uintptr) bool {
 		fa := EntryCompletion{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		return cbFn(fa, PrefixVarp)
+		return cbFn(fa, core.GoString(PrefixVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

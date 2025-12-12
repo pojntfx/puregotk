@@ -1335,12 +1335,12 @@ func (x *Label) ConnectActivateLink(cb *func(Label, string) bool) uint32 {
 		return gobject.SignalConnect(x.GoPointer(), "activate-link", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, UriVarp string) bool {
+	fcb := func(clsPtr uintptr, UriVarp uintptr) bool {
 		fa := Label{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		return cbFn(fa, UriVarp)
+		return cbFn(fa, core.GoString(UriVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

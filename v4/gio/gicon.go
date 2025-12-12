@@ -121,8 +121,8 @@ func (x *IconIface) OverrideFromTokens(cb func(string, int, int) *IconBase) {
 	if cb == nil {
 		x.xFromTokens = 0
 	} else {
-		x.xFromTokens = purego.NewCallback(func(TokensVarp string, NumTokensVarp int, VersionVarp int) uintptr {
-			ret := cb(TokensVarp, NumTokensVarp, VersionVarp)
+		x.xFromTokens = purego.NewCallback(func(TokensVarp uintptr, NumTokensVarp int, VersionVarp int) uintptr {
+			ret := cb(core.GoString(TokensVarp), NumTokensVarp, VersionVarp)
 			if ret == nil {
 				return 0
 			}

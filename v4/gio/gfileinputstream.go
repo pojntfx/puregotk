@@ -117,8 +117,8 @@ func (x *FileInputStreamClass) OverrideQueryInfo(cb func(*FileInputStream, strin
 	if cb == nil {
 		x.xQueryInfo = 0
 	} else {
-		x.xQueryInfo = purego.NewCallback(func(StreamVarp uintptr, AttributesVarp string, CancellableVarp uintptr) uintptr {
-			ret := cb(FileInputStreamNewFromInternalPtr(StreamVarp), AttributesVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xQueryInfo = purego.NewCallback(func(StreamVarp uintptr, AttributesVarp uintptr, CancellableVarp uintptr) uintptr {
+			ret := cb(FileInputStreamNewFromInternalPtr(StreamVarp), core.GoString(AttributesVarp), CancellableNewFromInternalPtr(CancellableVarp))
 			if ret == nil {
 				return 0
 			}
@@ -150,8 +150,8 @@ func (x *FileInputStreamClass) OverrideQueryInfoAsync(cb func(*FileInputStream, 
 	if cb == nil {
 		x.xQueryInfoAsync = 0
 	} else {
-		x.xQueryInfoAsync = purego.NewCallback(func(StreamVarp uintptr, AttributesVarp string, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(FileInputStreamNewFromInternalPtr(StreamVarp), AttributesVarp, IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xQueryInfoAsync = purego.NewCallback(func(StreamVarp uintptr, AttributesVarp uintptr, IoPriorityVarp int, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(FileInputStreamNewFromInternalPtr(StreamVarp), core.GoString(AttributesVarp), IoPriorityVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }

@@ -82,8 +82,8 @@ func (x *ResolverClass) OverrideLookupByName(cb func(*Resolver, string, *Cancell
 	if cb == nil {
 		x.xLookupByName = 0
 	} else {
-		x.xLookupByName = purego.NewCallback(func(ResolverVarp uintptr, HostnameVarp string, CancellableVarp uintptr) *glib.List {
-			return cb(ResolverNewFromInternalPtr(ResolverVarp), HostnameVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xLookupByName = purego.NewCallback(func(ResolverVarp uintptr, HostnameVarp uintptr, CancellableVarp uintptr) *glib.List {
+			return cb(ResolverNewFromInternalPtr(ResolverVarp), core.GoString(HostnameVarp), CancellableNewFromInternalPtr(CancellableVarp))
 		})
 	}
 }
@@ -105,8 +105,8 @@ func (x *ResolverClass) OverrideLookupByNameAsync(cb func(*Resolver, string, *Ca
 	if cb == nil {
 		x.xLookupByNameAsync = 0
 	} else {
-		x.xLookupByNameAsync = purego.NewCallback(func(ResolverVarp uintptr, HostnameVarp string, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(ResolverNewFromInternalPtr(ResolverVarp), HostnameVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xLookupByNameAsync = purego.NewCallback(func(ResolverVarp uintptr, HostnameVarp uintptr, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(ResolverNewFromInternalPtr(ResolverVarp), core.GoString(HostnameVarp), CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }
@@ -220,8 +220,8 @@ func (x *ResolverClass) OverrideLookupService(cb func(*Resolver, string, *Cancel
 	if cb == nil {
 		x.xLookupService = 0
 	} else {
-		x.xLookupService = purego.NewCallback(func(ResolverVarp uintptr, RrnameVarp string, CancellableVarp uintptr) *glib.List {
-			return cb(ResolverNewFromInternalPtr(ResolverVarp), RrnameVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xLookupService = purego.NewCallback(func(ResolverVarp uintptr, RrnameVarp uintptr, CancellableVarp uintptr) *glib.List {
+			return cb(ResolverNewFromInternalPtr(ResolverVarp), core.GoString(RrnameVarp), CancellableNewFromInternalPtr(CancellableVarp))
 		})
 	}
 }
@@ -243,8 +243,8 @@ func (x *ResolverClass) OverrideLookupServiceAsync(cb func(*Resolver, string, *C
 	if cb == nil {
 		x.xLookupServiceAsync = 0
 	} else {
-		x.xLookupServiceAsync = purego.NewCallback(func(ResolverVarp uintptr, RrnameVarp string, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(ResolverNewFromInternalPtr(ResolverVarp), RrnameVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xLookupServiceAsync = purego.NewCallback(func(ResolverVarp uintptr, RrnameVarp uintptr, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(ResolverNewFromInternalPtr(ResolverVarp), core.GoString(RrnameVarp), CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }
@@ -289,8 +289,8 @@ func (x *ResolverClass) OverrideLookupRecords(cb func(*Resolver, string, Resolve
 	if cb == nil {
 		x.xLookupRecords = 0
 	} else {
-		x.xLookupRecords = purego.NewCallback(func(ResolverVarp uintptr, RrnameVarp string, RecordTypeVarp ResolverRecordType, CancellableVarp uintptr) *glib.List {
-			return cb(ResolverNewFromInternalPtr(ResolverVarp), RrnameVarp, RecordTypeVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xLookupRecords = purego.NewCallback(func(ResolverVarp uintptr, RrnameVarp uintptr, RecordTypeVarp ResolverRecordType, CancellableVarp uintptr) *glib.List {
+			return cb(ResolverNewFromInternalPtr(ResolverVarp), core.GoString(RrnameVarp), RecordTypeVarp, CancellableNewFromInternalPtr(CancellableVarp))
 		})
 	}
 }
@@ -312,8 +312,8 @@ func (x *ResolverClass) OverrideLookupRecordsAsync(cb func(*Resolver, string, Re
 	if cb == nil {
 		x.xLookupRecordsAsync = 0
 	} else {
-		x.xLookupRecordsAsync = purego.NewCallback(func(ResolverVarp uintptr, RrnameVarp string, RecordTypeVarp ResolverRecordType, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(ResolverNewFromInternalPtr(ResolverVarp), RrnameVarp, RecordTypeVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xLookupRecordsAsync = purego.NewCallback(func(ResolverVarp uintptr, RrnameVarp uintptr, RecordTypeVarp ResolverRecordType, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(ResolverNewFromInternalPtr(ResolverVarp), core.GoString(RrnameVarp), RecordTypeVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }
@@ -358,8 +358,8 @@ func (x *ResolverClass) OverrideLookupByNameWithFlagsAsync(cb func(*Resolver, st
 	if cb == nil {
 		x.xLookupByNameWithFlagsAsync = 0
 	} else {
-		x.xLookupByNameWithFlagsAsync = purego.NewCallback(func(ResolverVarp uintptr, HostnameVarp string, FlagsVarp ResolverNameLookupFlags, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
-			cb(ResolverNewFromInternalPtr(ResolverVarp), HostnameVarp, FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
+		x.xLookupByNameWithFlagsAsync = purego.NewCallback(func(ResolverVarp uintptr, HostnameVarp uintptr, FlagsVarp ResolverNameLookupFlags, CancellableVarp uintptr, CallbackVarp uintptr, UserDataVarp uintptr) {
+			cb(ResolverNewFromInternalPtr(ResolverVarp), core.GoString(HostnameVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp), (*AsyncReadyCallback)(unsafe.Pointer(CallbackVarp)), UserDataVarp)
 		})
 	}
 }
@@ -404,8 +404,8 @@ func (x *ResolverClass) OverrideLookupByNameWithFlags(cb func(*Resolver, string,
 	if cb == nil {
 		x.xLookupByNameWithFlags = 0
 	} else {
-		x.xLookupByNameWithFlags = purego.NewCallback(func(ResolverVarp uintptr, HostnameVarp string, FlagsVarp ResolverNameLookupFlags, CancellableVarp uintptr) *glib.List {
-			return cb(ResolverNewFromInternalPtr(ResolverVarp), HostnameVarp, FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
+		x.xLookupByNameWithFlags = purego.NewCallback(func(ResolverVarp uintptr, HostnameVarp uintptr, FlagsVarp ResolverNameLookupFlags, CancellableVarp uintptr) *glib.List {
+			return cb(ResolverNewFromInternalPtr(ResolverVarp), core.GoString(HostnameVarp), FlagsVarp, CancellableNewFromInternalPtr(CancellableVarp))
 		})
 	}
 }

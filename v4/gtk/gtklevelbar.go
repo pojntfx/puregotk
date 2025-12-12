@@ -409,12 +409,12 @@ func (x *LevelBar) ConnectOffsetChanged(cb *func(LevelBar, string)) uint32 {
 		return gobject.SignalConnect(x.GoPointer(), "offset-changed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, NameVarp string) {
+	fcb := func(clsPtr uintptr, NameVarp uintptr) {
 		fa := LevelBar{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, NameVarp)
+		cbFn(fa, core.GoString(NameVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

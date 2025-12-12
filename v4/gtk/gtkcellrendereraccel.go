@@ -123,12 +123,12 @@ func (x *CellRendererAccel) ConnectAccelCleared(cb *func(CellRendererAccel, stri
 		return gobject.SignalConnect(x.GoPointer(), "accel-cleared", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, PathStringVarp string) {
+	fcb := func(clsPtr uintptr, PathStringVarp uintptr) {
 		fa := CellRendererAccel{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, PathStringVarp)
+		cbFn(fa, core.GoString(PathStringVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)
@@ -143,12 +143,12 @@ func (x *CellRendererAccel) ConnectAccelEdited(cb *func(CellRendererAccel, strin
 		return gobject.SignalConnect(x.GoPointer(), "accel-edited", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, PathStringVarp string, AccelKeyVarp uint, AccelModsVarp gdk.ModifierType, HardwareKeycodeVarp uint) {
+	fcb := func(clsPtr uintptr, PathStringVarp uintptr, AccelKeyVarp uint, AccelModsVarp gdk.ModifierType, HardwareKeycodeVarp uint) {
 		fa := CellRendererAccel{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, PathStringVarp, AccelKeyVarp, AccelModsVarp, HardwareKeycodeVarp)
+		cbFn(fa, core.GoString(PathStringVarp), AccelKeyVarp, AccelModsVarp, HardwareKeycodeVarp)
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

@@ -35,8 +35,8 @@ func (x *DBusProxyClass) OverrideGPropertiesChanged(cb func(*DBusProxy, *glib.Va
 	if cb == nil {
 		x.xGPropertiesChanged = 0
 	} else {
-		x.xGPropertiesChanged = purego.NewCallback(func(ProxyVarp uintptr, ChangedPropertiesVarp *glib.Variant, InvalidatedPropertiesVarp string) {
-			cb(DBusProxyNewFromInternalPtr(ProxyVarp), ChangedPropertiesVarp, InvalidatedPropertiesVarp)
+		x.xGPropertiesChanged = purego.NewCallback(func(ProxyVarp uintptr, ChangedPropertiesVarp *glib.Variant, InvalidatedPropertiesVarp uintptr) {
+			cb(DBusProxyNewFromInternalPtr(ProxyVarp), ChangedPropertiesVarp, core.GoString(InvalidatedPropertiesVarp))
 		})
 	}
 }
@@ -60,8 +60,8 @@ func (x *DBusProxyClass) OverrideGSignal(cb func(*DBusProxy, string, string, *gl
 	if cb == nil {
 		x.xGSignal = 0
 	} else {
-		x.xGSignal = purego.NewCallback(func(ProxyVarp uintptr, SenderNameVarp string, SignalNameVarp string, ParametersVarp *glib.Variant) {
-			cb(DBusProxyNewFromInternalPtr(ProxyVarp), SenderNameVarp, SignalNameVarp, ParametersVarp)
+		x.xGSignal = purego.NewCallback(func(ProxyVarp uintptr, SenderNameVarp uintptr, SignalNameVarp uintptr, ParametersVarp *glib.Variant) {
+			cb(DBusProxyNewFromInternalPtr(ProxyVarp), core.GoString(SenderNameVarp), core.GoString(SignalNameVarp), ParametersVarp)
 		})
 	}
 }
@@ -806,12 +806,12 @@ func (x *DBusProxy) ConnectGSignal(cb *func(DBusProxy, string, string, uintptr))
 		return gobject.SignalConnect(x.GoPointer(), "g-signal", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, SenderNameVarp string, SignalNameVarp string, ParametersVarp uintptr) {
+	fcb := func(clsPtr uintptr, SenderNameVarp uintptr, SignalNameVarp uintptr, ParametersVarp uintptr) {
 		fa := DBusProxy{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, SenderNameVarp, SignalNameVarp, ParametersVarp)
+		cbFn(fa, core.GoString(SenderNameVarp), core.GoString(SignalNameVarp), ParametersVarp)
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

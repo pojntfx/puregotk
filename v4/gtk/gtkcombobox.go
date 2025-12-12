@@ -64,8 +64,8 @@ func (x *ComboBoxClass) OverrideFormatEntryText(cb func(*ComboBox, string) strin
 	if cb == nil {
 		x.xFormatEntryText = 0
 	} else {
-		x.xFormatEntryText = purego.NewCallback(func(ComboBoxVarp uintptr, PathVarp string) string {
-			return cb(ComboBoxNewFromInternalPtr(ComboBoxVarp), PathVarp)
+		x.xFormatEntryText = purego.NewCallback(func(ComboBoxVarp uintptr, PathVarp uintptr) string {
+			return cb(ComboBoxNewFromInternalPtr(ComboBoxVarp), core.GoString(PathVarp))
 		})
 	}
 }
@@ -817,12 +817,12 @@ func (x *ComboBox) ConnectFormatEntryText(cb *func(ComboBox, string) string) uin
 		return gobject.SignalConnect(x.GoPointer(), "format-entry-text", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, PathVarp string) string {
+	fcb := func(clsPtr uintptr, PathVarp uintptr) string {
 		fa := ComboBox{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		return cbFn(fa, PathVarp)
+		return cbFn(fa, core.GoString(PathVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

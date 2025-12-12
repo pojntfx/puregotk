@@ -142,12 +142,12 @@ func (x *CellRendererCombo) ConnectChanged(cb *func(CellRendererCombo, string, u
 		return gobject.SignalConnect(x.GoPointer(), "changed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, PathStringVarp string, NewIterVarp uintptr) {
+	fcb := func(clsPtr uintptr, PathStringVarp uintptr, NewIterVarp uintptr) {
 		fa := CellRendererCombo{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, PathStringVarp, NewIterVarp)
+		cbFn(fa, core.GoString(PathStringVarp), NewIterVarp)
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

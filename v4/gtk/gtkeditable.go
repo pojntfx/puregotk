@@ -44,8 +44,8 @@ func (x *EditableInterface) OverrideInsertText(cb func(Editable, string, int, in
 	if cb == nil {
 		x.xInsertText = 0
 	} else {
-		x.xInsertText = purego.NewCallback(func(EditableVarp uintptr, TextVarp string, LengthVarp int, PositionVarp int) {
-			cb(&EditableBase{Ptr: EditableVarp}, TextVarp, LengthVarp, PositionVarp)
+		x.xInsertText = purego.NewCallback(func(EditableVarp uintptr, TextVarp uintptr, LengthVarp int, PositionVarp int) {
+			cb(&EditableBase{Ptr: EditableVarp}, core.GoString(TextVarp), LengthVarp, PositionVarp)
 		})
 	}
 }
@@ -136,8 +136,8 @@ func (x *EditableInterface) OverrideDoInsertText(cb func(Editable, string, int, 
 	if cb == nil {
 		x.xDoInsertText = 0
 	} else {
-		x.xDoInsertText = purego.NewCallback(func(EditableVarp uintptr, TextVarp string, LengthVarp int, PositionVarp int) {
-			cb(&EditableBase{Ptr: EditableVarp}, TextVarp, LengthVarp, PositionVarp)
+		x.xDoInsertText = purego.NewCallback(func(EditableVarp uintptr, TextVarp uintptr, LengthVarp int, PositionVarp int) {
+			cb(&EditableBase{Ptr: EditableVarp}, core.GoString(TextVarp), LengthVarp, PositionVarp)
 		})
 	}
 }

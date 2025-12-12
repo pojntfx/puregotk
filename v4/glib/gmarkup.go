@@ -365,8 +365,8 @@ func (x *MarkupParser) OverrideStartElement(cb func(*MarkupParseContext, string,
 	if cb == nil {
 		x.xStartElement = 0
 	} else {
-		x.xStartElement = purego.NewCallback(func(ContextVarp *MarkupParseContext, ElementNameVarp string, AttributeNamesVarp string, AttributeValuesVarp string, UserDataVarp uintptr) {
-			cb(ContextVarp, ElementNameVarp, AttributeNamesVarp, AttributeValuesVarp, UserDataVarp)
+		x.xStartElement = purego.NewCallback(func(ContextVarp *MarkupParseContext, ElementNameVarp uintptr, AttributeNamesVarp uintptr, AttributeValuesVarp uintptr, UserDataVarp uintptr) {
+			cb(ContextVarp, core.GoString(ElementNameVarp), core.GoString(AttributeNamesVarp), core.GoString(AttributeValuesVarp), UserDataVarp)
 		})
 	}
 }
@@ -396,8 +396,8 @@ func (x *MarkupParser) OverrideEndElement(cb func(*MarkupParseContext, string, u
 	if cb == nil {
 		x.xEndElement = 0
 	} else {
-		x.xEndElement = purego.NewCallback(func(ContextVarp *MarkupParseContext, ElementNameVarp string, UserDataVarp uintptr) {
-			cb(ContextVarp, ElementNameVarp, UserDataVarp)
+		x.xEndElement = purego.NewCallback(func(ContextVarp *MarkupParseContext, ElementNameVarp uintptr, UserDataVarp uintptr) {
+			cb(ContextVarp, core.GoString(ElementNameVarp), UserDataVarp)
 		})
 	}
 }
@@ -429,8 +429,8 @@ func (x *MarkupParser) OverrideText(cb func(*MarkupParseContext, string, uint, u
 	if cb == nil {
 		x.xText = 0
 	} else {
-		x.xText = purego.NewCallback(func(ContextVarp *MarkupParseContext, TextVarp string, TextLenVarp uint, UserDataVarp uintptr) {
-			cb(ContextVarp, TextVarp, TextLenVarp, UserDataVarp)
+		x.xText = purego.NewCallback(func(ContextVarp *MarkupParseContext, TextVarp uintptr, TextLenVarp uint, UserDataVarp uintptr) {
+			cb(ContextVarp, core.GoString(TextVarp), TextLenVarp, UserDataVarp)
 		})
 	}
 }
@@ -464,8 +464,8 @@ func (x *MarkupParser) OverridePassthrough(cb func(*MarkupParseContext, string, 
 	if cb == nil {
 		x.xPassthrough = 0
 	} else {
-		x.xPassthrough = purego.NewCallback(func(ContextVarp *MarkupParseContext, PassthroughTextVarp string, TextLenVarp uint, UserDataVarp uintptr) {
-			cb(ContextVarp, PassthroughTextVarp, TextLenVarp, UserDataVarp)
+		x.xPassthrough = purego.NewCallback(func(ContextVarp *MarkupParseContext, PassthroughTextVarp uintptr, TextLenVarp uint, UserDataVarp uintptr) {
+			cb(ContextVarp, core.GoString(PassthroughTextVarp), TextLenVarp, UserDataVarp)
 		})
 	}
 }

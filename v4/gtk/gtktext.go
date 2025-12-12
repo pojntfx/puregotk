@@ -993,12 +993,12 @@ func (x *Text) ConnectInsertAtCursor(cb *func(Text, string)) uint32 {
 		return gobject.SignalConnect(x.GoPointer(), "insert-at-cursor", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, StringVarp string) {
+	fcb := func(clsPtr uintptr, StringVarp uintptr) {
 		fa := Text{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, StringVarp)
+		cbFn(fa, core.GoString(StringVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)
@@ -1107,12 +1107,12 @@ func (x *Text) ConnectPreeditChanged(cb *func(Text, string)) uint32 {
 		return gobject.SignalConnect(x.GoPointer(), "preedit-changed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, PreeditVarp string) {
+	fcb := func(clsPtr uintptr, PreeditVarp uintptr) {
 		fa := Text{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, PreeditVarp)
+		cbFn(fa, core.GoString(PreeditVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

@@ -339,12 +339,12 @@ func (x *AppChooserButton) ConnectCustomItemActivated(cb *func(AppChooserButton,
 		return gobject.SignalConnect(x.GoPointer(), "custom-item-activated", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, ItemNameVarp string) {
+	fcb := func(clsPtr uintptr, ItemNameVarp uintptr) {
 		fa := AppChooserButton{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, ItemNameVarp)
+		cbFn(fa, core.GoString(ItemNameVarp))
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)

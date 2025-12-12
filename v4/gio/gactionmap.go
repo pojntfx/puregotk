@@ -135,8 +135,8 @@ func (x *ActionMapInterface) OverrideLookupAction(cb func(ActionMap, string) *Ac
 	if cb == nil {
 		x.xLookupAction = 0
 	} else {
-		x.xLookupAction = purego.NewCallback(func(ActionMapVarp uintptr, ActionNameVarp string) uintptr {
-			ret := cb(&ActionMapBase{Ptr: ActionMapVarp}, ActionNameVarp)
+		x.xLookupAction = purego.NewCallback(func(ActionMapVarp uintptr, ActionNameVarp uintptr) uintptr {
+			ret := cb(&ActionMapBase{Ptr: ActionMapVarp}, core.GoString(ActionNameVarp))
 			if ret == nil {
 				return 0
 			}
@@ -203,8 +203,8 @@ func (x *ActionMapInterface) OverrideRemoveAction(cb func(ActionMap, string)) {
 	if cb == nil {
 		x.xRemoveAction = 0
 	} else {
-		x.xRemoveAction = purego.NewCallback(func(ActionMapVarp uintptr, ActionNameVarp string) {
-			cb(&ActionMapBase{Ptr: ActionMapVarp}, ActionNameVarp)
+		x.xRemoveAction = purego.NewCallback(func(ActionMapVarp uintptr, ActionNameVarp uintptr) {
+			cb(&ActionMapBase{Ptr: ActionMapVarp}, core.GoString(ActionNameVarp))
 		})
 	}
 }

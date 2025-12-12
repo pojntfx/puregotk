@@ -102,8 +102,8 @@ func (x *TextBufferClass) OverrideInsertText(cb func(*TextBuffer, *TextIter, str
 	if cb == nil {
 		x.xInsertText = 0
 	} else {
-		x.xInsertText = purego.NewCallback(func(BufferVarp uintptr, PosVarp *TextIter, NewTextVarp string, NewTextLengthVarp int) {
-			cb(TextBufferNewFromInternalPtr(BufferVarp), PosVarp, NewTextVarp, NewTextLengthVarp)
+		x.xInsertText = purego.NewCallback(func(BufferVarp uintptr, PosVarp *TextIter, NewTextVarp uintptr, NewTextLengthVarp int) {
+			cb(TextBufferNewFromInternalPtr(BufferVarp), PosVarp, core.GoString(NewTextVarp), NewTextLengthVarp)
 		})
 	}
 }
@@ -2021,12 +2021,12 @@ func (x *TextBuffer) ConnectInsertText(cb *func(TextBuffer, uintptr, string, int
 		return gobject.SignalConnect(x.GoPointer(), "insert-text", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, LocationVarp uintptr, TextVarp string, LenVarp int) {
+	fcb := func(clsPtr uintptr, LocationVarp uintptr, TextVarp uintptr, LenVarp int) {
 		fa := TextBuffer{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
 
-		cbFn(fa, LocationVarp, TextVarp, LenVarp)
+		cbFn(fa, LocationVarp, core.GoString(TextVarp), LenVarp)
 
 	}
 	cbRefPtr := purego.NewCallback(fcb)
