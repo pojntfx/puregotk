@@ -188,4 +188,8 @@ func init() {
 	core.PuregoSafeRegister(&xURIResponseGetSuggestedFilename, libs, "webkit_uri_response_get_suggested_filename")
 	core.PuregoSafeRegister(&xURIResponseGetUri, libs, "webkit_uri_response_get_uri")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	URIResponseGLibType()
 }

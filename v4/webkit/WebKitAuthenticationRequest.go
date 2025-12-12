@@ -333,4 +333,8 @@ func init() {
 	core.PuregoSafeRegister(&xAuthenticationRequestSetCanSaveCredentials, libs, "webkit_authentication_request_set_can_save_credentials")
 	core.PuregoSafeRegister(&xAuthenticationRequestSetProposedCredential, libs, "webkit_authentication_request_set_proposed_credential")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	AuthenticationRequestGLibType()
 }

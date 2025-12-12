@@ -1235,4 +1235,8 @@ func init() {
 	core.PuregoSafeRegister(&xInputMethodContextSetInputHints, libs, "webkit_input_method_context_set_input_hints")
 	core.PuregoSafeRegister(&xInputMethodContextSetInputPurpose, libs, "webkit_input_method_context_set_input_purpose")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	InputMethodContextGLibType()
 }

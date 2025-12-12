@@ -104,4 +104,8 @@ func init() {
 	core.PuregoSafeRegister(&xWebsiteDataAccessPermissionRequestGetCurrentDomain, libs, "webkit_website_data_access_permission_request_get_current_domain")
 	core.PuregoSafeRegister(&xWebsiteDataAccessPermissionRequestGetRequestingDomain, libs, "webkit_website_data_access_permission_request_get_requesting_domain")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	WebsiteDataAccessPermissionRequestGLibType()
 }

@@ -98,4 +98,8 @@ func init() {
 
 	core.PuregoSafeRegister(&xMediaKeySystemPermissionRequestGLibType, libs, "webkit_media_key_system_permission_request_get_type")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	MediaKeySystemPermissionRequestGLibType()
 }

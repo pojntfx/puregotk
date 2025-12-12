@@ -203,4 +203,8 @@ func init() {
 	core.PuregoSafeRegister(&xNotificationGetTag, libs, "webkit_notification_get_tag")
 	core.PuregoSafeRegister(&xNotificationGetTitle, libs, "webkit_notification_get_title")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	NotificationGLibType()
 }

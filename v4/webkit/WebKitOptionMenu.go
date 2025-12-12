@@ -178,4 +178,8 @@ func init() {
 	core.PuregoSafeRegister(&xOptionMenuGetNItems, libs, "webkit_option_menu_get_n_items")
 	core.PuregoSafeRegister(&xOptionMenuSelectItem, libs, "webkit_option_menu_select_item")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	OptionMenuGLibType()
 }

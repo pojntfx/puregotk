@@ -330,4 +330,8 @@ func init() {
 	core.PuregoSafeRegister(&xContextMenuRemoveAll, libs, "webkit_context_menu_remove_all")
 	core.PuregoSafeRegister(&xContextMenuSetUserData, libs, "webkit_context_menu_set_user_data")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	ContextMenuGLibType()
 }

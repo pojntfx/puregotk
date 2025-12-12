@@ -86,4 +86,8 @@ func init() {
 
 	core.PuregoSafeRegister(&xNavigationPolicyDecisionGetNavigationAction, libs, "webkit_navigation_policy_decision_get_navigation_action")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	NavigationPolicyDecisionGLibType()
 }

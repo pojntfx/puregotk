@@ -188,4 +188,8 @@ func init() {
 	core.PuregoSafeRegister(&xEditorStateIsRedoAvailable, libs, "webkit_editor_state_is_redo_available")
 	core.PuregoSafeRegister(&xEditorStateIsUndoAvailable, libs, "webkit_editor_state_is_undo_available")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	EditorStateGLibType()
 }

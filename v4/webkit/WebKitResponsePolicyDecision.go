@@ -135,4 +135,8 @@ func init() {
 	core.PuregoSafeRegister(&xResponsePolicyDecisionIsMainFrameMainResource, libs, "webkit_response_policy_decision_is_main_frame_main_resource")
 	core.PuregoSafeRegister(&xResponsePolicyDecisionIsMimeTypeSupported, libs, "webkit_response_policy_decision_is_mime_type_supported")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	ResponsePolicyDecisionGLibType()
 }

@@ -524,4 +524,8 @@ func init() {
 	core.PuregoSafeRegister(&xWebsiteDataManagerRemoveFinish, libs, "webkit_website_data_manager_remove_finish")
 	core.PuregoSafeRegister(&xWebsiteDataManagerSetFaviconsEnabled, libs, "webkit_website_data_manager_set_favicons_enabled")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	WebsiteDataManagerGLibType()
 }

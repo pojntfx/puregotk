@@ -181,4 +181,8 @@ func init() {
 	core.PuregoSafeRegister(&xColorChooserRequestGetRgba, libs, "webkit_color_chooser_request_get_rgba")
 	core.PuregoSafeRegister(&xColorChooserRequestSetRgba, libs, "webkit_color_chooser_request_set_rgba")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	ColorChooserRequestGLibType()
 }

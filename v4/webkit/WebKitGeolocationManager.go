@@ -267,4 +267,8 @@ func init() {
 	core.PuregoSafeRegister(&xGeolocationManagerGetEnableHighAccuracy, libs, "webkit_geolocation_manager_get_enable_high_accuracy")
 	core.PuregoSafeRegister(&xGeolocationManagerUpdatePosition, libs, "webkit_geolocation_manager_update_position")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	GeolocationManagerGLibType()
 }

@@ -336,4 +336,8 @@ func init() {
 	core.PuregoSafeRegister(&xWindowPropertiesGetStatusbarVisible, libs, "webkit_window_properties_get_statusbar_visible")
 	core.PuregoSafeRegister(&xWindowPropertiesGetToolbarVisible, libs, "webkit_window_properties_get_toolbar_visible")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	WindowPropertiesGLibType()
 }

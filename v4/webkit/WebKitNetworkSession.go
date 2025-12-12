@@ -419,4 +419,8 @@ func init() {
 	core.PuregoSafeRegister(&xNetworkSessionGetDefault, libs, "webkit_network_session_get_default")
 	core.PuregoSafeRegister(&xNetworkSessionSetMemoryPressureSettings, libs, "webkit_network_session_set_memory_pressure_settings")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	NetworkSessionGLibType()
 }

@@ -191,4 +191,8 @@ func init() {
 	core.PuregoSafeRegister(&xURISchemeRequestGetUri, libs, "webkit_uri_scheme_request_get_uri")
 	core.PuregoSafeRegister(&xURISchemeRequestGetWebView, libs, "webkit_uri_scheme_request_get_web_view")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	URISchemeRequestGLibType()
 }

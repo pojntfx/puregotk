@@ -418,4 +418,8 @@ func init() {
 	core.PuregoSafeRegister(&xUserContentManagerRemoveStyleSheet, libs, "webkit_user_content_manager_remove_style_sheet")
 	core.PuregoSafeRegister(&xUserContentManagerUnregisterScriptMessageHandler, libs, "webkit_user_content_manager_unregister_script_message_handler")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	UserContentManagerGLibType()
 }

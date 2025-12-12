@@ -221,4 +221,8 @@ func init() {
 	core.PuregoSafeRegister(&xSecurityManagerUriSchemeIsNoAccess, libs, "webkit_security_manager_uri_scheme_is_no_access")
 	core.PuregoSafeRegister(&xSecurityManagerUriSchemeIsSecure, libs, "webkit_security_manager_uri_scheme_is_secure")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	SecurityManagerGLibType()
 }

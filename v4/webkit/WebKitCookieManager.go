@@ -351,4 +351,8 @@ func init() {
 	core.PuregoSafeRegister(&xCookieManagerSetAcceptPolicy, libs, "webkit_cookie_manager_set_accept_policy")
 	core.PuregoSafeRegister(&xCookieManagerSetPersistentStorage, libs, "webkit_cookie_manager_set_persistent_storage")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	CookieManagerGLibType()
 }

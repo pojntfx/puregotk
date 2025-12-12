@@ -137,4 +137,8 @@ func init() {
 
 	core.PuregoSafeRegister(&xWebsitePoliciesGetAutoplayPolicy, libs, "webkit_website_policies_get_autoplay_policy")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	WebsitePoliciesGLibType()
 }

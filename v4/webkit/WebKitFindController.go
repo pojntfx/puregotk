@@ -345,4 +345,8 @@ func init() {
 	core.PuregoSafeRegister(&xFindControllerSearchNext, libs, "webkit_find_controller_search_next")
 	core.PuregoSafeRegister(&xFindControllerSearchPrevious, libs, "webkit_find_controller_search_previous")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	FindControllerGLibType()
 }

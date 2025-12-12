@@ -252,4 +252,8 @@ func init() {
 	core.PuregoSafeRegister(&xContextMenuItemIsSeparator, libs, "webkit_context_menu_item_is_separator")
 	core.PuregoSafeRegister(&xContextMenuItemSetSubmenu, libs, "webkit_context_menu_item_set_submenu")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	ContextMenuItemGLibType()
 }

@@ -352,4 +352,8 @@ func init() {
 	core.PuregoSafeRegister(&xHitTestResultGetLinkUri, libs, "webkit_hit_test_result_get_link_uri")
 	core.PuregoSafeRegister(&xHitTestResultGetMediaUri, libs, "webkit_hit_test_result_get_media_uri")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	HitTestResultGLibType()
 }

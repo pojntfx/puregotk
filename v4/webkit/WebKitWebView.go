@@ -4605,4 +4605,8 @@ func init() {
 	core.PuregoSafeRegister(&xWebViewTerminateWebProcess, libs, "webkit_web_view_terminate_web_process")
 	core.PuregoSafeRegister(&xWebViewTryClose, libs, "webkit_web_view_try_close")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	WebViewGLibType()
 }

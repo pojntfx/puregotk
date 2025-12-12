@@ -140,4 +140,8 @@ func init() {
 	core.PuregoSafeRegister(&XWebkitPermissionRequestAllow, libs, "webkit_permission_request_allow")
 	core.PuregoSafeRegister(&XWebkitPermissionRequestDeny, libs, "webkit_permission_request_deny")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	PermissionRequestGLibType()
 }

@@ -225,4 +225,8 @@ func init() {
 	core.PuregoSafeRegister(&xBackForwardListGetLength, libs, "webkit_back_forward_list_get_length")
 	core.PuregoSafeRegister(&xBackForwardListGetNthItem, libs, "webkit_back_forward_list_get_nth_item")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	BackForwardListGLibType()
 }

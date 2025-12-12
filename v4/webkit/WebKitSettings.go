@@ -2620,4 +2620,8 @@ func init() {
 	core.PuregoSafeRegister(&xSettingsGetDevelopmentFeatures, libs, "webkit_settings_get_development_features")
 	core.PuregoSafeRegister(&xSettingsGetExperimentalFeatures, libs, "webkit_settings_get_experimental_features")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	SettingsGLibType()
 }

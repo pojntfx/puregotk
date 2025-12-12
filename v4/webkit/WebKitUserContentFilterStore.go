@@ -287,4 +287,8 @@ func init() {
 	core.PuregoSafeRegister(&xUserContentFilterStoreSaveFromFile, libs, "webkit_user_content_filter_store_save_from_file")
 	core.PuregoSafeRegister(&xUserContentFilterStoreSaveFromFileFinish, libs, "webkit_user_content_filter_store_save_from_file_finish")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	UserContentFilterStoreGLibType()
 }

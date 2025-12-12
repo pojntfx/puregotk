@@ -200,4 +200,8 @@ func init() {
 	core.PuregoSafeRegister(&xAutomationSessionGetId, libs, "webkit_automation_session_get_id")
 	core.PuregoSafeRegister(&xAutomationSessionSetApplicationInfo, libs, "webkit_automation_session_set_application_info")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	AutomationSessionGLibType()
 }

@@ -194,4 +194,8 @@ func init() {
 	core.PuregoSafeRegister(&xFaviconDatabaseGetFaviconFinish, libs, "webkit_favicon_database_get_favicon_finish")
 	core.PuregoSafeRegister(&xFaviconDatabaseGetFaviconUri, libs, "webkit_favicon_database_get_favicon_uri")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	FaviconDatabaseGLibType()
 }

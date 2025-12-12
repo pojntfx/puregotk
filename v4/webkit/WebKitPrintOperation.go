@@ -269,4 +269,8 @@ func init() {
 	core.PuregoSafeRegister(&xPrintOperationSetPageSetup, libs, "webkit_print_operation_set_page_setup")
 	core.PuregoSafeRegister(&xPrintOperationSetPrintSettings, libs, "webkit_print_operation_set_print_settings")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	PrintOperationGLibType()
 }

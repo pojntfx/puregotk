@@ -98,4 +98,8 @@ func init() {
 	core.PuregoSafeRegister(&xFormSubmissionRequestListTextFields, libs, "webkit_form_submission_request_list_text_fields")
 	core.PuregoSafeRegister(&xFormSubmissionRequestSubmit, libs, "webkit_form_submission_request_submit")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	FormSubmissionRequestGLibType()
 }

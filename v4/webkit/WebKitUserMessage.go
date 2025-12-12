@@ -228,4 +228,8 @@ func init() {
 	core.PuregoSafeRegister(&xUserMessageGetParameters, libs, "webkit_user_message_get_parameters")
 	core.PuregoSafeRegister(&xUserMessageSendReply, libs, "webkit_user_message_send_reply")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	UserMessageGLibType()
 }

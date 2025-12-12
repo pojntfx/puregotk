@@ -366,4 +366,8 @@ func init() {
 	core.PuregoSafeRegister(&xWebInspectorIsAttached, libs, "webkit_web_inspector_is_attached")
 	core.PuregoSafeRegister(&xWebInspectorShow, libs, "webkit_web_inspector_show")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	WebInspectorGLibType()
 }

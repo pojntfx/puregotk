@@ -412,4 +412,8 @@ func init() {
 	core.PuregoSafeRegister(&xDownloadSetAllowOverwrite, libs, "webkit_download_set_allow_overwrite")
 	core.PuregoSafeRegister(&xDownloadSetDestination, libs, "webkit_download_set_destination")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	DownloadGLibType()
 }

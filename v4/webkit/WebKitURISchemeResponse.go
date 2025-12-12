@@ -139,4 +139,8 @@ func init() {
 	core.PuregoSafeRegister(&xURISchemeResponseSetHttpHeaders, libs, "webkit_uri_scheme_response_set_http_headers")
 	core.PuregoSafeRegister(&xURISchemeResponseSetStatus, libs, "webkit_uri_scheme_response_set_status")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	URISchemeResponseGLibType()
 }

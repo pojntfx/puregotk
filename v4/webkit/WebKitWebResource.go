@@ -267,4 +267,8 @@ func init() {
 	core.PuregoSafeRegister(&xWebResourceGetResponse, libs, "webkit_web_resource_get_response")
 	core.PuregoSafeRegister(&xWebResourceGetUri, libs, "webkit_web_resource_get_uri")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	WebResourceGLibType()
 }

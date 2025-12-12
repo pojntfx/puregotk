@@ -218,4 +218,8 @@ func init() {
 	core.PuregoSafeRegister(&xFileChooserRequestGetSelectedFiles, libs, "webkit_file_chooser_request_get_selected_files")
 	core.PuregoSafeRegister(&xFileChooserRequestSelectFiles, libs, "webkit_file_chooser_request_select_files")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	FileChooserRequestGLibType()
 }

@@ -333,4 +333,8 @@ func init() {
 	core.PuregoSafeRegister(&xPolicyDecisionUse, libs, "webkit_policy_decision_use")
 	core.PuregoSafeRegister(&xPolicyDecisionUseWithPolicies, libs, "webkit_policy_decision_use_with_policies")
 
+	// Manually register types since they aren't being automatically registered when
+	// the library is loaded
+	// See https://bugs.webkit.org/show_bug.cgi?id=175937
+	PolicyDecisionGLibType()
 }
