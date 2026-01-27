@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type SpinnerClass struct {
+type SpinnerClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *SpinnerClass) GoPointer() uintptr {
+func (x *SpinnerClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -33,22 +33,22 @@ type FlowBoxForeachFunc func(uintptr, uintptr, uintptr)
 // should come first.
 type FlowBoxSortFunc func(uintptr, uintptr, uintptr) int
 
-type FlowBoxChildClass struct {
+type FlowBoxChildClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xActivate uintptr
 
 	Padding [8]uintptr
 }
 
-func (x *FlowBoxChildClass) GoPointer() uintptr {
+func (x *FlowBoxChildClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideActivate sets the "activate" callback function.
-func (x *FlowBoxChildClass) OverrideActivate(cb func(*FlowBoxChild)) {
+func (x *FlowBoxChildClassGType) OverrideActivate(cb func(*FlowBoxChild)) {
 	if cb == nil {
 		x.xActivate = 0
 	} else {
@@ -59,7 +59,7 @@ func (x *FlowBoxChildClass) OverrideActivate(cb func(*FlowBoxChild)) {
 }
 
 // GetActivate gets the "activate" callback function.
-func (x *FlowBoxChildClass) GetActivate() func(*FlowBoxChild) {
+func (x *FlowBoxChildClassGType) GetActivate() func(*FlowBoxChild) {
 	if x.xActivate == 0 {
 		return nil
 	}

@@ -13,11 +13,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type EventControllerScrollClass struct {
+type EventControllerScrollClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *EventControllerScrollClass) GoPointer() uintptr {
+func (x *EventControllerScrollClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

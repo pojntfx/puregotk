@@ -11,7 +11,7 @@ import (
 )
 
 // The virtual function table for #GMemoryMonitor.
-type MemoryMonitorInterface struct {
+type MemoryMonitorInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -19,7 +19,7 @@ type MemoryMonitorInterface struct {
 	xLowMemoryWarning uintptr
 }
 
-func (x *MemoryMonitorInterface) GoPointer() uintptr {
+func (x *MemoryMonitorInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -27,7 +27,7 @@ func (x *MemoryMonitorInterface) GoPointer() uintptr {
 // the virtual function pointer for the
 //
 //	#GMemoryMonitor::low-memory-warning signal.
-func (x *MemoryMonitorInterface) OverrideLowMemoryWarning(cb func(MemoryMonitor, MemoryMonitorWarningLevel)) {
+func (x *MemoryMonitorInterfaceGType) OverrideLowMemoryWarning(cb func(MemoryMonitor, MemoryMonitorWarningLevel)) {
 	if cb == nil {
 		x.xLowMemoryWarning = 0
 	} else {
@@ -41,7 +41,7 @@ func (x *MemoryMonitorInterface) OverrideLowMemoryWarning(cb func(MemoryMonitor,
 // the virtual function pointer for the
 //
 //	#GMemoryMonitor::low-memory-warning signal.
-func (x *MemoryMonitorInterface) GetLowMemoryWarning() func(MemoryMonitor, MemoryMonitorWarningLevel) {
+func (x *MemoryMonitorInterfaceGType) GetLowMemoryWarning() func(MemoryMonitor, MemoryMonitorWarningLevel) {
 	if x.xLowMemoryWarning == 0 {
 		return nil
 	}

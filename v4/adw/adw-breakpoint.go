@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type BreakpointClass struct {
+type BreakpointClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *BreakpointClass) GoPointer() uintptr {
+func (x *BreakpointClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

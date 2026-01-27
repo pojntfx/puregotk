@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type FileDialogClass struct {
+type FileDialogClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *FileDialogClass) GoPointer() uintptr {
+func (x *FileDialogClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

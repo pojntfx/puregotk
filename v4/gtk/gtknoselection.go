@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type NoSelectionClass struct {
+type NoSelectionClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *NoSelectionClass) GoPointer() uintptr {
+func (x *NoSelectionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

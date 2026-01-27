@@ -11,15 +11,15 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type BoxClass struct {
+type BoxClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	Padding [8]uintptr
 }
 
-func (x *BoxClass) GoPointer() uintptr {
+func (x *BoxClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

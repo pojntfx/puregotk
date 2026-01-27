@@ -14,7 +14,7 @@ import (
 // The class structure for the GParamSpec type.
 // Normally, GParamSpec classes are filled by
 // g_param_type_register_static().
-type ParamSpecClass struct {
+type ParamSpecClassGType struct {
 	_ structs.HostLayout
 
 	GTypeClass uintptr
@@ -34,7 +34,7 @@ type ParamSpecClass struct {
 	Dummy [3]uintptr
 }
 
-func (x *ParamSpecClass) GoPointer() uintptr {
+func (x *ParamSpecClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -42,7 +42,7 @@ func (x *ParamSpecClass) GoPointer() uintptr {
 // The instance finalization function (optional), should chain
 //
 //	up to the finalize method of the parent class.
-func (x *ParamSpecClass) OverrideFinalize(cb func(*ParamSpec)) {
+func (x *ParamSpecClassGType) OverrideFinalize(cb func(*ParamSpec)) {
 	if cb == nil {
 		x.xFinalize = 0
 	} else {
@@ -56,7 +56,7 @@ func (x *ParamSpecClass) OverrideFinalize(cb func(*ParamSpec)) {
 // The instance finalization function (optional), should chain
 //
 //	up to the finalize method of the parent class.
-func (x *ParamSpecClass) GetFinalize() func(*ParamSpec) {
+func (x *ParamSpecClassGType) GetFinalize() func(*ParamSpec) {
 	if x.xFinalize == 0 {
 		return nil
 	}
@@ -72,7 +72,7 @@ func (x *ParamSpecClass) GetFinalize() func(*ParamSpec) {
 //
 //	(recommended, the default is g_value_reset()), see
 //	g_param_value_set_default().
-func (x *ParamSpecClass) OverrideValueSetDefault(cb func(*ParamSpec, *Value)) {
+func (x *ParamSpecClassGType) OverrideValueSetDefault(cb func(*ParamSpec, *Value)) {
 	if cb == nil {
 		x.xValueSetDefault = 0
 	} else {
@@ -87,7 +87,7 @@ func (x *ParamSpecClass) OverrideValueSetDefault(cb func(*ParamSpec, *Value)) {
 //
 //	(recommended, the default is g_value_reset()), see
 //	g_param_value_set_default().
-func (x *ParamSpecClass) GetValueSetDefault() func(*ParamSpec, *Value) {
+func (x *ParamSpecClassGType) GetValueSetDefault() func(*ParamSpec, *Value) {
 	if x.xValueSetDefault == 0 {
 		return nil
 	}
@@ -103,7 +103,7 @@ func (x *ParamSpecClass) GetValueSetDefault() func(*ParamSpec, *Value) {
 //
 //	specifications set out by this type (optional), see
 //	g_param_value_validate().
-func (x *ParamSpecClass) OverrideValueValidate(cb func(*ParamSpec, *Value) bool) {
+func (x *ParamSpecClassGType) OverrideValueValidate(cb func(*ParamSpec, *Value) bool) {
 	if cb == nil {
 		x.xValueValidate = 0
 	} else {
@@ -118,7 +118,7 @@ func (x *ParamSpecClass) OverrideValueValidate(cb func(*ParamSpec, *Value) bool)
 //
 //	specifications set out by this type (optional), see
 //	g_param_value_validate().
-func (x *ParamSpecClass) GetValueValidate() func(*ParamSpec, *Value) bool {
+func (x *ParamSpecClassGType) GetValueValidate() func(*ParamSpec, *Value) bool {
 	if x.xValueValidate == 0 {
 		return nil
 	}
@@ -133,7 +133,7 @@ func (x *ParamSpecClass) GetValueValidate() func(*ParamSpec, *Value) bool {
 // Compares @value1 with @value2 according to this type
 //
 //	(recommended, the default is memcmp()), see g_param_values_cmp().
-func (x *ParamSpecClass) OverrideValuesCmp(cb func(*ParamSpec, *Value, *Value) int) {
+func (x *ParamSpecClassGType) OverrideValuesCmp(cb func(*ParamSpec, *Value, *Value) int) {
 	if cb == nil {
 		x.xValuesCmp = 0
 	} else {
@@ -147,7 +147,7 @@ func (x *ParamSpecClass) OverrideValuesCmp(cb func(*ParamSpec, *Value, *Value) i
 // Compares @value1 with @value2 according to this type
 //
 //	(recommended, the default is memcmp()), see g_param_values_cmp().
-func (x *ParamSpecClass) GetValuesCmp() func(*ParamSpec, *Value, *Value) int {
+func (x *ParamSpecClassGType) GetValuesCmp() func(*ParamSpec, *Value, *Value) int {
 	if x.xValuesCmp == 0 {
 		return nil
 	}
@@ -163,7 +163,7 @@ func (x *ParamSpecClass) GetValuesCmp() func(*ParamSpec, *Value, *Value) int {
 //
 //	set out by this type, without modifying the value. This vfunc is optional.
 //	If it isn't set, GObject will use @value_validate. Since 2.74
-func (x *ParamSpecClass) OverrideValueIsValid(cb func(*ParamSpec, *Value) bool) {
+func (x *ParamSpecClassGType) OverrideValueIsValid(cb func(*ParamSpec, *Value) bool) {
 	if cb == nil {
 		x.xValueIsValid = 0
 	} else {
@@ -178,7 +178,7 @@ func (x *ParamSpecClass) OverrideValueIsValid(cb func(*ParamSpec, *Value) bool) 
 //
 //	set out by this type, without modifying the value. This vfunc is optional.
 //	If it isn't set, GObject will use @value_validate. Since 2.74
-func (x *ParamSpecClass) GetValueIsValid() func(*ParamSpec, *Value) bool {
+func (x *ParamSpecClassGType) GetValueIsValid() func(*ParamSpec, *Value) bool {
 	if x.xValueIsValid == 0 {
 		return nil
 	}

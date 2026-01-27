@@ -13,11 +13,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type CssProviderClass struct {
+type CssProviderClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *CssProviderClass) GoPointer() uintptr {
+func (x *CssProviderClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

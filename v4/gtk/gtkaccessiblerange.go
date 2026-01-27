@@ -9,7 +9,7 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type AccessibleRangeInterface struct {
+type AccessibleRangeInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -17,12 +17,12 @@ type AccessibleRangeInterface struct {
 	xSetCurrentValue uintptr
 }
 
-func (x *AccessibleRangeInterface) GoPointer() uintptr {
+func (x *AccessibleRangeInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideSetCurrentValue sets the "set_current_value" callback function.
-func (x *AccessibleRangeInterface) OverrideSetCurrentValue(cb func(AccessibleRange, float64) bool) {
+func (x *AccessibleRangeInterfaceGType) OverrideSetCurrentValue(cb func(AccessibleRange, float64) bool) {
 	if cb == nil {
 		x.xSetCurrentValue = 0
 	} else {
@@ -33,7 +33,7 @@ func (x *AccessibleRangeInterface) OverrideSetCurrentValue(cb func(AccessibleRan
 }
 
 // GetSetCurrentValue gets the "set_current_value" callback function.
-func (x *AccessibleRangeInterface) GetSetCurrentValue() func(AccessibleRange, float64) bool {
+func (x *AccessibleRangeInterfaceGType) GetSetCurrentValue() func(AccessibleRange, float64) bool {
 	if x.xSetCurrentValue == 0 {
 		return nil
 	}

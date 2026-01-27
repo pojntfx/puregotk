@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type SpringAnimationClass struct {
+type SpringAnimationClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *SpringAnimationClass) GoPointer() uintptr {
+func (x *SpringAnimationClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

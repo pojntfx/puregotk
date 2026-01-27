@@ -802,7 +802,7 @@ func (x *StaticMutex) Init() {
 type StaticPrivate struct {
 	_ structs.HostLayout
 
-	Index uint
+	Index uint32
 }
 
 func (x *StaticPrivate) GoPointer() uintptr {
@@ -946,13 +946,13 @@ type StaticRWLock struct {
 
 	WriteCond *Cond
 
-	ReadCounter uint
+	ReadCounter uint32
 
 	HaveWriter bool
 
-	WantToRead uint
+	WantToRead uint32
 
-	WantToWrite uint
+	WantToWrite uint32
 }
 
 func (x *StaticRWLock) GoPointer() uintptr {
@@ -1090,7 +1090,7 @@ type StaticRecMutex struct {
 
 	Mutex uintptr
 
-	Depth uint
+	Depth uint32
 }
 
 func (x *StaticRecMutex) GoPointer() uintptr {

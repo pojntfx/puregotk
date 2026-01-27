@@ -13,7 +13,7 @@ import (
 // The list of virtual functions for the `GtkSectionModel` interface.
 // No function must be implemented, but unless `GtkSectionModel::get_section()`
 // is implemented, the whole model will just be a single section.
-type SectionModelInterface struct {
+type SectionModelInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -21,7 +21,7 @@ type SectionModelInterface struct {
 	xGetSection uintptr
 }
 
-func (x *SectionModelInterface) GoPointer() uintptr {
+func (x *SectionModelInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -30,7 +30,7 @@ func (x *SectionModelInterface) GoPointer() uintptr {
 //
 //	the position is outside the number of items, returns a single range from
 //	n_items to G_MAXUINT
-func (x *SectionModelInterface) OverrideGetSection(cb func(SectionModel, uint, *uint, *uint)) {
+func (x *SectionModelInterfaceGType) OverrideGetSection(cb func(SectionModel, uint, *uint, *uint)) {
 	if cb == nil {
 		x.xGetSection = 0
 	} else {
@@ -45,7 +45,7 @@ func (x *SectionModelInterface) OverrideGetSection(cb func(SectionModel, uint, *
 //
 //	the position is outside the number of items, returns a single range from
 //	n_items to G_MAXUINT
-func (x *SectionModelInterface) GetGetSection() func(SectionModel, uint, *uint, *uint) {
+func (x *SectionModelInterfaceGType) GetGetSection() func(SectionModel, uint, *uint, *uint) {
 	if x.xGetSection == 0 {
 		return nil
 	}

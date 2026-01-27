@@ -12,23 +12,23 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type EnumListItemClass struct {
+type EnumListItemClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *EnumListItemClass) GoPointer() uintptr {
+func (x *EnumListItemClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type EnumListModelClass struct {
+type EnumListModelClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *EnumListModelClass) GoPointer() uintptr {
+func (x *EnumListModelClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type DirectoryListClass struct {
+type DirectoryListClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *DirectoryListClass) GoPointer() uintptr {
+func (x *DirectoryListClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

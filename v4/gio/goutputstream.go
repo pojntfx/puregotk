@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type OutputStreamClass struct {
+type OutputStreamClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xWriteFn uintptr
 
@@ -58,12 +58,12 @@ type OutputStreamClass struct {
 	xGReserved8 uintptr
 }
 
-func (x *OutputStreamClass) GoPointer() uintptr {
+func (x *OutputStreamClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideWriteFn sets the "write_fn" callback function.
-func (x *OutputStreamClass) OverrideWriteFn(cb func(*OutputStream, []byte, uint, *Cancellable) int) {
+func (x *OutputStreamClassGType) OverrideWriteFn(cb func(*OutputStream, []byte, uint, *Cancellable) int) {
 	if cb == nil {
 		x.xWriteFn = 0
 	} else {
@@ -74,7 +74,7 @@ func (x *OutputStreamClass) OverrideWriteFn(cb func(*OutputStream, []byte, uint,
 }
 
 // GetWriteFn gets the "write_fn" callback function.
-func (x *OutputStreamClass) GetWriteFn() func(*OutputStream, []byte, uint, *Cancellable) int {
+func (x *OutputStreamClassGType) GetWriteFn() func(*OutputStream, []byte, uint, *Cancellable) int {
 	if x.xWriteFn == 0 {
 		return nil
 	}
@@ -86,7 +86,7 @@ func (x *OutputStreamClass) GetWriteFn() func(*OutputStream, []byte, uint, *Canc
 }
 
 // OverrideSplice sets the "splice" callback function.
-func (x *OutputStreamClass) OverrideSplice(cb func(*OutputStream, *InputStream, OutputStreamSpliceFlags, *Cancellable) int) {
+func (x *OutputStreamClassGType) OverrideSplice(cb func(*OutputStream, *InputStream, OutputStreamSpliceFlags, *Cancellable) int) {
 	if cb == nil {
 		x.xSplice = 0
 	} else {
@@ -97,7 +97,7 @@ func (x *OutputStreamClass) OverrideSplice(cb func(*OutputStream, *InputStream, 
 }
 
 // GetSplice gets the "splice" callback function.
-func (x *OutputStreamClass) GetSplice() func(*OutputStream, *InputStream, OutputStreamSpliceFlags, *Cancellable) int {
+func (x *OutputStreamClassGType) GetSplice() func(*OutputStream, *InputStream, OutputStreamSpliceFlags, *Cancellable) int {
 	if x.xSplice == 0 {
 		return nil
 	}
@@ -109,7 +109,7 @@ func (x *OutputStreamClass) GetSplice() func(*OutputStream, *InputStream, Output
 }
 
 // OverrideFlush sets the "flush" callback function.
-func (x *OutputStreamClass) OverrideFlush(cb func(*OutputStream, *Cancellable) bool) {
+func (x *OutputStreamClassGType) OverrideFlush(cb func(*OutputStream, *Cancellable) bool) {
 	if cb == nil {
 		x.xFlush = 0
 	} else {
@@ -120,7 +120,7 @@ func (x *OutputStreamClass) OverrideFlush(cb func(*OutputStream, *Cancellable) b
 }
 
 // GetFlush gets the "flush" callback function.
-func (x *OutputStreamClass) GetFlush() func(*OutputStream, *Cancellable) bool {
+func (x *OutputStreamClassGType) GetFlush() func(*OutputStream, *Cancellable) bool {
 	if x.xFlush == 0 {
 		return nil
 	}
@@ -132,7 +132,7 @@ func (x *OutputStreamClass) GetFlush() func(*OutputStream, *Cancellable) bool {
 }
 
 // OverrideCloseFn sets the "close_fn" callback function.
-func (x *OutputStreamClass) OverrideCloseFn(cb func(*OutputStream, *Cancellable) bool) {
+func (x *OutputStreamClassGType) OverrideCloseFn(cb func(*OutputStream, *Cancellable) bool) {
 	if cb == nil {
 		x.xCloseFn = 0
 	} else {
@@ -143,7 +143,7 @@ func (x *OutputStreamClass) OverrideCloseFn(cb func(*OutputStream, *Cancellable)
 }
 
 // GetCloseFn gets the "close_fn" callback function.
-func (x *OutputStreamClass) GetCloseFn() func(*OutputStream, *Cancellable) bool {
+func (x *OutputStreamClassGType) GetCloseFn() func(*OutputStream, *Cancellable) bool {
 	if x.xCloseFn == 0 {
 		return nil
 	}
@@ -155,7 +155,7 @@ func (x *OutputStreamClass) GetCloseFn() func(*OutputStream, *Cancellable) bool 
 }
 
 // OverrideWriteAsync sets the "write_async" callback function.
-func (x *OutputStreamClass) OverrideWriteAsync(cb func(*OutputStream, []byte, uint, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *OutputStreamClassGType) OverrideWriteAsync(cb func(*OutputStream, []byte, uint, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xWriteAsync = 0
 	} else {
@@ -166,7 +166,7 @@ func (x *OutputStreamClass) OverrideWriteAsync(cb func(*OutputStream, []byte, ui
 }
 
 // GetWriteAsync gets the "write_async" callback function.
-func (x *OutputStreamClass) GetWriteAsync() func(*OutputStream, []byte, uint, int, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *OutputStreamClassGType) GetWriteAsync() func(*OutputStream, []byte, uint, int, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xWriteAsync == 0 {
 		return nil
 	}
@@ -178,7 +178,7 @@ func (x *OutputStreamClass) GetWriteAsync() func(*OutputStream, []byte, uint, in
 }
 
 // OverrideWriteFinish sets the "write_finish" callback function.
-func (x *OutputStreamClass) OverrideWriteFinish(cb func(*OutputStream, AsyncResult) int) {
+func (x *OutputStreamClassGType) OverrideWriteFinish(cb func(*OutputStream, AsyncResult) int) {
 	if cb == nil {
 		x.xWriteFinish = 0
 	} else {
@@ -189,7 +189,7 @@ func (x *OutputStreamClass) OverrideWriteFinish(cb func(*OutputStream, AsyncResu
 }
 
 // GetWriteFinish gets the "write_finish" callback function.
-func (x *OutputStreamClass) GetWriteFinish() func(*OutputStream, AsyncResult) int {
+func (x *OutputStreamClassGType) GetWriteFinish() func(*OutputStream, AsyncResult) int {
 	if x.xWriteFinish == 0 {
 		return nil
 	}
@@ -201,7 +201,7 @@ func (x *OutputStreamClass) GetWriteFinish() func(*OutputStream, AsyncResult) in
 }
 
 // OverrideSpliceAsync sets the "splice_async" callback function.
-func (x *OutputStreamClass) OverrideSpliceAsync(cb func(*OutputStream, *InputStream, OutputStreamSpliceFlags, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *OutputStreamClassGType) OverrideSpliceAsync(cb func(*OutputStream, *InputStream, OutputStreamSpliceFlags, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xSpliceAsync = 0
 	} else {
@@ -212,7 +212,7 @@ func (x *OutputStreamClass) OverrideSpliceAsync(cb func(*OutputStream, *InputStr
 }
 
 // GetSpliceAsync gets the "splice_async" callback function.
-func (x *OutputStreamClass) GetSpliceAsync() func(*OutputStream, *InputStream, OutputStreamSpliceFlags, int, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *OutputStreamClassGType) GetSpliceAsync() func(*OutputStream, *InputStream, OutputStreamSpliceFlags, int, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xSpliceAsync == 0 {
 		return nil
 	}
@@ -224,7 +224,7 @@ func (x *OutputStreamClass) GetSpliceAsync() func(*OutputStream, *InputStream, O
 }
 
 // OverrideSpliceFinish sets the "splice_finish" callback function.
-func (x *OutputStreamClass) OverrideSpliceFinish(cb func(*OutputStream, AsyncResult) int) {
+func (x *OutputStreamClassGType) OverrideSpliceFinish(cb func(*OutputStream, AsyncResult) int) {
 	if cb == nil {
 		x.xSpliceFinish = 0
 	} else {
@@ -235,7 +235,7 @@ func (x *OutputStreamClass) OverrideSpliceFinish(cb func(*OutputStream, AsyncRes
 }
 
 // GetSpliceFinish gets the "splice_finish" callback function.
-func (x *OutputStreamClass) GetSpliceFinish() func(*OutputStream, AsyncResult) int {
+func (x *OutputStreamClassGType) GetSpliceFinish() func(*OutputStream, AsyncResult) int {
 	if x.xSpliceFinish == 0 {
 		return nil
 	}
@@ -247,7 +247,7 @@ func (x *OutputStreamClass) GetSpliceFinish() func(*OutputStream, AsyncResult) i
 }
 
 // OverrideFlushAsync sets the "flush_async" callback function.
-func (x *OutputStreamClass) OverrideFlushAsync(cb func(*OutputStream, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *OutputStreamClassGType) OverrideFlushAsync(cb func(*OutputStream, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xFlushAsync = 0
 	} else {
@@ -258,7 +258,7 @@ func (x *OutputStreamClass) OverrideFlushAsync(cb func(*OutputStream, int, *Canc
 }
 
 // GetFlushAsync gets the "flush_async" callback function.
-func (x *OutputStreamClass) GetFlushAsync() func(*OutputStream, int, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *OutputStreamClassGType) GetFlushAsync() func(*OutputStream, int, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xFlushAsync == 0 {
 		return nil
 	}
@@ -270,7 +270,7 @@ func (x *OutputStreamClass) GetFlushAsync() func(*OutputStream, int, *Cancellabl
 }
 
 // OverrideFlushFinish sets the "flush_finish" callback function.
-func (x *OutputStreamClass) OverrideFlushFinish(cb func(*OutputStream, AsyncResult) bool) {
+func (x *OutputStreamClassGType) OverrideFlushFinish(cb func(*OutputStream, AsyncResult) bool) {
 	if cb == nil {
 		x.xFlushFinish = 0
 	} else {
@@ -281,7 +281,7 @@ func (x *OutputStreamClass) OverrideFlushFinish(cb func(*OutputStream, AsyncResu
 }
 
 // GetFlushFinish gets the "flush_finish" callback function.
-func (x *OutputStreamClass) GetFlushFinish() func(*OutputStream, AsyncResult) bool {
+func (x *OutputStreamClassGType) GetFlushFinish() func(*OutputStream, AsyncResult) bool {
 	if x.xFlushFinish == 0 {
 		return nil
 	}
@@ -293,7 +293,7 @@ func (x *OutputStreamClass) GetFlushFinish() func(*OutputStream, AsyncResult) bo
 }
 
 // OverrideCloseAsync sets the "close_async" callback function.
-func (x *OutputStreamClass) OverrideCloseAsync(cb func(*OutputStream, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *OutputStreamClassGType) OverrideCloseAsync(cb func(*OutputStream, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xCloseAsync = 0
 	} else {
@@ -304,7 +304,7 @@ func (x *OutputStreamClass) OverrideCloseAsync(cb func(*OutputStream, int, *Canc
 }
 
 // GetCloseAsync gets the "close_async" callback function.
-func (x *OutputStreamClass) GetCloseAsync() func(*OutputStream, int, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *OutputStreamClassGType) GetCloseAsync() func(*OutputStream, int, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xCloseAsync == 0 {
 		return nil
 	}
@@ -316,7 +316,7 @@ func (x *OutputStreamClass) GetCloseAsync() func(*OutputStream, int, *Cancellabl
 }
 
 // OverrideCloseFinish sets the "close_finish" callback function.
-func (x *OutputStreamClass) OverrideCloseFinish(cb func(*OutputStream, AsyncResult) bool) {
+func (x *OutputStreamClassGType) OverrideCloseFinish(cb func(*OutputStream, AsyncResult) bool) {
 	if cb == nil {
 		x.xCloseFinish = 0
 	} else {
@@ -327,7 +327,7 @@ func (x *OutputStreamClass) OverrideCloseFinish(cb func(*OutputStream, AsyncResu
 }
 
 // GetCloseFinish gets the "close_finish" callback function.
-func (x *OutputStreamClass) GetCloseFinish() func(*OutputStream, AsyncResult) bool {
+func (x *OutputStreamClassGType) GetCloseFinish() func(*OutputStream, AsyncResult) bool {
 	if x.xCloseFinish == 0 {
 		return nil
 	}
@@ -339,7 +339,7 @@ func (x *OutputStreamClass) GetCloseFinish() func(*OutputStream, AsyncResult) bo
 }
 
 // OverrideWritevFn sets the "writev_fn" callback function.
-func (x *OutputStreamClass) OverrideWritevFn(cb func(*OutputStream, []OutputVector, uint, *uint, *Cancellable) bool) {
+func (x *OutputStreamClassGType) OverrideWritevFn(cb func(*OutputStream, []OutputVector, uint, *uint, *Cancellable) bool) {
 	if cb == nil {
 		x.xWritevFn = 0
 	} else {
@@ -350,7 +350,7 @@ func (x *OutputStreamClass) OverrideWritevFn(cb func(*OutputStream, []OutputVect
 }
 
 // GetWritevFn gets the "writev_fn" callback function.
-func (x *OutputStreamClass) GetWritevFn() func(*OutputStream, []OutputVector, uint, *uint, *Cancellable) bool {
+func (x *OutputStreamClassGType) GetWritevFn() func(*OutputStream, []OutputVector, uint, *uint, *Cancellable) bool {
 	if x.xWritevFn == 0 {
 		return nil
 	}
@@ -362,7 +362,7 @@ func (x *OutputStreamClass) GetWritevFn() func(*OutputStream, []OutputVector, ui
 }
 
 // OverrideWritevAsync sets the "writev_async" callback function.
-func (x *OutputStreamClass) OverrideWritevAsync(cb func(*OutputStream, []OutputVector, uint, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *OutputStreamClassGType) OverrideWritevAsync(cb func(*OutputStream, []OutputVector, uint, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xWritevAsync = 0
 	} else {
@@ -373,7 +373,7 @@ func (x *OutputStreamClass) OverrideWritevAsync(cb func(*OutputStream, []OutputV
 }
 
 // GetWritevAsync gets the "writev_async" callback function.
-func (x *OutputStreamClass) GetWritevAsync() func(*OutputStream, []OutputVector, uint, int, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *OutputStreamClassGType) GetWritevAsync() func(*OutputStream, []OutputVector, uint, int, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xWritevAsync == 0 {
 		return nil
 	}
@@ -385,7 +385,7 @@ func (x *OutputStreamClass) GetWritevAsync() func(*OutputStream, []OutputVector,
 }
 
 // OverrideWritevFinish sets the "writev_finish" callback function.
-func (x *OutputStreamClass) OverrideWritevFinish(cb func(*OutputStream, AsyncResult, *uint) bool) {
+func (x *OutputStreamClassGType) OverrideWritevFinish(cb func(*OutputStream, AsyncResult, *uint) bool) {
 	if cb == nil {
 		x.xWritevFinish = 0
 	} else {
@@ -396,7 +396,7 @@ func (x *OutputStreamClass) OverrideWritevFinish(cb func(*OutputStream, AsyncRes
 }
 
 // GetWritevFinish gets the "writev_finish" callback function.
-func (x *OutputStreamClass) GetWritevFinish() func(*OutputStream, AsyncResult, *uint) bool {
+func (x *OutputStreamClassGType) GetWritevFinish() func(*OutputStream, AsyncResult, *uint) bool {
 	if x.xWritevFinish == 0 {
 		return nil
 	}
@@ -408,7 +408,7 @@ func (x *OutputStreamClass) GetWritevFinish() func(*OutputStream, AsyncResult, *
 }
 
 // OverrideGReserved4 sets the "_g_reserved4" callback function.
-func (x *OutputStreamClass) OverrideGReserved4(cb func()) {
+func (x *OutputStreamClassGType) OverrideGReserved4(cb func()) {
 	if cb == nil {
 		x.xGReserved4 = 0
 	} else {
@@ -419,7 +419,7 @@ func (x *OutputStreamClass) OverrideGReserved4(cb func()) {
 }
 
 // GetGReserved4 gets the "_g_reserved4" callback function.
-func (x *OutputStreamClass) GetGReserved4() func() {
+func (x *OutputStreamClassGType) GetGReserved4() func() {
 	if x.xGReserved4 == 0 {
 		return nil
 	}
@@ -431,7 +431,7 @@ func (x *OutputStreamClass) GetGReserved4() func() {
 }
 
 // OverrideGReserved5 sets the "_g_reserved5" callback function.
-func (x *OutputStreamClass) OverrideGReserved5(cb func()) {
+func (x *OutputStreamClassGType) OverrideGReserved5(cb func()) {
 	if cb == nil {
 		x.xGReserved5 = 0
 	} else {
@@ -442,7 +442,7 @@ func (x *OutputStreamClass) OverrideGReserved5(cb func()) {
 }
 
 // GetGReserved5 gets the "_g_reserved5" callback function.
-func (x *OutputStreamClass) GetGReserved5() func() {
+func (x *OutputStreamClassGType) GetGReserved5() func() {
 	if x.xGReserved5 == 0 {
 		return nil
 	}
@@ -454,7 +454,7 @@ func (x *OutputStreamClass) GetGReserved5() func() {
 }
 
 // OverrideGReserved6 sets the "_g_reserved6" callback function.
-func (x *OutputStreamClass) OverrideGReserved6(cb func()) {
+func (x *OutputStreamClassGType) OverrideGReserved6(cb func()) {
 	if cb == nil {
 		x.xGReserved6 = 0
 	} else {
@@ -465,7 +465,7 @@ func (x *OutputStreamClass) OverrideGReserved6(cb func()) {
 }
 
 // GetGReserved6 gets the "_g_reserved6" callback function.
-func (x *OutputStreamClass) GetGReserved6() func() {
+func (x *OutputStreamClassGType) GetGReserved6() func() {
 	if x.xGReserved6 == 0 {
 		return nil
 	}
@@ -477,7 +477,7 @@ func (x *OutputStreamClass) GetGReserved6() func() {
 }
 
 // OverrideGReserved7 sets the "_g_reserved7" callback function.
-func (x *OutputStreamClass) OverrideGReserved7(cb func()) {
+func (x *OutputStreamClassGType) OverrideGReserved7(cb func()) {
 	if cb == nil {
 		x.xGReserved7 = 0
 	} else {
@@ -488,7 +488,7 @@ func (x *OutputStreamClass) OverrideGReserved7(cb func()) {
 }
 
 // GetGReserved7 gets the "_g_reserved7" callback function.
-func (x *OutputStreamClass) GetGReserved7() func() {
+func (x *OutputStreamClassGType) GetGReserved7() func() {
 	if x.xGReserved7 == 0 {
 		return nil
 	}
@@ -500,7 +500,7 @@ func (x *OutputStreamClass) GetGReserved7() func() {
 }
 
 // OverrideGReserved8 sets the "_g_reserved8" callback function.
-func (x *OutputStreamClass) OverrideGReserved8(cb func()) {
+func (x *OutputStreamClassGType) OverrideGReserved8(cb func()) {
 	if cb == nil {
 		x.xGReserved8 = 0
 	} else {
@@ -511,7 +511,7 @@ func (x *OutputStreamClass) OverrideGReserved8(cb func()) {
 }
 
 // GetGReserved8 gets the "_g_reserved8" callback function.
-func (x *OutputStreamClass) GetGReserved8() func() {
+func (x *OutputStreamClassGType) GetGReserved8() func() {
 	if x.xGReserved8 == 0 {
 		return nil
 	}

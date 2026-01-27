@@ -449,7 +449,7 @@ func (x *DmabufFormats) Unref() {
 type KeymapKey struct {
 	_ structs.HostLayout
 
-	Keycode uint
+	Keycode uint32
 
 	Group int
 

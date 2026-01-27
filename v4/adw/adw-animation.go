@@ -13,11 +13,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type AnimationClass struct {
+type AnimationClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *AnimationClass) GoPointer() uintptr {
+func (x *AnimationClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

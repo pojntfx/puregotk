@@ -13,7 +13,7 @@ import (
 )
 
 // The virtual function table for #GNetworkMonitor.
-type NetworkMonitorInterface struct {
+type NetworkMonitorInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -27,7 +27,7 @@ type NetworkMonitorInterface struct {
 	xCanReachFinish uintptr
 }
 
-func (x *NetworkMonitorInterface) GoPointer() uintptr {
+func (x *NetworkMonitorInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -35,7 +35,7 @@ func (x *NetworkMonitorInterface) GoPointer() uintptr {
 // the virtual function pointer for the
 //
 //	GNetworkMonitor::network-changed signal.
-func (x *NetworkMonitorInterface) OverrideNetworkChanged(cb func(NetworkMonitor, bool)) {
+func (x *NetworkMonitorInterfaceGType) OverrideNetworkChanged(cb func(NetworkMonitor, bool)) {
 	if cb == nil {
 		x.xNetworkChanged = 0
 	} else {
@@ -49,7 +49,7 @@ func (x *NetworkMonitorInterface) OverrideNetworkChanged(cb func(NetworkMonitor,
 // the virtual function pointer for the
 //
 //	GNetworkMonitor::network-changed signal.
-func (x *NetworkMonitorInterface) GetNetworkChanged() func(NetworkMonitor, bool) {
+func (x *NetworkMonitorInterfaceGType) GetNetworkChanged() func(NetworkMonitor, bool) {
 	if x.xNetworkChanged == 0 {
 		return nil
 	}
@@ -62,7 +62,7 @@ func (x *NetworkMonitorInterface) GetNetworkChanged() func(NetworkMonitor, bool)
 
 // OverrideCanReach sets the "can_reach" callback function.
 // the virtual function pointer for g_network_monitor_can_reach()
-func (x *NetworkMonitorInterface) OverrideCanReach(cb func(NetworkMonitor, SocketConnectable, *Cancellable) bool) {
+func (x *NetworkMonitorInterfaceGType) OverrideCanReach(cb func(NetworkMonitor, SocketConnectable, *Cancellable) bool) {
 	if cb == nil {
 		x.xCanReach = 0
 	} else {
@@ -74,7 +74,7 @@ func (x *NetworkMonitorInterface) OverrideCanReach(cb func(NetworkMonitor, Socke
 
 // GetCanReach gets the "can_reach" callback function.
 // the virtual function pointer for g_network_monitor_can_reach()
-func (x *NetworkMonitorInterface) GetCanReach() func(NetworkMonitor, SocketConnectable, *Cancellable) bool {
+func (x *NetworkMonitorInterfaceGType) GetCanReach() func(NetworkMonitor, SocketConnectable, *Cancellable) bool {
 	if x.xCanReach == 0 {
 		return nil
 	}
@@ -89,7 +89,7 @@ func (x *NetworkMonitorInterface) GetCanReach() func(NetworkMonitor, SocketConne
 // the virtual function pointer for
 //
 //	g_network_monitor_can_reach_async()
-func (x *NetworkMonitorInterface) OverrideCanReachAsync(cb func(NetworkMonitor, SocketConnectable, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *NetworkMonitorInterfaceGType) OverrideCanReachAsync(cb func(NetworkMonitor, SocketConnectable, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xCanReachAsync = 0
 	} else {
@@ -103,7 +103,7 @@ func (x *NetworkMonitorInterface) OverrideCanReachAsync(cb func(NetworkMonitor, 
 // the virtual function pointer for
 //
 //	g_network_monitor_can_reach_async()
-func (x *NetworkMonitorInterface) GetCanReachAsync() func(NetworkMonitor, SocketConnectable, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *NetworkMonitorInterfaceGType) GetCanReachAsync() func(NetworkMonitor, SocketConnectable, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xCanReachAsync == 0 {
 		return nil
 	}
@@ -118,7 +118,7 @@ func (x *NetworkMonitorInterface) GetCanReachAsync() func(NetworkMonitor, Socket
 // the virtual function pointer for
 //
 //	g_network_monitor_can_reach_finish()
-func (x *NetworkMonitorInterface) OverrideCanReachFinish(cb func(NetworkMonitor, AsyncResult) bool) {
+func (x *NetworkMonitorInterfaceGType) OverrideCanReachFinish(cb func(NetworkMonitor, AsyncResult) bool) {
 	if cb == nil {
 		x.xCanReachFinish = 0
 	} else {
@@ -132,7 +132,7 @@ func (x *NetworkMonitorInterface) OverrideCanReachFinish(cb func(NetworkMonitor,
 // the virtual function pointer for
 //
 //	g_network_monitor_can_reach_finish()
-func (x *NetworkMonitorInterface) GetCanReachFinish() func(NetworkMonitor, AsyncResult) bool {
+func (x *NetworkMonitorInterfaceGType) GetCanReachFinish() func(NetworkMonitor, AsyncResult) bool {
 	if x.xCanReachFinish == 0 {
 		return nil
 	}

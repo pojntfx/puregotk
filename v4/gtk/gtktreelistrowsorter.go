@@ -11,13 +11,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type TreeListRowSorterClass struct {
+type TreeListRowSorterClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass SorterClass
+	ParentClass SorterClassGType
 }
 
-func (x *TreeListRowSorterClass) GoPointer() uintptr {
+func (x *TreeListRowSorterClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

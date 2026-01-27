@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type MultiLayoutViewClass struct {
+type MultiLayoutViewClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *MultiLayoutViewClass) GoPointer() uintptr {
+func (x *MultiLayoutViewClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

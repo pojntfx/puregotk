@@ -139,25 +139,25 @@ func {{.Name}}GLibType() types.GType {
 }
 {{end}}
 
-type {{.Name}}Base struct {
+type {{.BaseName}} struct {
      Ptr uintptr
 }
 
-func (x *{{.Name}}Base) GoPointer() uintptr {
+func (x *{{.BaseName}}) GoPointer() uintptr {
      if x == nil {
          return 0
      }
      return x.Ptr
 }
 
-func (x *{{.Name}}Base) SetGoPointer(ptr uintptr) {
+func (x *{{.BaseName}}) SetGoPointer(ptr uintptr) {
      x.Ptr = ptr
 }
 
 {{$outer := .}}
 {{range .Methods -}}
 {{.Doc}}
-func (x *{{$outer.Name}}Base) {{.Name}}({{conv .Args.API.Full}}) {{.Ret.Return}} {
+func (x *{{$outer.BaseName}}) {{.Name}}({{conv .Args.API.Full}}) {{.Ret.Return}} {
      {{.Ret.Preamble $NotGLib}}
      {{if .Ret.Value}}cret := {{end}}{{.Namespace}}X{{.FullName}}(x.GoPointer() {{convcd .Args.API.Call}})
      {{.Ret.Fmt $NotGObject}}
@@ -168,7 +168,7 @@ func (x *{{$outer.Name}}Base) {{.Name}}({{conv .Args.API.Full}}) {{.Ret.Return}}
 {{if .Writable}}
 // SetProperty{{.Name}} sets the "{{.CName}}" property.
 {{if .Doc}}{{.Doc}}
-{{end}}func (x *{{$outer.Name}}Base) SetProperty{{.Name}}(value {{.GoType}}) {
+{{end}}func (x *{{$outer.BaseName}}) SetProperty{{.Name}}(value {{.GoType}}) {
 	obj := {{if $NotGObject}}gobject.{{end}}Object{}
 	obj.Ptr = x.GoPointer()
 	var v {{if $NotGObject}}gobject.{{end}}Value
@@ -180,7 +180,7 @@ func (x *{{$outer.Name}}Base) {{.Name}}({{conv .Args.API.Full}}) {{.Ret.Return}}
 {{if .Readable}}
 // GetProperty{{.Name}} gets the "{{.CName}}" property.
 {{if .Doc}}{{.Doc}}
-{{end}}func (x *{{$outer.Name}}Base) GetProperty{{.Name}}() {{.GoType}} {
+{{end}}func (x *{{$outer.BaseName}}) GetProperty{{.Name}}() {{.GoType}} {
 	obj := {{if $NotGObject}}gobject.{{end}}Object{}
 	obj.Ptr = x.GoPointer()
 	var v {{if $NotGObject}}gobject.{{end}}Value

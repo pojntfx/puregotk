@@ -12,22 +12,22 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ScaleButtonClass struct {
+type ScaleButtonClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xValueChanged uintptr
 
 	Padding [8]uintptr
 }
 
-func (x *ScaleButtonClass) GoPointer() uintptr {
+func (x *ScaleButtonClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideValueChanged sets the "value_changed" callback function.
-func (x *ScaleButtonClass) OverrideValueChanged(cb func(*ScaleButton, float64)) {
+func (x *ScaleButtonClassGType) OverrideValueChanged(cb func(*ScaleButton, float64)) {
 	if cb == nil {
 		x.xValueChanged = 0
 	} else {
@@ -38,7 +38,7 @@ func (x *ScaleButtonClass) OverrideValueChanged(cb func(*ScaleButton, float64)) 
 }
 
 // GetValueChanged gets the "value_changed" callback function.
-func (x *ScaleButtonClass) GetValueChanged() func(*ScaleButton, float64) {
+func (x *ScaleButtonClassGType) GetValueChanged() func(*ScaleButton, float64) {
 	if x.xValueChanged == 0 {
 		return nil
 	}

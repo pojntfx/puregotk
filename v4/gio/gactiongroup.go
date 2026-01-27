@@ -12,7 +12,7 @@ import (
 )
 
 // The virtual function table for [type@Gio.ActionGroup].
-type ActionGroupInterface struct {
+type ActionGroupInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -46,13 +46,13 @@ type ActionGroupInterface struct {
 	xQueryAction uintptr
 }
 
-func (x *ActionGroupInterface) GoPointer() uintptr {
+func (x *ActionGroupInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideHasAction sets the "has_action" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.has_action]
-func (x *ActionGroupInterface) OverrideHasAction(cb func(ActionGroup, string) bool) {
+func (x *ActionGroupInterfaceGType) OverrideHasAction(cb func(ActionGroup, string) bool) {
 	if cb == nil {
 		x.xHasAction = 0
 	} else {
@@ -64,7 +64,7 @@ func (x *ActionGroupInterface) OverrideHasAction(cb func(ActionGroup, string) bo
 
 // GetHasAction gets the "has_action" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.has_action]
-func (x *ActionGroupInterface) GetHasAction() func(ActionGroup, string) bool {
+func (x *ActionGroupInterfaceGType) GetHasAction() func(ActionGroup, string) bool {
 	if x.xHasAction == 0 {
 		return nil
 	}
@@ -77,7 +77,7 @@ func (x *ActionGroupInterface) GetHasAction() func(ActionGroup, string) bool {
 
 // OverrideListActions sets the "list_actions" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.list_actions]
-func (x *ActionGroupInterface) OverrideListActions(cb func(ActionGroup) []string) {
+func (x *ActionGroupInterfaceGType) OverrideListActions(cb func(ActionGroup) []string) {
 	if cb == nil {
 		x.xListActions = 0
 	} else {
@@ -89,7 +89,7 @@ func (x *ActionGroupInterface) OverrideListActions(cb func(ActionGroup) []string
 
 // GetListActions gets the "list_actions" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.list_actions]
-func (x *ActionGroupInterface) GetListActions() func(ActionGroup) []string {
+func (x *ActionGroupInterfaceGType) GetListActions() func(ActionGroup) []string {
 	if x.xListActions == 0 {
 		return nil
 	}
@@ -102,7 +102,7 @@ func (x *ActionGroupInterface) GetListActions() func(ActionGroup) []string {
 
 // OverrideGetActionEnabled sets the "get_action_enabled" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.get_action_enabled]
-func (x *ActionGroupInterface) OverrideGetActionEnabled(cb func(ActionGroup, string) bool) {
+func (x *ActionGroupInterfaceGType) OverrideGetActionEnabled(cb func(ActionGroup, string) bool) {
 	if cb == nil {
 		x.xGetActionEnabled = 0
 	} else {
@@ -114,7 +114,7 @@ func (x *ActionGroupInterface) OverrideGetActionEnabled(cb func(ActionGroup, str
 
 // GetGetActionEnabled gets the "get_action_enabled" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.get_action_enabled]
-func (x *ActionGroupInterface) GetGetActionEnabled() func(ActionGroup, string) bool {
+func (x *ActionGroupInterfaceGType) GetGetActionEnabled() func(ActionGroup, string) bool {
 	if x.xGetActionEnabled == 0 {
 		return nil
 	}
@@ -127,7 +127,7 @@ func (x *ActionGroupInterface) GetGetActionEnabled() func(ActionGroup, string) b
 
 // OverrideGetActionParameterType sets the "get_action_parameter_type" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.get_action_parameter_type]
-func (x *ActionGroupInterface) OverrideGetActionParameterType(cb func(ActionGroup, string) *glib.VariantType) {
+func (x *ActionGroupInterfaceGType) OverrideGetActionParameterType(cb func(ActionGroup, string) *glib.VariantType) {
 	if cb == nil {
 		x.xGetActionParameterType = 0
 	} else {
@@ -139,7 +139,7 @@ func (x *ActionGroupInterface) OverrideGetActionParameterType(cb func(ActionGrou
 
 // GetGetActionParameterType gets the "get_action_parameter_type" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.get_action_parameter_type]
-func (x *ActionGroupInterface) GetGetActionParameterType() func(ActionGroup, string) *glib.VariantType {
+func (x *ActionGroupInterfaceGType) GetGetActionParameterType() func(ActionGroup, string) *glib.VariantType {
 	if x.xGetActionParameterType == 0 {
 		return nil
 	}
@@ -152,7 +152,7 @@ func (x *ActionGroupInterface) GetGetActionParameterType() func(ActionGroup, str
 
 // OverrideGetActionStateType sets the "get_action_state_type" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.get_action_state_type]
-func (x *ActionGroupInterface) OverrideGetActionStateType(cb func(ActionGroup, string) *glib.VariantType) {
+func (x *ActionGroupInterfaceGType) OverrideGetActionStateType(cb func(ActionGroup, string) *glib.VariantType) {
 	if cb == nil {
 		x.xGetActionStateType = 0
 	} else {
@@ -164,7 +164,7 @@ func (x *ActionGroupInterface) OverrideGetActionStateType(cb func(ActionGroup, s
 
 // GetGetActionStateType gets the "get_action_state_type" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.get_action_state_type]
-func (x *ActionGroupInterface) GetGetActionStateType() func(ActionGroup, string) *glib.VariantType {
+func (x *ActionGroupInterfaceGType) GetGetActionStateType() func(ActionGroup, string) *glib.VariantType {
 	if x.xGetActionStateType == 0 {
 		return nil
 	}
@@ -177,7 +177,7 @@ func (x *ActionGroupInterface) GetGetActionStateType() func(ActionGroup, string)
 
 // OverrideGetActionStateHint sets the "get_action_state_hint" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.get_action_state_hint]
-func (x *ActionGroupInterface) OverrideGetActionStateHint(cb func(ActionGroup, string) *glib.Variant) {
+func (x *ActionGroupInterfaceGType) OverrideGetActionStateHint(cb func(ActionGroup, string) *glib.Variant) {
 	if cb == nil {
 		x.xGetActionStateHint = 0
 	} else {
@@ -189,7 +189,7 @@ func (x *ActionGroupInterface) OverrideGetActionStateHint(cb func(ActionGroup, s
 
 // GetGetActionStateHint gets the "get_action_state_hint" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.get_action_state_hint]
-func (x *ActionGroupInterface) GetGetActionStateHint() func(ActionGroup, string) *glib.Variant {
+func (x *ActionGroupInterfaceGType) GetGetActionStateHint() func(ActionGroup, string) *glib.Variant {
 	if x.xGetActionStateHint == 0 {
 		return nil
 	}
@@ -202,7 +202,7 @@ func (x *ActionGroupInterface) GetGetActionStateHint() func(ActionGroup, string)
 
 // OverrideGetActionState sets the "get_action_state" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.get_action_state]
-func (x *ActionGroupInterface) OverrideGetActionState(cb func(ActionGroup, string) *glib.Variant) {
+func (x *ActionGroupInterfaceGType) OverrideGetActionState(cb func(ActionGroup, string) *glib.Variant) {
 	if cb == nil {
 		x.xGetActionState = 0
 	} else {
@@ -214,7 +214,7 @@ func (x *ActionGroupInterface) OverrideGetActionState(cb func(ActionGroup, strin
 
 // GetGetActionState gets the "get_action_state" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.get_action_state]
-func (x *ActionGroupInterface) GetGetActionState() func(ActionGroup, string) *glib.Variant {
+func (x *ActionGroupInterfaceGType) GetGetActionState() func(ActionGroup, string) *glib.Variant {
 	if x.xGetActionState == 0 {
 		return nil
 	}
@@ -227,7 +227,7 @@ func (x *ActionGroupInterface) GetGetActionState() func(ActionGroup, string) *gl
 
 // OverrideChangeActionState sets the "change_action_state" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.change_action_state]
-func (x *ActionGroupInterface) OverrideChangeActionState(cb func(ActionGroup, string, *glib.Variant)) {
+func (x *ActionGroupInterfaceGType) OverrideChangeActionState(cb func(ActionGroup, string, *glib.Variant)) {
 	if cb == nil {
 		x.xChangeActionState = 0
 	} else {
@@ -239,7 +239,7 @@ func (x *ActionGroupInterface) OverrideChangeActionState(cb func(ActionGroup, st
 
 // GetChangeActionState gets the "change_action_state" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.change_action_state]
-func (x *ActionGroupInterface) GetChangeActionState() func(ActionGroup, string, *glib.Variant) {
+func (x *ActionGroupInterfaceGType) GetChangeActionState() func(ActionGroup, string, *glib.Variant) {
 	if x.xChangeActionState == 0 {
 		return nil
 	}
@@ -252,7 +252,7 @@ func (x *ActionGroupInterface) GetChangeActionState() func(ActionGroup, string, 
 
 // OverrideActivateAction sets the "activate_action" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.activate_action]
-func (x *ActionGroupInterface) OverrideActivateAction(cb func(ActionGroup, string, *glib.Variant)) {
+func (x *ActionGroupInterfaceGType) OverrideActivateAction(cb func(ActionGroup, string, *glib.Variant)) {
 	if cb == nil {
 		x.xActivateAction = 0
 	} else {
@@ -264,7 +264,7 @@ func (x *ActionGroupInterface) OverrideActivateAction(cb func(ActionGroup, strin
 
 // GetActivateAction gets the "activate_action" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.activate_action]
-func (x *ActionGroupInterface) GetActivateAction() func(ActionGroup, string, *glib.Variant) {
+func (x *ActionGroupInterfaceGType) GetActivateAction() func(ActionGroup, string, *glib.Variant) {
 	if x.xActivateAction == 0 {
 		return nil
 	}
@@ -277,7 +277,7 @@ func (x *ActionGroupInterface) GetActivateAction() func(ActionGroup, string, *gl
 
 // OverrideActionAdded sets the "action_added" callback function.
 // the class closure for the [signal@Gio.ActionGroup::action-added] signal
-func (x *ActionGroupInterface) OverrideActionAdded(cb func(ActionGroup, string)) {
+func (x *ActionGroupInterfaceGType) OverrideActionAdded(cb func(ActionGroup, string)) {
 	if cb == nil {
 		x.xActionAdded = 0
 	} else {
@@ -289,7 +289,7 @@ func (x *ActionGroupInterface) OverrideActionAdded(cb func(ActionGroup, string))
 
 // GetActionAdded gets the "action_added" callback function.
 // the class closure for the [signal@Gio.ActionGroup::action-added] signal
-func (x *ActionGroupInterface) GetActionAdded() func(ActionGroup, string) {
+func (x *ActionGroupInterfaceGType) GetActionAdded() func(ActionGroup, string) {
 	if x.xActionAdded == 0 {
 		return nil
 	}
@@ -302,7 +302,7 @@ func (x *ActionGroupInterface) GetActionAdded() func(ActionGroup, string) {
 
 // OverrideActionRemoved sets the "action_removed" callback function.
 // the class closure for the [signal@Gio.ActionGroup::action-removed] signal
-func (x *ActionGroupInterface) OverrideActionRemoved(cb func(ActionGroup, string)) {
+func (x *ActionGroupInterfaceGType) OverrideActionRemoved(cb func(ActionGroup, string)) {
 	if cb == nil {
 		x.xActionRemoved = 0
 	} else {
@@ -314,7 +314,7 @@ func (x *ActionGroupInterface) OverrideActionRemoved(cb func(ActionGroup, string
 
 // GetActionRemoved gets the "action_removed" callback function.
 // the class closure for the [signal@Gio.ActionGroup::action-removed] signal
-func (x *ActionGroupInterface) GetActionRemoved() func(ActionGroup, string) {
+func (x *ActionGroupInterfaceGType) GetActionRemoved() func(ActionGroup, string) {
 	if x.xActionRemoved == 0 {
 		return nil
 	}
@@ -327,7 +327,7 @@ func (x *ActionGroupInterface) GetActionRemoved() func(ActionGroup, string) {
 
 // OverrideActionEnabledChanged sets the "action_enabled_changed" callback function.
 // the class closure for the [signal@Gio.ActionGroup::action-enabled-changed] signal
-func (x *ActionGroupInterface) OverrideActionEnabledChanged(cb func(ActionGroup, string, bool)) {
+func (x *ActionGroupInterfaceGType) OverrideActionEnabledChanged(cb func(ActionGroup, string, bool)) {
 	if cb == nil {
 		x.xActionEnabledChanged = 0
 	} else {
@@ -339,7 +339,7 @@ func (x *ActionGroupInterface) OverrideActionEnabledChanged(cb func(ActionGroup,
 
 // GetActionEnabledChanged gets the "action_enabled_changed" callback function.
 // the class closure for the [signal@Gio.ActionGroup::action-enabled-changed] signal
-func (x *ActionGroupInterface) GetActionEnabledChanged() func(ActionGroup, string, bool) {
+func (x *ActionGroupInterfaceGType) GetActionEnabledChanged() func(ActionGroup, string, bool) {
 	if x.xActionEnabledChanged == 0 {
 		return nil
 	}
@@ -352,7 +352,7 @@ func (x *ActionGroupInterface) GetActionEnabledChanged() func(ActionGroup, strin
 
 // OverrideActionStateChanged sets the "action_state_changed" callback function.
 // the class closure for the [signal@Gio.ActionGroup::action-enabled-changed] signal
-func (x *ActionGroupInterface) OverrideActionStateChanged(cb func(ActionGroup, string, *glib.Variant)) {
+func (x *ActionGroupInterfaceGType) OverrideActionStateChanged(cb func(ActionGroup, string, *glib.Variant)) {
 	if cb == nil {
 		x.xActionStateChanged = 0
 	} else {
@@ -364,7 +364,7 @@ func (x *ActionGroupInterface) OverrideActionStateChanged(cb func(ActionGroup, s
 
 // GetActionStateChanged gets the "action_state_changed" callback function.
 // the class closure for the [signal@Gio.ActionGroup::action-enabled-changed] signal
-func (x *ActionGroupInterface) GetActionStateChanged() func(ActionGroup, string, *glib.Variant) {
+func (x *ActionGroupInterfaceGType) GetActionStateChanged() func(ActionGroup, string, *glib.Variant) {
 	if x.xActionStateChanged == 0 {
 		return nil
 	}
@@ -377,7 +377,7 @@ func (x *ActionGroupInterface) GetActionStateChanged() func(ActionGroup, string,
 
 // OverrideQueryAction sets the "query_action" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.query_action]
-func (x *ActionGroupInterface) OverrideQueryAction(cb func(ActionGroup, string, *bool, **glib.VariantType, **glib.VariantType, **glib.Variant, **glib.Variant) bool) {
+func (x *ActionGroupInterfaceGType) OverrideQueryAction(cb func(ActionGroup, string, *bool, **glib.VariantType, **glib.VariantType, **glib.Variant, **glib.Variant) bool) {
 	if cb == nil {
 		x.xQueryAction = 0
 	} else {
@@ -389,7 +389,7 @@ func (x *ActionGroupInterface) OverrideQueryAction(cb func(ActionGroup, string, 
 
 // GetQueryAction gets the "query_action" callback function.
 // the virtual function pointer for [method@Gio.ActionGroup.query_action]
-func (x *ActionGroupInterface) GetQueryAction() func(ActionGroup, string, *bool, **glib.VariantType, **glib.VariantType, **glib.Variant, **glib.Variant) bool {
+func (x *ActionGroupInterfaceGType) GetQueryAction() func(ActionGroup, string, *bool, **glib.VariantType, **glib.VariantType, **glib.Variant, **glib.Variant) bool {
 	if x.xQueryAction == 0 {
 		return nil
 	}

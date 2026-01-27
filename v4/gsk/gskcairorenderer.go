@@ -10,11 +10,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type CairoRendererClass struct {
+type CairoRendererClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *CairoRendererClass) GoPointer() uintptr {
+func (x *CairoRendererClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -12,7 +12,7 @@ import (
 )
 
 // Interface for implementing operations for mounts.
-type MountIface struct {
+type MountIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -72,13 +72,13 @@ type MountIface struct {
 	xGetSymbolicIcon uintptr
 }
 
-func (x *MountIface) GoPointer() uintptr {
+func (x *MountIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideChanged sets the "changed" callback function.
 // Changed signal that is emitted when the mount's state has changed.
-func (x *MountIface) OverrideChanged(cb func(Mount)) {
+func (x *MountIfaceGType) OverrideChanged(cb func(Mount)) {
 	if cb == nil {
 		x.xChanged = 0
 	} else {
@@ -90,7 +90,7 @@ func (x *MountIface) OverrideChanged(cb func(Mount)) {
 
 // GetChanged gets the "changed" callback function.
 // Changed signal that is emitted when the mount's state has changed.
-func (x *MountIface) GetChanged() func(Mount) {
+func (x *MountIfaceGType) GetChanged() func(Mount) {
 	if x.xChanged == 0 {
 		return nil
 	}
@@ -103,7 +103,7 @@ func (x *MountIface) GetChanged() func(Mount) {
 
 // OverrideUnmounted sets the "unmounted" callback function.
 // The unmounted signal that is emitted when the #GMount have been unmounted. If the recipient is holding references to the object they should release them so the object can be finalized.
-func (x *MountIface) OverrideUnmounted(cb func(Mount)) {
+func (x *MountIfaceGType) OverrideUnmounted(cb func(Mount)) {
 	if cb == nil {
 		x.xUnmounted = 0
 	} else {
@@ -115,7 +115,7 @@ func (x *MountIface) OverrideUnmounted(cb func(Mount)) {
 
 // GetUnmounted gets the "unmounted" callback function.
 // The unmounted signal that is emitted when the #GMount have been unmounted. If the recipient is holding references to the object they should release them so the object can be finalized.
-func (x *MountIface) GetUnmounted() func(Mount) {
+func (x *MountIfaceGType) GetUnmounted() func(Mount) {
 	if x.xUnmounted == 0 {
 		return nil
 	}
@@ -128,7 +128,7 @@ func (x *MountIface) GetUnmounted() func(Mount) {
 
 // OverrideGetRoot sets the "get_root" callback function.
 // Gets a #GFile to the root directory of the #GMount.
-func (x *MountIface) OverrideGetRoot(cb func(Mount) *FileBase) {
+func (x *MountIfaceGType) OverrideGetRoot(cb func(Mount) *FileBase) {
 	if cb == nil {
 		x.xGetRoot = 0
 	} else {
@@ -144,7 +144,7 @@ func (x *MountIface) OverrideGetRoot(cb func(Mount) *FileBase) {
 
 // GetGetRoot gets the "get_root" callback function.
 // Gets a #GFile to the root directory of the #GMount.
-func (x *MountIface) GetGetRoot() func(Mount) *FileBase {
+func (x *MountIfaceGType) GetGetRoot() func(Mount) *FileBase {
 	if x.xGetRoot == 0 {
 		return nil
 	}
@@ -163,7 +163,7 @@ func (x *MountIface) GetGetRoot() func(Mount) *FileBase {
 
 // OverrideGetName sets the "get_name" callback function.
 // Gets a string containing the name of the #GMount.
-func (x *MountIface) OverrideGetName(cb func(Mount) string) {
+func (x *MountIfaceGType) OverrideGetName(cb func(Mount) string) {
 	if cb == nil {
 		x.xGetName = 0
 	} else {
@@ -175,7 +175,7 @@ func (x *MountIface) OverrideGetName(cb func(Mount) string) {
 
 // GetGetName gets the "get_name" callback function.
 // Gets a string containing the name of the #GMount.
-func (x *MountIface) GetGetName() func(Mount) string {
+func (x *MountIfaceGType) GetGetName() func(Mount) string {
 	if x.xGetName == 0 {
 		return nil
 	}
@@ -188,7 +188,7 @@ func (x *MountIface) GetGetName() func(Mount) string {
 
 // OverrideGetIcon sets the "get_icon" callback function.
 // Gets a #GIcon for the #GMount.
-func (x *MountIface) OverrideGetIcon(cb func(Mount) *IconBase) {
+func (x *MountIfaceGType) OverrideGetIcon(cb func(Mount) *IconBase) {
 	if cb == nil {
 		x.xGetIcon = 0
 	} else {
@@ -204,7 +204,7 @@ func (x *MountIface) OverrideGetIcon(cb func(Mount) *IconBase) {
 
 // GetGetIcon gets the "get_icon" callback function.
 // Gets a #GIcon for the #GMount.
-func (x *MountIface) GetGetIcon() func(Mount) *IconBase {
+func (x *MountIfaceGType) GetGetIcon() func(Mount) *IconBase {
 	if x.xGetIcon == 0 {
 		return nil
 	}
@@ -223,7 +223,7 @@ func (x *MountIface) GetGetIcon() func(Mount) *IconBase {
 
 // OverrideGetUuid sets the "get_uuid" callback function.
 // Gets the UUID for the #GMount. The reference is typically based on the file system UUID for the mount in question and should be considered an opaque string. Returns %NULL if there is no UUID available.
-func (x *MountIface) OverrideGetUuid(cb func(Mount) string) {
+func (x *MountIfaceGType) OverrideGetUuid(cb func(Mount) string) {
 	if cb == nil {
 		x.xGetUuid = 0
 	} else {
@@ -235,7 +235,7 @@ func (x *MountIface) OverrideGetUuid(cb func(Mount) string) {
 
 // GetGetUuid gets the "get_uuid" callback function.
 // Gets the UUID for the #GMount. The reference is typically based on the file system UUID for the mount in question and should be considered an opaque string. Returns %NULL if there is no UUID available.
-func (x *MountIface) GetGetUuid() func(Mount) string {
+func (x *MountIfaceGType) GetGetUuid() func(Mount) string {
 	if x.xGetUuid == 0 {
 		return nil
 	}
@@ -248,7 +248,7 @@ func (x *MountIface) GetGetUuid() func(Mount) string {
 
 // OverrideGetVolume sets the "get_volume" callback function.
 // Gets a #GVolume the mount is located on. Returns %NULL if the #GMount is not associated with a #GVolume.
-func (x *MountIface) OverrideGetVolume(cb func(Mount) *VolumeBase) {
+func (x *MountIfaceGType) OverrideGetVolume(cb func(Mount) *VolumeBase) {
 	if cb == nil {
 		x.xGetVolume = 0
 	} else {
@@ -264,7 +264,7 @@ func (x *MountIface) OverrideGetVolume(cb func(Mount) *VolumeBase) {
 
 // GetGetVolume gets the "get_volume" callback function.
 // Gets a #GVolume the mount is located on. Returns %NULL if the #GMount is not associated with a #GVolume.
-func (x *MountIface) GetGetVolume() func(Mount) *VolumeBase {
+func (x *MountIfaceGType) GetGetVolume() func(Mount) *VolumeBase {
 	if x.xGetVolume == 0 {
 		return nil
 	}
@@ -283,7 +283,7 @@ func (x *MountIface) GetGetVolume() func(Mount) *VolumeBase {
 
 // OverrideGetDrive sets the "get_drive" callback function.
 // Gets a #GDrive the volume of the mount is located on. Returns %NULL if the #GMount is not associated with a #GDrive or a #GVolume. This is convenience method for getting the #GVolume and using that to get the #GDrive.
-func (x *MountIface) OverrideGetDrive(cb func(Mount) *DriveBase) {
+func (x *MountIfaceGType) OverrideGetDrive(cb func(Mount) *DriveBase) {
 	if cb == nil {
 		x.xGetDrive = 0
 	} else {
@@ -299,7 +299,7 @@ func (x *MountIface) OverrideGetDrive(cb func(Mount) *DriveBase) {
 
 // GetGetDrive gets the "get_drive" callback function.
 // Gets a #GDrive the volume of the mount is located on. Returns %NULL if the #GMount is not associated with a #GDrive or a #GVolume. This is convenience method for getting the #GVolume and using that to get the #GDrive.
-func (x *MountIface) GetGetDrive() func(Mount) *DriveBase {
+func (x *MountIfaceGType) GetGetDrive() func(Mount) *DriveBase {
 	if x.xGetDrive == 0 {
 		return nil
 	}
@@ -318,7 +318,7 @@ func (x *MountIface) GetGetDrive() func(Mount) *DriveBase {
 
 // OverrideCanUnmount sets the "can_unmount" callback function.
 // Checks if a #GMount can be unmounted.
-func (x *MountIface) OverrideCanUnmount(cb func(Mount) bool) {
+func (x *MountIfaceGType) OverrideCanUnmount(cb func(Mount) bool) {
 	if cb == nil {
 		x.xCanUnmount = 0
 	} else {
@@ -330,7 +330,7 @@ func (x *MountIface) OverrideCanUnmount(cb func(Mount) bool) {
 
 // GetCanUnmount gets the "can_unmount" callback function.
 // Checks if a #GMount can be unmounted.
-func (x *MountIface) GetCanUnmount() func(Mount) bool {
+func (x *MountIfaceGType) GetCanUnmount() func(Mount) bool {
 	if x.xCanUnmount == 0 {
 		return nil
 	}
@@ -343,7 +343,7 @@ func (x *MountIface) GetCanUnmount() func(Mount) bool {
 
 // OverrideCanEject sets the "can_eject" callback function.
 // Checks if a #GMount can be ejected.
-func (x *MountIface) OverrideCanEject(cb func(Mount) bool) {
+func (x *MountIfaceGType) OverrideCanEject(cb func(Mount) bool) {
 	if cb == nil {
 		x.xCanEject = 0
 	} else {
@@ -355,7 +355,7 @@ func (x *MountIface) OverrideCanEject(cb func(Mount) bool) {
 
 // GetCanEject gets the "can_eject" callback function.
 // Checks if a #GMount can be ejected.
-func (x *MountIface) GetCanEject() func(Mount) bool {
+func (x *MountIfaceGType) GetCanEject() func(Mount) bool {
 	if x.xCanEject == 0 {
 		return nil
 	}
@@ -368,7 +368,7 @@ func (x *MountIface) GetCanEject() func(Mount) bool {
 
 // OverrideUnmount sets the "unmount" callback function.
 // Starts unmounting a #GMount.
-func (x *MountIface) OverrideUnmount(cb func(Mount, MountUnmountFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *MountIfaceGType) OverrideUnmount(cb func(Mount, MountUnmountFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xUnmount = 0
 	} else {
@@ -380,7 +380,7 @@ func (x *MountIface) OverrideUnmount(cb func(Mount, MountUnmountFlags, *Cancella
 
 // GetUnmount gets the "unmount" callback function.
 // Starts unmounting a #GMount.
-func (x *MountIface) GetUnmount() func(Mount, MountUnmountFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *MountIfaceGType) GetUnmount() func(Mount, MountUnmountFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xUnmount == 0 {
 		return nil
 	}
@@ -393,7 +393,7 @@ func (x *MountIface) GetUnmount() func(Mount, MountUnmountFlags, *Cancellable, *
 
 // OverrideUnmountFinish sets the "unmount_finish" callback function.
 // Finishes an unmounting operation.
-func (x *MountIface) OverrideUnmountFinish(cb func(Mount, AsyncResult) bool) {
+func (x *MountIfaceGType) OverrideUnmountFinish(cb func(Mount, AsyncResult) bool) {
 	if cb == nil {
 		x.xUnmountFinish = 0
 	} else {
@@ -405,7 +405,7 @@ func (x *MountIface) OverrideUnmountFinish(cb func(Mount, AsyncResult) bool) {
 
 // GetUnmountFinish gets the "unmount_finish" callback function.
 // Finishes an unmounting operation.
-func (x *MountIface) GetUnmountFinish() func(Mount, AsyncResult) bool {
+func (x *MountIfaceGType) GetUnmountFinish() func(Mount, AsyncResult) bool {
 	if x.xUnmountFinish == 0 {
 		return nil
 	}
@@ -418,7 +418,7 @@ func (x *MountIface) GetUnmountFinish() func(Mount, AsyncResult) bool {
 
 // OverrideEject sets the "eject" callback function.
 // Starts ejecting a #GMount.
-func (x *MountIface) OverrideEject(cb func(Mount, MountUnmountFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *MountIfaceGType) OverrideEject(cb func(Mount, MountUnmountFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xEject = 0
 	} else {
@@ -430,7 +430,7 @@ func (x *MountIface) OverrideEject(cb func(Mount, MountUnmountFlags, *Cancellabl
 
 // GetEject gets the "eject" callback function.
 // Starts ejecting a #GMount.
-func (x *MountIface) GetEject() func(Mount, MountUnmountFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *MountIfaceGType) GetEject() func(Mount, MountUnmountFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xEject == 0 {
 		return nil
 	}
@@ -443,7 +443,7 @@ func (x *MountIface) GetEject() func(Mount, MountUnmountFlags, *Cancellable, *As
 
 // OverrideEjectFinish sets the "eject_finish" callback function.
 // Finishes an eject operation.
-func (x *MountIface) OverrideEjectFinish(cb func(Mount, AsyncResult) bool) {
+func (x *MountIfaceGType) OverrideEjectFinish(cb func(Mount, AsyncResult) bool) {
 	if cb == nil {
 		x.xEjectFinish = 0
 	} else {
@@ -455,7 +455,7 @@ func (x *MountIface) OverrideEjectFinish(cb func(Mount, AsyncResult) bool) {
 
 // GetEjectFinish gets the "eject_finish" callback function.
 // Finishes an eject operation.
-func (x *MountIface) GetEjectFinish() func(Mount, AsyncResult) bool {
+func (x *MountIfaceGType) GetEjectFinish() func(Mount, AsyncResult) bool {
 	if x.xEjectFinish == 0 {
 		return nil
 	}
@@ -468,7 +468,7 @@ func (x *MountIface) GetEjectFinish() func(Mount, AsyncResult) bool {
 
 // OverrideRemount sets the "remount" callback function.
 // Starts remounting a #GMount.
-func (x *MountIface) OverrideRemount(cb func(Mount, MountMountFlags, *MountOperation, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *MountIfaceGType) OverrideRemount(cb func(Mount, MountMountFlags, *MountOperation, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xRemount = 0
 	} else {
@@ -480,7 +480,7 @@ func (x *MountIface) OverrideRemount(cb func(Mount, MountMountFlags, *MountOpera
 
 // GetRemount gets the "remount" callback function.
 // Starts remounting a #GMount.
-func (x *MountIface) GetRemount() func(Mount, MountMountFlags, *MountOperation, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *MountIfaceGType) GetRemount() func(Mount, MountMountFlags, *MountOperation, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xRemount == 0 {
 		return nil
 	}
@@ -493,7 +493,7 @@ func (x *MountIface) GetRemount() func(Mount, MountMountFlags, *MountOperation, 
 
 // OverrideRemountFinish sets the "remount_finish" callback function.
 // Finishes a remounting operation.
-func (x *MountIface) OverrideRemountFinish(cb func(Mount, AsyncResult) bool) {
+func (x *MountIfaceGType) OverrideRemountFinish(cb func(Mount, AsyncResult) bool) {
 	if cb == nil {
 		x.xRemountFinish = 0
 	} else {
@@ -505,7 +505,7 @@ func (x *MountIface) OverrideRemountFinish(cb func(Mount, AsyncResult) bool) {
 
 // GetRemountFinish gets the "remount_finish" callback function.
 // Finishes a remounting operation.
-func (x *MountIface) GetRemountFinish() func(Mount, AsyncResult) bool {
+func (x *MountIfaceGType) GetRemountFinish() func(Mount, AsyncResult) bool {
 	if x.xRemountFinish == 0 {
 		return nil
 	}
@@ -521,7 +521,7 @@ func (x *MountIface) GetRemountFinish() func(Mount, AsyncResult) bool {
 //
 //	See g_mount_guess_content_type() for more information on content
 //	type guessing. This operation was added in 2.18.
-func (x *MountIface) OverrideGuessContentType(cb func(Mount, bool, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *MountIfaceGType) OverrideGuessContentType(cb func(Mount, bool, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xGuessContentType = 0
 	} else {
@@ -536,7 +536,7 @@ func (x *MountIface) OverrideGuessContentType(cb func(Mount, bool, *Cancellable,
 //
 //	See g_mount_guess_content_type() for more information on content
 //	type guessing. This operation was added in 2.18.
-func (x *MountIface) GetGuessContentType() func(Mount, bool, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *MountIfaceGType) GetGuessContentType() func(Mount, bool, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xGuessContentType == 0 {
 		return nil
 	}
@@ -549,7 +549,7 @@ func (x *MountIface) GetGuessContentType() func(Mount, bool, *Cancellable, *Asyn
 
 // OverrideGuessContentTypeFinish sets the "guess_content_type_finish" callback function.
 // Finishes a content type guessing operation. Added in 2.18.
-func (x *MountIface) OverrideGuessContentTypeFinish(cb func(Mount, AsyncResult) []string) {
+func (x *MountIfaceGType) OverrideGuessContentTypeFinish(cb func(Mount, AsyncResult) []string) {
 	if cb == nil {
 		x.xGuessContentTypeFinish = 0
 	} else {
@@ -561,7 +561,7 @@ func (x *MountIface) OverrideGuessContentTypeFinish(cb func(Mount, AsyncResult) 
 
 // GetGuessContentTypeFinish gets the "guess_content_type_finish" callback function.
 // Finishes a content type guessing operation. Added in 2.18.
-func (x *MountIface) GetGuessContentTypeFinish() func(Mount, AsyncResult) []string {
+func (x *MountIfaceGType) GetGuessContentTypeFinish() func(Mount, AsyncResult) []string {
 	if x.xGuessContentTypeFinish == 0 {
 		return nil
 	}
@@ -574,7 +574,7 @@ func (x *MountIface) GetGuessContentTypeFinish() func(Mount, AsyncResult) []stri
 
 // OverrideGuessContentTypeSync sets the "guess_content_type_sync" callback function.
 // Synchronous variant of @guess_content_type. Added in 2.18
-func (x *MountIface) OverrideGuessContentTypeSync(cb func(Mount, bool, *Cancellable) []string) {
+func (x *MountIfaceGType) OverrideGuessContentTypeSync(cb func(Mount, bool, *Cancellable) []string) {
 	if cb == nil {
 		x.xGuessContentTypeSync = 0
 	} else {
@@ -586,7 +586,7 @@ func (x *MountIface) OverrideGuessContentTypeSync(cb func(Mount, bool, *Cancella
 
 // GetGuessContentTypeSync gets the "guess_content_type_sync" callback function.
 // Synchronous variant of @guess_content_type. Added in 2.18
-func (x *MountIface) GetGuessContentTypeSync() func(Mount, bool, *Cancellable) []string {
+func (x *MountIfaceGType) GetGuessContentTypeSync() func(Mount, bool, *Cancellable) []string {
 	if x.xGuessContentTypeSync == 0 {
 		return nil
 	}
@@ -599,7 +599,7 @@ func (x *MountIface) GetGuessContentTypeSync() func(Mount, bool, *Cancellable) [
 
 // OverridePreUnmount sets the "pre_unmount" callback function.
 // The ::pre-unmount signal that is emitted when the #GMount will soon be emitted. If the recipient is somehow holding the mount open by keeping an open file on it it should close the file.
-func (x *MountIface) OverridePreUnmount(cb func(Mount)) {
+func (x *MountIfaceGType) OverridePreUnmount(cb func(Mount)) {
 	if cb == nil {
 		x.xPreUnmount = 0
 	} else {
@@ -611,7 +611,7 @@ func (x *MountIface) OverridePreUnmount(cb func(Mount)) {
 
 // GetPreUnmount gets the "pre_unmount" callback function.
 // The ::pre-unmount signal that is emitted when the #GMount will soon be emitted. If the recipient is somehow holding the mount open by keeping an open file on it it should close the file.
-func (x *MountIface) GetPreUnmount() func(Mount) {
+func (x *MountIfaceGType) GetPreUnmount() func(Mount) {
 	if x.xPreUnmount == 0 {
 		return nil
 	}
@@ -624,7 +624,7 @@ func (x *MountIface) GetPreUnmount() func(Mount) {
 
 // OverrideUnmountWithOperation sets the "unmount_with_operation" callback function.
 // Starts unmounting a #GMount using a #GMountOperation. Since 2.22.
-func (x *MountIface) OverrideUnmountWithOperation(cb func(Mount, MountUnmountFlags, *MountOperation, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *MountIfaceGType) OverrideUnmountWithOperation(cb func(Mount, MountUnmountFlags, *MountOperation, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xUnmountWithOperation = 0
 	} else {
@@ -636,7 +636,7 @@ func (x *MountIface) OverrideUnmountWithOperation(cb func(Mount, MountUnmountFla
 
 // GetUnmountWithOperation gets the "unmount_with_operation" callback function.
 // Starts unmounting a #GMount using a #GMountOperation. Since 2.22.
-func (x *MountIface) GetUnmountWithOperation() func(Mount, MountUnmountFlags, *MountOperation, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *MountIfaceGType) GetUnmountWithOperation() func(Mount, MountUnmountFlags, *MountOperation, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xUnmountWithOperation == 0 {
 		return nil
 	}
@@ -649,7 +649,7 @@ func (x *MountIface) GetUnmountWithOperation() func(Mount, MountUnmountFlags, *M
 
 // OverrideUnmountWithOperationFinish sets the "unmount_with_operation_finish" callback function.
 // Finishes an unmounting operation using a #GMountOperation. Since 2.22.
-func (x *MountIface) OverrideUnmountWithOperationFinish(cb func(Mount, AsyncResult) bool) {
+func (x *MountIfaceGType) OverrideUnmountWithOperationFinish(cb func(Mount, AsyncResult) bool) {
 	if cb == nil {
 		x.xUnmountWithOperationFinish = 0
 	} else {
@@ -661,7 +661,7 @@ func (x *MountIface) OverrideUnmountWithOperationFinish(cb func(Mount, AsyncResu
 
 // GetUnmountWithOperationFinish gets the "unmount_with_operation_finish" callback function.
 // Finishes an unmounting operation using a #GMountOperation. Since 2.22.
-func (x *MountIface) GetUnmountWithOperationFinish() func(Mount, AsyncResult) bool {
+func (x *MountIfaceGType) GetUnmountWithOperationFinish() func(Mount, AsyncResult) bool {
 	if x.xUnmountWithOperationFinish == 0 {
 		return nil
 	}
@@ -674,7 +674,7 @@ func (x *MountIface) GetUnmountWithOperationFinish() func(Mount, AsyncResult) bo
 
 // OverrideEjectWithOperation sets the "eject_with_operation" callback function.
 // Starts ejecting a #GMount using a #GMountOperation. Since 2.22.
-func (x *MountIface) OverrideEjectWithOperation(cb func(Mount, MountUnmountFlags, *MountOperation, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *MountIfaceGType) OverrideEjectWithOperation(cb func(Mount, MountUnmountFlags, *MountOperation, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xEjectWithOperation = 0
 	} else {
@@ -686,7 +686,7 @@ func (x *MountIface) OverrideEjectWithOperation(cb func(Mount, MountUnmountFlags
 
 // GetEjectWithOperation gets the "eject_with_operation" callback function.
 // Starts ejecting a #GMount using a #GMountOperation. Since 2.22.
-func (x *MountIface) GetEjectWithOperation() func(Mount, MountUnmountFlags, *MountOperation, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *MountIfaceGType) GetEjectWithOperation() func(Mount, MountUnmountFlags, *MountOperation, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xEjectWithOperation == 0 {
 		return nil
 	}
@@ -699,7 +699,7 @@ func (x *MountIface) GetEjectWithOperation() func(Mount, MountUnmountFlags, *Mou
 
 // OverrideEjectWithOperationFinish sets the "eject_with_operation_finish" callback function.
 // Finishes an eject operation using a #GMountOperation. Since 2.22.
-func (x *MountIface) OverrideEjectWithOperationFinish(cb func(Mount, AsyncResult) bool) {
+func (x *MountIfaceGType) OverrideEjectWithOperationFinish(cb func(Mount, AsyncResult) bool) {
 	if cb == nil {
 		x.xEjectWithOperationFinish = 0
 	} else {
@@ -711,7 +711,7 @@ func (x *MountIface) OverrideEjectWithOperationFinish(cb func(Mount, AsyncResult
 
 // GetEjectWithOperationFinish gets the "eject_with_operation_finish" callback function.
 // Finishes an eject operation using a #GMountOperation. Since 2.22.
-func (x *MountIface) GetEjectWithOperationFinish() func(Mount, AsyncResult) bool {
+func (x *MountIfaceGType) GetEjectWithOperationFinish() func(Mount, AsyncResult) bool {
 	if x.xEjectWithOperationFinish == 0 {
 		return nil
 	}
@@ -724,7 +724,7 @@ func (x *MountIface) GetEjectWithOperationFinish() func(Mount, AsyncResult) bool
 
 // OverrideGetDefaultLocation sets the "get_default_location" callback function.
 // Gets a #GFile indication a start location that can be use as the entry point for this mount. Since 2.24.
-func (x *MountIface) OverrideGetDefaultLocation(cb func(Mount) *FileBase) {
+func (x *MountIfaceGType) OverrideGetDefaultLocation(cb func(Mount) *FileBase) {
 	if cb == nil {
 		x.xGetDefaultLocation = 0
 	} else {
@@ -740,7 +740,7 @@ func (x *MountIface) OverrideGetDefaultLocation(cb func(Mount) *FileBase) {
 
 // GetGetDefaultLocation gets the "get_default_location" callback function.
 // Gets a #GFile indication a start location that can be use as the entry point for this mount. Since 2.24.
-func (x *MountIface) GetGetDefaultLocation() func(Mount) *FileBase {
+func (x *MountIfaceGType) GetGetDefaultLocation() func(Mount) *FileBase {
 	if x.xGetDefaultLocation == 0 {
 		return nil
 	}
@@ -759,7 +759,7 @@ func (x *MountIface) GetGetDefaultLocation() func(Mount) *FileBase {
 
 // OverrideGetSortKey sets the "get_sort_key" callback function.
 // Gets a key used for sorting #GMount instance or %NULL if no such key exists. Since 2.32.
-func (x *MountIface) OverrideGetSortKey(cb func(Mount) string) {
+func (x *MountIfaceGType) OverrideGetSortKey(cb func(Mount) string) {
 	if cb == nil {
 		x.xGetSortKey = 0
 	} else {
@@ -771,7 +771,7 @@ func (x *MountIface) OverrideGetSortKey(cb func(Mount) string) {
 
 // GetGetSortKey gets the "get_sort_key" callback function.
 // Gets a key used for sorting #GMount instance or %NULL if no such key exists. Since 2.32.
-func (x *MountIface) GetGetSortKey() func(Mount) string {
+func (x *MountIfaceGType) GetGetSortKey() func(Mount) string {
 	if x.xGetSortKey == 0 {
 		return nil
 	}
@@ -784,7 +784,7 @@ func (x *MountIface) GetGetSortKey() func(Mount) string {
 
 // OverrideGetSymbolicIcon sets the "get_symbolic_icon" callback function.
 // Gets a symbolic #GIcon for the #GMount. Since 2.34.
-func (x *MountIface) OverrideGetSymbolicIcon(cb func(Mount) *IconBase) {
+func (x *MountIfaceGType) OverrideGetSymbolicIcon(cb func(Mount) *IconBase) {
 	if cb == nil {
 		x.xGetSymbolicIcon = 0
 	} else {
@@ -800,7 +800,7 @@ func (x *MountIface) OverrideGetSymbolicIcon(cb func(Mount) *IconBase) {
 
 // GetGetSymbolicIcon gets the "get_symbolic_icon" callback function.
 // Gets a symbolic #GIcon for the #GMount. Since 2.34.
-func (x *MountIface) GetGetSymbolicIcon() func(Mount) *IconBase {
+func (x *MountIfaceGType) GetGetSymbolicIcon() func(Mount) *IconBase {
 	if x.xGetSymbolicIcon == 0 {
 		return nil
 	}

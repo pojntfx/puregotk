@@ -11,7 +11,7 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type EditableInterface struct {
+type EditableInterfaceGType struct {
 	_ structs.HostLayout
 
 	BaseIface uintptr
@@ -35,12 +35,12 @@ type EditableInterface struct {
 	xGetDelegate uintptr
 }
 
-func (x *EditableInterface) GoPointer() uintptr {
+func (x *EditableInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideInsertText sets the "insert_text" callback function.
-func (x *EditableInterface) OverrideInsertText(cb func(Editable, string, int, int)) {
+func (x *EditableInterfaceGType) OverrideInsertText(cb func(Editable, string, int, int)) {
 	if cb == nil {
 		x.xInsertText = 0
 	} else {
@@ -51,7 +51,7 @@ func (x *EditableInterface) OverrideInsertText(cb func(Editable, string, int, in
 }
 
 // GetInsertText gets the "insert_text" callback function.
-func (x *EditableInterface) GetInsertText() func(Editable, string, int, int) {
+func (x *EditableInterfaceGType) GetInsertText() func(Editable, string, int, int) {
 	if x.xInsertText == 0 {
 		return nil
 	}
@@ -63,7 +63,7 @@ func (x *EditableInterface) GetInsertText() func(Editable, string, int, int) {
 }
 
 // OverrideDeleteText sets the "delete_text" callback function.
-func (x *EditableInterface) OverrideDeleteText(cb func(Editable, int, int)) {
+func (x *EditableInterfaceGType) OverrideDeleteText(cb func(Editable, int, int)) {
 	if cb == nil {
 		x.xDeleteText = 0
 	} else {
@@ -74,7 +74,7 @@ func (x *EditableInterface) OverrideDeleteText(cb func(Editable, int, int)) {
 }
 
 // GetDeleteText gets the "delete_text" callback function.
-func (x *EditableInterface) GetDeleteText() func(Editable, int, int) {
+func (x *EditableInterfaceGType) GetDeleteText() func(Editable, int, int) {
 	if x.xDeleteText == 0 {
 		return nil
 	}
@@ -86,7 +86,7 @@ func (x *EditableInterface) GetDeleteText() func(Editable, int, int) {
 }
 
 // OverrideChanged sets the "changed" callback function.
-func (x *EditableInterface) OverrideChanged(cb func(Editable)) {
+func (x *EditableInterfaceGType) OverrideChanged(cb func(Editable)) {
 	if cb == nil {
 		x.xChanged = 0
 	} else {
@@ -97,7 +97,7 @@ func (x *EditableInterface) OverrideChanged(cb func(Editable)) {
 }
 
 // GetChanged gets the "changed" callback function.
-func (x *EditableInterface) GetChanged() func(Editable) {
+func (x *EditableInterfaceGType) GetChanged() func(Editable) {
 	if x.xChanged == 0 {
 		return nil
 	}
@@ -109,7 +109,7 @@ func (x *EditableInterface) GetChanged() func(Editable) {
 }
 
 // OverrideGetText sets the "get_text" callback function.
-func (x *EditableInterface) OverrideGetText(cb func(Editable) string) {
+func (x *EditableInterfaceGType) OverrideGetText(cb func(Editable) string) {
 	if cb == nil {
 		x.xGetText = 0
 	} else {
@@ -120,7 +120,7 @@ func (x *EditableInterface) OverrideGetText(cb func(Editable) string) {
 }
 
 // GetGetText gets the "get_text" callback function.
-func (x *EditableInterface) GetGetText() func(Editable) string {
+func (x *EditableInterfaceGType) GetGetText() func(Editable) string {
 	if x.xGetText == 0 {
 		return nil
 	}
@@ -132,7 +132,7 @@ func (x *EditableInterface) GetGetText() func(Editable) string {
 }
 
 // OverrideDoInsertText sets the "do_insert_text" callback function.
-func (x *EditableInterface) OverrideDoInsertText(cb func(Editable, string, int, int)) {
+func (x *EditableInterfaceGType) OverrideDoInsertText(cb func(Editable, string, int, int)) {
 	if cb == nil {
 		x.xDoInsertText = 0
 	} else {
@@ -143,7 +143,7 @@ func (x *EditableInterface) OverrideDoInsertText(cb func(Editable, string, int, 
 }
 
 // GetDoInsertText gets the "do_insert_text" callback function.
-func (x *EditableInterface) GetDoInsertText() func(Editable, string, int, int) {
+func (x *EditableInterfaceGType) GetDoInsertText() func(Editable, string, int, int) {
 	if x.xDoInsertText == 0 {
 		return nil
 	}
@@ -155,7 +155,7 @@ func (x *EditableInterface) GetDoInsertText() func(Editable, string, int, int) {
 }
 
 // OverrideDoDeleteText sets the "do_delete_text" callback function.
-func (x *EditableInterface) OverrideDoDeleteText(cb func(Editable, int, int)) {
+func (x *EditableInterfaceGType) OverrideDoDeleteText(cb func(Editable, int, int)) {
 	if cb == nil {
 		x.xDoDeleteText = 0
 	} else {
@@ -166,7 +166,7 @@ func (x *EditableInterface) OverrideDoDeleteText(cb func(Editable, int, int)) {
 }
 
 // GetDoDeleteText gets the "do_delete_text" callback function.
-func (x *EditableInterface) GetDoDeleteText() func(Editable, int, int) {
+func (x *EditableInterfaceGType) GetDoDeleteText() func(Editable, int, int) {
 	if x.xDoDeleteText == 0 {
 		return nil
 	}
@@ -178,7 +178,7 @@ func (x *EditableInterface) GetDoDeleteText() func(Editable, int, int) {
 }
 
 // OverrideGetSelectionBounds sets the "get_selection_bounds" callback function.
-func (x *EditableInterface) OverrideGetSelectionBounds(cb func(Editable, *int, *int) bool) {
+func (x *EditableInterfaceGType) OverrideGetSelectionBounds(cb func(Editable, *int, *int) bool) {
 	if cb == nil {
 		x.xGetSelectionBounds = 0
 	} else {
@@ -189,7 +189,7 @@ func (x *EditableInterface) OverrideGetSelectionBounds(cb func(Editable, *int, *
 }
 
 // GetGetSelectionBounds gets the "get_selection_bounds" callback function.
-func (x *EditableInterface) GetGetSelectionBounds() func(Editable, *int, *int) bool {
+func (x *EditableInterfaceGType) GetGetSelectionBounds() func(Editable, *int, *int) bool {
 	if x.xGetSelectionBounds == 0 {
 		return nil
 	}
@@ -201,7 +201,7 @@ func (x *EditableInterface) GetGetSelectionBounds() func(Editable, *int, *int) b
 }
 
 // OverrideSetSelectionBounds sets the "set_selection_bounds" callback function.
-func (x *EditableInterface) OverrideSetSelectionBounds(cb func(Editable, int, int)) {
+func (x *EditableInterfaceGType) OverrideSetSelectionBounds(cb func(Editable, int, int)) {
 	if cb == nil {
 		x.xSetSelectionBounds = 0
 	} else {
@@ -212,7 +212,7 @@ func (x *EditableInterface) OverrideSetSelectionBounds(cb func(Editable, int, in
 }
 
 // GetSetSelectionBounds gets the "set_selection_bounds" callback function.
-func (x *EditableInterface) GetSetSelectionBounds() func(Editable, int, int) {
+func (x *EditableInterfaceGType) GetSetSelectionBounds() func(Editable, int, int) {
 	if x.xSetSelectionBounds == 0 {
 		return nil
 	}
@@ -224,7 +224,7 @@ func (x *EditableInterface) GetSetSelectionBounds() func(Editable, int, int) {
 }
 
 // OverrideGetDelegate sets the "get_delegate" callback function.
-func (x *EditableInterface) OverrideGetDelegate(cb func(Editable) *EditableBase) {
+func (x *EditableInterfaceGType) OverrideGetDelegate(cb func(Editable) *EditableBase) {
 	if cb == nil {
 		x.xGetDelegate = 0
 	} else {
@@ -239,7 +239,7 @@ func (x *EditableInterface) OverrideGetDelegate(cb func(Editable) *EditableBase)
 }
 
 // GetGetDelegate gets the "get_delegate" callback function.
-func (x *EditableInterface) GetGetDelegate() func(Editable) *EditableBase {
+func (x *EditableInterfaceGType) GetGetDelegate() func(Editable) *EditableBase {
 	if x.xGetDelegate == 0 {
 		return nil
 	}
@@ -967,7 +967,7 @@ func EditableDelegateSetProperty(ObjectVar *gobject.Object, PropIdVar uint, Valu
 	return cret
 }
 
-var xEditableInstallProperties func(*gobject.ObjectClass, uint) uint
+var xEditableInstallProperties func(*gobject.ObjectClassGType, uint) uint
 
 // Overrides the `GtkEditable` properties for @class.
 //
@@ -984,7 +984,7 @@ var xEditableInstallProperties func(*gobject.ObjectClass, uint) uint
 // a delegate), or remember the @first_prop offset and add it to the
 // values in the [enum@Gtk.EditableProperties] enumeration to get the
 // property IDs for these properties.
-func EditableInstallProperties(ObjectClassVar *gobject.ObjectClass, FirstPropVar uint) uint {
+func EditableInstallProperties(ObjectClassVar *gobject.ObjectClassGType, FirstPropVar uint) uint {
 
 	cret := xEditableInstallProperties(ObjectClassVar, FirstPropVar)
 	return cret

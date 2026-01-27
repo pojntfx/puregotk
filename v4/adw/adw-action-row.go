@@ -13,23 +13,23 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type ActionRowClass struct {
+type ActionRowClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass PreferencesRowClass
+	ParentClass PreferencesRowClassGType
 
 	xActivate uintptr
 
 	Padding [4]uintptr
 }
 
-func (x *ActionRowClass) GoPointer() uintptr {
+func (x *ActionRowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideActivate sets the "activate" callback function.
 // Activates the row to trigger its main action.
-func (x *ActionRowClass) OverrideActivate(cb func(*ActionRow)) {
+func (x *ActionRowClassGType) OverrideActivate(cb func(*ActionRow)) {
 	if cb == nil {
 		x.xActivate = 0
 	} else {
@@ -41,7 +41,7 @@ func (x *ActionRowClass) OverrideActivate(cb func(*ActionRow)) {
 
 // GetActivate gets the "activate" callback function.
 // Activates the row to trigger its main action.
-func (x *ActionRowClass) GetActivate() func(*ActionRow) {
+func (x *ActionRowClassGType) GetActivate() func(*ActionRow) {
 	if x.xActivate == 0 {
 		return nil
 	}

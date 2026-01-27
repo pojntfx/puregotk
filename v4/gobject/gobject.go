@@ -40,7 +40,7 @@ type ToggleNotify func(uintptr, uintptr, bool)
 type WeakNotify func(uintptr, uintptr)
 
 // The class structure for the GInitiallyUnowned type.
-type InitiallyUnownedClass struct {
+type InitiallyUnownedClassGType struct {
 	_ structs.HostLayout
 
 	GTypeClass uintptr
@@ -74,7 +74,7 @@ type InitiallyUnownedClass struct {
 	Pdummy [3]uintptr
 }
 
-func (x *InitiallyUnownedClass) GoPointer() uintptr {
+func (x *InitiallyUnownedClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -85,7 +85,7 @@ func (x *InitiallyUnownedClass) GoPointer() uintptr {
 //	set. The first thing a @constructor implementation must do is chain up to the
 //	@constructor of the parent class. Overriding @constructor should be rarely
 //	needed, e.g. to handle construct properties, or to implement singletons.
-func (x *InitiallyUnownedClass) OverrideConstructor(cb func(types.GType, uint, *ObjectConstructParam) *Object) {
+func (x *InitiallyUnownedClassGType) OverrideConstructor(cb func(types.GType, uint, *ObjectConstructParam) *Object) {
 	if cb == nil {
 		x.xConstructor = 0
 	} else {
@@ -106,7 +106,7 @@ func (x *InitiallyUnownedClass) OverrideConstructor(cb func(types.GType, uint, *
 //	set. The first thing a @constructor implementation must do is chain up to the
 //	@constructor of the parent class. Overriding @constructor should be rarely
 //	needed, e.g. to handle construct properties, or to implement singletons.
-func (x *InitiallyUnownedClass) GetConstructor() func(types.GType, uint, *ObjectConstructParam) *Object {
+func (x *InitiallyUnownedClassGType) GetConstructor() func(types.GType, uint, *ObjectConstructParam) *Object {
 	if x.xConstructor == 0 {
 		return nil
 	}
@@ -130,7 +130,7 @@ func (x *InitiallyUnownedClass) GetConstructor() func(types.GType, uint, *Object
 //	@set_property don't emit property change notification explicitly, this will
 //	be done implicitly by the type system. However, if the notify signal is
 //	emitted explicitly, the type system will not emit it a second time.
-func (x *InitiallyUnownedClass) OverrideSetProperty(cb func(*Object, uint, *Value, *ParamSpec)) {
+func (x *InitiallyUnownedClassGType) OverrideSetProperty(cb func(*Object, uint, *Value, *ParamSpec)) {
 	if cb == nil {
 		x.xSetProperty = 0
 	} else {
@@ -147,7 +147,7 @@ func (x *InitiallyUnownedClass) OverrideSetProperty(cb func(*Object, uint, *Valu
 //	@set_property don't emit property change notification explicitly, this will
 //	be done implicitly by the type system. However, if the notify signal is
 //	emitted explicitly, the type system will not emit it a second time.
-func (x *InitiallyUnownedClass) GetSetProperty() func(*Object, uint, *Value, *ParamSpec) {
+func (x *InitiallyUnownedClassGType) GetSetProperty() func(*Object, uint, *Value, *ParamSpec) {
 	if x.xSetProperty == 0 {
 		return nil
 	}
@@ -162,7 +162,7 @@ func (x *InitiallyUnownedClass) GetSetProperty() func(*Object, uint, *Value, *Pa
 // the generic getter for all properties of this type. Should be
 //
 //	overridden for every type with properties.
-func (x *InitiallyUnownedClass) OverrideGetProperty(cb func(*Object, uint, *Value, *ParamSpec)) {
+func (x *InitiallyUnownedClassGType) OverrideGetProperty(cb func(*Object, uint, *Value, *ParamSpec)) {
 	if cb == nil {
 		x.xGetProperty = 0
 	} else {
@@ -176,7 +176,7 @@ func (x *InitiallyUnownedClass) OverrideGetProperty(cb func(*Object, uint, *Valu
 // the generic getter for all properties of this type. Should be
 //
 //	overridden for every type with properties.
-func (x *InitiallyUnownedClass) GetGetProperty() func(*Object, uint, *Value, *ParamSpec) {
+func (x *InitiallyUnownedClassGType) GetGetProperty() func(*Object, uint, *Value, *ParamSpec) {
 	if x.xGetProperty == 0 {
 		return nil
 	}
@@ -194,7 +194,7 @@ func (x *InitiallyUnownedClass) GetGetProperty() func(*Object, uint, *Value, *Pa
 //	invocations still work. It may be run multiple times (due to reference
 //	loops). Before returning, @dispose should chain up to the @dispose method
 //	of the parent class.
-func (x *InitiallyUnownedClass) OverrideDispose(cb func(*Object)) {
+func (x *InitiallyUnownedClassGType) OverrideDispose(cb func(*Object)) {
 	if cb == nil {
 		x.xDispose = 0
 	} else {
@@ -211,7 +211,7 @@ func (x *InitiallyUnownedClass) OverrideDispose(cb func(*Object)) {
 //	invocations still work. It may be run multiple times (due to reference
 //	loops). Before returning, @dispose should chain up to the @dispose method
 //	of the parent class.
-func (x *InitiallyUnownedClass) GetDispose() func(*Object) {
+func (x *InitiallyUnownedClassGType) GetDispose() func(*Object) {
 	if x.xDispose == 0 {
 		return nil
 	}
@@ -227,7 +227,7 @@ func (x *InitiallyUnownedClass) GetDispose() func(*Object) {
 //
 //	the instance begun in @dispose and chain up to the @finalize method of the
 //	parent class.
-func (x *InitiallyUnownedClass) OverrideFinalize(cb func(*Object)) {
+func (x *InitiallyUnownedClassGType) OverrideFinalize(cb func(*Object)) {
 	if cb == nil {
 		x.xFinalize = 0
 	} else {
@@ -242,7 +242,7 @@ func (x *InitiallyUnownedClass) OverrideFinalize(cb func(*Object)) {
 //
 //	the instance begun in @dispose and chain up to the @finalize method of the
 //	parent class.
-func (x *InitiallyUnownedClass) GetFinalize() func(*Object) {
+func (x *InitiallyUnownedClassGType) GetFinalize() func(*Object) {
 	if x.xFinalize == 0 {
 		return nil
 	}
@@ -258,7 +258,7 @@ func (x *InitiallyUnownedClass) GetFinalize() func(*Object) {
 //
 //	of properties. Overriding @dispatch_properties_changed should be rarely
 //	needed.
-func (x *InitiallyUnownedClass) OverrideDispatchPropertiesChanged(cb func(*Object, uint, **ParamSpec)) {
+func (x *InitiallyUnownedClassGType) OverrideDispatchPropertiesChanged(cb func(*Object, uint, **ParamSpec)) {
 	if cb == nil {
 		x.xDispatchPropertiesChanged = 0
 	} else {
@@ -273,7 +273,7 @@ func (x *InitiallyUnownedClass) OverrideDispatchPropertiesChanged(cb func(*Objec
 //
 //	of properties. Overriding @dispatch_properties_changed should be rarely
 //	needed.
-func (x *InitiallyUnownedClass) GetDispatchPropertiesChanged() func(*Object, uint, **ParamSpec) {
+func (x *InitiallyUnownedClassGType) GetDispatchPropertiesChanged() func(*Object, uint, **ParamSpec) {
 	if x.xDispatchPropertiesChanged == 0 {
 		return nil
 	}
@@ -286,7 +286,7 @@ func (x *InitiallyUnownedClass) GetDispatchPropertiesChanged() func(*Object, uin
 
 // OverrideNotify sets the "notify" callback function.
 // the class closure for the notify signal
-func (x *InitiallyUnownedClass) OverrideNotify(cb func(*Object, *ParamSpec)) {
+func (x *InitiallyUnownedClassGType) OverrideNotify(cb func(*Object, *ParamSpec)) {
 	if cb == nil {
 		x.xNotify = 0
 	} else {
@@ -298,7 +298,7 @@ func (x *InitiallyUnownedClass) OverrideNotify(cb func(*Object, *ParamSpec)) {
 
 // GetNotify gets the "notify" callback function.
 // the class closure for the notify signal
-func (x *InitiallyUnownedClass) GetNotify() func(*Object, *ParamSpec) {
+func (x *InitiallyUnownedClassGType) GetNotify() func(*Object, *ParamSpec) {
 	if x.xNotify == 0 {
 		return nil
 	}
@@ -318,7 +318,7 @@ func (x *InitiallyUnownedClass) GetNotify() func(*Object, *ParamSpec) {
 //	after construction properties have been set.  @constructed implementors
 //	should chain up to the @constructed call of their parent class to allow it
 //	to complete its initialisation.
-func (x *InitiallyUnownedClass) OverrideConstructed(cb func(*Object)) {
+func (x *InitiallyUnownedClassGType) OverrideConstructed(cb func(*Object)) {
 	if cb == nil {
 		x.xConstructed = 0
 	} else {
@@ -337,7 +337,7 @@ func (x *InitiallyUnownedClass) OverrideConstructed(cb func(*Object)) {
 //	after construction properties have been set.  @constructed implementors
 //	should chain up to the @constructed call of their parent class to allow it
 //	to complete its initialisation.
-func (x *InitiallyUnownedClass) GetConstructed() func(*Object) {
+func (x *InitiallyUnownedClassGType) GetConstructed() func(*Object) {
 	if x.xConstructed == 0 {
 		return nil
 	}
@@ -377,7 +377,7 @@ func (x *InitiallyUnownedClass) GetConstructed() func(*Object) {
 //	}
 //
 // ]|
-type ObjectClass struct {
+type ObjectClassGType struct {
 	_ structs.HostLayout
 
 	GTypeClass uintptr
@@ -411,17 +411,17 @@ type ObjectClass struct {
 	Pdummy [3]uintptr
 }
 
-func (x *ObjectClass) GoPointer() uintptr {
+func (x *ObjectClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-var xObjectClassFindProperty func(uintptr, string) uintptr
+var xObjectClassGTypeFindProperty func(uintptr, string) uintptr
 
 // Looks up the #GParamSpec for a property of a class.
-func (x *ObjectClass) FindProperty(PropertyNameVar string) *ParamSpec {
+func (x *ObjectClassGType) FindProperty(PropertyNameVar string) *ParamSpec {
 	var cls *ParamSpec
 
-	cret := xObjectClassFindProperty(x.GoPointer(), PropertyNameVar)
+	cret := xObjectClassGTypeFindProperty(x.GoPointer(), PropertyNameVar)
 
 	if cret == 0 {
 		return nil
@@ -432,7 +432,7 @@ func (x *ObjectClass) FindProperty(PropertyNameVar string) *ParamSpec {
 	return cls
 }
 
-var xObjectClassInstallProperties func(uintptr, uint, uintptr)
+var xObjectClassGTypeInstallProperties func(uintptr, uint, uintptr)
 
 // Installs new properties from an array of #GParamSpecs.
 //
@@ -502,13 +502,13 @@ var xObjectClassInstallProperties func(uintptr, uint, uintptr)
 //	 }
 //
 // ]|
-func (x *ObjectClass) InstallProperties(NPspecsVar uint, PspecsVar uintptr) {
+func (x *ObjectClassGType) InstallProperties(NPspecsVar uint, PspecsVar uintptr) {
 
-	xObjectClassInstallProperties(x.GoPointer(), NPspecsVar, PspecsVar)
+	xObjectClassGTypeInstallProperties(x.GoPointer(), NPspecsVar, PspecsVar)
 
 }
 
-var xObjectClassInstallProperty func(uintptr, uint, uintptr)
+var xObjectClassGTypeInstallProperty func(uintptr, uint, uintptr)
 
 // Installs a new property.
 //
@@ -520,22 +520,22 @@ var xObjectClassInstallProperty func(uintptr, uint, uintptr)
 // Note that it is possible to redefine a property in a derived class,
 // by installing a property with the same name. This can be useful at times,
 // e.g. to change the range of allowed values or the default value.
-func (x *ObjectClass) InstallProperty(PropertyIdVar uint, PspecVar *ParamSpec) {
+func (x *ObjectClassGType) InstallProperty(PropertyIdVar uint, PspecVar *ParamSpec) {
 
-	xObjectClassInstallProperty(x.GoPointer(), PropertyIdVar, PspecVar.GoPointer())
+	xObjectClassGTypeInstallProperty(x.GoPointer(), PropertyIdVar, PspecVar.GoPointer())
 
 }
 
-var xObjectClassListProperties func(uintptr, *uint) uintptr
+var xObjectClassGTypeListProperties func(uintptr, *uint) uintptr
 
 // Get an array of #GParamSpec* for all properties of a class.
-func (x *ObjectClass) ListProperties(NPropertiesVar *uint) uintptr {
+func (x *ObjectClassGType) ListProperties(NPropertiesVar *uint) uintptr {
 
-	cret := xObjectClassListProperties(x.GoPointer(), NPropertiesVar)
+	cret := xObjectClassGTypeListProperties(x.GoPointer(), NPropertiesVar)
 	return cret
 }
 
-var xObjectClassOverrideProperty func(uintptr, uint, string)
+var xObjectClassGTypeOverrideProperty func(uintptr, uint, string)
 
 // Registers @property_id as referring to a property with the name
 // @name in a parent class or in an interface implemented by @oclass.
@@ -553,9 +553,9 @@ var xObjectClassOverrideProperty func(uintptr, uint, string)
 // correct.  For virtually all uses, this makes no difference. If you
 // need to get the overridden property, you can call
 // g_param_spec_get_redirect_target().
-func (x *ObjectClass) OverrideProperty(PropertyIdVar uint, NameVar string) {
+func (x *ObjectClassGType) OverrideProperty(PropertyIdVar uint, NameVar string) {
 
-	xObjectClassOverrideProperty(x.GoPointer(), PropertyIdVar, NameVar)
+	xObjectClassGTypeOverrideProperty(x.GoPointer(), PropertyIdVar, NameVar)
 
 }
 
@@ -566,7 +566,7 @@ func (x *ObjectClass) OverrideProperty(PropertyIdVar uint, NameVar string) {
 //	set. The first thing a @constructor implementation must do is chain up to the
 //	@constructor of the parent class. Overriding @constructor should be rarely
 //	needed, e.g. to handle construct properties, or to implement singletons.
-func (x *ObjectClass) OverrideConstructor(cb func(types.GType, uint, *ObjectConstructParam) *Object) {
+func (x *ObjectClassGType) OverrideConstructor(cb func(types.GType, uint, *ObjectConstructParam) *Object) {
 	if cb == nil {
 		x.xConstructor = 0
 	} else {
@@ -587,7 +587,7 @@ func (x *ObjectClass) OverrideConstructor(cb func(types.GType, uint, *ObjectCons
 //	set. The first thing a @constructor implementation must do is chain up to the
 //	@constructor of the parent class. Overriding @constructor should be rarely
 //	needed, e.g. to handle construct properties, or to implement singletons.
-func (x *ObjectClass) GetConstructor() func(types.GType, uint, *ObjectConstructParam) *Object {
+func (x *ObjectClassGType) GetConstructor() func(types.GType, uint, *ObjectConstructParam) *Object {
 	if x.xConstructor == 0 {
 		return nil
 	}
@@ -606,7 +606,7 @@ func (x *ObjectClass) GetConstructor() func(types.GType, uint, *ObjectConstructP
 
 // OverrideSetProperty sets the "set_property" callback function.
 // The type of the @set_property function of #GObjectClass.
-func (x *ObjectClass) OverrideSetProperty(cb func(*Object, uint, *Value, *ParamSpec)) {
+func (x *ObjectClassGType) OverrideSetProperty(cb func(*Object, uint, *Value, *ParamSpec)) {
 	if cb == nil {
 		x.xSetProperty = 0
 	} else {
@@ -618,7 +618,7 @@ func (x *ObjectClass) OverrideSetProperty(cb func(*Object, uint, *Value, *ParamS
 
 // GetSetProperty gets the "set_property" callback function.
 // The type of the @set_property function of #GObjectClass.
-func (x *ObjectClass) GetSetProperty() func(*Object, uint, *Value, *ParamSpec) {
+func (x *ObjectClassGType) GetSetProperty() func(*Object, uint, *Value, *ParamSpec) {
 	if x.xSetProperty == 0 {
 		return nil
 	}
@@ -631,7 +631,7 @@ func (x *ObjectClass) GetSetProperty() func(*Object, uint, *Value, *ParamSpec) {
 
 // OverrideGetProperty sets the "get_property" callback function.
 // The type of the @get_property function of #GObjectClass.
-func (x *ObjectClass) OverrideGetProperty(cb func(*Object, uint, *Value, *ParamSpec)) {
+func (x *ObjectClassGType) OverrideGetProperty(cb func(*Object, uint, *Value, *ParamSpec)) {
 	if cb == nil {
 		x.xGetProperty = 0
 	} else {
@@ -643,7 +643,7 @@ func (x *ObjectClass) OverrideGetProperty(cb func(*Object, uint, *Value, *ParamS
 
 // GetGetProperty gets the "get_property" callback function.
 // The type of the @get_property function of #GObjectClass.
-func (x *ObjectClass) GetGetProperty() func(*Object, uint, *Value, *ParamSpec) {
+func (x *ObjectClassGType) GetGetProperty() func(*Object, uint, *Value, *ParamSpec) {
 	if x.xGetProperty == 0 {
 		return nil
 	}
@@ -661,7 +661,7 @@ func (x *ObjectClass) GetGetProperty() func(*Object, uint, *Value, *ParamSpec) {
 //	invocations still work. It may be run multiple times (due to reference
 //	loops). Before returning, @dispose should chain up to the @dispose method
 //	of the parent class.
-func (x *ObjectClass) OverrideDispose(cb func(*Object)) {
+func (x *ObjectClassGType) OverrideDispose(cb func(*Object)) {
 	if cb == nil {
 		x.xDispose = 0
 	} else {
@@ -678,7 +678,7 @@ func (x *ObjectClass) OverrideDispose(cb func(*Object)) {
 //	invocations still work. It may be run multiple times (due to reference
 //	loops). Before returning, @dispose should chain up to the @dispose method
 //	of the parent class.
-func (x *ObjectClass) GetDispose() func(*Object) {
+func (x *ObjectClassGType) GetDispose() func(*Object) {
 	if x.xDispose == 0 {
 		return nil
 	}
@@ -691,7 +691,7 @@ func (x *ObjectClass) GetDispose() func(*Object) {
 
 // OverrideFinalize sets the "finalize" callback function.
 // The type of the @finalize function of #GObjectClass.
-func (x *ObjectClass) OverrideFinalize(cb func(*Object)) {
+func (x *ObjectClassGType) OverrideFinalize(cb func(*Object)) {
 	if cb == nil {
 		x.xFinalize = 0
 	} else {
@@ -703,7 +703,7 @@ func (x *ObjectClass) OverrideFinalize(cb func(*Object)) {
 
 // GetFinalize gets the "finalize" callback function.
 // The type of the @finalize function of #GObjectClass.
-func (x *ObjectClass) GetFinalize() func(*Object) {
+func (x *ObjectClassGType) GetFinalize() func(*Object) {
 	if x.xFinalize == 0 {
 		return nil
 	}
@@ -719,7 +719,7 @@ func (x *ObjectClass) GetFinalize() func(*Object) {
 //
 //	of properties. Overriding @dispatch_properties_changed should be rarely
 //	needed.
-func (x *ObjectClass) OverrideDispatchPropertiesChanged(cb func(*Object, uint, **ParamSpec)) {
+func (x *ObjectClassGType) OverrideDispatchPropertiesChanged(cb func(*Object, uint, **ParamSpec)) {
 	if cb == nil {
 		x.xDispatchPropertiesChanged = 0
 	} else {
@@ -734,7 +734,7 @@ func (x *ObjectClass) OverrideDispatchPropertiesChanged(cb func(*Object, uint, *
 //
 //	of properties. Overriding @dispatch_properties_changed should be rarely
 //	needed.
-func (x *ObjectClass) GetDispatchPropertiesChanged() func(*Object, uint, **ParamSpec) {
+func (x *ObjectClassGType) GetDispatchPropertiesChanged() func(*Object, uint, **ParamSpec) {
 	if x.xDispatchPropertiesChanged == 0 {
 		return nil
 	}
@@ -747,7 +747,7 @@ func (x *ObjectClass) GetDispatchPropertiesChanged() func(*Object, uint, **Param
 
 // OverrideNotify sets the "notify" callback function.
 // the class closure for the notify signal
-func (x *ObjectClass) OverrideNotify(cb func(*Object, *ParamSpec)) {
+func (x *ObjectClassGType) OverrideNotify(cb func(*Object, *ParamSpec)) {
 	if cb == nil {
 		x.xNotify = 0
 	} else {
@@ -759,7 +759,7 @@ func (x *ObjectClass) OverrideNotify(cb func(*Object, *ParamSpec)) {
 
 // GetNotify gets the "notify" callback function.
 // the class closure for the notify signal
-func (x *ObjectClass) GetNotify() func(*Object, *ParamSpec) {
+func (x *ObjectClassGType) GetNotify() func(*Object, *ParamSpec) {
 	if x.xNotify == 0 {
 		return nil
 	}
@@ -779,7 +779,7 @@ func (x *ObjectClass) GetNotify() func(*Object, *ParamSpec) {
 //	after construction properties have been set.  @constructed implementors
 //	should chain up to the @constructed call of their parent class to allow it
 //	to complete its initialisation.
-func (x *ObjectClass) OverrideConstructed(cb func(*Object)) {
+func (x *ObjectClassGType) OverrideConstructed(cb func(*Object)) {
 	if cb == nil {
 		x.xConstructed = 0
 	} else {
@@ -798,7 +798,7 @@ func (x *ObjectClass) OverrideConstructed(cb func(*Object)) {
 //	after construction properties have been set.  @constructed implementors
 //	should chain up to the @constructed call of their parent class to allow it
 //	to complete its initialisation.
-func (x *ObjectClass) GetConstructed() func(*Object) {
+func (x *ObjectClassGType) GetConstructed() func(*Object) {
 	if x.xConstructed == 0 {
 		return nil
 	}
@@ -2206,11 +2206,11 @@ func init() {
 	core.PuregoSafeRegister(&xClearObject, libs, "g_clear_object")
 	core.PuregoSafeRegister(&xSignalConnectObject, libs, "g_signal_connect_object")
 
-	core.PuregoSafeRegister(&xObjectClassFindProperty, libs, "g_object_class_find_property")
-	core.PuregoSafeRegister(&xObjectClassInstallProperties, libs, "g_object_class_install_properties")
-	core.PuregoSafeRegister(&xObjectClassInstallProperty, libs, "g_object_class_install_property")
-	core.PuregoSafeRegister(&xObjectClassListProperties, libs, "g_object_class_list_properties")
-	core.PuregoSafeRegister(&xObjectClassOverrideProperty, libs, "g_object_class_override_property")
+	core.PuregoSafeRegister(&xObjectClassGTypeFindProperty, libs, "g_object_class_find_property")
+	core.PuregoSafeRegister(&xObjectClassGTypeInstallProperties, libs, "g_object_class_install_properties")
+	core.PuregoSafeRegister(&xObjectClassGTypeInstallProperty, libs, "g_object_class_install_property")
+	core.PuregoSafeRegister(&xObjectClassGTypeListProperties, libs, "g_object_class_list_properties")
+	core.PuregoSafeRegister(&xObjectClassGTypeOverrideProperty, libs, "g_object_class_override_property")
 
 	core.PuregoSafeRegister(&xWeakRefClear, libs, "g_weak_ref_clear")
 	core.PuregoSafeRegister(&xWeakRefGet, libs, "g_weak_ref_get")

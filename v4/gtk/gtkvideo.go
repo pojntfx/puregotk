@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type VideoClass struct {
+type VideoClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 }
 
-func (x *VideoClass) GoPointer() uintptr {
+func (x *VideoClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

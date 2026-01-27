@@ -13,10 +13,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ComboBoxClass struct {
+type ComboBoxClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xChanged uintptr
 
@@ -27,13 +27,13 @@ type ComboBoxClass struct {
 	Padding [7]uintptr
 }
 
-func (x *ComboBoxClass) GoPointer() uintptr {
+func (x *ComboBoxClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideChanged sets the "changed" callback function.
 // Signal is emitted when the active item is changed.
-func (x *ComboBoxClass) OverrideChanged(cb func(*ComboBox)) {
+func (x *ComboBoxClassGType) OverrideChanged(cb func(*ComboBox)) {
 	if cb == nil {
 		x.xChanged = 0
 	} else {
@@ -45,7 +45,7 @@ func (x *ComboBoxClass) OverrideChanged(cb func(*ComboBox)) {
 
 // GetChanged gets the "changed" callback function.
 // Signal is emitted when the active item is changed.
-func (x *ComboBoxClass) GetChanged() func(*ComboBox) {
+func (x *ComboBoxClassGType) GetChanged() func(*ComboBox) {
 	if x.xChanged == 0 {
 		return nil
 	}
@@ -60,7 +60,7 @@ func (x *ComboBoxClass) GetChanged() func(*ComboBox) {
 // Signal which allows you to change how the text
 //
 //	displayed in a combo box’s entry is displayed.
-func (x *ComboBoxClass) OverrideFormatEntryText(cb func(*ComboBox, string) string) {
+func (x *ComboBoxClassGType) OverrideFormatEntryText(cb func(*ComboBox, string) string) {
 	if cb == nil {
 		x.xFormatEntryText = 0
 	} else {
@@ -74,7 +74,7 @@ func (x *ComboBoxClass) OverrideFormatEntryText(cb func(*ComboBox, string) strin
 // Signal which allows you to change how the text
 //
 //	displayed in a combo box’s entry is displayed.
-func (x *ComboBoxClass) GetFormatEntryText() func(*ComboBox, string) string {
+func (x *ComboBoxClassGType) GetFormatEntryText() func(*ComboBox, string) string {
 	if x.xFormatEntryText == 0 {
 		return nil
 	}
@@ -86,7 +86,7 @@ func (x *ComboBoxClass) GetFormatEntryText() func(*ComboBox, string) string {
 }
 
 // OverrideActivate sets the "activate" callback function.
-func (x *ComboBoxClass) OverrideActivate(cb func(*ComboBox)) {
+func (x *ComboBoxClassGType) OverrideActivate(cb func(*ComboBox)) {
 	if cb == nil {
 		x.xActivate = 0
 	} else {
@@ -97,7 +97,7 @@ func (x *ComboBoxClass) OverrideActivate(cb func(*ComboBox)) {
 }
 
 // GetActivate gets the "activate" callback function.
-func (x *ComboBoxClass) GetActivate() func(*ComboBox) {
+func (x *ComboBoxClassGType) GetActivate() func(*ComboBox) {
 	if x.xActivate == 0 {
 		return nil
 	}

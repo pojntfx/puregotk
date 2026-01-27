@@ -14,7 +14,7 @@ import (
 
 // Contains methods to let `GtkBuilder` construct an object from
 // a `GtkBuilder` UI definition.
-type BuildableIface struct {
+type BuildableIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -40,7 +40,7 @@ type BuildableIface struct {
 	xGetInternalChild uintptr
 }
 
-func (x *BuildableIface) GoPointer() uintptr {
+func (x *BuildableIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -50,7 +50,7 @@ func (x *BuildableIface) GoPointer() uintptr {
 //	`GtkWidget` stores the name as object data. Implement this method if your
 //	object has some notion of “ID” and it makes sense to map the XML id
 //	attribute to it.
-func (x *BuildableIface) OverrideSetId(cb func(Buildable, string)) {
+func (x *BuildableIfaceGType) OverrideSetId(cb func(Buildable, string)) {
 	if cb == nil {
 		x.xSetId = 0
 	} else {
@@ -66,7 +66,7 @@ func (x *BuildableIface) OverrideSetId(cb func(Buildable, string)) {
 //	`GtkWidget` stores the name as object data. Implement this method if your
 //	object has some notion of “ID” and it makes sense to map the XML id
 //	attribute to it.
-func (x *BuildableIface) GetSetId() func(Buildable, string) {
+func (x *BuildableIfaceGType) GetSetId() func(Buildable, string) {
 	if x.xSetId == 0 {
 		return nil
 	}
@@ -81,7 +81,7 @@ func (x *BuildableIface) GetSetId() func(Buildable, string) {
 // The getter corresponding to @set_id. Implement this
 //
 //	if you implement @set_id.
-func (x *BuildableIface) OverrideGetId(cb func(Buildable) string) {
+func (x *BuildableIfaceGType) OverrideGetId(cb func(Buildable) string) {
 	if cb == nil {
 		x.xGetId = 0
 	} else {
@@ -95,7 +95,7 @@ func (x *BuildableIface) OverrideGetId(cb func(Buildable) string) {
 // The getter corresponding to @set_id. Implement this
 //
 //	if you implement @set_id.
-func (x *BuildableIface) GetGetId() func(Buildable) string {
+func (x *BuildableIfaceGType) GetGetId() func(Buildable) string {
 	if x.xGetId == 0 {
 		return nil
 	}
@@ -113,7 +113,7 @@ func (x *BuildableIface) GetGetId() func(Buildable) string {
 //	to add event controllers to the widget, `GtkNotebook` uses
 //	the @type to distinguish between page labels (of type "page-label")
 //	and normal children.
-func (x *BuildableIface) OverrideAddChild(cb func(Buildable, *Builder, *gobject.Object, string)) {
+func (x *BuildableIfaceGType) OverrideAddChild(cb func(Buildable, *Builder, *gobject.Object, string)) {
 	if cb == nil {
 		x.xAddChild = 0
 	} else {
@@ -130,7 +130,7 @@ func (x *BuildableIface) OverrideAddChild(cb func(Buildable, *Builder, *gobject.
 //	to add event controllers to the widget, `GtkNotebook` uses
 //	the @type to distinguish between page labels (of type "page-label")
 //	and normal children.
-func (x *BuildableIface) GetAddChild() func(Buildable, *Builder, *gobject.Object, string) {
+func (x *BuildableIfaceGType) GetAddChild() func(Buildable, *Builder, *gobject.Object, string) {
 	if x.xAddChild == 0 {
 		return nil
 	}
@@ -148,7 +148,7 @@ func (x *BuildableIface) GetAddChild() func(Buildable, *Builder, *gobject.Object
 //	is used by default. `GtkWindow` implements this to delay showing itself
 //	(i.e. setting the [property@Gtk.Widget:visible] property) until the whole
 //	interface is created.
-func (x *BuildableIface) OverrideSetBuildableProperty(cb func(Buildable, *Builder, string, *gobject.Value)) {
+func (x *BuildableIfaceGType) OverrideSetBuildableProperty(cb func(Buildable, *Builder, string, *gobject.Value)) {
 	if cb == nil {
 		x.xSetBuildableProperty = 0
 	} else {
@@ -165,7 +165,7 @@ func (x *BuildableIface) OverrideSetBuildableProperty(cb func(Buildable, *Builde
 //	is used by default. `GtkWindow` implements this to delay showing itself
 //	(i.e. setting the [property@Gtk.Widget:visible] property) until the whole
 //	interface is created.
-func (x *BuildableIface) GetSetBuildableProperty() func(Buildable, *Builder, string, *gobject.Value) {
+func (x *BuildableIfaceGType) GetSetBuildableProperty() func(Buildable, *Builder, string, *gobject.Value) {
 	if x.xSetBuildableProperty == 0 {
 		return nil
 	}
@@ -183,7 +183,7 @@ func (x *BuildableIface) GetSetBuildableProperty() func(Buildable, *Builder, str
 //	reference a widget created in a `&lt;ui&gt;` tag which is outside
 //	of the normal GtkBuilder UI definition hierarchy.  A reference to the
 //	constructed object is returned and becomes owned by the caller.
-func (x *BuildableIface) OverrideConstructChild(cb func(Buildable, *Builder, string) *gobject.Object) {
+func (x *BuildableIfaceGType) OverrideConstructChild(cb func(Buildable, *Builder, string) *gobject.Object) {
 	if cb == nil {
 		x.xConstructChild = 0
 	} else {
@@ -204,7 +204,7 @@ func (x *BuildableIface) OverrideConstructChild(cb func(Buildable, *Builder, str
 //	reference a widget created in a `&lt;ui&gt;` tag which is outside
 //	of the normal GtkBuilder UI definition hierarchy.  A reference to the
 //	constructed object is returned and becomes owned by the caller.
-func (x *BuildableIface) GetConstructChild() func(Buildable, *Builder, string) *gobject.Object {
+func (x *BuildableIfaceGType) GetConstructChild() func(Buildable, *Builder, string) *gobject.Object {
 	if x.xConstructChild == 0 {
 		return nil
 	}
@@ -229,7 +229,7 @@ func (x *BuildableIface) GetConstructChild() func(Buildable, *Builder, string) *
 //	`GtkWidget` implements this to parse accessible attributes specified
 //	in `&lt;accessibility&gt;` elements.
 //	Note that @user_data must be freed in @custom_tag_end or @custom_finished.
-func (x *BuildableIface) OverrideCustomTagStart(cb func(Buildable, *Builder, *gobject.Object, string, *BuildableParser, *uintptr) bool) {
+func (x *BuildableIfaceGType) OverrideCustomTagStart(cb func(Buildable, *Builder, *gobject.Object, string, *BuildableParser, *uintptr) bool) {
 	if cb == nil {
 		x.xCustomTagStart = 0
 	} else {
@@ -247,7 +247,7 @@ func (x *BuildableIface) OverrideCustomTagStart(cb func(Buildable, *Builder, *go
 //	`GtkWidget` implements this to parse accessible attributes specified
 //	in `&lt;accessibility&gt;` elements.
 //	Note that @user_data must be freed in @custom_tag_end or @custom_finished.
-func (x *BuildableIface) GetCustomTagStart() func(Buildable, *Builder, *gobject.Object, string, *BuildableParser, *uintptr) bool {
+func (x *BuildableIfaceGType) GetCustomTagStart() func(Buildable, *Builder, *gobject.Object, string, *BuildableParser, *uintptr) bool {
 	if x.xCustomTagStart == 0 {
 		return nil
 	}
@@ -262,7 +262,7 @@ func (x *BuildableIface) GetCustomTagStart() func(Buildable, *Builder, *gobject.
 // Called for the end tag of each custom element that is
 //
 //	handled by the buildable (see @custom_tag_start).
-func (x *BuildableIface) OverrideCustomTagEnd(cb func(Buildable, *Builder, *gobject.Object, string, uintptr)) {
+func (x *BuildableIfaceGType) OverrideCustomTagEnd(cb func(Buildable, *Builder, *gobject.Object, string, uintptr)) {
 	if cb == nil {
 		x.xCustomTagEnd = 0
 	} else {
@@ -276,7 +276,7 @@ func (x *BuildableIface) OverrideCustomTagEnd(cb func(Buildable, *Builder, *gobj
 // Called for the end tag of each custom element that is
 //
 //	handled by the buildable (see @custom_tag_start).
-func (x *BuildableIface) GetCustomTagEnd() func(Buildable, *Builder, *gobject.Object, string, uintptr) {
+func (x *BuildableIfaceGType) GetCustomTagEnd() func(Buildable, *Builder, *gobject.Object, string, uintptr) {
 	if x.xCustomTagEnd == 0 {
 		return nil
 	}
@@ -291,7 +291,7 @@ func (x *BuildableIface) GetCustomTagEnd() func(Buildable, *Builder, *gobject.Ob
 // Called for each custom tag handled by the buildable
 //
 //	when the builder finishes parsing (see @custom_tag_start)
-func (x *BuildableIface) OverrideCustomFinished(cb func(Buildable, *Builder, *gobject.Object, string, uintptr)) {
+func (x *BuildableIfaceGType) OverrideCustomFinished(cb func(Buildable, *Builder, *gobject.Object, string, uintptr)) {
 	if cb == nil {
 		x.xCustomFinished = 0
 	} else {
@@ -305,7 +305,7 @@ func (x *BuildableIface) OverrideCustomFinished(cb func(Buildable, *Builder, *go
 // Called for each custom tag handled by the buildable
 //
 //	when the builder finishes parsing (see @custom_tag_start)
-func (x *BuildableIface) GetCustomFinished() func(Buildable, *Builder, *gobject.Object, string, uintptr) {
+func (x *BuildableIfaceGType) GetCustomFinished() func(Buildable, *Builder, *gobject.Object, string, uintptr) {
 	if x.xCustomFinished == 0 {
 		return nil
 	}
@@ -322,7 +322,7 @@ func (x *BuildableIface) GetCustomFinished() func(Buildable, *Builder, *gobject.
 //	of a UI definition. It is normally not necessary to implement this,
 //	unless you need to perform special cleanup actions. `GtkWindow` sets
 //	the `GtkWidget:visible` property here.
-func (x *BuildableIface) OverrideParserFinished(cb func(Buildable, *Builder)) {
+func (x *BuildableIfaceGType) OverrideParserFinished(cb func(Buildable, *Builder)) {
 	if cb == nil {
 		x.xParserFinished = 0
 	} else {
@@ -338,7 +338,7 @@ func (x *BuildableIface) OverrideParserFinished(cb func(Buildable, *Builder)) {
 //	of a UI definition. It is normally not necessary to implement this,
 //	unless you need to perform special cleanup actions. `GtkWindow` sets
 //	the `GtkWidget:visible` property here.
-func (x *BuildableIface) GetParserFinished() func(Buildable, *Builder) {
+func (x *BuildableIfaceGType) GetParserFinished() func(Buildable, *Builder) {
 	if x.xParserFinished == 0 {
 		return nil
 	}
@@ -356,7 +356,7 @@ func (x *BuildableIface) GetParserFinished() func(Buildable, *Builder) {
 //	it possible to add children to the vbox in a UI definition.
 //	Implement this if the buildable has internal children that may
 //	need to be accessed from a UI definition.
-func (x *BuildableIface) OverrideGetInternalChild(cb func(Buildable, *Builder, string) *gobject.Object) {
+func (x *BuildableIfaceGType) OverrideGetInternalChild(cb func(Buildable, *Builder, string) *gobject.Object) {
 	if cb == nil {
 		x.xGetInternalChild = 0
 	} else {
@@ -377,7 +377,7 @@ func (x *BuildableIface) OverrideGetInternalChild(cb func(Buildable, *Builder, s
 //	it possible to add children to the vbox in a UI definition.
 //	Implement this if the buildable has internal children that may
 //	need to be accessed from a UI definition.
-func (x *BuildableIface) GetGetInternalChild() func(Buildable, *Builder, string) *gobject.Object {
+func (x *BuildableIfaceGType) GetGetInternalChild() func(Buildable, *Builder, string) *gobject.Object {
 	if x.xGetInternalChild == 0 {
 		return nil
 	}
@@ -418,7 +418,7 @@ func (x *BuildableParseContext) GetElement() string {
 	return cret
 }
 
-var xBuildableParseContextGetElementStack func(uintptr) []string
+var xBuildableParseContextGetElementStack func(uintptr) uintptr
 
 // Retrieves the element stack from the internal state of the parser.
 //
@@ -431,7 +431,7 @@ var xBuildableParseContextGetElementStack func(uintptr) []string
 // end_element handlers where gtk_buildable_parse_context_get_element()
 // would merely return the name of the element that is being
 // processed.
-func (x *BuildableParseContext) GetElementStack() []string {
+func (x *BuildableParseContext) GetElementStack() uintptr {
 
 	cret := xBuildableParseContextGetElementStack(x.GoPointer())
 	return cret

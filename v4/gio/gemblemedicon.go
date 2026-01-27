@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type EmblemedIconClass struct {
+type EmblemedIconClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *EmblemedIconClass) GoPointer() uintptr {
+func (x *EmblemedIconClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

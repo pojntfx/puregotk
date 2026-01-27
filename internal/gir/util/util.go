@@ -98,6 +98,7 @@ func AddNamespace(val, ns string) string {
 
 // NormalizeNamespace converts a type to one that always includes a lowercase namespace
 // if no namespace is found, it adds `ns`, unless if strip is True then namespaces always equaling `ns` will be removed
+// Type names with underscores are converted to CamelCase (e.g., Property_Class -> PropertyClass)
 func NormalizeNamespace(ns string, gotype string, strip bool) string {
 	if ns == "" {
 		return ""
@@ -108,6 +109,11 @@ func NormalizeNamespace(ns string, gotype string, strip bool) string {
 		splt = append([]string{ns}, splt...)
 	}
 	splt[0] = strings.ToLower(splt[0])
+	// Convert type name with underscores to CamelCase, but only if it contains an underscore
+	// This preserves lowercase primitive types like "interface" while fixing names like "Property_Class"
+	if len(splt) > 1 && strings.Contains(splt[len(splt)-1], "_") {
+		splt[len(splt)-1] = SnakeToCamel(splt[len(splt)-1])
+	}
 	if strip && splt[0] == strings.ToLower(ns) {
 		splt = splt[1:]
 	}

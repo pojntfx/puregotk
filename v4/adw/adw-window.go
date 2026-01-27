@@ -15,15 +15,15 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type WindowClass struct {
+type WindowClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WindowClass
+	ParentClass gtk.WindowClassGType
 
 	Padding [4]uintptr
 }
 
-func (x *WindowClass) GoPointer() uintptr {
+func (x *WindowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

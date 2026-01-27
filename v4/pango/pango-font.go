@@ -13,10 +13,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type FontClass struct {
+type FontClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xDescribe uintptr
 
@@ -35,12 +35,12 @@ type FontClass struct {
 	xCreateHbFont uintptr
 }
 
-func (x *FontClass) GoPointer() uintptr {
+func (x *FontClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideDescribe sets the "describe" callback function.
-func (x *FontClass) OverrideDescribe(cb func(*Font) *FontDescription) {
+func (x *FontClassGType) OverrideDescribe(cb func(*Font) *FontDescription) {
 	if cb == nil {
 		x.xDescribe = 0
 	} else {
@@ -51,7 +51,7 @@ func (x *FontClass) OverrideDescribe(cb func(*Font) *FontDescription) {
 }
 
 // GetDescribe gets the "describe" callback function.
-func (x *FontClass) GetDescribe() func(*Font) *FontDescription {
+func (x *FontClassGType) GetDescribe() func(*Font) *FontDescription {
 	if x.xDescribe == 0 {
 		return nil
 	}
@@ -63,7 +63,7 @@ func (x *FontClass) GetDescribe() func(*Font) *FontDescription {
 }
 
 // OverrideGetCoverage sets the "get_coverage" callback function.
-func (x *FontClass) OverrideGetCoverage(cb func(*Font, *Language) *Coverage) {
+func (x *FontClassGType) OverrideGetCoverage(cb func(*Font, *Language) *Coverage) {
 	if cb == nil {
 		x.xGetCoverage = 0
 	} else {
@@ -78,7 +78,7 @@ func (x *FontClass) OverrideGetCoverage(cb func(*Font, *Language) *Coverage) {
 }
 
 // GetGetCoverage gets the "get_coverage" callback function.
-func (x *FontClass) GetGetCoverage() func(*Font, *Language) *Coverage {
+func (x *FontClassGType) GetGetCoverage() func(*Font, *Language) *Coverage {
 	if x.xGetCoverage == 0 {
 		return nil
 	}
@@ -96,7 +96,7 @@ func (x *FontClass) GetGetCoverage() func(*Font, *Language) *Coverage {
 }
 
 // OverrideGetGlyphExtents sets the "get_glyph_extents" callback function.
-func (x *FontClass) OverrideGetGlyphExtents(cb func(*Font, Glyph, *Rectangle, *Rectangle)) {
+func (x *FontClassGType) OverrideGetGlyphExtents(cb func(*Font, Glyph, *Rectangle, *Rectangle)) {
 	if cb == nil {
 		x.xGetGlyphExtents = 0
 	} else {
@@ -107,7 +107,7 @@ func (x *FontClass) OverrideGetGlyphExtents(cb func(*Font, Glyph, *Rectangle, *R
 }
 
 // GetGetGlyphExtents gets the "get_glyph_extents" callback function.
-func (x *FontClass) GetGetGlyphExtents() func(*Font, Glyph, *Rectangle, *Rectangle) {
+func (x *FontClassGType) GetGetGlyphExtents() func(*Font, Glyph, *Rectangle, *Rectangle) {
 	if x.xGetGlyphExtents == 0 {
 		return nil
 	}
@@ -119,7 +119,7 @@ func (x *FontClass) GetGetGlyphExtents() func(*Font, Glyph, *Rectangle, *Rectang
 }
 
 // OverrideGetMetrics sets the "get_metrics" callback function.
-func (x *FontClass) OverrideGetMetrics(cb func(*Font, *Language) *FontMetrics) {
+func (x *FontClassGType) OverrideGetMetrics(cb func(*Font, *Language) *FontMetrics) {
 	if cb == nil {
 		x.xGetMetrics = 0
 	} else {
@@ -130,7 +130,7 @@ func (x *FontClass) OverrideGetMetrics(cb func(*Font, *Language) *FontMetrics) {
 }
 
 // GetGetMetrics gets the "get_metrics" callback function.
-func (x *FontClass) GetGetMetrics() func(*Font, *Language) *FontMetrics {
+func (x *FontClassGType) GetGetMetrics() func(*Font, *Language) *FontMetrics {
 	if x.xGetMetrics == 0 {
 		return nil
 	}
@@ -142,7 +142,7 @@ func (x *FontClass) GetGetMetrics() func(*Font, *Language) *FontMetrics {
 }
 
 // OverrideGetFontMap sets the "get_font_map" callback function.
-func (x *FontClass) OverrideGetFontMap(cb func(*Font) *FontMap) {
+func (x *FontClassGType) OverrideGetFontMap(cb func(*Font) *FontMap) {
 	if cb == nil {
 		x.xGetFontMap = 0
 	} else {
@@ -157,7 +157,7 @@ func (x *FontClass) OverrideGetFontMap(cb func(*Font) *FontMap) {
 }
 
 // GetGetFontMap gets the "get_font_map" callback function.
-func (x *FontClass) GetGetFontMap() func(*Font) *FontMap {
+func (x *FontClassGType) GetGetFontMap() func(*Font) *FontMap {
 	if x.xGetFontMap == 0 {
 		return nil
 	}
@@ -175,7 +175,7 @@ func (x *FontClass) GetGetFontMap() func(*Font) *FontMap {
 }
 
 // OverrideDescribeAbsolute sets the "describe_absolute" callback function.
-func (x *FontClass) OverrideDescribeAbsolute(cb func(*Font) *FontDescription) {
+func (x *FontClassGType) OverrideDescribeAbsolute(cb func(*Font) *FontDescription) {
 	if cb == nil {
 		x.xDescribeAbsolute = 0
 	} else {
@@ -186,7 +186,7 @@ func (x *FontClass) OverrideDescribeAbsolute(cb func(*Font) *FontDescription) {
 }
 
 // GetDescribeAbsolute gets the "describe_absolute" callback function.
-func (x *FontClass) GetDescribeAbsolute() func(*Font) *FontDescription {
+func (x *FontClassGType) GetDescribeAbsolute() func(*Font) *FontDescription {
 	if x.xDescribeAbsolute == 0 {
 		return nil
 	}
@@ -198,7 +198,7 @@ func (x *FontClass) GetDescribeAbsolute() func(*Font) *FontDescription {
 }
 
 // OverrideGetFeatures sets the "get_features" callback function.
-func (x *FontClass) OverrideGetFeatures(cb func(*Font, *[]uintptr, uint, uint)) {
+func (x *FontClassGType) OverrideGetFeatures(cb func(*Font, *[]uintptr, uint, uint)) {
 	if cb == nil {
 		x.xGetFeatures = 0
 	} else {
@@ -209,7 +209,7 @@ func (x *FontClass) OverrideGetFeatures(cb func(*Font, *[]uintptr, uint, uint)) 
 }
 
 // GetGetFeatures gets the "get_features" callback function.
-func (x *FontClass) GetGetFeatures() func(*Font, *[]uintptr, uint, uint) {
+func (x *FontClassGType) GetGetFeatures() func(*Font, *[]uintptr, uint, uint) {
 	if x.xGetFeatures == 0 {
 		return nil
 	}
@@ -221,7 +221,7 @@ func (x *FontClass) GetGetFeatures() func(*Font, *[]uintptr, uint, uint) {
 }
 
 // OverrideCreateHbFont sets the "create_hb_font" callback function.
-func (x *FontClass) OverrideCreateHbFont(cb func(*Font) uintptr) {
+func (x *FontClassGType) OverrideCreateHbFont(cb func(*Font) uintptr) {
 	if cb == nil {
 		x.xCreateHbFont = 0
 	} else {
@@ -232,7 +232,7 @@ func (x *FontClass) OverrideCreateHbFont(cb func(*Font) uintptr) {
 }
 
 // GetCreateHbFont gets the "create_hb_font" callback function.
-func (x *FontClass) GetCreateHbFont() func(*Font) uintptr {
+func (x *FontClassGType) GetCreateHbFont() func(*Font) uintptr {
 	if x.xCreateHbFont == 0 {
 		return nil
 	}
@@ -780,10 +780,10 @@ func (x *FontDescription) UnsetFields(ToUnsetVar FontMask) {
 
 }
 
-type FontFaceClass struct {
+type FontFaceClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xGetFaceName uintptr
 
@@ -800,12 +800,12 @@ type FontFaceClass struct {
 	xPangoReserved4 uintptr
 }
 
-func (x *FontFaceClass) GoPointer() uintptr {
+func (x *FontFaceClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetFaceName sets the "get_face_name" callback function.
-func (x *FontFaceClass) OverrideGetFaceName(cb func(*FontFace) string) {
+func (x *FontFaceClassGType) OverrideGetFaceName(cb func(*FontFace) string) {
 	if cb == nil {
 		x.xGetFaceName = 0
 	} else {
@@ -816,7 +816,7 @@ func (x *FontFaceClass) OverrideGetFaceName(cb func(*FontFace) string) {
 }
 
 // GetGetFaceName gets the "get_face_name" callback function.
-func (x *FontFaceClass) GetGetFaceName() func(*FontFace) string {
+func (x *FontFaceClassGType) GetGetFaceName() func(*FontFace) string {
 	if x.xGetFaceName == 0 {
 		return nil
 	}
@@ -828,7 +828,7 @@ func (x *FontFaceClass) GetGetFaceName() func(*FontFace) string {
 }
 
 // OverrideDescribe sets the "describe" callback function.
-func (x *FontFaceClass) OverrideDescribe(cb func(*FontFace) *FontDescription) {
+func (x *FontFaceClassGType) OverrideDescribe(cb func(*FontFace) *FontDescription) {
 	if cb == nil {
 		x.xDescribe = 0
 	} else {
@@ -839,7 +839,7 @@ func (x *FontFaceClass) OverrideDescribe(cb func(*FontFace) *FontDescription) {
 }
 
 // GetDescribe gets the "describe" callback function.
-func (x *FontFaceClass) GetDescribe() func(*FontFace) *FontDescription {
+func (x *FontFaceClassGType) GetDescribe() func(*FontFace) *FontDescription {
 	if x.xDescribe == 0 {
 		return nil
 	}
@@ -851,7 +851,7 @@ func (x *FontFaceClass) GetDescribe() func(*FontFace) *FontDescription {
 }
 
 // OverrideListSizes sets the "list_sizes" callback function.
-func (x *FontFaceClass) OverrideListSizes(cb func(*FontFace, *[]int, *int)) {
+func (x *FontFaceClassGType) OverrideListSizes(cb func(*FontFace, *[]int, *int)) {
 	if cb == nil {
 		x.xListSizes = 0
 	} else {
@@ -862,7 +862,7 @@ func (x *FontFaceClass) OverrideListSizes(cb func(*FontFace, *[]int, *int)) {
 }
 
 // GetListSizes gets the "list_sizes" callback function.
-func (x *FontFaceClass) GetListSizes() func(*FontFace, *[]int, *int) {
+func (x *FontFaceClassGType) GetListSizes() func(*FontFace, *[]int, *int) {
 	if x.xListSizes == 0 {
 		return nil
 	}
@@ -874,7 +874,7 @@ func (x *FontFaceClass) GetListSizes() func(*FontFace, *[]int, *int) {
 }
 
 // OverrideIsSynthesized sets the "is_synthesized" callback function.
-func (x *FontFaceClass) OverrideIsSynthesized(cb func(*FontFace) bool) {
+func (x *FontFaceClassGType) OverrideIsSynthesized(cb func(*FontFace) bool) {
 	if cb == nil {
 		x.xIsSynthesized = 0
 	} else {
@@ -885,7 +885,7 @@ func (x *FontFaceClass) OverrideIsSynthesized(cb func(*FontFace) bool) {
 }
 
 // GetIsSynthesized gets the "is_synthesized" callback function.
-func (x *FontFaceClass) GetIsSynthesized() func(*FontFace) bool {
+func (x *FontFaceClassGType) GetIsSynthesized() func(*FontFace) bool {
 	if x.xIsSynthesized == 0 {
 		return nil
 	}
@@ -897,7 +897,7 @@ func (x *FontFaceClass) GetIsSynthesized() func(*FontFace) bool {
 }
 
 // OverrideGetFamily sets the "get_family" callback function.
-func (x *FontFaceClass) OverrideGetFamily(cb func(*FontFace) *FontFamily) {
+func (x *FontFaceClassGType) OverrideGetFamily(cb func(*FontFace) *FontFamily) {
 	if cb == nil {
 		x.xGetFamily = 0
 	} else {
@@ -912,7 +912,7 @@ func (x *FontFaceClass) OverrideGetFamily(cb func(*FontFace) *FontFamily) {
 }
 
 // GetGetFamily gets the "get_family" callback function.
-func (x *FontFaceClass) GetGetFamily() func(*FontFace) *FontFamily {
+func (x *FontFaceClassGType) GetGetFamily() func(*FontFace) *FontFamily {
 	if x.xGetFamily == 0 {
 		return nil
 	}
@@ -930,7 +930,7 @@ func (x *FontFaceClass) GetGetFamily() func(*FontFace) *FontFamily {
 }
 
 // OverridePangoReserved3 sets the "_pango_reserved3" callback function.
-func (x *FontFaceClass) OverridePangoReserved3(cb func()) {
+func (x *FontFaceClassGType) OverridePangoReserved3(cb func()) {
 	if cb == nil {
 		x.xPangoReserved3 = 0
 	} else {
@@ -941,7 +941,7 @@ func (x *FontFaceClass) OverridePangoReserved3(cb func()) {
 }
 
 // GetPangoReserved3 gets the "_pango_reserved3" callback function.
-func (x *FontFaceClass) GetPangoReserved3() func() {
+func (x *FontFaceClassGType) GetPangoReserved3() func() {
 	if x.xPangoReserved3 == 0 {
 		return nil
 	}
@@ -953,7 +953,7 @@ func (x *FontFaceClass) GetPangoReserved3() func() {
 }
 
 // OverridePangoReserved4 sets the "_pango_reserved4" callback function.
-func (x *FontFaceClass) OverridePangoReserved4(cb func()) {
+func (x *FontFaceClassGType) OverridePangoReserved4(cb func()) {
 	if cb == nil {
 		x.xPangoReserved4 = 0
 	} else {
@@ -964,7 +964,7 @@ func (x *FontFaceClass) OverridePangoReserved4(cb func()) {
 }
 
 // GetPangoReserved4 gets the "_pango_reserved4" callback function.
-func (x *FontFaceClass) GetPangoReserved4() func() {
+func (x *FontFaceClassGType) GetPangoReserved4() func() {
 	if x.xPangoReserved4 == 0 {
 		return nil
 	}
@@ -975,10 +975,10 @@ func (x *FontFaceClass) GetPangoReserved4() func() {
 	}
 }
 
-type FontFamilyClass struct {
+type FontFamilyClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xListFaces uintptr
 
@@ -993,12 +993,12 @@ type FontFamilyClass struct {
 	xPangoReserved2 uintptr
 }
 
-func (x *FontFamilyClass) GoPointer() uintptr {
+func (x *FontFamilyClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideListFaces sets the "list_faces" callback function.
-func (x *FontFamilyClass) OverrideListFaces(cb func(*FontFamily, *uintptr, *int)) {
+func (x *FontFamilyClassGType) OverrideListFaces(cb func(*FontFamily, *uintptr, *int)) {
 	if cb == nil {
 		x.xListFaces = 0
 	} else {
@@ -1009,7 +1009,7 @@ func (x *FontFamilyClass) OverrideListFaces(cb func(*FontFamily, *uintptr, *int)
 }
 
 // GetListFaces gets the "list_faces" callback function.
-func (x *FontFamilyClass) GetListFaces() func(*FontFamily, *uintptr, *int) {
+func (x *FontFamilyClassGType) GetListFaces() func(*FontFamily, *uintptr, *int) {
 	if x.xListFaces == 0 {
 		return nil
 	}
@@ -1021,7 +1021,7 @@ func (x *FontFamilyClass) GetListFaces() func(*FontFamily, *uintptr, *int) {
 }
 
 // OverrideGetName sets the "get_name" callback function.
-func (x *FontFamilyClass) OverrideGetName(cb func(*FontFamily) string) {
+func (x *FontFamilyClassGType) OverrideGetName(cb func(*FontFamily) string) {
 	if cb == nil {
 		x.xGetName = 0
 	} else {
@@ -1032,7 +1032,7 @@ func (x *FontFamilyClass) OverrideGetName(cb func(*FontFamily) string) {
 }
 
 // GetGetName gets the "get_name" callback function.
-func (x *FontFamilyClass) GetGetName() func(*FontFamily) string {
+func (x *FontFamilyClassGType) GetGetName() func(*FontFamily) string {
 	if x.xGetName == 0 {
 		return nil
 	}
@@ -1044,7 +1044,7 @@ func (x *FontFamilyClass) GetGetName() func(*FontFamily) string {
 }
 
 // OverrideIsMonospace sets the "is_monospace" callback function.
-func (x *FontFamilyClass) OverrideIsMonospace(cb func(*FontFamily) bool) {
+func (x *FontFamilyClassGType) OverrideIsMonospace(cb func(*FontFamily) bool) {
 	if cb == nil {
 		x.xIsMonospace = 0
 	} else {
@@ -1055,7 +1055,7 @@ func (x *FontFamilyClass) OverrideIsMonospace(cb func(*FontFamily) bool) {
 }
 
 // GetIsMonospace gets the "is_monospace" callback function.
-func (x *FontFamilyClass) GetIsMonospace() func(*FontFamily) bool {
+func (x *FontFamilyClassGType) GetIsMonospace() func(*FontFamily) bool {
 	if x.xIsMonospace == 0 {
 		return nil
 	}
@@ -1067,7 +1067,7 @@ func (x *FontFamilyClass) GetIsMonospace() func(*FontFamily) bool {
 }
 
 // OverrideIsVariable sets the "is_variable" callback function.
-func (x *FontFamilyClass) OverrideIsVariable(cb func(*FontFamily) bool) {
+func (x *FontFamilyClassGType) OverrideIsVariable(cb func(*FontFamily) bool) {
 	if cb == nil {
 		x.xIsVariable = 0
 	} else {
@@ -1078,7 +1078,7 @@ func (x *FontFamilyClass) OverrideIsVariable(cb func(*FontFamily) bool) {
 }
 
 // GetIsVariable gets the "is_variable" callback function.
-func (x *FontFamilyClass) GetIsVariable() func(*FontFamily) bool {
+func (x *FontFamilyClassGType) GetIsVariable() func(*FontFamily) bool {
 	if x.xIsVariable == 0 {
 		return nil
 	}
@@ -1090,7 +1090,7 @@ func (x *FontFamilyClass) GetIsVariable() func(*FontFamily) bool {
 }
 
 // OverrideGetFace sets the "get_face" callback function.
-func (x *FontFamilyClass) OverrideGetFace(cb func(*FontFamily, string) *FontFace) {
+func (x *FontFamilyClassGType) OverrideGetFace(cb func(*FontFamily, string) *FontFace) {
 	if cb == nil {
 		x.xGetFace = 0
 	} else {
@@ -1105,7 +1105,7 @@ func (x *FontFamilyClass) OverrideGetFace(cb func(*FontFamily, string) *FontFace
 }
 
 // GetGetFace gets the "get_face" callback function.
-func (x *FontFamilyClass) GetGetFace() func(*FontFamily, string) *FontFace {
+func (x *FontFamilyClassGType) GetGetFace() func(*FontFamily, string) *FontFace {
 	if x.xGetFace == 0 {
 		return nil
 	}
@@ -1123,7 +1123,7 @@ func (x *FontFamilyClass) GetGetFace() func(*FontFamily, string) *FontFace {
 }
 
 // OverridePangoReserved2 sets the "_pango_reserved2" callback function.
-func (x *FontFamilyClass) OverridePangoReserved2(cb func()) {
+func (x *FontFamilyClassGType) OverridePangoReserved2(cb func()) {
 	if cb == nil {
 		x.xPangoReserved2 = 0
 	} else {
@@ -1134,7 +1134,7 @@ func (x *FontFamilyClass) OverridePangoReserved2(cb func()) {
 }
 
 // GetPangoReserved2 gets the "_pango_reserved2" callback function.
-func (x *FontFamilyClass) GetPangoReserved2() func() {
+func (x *FontFamilyClassGType) GetPangoReserved2() func() {
 	if x.xPangoReserved2 == 0 {
 		return nil
 	}
@@ -1164,7 +1164,7 @@ func (x *FontFamilyClass) GetPangoReserved2() func() {
 type FontMetrics struct {
 	_ structs.HostLayout
 
-	RefCount uint
+	RefCount uint32
 
 	Ascent int
 

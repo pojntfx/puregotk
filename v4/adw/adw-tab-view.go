@@ -14,23 +14,23 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type TabPageClass struct {
+type TabPageClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *TabPageClass) GoPointer() uintptr {
+func (x *TabPageClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type TabViewClass struct {
+type TabViewClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *TabViewClass) GoPointer() uintptr {
+func (x *TabViewClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

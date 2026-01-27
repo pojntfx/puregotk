@@ -14,15 +14,15 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type ComboRowClass struct {
+type ComboRowClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass ActionRowClass
+	ParentClass ActionRowClassGType
 
 	Padding [4]uintptr
 }
 
-func (x *ComboRowClass) GoPointer() uintptr {
+func (x *ComboRowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

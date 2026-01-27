@@ -13,7 +13,7 @@ import (
 )
 
 // The virtual function table for #GProxyResolver.
-type ProxyResolverInterface struct {
+type ProxyResolverInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -27,13 +27,13 @@ type ProxyResolverInterface struct {
 	xLookupFinish uintptr
 }
 
-func (x *ProxyResolverInterface) GoPointer() uintptr {
+func (x *ProxyResolverInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideIsSupported sets the "is_supported" callback function.
 // the virtual function pointer for g_proxy_resolver_is_supported()
-func (x *ProxyResolverInterface) OverrideIsSupported(cb func(ProxyResolver) bool) {
+func (x *ProxyResolverInterfaceGType) OverrideIsSupported(cb func(ProxyResolver) bool) {
 	if cb == nil {
 		x.xIsSupported = 0
 	} else {
@@ -45,7 +45,7 @@ func (x *ProxyResolverInterface) OverrideIsSupported(cb func(ProxyResolver) bool
 
 // GetIsSupported gets the "is_supported" callback function.
 // the virtual function pointer for g_proxy_resolver_is_supported()
-func (x *ProxyResolverInterface) GetIsSupported() func(ProxyResolver) bool {
+func (x *ProxyResolverInterfaceGType) GetIsSupported() func(ProxyResolver) bool {
 	if x.xIsSupported == 0 {
 		return nil
 	}
@@ -58,7 +58,7 @@ func (x *ProxyResolverInterface) GetIsSupported() func(ProxyResolver) bool {
 
 // OverrideLookup sets the "lookup" callback function.
 // the virtual function pointer for g_proxy_resolver_lookup()
-func (x *ProxyResolverInterface) OverrideLookup(cb func(ProxyResolver, string, *Cancellable) []string) {
+func (x *ProxyResolverInterfaceGType) OverrideLookup(cb func(ProxyResolver, string, *Cancellable) []string) {
 	if cb == nil {
 		x.xLookup = 0
 	} else {
@@ -70,7 +70,7 @@ func (x *ProxyResolverInterface) OverrideLookup(cb func(ProxyResolver, string, *
 
 // GetLookup gets the "lookup" callback function.
 // the virtual function pointer for g_proxy_resolver_lookup()
-func (x *ProxyResolverInterface) GetLookup() func(ProxyResolver, string, *Cancellable) []string {
+func (x *ProxyResolverInterfaceGType) GetLookup() func(ProxyResolver, string, *Cancellable) []string {
 	if x.xLookup == 0 {
 		return nil
 	}
@@ -85,7 +85,7 @@ func (x *ProxyResolverInterface) GetLookup() func(ProxyResolver, string, *Cancel
 // the virtual function pointer for
 //
 //	g_proxy_resolver_lookup_async()
-func (x *ProxyResolverInterface) OverrideLookupAsync(cb func(ProxyResolver, string, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *ProxyResolverInterfaceGType) OverrideLookupAsync(cb func(ProxyResolver, string, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xLookupAsync = 0
 	} else {
@@ -99,7 +99,7 @@ func (x *ProxyResolverInterface) OverrideLookupAsync(cb func(ProxyResolver, stri
 // the virtual function pointer for
 //
 //	g_proxy_resolver_lookup_async()
-func (x *ProxyResolverInterface) GetLookupAsync() func(ProxyResolver, string, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *ProxyResolverInterfaceGType) GetLookupAsync() func(ProxyResolver, string, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xLookupAsync == 0 {
 		return nil
 	}
@@ -114,7 +114,7 @@ func (x *ProxyResolverInterface) GetLookupAsync() func(ProxyResolver, string, *C
 // the virtual function pointer for
 //
 //	g_proxy_resolver_lookup_finish()
-func (x *ProxyResolverInterface) OverrideLookupFinish(cb func(ProxyResolver, AsyncResult) []string) {
+func (x *ProxyResolverInterfaceGType) OverrideLookupFinish(cb func(ProxyResolver, AsyncResult) []string) {
 	if cb == nil {
 		x.xLookupFinish = 0
 	} else {
@@ -128,7 +128,7 @@ func (x *ProxyResolverInterface) OverrideLookupFinish(cb func(ProxyResolver, Asy
 // the virtual function pointer for
 //
 //	g_proxy_resolver_lookup_finish()
-func (x *ProxyResolverInterface) GetLookupFinish() func(ProxyResolver, AsyncResult) []string {
+func (x *ProxyResolverInterfaceGType) GetLookupFinish() func(ProxyResolver, AsyncResult) []string {
 	if x.xLookupFinish == 0 {
 		return nil
 	}

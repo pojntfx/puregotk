@@ -14,7 +14,7 @@ import (
 // GIconIface is used to implement GIcon types for various
 // different systems. See #GThemedIcon and #GLoadableIcon for
 // examples of how to implement this interface.
-type IconIface struct {
+type IconIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -30,13 +30,13 @@ type IconIface struct {
 	xSerialize uintptr
 }
 
-func (x *IconIface) GoPointer() uintptr {
+func (x *IconIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideHash sets the "hash" callback function.
 // A hash for a given #GIcon.
-func (x *IconIface) OverrideHash(cb func(Icon) uint) {
+func (x *IconIfaceGType) OverrideHash(cb func(Icon) uint) {
 	if cb == nil {
 		x.xHash = 0
 	} else {
@@ -48,7 +48,7 @@ func (x *IconIface) OverrideHash(cb func(Icon) uint) {
 
 // GetHash gets the "hash" callback function.
 // A hash for a given #GIcon.
-func (x *IconIface) GetHash() func(Icon) uint {
+func (x *IconIfaceGType) GetHash() func(Icon) uint {
 	if x.xHash == 0 {
 		return nil
 	}
@@ -61,7 +61,7 @@ func (x *IconIface) GetHash() func(Icon) uint {
 
 // OverrideEqual sets the "equal" callback function.
 // Checks if two #GIcons are equal.
-func (x *IconIface) OverrideEqual(cb func(Icon, Icon) bool) {
+func (x *IconIfaceGType) OverrideEqual(cb func(Icon, Icon) bool) {
 	if cb == nil {
 		x.xEqual = 0
 	} else {
@@ -73,7 +73,7 @@ func (x *IconIface) OverrideEqual(cb func(Icon, Icon) bool) {
 
 // GetEqual gets the "equal" callback function.
 // Checks if two #GIcons are equal.
-func (x *IconIface) GetEqual() func(Icon, Icon) bool {
+func (x *IconIfaceGType) GetEqual() func(Icon, Icon) bool {
 	if x.xEqual == 0 {
 		return nil
 	}
@@ -88,11 +88,11 @@ func (x *IconIface) GetEqual() func(Icon, Icon) bool {
 // Serializes a #GIcon into tokens. The tokens must not
 // contain any whitespace. Don't implement if the #GIcon can't be
 // serialized (Since 2.20).
-func (x *IconIface) OverrideToTokens(cb func(Icon, *[]string, *int) bool) {
+func (x *IconIfaceGType) OverrideToTokens(cb func(Icon, *uintptr, *int) bool) {
 	if cb == nil {
 		x.xToTokens = 0
 	} else {
-		x.xToTokens = purego.NewCallback(func(IconVarp uintptr, TokensVarp *[]string, OutVersionVarp *int) bool {
+		x.xToTokens = purego.NewCallback(func(IconVarp uintptr, TokensVarp *uintptr, OutVersionVarp *int) bool {
 			return cb(&IconBase{Ptr: IconVarp}, TokensVarp, OutVersionVarp)
 		})
 	}
@@ -102,13 +102,13 @@ func (x *IconIface) OverrideToTokens(cb func(Icon, *[]string, *int) bool) {
 // Serializes a #GIcon into tokens. The tokens must not
 // contain any whitespace. Don't implement if the #GIcon can't be
 // serialized (Since 2.20).
-func (x *IconIface) GetToTokens() func(Icon, *[]string, *int) bool {
+func (x *IconIfaceGType) GetToTokens() func(Icon, *uintptr, *int) bool {
 	if x.xToTokens == 0 {
 		return nil
 	}
-	var rawCallback func(IconVarp uintptr, TokensVarp *[]string, OutVersionVarp *int) bool
+	var rawCallback func(IconVarp uintptr, TokensVarp *uintptr, OutVersionVarp *int) bool
 	purego.RegisterFunc(&rawCallback, x.xToTokens)
-	return func(IconVar Icon, TokensVar *[]string, OutVersionVar *int) bool {
+	return func(IconVar Icon, TokensVar *uintptr, OutVersionVar *int) bool {
 		return rawCallback(IconVar.GoPointer(), TokensVar, OutVersionVar)
 	}
 }
@@ -117,7 +117,7 @@ func (x *IconIface) GetToTokens() func(Icon, *[]string, *int) bool {
 // Constructs a #GIcon from tokens. Set the #GError if
 // the tokens are malformed. Don't implement if the #GIcon can't be
 // serialized (Since 2.20).
-func (x *IconIface) OverrideFromTokens(cb func(string, int, int) *IconBase) {
+func (x *IconIfaceGType) OverrideFromTokens(cb func(string, int, int) *IconBase) {
 	if cb == nil {
 		x.xFromTokens = 0
 	} else {
@@ -135,7 +135,7 @@ func (x *IconIface) OverrideFromTokens(cb func(string, int, int) *IconBase) {
 // Constructs a #GIcon from tokens. Set the #GError if
 // the tokens are malformed. Don't implement if the #GIcon can't be
 // serialized (Since 2.20).
-func (x *IconIface) GetFromTokens() func(string, int, int) *IconBase {
+func (x *IconIfaceGType) GetFromTokens() func(string, int, int) *IconBase {
 	if x.xFromTokens == 0 {
 		return nil
 	}
@@ -154,7 +154,7 @@ func (x *IconIface) GetFromTokens() func(string, int, int) *IconBase {
 
 // OverrideSerialize sets the "serialize" callback function.
 // Serializes a #GIcon into a #GVariant. Since: 2.38
-func (x *IconIface) OverrideSerialize(cb func(Icon) *glib.Variant) {
+func (x *IconIfaceGType) OverrideSerialize(cb func(Icon) *glib.Variant) {
 	if cb == nil {
 		x.xSerialize = 0
 	} else {
@@ -166,7 +166,7 @@ func (x *IconIface) OverrideSerialize(cb func(Icon) *glib.Variant) {
 
 // GetSerialize gets the "serialize" callback function.
 // Serializes a #GIcon into a #GVariant. Since: 2.38
-func (x *IconIface) GetSerialize() func(Icon) *glib.Variant {
+func (x *IconIfaceGType) GetSerialize() func(Icon) *glib.Variant {
 	if x.xSerialize == 0 {
 		return nil
 	}

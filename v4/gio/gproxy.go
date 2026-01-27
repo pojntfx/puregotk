@@ -12,7 +12,7 @@ import (
 )
 
 // Provides an interface for handling proxy connection and payload.
-type ProxyInterface struct {
+type ProxyInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -26,7 +26,7 @@ type ProxyInterface struct {
 	xSupportsHostname uintptr
 }
 
-func (x *ProxyInterface) GoPointer() uintptr {
+func (x *ProxyInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -34,7 +34,7 @@ func (x *ProxyInterface) GoPointer() uintptr {
 // Connect to proxy server and wrap (if required) the #connection
 //
 //	to handle payload.
-func (x *ProxyInterface) OverrideConnect(cb func(Proxy, *IOStream, *ProxyAddress, *Cancellable) *IOStream) {
+func (x *ProxyInterfaceGType) OverrideConnect(cb func(Proxy, *IOStream, *ProxyAddress, *Cancellable) *IOStream) {
 	if cb == nil {
 		x.xConnect = 0
 	} else {
@@ -52,7 +52,7 @@ func (x *ProxyInterface) OverrideConnect(cb func(Proxy, *IOStream, *ProxyAddress
 // Connect to proxy server and wrap (if required) the #connection
 //
 //	to handle payload.
-func (x *ProxyInterface) GetConnect() func(Proxy, *IOStream, *ProxyAddress, *Cancellable) *IOStream {
+func (x *ProxyInterfaceGType) GetConnect() func(Proxy, *IOStream, *ProxyAddress, *Cancellable) *IOStream {
 	if x.xConnect == 0 {
 		return nil
 	}
@@ -71,7 +71,7 @@ func (x *ProxyInterface) GetConnect() func(Proxy, *IOStream, *ProxyAddress, *Can
 
 // OverrideConnectAsync sets the "connect_async" callback function.
 // Same as connect() but asynchronous.
-func (x *ProxyInterface) OverrideConnectAsync(cb func(Proxy, *IOStream, *ProxyAddress, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *ProxyInterfaceGType) OverrideConnectAsync(cb func(Proxy, *IOStream, *ProxyAddress, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xConnectAsync = 0
 	} else {
@@ -83,7 +83,7 @@ func (x *ProxyInterface) OverrideConnectAsync(cb func(Proxy, *IOStream, *ProxyAd
 
 // GetConnectAsync gets the "connect_async" callback function.
 // Same as connect() but asynchronous.
-func (x *ProxyInterface) GetConnectAsync() func(Proxy, *IOStream, *ProxyAddress, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *ProxyInterfaceGType) GetConnectAsync() func(Proxy, *IOStream, *ProxyAddress, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xConnectAsync == 0 {
 		return nil
 	}
@@ -96,7 +96,7 @@ func (x *ProxyInterface) GetConnectAsync() func(Proxy, *IOStream, *ProxyAddress,
 
 // OverrideConnectFinish sets the "connect_finish" callback function.
 // Returns the result of connect_async()
-func (x *ProxyInterface) OverrideConnectFinish(cb func(Proxy, AsyncResult) *IOStream) {
+func (x *ProxyInterfaceGType) OverrideConnectFinish(cb func(Proxy, AsyncResult) *IOStream) {
 	if cb == nil {
 		x.xConnectFinish = 0
 	} else {
@@ -112,7 +112,7 @@ func (x *ProxyInterface) OverrideConnectFinish(cb func(Proxy, AsyncResult) *IOSt
 
 // GetConnectFinish gets the "connect_finish" callback function.
 // Returns the result of connect_async()
-func (x *ProxyInterface) GetConnectFinish() func(Proxy, AsyncResult) *IOStream {
+func (x *ProxyInterfaceGType) GetConnectFinish() func(Proxy, AsyncResult) *IOStream {
 	if x.xConnectFinish == 0 {
 		return nil
 	}
@@ -131,7 +131,7 @@ func (x *ProxyInterface) GetConnectFinish() func(Proxy, AsyncResult) *IOStream {
 
 // OverrideSupportsHostname sets the "supports_hostname" callback function.
 // Returns whether the proxy supports hostname lookups.
-func (x *ProxyInterface) OverrideSupportsHostname(cb func(Proxy) bool) {
+func (x *ProxyInterfaceGType) OverrideSupportsHostname(cb func(Proxy) bool) {
 	if cb == nil {
 		x.xSupportsHostname = 0
 	} else {
@@ -143,7 +143,7 @@ func (x *ProxyInterface) OverrideSupportsHostname(cb func(Proxy) bool) {
 
 // GetSupportsHostname gets the "supports_hostname" callback function.
 // Returns whether the proxy supports hostname lookups.
-func (x *ProxyInterface) GetSupportsHostname() func(Proxy) bool {
+func (x *ProxyInterfaceGType) GetSupportsHostname() func(Proxy) bool {
 	if x.xSupportsHostname == 0 {
 		return nil
 	}

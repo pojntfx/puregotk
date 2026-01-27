@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/pango"
 )
 
-type FontDialogButtonClass struct {
+type FontDialogButtonClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 }
 
-func (x *FontDialogButtonClass) GoPointer() uintptr {
+func (x *FontDialogButtonClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

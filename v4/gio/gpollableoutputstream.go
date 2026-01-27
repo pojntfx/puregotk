@@ -27,7 +27,7 @@ import (
 // its return value and error (if set) to a #GPollableReturn. You should
 // override this where possible to avoid having to allocate a #GError to return
 // %G_IO_ERROR_WOULD_BLOCK.
-type PollableOutputStreamInterface struct {
+type PollableOutputStreamInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -43,13 +43,13 @@ type PollableOutputStreamInterface struct {
 	xWritevNonblocking uintptr
 }
 
-func (x *PollableOutputStreamInterface) GoPointer() uintptr {
+func (x *PollableOutputStreamInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideCanPoll sets the "can_poll" callback function.
 // Checks if the #GPollableOutputStream instance is actually pollable
-func (x *PollableOutputStreamInterface) OverrideCanPoll(cb func(PollableOutputStream) bool) {
+func (x *PollableOutputStreamInterfaceGType) OverrideCanPoll(cb func(PollableOutputStream) bool) {
 	if cb == nil {
 		x.xCanPoll = 0
 	} else {
@@ -61,7 +61,7 @@ func (x *PollableOutputStreamInterface) OverrideCanPoll(cb func(PollableOutputSt
 
 // GetCanPoll gets the "can_poll" callback function.
 // Checks if the #GPollableOutputStream instance is actually pollable
-func (x *PollableOutputStreamInterface) GetCanPoll() func(PollableOutputStream) bool {
+func (x *PollableOutputStreamInterfaceGType) GetCanPoll() func(PollableOutputStream) bool {
 	if x.xCanPoll == 0 {
 		return nil
 	}
@@ -74,7 +74,7 @@ func (x *PollableOutputStreamInterface) GetCanPoll() func(PollableOutputStream) 
 
 // OverrideIsWritable sets the "is_writable" callback function.
 // Checks if the stream is writable
-func (x *PollableOutputStreamInterface) OverrideIsWritable(cb func(PollableOutputStream) bool) {
+func (x *PollableOutputStreamInterfaceGType) OverrideIsWritable(cb func(PollableOutputStream) bool) {
 	if cb == nil {
 		x.xIsWritable = 0
 	} else {
@@ -86,7 +86,7 @@ func (x *PollableOutputStreamInterface) OverrideIsWritable(cb func(PollableOutpu
 
 // GetIsWritable gets the "is_writable" callback function.
 // Checks if the stream is writable
-func (x *PollableOutputStreamInterface) GetIsWritable() func(PollableOutputStream) bool {
+func (x *PollableOutputStreamInterfaceGType) GetIsWritable() func(PollableOutputStream) bool {
 	if x.xIsWritable == 0 {
 		return nil
 	}
@@ -99,7 +99,7 @@ func (x *PollableOutputStreamInterface) GetIsWritable() func(PollableOutputStrea
 
 // OverrideCreateSource sets the "create_source" callback function.
 // Creates a #GSource to poll the stream
-func (x *PollableOutputStreamInterface) OverrideCreateSource(cb func(PollableOutputStream, *Cancellable) *glib.Source) {
+func (x *PollableOutputStreamInterfaceGType) OverrideCreateSource(cb func(PollableOutputStream, *Cancellable) *glib.Source) {
 	if cb == nil {
 		x.xCreateSource = 0
 	} else {
@@ -111,7 +111,7 @@ func (x *PollableOutputStreamInterface) OverrideCreateSource(cb func(PollableOut
 
 // GetCreateSource gets the "create_source" callback function.
 // Creates a #GSource to poll the stream
-func (x *PollableOutputStreamInterface) GetCreateSource() func(PollableOutputStream, *Cancellable) *glib.Source {
+func (x *PollableOutputStreamInterfaceGType) GetCreateSource() func(PollableOutputStream, *Cancellable) *glib.Source {
 	if x.xCreateSource == 0 {
 		return nil
 	}
@@ -126,7 +126,7 @@ func (x *PollableOutputStreamInterface) GetCreateSource() func(PollableOutputStr
 // Does a non-blocking write or returns
 //
 //	%G_IO_ERROR_WOULD_BLOCK
-func (x *PollableOutputStreamInterface) OverrideWriteNonblocking(cb func(PollableOutputStream, []byte, uint) int) {
+func (x *PollableOutputStreamInterfaceGType) OverrideWriteNonblocking(cb func(PollableOutputStream, []byte, uint) int) {
 	if cb == nil {
 		x.xWriteNonblocking = 0
 	} else {
@@ -140,7 +140,7 @@ func (x *PollableOutputStreamInterface) OverrideWriteNonblocking(cb func(Pollabl
 // Does a non-blocking write or returns
 //
 //	%G_IO_ERROR_WOULD_BLOCK
-func (x *PollableOutputStreamInterface) GetWriteNonblocking() func(PollableOutputStream, []byte, uint) int {
+func (x *PollableOutputStreamInterfaceGType) GetWriteNonblocking() func(PollableOutputStream, []byte, uint) int {
 	if x.xWriteNonblocking == 0 {
 		return nil
 	}
@@ -155,7 +155,7 @@ func (x *PollableOutputStreamInterface) GetWriteNonblocking() func(PollableOutpu
 // Does a vectored non-blocking write, or returns
 //
 //	%G_POLLABLE_RETURN_WOULD_BLOCK
-func (x *PollableOutputStreamInterface) OverrideWritevNonblocking(cb func(PollableOutputStream, []OutputVector, uint, *uint) PollableReturn) {
+func (x *PollableOutputStreamInterfaceGType) OverrideWritevNonblocking(cb func(PollableOutputStream, []OutputVector, uint, *uint) PollableReturn) {
 	if cb == nil {
 		x.xWritevNonblocking = 0
 	} else {
@@ -169,7 +169,7 @@ func (x *PollableOutputStreamInterface) OverrideWritevNonblocking(cb func(Pollab
 // Does a vectored non-blocking write, or returns
 //
 //	%G_POLLABLE_RETURN_WOULD_BLOCK
-func (x *PollableOutputStreamInterface) GetWritevNonblocking() func(PollableOutputStream, []OutputVector, uint, *uint) PollableReturn {
+func (x *PollableOutputStreamInterfaceGType) GetWritevNonblocking() func(PollableOutputStream, []OutputVector, uint, *uint) PollableReturn {
 	if x.xWritevNonblocking == 0 {
 		return nil
 	}

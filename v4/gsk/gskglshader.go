@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/graphene"
 )
 
-type GLShaderClass struct {
+type GLShaderClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *GLShaderClass) GoPointer() uintptr {
+func (x *GLShaderClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

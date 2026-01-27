@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type IconPaintableClass struct {
+type IconPaintableClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *IconPaintableClass) GoPointer() uintptr {
+func (x *IconPaintableClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

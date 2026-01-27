@@ -15,10 +15,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gsk"
 )
 
-type WindowClass struct {
+type WindowClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xActivateFocus uintptr
 
@@ -33,13 +33,13 @@ type WindowClass struct {
 	Padding [8]uintptr
 }
 
-func (x *WindowClass) GoPointer() uintptr {
+func (x *WindowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideActivateFocus sets the "activate_focus" callback function.
 // Activates the current focused widget within the window.
-func (x *WindowClass) OverrideActivateFocus(cb func(*Window)) {
+func (x *WindowClassGType) OverrideActivateFocus(cb func(*Window)) {
 	if cb == nil {
 		x.xActivateFocus = 0
 	} else {
@@ -51,7 +51,7 @@ func (x *WindowClass) OverrideActivateFocus(cb func(*Window)) {
 
 // GetActivateFocus gets the "activate_focus" callback function.
 // Activates the current focused widget within the window.
-func (x *WindowClass) GetActivateFocus() func(*Window) {
+func (x *WindowClassGType) GetActivateFocus() func(*Window) {
 	if x.xActivateFocus == 0 {
 		return nil
 	}
@@ -64,7 +64,7 @@ func (x *WindowClass) GetActivateFocus() func(*Window) {
 
 // OverrideActivateDefault sets the "activate_default" callback function.
 // Activates the default widget for the window.
-func (x *WindowClass) OverrideActivateDefault(cb func(*Window)) {
+func (x *WindowClassGType) OverrideActivateDefault(cb func(*Window)) {
 	if cb == nil {
 		x.xActivateDefault = 0
 	} else {
@@ -76,7 +76,7 @@ func (x *WindowClass) OverrideActivateDefault(cb func(*Window)) {
 
 // GetActivateDefault gets the "activate_default" callback function.
 // Activates the default widget for the window.
-func (x *WindowClass) GetActivateDefault() func(*Window) {
+func (x *WindowClassGType) GetActivateDefault() func(*Window) {
 	if x.xActivateDefault == 0 {
 		return nil
 	}
@@ -91,7 +91,7 @@ func (x *WindowClass) GetActivateDefault() func(*Window) {
 // Signal gets emitted when the set of accelerators or
 //
 //	mnemonics that are associated with window changes.
-func (x *WindowClass) OverrideKeysChanged(cb func(*Window)) {
+func (x *WindowClassGType) OverrideKeysChanged(cb func(*Window)) {
 	if cb == nil {
 		x.xKeysChanged = 0
 	} else {
@@ -105,7 +105,7 @@ func (x *WindowClass) OverrideKeysChanged(cb func(*Window)) {
 // Signal gets emitted when the set of accelerators or
 //
 //	mnemonics that are associated with window changes.
-func (x *WindowClass) GetKeysChanged() func(*Window) {
+func (x *WindowClassGType) GetKeysChanged() func(*Window) {
 	if x.xKeysChanged == 0 {
 		return nil
 	}
@@ -120,7 +120,7 @@ func (x *WindowClass) GetKeysChanged() func(*Window) {
 // Class handler for the `GtkWindow::enable-debugging`
 //
 //	keybinding signal.
-func (x *WindowClass) OverrideEnableDebugging(cb func(*Window, bool) bool) {
+func (x *WindowClassGType) OverrideEnableDebugging(cb func(*Window, bool) bool) {
 	if cb == nil {
 		x.xEnableDebugging = 0
 	} else {
@@ -134,7 +134,7 @@ func (x *WindowClass) OverrideEnableDebugging(cb func(*Window, bool) bool) {
 // Class handler for the `GtkWindow::enable-debugging`
 //
 //	keybinding signal.
-func (x *WindowClass) GetEnableDebugging() func(*Window, bool) bool {
+func (x *WindowClassGType) GetEnableDebugging() func(*Window, bool) bool {
 	if x.xEnableDebugging == 0 {
 		return nil
 	}
@@ -146,7 +146,7 @@ func (x *WindowClass) GetEnableDebugging() func(*Window, bool) bool {
 }
 
 // OverrideCloseRequest sets the "close_request" callback function.
-func (x *WindowClass) OverrideCloseRequest(cb func(*Window) bool) {
+func (x *WindowClassGType) OverrideCloseRequest(cb func(*Window) bool) {
 	if cb == nil {
 		x.xCloseRequest = 0
 	} else {
@@ -157,7 +157,7 @@ func (x *WindowClass) OverrideCloseRequest(cb func(*Window) bool) {
 }
 
 // GetCloseRequest gets the "close_request" callback function.
-func (x *WindowClass) GetCloseRequest() func(*Window) bool {
+func (x *WindowClassGType) GetCloseRequest() func(*Window) bool {
 	if x.xCloseRequest == 0 {
 		return nil
 	}

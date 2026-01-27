@@ -12,13 +12,13 @@ import (
 )
 
 // The virtual function table for #GPowerProfileMonitor.
-type PowerProfileMonitorInterface struct {
+type PowerProfileMonitorInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
 }
 
-func (x *PowerProfileMonitorInterface) GoPointer() uintptr {
+func (x *PowerProfileMonitorInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

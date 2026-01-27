@@ -12,22 +12,22 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ToggleButtonClass struct {
+type ToggleButtonClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass ButtonClass
+	ParentClass ButtonClassGType
 
 	xToggled uintptr
 
 	Padding [8]uintptr
 }
 
-func (x *ToggleButtonClass) GoPointer() uintptr {
+func (x *ToggleButtonClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideToggled sets the "toggled" callback function.
-func (x *ToggleButtonClass) OverrideToggled(cb func(*ToggleButton)) {
+func (x *ToggleButtonClassGType) OverrideToggled(cb func(*ToggleButton)) {
 	if cb == nil {
 		x.xToggled = 0
 	} else {
@@ -38,7 +38,7 @@ func (x *ToggleButtonClass) OverrideToggled(cb func(*ToggleButton)) {
 }
 
 // GetToggled gets the "toggled" callback function.
-func (x *ToggleButtonClass) GetToggled() func(*ToggleButton) {
+func (x *ToggleButtonClassGType) GetToggled() func(*ToggleButton) {
 	if x.xToggled == 0 {
 		return nil
 	}

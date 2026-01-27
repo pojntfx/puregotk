@@ -13,10 +13,10 @@ import (
 )
 
 // Virtual function table for #GApplication.
-type ApplicationClass struct {
+type ApplicationClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xStartup uintptr
 
@@ -51,13 +51,13 @@ type ApplicationClass struct {
 	Padding [7]uintptr
 }
 
-func (x *ApplicationClass) GoPointer() uintptr {
+func (x *ApplicationClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideStartup sets the "startup" callback function.
 // invoked on the primary instance immediately after registration
-func (x *ApplicationClass) OverrideStartup(cb func(*Application)) {
+func (x *ApplicationClassGType) OverrideStartup(cb func(*Application)) {
 	if cb == nil {
 		x.xStartup = 0
 	} else {
@@ -69,7 +69,7 @@ func (x *ApplicationClass) OverrideStartup(cb func(*Application)) {
 
 // GetStartup gets the "startup" callback function.
 // invoked on the primary instance immediately after registration
-func (x *ApplicationClass) GetStartup() func(*Application) {
+func (x *ApplicationClassGType) GetStartup() func(*Application) {
 	if x.xStartup == 0 {
 		return nil
 	}
@@ -82,7 +82,7 @@ func (x *ApplicationClass) GetStartup() func(*Application) {
 
 // OverrideActivate sets the "activate" callback function.
 // invoked on the primary instance when an activation occurs
-func (x *ApplicationClass) OverrideActivate(cb func(*Application)) {
+func (x *ApplicationClassGType) OverrideActivate(cb func(*Application)) {
 	if cb == nil {
 		x.xActivate = 0
 	} else {
@@ -94,7 +94,7 @@ func (x *ApplicationClass) OverrideActivate(cb func(*Application)) {
 
 // GetActivate gets the "activate" callback function.
 // invoked on the primary instance when an activation occurs
-func (x *ApplicationClass) GetActivate() func(*Application) {
+func (x *ApplicationClassGType) GetActivate() func(*Application) {
 	if x.xActivate == 0 {
 		return nil
 	}
@@ -107,7 +107,7 @@ func (x *ApplicationClass) GetActivate() func(*Application) {
 
 // OverrideOpen sets the "open" callback function.
 // invoked on the primary instance when there are files to open
-func (x *ApplicationClass) OverrideOpen(cb func(*Application, uintptr, int, string)) {
+func (x *ApplicationClassGType) OverrideOpen(cb func(*Application, uintptr, int, string)) {
 	if cb == nil {
 		x.xOpen = 0
 	} else {
@@ -119,7 +119,7 @@ func (x *ApplicationClass) OverrideOpen(cb func(*Application, uintptr, int, stri
 
 // GetOpen gets the "open" callback function.
 // invoked on the primary instance when there are files to open
-func (x *ApplicationClass) GetOpen() func(*Application, uintptr, int, string) {
+func (x *ApplicationClassGType) GetOpen() func(*Application, uintptr, int, string) {
 	if x.xOpen == 0 {
 		return nil
 	}
@@ -134,7 +134,7 @@ func (x *ApplicationClass) GetOpen() func(*Application, uintptr, int, string) {
 // invoked on the primary instance when a command-line is
 //
 //	not handled locally
-func (x *ApplicationClass) OverrideCommandLine(cb func(*Application, *ApplicationCommandLine) int) {
+func (x *ApplicationClassGType) OverrideCommandLine(cb func(*Application, *ApplicationCommandLine) int) {
 	if cb == nil {
 		x.xCommandLine = 0
 	} else {
@@ -148,7 +148,7 @@ func (x *ApplicationClass) OverrideCommandLine(cb func(*Application, *Applicatio
 // invoked on the primary instance when a command-line is
 //
 //	not handled locally
-func (x *ApplicationClass) GetCommandLine() func(*Application, *ApplicationCommandLine) int {
+func (x *ApplicationClassGType) GetCommandLine() func(*Application, *ApplicationCommandLine) int {
 	if x.xCommandLine == 0 {
 		return nil
 	}
@@ -166,7 +166,7 @@ func (x *ApplicationClass) GetCommandLine() func(*Application, *ApplicationComma
 //	g_application_run() for more information. Also see the
 //	#GApplication::handle-local-options signal, which is a simpler
 //	alternative to handling some commandline options locally
-func (x *ApplicationClass) OverrideLocalCommandLine(cb func(*Application, []string, *int) bool) {
+func (x *ApplicationClassGType) OverrideLocalCommandLine(cb func(*Application, []string, *int) bool) {
 	if cb == nil {
 		x.xLocalCommandLine = 0
 	} else {
@@ -183,7 +183,7 @@ func (x *ApplicationClass) OverrideLocalCommandLine(cb func(*Application, []stri
 //	g_application_run() for more information. Also see the
 //	#GApplication::handle-local-options signal, which is a simpler
 //	alternative to handling some commandline options locally
-func (x *ApplicationClass) GetLocalCommandLine() func(*Application, []string, *int) bool {
+func (x *ApplicationClassGType) GetLocalCommandLine() func(*Application, []string, *int) bool {
 	if x.xLocalCommandLine == 0 {
 		return nil
 	}
@@ -199,7 +199,7 @@ func (x *ApplicationClass) GetLocalCommandLine() func(*Application, []string, *i
 //
 //	'command-line' or any action invocation, gets the 'platform data' from
 //	the calling instance. Must chain up
-func (x *ApplicationClass) OverrideBeforeEmit(cb func(*Application, *glib.Variant)) {
+func (x *ApplicationClassGType) OverrideBeforeEmit(cb func(*Application, *glib.Variant)) {
 	if cb == nil {
 		x.xBeforeEmit = 0
 	} else {
@@ -214,7 +214,7 @@ func (x *ApplicationClass) OverrideBeforeEmit(cb func(*Application, *glib.Varian
 //
 //	'command-line' or any action invocation, gets the 'platform data' from
 //	the calling instance. Must chain up
-func (x *ApplicationClass) GetBeforeEmit() func(*Application, *glib.Variant) {
+func (x *ApplicationClassGType) GetBeforeEmit() func(*Application, *glib.Variant) {
 	if x.xBeforeEmit == 0 {
 		return nil
 	}
@@ -230,7 +230,7 @@ func (x *ApplicationClass) GetBeforeEmit() func(*Application, *glib.Variant) {
 //
 //	'command-line' or any action invocation, gets the 'platform data' from
 //	the calling instance. Must chain up
-func (x *ApplicationClass) OverrideAfterEmit(cb func(*Application, *glib.Variant)) {
+func (x *ApplicationClassGType) OverrideAfterEmit(cb func(*Application, *glib.Variant)) {
 	if cb == nil {
 		x.xAfterEmit = 0
 	} else {
@@ -245,7 +245,7 @@ func (x *ApplicationClass) OverrideAfterEmit(cb func(*Application, *glib.Variant
 //
 //	'command-line' or any action invocation, gets the 'platform data' from
 //	the calling instance. Must chain up
-func (x *ApplicationClass) GetAfterEmit() func(*Application, *glib.Variant) {
+func (x *ApplicationClassGType) GetAfterEmit() func(*Application, *glib.Variant) {
 	if x.xAfterEmit == 0 {
 		return nil
 	}
@@ -260,7 +260,7 @@ func (x *ApplicationClass) GetAfterEmit() func(*Application, *glib.Variant) {
 // invoked (locally) to add 'platform data' to be sent to
 //
 //	the primary instance when activating, opening or invoking actions. Must chain up
-func (x *ApplicationClass) OverrideAddPlatformData(cb func(*Application, *glib.VariantBuilder)) {
+func (x *ApplicationClassGType) OverrideAddPlatformData(cb func(*Application, *glib.VariantBuilder)) {
 	if cb == nil {
 		x.xAddPlatformData = 0
 	} else {
@@ -274,7 +274,7 @@ func (x *ApplicationClass) OverrideAddPlatformData(cb func(*Application, *glib.V
 // invoked (locally) to add 'platform data' to be sent to
 //
 //	the primary instance when activating, opening or invoking actions. Must chain up
-func (x *ApplicationClass) GetAddPlatformData() func(*Application, *glib.VariantBuilder) {
+func (x *ApplicationClassGType) GetAddPlatformData() func(*Application, *glib.VariantBuilder) {
 	if x.xAddPlatformData == 0 {
 		return nil
 	}
@@ -290,7 +290,7 @@ func (x *ApplicationClass) GetAddPlatformData() func(*Application, *glib.Variant
 //
 //	count of the application drops to zero (and after any inactivity
 //	timeout, if requested). Not used anymore since 2.32
-func (x *ApplicationClass) OverrideQuitMainloop(cb func(*Application)) {
+func (x *ApplicationClassGType) OverrideQuitMainloop(cb func(*Application)) {
 	if cb == nil {
 		x.xQuitMainloop = 0
 	} else {
@@ -305,7 +305,7 @@ func (x *ApplicationClass) OverrideQuitMainloop(cb func(*Application)) {
 //
 //	count of the application drops to zero (and after any inactivity
 //	timeout, if requested). Not used anymore since 2.32
-func (x *ApplicationClass) GetQuitMainloop() func(*Application) {
+func (x *ApplicationClassGType) GetQuitMainloop() func(*Application) {
 	if x.xQuitMainloop == 0 {
 		return nil
 	}
@@ -322,7 +322,7 @@ func (x *ApplicationClass) GetQuitMainloop() func(*Application) {
 //	g_application_run() if the use-count is non-zero. Since 2.32,
 //	GApplication is iterating the main context directly and is not
 //	using @run_mainloop anymore
-func (x *ApplicationClass) OverrideRunMainloop(cb func(*Application)) {
+func (x *ApplicationClassGType) OverrideRunMainloop(cb func(*Application)) {
 	if cb == nil {
 		x.xRunMainloop = 0
 	} else {
@@ -338,7 +338,7 @@ func (x *ApplicationClass) OverrideRunMainloop(cb func(*Application)) {
 //	g_application_run() if the use-count is non-zero. Since 2.32,
 //	GApplication is iterating the main context directly and is not
 //	using @run_mainloop anymore
-func (x *ApplicationClass) GetRunMainloop() func(*Application) {
+func (x *ApplicationClassGType) GetRunMainloop() func(*Application) {
 	if x.xRunMainloop == 0 {
 		return nil
 	}
@@ -353,7 +353,7 @@ func (x *ApplicationClass) GetRunMainloop() func(*Application) {
 // invoked only on the registered primary instance immediately
 //
 //	after the main loop terminates
-func (x *ApplicationClass) OverrideShutdown(cb func(*Application)) {
+func (x *ApplicationClassGType) OverrideShutdown(cb func(*Application)) {
 	if cb == nil {
 		x.xShutdown = 0
 	} else {
@@ -367,7 +367,7 @@ func (x *ApplicationClass) OverrideShutdown(cb func(*Application)) {
 // invoked only on the registered primary instance immediately
 //
 //	after the main loop terminates
-func (x *ApplicationClass) GetShutdown() func(*Application) {
+func (x *ApplicationClassGType) GetShutdown() func(*Application) {
 	if x.xShutdown == 0 {
 		return nil
 	}
@@ -387,7 +387,7 @@ func (x *ApplicationClass) GetShutdown() func(*Application) {
 //	object path that #GApplication will use to export its D-Bus API.
 //	If this function returns %TRUE, registration will proceed; otherwise
 //	registration will abort. Since: 2.34
-func (x *ApplicationClass) OverrideDbusRegister(cb func(*Application, *DBusConnection, string) bool) {
+func (x *ApplicationClassGType) OverrideDbusRegister(cb func(*Application, *DBusConnection, string) bool) {
 	if cb == nil {
 		x.xDbusRegister = 0
 	} else {
@@ -406,7 +406,7 @@ func (x *ApplicationClass) OverrideDbusRegister(cb func(*Application, *DBusConne
 //	object path that #GApplication will use to export its D-Bus API.
 //	If this function returns %TRUE, registration will proceed; otherwise
 //	registration will abort. Since: 2.34
-func (x *ApplicationClass) GetDbusRegister() func(*Application, *DBusConnection, string) bool {
+func (x *ApplicationClassGType) GetDbusRegister() func(*Application, *DBusConnection, string) bool {
 	if x.xDbusRegister == 0 {
 		return nil
 	}
@@ -422,7 +422,7 @@ func (x *ApplicationClass) GetDbusRegister() func(*Application, *DBusConnection,
 //
 //	is using its D-Bus backend. Use this to undo anything done by
 //	the @dbus_register vfunc. Since: 2.34
-func (x *ApplicationClass) OverrideDbusUnregister(cb func(*Application, *DBusConnection, string)) {
+func (x *ApplicationClassGType) OverrideDbusUnregister(cb func(*Application, *DBusConnection, string)) {
 	if cb == nil {
 		x.xDbusUnregister = 0
 	} else {
@@ -437,7 +437,7 @@ func (x *ApplicationClass) OverrideDbusUnregister(cb func(*Application, *DBusCon
 //
 //	is using its D-Bus backend. Use this to undo anything done by
 //	the @dbus_register vfunc. Since: 2.34
-func (x *ApplicationClass) GetDbusUnregister() func(*Application, *DBusConnection, string) {
+func (x *ApplicationClassGType) GetDbusUnregister() func(*Application, *DBusConnection, string) {
 	if x.xDbusUnregister == 0 {
 		return nil
 	}
@@ -452,7 +452,7 @@ func (x *ApplicationClass) GetDbusUnregister() func(*Application, *DBusConnectio
 // invoked locally after the parsing of the commandline
 //
 //	options has occurred. Since: 2.40
-func (x *ApplicationClass) OverrideHandleLocalOptions(cb func(*Application, *glib.VariantDict) int) {
+func (x *ApplicationClassGType) OverrideHandleLocalOptions(cb func(*Application, *glib.VariantDict) int) {
 	if cb == nil {
 		x.xHandleLocalOptions = 0
 	} else {
@@ -466,7 +466,7 @@ func (x *ApplicationClass) OverrideHandleLocalOptions(cb func(*Application, *gli
 // invoked locally after the parsing of the commandline
 //
 //	options has occurred. Since: 2.40
-func (x *ApplicationClass) GetHandleLocalOptions() func(*Application, *glib.VariantDict) int {
+func (x *ApplicationClassGType) GetHandleLocalOptions() func(*Application, *glib.VariantDict) int {
 	if x.xHandleLocalOptions == 0 {
 		return nil
 	}
@@ -479,7 +479,7 @@ func (x *ApplicationClass) GetHandleLocalOptions() func(*Application, *glib.Vari
 
 // OverrideNameLost sets the "name_lost" callback function.
 // invoked when another instance is taking over the name. Since: 2.60
-func (x *ApplicationClass) OverrideNameLost(cb func(*Application) bool) {
+func (x *ApplicationClassGType) OverrideNameLost(cb func(*Application) bool) {
 	if cb == nil {
 		x.xNameLost = 0
 	} else {
@@ -491,7 +491,7 @@ func (x *ApplicationClass) OverrideNameLost(cb func(*Application) bool) {
 
 // GetNameLost gets the "name_lost" callback function.
 // invoked when another instance is taking over the name. Since: 2.60
-func (x *ApplicationClass) GetNameLost() func(*Application) bool {
+func (x *ApplicationClassGType) GetNameLost() func(*Application) bool {
 	if x.xNameLost == 0 {
 		return nil
 	}

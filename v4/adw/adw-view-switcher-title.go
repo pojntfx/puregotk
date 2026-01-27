@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type ViewSwitcherTitleClass struct {
+type ViewSwitcherTitleClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *ViewSwitcherTitleClass) GoPointer() uintptr {
+func (x *ViewSwitcherTitleClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

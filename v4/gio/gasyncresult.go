@@ -13,7 +13,7 @@ import (
 )
 
 // Interface definition for [iface@Gio.AsyncResult].
-type AsyncResultIface struct {
+type AsyncResultIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -25,13 +25,13 @@ type AsyncResultIface struct {
 	xIsTagged uintptr
 }
 
-func (x *AsyncResultIface) GoPointer() uintptr {
+func (x *AsyncResultIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetUserData sets the "get_user_data" callback function.
 // Gets the user data passed to the callback.
-func (x *AsyncResultIface) OverrideGetUserData(cb func(AsyncResult) uintptr) {
+func (x *AsyncResultIfaceGType) OverrideGetUserData(cb func(AsyncResult) uintptr) {
 	if cb == nil {
 		x.xGetUserData = 0
 	} else {
@@ -43,7 +43,7 @@ func (x *AsyncResultIface) OverrideGetUserData(cb func(AsyncResult) uintptr) {
 
 // GetGetUserData gets the "get_user_data" callback function.
 // Gets the user data passed to the callback.
-func (x *AsyncResultIface) GetGetUserData() func(AsyncResult) uintptr {
+func (x *AsyncResultIfaceGType) GetGetUserData() func(AsyncResult) uintptr {
 	if x.xGetUserData == 0 {
 		return nil
 	}
@@ -56,7 +56,7 @@ func (x *AsyncResultIface) GetGetUserData() func(AsyncResult) uintptr {
 
 // OverrideGetSourceObject sets the "get_source_object" callback function.
 // Gets the source object that issued the asynchronous operation.
-func (x *AsyncResultIface) OverrideGetSourceObject(cb func(AsyncResult) *gobject.Object) {
+func (x *AsyncResultIfaceGType) OverrideGetSourceObject(cb func(AsyncResult) *gobject.Object) {
 	if cb == nil {
 		x.xGetSourceObject = 0
 	} else {
@@ -72,7 +72,7 @@ func (x *AsyncResultIface) OverrideGetSourceObject(cb func(AsyncResult) *gobject
 
 // GetGetSourceObject gets the "get_source_object" callback function.
 // Gets the source object that issued the asynchronous operation.
-func (x *AsyncResultIface) GetGetSourceObject() func(AsyncResult) *gobject.Object {
+func (x *AsyncResultIfaceGType) GetGetSourceObject() func(AsyncResult) *gobject.Object {
 	if x.xGetSourceObject == 0 {
 		return nil
 	}
@@ -91,7 +91,7 @@ func (x *AsyncResultIface) GetGetSourceObject() func(AsyncResult) *gobject.Objec
 
 // OverrideIsTagged sets the "is_tagged" callback function.
 // Checks if a result is tagged with a particular source.
-func (x *AsyncResultIface) OverrideIsTagged(cb func(AsyncResult, uintptr) bool) {
+func (x *AsyncResultIfaceGType) OverrideIsTagged(cb func(AsyncResult, uintptr) bool) {
 	if cb == nil {
 		x.xIsTagged = 0
 	} else {
@@ -103,7 +103,7 @@ func (x *AsyncResultIface) OverrideIsTagged(cb func(AsyncResult, uintptr) bool) 
 
 // GetIsTagged gets the "is_tagged" callback function.
 // Checks if a result is tagged with a particular source.
-func (x *AsyncResultIface) GetIsTagged() func(AsyncResult, uintptr) bool {
+func (x *AsyncResultIfaceGType) GetIsTagged() func(AsyncResult, uintptr) bool {
 	if x.xIsTagged == 0 {
 		return nil
 	}

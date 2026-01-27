@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type MountOperationClass struct {
+type MountOperationClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xAskPassword uintptr
 
@@ -48,12 +48,12 @@ type MountOperationClass struct {
 	xGReserved9 uintptr
 }
 
-func (x *MountOperationClass) GoPointer() uintptr {
+func (x *MountOperationClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideAskPassword sets the "ask_password" callback function.
-func (x *MountOperationClass) OverrideAskPassword(cb func(*MountOperation, string, string, string, AskPasswordFlags)) {
+func (x *MountOperationClassGType) OverrideAskPassword(cb func(*MountOperation, string, string, string, AskPasswordFlags)) {
 	if cb == nil {
 		x.xAskPassword = 0
 	} else {
@@ -64,7 +64,7 @@ func (x *MountOperationClass) OverrideAskPassword(cb func(*MountOperation, strin
 }
 
 // GetAskPassword gets the "ask_password" callback function.
-func (x *MountOperationClass) GetAskPassword() func(*MountOperation, string, string, string, AskPasswordFlags) {
+func (x *MountOperationClassGType) GetAskPassword() func(*MountOperation, string, string, string, AskPasswordFlags) {
 	if x.xAskPassword == 0 {
 		return nil
 	}
@@ -76,7 +76,7 @@ func (x *MountOperationClass) GetAskPassword() func(*MountOperation, string, str
 }
 
 // OverrideAskQuestion sets the "ask_question" callback function.
-func (x *MountOperationClass) OverrideAskQuestion(cb func(*MountOperation, string, []string)) {
+func (x *MountOperationClassGType) OverrideAskQuestion(cb func(*MountOperation, string, []string)) {
 	if cb == nil {
 		x.xAskQuestion = 0
 	} else {
@@ -87,7 +87,7 @@ func (x *MountOperationClass) OverrideAskQuestion(cb func(*MountOperation, strin
 }
 
 // GetAskQuestion gets the "ask_question" callback function.
-func (x *MountOperationClass) GetAskQuestion() func(*MountOperation, string, []string) {
+func (x *MountOperationClassGType) GetAskQuestion() func(*MountOperation, string, []string) {
 	if x.xAskQuestion == 0 {
 		return nil
 	}
@@ -99,7 +99,7 @@ func (x *MountOperationClass) GetAskQuestion() func(*MountOperation, string, []s
 }
 
 // OverrideReply sets the "reply" callback function.
-func (x *MountOperationClass) OverrideReply(cb func(*MountOperation, MountOperationResult)) {
+func (x *MountOperationClassGType) OverrideReply(cb func(*MountOperation, MountOperationResult)) {
 	if cb == nil {
 		x.xReply = 0
 	} else {
@@ -110,7 +110,7 @@ func (x *MountOperationClass) OverrideReply(cb func(*MountOperation, MountOperat
 }
 
 // GetReply gets the "reply" callback function.
-func (x *MountOperationClass) GetReply() func(*MountOperation, MountOperationResult) {
+func (x *MountOperationClassGType) GetReply() func(*MountOperation, MountOperationResult) {
 	if x.xReply == 0 {
 		return nil
 	}
@@ -122,7 +122,7 @@ func (x *MountOperationClass) GetReply() func(*MountOperation, MountOperationRes
 }
 
 // OverrideAborted sets the "aborted" callback function.
-func (x *MountOperationClass) OverrideAborted(cb func(*MountOperation)) {
+func (x *MountOperationClassGType) OverrideAborted(cb func(*MountOperation)) {
 	if cb == nil {
 		x.xAborted = 0
 	} else {
@@ -133,7 +133,7 @@ func (x *MountOperationClass) OverrideAborted(cb func(*MountOperation)) {
 }
 
 // GetAborted gets the "aborted" callback function.
-func (x *MountOperationClass) GetAborted() func(*MountOperation) {
+func (x *MountOperationClassGType) GetAborted() func(*MountOperation) {
 	if x.xAborted == 0 {
 		return nil
 	}
@@ -145,7 +145,7 @@ func (x *MountOperationClass) GetAborted() func(*MountOperation) {
 }
 
 // OverrideShowProcesses sets the "show_processes" callback function.
-func (x *MountOperationClass) OverrideShowProcesses(cb func(*MountOperation, string, []glib.Pid, []string)) {
+func (x *MountOperationClassGType) OverrideShowProcesses(cb func(*MountOperation, string, []glib.Pid, []string)) {
 	if cb == nil {
 		x.xShowProcesses = 0
 	} else {
@@ -156,7 +156,7 @@ func (x *MountOperationClass) OverrideShowProcesses(cb func(*MountOperation, str
 }
 
 // GetShowProcesses gets the "show_processes" callback function.
-func (x *MountOperationClass) GetShowProcesses() func(*MountOperation, string, []glib.Pid, []string) {
+func (x *MountOperationClassGType) GetShowProcesses() func(*MountOperation, string, []glib.Pid, []string) {
 	if x.xShowProcesses == 0 {
 		return nil
 	}
@@ -168,7 +168,7 @@ func (x *MountOperationClass) GetShowProcesses() func(*MountOperation, string, [
 }
 
 // OverrideShowUnmountProgress sets the "show_unmount_progress" callback function.
-func (x *MountOperationClass) OverrideShowUnmountProgress(cb func(*MountOperation, string, int64, int64)) {
+func (x *MountOperationClassGType) OverrideShowUnmountProgress(cb func(*MountOperation, string, int64, int64)) {
 	if cb == nil {
 		x.xShowUnmountProgress = 0
 	} else {
@@ -179,7 +179,7 @@ func (x *MountOperationClass) OverrideShowUnmountProgress(cb func(*MountOperatio
 }
 
 // GetShowUnmountProgress gets the "show_unmount_progress" callback function.
-func (x *MountOperationClass) GetShowUnmountProgress() func(*MountOperation, string, int64, int64) {
+func (x *MountOperationClassGType) GetShowUnmountProgress() func(*MountOperation, string, int64, int64) {
 	if x.xShowUnmountProgress == 0 {
 		return nil
 	}
@@ -191,7 +191,7 @@ func (x *MountOperationClass) GetShowUnmountProgress() func(*MountOperation, str
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *MountOperationClass) OverrideGReserved1(cb func()) {
+func (x *MountOperationClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -202,7 +202,7 @@ func (x *MountOperationClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *MountOperationClass) GetGReserved1() func() {
+func (x *MountOperationClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -214,7 +214,7 @@ func (x *MountOperationClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *MountOperationClass) OverrideGReserved2(cb func()) {
+func (x *MountOperationClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -225,7 +225,7 @@ func (x *MountOperationClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *MountOperationClass) GetGReserved2() func() {
+func (x *MountOperationClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}
@@ -237,7 +237,7 @@ func (x *MountOperationClass) GetGReserved2() func() {
 }
 
 // OverrideGReserved3 sets the "_g_reserved3" callback function.
-func (x *MountOperationClass) OverrideGReserved3(cb func()) {
+func (x *MountOperationClassGType) OverrideGReserved3(cb func()) {
 	if cb == nil {
 		x.xGReserved3 = 0
 	} else {
@@ -248,7 +248,7 @@ func (x *MountOperationClass) OverrideGReserved3(cb func()) {
 }
 
 // GetGReserved3 gets the "_g_reserved3" callback function.
-func (x *MountOperationClass) GetGReserved3() func() {
+func (x *MountOperationClassGType) GetGReserved3() func() {
 	if x.xGReserved3 == 0 {
 		return nil
 	}
@@ -260,7 +260,7 @@ func (x *MountOperationClass) GetGReserved3() func() {
 }
 
 // OverrideGReserved4 sets the "_g_reserved4" callback function.
-func (x *MountOperationClass) OverrideGReserved4(cb func()) {
+func (x *MountOperationClassGType) OverrideGReserved4(cb func()) {
 	if cb == nil {
 		x.xGReserved4 = 0
 	} else {
@@ -271,7 +271,7 @@ func (x *MountOperationClass) OverrideGReserved4(cb func()) {
 }
 
 // GetGReserved4 gets the "_g_reserved4" callback function.
-func (x *MountOperationClass) GetGReserved4() func() {
+func (x *MountOperationClassGType) GetGReserved4() func() {
 	if x.xGReserved4 == 0 {
 		return nil
 	}
@@ -283,7 +283,7 @@ func (x *MountOperationClass) GetGReserved4() func() {
 }
 
 // OverrideGReserved5 sets the "_g_reserved5" callback function.
-func (x *MountOperationClass) OverrideGReserved5(cb func()) {
+func (x *MountOperationClassGType) OverrideGReserved5(cb func()) {
 	if cb == nil {
 		x.xGReserved5 = 0
 	} else {
@@ -294,7 +294,7 @@ func (x *MountOperationClass) OverrideGReserved5(cb func()) {
 }
 
 // GetGReserved5 gets the "_g_reserved5" callback function.
-func (x *MountOperationClass) GetGReserved5() func() {
+func (x *MountOperationClassGType) GetGReserved5() func() {
 	if x.xGReserved5 == 0 {
 		return nil
 	}
@@ -306,7 +306,7 @@ func (x *MountOperationClass) GetGReserved5() func() {
 }
 
 // OverrideGReserved6 sets the "_g_reserved6" callback function.
-func (x *MountOperationClass) OverrideGReserved6(cb func()) {
+func (x *MountOperationClassGType) OverrideGReserved6(cb func()) {
 	if cb == nil {
 		x.xGReserved6 = 0
 	} else {
@@ -317,7 +317,7 @@ func (x *MountOperationClass) OverrideGReserved6(cb func()) {
 }
 
 // GetGReserved6 gets the "_g_reserved6" callback function.
-func (x *MountOperationClass) GetGReserved6() func() {
+func (x *MountOperationClassGType) GetGReserved6() func() {
 	if x.xGReserved6 == 0 {
 		return nil
 	}
@@ -329,7 +329,7 @@ func (x *MountOperationClass) GetGReserved6() func() {
 }
 
 // OverrideGReserved7 sets the "_g_reserved7" callback function.
-func (x *MountOperationClass) OverrideGReserved7(cb func()) {
+func (x *MountOperationClassGType) OverrideGReserved7(cb func()) {
 	if cb == nil {
 		x.xGReserved7 = 0
 	} else {
@@ -340,7 +340,7 @@ func (x *MountOperationClass) OverrideGReserved7(cb func()) {
 }
 
 // GetGReserved7 gets the "_g_reserved7" callback function.
-func (x *MountOperationClass) GetGReserved7() func() {
+func (x *MountOperationClassGType) GetGReserved7() func() {
 	if x.xGReserved7 == 0 {
 		return nil
 	}
@@ -352,7 +352,7 @@ func (x *MountOperationClass) GetGReserved7() func() {
 }
 
 // OverrideGReserved8 sets the "_g_reserved8" callback function.
-func (x *MountOperationClass) OverrideGReserved8(cb func()) {
+func (x *MountOperationClassGType) OverrideGReserved8(cb func()) {
 	if cb == nil {
 		x.xGReserved8 = 0
 	} else {
@@ -363,7 +363,7 @@ func (x *MountOperationClass) OverrideGReserved8(cb func()) {
 }
 
 // GetGReserved8 gets the "_g_reserved8" callback function.
-func (x *MountOperationClass) GetGReserved8() func() {
+func (x *MountOperationClassGType) GetGReserved8() func() {
 	if x.xGReserved8 == 0 {
 		return nil
 	}
@@ -375,7 +375,7 @@ func (x *MountOperationClass) GetGReserved8() func() {
 }
 
 // OverrideGReserved9 sets the "_g_reserved9" callback function.
-func (x *MountOperationClass) OverrideGReserved9(cb func()) {
+func (x *MountOperationClassGType) OverrideGReserved9(cb func()) {
 	if cb == nil {
 		x.xGReserved9 = 0
 	} else {
@@ -386,7 +386,7 @@ func (x *MountOperationClass) OverrideGReserved9(cb func()) {
 }
 
 // GetGReserved9 gets the "_g_reserved9" callback function.
-func (x *MountOperationClass) GetGReserved9() func() {
+func (x *MountOperationClassGType) GetGReserved9() func() {
 	if x.xGReserved9 == 0 {
 		return nil
 	}

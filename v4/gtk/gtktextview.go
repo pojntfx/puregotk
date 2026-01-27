@@ -15,10 +15,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/pango"
 )
 
-type TextViewClass struct {
+type TextViewClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xMoveCursor uintptr
 
@@ -49,7 +49,7 @@ type TextViewClass struct {
 	Padding [8]uintptr
 }
 
-func (x *TextViewClass) GoPointer() uintptr {
+func (x *TextViewClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -57,7 +57,7 @@ func (x *TextViewClass) GoPointer() uintptr {
 // The class handler for the `GtkTextView::move-cursor`
 //
 //	keybinding signal.
-func (x *TextViewClass) OverrideMoveCursor(cb func(*TextView, MovementStep, int, bool)) {
+func (x *TextViewClassGType) OverrideMoveCursor(cb func(*TextView, MovementStep, int, bool)) {
 	if cb == nil {
 		x.xMoveCursor = 0
 	} else {
@@ -71,7 +71,7 @@ func (x *TextViewClass) OverrideMoveCursor(cb func(*TextView, MovementStep, int,
 // The class handler for the `GtkTextView::move-cursor`
 //
 //	keybinding signal.
-func (x *TextViewClass) GetMoveCursor() func(*TextView, MovementStep, int, bool) {
+func (x *TextViewClassGType) GetMoveCursor() func(*TextView, MovementStep, int, bool) {
 	if x.xMoveCursor == 0 {
 		return nil
 	}
@@ -86,7 +86,7 @@ func (x *TextViewClass) GetMoveCursor() func(*TextView, MovementStep, int, bool)
 // The class handler for the `GtkTextView::set-anchor`
 //
 //	keybinding signal.
-func (x *TextViewClass) OverrideSetAnchor(cb func(*TextView)) {
+func (x *TextViewClassGType) OverrideSetAnchor(cb func(*TextView)) {
 	if cb == nil {
 		x.xSetAnchor = 0
 	} else {
@@ -100,7 +100,7 @@ func (x *TextViewClass) OverrideSetAnchor(cb func(*TextView)) {
 // The class handler for the `GtkTextView::set-anchor`
 //
 //	keybinding signal.
-func (x *TextViewClass) GetSetAnchor() func(*TextView) {
+func (x *TextViewClassGType) GetSetAnchor() func(*TextView) {
 	if x.xSetAnchor == 0 {
 		return nil
 	}
@@ -115,7 +115,7 @@ func (x *TextViewClass) GetSetAnchor() func(*TextView) {
 // The class handler for the `GtkTextView::insert-at-cursor`
 //
 //	keybinding signal.
-func (x *TextViewClass) OverrideInsertAtCursor(cb func(*TextView, string)) {
+func (x *TextViewClassGType) OverrideInsertAtCursor(cb func(*TextView, string)) {
 	if cb == nil {
 		x.xInsertAtCursor = 0
 	} else {
@@ -129,7 +129,7 @@ func (x *TextViewClass) OverrideInsertAtCursor(cb func(*TextView, string)) {
 // The class handler for the `GtkTextView::insert-at-cursor`
 //
 //	keybinding signal.
-func (x *TextViewClass) GetInsertAtCursor() func(*TextView, string) {
+func (x *TextViewClassGType) GetInsertAtCursor() func(*TextView, string) {
 	if x.xInsertAtCursor == 0 {
 		return nil
 	}
@@ -144,7 +144,7 @@ func (x *TextViewClass) GetInsertAtCursor() func(*TextView, string) {
 // The class handler for the `GtkTextView::delete-from-cursor`
 //
 //	keybinding signal.
-func (x *TextViewClass) OverrideDeleteFromCursor(cb func(*TextView, DeleteType, int)) {
+func (x *TextViewClassGType) OverrideDeleteFromCursor(cb func(*TextView, DeleteType, int)) {
 	if cb == nil {
 		x.xDeleteFromCursor = 0
 	} else {
@@ -158,7 +158,7 @@ func (x *TextViewClass) OverrideDeleteFromCursor(cb func(*TextView, DeleteType, 
 // The class handler for the `GtkTextView::delete-from-cursor`
 //
 //	keybinding signal.
-func (x *TextViewClass) GetDeleteFromCursor() func(*TextView, DeleteType, int) {
+func (x *TextViewClassGType) GetDeleteFromCursor() func(*TextView, DeleteType, int) {
 	if x.xDeleteFromCursor == 0 {
 		return nil
 	}
@@ -173,7 +173,7 @@ func (x *TextViewClass) GetDeleteFromCursor() func(*TextView, DeleteType, int) {
 // The class handler for the `GtkTextView::backspace`
 //
 //	keybinding signal.
-func (x *TextViewClass) OverrideBackspace(cb func(*TextView)) {
+func (x *TextViewClassGType) OverrideBackspace(cb func(*TextView)) {
 	if cb == nil {
 		x.xBackspace = 0
 	} else {
@@ -187,7 +187,7 @@ func (x *TextViewClass) OverrideBackspace(cb func(*TextView)) {
 // The class handler for the `GtkTextView::backspace`
 //
 //	keybinding signal.
-func (x *TextViewClass) GetBackspace() func(*TextView) {
+func (x *TextViewClassGType) GetBackspace() func(*TextView) {
 	if x.xBackspace == 0 {
 		return nil
 	}
@@ -202,7 +202,7 @@ func (x *TextViewClass) GetBackspace() func(*TextView) {
 // The class handler for the `GtkTextView::cut-clipboard`
 //
 //	keybinding signal
-func (x *TextViewClass) OverrideCutClipboard(cb func(*TextView)) {
+func (x *TextViewClassGType) OverrideCutClipboard(cb func(*TextView)) {
 	if cb == nil {
 		x.xCutClipboard = 0
 	} else {
@@ -216,7 +216,7 @@ func (x *TextViewClass) OverrideCutClipboard(cb func(*TextView)) {
 // The class handler for the `GtkTextView::cut-clipboard`
 //
 //	keybinding signal
-func (x *TextViewClass) GetCutClipboard() func(*TextView) {
+func (x *TextViewClassGType) GetCutClipboard() func(*TextView) {
 	if x.xCutClipboard == 0 {
 		return nil
 	}
@@ -231,7 +231,7 @@ func (x *TextViewClass) GetCutClipboard() func(*TextView) {
 // The class handler for the `GtkTextView::copy-clipboard`
 //
 //	keybinding signal.
-func (x *TextViewClass) OverrideCopyClipboard(cb func(*TextView)) {
+func (x *TextViewClassGType) OverrideCopyClipboard(cb func(*TextView)) {
 	if cb == nil {
 		x.xCopyClipboard = 0
 	} else {
@@ -245,7 +245,7 @@ func (x *TextViewClass) OverrideCopyClipboard(cb func(*TextView)) {
 // The class handler for the `GtkTextView::copy-clipboard`
 //
 //	keybinding signal.
-func (x *TextViewClass) GetCopyClipboard() func(*TextView) {
+func (x *TextViewClassGType) GetCopyClipboard() func(*TextView) {
 	if x.xCopyClipboard == 0 {
 		return nil
 	}
@@ -260,7 +260,7 @@ func (x *TextViewClass) GetCopyClipboard() func(*TextView) {
 // The class handler for the `GtkTextView::paste-clipboard`
 //
 //	keybinding signal.
-func (x *TextViewClass) OverridePasteClipboard(cb func(*TextView)) {
+func (x *TextViewClassGType) OverridePasteClipboard(cb func(*TextView)) {
 	if cb == nil {
 		x.xPasteClipboard = 0
 	} else {
@@ -274,7 +274,7 @@ func (x *TextViewClass) OverridePasteClipboard(cb func(*TextView)) {
 // The class handler for the `GtkTextView::paste-clipboard`
 //
 //	keybinding signal.
-func (x *TextViewClass) GetPasteClipboard() func(*TextView) {
+func (x *TextViewClassGType) GetPasteClipboard() func(*TextView) {
 	if x.xPasteClipboard == 0 {
 		return nil
 	}
@@ -289,7 +289,7 @@ func (x *TextViewClass) GetPasteClipboard() func(*TextView) {
 // The class handler for the `GtkTextView::toggle-overwrite`
 //
 //	keybinding signal.
-func (x *TextViewClass) OverrideToggleOverwrite(cb func(*TextView)) {
+func (x *TextViewClassGType) OverrideToggleOverwrite(cb func(*TextView)) {
 	if cb == nil {
 		x.xToggleOverwrite = 0
 	} else {
@@ -303,7 +303,7 @@ func (x *TextViewClass) OverrideToggleOverwrite(cb func(*TextView)) {
 // The class handler for the `GtkTextView::toggle-overwrite`
 //
 //	keybinding signal.
-func (x *TextViewClass) GetToggleOverwrite() func(*TextView) {
+func (x *TextViewClassGType) GetToggleOverwrite() func(*TextView) {
 	if x.xToggleOverwrite == 0 {
 		return nil
 	}
@@ -319,7 +319,7 @@ func (x *TextViewClass) GetToggleOverwrite() func(*TextView) {
 //
 //	for the text view. The default implementation is to just call
 //	gtk_text_buffer_new().
-func (x *TextViewClass) OverrideCreateBuffer(cb func(*TextView) *TextBuffer) {
+func (x *TextViewClassGType) OverrideCreateBuffer(cb func(*TextView) *TextBuffer) {
 	if cb == nil {
 		x.xCreateBuffer = 0
 	} else {
@@ -338,7 +338,7 @@ func (x *TextViewClass) OverrideCreateBuffer(cb func(*TextView) *TextBuffer) {
 //
 //	for the text view. The default implementation is to just call
 //	gtk_text_buffer_new().
-func (x *TextViewClass) GetCreateBuffer() func(*TextView) *TextBuffer {
+func (x *TextViewClassGType) GetCreateBuffer() func(*TextView) *TextBuffer {
 	if x.xCreateBuffer == 0 {
 		return nil
 	}
@@ -362,7 +362,7 @@ func (x *TextViewClass) GetCreateBuffer() func(*TextView) *TextBuffer {
 //	in a subclass to draw customized content underneath or above the
 //	text. In the %GTK_TEXT_VIEW_LAYER_BELOW_TEXT and %GTK_TEXT_VIEW_LAYER_ABOVE_TEXT
 //	layers the drawing is done in the buffer coordinate space.
-func (x *TextViewClass) OverrideSnapshotLayer(cb func(*TextView, TextViewLayer, *Snapshot)) {
+func (x *TextViewClassGType) OverrideSnapshotLayer(cb func(*TextView, TextViewLayer, *Snapshot)) {
 	if cb == nil {
 		x.xSnapshotLayer = 0
 	} else {
@@ -379,7 +379,7 @@ func (x *TextViewClass) OverrideSnapshotLayer(cb func(*TextView, TextViewLayer, 
 //	in a subclass to draw customized content underneath or above the
 //	text. In the %GTK_TEXT_VIEW_LAYER_BELOW_TEXT and %GTK_TEXT_VIEW_LAYER_ABOVE_TEXT
 //	layers the drawing is done in the buffer coordinate space.
-func (x *TextViewClass) GetSnapshotLayer() func(*TextView, TextViewLayer, *Snapshot) {
+func (x *TextViewClassGType) GetSnapshotLayer() func(*TextView, TextViewLayer, *Snapshot) {
 	if x.xSnapshotLayer == 0 {
 		return nil
 	}
@@ -392,7 +392,7 @@ func (x *TextViewClass) GetSnapshotLayer() func(*TextView, TextViewLayer, *Snaps
 
 // OverrideExtendSelection sets the "extend_selection" callback function.
 // The class handler for the `GtkTextView::extend-selection` signal.
-func (x *TextViewClass) OverrideExtendSelection(cb func(*TextView, TextExtendSelection, *TextIter, *TextIter, *TextIter) bool) {
+func (x *TextViewClassGType) OverrideExtendSelection(cb func(*TextView, TextExtendSelection, *TextIter, *TextIter, *TextIter) bool) {
 	if cb == nil {
 		x.xExtendSelection = 0
 	} else {
@@ -404,7 +404,7 @@ func (x *TextViewClass) OverrideExtendSelection(cb func(*TextView, TextExtendSel
 
 // GetExtendSelection gets the "extend_selection" callback function.
 // The class handler for the `GtkTextView::extend-selection` signal.
-func (x *TextViewClass) GetExtendSelection() func(*TextView, TextExtendSelection, *TextIter, *TextIter, *TextIter) bool {
+func (x *TextViewClassGType) GetExtendSelection() func(*TextView, TextExtendSelection, *TextIter, *TextIter, *TextIter) bool {
 	if x.xExtendSelection == 0 {
 		return nil
 	}
@@ -417,7 +417,7 @@ func (x *TextViewClass) GetExtendSelection() func(*TextView, TextExtendSelection
 
 // OverrideInsertEmoji sets the "insert_emoji" callback function.
 // The class handler for the `GtkTextView::insert-emoji` signal.
-func (x *TextViewClass) OverrideInsertEmoji(cb func(*TextView)) {
+func (x *TextViewClassGType) OverrideInsertEmoji(cb func(*TextView)) {
 	if cb == nil {
 		x.xInsertEmoji = 0
 	} else {
@@ -429,7 +429,7 @@ func (x *TextViewClass) OverrideInsertEmoji(cb func(*TextView)) {
 
 // GetInsertEmoji gets the "insert_emoji" callback function.
 // The class handler for the `GtkTextView::insert-emoji` signal.
-func (x *TextViewClass) GetInsertEmoji() func(*TextView) {
+func (x *TextViewClassGType) GetInsertEmoji() func(*TextView) {
 	if x.xInsertEmoji == 0 {
 		return nil
 	}

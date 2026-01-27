@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type NavigationSplitViewClass struct {
+type NavigationSplitViewClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *NavigationSplitViewClass) GoPointer() uintptr {
+func (x *NavigationSplitViewClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

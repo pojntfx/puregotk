@@ -13,11 +13,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gsk"
 )
 
-type MessageDialogClass struct {
+type MessageDialogClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *MessageDialogClass) GoPointer() uintptr {
+func (x *MessageDialogClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

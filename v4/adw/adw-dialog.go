@@ -13,10 +13,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type DialogClass struct {
+type DialogClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 
 	xCloseAttempt uintptr
 
@@ -25,12 +25,12 @@ type DialogClass struct {
 	Padding [4]uintptr
 }
 
-func (x *DialogClass) GoPointer() uintptr {
+func (x *DialogClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideCloseAttempt sets the "close_attempt" callback function.
-func (x *DialogClass) OverrideCloseAttempt(cb func(*Dialog)) {
+func (x *DialogClassGType) OverrideCloseAttempt(cb func(*Dialog)) {
 	if cb == nil {
 		x.xCloseAttempt = 0
 	} else {
@@ -41,7 +41,7 @@ func (x *DialogClass) OverrideCloseAttempt(cb func(*Dialog)) {
 }
 
 // GetCloseAttempt gets the "close_attempt" callback function.
-func (x *DialogClass) GetCloseAttempt() func(*Dialog) {
+func (x *DialogClassGType) GetCloseAttempt() func(*Dialog) {
 	if x.xCloseAttempt == 0 {
 		return nil
 	}
@@ -53,7 +53,7 @@ func (x *DialogClass) GetCloseAttempt() func(*Dialog) {
 }
 
 // OverrideClosed sets the "closed" callback function.
-func (x *DialogClass) OverrideClosed(cb func(*Dialog)) {
+func (x *DialogClassGType) OverrideClosed(cb func(*Dialog)) {
 	if cb == nil {
 		x.xClosed = 0
 	} else {
@@ -64,7 +64,7 @@ func (x *DialogClass) OverrideClosed(cb func(*Dialog)) {
 }
 
 // GetClosed gets the "closed" callback function.
-func (x *DialogClass) GetClosed() func(*Dialog) {
+func (x *DialogClassGType) GetClosed() func(*Dialog) {
 	if x.xClosed == 0 {
 		return nil
 	}

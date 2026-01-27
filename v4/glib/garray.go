@@ -16,7 +16,7 @@ type Array struct {
 
 	Data uintptr
 
-	Len uint
+	Len uint32
 }
 
 var xArrayGLibType func() types.GType
@@ -35,7 +35,7 @@ type ByteArray struct {
 
 	Data byte
 
-	Len uint
+	Len uint32
 }
 
 var xByteArrayGLibType func() types.GType
@@ -337,7 +337,7 @@ type PtrArray struct {
 
 	Pdata uintptr
 
-	Len uint
+	Len uint32
 }
 
 var xPtrArrayGLibType func() types.GType
@@ -590,7 +590,7 @@ func ByteArrayUnref(ArrayVar []byte) {
 
 }
 
-var xPtrArrayFind func([]uintptr, uintptr, *uint) bool
+var xPtrArrayFind func(uintptr, uintptr, *uint) bool
 
 // Checks whether @needle exists in @haystack. If the element is found, true
 // is returned and the element’s index is returned in @index_ (if non-`NULL`).
@@ -600,13 +600,13 @@ var xPtrArrayFind func([]uintptr, uintptr, *uint) bool
 // This does pointer comparisons only. If you want to use more complex equality
 // checks, such as string comparisons, use
 // [func@GLib.PtrArray.find_with_equal_func].
-func PtrArrayFind(HaystackVar []uintptr, NeedleVar uintptr, IndexVar *uint) bool {
+func PtrArrayFind(HaystackVar uintptr, NeedleVar uintptr, IndexVar *uint) bool {
 
 	cret := xPtrArrayFind(HaystackVar, NeedleVar, IndexVar)
 	return cret
 }
 
-var xPtrArrayFindWithEqualFunc func([]uintptr, uintptr, uintptr, *uint) bool
+var xPtrArrayFindWithEqualFunc func(uintptr, uintptr, uintptr, *uint) bool
 
 // Checks whether @needle exists in @haystack, using the given @equal_func.
 // If the element is found, true is returned and the element’s index is
@@ -617,7 +617,7 @@ var xPtrArrayFindWithEqualFunc func([]uintptr, uintptr, uintptr, *uint) bool
 // @equal_func is called with the element from the array as its first parameter,
 // and @needle as its second parameter. If @equal_func is `NULL`, pointer
 // equality is used.
-func PtrArrayFindWithEqualFunc(HaystackVar []uintptr, NeedleVar uintptr, EqualFuncVar *EqualFunc, IndexVar *uint) bool {
+func PtrArrayFindWithEqualFunc(HaystackVar uintptr, NeedleVar uintptr, EqualFuncVar *EqualFunc, IndexVar *uint) bool {
 
 	cret := xPtrArrayFindWithEqualFunc(HaystackVar, NeedleVar, NewCallbackNullable(EqualFuncVar), IndexVar)
 	return cret

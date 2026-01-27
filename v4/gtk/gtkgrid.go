@@ -11,15 +11,15 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type GridClass struct {
+type GridClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	Padding [8]uintptr
 }
 
-func (x *GridClass) GoPointer() uintptr {
+func (x *GridClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

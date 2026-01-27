@@ -13,23 +13,23 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type LeafletClass struct {
+type LeafletClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *LeafletClass) GoPointer() uintptr {
+func (x *LeafletClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type LeafletPageClass struct {
+type LeafletPageClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *LeafletPageClass) GoPointer() uintptr {
+func (x *LeafletPageClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type BannerClass struct {
+type BannerClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *BannerClass) GoPointer() uintptr {
+func (x *BannerClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

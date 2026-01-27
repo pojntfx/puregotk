@@ -34,10 +34,10 @@ type SettingsBindSetMapping func(*gobject.Value, *glib.VariantType, uintptr) *gl
 // must be returned in this case.
 type SettingsGetMapping func(*glib.Variant, *uintptr, uintptr) bool
 
-type SettingsClass struct {
+type SettingsClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xWritableChanged uintptr
 
@@ -50,12 +50,12 @@ type SettingsClass struct {
 	Padding [20]uintptr
 }
 
-func (x *SettingsClass) GoPointer() uintptr {
+func (x *SettingsClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideWritableChanged sets the "writable_changed" callback function.
-func (x *SettingsClass) OverrideWritableChanged(cb func(*Settings, string)) {
+func (x *SettingsClassGType) OverrideWritableChanged(cb func(*Settings, string)) {
 	if cb == nil {
 		x.xWritableChanged = 0
 	} else {
@@ -66,7 +66,7 @@ func (x *SettingsClass) OverrideWritableChanged(cb func(*Settings, string)) {
 }
 
 // GetWritableChanged gets the "writable_changed" callback function.
-func (x *SettingsClass) GetWritableChanged() func(*Settings, string) {
+func (x *SettingsClassGType) GetWritableChanged() func(*Settings, string) {
 	if x.xWritableChanged == 0 {
 		return nil
 	}
@@ -78,7 +78,7 @@ func (x *SettingsClass) GetWritableChanged() func(*Settings, string) {
 }
 
 // OverrideChanged sets the "changed" callback function.
-func (x *SettingsClass) OverrideChanged(cb func(*Settings, string)) {
+func (x *SettingsClassGType) OverrideChanged(cb func(*Settings, string)) {
 	if cb == nil {
 		x.xChanged = 0
 	} else {
@@ -89,7 +89,7 @@ func (x *SettingsClass) OverrideChanged(cb func(*Settings, string)) {
 }
 
 // GetChanged gets the "changed" callback function.
-func (x *SettingsClass) GetChanged() func(*Settings, string) {
+func (x *SettingsClassGType) GetChanged() func(*Settings, string) {
 	if x.xChanged == 0 {
 		return nil
 	}
@@ -101,7 +101,7 @@ func (x *SettingsClass) GetChanged() func(*Settings, string) {
 }
 
 // OverrideWritableChangeEvent sets the "writable_change_event" callback function.
-func (x *SettingsClass) OverrideWritableChangeEvent(cb func(*Settings, glib.Quark) bool) {
+func (x *SettingsClassGType) OverrideWritableChangeEvent(cb func(*Settings, glib.Quark) bool) {
 	if cb == nil {
 		x.xWritableChangeEvent = 0
 	} else {
@@ -112,7 +112,7 @@ func (x *SettingsClass) OverrideWritableChangeEvent(cb func(*Settings, glib.Quar
 }
 
 // GetWritableChangeEvent gets the "writable_change_event" callback function.
-func (x *SettingsClass) GetWritableChangeEvent() func(*Settings, glib.Quark) bool {
+func (x *SettingsClassGType) GetWritableChangeEvent() func(*Settings, glib.Quark) bool {
 	if x.xWritableChangeEvent == 0 {
 		return nil
 	}
@@ -124,7 +124,7 @@ func (x *SettingsClass) GetWritableChangeEvent() func(*Settings, glib.Quark) boo
 }
 
 // OverrideChangeEvent sets the "change_event" callback function.
-func (x *SettingsClass) OverrideChangeEvent(cb func(*Settings, *glib.Quark, int) bool) {
+func (x *SettingsClassGType) OverrideChangeEvent(cb func(*Settings, *glib.Quark, int) bool) {
 	if cb == nil {
 		x.xChangeEvent = 0
 	} else {
@@ -135,7 +135,7 @@ func (x *SettingsClass) OverrideChangeEvent(cb func(*Settings, *glib.Quark, int)
 }
 
 // GetChangeEvent gets the "change_event" callback function.
-func (x *SettingsClass) GetChangeEvent() func(*Settings, *glib.Quark, int) bool {
+func (x *SettingsClassGType) GetChangeEvent() func(*Settings, *glib.Quark, int) bool {
 	if x.xChangeEvent == 0 {
 		return nil
 	}

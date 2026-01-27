@@ -10,13 +10,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type NativeSocketAddressClass struct {
+type NativeSocketAddressClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass SocketAddressClass
+	ParentClass SocketAddressClassGType
 }
 
-func (x *NativeSocketAddressClass) GoPointer() uintptr {
+func (x *NativeSocketAddressClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

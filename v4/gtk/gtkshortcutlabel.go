@@ -11,11 +11,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ShortcutLabelClass struct {
+type ShortcutLabelClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *ShortcutLabelClass) GoPointer() uintptr {
+func (x *ShortcutLabelClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

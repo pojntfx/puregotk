@@ -11,11 +11,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type PopupInterface struct {
+type PopupInterfaceGType struct {
 	_ structs.HostLayout
 }
 
-func (x *PopupInterface) GoPointer() uintptr {
+func (x *PopupInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

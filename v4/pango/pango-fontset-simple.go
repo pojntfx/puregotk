@@ -10,11 +10,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type FontsetSimpleClass struct {
+type FontsetSimpleClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *FontsetSimpleClass) GoPointer() uintptr {
+func (x *FontsetSimpleClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

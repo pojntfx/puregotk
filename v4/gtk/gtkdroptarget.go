@@ -13,11 +13,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type DropTargetClass struct {
+type DropTargetClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *DropTargetClass) GoPointer() uintptr {
+func (x *DropTargetClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

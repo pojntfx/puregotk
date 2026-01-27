@@ -31,9 +31,9 @@ type Scanner struct {
 
 	UserData uintptr
 
-	MaxParseErrors uint
+	MaxParseErrors uint32
 
-	ParseErrors uint
+	ParseErrors uint32
 
 	InputName uintptr
 
@@ -45,17 +45,17 @@ type Scanner struct {
 
 	Value TokenValue
 
-	Line uint
+	Line uint32
 
-	Position uint
+	Position uint32
 
 	NextToken TokenType
 
 	NextValue TokenValue
 
-	NextLine uint
+	NextLine uint32
 
-	NextPosition uint
+	NextPosition uint32
 
 	SymbolTable *HashTable
 
@@ -67,7 +67,7 @@ type Scanner struct {
 
 	Buffer uintptr
 
-	ScopeId uint
+	ScopeId uint32
 
 	MsgHandler ScannerMsgFunc
 }
@@ -305,51 +305,51 @@ type ScannerConfig struct {
 
 	CpairCommentSingle uintptr
 
-	CaseSensitive uint
+	CaseSensitive uint32
 
-	SkipCommentMulti uint
+	SkipCommentMulti uint32
 
-	SkipCommentSingle uint
+	SkipCommentSingle uint32
 
-	ScanCommentMulti uint
+	ScanCommentMulti uint32
 
-	ScanIdentifier uint
+	ScanIdentifier uint32
 
-	ScanIdentifier1char uint
+	ScanIdentifier1char uint32
 
-	ScanIdentifierNULL uint
+	ScanIdentifierNULL uint32
 
-	ScanSymbols uint
+	ScanSymbols uint32
 
-	ScanBinary uint
+	ScanBinary uint32
 
-	ScanOctal uint
+	ScanOctal uint32
 
-	ScanFloat uint
+	ScanFloat uint32
 
-	ScanHex uint
+	ScanHex uint32
 
-	ScanHexDollar uint
+	ScanHexDollar uint32
 
-	ScanStringSq uint
+	ScanStringSq uint32
 
-	ScanStringDq uint
+	ScanStringDq uint32
 
-	Numbers2Int uint
+	Numbers2Int uint32
 
-	Int2Float uint
+	Int2Float uint32
 
-	Identifier2String uint
+	Identifier2String uint32
 
-	Char2Token uint
+	Char2Token uint32
 
-	Symbol2Token uint
+	Symbol2Token uint32
 
-	Scope0Fallback uint
+	Scope0Fallback uint32
 
-	StoreInt64 uint
+	StoreInt64 uint32
 
-	PaddingDummy uint
+	PaddingDummy uint32
 }
 
 func (x *ScannerConfig) GoPointer() uintptr {

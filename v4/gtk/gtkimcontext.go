@@ -14,10 +14,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/pango"
 )
 
-type IMContextClass struct {
+type IMContextClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xPreeditStart uintptr
 
@@ -66,13 +66,13 @@ type IMContextClass struct {
 	xGtkReserved4 uintptr
 }
 
-func (x *IMContextClass) GoPointer() uintptr {
+func (x *IMContextClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverridePreeditStart sets the "preedit_start" callback function.
 // Default handler of the [signal@Gtk.IMContext::preedit-start] signal.
-func (x *IMContextClass) OverridePreeditStart(cb func(*IMContext)) {
+func (x *IMContextClassGType) OverridePreeditStart(cb func(*IMContext)) {
 	if cb == nil {
 		x.xPreeditStart = 0
 	} else {
@@ -84,7 +84,7 @@ func (x *IMContextClass) OverridePreeditStart(cb func(*IMContext)) {
 
 // GetPreeditStart gets the "preedit_start" callback function.
 // Default handler of the [signal@Gtk.IMContext::preedit-start] signal.
-func (x *IMContextClass) GetPreeditStart() func(*IMContext) {
+func (x *IMContextClassGType) GetPreeditStart() func(*IMContext) {
 	if x.xPreeditStart == 0 {
 		return nil
 	}
@@ -97,7 +97,7 @@ func (x *IMContextClass) GetPreeditStart() func(*IMContext) {
 
 // OverridePreeditEnd sets the "preedit_end" callback function.
 // Default handler of the [signal@Gtk.IMContext::preedit-end] signal.
-func (x *IMContextClass) OverridePreeditEnd(cb func(*IMContext)) {
+func (x *IMContextClassGType) OverridePreeditEnd(cb func(*IMContext)) {
 	if cb == nil {
 		x.xPreeditEnd = 0
 	} else {
@@ -109,7 +109,7 @@ func (x *IMContextClass) OverridePreeditEnd(cb func(*IMContext)) {
 
 // GetPreeditEnd gets the "preedit_end" callback function.
 // Default handler of the [signal@Gtk.IMContext::preedit-end] signal.
-func (x *IMContextClass) GetPreeditEnd() func(*IMContext) {
+func (x *IMContextClassGType) GetPreeditEnd() func(*IMContext) {
 	if x.xPreeditEnd == 0 {
 		return nil
 	}
@@ -124,7 +124,7 @@ func (x *IMContextClass) GetPreeditEnd() func(*IMContext) {
 // Default handler of the [signal@Gtk.IMContext::preedit-changed]
 //
 //	signal.
-func (x *IMContextClass) OverridePreeditChanged(cb func(*IMContext)) {
+func (x *IMContextClassGType) OverridePreeditChanged(cb func(*IMContext)) {
 	if cb == nil {
 		x.xPreeditChanged = 0
 	} else {
@@ -138,7 +138,7 @@ func (x *IMContextClass) OverridePreeditChanged(cb func(*IMContext)) {
 // Default handler of the [signal@Gtk.IMContext::preedit-changed]
 //
 //	signal.
-func (x *IMContextClass) GetPreeditChanged() func(*IMContext) {
+func (x *IMContextClassGType) GetPreeditChanged() func(*IMContext) {
 	if x.xPreeditChanged == 0 {
 		return nil
 	}
@@ -151,7 +151,7 @@ func (x *IMContextClass) GetPreeditChanged() func(*IMContext) {
 
 // OverrideCommit sets the "commit" callback function.
 // Default handler of the [signal@Gtk.IMContext::commit] signal.
-func (x *IMContextClass) OverrideCommit(cb func(*IMContext, string)) {
+func (x *IMContextClassGType) OverrideCommit(cb func(*IMContext, string)) {
 	if cb == nil {
 		x.xCommit = 0
 	} else {
@@ -163,7 +163,7 @@ func (x *IMContextClass) OverrideCommit(cb func(*IMContext, string)) {
 
 // GetCommit gets the "commit" callback function.
 // Default handler of the [signal@Gtk.IMContext::commit] signal.
-func (x *IMContextClass) GetCommit() func(*IMContext, string) {
+func (x *IMContextClassGType) GetCommit() func(*IMContext, string) {
 	if x.xCommit == 0 {
 		return nil
 	}
@@ -178,7 +178,7 @@ func (x *IMContextClass) GetCommit() func(*IMContext, string) {
 // Default handler of the
 //
 //	[signal@Gtk.IMContext::retrieve-surrounding] signal.
-func (x *IMContextClass) OverrideRetrieveSurrounding(cb func(*IMContext) bool) {
+func (x *IMContextClassGType) OverrideRetrieveSurrounding(cb func(*IMContext) bool) {
 	if cb == nil {
 		x.xRetrieveSurrounding = 0
 	} else {
@@ -192,7 +192,7 @@ func (x *IMContextClass) OverrideRetrieveSurrounding(cb func(*IMContext) bool) {
 // Default handler of the
 //
 //	[signal@Gtk.IMContext::retrieve-surrounding] signal.
-func (x *IMContextClass) GetRetrieveSurrounding() func(*IMContext) bool {
+func (x *IMContextClassGType) GetRetrieveSurrounding() func(*IMContext) bool {
 	if x.xRetrieveSurrounding == 0 {
 		return nil
 	}
@@ -207,7 +207,7 @@ func (x *IMContextClass) GetRetrieveSurrounding() func(*IMContext) bool {
 // Default handler of the
 //
 //	[signal@Gtk.IMContext::delete-surrounding] signal.
-func (x *IMContextClass) OverrideDeleteSurrounding(cb func(*IMContext, int, int) bool) {
+func (x *IMContextClassGType) OverrideDeleteSurrounding(cb func(*IMContext, int, int) bool) {
 	if cb == nil {
 		x.xDeleteSurrounding = 0
 	} else {
@@ -221,7 +221,7 @@ func (x *IMContextClass) OverrideDeleteSurrounding(cb func(*IMContext, int, int)
 // Default handler of the
 //
 //	[signal@Gtk.IMContext::delete-surrounding] signal.
-func (x *IMContextClass) GetDeleteSurrounding() func(*IMContext, int, int) bool {
+func (x *IMContextClassGType) GetDeleteSurrounding() func(*IMContext, int, int) bool {
 	if x.xDeleteSurrounding == 0 {
 		return nil
 	}
@@ -238,7 +238,7 @@ func (x *IMContextClass) GetDeleteSurrounding() func(*IMContext, int, int) bool 
 //	the input window where the entered text will appear changes. Override this
 //	to keep track of the current input window, for instance for the purpose of
 //	positioning a status display of your input method.
-func (x *IMContextClass) OverrideSetClientWidget(cb func(*IMContext, *Widget)) {
+func (x *IMContextClassGType) OverrideSetClientWidget(cb func(*IMContext, *Widget)) {
 	if cb == nil {
 		x.xSetClientWidget = 0
 	} else {
@@ -254,7 +254,7 @@ func (x *IMContextClass) OverrideSetClientWidget(cb func(*IMContext, *Widget)) {
 //	the input window where the entered text will appear changes. Override this
 //	to keep track of the current input window, for instance for the purpose of
 //	positioning a status display of your input method.
-func (x *IMContextClass) GetSetClientWidget() func(*IMContext, *Widget) {
+func (x *IMContextClassGType) GetSetClientWidget() func(*IMContext, *Widget) {
 	if x.xSetClientWidget == 0 {
 		return nil
 	}
@@ -272,7 +272,7 @@ func (x *IMContextClass) GetSetClientWidget() func(*IMContext, *Widget) {
 //	position. Any input method which composes complex characters or any
 //	other compositions from multiple sequential key presses should override
 //	this method to provide feedback.
-func (x *IMContextClass) OverrideGetPreeditString(cb func(*IMContext, *string, **pango.AttrList, *int)) {
+func (x *IMContextClassGType) OverrideGetPreeditString(cb func(*IMContext, *string, **pango.AttrList, *int)) {
 	if cb == nil {
 		x.xGetPreeditString = 0
 	} else {
@@ -289,7 +289,7 @@ func (x *IMContextClass) OverrideGetPreeditString(cb func(*IMContext, *string, *
 //	position. Any input method which composes complex characters or any
 //	other compositions from multiple sequential key presses should override
 //	this method to provide feedback.
-func (x *IMContextClass) GetGetPreeditString() func(*IMContext, *string, **pango.AttrList, *int) {
+func (x *IMContextClassGType) GetGetPreeditString() func(*IMContext, *string, **pango.AttrList, *int) {
 	if x.xGetPreeditString == 0 {
 		return nil
 	}
@@ -312,7 +312,7 @@ func (x *IMContextClass) GetGetPreeditString() func(*IMContext, *string, **pango
 //	returned to indicate that the event wasn’t handled by the input method.
 //	If a builtin mapping exists for the key, it is used to produce a
 //	character.
-func (x *IMContextClass) OverrideFilterKeypress(cb func(*IMContext, *gdk.Event) bool) {
+func (x *IMContextClassGType) OverrideFilterKeypress(cb func(*IMContext, *gdk.Event) bool) {
 	if cb == nil {
 		x.xFilterKeypress = 0
 	} else {
@@ -334,7 +334,7 @@ func (x *IMContextClass) OverrideFilterKeypress(cb func(*IMContext, *gdk.Event) 
 //	returned to indicate that the event wasn’t handled by the input method.
 //	If a builtin mapping exists for the key, it is used to produce a
 //	character.
-func (x *IMContextClass) GetFilterKeypress() func(*IMContext, *gdk.Event) bool {
+func (x *IMContextClassGType) GetFilterKeypress() func(*IMContext, *gdk.Event) bool {
 	if x.xFilterKeypress == 0 {
 		return nil
 	}
@@ -349,7 +349,7 @@ func (x *IMContextClass) GetFilterKeypress() func(*IMContext, *gdk.Event) bool {
 // Called via [method@Gtk.IMContext.focus_in] when the input widget
 //
 //	has gained focus. May be overridden to keep track of the current focus.
-func (x *IMContextClass) OverrideFocusIn(cb func(*IMContext)) {
+func (x *IMContextClassGType) OverrideFocusIn(cb func(*IMContext)) {
 	if cb == nil {
 		x.xFocusIn = 0
 	} else {
@@ -363,7 +363,7 @@ func (x *IMContextClass) OverrideFocusIn(cb func(*IMContext)) {
 // Called via [method@Gtk.IMContext.focus_in] when the input widget
 //
 //	has gained focus. May be overridden to keep track of the current focus.
-func (x *IMContextClass) GetFocusIn() func(*IMContext) {
+func (x *IMContextClassGType) GetFocusIn() func(*IMContext) {
 	if x.xFocusIn == 0 {
 		return nil
 	}
@@ -378,7 +378,7 @@ func (x *IMContextClass) GetFocusIn() func(*IMContext) {
 // Called via [method@Gtk.IMContext.focus_out] when the input widget
 //
 //	has lost focus. May be overridden to keep track of the current focus.
-func (x *IMContextClass) OverrideFocusOut(cb func(*IMContext)) {
+func (x *IMContextClassGType) OverrideFocusOut(cb func(*IMContext)) {
 	if cb == nil {
 		x.xFocusOut = 0
 	} else {
@@ -392,7 +392,7 @@ func (x *IMContextClass) OverrideFocusOut(cb func(*IMContext)) {
 // Called via [method@Gtk.IMContext.focus_out] when the input widget
 //
 //	has lost focus. May be overridden to keep track of the current focus.
-func (x *IMContextClass) GetFocusOut() func(*IMContext) {
+func (x *IMContextClassGType) GetFocusOut() func(*IMContext) {
 	if x.xFocusOut == 0 {
 		return nil
 	}
@@ -408,7 +408,7 @@ func (x *IMContextClass) GetFocusOut() func(*IMContext) {
 //
 //	change in cursor position. An input method that implements preediting
 //	should override this method to clear the preedit state on reset.
-func (x *IMContextClass) OverrideReset(cb func(*IMContext)) {
+func (x *IMContextClassGType) OverrideReset(cb func(*IMContext)) {
 	if cb == nil {
 		x.xReset = 0
 	} else {
@@ -423,7 +423,7 @@ func (x *IMContextClass) OverrideReset(cb func(*IMContext)) {
 //
 //	change in cursor position. An input method that implements preediting
 //	should override this method to clear the preedit state on reset.
-func (x *IMContextClass) GetReset() func(*IMContext) {
+func (x *IMContextClassGType) GetReset() func(*IMContext) {
 	if x.xReset == 0 {
 		return nil
 	}
@@ -440,7 +440,7 @@ func (x *IMContextClass) GetReset() func(*IMContext) {
 //	to inform the input method of the current cursor location relative to
 //	the client window. May be overridden to implement the display of popup
 //	windows at the cursor position.
-func (x *IMContextClass) OverrideSetCursorLocation(cb func(*IMContext, *gdk.Rectangle)) {
+func (x *IMContextClassGType) OverrideSetCursorLocation(cb func(*IMContext, *gdk.Rectangle)) {
 	if cb == nil {
 		x.xSetCursorLocation = 0
 	} else {
@@ -456,7 +456,7 @@ func (x *IMContextClass) OverrideSetCursorLocation(cb func(*IMContext, *gdk.Rect
 //	to inform the input method of the current cursor location relative to
 //	the client window. May be overridden to implement the display of popup
 //	windows at the cursor position.
-func (x *IMContextClass) GetSetCursorLocation() func(*IMContext, *gdk.Rectangle) {
+func (x *IMContextClassGType) GetSetCursorLocation() func(*IMContext, *gdk.Rectangle) {
 	if x.xSetCursorLocation == 0 {
 		return nil
 	}
@@ -472,7 +472,7 @@ func (x *IMContextClass) GetSetCursorLocation() func(*IMContext, *gdk.Rectangle)
 //
 //	the use of the preedit string. Override this to display feedback by some
 //	other means if turned off.
-func (x *IMContextClass) OverrideSetUsePreedit(cb func(*IMContext, bool)) {
+func (x *IMContextClassGType) OverrideSetUsePreedit(cb func(*IMContext, bool)) {
 	if cb == nil {
 		x.xSetUsePreedit = 0
 	} else {
@@ -487,7 +487,7 @@ func (x *IMContextClass) OverrideSetUsePreedit(cb func(*IMContext, bool)) {
 //
 //	the use of the preedit string. Override this to display feedback by some
 //	other means if turned off.
-func (x *IMContextClass) GetSetUsePreedit() func(*IMContext, bool) {
+func (x *IMContextClassGType) GetSetUsePreedit() func(*IMContext, bool) {
 	if x.xSetUsePreedit == 0 {
 		return nil
 	}
@@ -506,7 +506,7 @@ func (x *IMContextClass) GetSetUsePreedit() func(*IMContext, bool) {
 //	to override this method even with input methods which implement
 //	context-dependent behavior. The base implementation is sufficient for
 //	[method@Gtk.IMContext.get_surrounding] to work.
-func (x *IMContextClass) OverrideSetSurrounding(cb func(*IMContext, string, int, int)) {
+func (x *IMContextClassGType) OverrideSetSurrounding(cb func(*IMContext, string, int, int)) {
 	if cb == nil {
 		x.xSetSurrounding = 0
 	} else {
@@ -524,7 +524,7 @@ func (x *IMContextClass) OverrideSetSurrounding(cb func(*IMContext, string, int,
 //	to override this method even with input methods which implement
 //	context-dependent behavior. The base implementation is sufficient for
 //	[method@Gtk.IMContext.get_surrounding] to work.
-func (x *IMContextClass) GetSetSurrounding() func(*IMContext, string, int, int) {
+func (x *IMContextClassGType) GetSetSurrounding() func(*IMContext, string, int, int) {
 	if x.xSetSurrounding == 0 {
 		return nil
 	}
@@ -543,7 +543,7 @@ func (x *IMContextClass) GetSetSurrounding() func(*IMContext, string, int, int) 
 //	The base implementation emits [signal@Gtk.IMContext::retrieve-surrounding]
 //	and records the context received by the subsequent invocation of
 //	[vfunc@Gtk.IMContext.get_surrounding].
-func (x *IMContextClass) OverrideGetSurrounding(cb func(*IMContext, *string, *int) bool) {
+func (x *IMContextClassGType) OverrideGetSurrounding(cb func(*IMContext, *string, *int) bool) {
 	if cb == nil {
 		x.xGetSurrounding = 0
 	} else {
@@ -561,7 +561,7 @@ func (x *IMContextClass) OverrideGetSurrounding(cb func(*IMContext, *string, *in
 //	The base implementation emits [signal@Gtk.IMContext::retrieve-surrounding]
 //	and records the context received by the subsequent invocation of
 //	[vfunc@Gtk.IMContext.get_surrounding].
-func (x *IMContextClass) GetGetSurrounding() func(*IMContext, *string, *int) bool {
+func (x *IMContextClassGType) GetGetSurrounding() func(*IMContext, *string, *int) bool {
 	if x.xGetSurrounding == 0 {
 		return nil
 	}
@@ -581,7 +581,7 @@ func (x *IMContextClass) GetGetSurrounding() func(*IMContext, *string, *int) boo
 //	override this method even with input methods which implement
 //	context-dependent behavior. The base implementation is sufficient for
 //	[method@Gtk.IMContext.get_surrounding] to work.
-func (x *IMContextClass) OverrideSetSurroundingWithSelection(cb func(*IMContext, string, int, int, int)) {
+func (x *IMContextClassGType) OverrideSetSurroundingWithSelection(cb func(*IMContext, string, int, int, int)) {
 	if cb == nil {
 		x.xSetSurroundingWithSelection = 0
 	} else {
@@ -600,7 +600,7 @@ func (x *IMContextClass) OverrideSetSurroundingWithSelection(cb func(*IMContext,
 //	override this method even with input methods which implement
 //	context-dependent behavior. The base implementation is sufficient for
 //	[method@Gtk.IMContext.get_surrounding] to work.
-func (x *IMContextClass) GetSetSurroundingWithSelection() func(*IMContext, string, int, int, int) {
+func (x *IMContextClassGType) GetSetSurroundingWithSelection() func(*IMContext, string, int, int, int) {
 	if x.xSetSurroundingWithSelection == 0 {
 		return nil
 	}
@@ -620,7 +620,7 @@ func (x *IMContextClass) GetSetSurroundingWithSelection() func(*IMContext, strin
 //	behavior. The base implementation emits
 //	[signal@Gtk.IMContext::retrieve-surrounding] and records the context
 //	received by the subsequent invocation of [vfunc@Gtk.IMContext.get_surrounding].
-func (x *IMContextClass) OverrideGetSurroundingWithSelection(cb func(*IMContext, *string, *int, *int) bool) {
+func (x *IMContextClassGType) OverrideGetSurroundingWithSelection(cb func(*IMContext, *string, *int, *int) bool) {
 	if cb == nil {
 		x.xGetSurroundingWithSelection = 0
 	} else {
@@ -639,7 +639,7 @@ func (x *IMContextClass) OverrideGetSurroundingWithSelection(cb func(*IMContext,
 //	behavior. The base implementation emits
 //	[signal@Gtk.IMContext::retrieve-surrounding] and records the context
 //	received by the subsequent invocation of [vfunc@Gtk.IMContext.get_surrounding].
-func (x *IMContextClass) GetGetSurroundingWithSelection() func(*IMContext, *string, *int, *int) bool {
+func (x *IMContextClassGType) GetGetSurroundingWithSelection() func(*IMContext, *string, *int, *int) bool {
 	if x.xGetSurroundingWithSelection == 0 {
 		return nil
 	}
@@ -651,7 +651,7 @@ func (x *IMContextClass) GetGetSurroundingWithSelection() func(*IMContext, *stri
 }
 
 // OverrideActivateOsk sets the "activate_osk" callback function.
-func (x *IMContextClass) OverrideActivateOsk(cb func(*IMContext)) {
+func (x *IMContextClassGType) OverrideActivateOsk(cb func(*IMContext)) {
 	if cb == nil {
 		x.xActivateOsk = 0
 	} else {
@@ -662,7 +662,7 @@ func (x *IMContextClass) OverrideActivateOsk(cb func(*IMContext)) {
 }
 
 // GetActivateOsk gets the "activate_osk" callback function.
-func (x *IMContextClass) GetActivateOsk() func(*IMContext) {
+func (x *IMContextClassGType) GetActivateOsk() func(*IMContext) {
 	if x.xActivateOsk == 0 {
 		return nil
 	}
@@ -674,7 +674,7 @@ func (x *IMContextClass) GetActivateOsk() func(*IMContext) {
 }
 
 // OverrideActivateOskWithEvent sets the "activate_osk_with_event" callback function.
-func (x *IMContextClass) OverrideActivateOskWithEvent(cb func(*IMContext, *gdk.Event) bool) {
+func (x *IMContextClassGType) OverrideActivateOskWithEvent(cb func(*IMContext, *gdk.Event) bool) {
 	if cb == nil {
 		x.xActivateOskWithEvent = 0
 	} else {
@@ -685,7 +685,7 @@ func (x *IMContextClass) OverrideActivateOskWithEvent(cb func(*IMContext, *gdk.E
 }
 
 // GetActivateOskWithEvent gets the "activate_osk_with_event" callback function.
-func (x *IMContextClass) GetActivateOskWithEvent() func(*IMContext, *gdk.Event) bool {
+func (x *IMContextClassGType) GetActivateOskWithEvent() func(*IMContext, *gdk.Event) bool {
 	if x.xActivateOskWithEvent == 0 {
 		return nil
 	}
@@ -697,7 +697,7 @@ func (x *IMContextClass) GetActivateOskWithEvent() func(*IMContext, *gdk.Event) 
 }
 
 // OverrideGtkReserved2 sets the "_gtk_reserved2" callback function.
-func (x *IMContextClass) OverrideGtkReserved2(cb func()) {
+func (x *IMContextClassGType) OverrideGtkReserved2(cb func()) {
 	if cb == nil {
 		x.xGtkReserved2 = 0
 	} else {
@@ -708,7 +708,7 @@ func (x *IMContextClass) OverrideGtkReserved2(cb func()) {
 }
 
 // GetGtkReserved2 gets the "_gtk_reserved2" callback function.
-func (x *IMContextClass) GetGtkReserved2() func() {
+func (x *IMContextClassGType) GetGtkReserved2() func() {
 	if x.xGtkReserved2 == 0 {
 		return nil
 	}
@@ -720,7 +720,7 @@ func (x *IMContextClass) GetGtkReserved2() func() {
 }
 
 // OverrideGtkReserved3 sets the "_gtk_reserved3" callback function.
-func (x *IMContextClass) OverrideGtkReserved3(cb func()) {
+func (x *IMContextClassGType) OverrideGtkReserved3(cb func()) {
 	if cb == nil {
 		x.xGtkReserved3 = 0
 	} else {
@@ -731,7 +731,7 @@ func (x *IMContextClass) OverrideGtkReserved3(cb func()) {
 }
 
 // GetGtkReserved3 gets the "_gtk_reserved3" callback function.
-func (x *IMContextClass) GetGtkReserved3() func() {
+func (x *IMContextClassGType) GetGtkReserved3() func() {
 	if x.xGtkReserved3 == 0 {
 		return nil
 	}
@@ -743,7 +743,7 @@ func (x *IMContextClass) GetGtkReserved3() func() {
 }
 
 // OverrideGtkReserved4 sets the "_gtk_reserved4" callback function.
-func (x *IMContextClass) OverrideGtkReserved4(cb func()) {
+func (x *IMContextClassGType) OverrideGtkReserved4(cb func()) {
 	if cb == nil {
 		x.xGtkReserved4 = 0
 	} else {
@@ -754,7 +754,7 @@ func (x *IMContextClass) OverrideGtkReserved4(cb func()) {
 }
 
 // GetGtkReserved4 gets the "_gtk_reserved4" callback function.
-func (x *IMContextClass) GetGtkReserved4() func() {
+func (x *IMContextClassGType) GetGtkReserved4() func() {
 	if x.xGtkReserved4 == 0 {
 		return nil
 	}

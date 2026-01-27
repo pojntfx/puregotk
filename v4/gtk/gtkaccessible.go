@@ -13,7 +13,7 @@ import (
 )
 
 // The common interface for accessible objects.
-type AccessibleInterface struct {
+type AccessibleInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -31,7 +31,7 @@ type AccessibleInterface struct {
 	xGetBounds uintptr
 }
 
-func (x *AccessibleInterface) GoPointer() uintptr {
+func (x *AccessibleInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -39,7 +39,7 @@ func (x *AccessibleInterface) GoPointer() uintptr {
 // retrieve the platform-specific accessibility context
 //
 //	for the accessible implementation
-func (x *AccessibleInterface) OverrideGetAtContext(cb func(Accessible) *ATContext) {
+func (x *AccessibleInterfaceGType) OverrideGetAtContext(cb func(Accessible) *ATContext) {
 	if cb == nil {
 		x.xGetAtContext = 0
 	} else {
@@ -57,7 +57,7 @@ func (x *AccessibleInterface) OverrideGetAtContext(cb func(Accessible) *ATContex
 // retrieve the platform-specific accessibility context
 //
 //	for the accessible implementation
-func (x *AccessibleInterface) GetGetAtContext() func(Accessible) *ATContext {
+func (x *AccessibleInterfaceGType) GetGetAtContext() func(Accessible) *ATContext {
 	if x.xGetAtContext == 0 {
 		return nil
 	}
@@ -76,7 +76,7 @@ func (x *AccessibleInterface) GetGetAtContext() func(Accessible) *ATContext {
 
 // OverrideGetPlatformState sets the "get_platform_state" callback function.
 // retrieve the accessible state
-func (x *AccessibleInterface) OverrideGetPlatformState(cb func(Accessible, AccessiblePlatformState) bool) {
+func (x *AccessibleInterfaceGType) OverrideGetPlatformState(cb func(Accessible, AccessiblePlatformState) bool) {
 	if cb == nil {
 		x.xGetPlatformState = 0
 	} else {
@@ -88,7 +88,7 @@ func (x *AccessibleInterface) OverrideGetPlatformState(cb func(Accessible, Acces
 
 // GetGetPlatformState gets the "get_platform_state" callback function.
 // retrieve the accessible state
-func (x *AccessibleInterface) GetGetPlatformState() func(Accessible, AccessiblePlatformState) bool {
+func (x *AccessibleInterfaceGType) GetGetPlatformState() func(Accessible, AccessiblePlatformState) bool {
 	if x.xGetPlatformState == 0 {
 		return nil
 	}
@@ -100,7 +100,7 @@ func (x *AccessibleInterface) GetGetPlatformState() func(Accessible, AccessibleP
 }
 
 // OverrideGetAccessibleParent sets the "get_accessible_parent" callback function.
-func (x *AccessibleInterface) OverrideGetAccessibleParent(cb func(Accessible) *AccessibleBase) {
+func (x *AccessibleInterfaceGType) OverrideGetAccessibleParent(cb func(Accessible) *AccessibleBase) {
 	if cb == nil {
 		x.xGetAccessibleParent = 0
 	} else {
@@ -115,7 +115,7 @@ func (x *AccessibleInterface) OverrideGetAccessibleParent(cb func(Accessible) *A
 }
 
 // GetGetAccessibleParent gets the "get_accessible_parent" callback function.
-func (x *AccessibleInterface) GetGetAccessibleParent() func(Accessible) *AccessibleBase {
+func (x *AccessibleInterfaceGType) GetGetAccessibleParent() func(Accessible) *AccessibleBase {
 	if x.xGetAccessibleParent == 0 {
 		return nil
 	}
@@ -133,7 +133,7 @@ func (x *AccessibleInterface) GetGetAccessibleParent() func(Accessible) *Accessi
 }
 
 // OverrideGetFirstAccessibleChild sets the "get_first_accessible_child" callback function.
-func (x *AccessibleInterface) OverrideGetFirstAccessibleChild(cb func(Accessible) *AccessibleBase) {
+func (x *AccessibleInterfaceGType) OverrideGetFirstAccessibleChild(cb func(Accessible) *AccessibleBase) {
 	if cb == nil {
 		x.xGetFirstAccessibleChild = 0
 	} else {
@@ -148,7 +148,7 @@ func (x *AccessibleInterface) OverrideGetFirstAccessibleChild(cb func(Accessible
 }
 
 // GetGetFirstAccessibleChild gets the "get_first_accessible_child" callback function.
-func (x *AccessibleInterface) GetGetFirstAccessibleChild() func(Accessible) *AccessibleBase {
+func (x *AccessibleInterfaceGType) GetGetFirstAccessibleChild() func(Accessible) *AccessibleBase {
 	if x.xGetFirstAccessibleChild == 0 {
 		return nil
 	}
@@ -166,7 +166,7 @@ func (x *AccessibleInterface) GetGetFirstAccessibleChild() func(Accessible) *Acc
 }
 
 // OverrideGetNextAccessibleSibling sets the "get_next_accessible_sibling" callback function.
-func (x *AccessibleInterface) OverrideGetNextAccessibleSibling(cb func(Accessible) *AccessibleBase) {
+func (x *AccessibleInterfaceGType) OverrideGetNextAccessibleSibling(cb func(Accessible) *AccessibleBase) {
 	if cb == nil {
 		x.xGetNextAccessibleSibling = 0
 	} else {
@@ -181,7 +181,7 @@ func (x *AccessibleInterface) OverrideGetNextAccessibleSibling(cb func(Accessibl
 }
 
 // GetGetNextAccessibleSibling gets the "get_next_accessible_sibling" callback function.
-func (x *AccessibleInterface) GetGetNextAccessibleSibling() func(Accessible) *AccessibleBase {
+func (x *AccessibleInterfaceGType) GetGetNextAccessibleSibling() func(Accessible) *AccessibleBase {
 	if x.xGetNextAccessibleSibling == 0 {
 		return nil
 	}
@@ -199,7 +199,7 @@ func (x *AccessibleInterface) GetGetNextAccessibleSibling() func(Accessible) *Ac
 }
 
 // OverrideGetBounds sets the "get_bounds" callback function.
-func (x *AccessibleInterface) OverrideGetBounds(cb func(Accessible, *int, *int, *int, *int) bool) {
+func (x *AccessibleInterfaceGType) OverrideGetBounds(cb func(Accessible, *int, *int, *int, *int) bool) {
 	if cb == nil {
 		x.xGetBounds = 0
 	} else {
@@ -210,7 +210,7 @@ func (x *AccessibleInterface) OverrideGetBounds(cb func(Accessible, *int, *int, 
 }
 
 // GetGetBounds gets the "get_bounds" callback function.
-func (x *AccessibleInterface) GetGetBounds() func(Accessible, *int, *int, *int, *int) bool {
+func (x *AccessibleInterfaceGType) GetGetBounds() func(Accessible, *int, *int, *int, *int) bool {
 	if x.xGetBounds == 0 {
 		return nil
 	}

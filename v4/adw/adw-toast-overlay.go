@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type ToastOverlayClass struct {
+type ToastOverlayClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *ToastOverlayClass) GoPointer() uintptr {
+func (x *ToastOverlayClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

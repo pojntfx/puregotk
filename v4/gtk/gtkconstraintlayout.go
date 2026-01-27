@@ -12,23 +12,23 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ConstraintLayoutChildClass struct {
+type ConstraintLayoutChildClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass LayoutChildClass
+	ParentClass LayoutChildClassGType
 }
 
-func (x *ConstraintLayoutChildClass) GoPointer() uintptr {
+func (x *ConstraintLayoutChildClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type ConstraintLayoutClass struct {
+type ConstraintLayoutClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass LayoutManagerClass
+	ParentClass LayoutManagerClassGType
 }
 
-func (x *ConstraintLayoutClass) GoPointer() uintptr {
+func (x *ConstraintLayoutClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

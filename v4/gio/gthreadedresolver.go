@@ -8,13 +8,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ThreadedResolverClass struct {
+type ThreadedResolverClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass ResolverClass
+	ParentClass ResolverClassGType
 }
 
-func (x *ThreadedResolverClass) GoPointer() uintptr {
+func (x *ThreadedResolverClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

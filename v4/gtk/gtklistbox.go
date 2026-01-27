@@ -39,22 +39,22 @@ type ListBoxSortFunc func(uintptr, uintptr, uintptr) int
 // or just change the state of the current header widget.
 type ListBoxUpdateHeaderFunc func(uintptr, uintptr, uintptr)
 
-type ListBoxRowClass struct {
+type ListBoxRowClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xActivate uintptr
 
 	Padding [8]uintptr
 }
 
-func (x *ListBoxRowClass) GoPointer() uintptr {
+func (x *ListBoxRowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideActivate sets the "activate" callback function.
-func (x *ListBoxRowClass) OverrideActivate(cb func(*ListBoxRow)) {
+func (x *ListBoxRowClassGType) OverrideActivate(cb func(*ListBoxRow)) {
 	if cb == nil {
 		x.xActivate = 0
 	} else {
@@ -65,7 +65,7 @@ func (x *ListBoxRowClass) OverrideActivate(cb func(*ListBoxRow)) {
 }
 
 // GetActivate gets the "activate" callback function.
-func (x *ListBoxRowClass) GetActivate() func(*ListBoxRow) {
+func (x *ListBoxRowClassGType) GetActivate() func(*ListBoxRow) {
 	if x.xActivate == 0 {
 		return nil
 	}

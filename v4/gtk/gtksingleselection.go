@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type SingleSelectionClass struct {
+type SingleSelectionClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *SingleSelectionClass) GoPointer() uintptr {
+func (x *SingleSelectionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

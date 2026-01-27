@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type PasswordEntryRowClass struct {
+type PasswordEntryRowClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass EntryRowClass
+	ParentClass EntryRowClassGType
 }
 
-func (x *PasswordEntryRowClass) GoPointer() uintptr {
+func (x *PasswordEntryRowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

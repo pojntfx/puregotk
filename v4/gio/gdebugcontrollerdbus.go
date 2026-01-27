@@ -13,23 +13,23 @@ import (
 )
 
 // The virtual function table for #GDebugControllerDBus.
-type DebugControllerDBusClass struct {
+type DebugControllerDBusClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xAuthorize uintptr
 
 	Padding [12]uintptr
 }
 
-func (x *DebugControllerDBusClass) GoPointer() uintptr {
+func (x *DebugControllerDBusClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideAuthorize sets the "authorize" callback function.
 // Default handler for the #GDebugControllerDBus::authorize signal.
-func (x *DebugControllerDBusClass) OverrideAuthorize(cb func(*DebugControllerDBus, *DBusMethodInvocation) bool) {
+func (x *DebugControllerDBusClassGType) OverrideAuthorize(cb func(*DebugControllerDBus, *DBusMethodInvocation) bool) {
 	if cb == nil {
 		x.xAuthorize = 0
 	} else {
@@ -41,7 +41,7 @@ func (x *DebugControllerDBusClass) OverrideAuthorize(cb func(*DebugControllerDBu
 
 // GetAuthorize gets the "authorize" callback function.
 // Default handler for the #GDebugControllerDBus::authorize signal.
-func (x *DebugControllerDBusClass) GetAuthorize() func(*DebugControllerDBus, *DBusMethodInvocation) bool {
+func (x *DebugControllerDBusClassGType) GetAuthorize() func(*DebugControllerDBus, *DBusMethodInvocation) bool {
 	if x.xAuthorize == 0 {
 		return nil
 	}

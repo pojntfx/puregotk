@@ -122,7 +122,18 @@ func (p *Pass) writeGo(r types.Repository, gotemp *template.Template, dir string
 	records := make(map[string][]types.RecordTemplate)
 	recordLookup := make(map[string]bool)
 	for _, rec := range ns.Records {
+		// Skip private/internal records that start with underscore
+		// These types (like _Array, _Component) are internal implementation details
+		// that would collide with the public class names after SnakeToCamel conversion
+		if strings.HasPrefix(rec.Name, "_") {
+			continue
+		}
 		name := util.SnakeToCamel(rec.Name)
+		// Add "GType" suffix to GType struct records to avoid collision with enums
+		// that may have the same name (e.g., PropertyClass enum vs PropertyClass record in icalglib)
+		if rec.GLibIsGTypeStructFor != "" {
+			name = name + "GType"
+		}
 		constructors := make([]types.FuncTemplate, len(rec.Constructors))
 		receivers := make([]types.FuncTemplate, 0, len(rec.Methods))
 		fields := make([]types.RecordField, 0, len(rec.Fields))
@@ -186,6 +197,11 @@ func (p *Pass) writeGo(r types.Repository, gotemp *template.Template, dir string
 				if f.AnyType.Type != nil && f.AnyType.Type.CType == "gint" {
 					_type = "int32"
 				}
+				// HACK: Same for guint - in structs it needs to be uint32 for correct memory layout
+				// C's unsigned int is 32-bit even on 64-bit platforms
+				if f.AnyType.Type != nil && f.AnyType.Type.CType == "guint" {
+					_type = "uint32"
+				}
 
 				// HACK: in structs the strings should be uintptr as we convert it ourselves
 				if _type == "string" {
@@ -201,6 +217,10 @@ func (p *Pass) writeGo(r types.Repository, gotemp *template.Template, dir string
 					kind := p.Types.Kind(ns.Name, typeName)
 					if kind == types.RecordsType && !strings.Contains(f.AnyType.Type.CType, "*") {
 						// Use the full struct type for embedding
+						// Check if this is a GType struct record and add suffix
+						if p.Types.IsGTypeStruct(ns.Name, typeName) {
+							typeName = typeName + "GType"
+						}
 						_type = typeName
 					}
 				}
@@ -262,7 +282,14 @@ func (p *Pass) writeGo(r types.Repository, gotemp *template.Template, dir string
 	for _, inter := range ns.Interfaces {
 		fn := inter.FilenameSafe()
 		files = append(files, fn)
-		interfaces[fn] = append(interfaces[fn], types.ConvertInterface(ns.Name, "", inter, nil, p.Types))
+		interTemplate := types.ConvertInterface(ns.Name, "", inter, nil, p.Types)
+		// Check if a class with the name "InterfaceName + Base" already exists
+		// If so, use an alternate name for the Base implementation struct to avoid collision
+		baseName := inter.Name + "Base"
+		if p.Types.Kind(ns.Name, baseName) == types.ClassesType {
+			interTemplate.BaseName = inter.Name + "Iface"
+		}
+		interfaces[fn] = append(interfaces[fn], interTemplate)
 	}
 
 	for _, union := range ns.Unions {

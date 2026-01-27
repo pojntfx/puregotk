@@ -11,13 +11,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ConstraintGuideClass struct {
+type ConstraintGuideClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *ConstraintGuideClass) GoPointer() uintptr {
+func (x *ConstraintGuideClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

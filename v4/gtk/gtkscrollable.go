@@ -11,7 +11,7 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ScrollableInterface struct {
+type ScrollableInterfaceGType struct {
 	_ structs.HostLayout
 
 	BaseIface uintptr
@@ -19,12 +19,12 @@ type ScrollableInterface struct {
 	xGetBorder uintptr
 }
 
-func (x *ScrollableInterface) GoPointer() uintptr {
+func (x *ScrollableInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetBorder sets the "get_border" callback function.
-func (x *ScrollableInterface) OverrideGetBorder(cb func(Scrollable, *Border) bool) {
+func (x *ScrollableInterfaceGType) OverrideGetBorder(cb func(Scrollable, *Border) bool) {
 	if cb == nil {
 		x.xGetBorder = 0
 	} else {
@@ -35,7 +35,7 @@ func (x *ScrollableInterface) OverrideGetBorder(cb func(Scrollable, *Border) boo
 }
 
 // GetGetBorder gets the "get_border" callback function.
-func (x *ScrollableInterface) GetGetBorder() func(Scrollable, *Border) bool {
+func (x *ScrollableInterfaceGType) GetGetBorder() func(Scrollable, *Border) bool {
 	if x.xGetBorder == 0 {
 		return nil
 	}

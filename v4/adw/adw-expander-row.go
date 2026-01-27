@@ -13,15 +13,15 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type ExpanderRowClass struct {
+type ExpanderRowClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass PreferencesRowClass
+	ParentClass PreferencesRowClassGType
 
 	Padding [4]uintptr
 }
 
-func (x *ExpanderRowClass) GoPointer() uintptr {
+func (x *ExpanderRowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

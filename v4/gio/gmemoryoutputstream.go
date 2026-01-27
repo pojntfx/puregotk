@@ -18,10 +18,10 @@ import (
 // The function should have the same semantics as realloc().
 type ReallocFunc func(uintptr, uint) uintptr
 
-type MemoryOutputStreamClass struct {
+type MemoryOutputStreamClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass OutputStreamClass
+	ParentClass OutputStreamClassGType
 
 	xGReserved1 uintptr
 
@@ -34,12 +34,12 @@ type MemoryOutputStreamClass struct {
 	xGReserved5 uintptr
 }
 
-func (x *MemoryOutputStreamClass) GoPointer() uintptr {
+func (x *MemoryOutputStreamClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *MemoryOutputStreamClass) OverrideGReserved1(cb func()) {
+func (x *MemoryOutputStreamClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -50,7 +50,7 @@ func (x *MemoryOutputStreamClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *MemoryOutputStreamClass) GetGReserved1() func() {
+func (x *MemoryOutputStreamClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -62,7 +62,7 @@ func (x *MemoryOutputStreamClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *MemoryOutputStreamClass) OverrideGReserved2(cb func()) {
+func (x *MemoryOutputStreamClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -73,7 +73,7 @@ func (x *MemoryOutputStreamClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *MemoryOutputStreamClass) GetGReserved2() func() {
+func (x *MemoryOutputStreamClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}
@@ -85,7 +85,7 @@ func (x *MemoryOutputStreamClass) GetGReserved2() func() {
 }
 
 // OverrideGReserved3 sets the "_g_reserved3" callback function.
-func (x *MemoryOutputStreamClass) OverrideGReserved3(cb func()) {
+func (x *MemoryOutputStreamClassGType) OverrideGReserved3(cb func()) {
 	if cb == nil {
 		x.xGReserved3 = 0
 	} else {
@@ -96,7 +96,7 @@ func (x *MemoryOutputStreamClass) OverrideGReserved3(cb func()) {
 }
 
 // GetGReserved3 gets the "_g_reserved3" callback function.
-func (x *MemoryOutputStreamClass) GetGReserved3() func() {
+func (x *MemoryOutputStreamClassGType) GetGReserved3() func() {
 	if x.xGReserved3 == 0 {
 		return nil
 	}
@@ -108,7 +108,7 @@ func (x *MemoryOutputStreamClass) GetGReserved3() func() {
 }
 
 // OverrideGReserved4 sets the "_g_reserved4" callback function.
-func (x *MemoryOutputStreamClass) OverrideGReserved4(cb func()) {
+func (x *MemoryOutputStreamClassGType) OverrideGReserved4(cb func()) {
 	if cb == nil {
 		x.xGReserved4 = 0
 	} else {
@@ -119,7 +119,7 @@ func (x *MemoryOutputStreamClass) OverrideGReserved4(cb func()) {
 }
 
 // GetGReserved4 gets the "_g_reserved4" callback function.
-func (x *MemoryOutputStreamClass) GetGReserved4() func() {
+func (x *MemoryOutputStreamClassGType) GetGReserved4() func() {
 	if x.xGReserved4 == 0 {
 		return nil
 	}
@@ -131,7 +131,7 @@ func (x *MemoryOutputStreamClass) GetGReserved4() func() {
 }
 
 // OverrideGReserved5 sets the "_g_reserved5" callback function.
-func (x *MemoryOutputStreamClass) OverrideGReserved5(cb func()) {
+func (x *MemoryOutputStreamClassGType) OverrideGReserved5(cb func()) {
 	if cb == nil {
 		x.xGReserved5 = 0
 	} else {
@@ -142,7 +142,7 @@ func (x *MemoryOutputStreamClass) OverrideGReserved5(cb func()) {
 }
 
 // GetGReserved5 gets the "_g_reserved5" callback function.
-func (x *MemoryOutputStreamClass) GetGReserved5() func() {
+func (x *MemoryOutputStreamClassGType) GetGReserved5() func() {
 	if x.xGReserved5 == 0 {
 		return nil
 	}

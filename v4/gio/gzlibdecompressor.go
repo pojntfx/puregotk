@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ZlibDecompressorClass struct {
+type ZlibDecompressorClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *ZlibDecompressorClass) GoPointer() uintptr {
+func (x *ZlibDecompressorClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

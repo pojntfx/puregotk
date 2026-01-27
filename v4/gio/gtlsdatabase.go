@@ -15,10 +15,10 @@ import (
 // The class for #GTlsDatabase. Derived classes should implement the various
 // virtual methods. _async and _finish methods have a default
 // implementation that runs the corresponding sync method in a thread.
-type TlsDatabaseClass struct {
+type TlsDatabaseClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xVerifyChain uintptr
 
@@ -49,7 +49,7 @@ type TlsDatabaseClass struct {
 	Padding [16]uintptr
 }
 
-func (x *TlsDatabaseClass) GoPointer() uintptr {
+func (x *TlsDatabaseClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -57,7 +57,7 @@ func (x *TlsDatabaseClass) GoPointer() uintptr {
 // Virtual method implementing
 //
 //	g_tls_database_verify_chain().
-func (x *TlsDatabaseClass) OverrideVerifyChain(cb func(*TlsDatabase, *TlsCertificate, string, SocketConnectable, *TlsInteraction, TlsDatabaseVerifyFlags, *Cancellable) TlsCertificateFlags) {
+func (x *TlsDatabaseClassGType) OverrideVerifyChain(cb func(*TlsDatabase, *TlsCertificate, string, SocketConnectable, *TlsInteraction, TlsDatabaseVerifyFlags, *Cancellable) TlsCertificateFlags) {
 	if cb == nil {
 		x.xVerifyChain = 0
 	} else {
@@ -71,7 +71,7 @@ func (x *TlsDatabaseClass) OverrideVerifyChain(cb func(*TlsDatabase, *TlsCertifi
 // Virtual method implementing
 //
 //	g_tls_database_verify_chain().
-func (x *TlsDatabaseClass) GetVerifyChain() func(*TlsDatabase, *TlsCertificate, string, SocketConnectable, *TlsInteraction, TlsDatabaseVerifyFlags, *Cancellable) TlsCertificateFlags {
+func (x *TlsDatabaseClassGType) GetVerifyChain() func(*TlsDatabase, *TlsCertificate, string, SocketConnectable, *TlsInteraction, TlsDatabaseVerifyFlags, *Cancellable) TlsCertificateFlags {
 	if x.xVerifyChain == 0 {
 		return nil
 	}
@@ -86,7 +86,7 @@ func (x *TlsDatabaseClass) GetVerifyChain() func(*TlsDatabase, *TlsCertificate, 
 // Virtual method implementing
 //
 //	g_tls_database_verify_chain_async().
-func (x *TlsDatabaseClass) OverrideVerifyChainAsync(cb func(*TlsDatabase, *TlsCertificate, string, SocketConnectable, *TlsInteraction, TlsDatabaseVerifyFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *TlsDatabaseClassGType) OverrideVerifyChainAsync(cb func(*TlsDatabase, *TlsCertificate, string, SocketConnectable, *TlsInteraction, TlsDatabaseVerifyFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xVerifyChainAsync = 0
 	} else {
@@ -100,7 +100,7 @@ func (x *TlsDatabaseClass) OverrideVerifyChainAsync(cb func(*TlsDatabase, *TlsCe
 // Virtual method implementing
 //
 //	g_tls_database_verify_chain_async().
-func (x *TlsDatabaseClass) GetVerifyChainAsync() func(*TlsDatabase, *TlsCertificate, string, SocketConnectable, *TlsInteraction, TlsDatabaseVerifyFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *TlsDatabaseClassGType) GetVerifyChainAsync() func(*TlsDatabase, *TlsCertificate, string, SocketConnectable, *TlsInteraction, TlsDatabaseVerifyFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xVerifyChainAsync == 0 {
 		return nil
 	}
@@ -115,7 +115,7 @@ func (x *TlsDatabaseClass) GetVerifyChainAsync() func(*TlsDatabase, *TlsCertific
 // Virtual method implementing
 //
 //	g_tls_database_verify_chain_finish().
-func (x *TlsDatabaseClass) OverrideVerifyChainFinish(cb func(*TlsDatabase, AsyncResult) TlsCertificateFlags) {
+func (x *TlsDatabaseClassGType) OverrideVerifyChainFinish(cb func(*TlsDatabase, AsyncResult) TlsCertificateFlags) {
 	if cb == nil {
 		x.xVerifyChainFinish = 0
 	} else {
@@ -129,7 +129,7 @@ func (x *TlsDatabaseClass) OverrideVerifyChainFinish(cb func(*TlsDatabase, Async
 // Virtual method implementing
 //
 //	g_tls_database_verify_chain_finish().
-func (x *TlsDatabaseClass) GetVerifyChainFinish() func(*TlsDatabase, AsyncResult) TlsCertificateFlags {
+func (x *TlsDatabaseClassGType) GetVerifyChainFinish() func(*TlsDatabase, AsyncResult) TlsCertificateFlags {
 	if x.xVerifyChainFinish == 0 {
 		return nil
 	}
@@ -144,7 +144,7 @@ func (x *TlsDatabaseClass) GetVerifyChainFinish() func(*TlsDatabase, AsyncResult
 // Virtual method implementing
 //
 //	g_tls_database_create_certificate_handle().
-func (x *TlsDatabaseClass) OverrideCreateCertificateHandle(cb func(*TlsDatabase, *TlsCertificate) string) {
+func (x *TlsDatabaseClassGType) OverrideCreateCertificateHandle(cb func(*TlsDatabase, *TlsCertificate) string) {
 	if cb == nil {
 		x.xCreateCertificateHandle = 0
 	} else {
@@ -158,7 +158,7 @@ func (x *TlsDatabaseClass) OverrideCreateCertificateHandle(cb func(*TlsDatabase,
 // Virtual method implementing
 //
 //	g_tls_database_create_certificate_handle().
-func (x *TlsDatabaseClass) GetCreateCertificateHandle() func(*TlsDatabase, *TlsCertificate) string {
+func (x *TlsDatabaseClassGType) GetCreateCertificateHandle() func(*TlsDatabase, *TlsCertificate) string {
 	if x.xCreateCertificateHandle == 0 {
 		return nil
 	}
@@ -173,7 +173,7 @@ func (x *TlsDatabaseClass) GetCreateCertificateHandle() func(*TlsDatabase, *TlsC
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificate_for_handle().
-func (x *TlsDatabaseClass) OverrideLookupCertificateForHandle(cb func(*TlsDatabase, string, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable) *TlsCertificate) {
+func (x *TlsDatabaseClassGType) OverrideLookupCertificateForHandle(cb func(*TlsDatabase, string, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable) *TlsCertificate) {
 	if cb == nil {
 		x.xLookupCertificateForHandle = 0
 	} else {
@@ -191,7 +191,7 @@ func (x *TlsDatabaseClass) OverrideLookupCertificateForHandle(cb func(*TlsDataba
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificate_for_handle().
-func (x *TlsDatabaseClass) GetLookupCertificateForHandle() func(*TlsDatabase, string, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable) *TlsCertificate {
+func (x *TlsDatabaseClassGType) GetLookupCertificateForHandle() func(*TlsDatabase, string, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable) *TlsCertificate {
 	if x.xLookupCertificateForHandle == 0 {
 		return nil
 	}
@@ -212,7 +212,7 @@ func (x *TlsDatabaseClass) GetLookupCertificateForHandle() func(*TlsDatabase, st
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificate_for_handle_async().
-func (x *TlsDatabaseClass) OverrideLookupCertificateForHandleAsync(cb func(*TlsDatabase, string, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *TlsDatabaseClassGType) OverrideLookupCertificateForHandleAsync(cb func(*TlsDatabase, string, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xLookupCertificateForHandleAsync = 0
 	} else {
@@ -226,7 +226,7 @@ func (x *TlsDatabaseClass) OverrideLookupCertificateForHandleAsync(cb func(*TlsD
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificate_for_handle_async().
-func (x *TlsDatabaseClass) GetLookupCertificateForHandleAsync() func(*TlsDatabase, string, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *TlsDatabaseClassGType) GetLookupCertificateForHandleAsync() func(*TlsDatabase, string, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xLookupCertificateForHandleAsync == 0 {
 		return nil
 	}
@@ -241,7 +241,7 @@ func (x *TlsDatabaseClass) GetLookupCertificateForHandleAsync() func(*TlsDatabas
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificate_for_handle_finish().
-func (x *TlsDatabaseClass) OverrideLookupCertificateForHandleFinish(cb func(*TlsDatabase, AsyncResult) *TlsCertificate) {
+func (x *TlsDatabaseClassGType) OverrideLookupCertificateForHandleFinish(cb func(*TlsDatabase, AsyncResult) *TlsCertificate) {
 	if cb == nil {
 		x.xLookupCertificateForHandleFinish = 0
 	} else {
@@ -259,7 +259,7 @@ func (x *TlsDatabaseClass) OverrideLookupCertificateForHandleFinish(cb func(*Tls
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificate_for_handle_finish().
-func (x *TlsDatabaseClass) GetLookupCertificateForHandleFinish() func(*TlsDatabase, AsyncResult) *TlsCertificate {
+func (x *TlsDatabaseClassGType) GetLookupCertificateForHandleFinish() func(*TlsDatabase, AsyncResult) *TlsCertificate {
 	if x.xLookupCertificateForHandleFinish == 0 {
 		return nil
 	}
@@ -280,7 +280,7 @@ func (x *TlsDatabaseClass) GetLookupCertificateForHandleFinish() func(*TlsDataba
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificate_issuer().
-func (x *TlsDatabaseClass) OverrideLookupCertificateIssuer(cb func(*TlsDatabase, *TlsCertificate, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable) *TlsCertificate) {
+func (x *TlsDatabaseClassGType) OverrideLookupCertificateIssuer(cb func(*TlsDatabase, *TlsCertificate, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable) *TlsCertificate) {
 	if cb == nil {
 		x.xLookupCertificateIssuer = 0
 	} else {
@@ -298,7 +298,7 @@ func (x *TlsDatabaseClass) OverrideLookupCertificateIssuer(cb func(*TlsDatabase,
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificate_issuer().
-func (x *TlsDatabaseClass) GetLookupCertificateIssuer() func(*TlsDatabase, *TlsCertificate, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable) *TlsCertificate {
+func (x *TlsDatabaseClassGType) GetLookupCertificateIssuer() func(*TlsDatabase, *TlsCertificate, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable) *TlsCertificate {
 	if x.xLookupCertificateIssuer == 0 {
 		return nil
 	}
@@ -319,7 +319,7 @@ func (x *TlsDatabaseClass) GetLookupCertificateIssuer() func(*TlsDatabase, *TlsC
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificate_issuer_async().
-func (x *TlsDatabaseClass) OverrideLookupCertificateIssuerAsync(cb func(*TlsDatabase, *TlsCertificate, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *TlsDatabaseClassGType) OverrideLookupCertificateIssuerAsync(cb func(*TlsDatabase, *TlsCertificate, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xLookupCertificateIssuerAsync = 0
 	} else {
@@ -333,7 +333,7 @@ func (x *TlsDatabaseClass) OverrideLookupCertificateIssuerAsync(cb func(*TlsData
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificate_issuer_async().
-func (x *TlsDatabaseClass) GetLookupCertificateIssuerAsync() func(*TlsDatabase, *TlsCertificate, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *TlsDatabaseClassGType) GetLookupCertificateIssuerAsync() func(*TlsDatabase, *TlsCertificate, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xLookupCertificateIssuerAsync == 0 {
 		return nil
 	}
@@ -348,7 +348,7 @@ func (x *TlsDatabaseClass) GetLookupCertificateIssuerAsync() func(*TlsDatabase, 
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificate_issuer_finish().
-func (x *TlsDatabaseClass) OverrideLookupCertificateIssuerFinish(cb func(*TlsDatabase, AsyncResult) *TlsCertificate) {
+func (x *TlsDatabaseClassGType) OverrideLookupCertificateIssuerFinish(cb func(*TlsDatabase, AsyncResult) *TlsCertificate) {
 	if cb == nil {
 		x.xLookupCertificateIssuerFinish = 0
 	} else {
@@ -366,7 +366,7 @@ func (x *TlsDatabaseClass) OverrideLookupCertificateIssuerFinish(cb func(*TlsDat
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificate_issuer_finish().
-func (x *TlsDatabaseClass) GetLookupCertificateIssuerFinish() func(*TlsDatabase, AsyncResult) *TlsCertificate {
+func (x *TlsDatabaseClassGType) GetLookupCertificateIssuerFinish() func(*TlsDatabase, AsyncResult) *TlsCertificate {
 	if x.xLookupCertificateIssuerFinish == 0 {
 		return nil
 	}
@@ -387,7 +387,7 @@ func (x *TlsDatabaseClass) GetLookupCertificateIssuerFinish() func(*TlsDatabase,
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificates_issued_by().
-func (x *TlsDatabaseClass) OverrideLookupCertificatesIssuedBy(cb func(*TlsDatabase, []byte, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable) *glib.List) {
+func (x *TlsDatabaseClassGType) OverrideLookupCertificatesIssuedBy(cb func(*TlsDatabase, []byte, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable) *glib.List) {
 	if cb == nil {
 		x.xLookupCertificatesIssuedBy = 0
 	} else {
@@ -401,7 +401,7 @@ func (x *TlsDatabaseClass) OverrideLookupCertificatesIssuedBy(cb func(*TlsDataba
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificates_issued_by().
-func (x *TlsDatabaseClass) GetLookupCertificatesIssuedBy() func(*TlsDatabase, []byte, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable) *glib.List {
+func (x *TlsDatabaseClassGType) GetLookupCertificatesIssuedBy() func(*TlsDatabase, []byte, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable) *glib.List {
 	if x.xLookupCertificatesIssuedBy == 0 {
 		return nil
 	}
@@ -416,7 +416,7 @@ func (x *TlsDatabaseClass) GetLookupCertificatesIssuedBy() func(*TlsDatabase, []
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificates_issued_by_async().
-func (x *TlsDatabaseClass) OverrideLookupCertificatesIssuedByAsync(cb func(*TlsDatabase, []byte, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *TlsDatabaseClassGType) OverrideLookupCertificatesIssuedByAsync(cb func(*TlsDatabase, []byte, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xLookupCertificatesIssuedByAsync = 0
 	} else {
@@ -430,7 +430,7 @@ func (x *TlsDatabaseClass) OverrideLookupCertificatesIssuedByAsync(cb func(*TlsD
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificates_issued_by_async().
-func (x *TlsDatabaseClass) GetLookupCertificatesIssuedByAsync() func(*TlsDatabase, []byte, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *TlsDatabaseClassGType) GetLookupCertificatesIssuedByAsync() func(*TlsDatabase, []byte, *TlsInteraction, TlsDatabaseLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xLookupCertificatesIssuedByAsync == 0 {
 		return nil
 	}
@@ -445,7 +445,7 @@ func (x *TlsDatabaseClass) GetLookupCertificatesIssuedByAsync() func(*TlsDatabas
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificates_issued_by_finish().
-func (x *TlsDatabaseClass) OverrideLookupCertificatesIssuedByFinish(cb func(*TlsDatabase, AsyncResult) *glib.List) {
+func (x *TlsDatabaseClassGType) OverrideLookupCertificatesIssuedByFinish(cb func(*TlsDatabase, AsyncResult) *glib.List) {
 	if cb == nil {
 		x.xLookupCertificatesIssuedByFinish = 0
 	} else {
@@ -459,7 +459,7 @@ func (x *TlsDatabaseClass) OverrideLookupCertificatesIssuedByFinish(cb func(*Tls
 // Virtual method implementing
 //
 //	g_tls_database_lookup_certificates_issued_by_finish().
-func (x *TlsDatabaseClass) GetLookupCertificatesIssuedByFinish() func(*TlsDatabase, AsyncResult) *glib.List {
+func (x *TlsDatabaseClassGType) GetLookupCertificatesIssuedByFinish() func(*TlsDatabase, AsyncResult) *glib.List {
 	if x.xLookupCertificatesIssuedByFinish == 0 {
 		return nil
 	}

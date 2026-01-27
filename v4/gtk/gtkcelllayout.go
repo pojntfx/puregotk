@@ -16,7 +16,7 @@ import (
 // as appropriate.
 type CellLayoutDataFunc func(uintptr, uintptr, uintptr, *TreeIter, uintptr)
 
-type CellLayoutIface struct {
+type CellLayoutIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -40,13 +40,13 @@ type CellLayoutIface struct {
 	xGetArea uintptr
 }
 
-func (x *CellLayoutIface) GoPointer() uintptr {
+func (x *CellLayoutIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverridePackStart sets the "pack_start" callback function.
 // Packs the cell into the beginning of cell_layout.
-func (x *CellLayoutIface) OverridePackStart(cb func(CellLayout, *CellRenderer, bool)) {
+func (x *CellLayoutIfaceGType) OverridePackStart(cb func(CellLayout, *CellRenderer, bool)) {
 	if cb == nil {
 		x.xPackStart = 0
 	} else {
@@ -58,7 +58,7 @@ func (x *CellLayoutIface) OverridePackStart(cb func(CellLayout, *CellRenderer, b
 
 // GetPackStart gets the "pack_start" callback function.
 // Packs the cell into the beginning of cell_layout.
-func (x *CellLayoutIface) GetPackStart() func(CellLayout, *CellRenderer, bool) {
+func (x *CellLayoutIfaceGType) GetPackStart() func(CellLayout, *CellRenderer, bool) {
 	if x.xPackStart == 0 {
 		return nil
 	}
@@ -71,7 +71,7 @@ func (x *CellLayoutIface) GetPackStart() func(CellLayout, *CellRenderer, bool) {
 
 // OverridePackEnd sets the "pack_end" callback function.
 // Adds the cell to the end of cell_layout.
-func (x *CellLayoutIface) OverridePackEnd(cb func(CellLayout, *CellRenderer, bool)) {
+func (x *CellLayoutIfaceGType) OverridePackEnd(cb func(CellLayout, *CellRenderer, bool)) {
 	if cb == nil {
 		x.xPackEnd = 0
 	} else {
@@ -83,7 +83,7 @@ func (x *CellLayoutIface) OverridePackEnd(cb func(CellLayout, *CellRenderer, boo
 
 // GetPackEnd gets the "pack_end" callback function.
 // Adds the cell to the end of cell_layout.
-func (x *CellLayoutIface) GetPackEnd() func(CellLayout, *CellRenderer, bool) {
+func (x *CellLayoutIfaceGType) GetPackEnd() func(CellLayout, *CellRenderer, bool) {
 	if x.xPackEnd == 0 {
 		return nil
 	}
@@ -98,7 +98,7 @@ func (x *CellLayoutIface) GetPackEnd() func(CellLayout, *CellRenderer, bool) {
 // Unsets all the mappings on all renderers on cell_layout and
 //
 //	removes all renderers from cell_layout.
-func (x *CellLayoutIface) OverrideClear(cb func(CellLayout)) {
+func (x *CellLayoutIfaceGType) OverrideClear(cb func(CellLayout)) {
 	if cb == nil {
 		x.xClear = 0
 	} else {
@@ -112,7 +112,7 @@ func (x *CellLayoutIface) OverrideClear(cb func(CellLayout)) {
 // Unsets all the mappings on all renderers on cell_layout and
 //
 //	removes all renderers from cell_layout.
-func (x *CellLayoutIface) GetClear() func(CellLayout) {
+func (x *CellLayoutIfaceGType) GetClear() func(CellLayout) {
 	if x.xClear == 0 {
 		return nil
 	}
@@ -127,7 +127,7 @@ func (x *CellLayoutIface) GetClear() func(CellLayout) {
 // Adds an attribute mapping to the list in
 //
 //	cell_layout.
-func (x *CellLayoutIface) OverrideAddAttribute(cb func(CellLayout, *CellRenderer, string, int)) {
+func (x *CellLayoutIfaceGType) OverrideAddAttribute(cb func(CellLayout, *CellRenderer, string, int)) {
 	if cb == nil {
 		x.xAddAttribute = 0
 	} else {
@@ -141,7 +141,7 @@ func (x *CellLayoutIface) OverrideAddAttribute(cb func(CellLayout, *CellRenderer
 // Adds an attribute mapping to the list in
 //
 //	cell_layout.
-func (x *CellLayoutIface) GetAddAttribute() func(CellLayout, *CellRenderer, string, int) {
+func (x *CellLayoutIfaceGType) GetAddAttribute() func(CellLayout, *CellRenderer, string, int) {
 	if x.xAddAttribute == 0 {
 		return nil
 	}
@@ -156,7 +156,7 @@ func (x *CellLayoutIface) GetAddAttribute() func(CellLayout, *CellRenderer, stri
 // Sets the `GtkCellLayout`DataFunc to use for
 //
 //	cell_layout.
-func (x *CellLayoutIface) OverrideSetCellDataFunc(cb func(CellLayout, *CellRenderer, *CellLayoutDataFunc, uintptr, *glib.DestroyNotify)) {
+func (x *CellLayoutIfaceGType) OverrideSetCellDataFunc(cb func(CellLayout, *CellRenderer, *CellLayoutDataFunc, uintptr, *glib.DestroyNotify)) {
 	if cb == nil {
 		x.xSetCellDataFunc = 0
 	} else {
@@ -170,7 +170,7 @@ func (x *CellLayoutIface) OverrideSetCellDataFunc(cb func(CellLayout, *CellRende
 // Sets the `GtkCellLayout`DataFunc to use for
 //
 //	cell_layout.
-func (x *CellLayoutIface) GetSetCellDataFunc() func(CellLayout, *CellRenderer, *CellLayoutDataFunc, uintptr, *glib.DestroyNotify) {
+func (x *CellLayoutIfaceGType) GetSetCellDataFunc() func(CellLayout, *CellRenderer, *CellLayoutDataFunc, uintptr, *glib.DestroyNotify) {
 	if x.xSetCellDataFunc == 0 {
 		return nil
 	}
@@ -185,7 +185,7 @@ func (x *CellLayoutIface) GetSetCellDataFunc() func(CellLayout, *CellRenderer, *
 // Clears all existing attributes previously set
 //
 //	with gtk_cell_layout_set_attributes().
-func (x *CellLayoutIface) OverrideClearAttributes(cb func(CellLayout, *CellRenderer)) {
+func (x *CellLayoutIfaceGType) OverrideClearAttributes(cb func(CellLayout, *CellRenderer)) {
 	if cb == nil {
 		x.xClearAttributes = 0
 	} else {
@@ -199,7 +199,7 @@ func (x *CellLayoutIface) OverrideClearAttributes(cb func(CellLayout, *CellRende
 // Clears all existing attributes previously set
 //
 //	with gtk_cell_layout_set_attributes().
-func (x *CellLayoutIface) GetClearAttributes() func(CellLayout, *CellRenderer) {
+func (x *CellLayoutIfaceGType) GetClearAttributes() func(CellLayout, *CellRenderer) {
 	if x.xClearAttributes == 0 {
 		return nil
 	}
@@ -212,7 +212,7 @@ func (x *CellLayoutIface) GetClearAttributes() func(CellLayout, *CellRenderer) {
 
 // OverrideReorder sets the "reorder" callback function.
 // Re-inserts cell at position.
-func (x *CellLayoutIface) OverrideReorder(cb func(CellLayout, *CellRenderer, int)) {
+func (x *CellLayoutIfaceGType) OverrideReorder(cb func(CellLayout, *CellRenderer, int)) {
 	if cb == nil {
 		x.xReorder = 0
 	} else {
@@ -224,7 +224,7 @@ func (x *CellLayoutIface) OverrideReorder(cb func(CellLayout, *CellRenderer, int
 
 // GetReorder gets the "reorder" callback function.
 // Re-inserts cell at position.
-func (x *CellLayoutIface) GetReorder() func(CellLayout, *CellRenderer, int) {
+func (x *CellLayoutIfaceGType) GetReorder() func(CellLayout, *CellRenderer, int) {
 	if x.xReorder == 0 {
 		return nil
 	}
@@ -239,7 +239,7 @@ func (x *CellLayoutIface) GetReorder() func(CellLayout, *CellRenderer, int) {
 // Get the cell renderers which have been added to
 //
 //	cell_layout.
-func (x *CellLayoutIface) OverrideGetCells(cb func(CellLayout) *glib.List) {
+func (x *CellLayoutIfaceGType) OverrideGetCells(cb func(CellLayout) *glib.List) {
 	if cb == nil {
 		x.xGetCells = 0
 	} else {
@@ -253,7 +253,7 @@ func (x *CellLayoutIface) OverrideGetCells(cb func(CellLayout) *glib.List) {
 // Get the cell renderers which have been added to
 //
 //	cell_layout.
-func (x *CellLayoutIface) GetGetCells() func(CellLayout) *glib.List {
+func (x *CellLayoutIfaceGType) GetGetCells() func(CellLayout) *glib.List {
 	if x.xGetCells == 0 {
 		return nil
 	}
@@ -269,7 +269,7 @@ func (x *CellLayoutIface) GetGetCells() func(CellLayout) *glib.List {
 //
 //	cell_layout if called on a `GtkCellArea` or might be NULL if no
 //	`GtkCellArea` is used by cell_layout.
-func (x *CellLayoutIface) OverrideGetArea(cb func(CellLayout) *CellArea) {
+func (x *CellLayoutIfaceGType) OverrideGetArea(cb func(CellLayout) *CellArea) {
 	if cb == nil {
 		x.xGetArea = 0
 	} else {
@@ -288,7 +288,7 @@ func (x *CellLayoutIface) OverrideGetArea(cb func(CellLayout) *CellArea) {
 //
 //	cell_layout if called on a `GtkCellArea` or might be NULL if no
 //	`GtkCellArea` is used by cell_layout.
-func (x *CellLayoutIface) GetGetArea() func(CellLayout) *CellArea {
+func (x *CellLayoutIfaceGType) GetGetArea() func(CellLayout) *CellArea {
 	if x.xGetArea == 0 {
 		return nil
 	}

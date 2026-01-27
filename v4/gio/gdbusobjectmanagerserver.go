@@ -13,15 +13,15 @@ import (
 )
 
 // Class structure for #GDBusObjectManagerServer.
-type DBusObjectManagerServerClass struct {
+type DBusObjectManagerServerClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	Padding [8]uintptr
 }
 
-func (x *DBusObjectManagerServerClass) GoPointer() uintptr {
+func (x *DBusObjectManagerServerClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -16,22 +16,22 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type MessageDialogClass struct {
+type MessageDialogClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WindowClass
+	ParentClass gtk.WindowClassGType
 
 	xResponse uintptr
 
 	Padding [4]uintptr
 }
 
-func (x *MessageDialogClass) GoPointer() uintptr {
+func (x *MessageDialogClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideResponse sets the "response" callback function.
-func (x *MessageDialogClass) OverrideResponse(cb func(*MessageDialog, string)) {
+func (x *MessageDialogClassGType) OverrideResponse(cb func(*MessageDialog, string)) {
 	if cb == nil {
 		x.xResponse = 0
 	} else {
@@ -42,7 +42,7 @@ func (x *MessageDialogClass) OverrideResponse(cb func(*MessageDialog, string)) {
 }
 
 // GetResponse gets the "response" callback function.
-func (x *MessageDialogClass) GetResponse() func(*MessageDialog, string) {
+func (x *MessageDialogClassGType) GetResponse() func(*MessageDialog, string) {
 	if x.xResponse == 0 {
 		return nil
 	}

@@ -15,10 +15,10 @@ import (
 
 // The `PangoFontMapClass` structure holds the virtual functions for
 // a particular `PangoFontMap` implementation.
-type FontMapClass struct {
+type FontMapClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xLoadFont uintptr
 
@@ -37,14 +37,14 @@ type FontMapClass struct {
 	xGetFace uintptr
 }
 
-func (x *FontMapClass) GoPointer() uintptr {
+func (x *FontMapClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideLoadFont sets the "load_font" callback function.
 // a function to load a font with a given description. See
 // pango_font_map_load_font().
-func (x *FontMapClass) OverrideLoadFont(cb func(*FontMap, *Context, *FontDescription) *Font) {
+func (x *FontMapClassGType) OverrideLoadFont(cb func(*FontMap, *Context, *FontDescription) *Font) {
 	if cb == nil {
 		x.xLoadFont = 0
 	} else {
@@ -61,7 +61,7 @@ func (x *FontMapClass) OverrideLoadFont(cb func(*FontMap, *Context, *FontDescrip
 // GetLoadFont gets the "load_font" callback function.
 // a function to load a font with a given description. See
 // pango_font_map_load_font().
-func (x *FontMapClass) GetLoadFont() func(*FontMap, *Context, *FontDescription) *Font {
+func (x *FontMapClassGType) GetLoadFont() func(*FontMap, *Context, *FontDescription) *Font {
 	if x.xLoadFont == 0 {
 		return nil
 	}
@@ -81,7 +81,7 @@ func (x *FontMapClass) GetLoadFont() func(*FontMap, *Context, *FontDescription) 
 // OverrideListFamilies sets the "list_families" callback function.
 // A function to list available font families. See
 // pango_font_map_list_families().
-func (x *FontMapClass) OverrideListFamilies(cb func(*FontMap, *uintptr, *int)) {
+func (x *FontMapClassGType) OverrideListFamilies(cb func(*FontMap, *uintptr, *int)) {
 	if cb == nil {
 		x.xListFamilies = 0
 	} else {
@@ -94,7 +94,7 @@ func (x *FontMapClass) OverrideListFamilies(cb func(*FontMap, *uintptr, *int)) {
 // GetListFamilies gets the "list_families" callback function.
 // A function to list available font families. See
 // pango_font_map_list_families().
-func (x *FontMapClass) GetListFamilies() func(*FontMap, *uintptr, *int) {
+func (x *FontMapClassGType) GetListFamilies() func(*FontMap, *uintptr, *int) {
 	if x.xListFamilies == 0 {
 		return nil
 	}
@@ -108,7 +108,7 @@ func (x *FontMapClass) GetListFamilies() func(*FontMap, *uintptr, *int) {
 // OverrideLoadFontset sets the "load_fontset" callback function.
 // a function to load a fontset with a given given description
 // suitable for a particular language. See pango_font_map_load_fontset().
-func (x *FontMapClass) OverrideLoadFontset(cb func(*FontMap, *Context, *FontDescription, *Language) *Fontset) {
+func (x *FontMapClassGType) OverrideLoadFontset(cb func(*FontMap, *Context, *FontDescription, *Language) *Fontset) {
 	if cb == nil {
 		x.xLoadFontset = 0
 	} else {
@@ -125,7 +125,7 @@ func (x *FontMapClass) OverrideLoadFontset(cb func(*FontMap, *Context, *FontDesc
 // GetLoadFontset gets the "load_fontset" callback function.
 // a function to load a fontset with a given given description
 // suitable for a particular language. See pango_font_map_load_fontset().
-func (x *FontMapClass) GetLoadFontset() func(*FontMap, *Context, *FontDescription, *Language) *Fontset {
+func (x *FontMapClassGType) GetLoadFontset() func(*FontMap, *Context, *FontDescription, *Language) *Fontset {
 	if x.xLoadFontset == 0 {
 		return nil
 	}
@@ -145,7 +145,7 @@ func (x *FontMapClass) GetLoadFontset() func(*FontMap, *Context, *FontDescriptio
 // OverrideGetSerial sets the "get_serial" callback function.
 // a function to get the serial number of the fontmap.
 // See pango_font_map_get_serial().
-func (x *FontMapClass) OverrideGetSerial(cb func(*FontMap) uint) {
+func (x *FontMapClassGType) OverrideGetSerial(cb func(*FontMap) uint) {
 	if cb == nil {
 		x.xGetSerial = 0
 	} else {
@@ -158,7 +158,7 @@ func (x *FontMapClass) OverrideGetSerial(cb func(*FontMap) uint) {
 // GetGetSerial gets the "get_serial" callback function.
 // a function to get the serial number of the fontmap.
 // See pango_font_map_get_serial().
-func (x *FontMapClass) GetGetSerial() func(*FontMap) uint {
+func (x *FontMapClassGType) GetGetSerial() func(*FontMap) uint {
 	if x.xGetSerial == 0 {
 		return nil
 	}
@@ -171,7 +171,7 @@ func (x *FontMapClass) GetGetSerial() func(*FontMap) uint {
 
 // OverrideChanged sets the "changed" callback function.
 // See pango_font_map_changed()
-func (x *FontMapClass) OverrideChanged(cb func(*FontMap)) {
+func (x *FontMapClassGType) OverrideChanged(cb func(*FontMap)) {
 	if cb == nil {
 		x.xChanged = 0
 	} else {
@@ -183,7 +183,7 @@ func (x *FontMapClass) OverrideChanged(cb func(*FontMap)) {
 
 // GetChanged gets the "changed" callback function.
 // See pango_font_map_changed()
-func (x *FontMapClass) GetChanged() func(*FontMap) {
+func (x *FontMapClassGType) GetChanged() func(*FontMap) {
 	if x.xChanged == 0 {
 		return nil
 	}
@@ -195,7 +195,7 @@ func (x *FontMapClass) GetChanged() func(*FontMap) {
 }
 
 // OverrideGetFamily sets the "get_family" callback function.
-func (x *FontMapClass) OverrideGetFamily(cb func(*FontMap, string) *FontFamily) {
+func (x *FontMapClassGType) OverrideGetFamily(cb func(*FontMap, string) *FontFamily) {
 	if cb == nil {
 		x.xGetFamily = 0
 	} else {
@@ -210,7 +210,7 @@ func (x *FontMapClass) OverrideGetFamily(cb func(*FontMap, string) *FontFamily) 
 }
 
 // GetGetFamily gets the "get_family" callback function.
-func (x *FontMapClass) GetGetFamily() func(*FontMap, string) *FontFamily {
+func (x *FontMapClassGType) GetGetFamily() func(*FontMap, string) *FontFamily {
 	if x.xGetFamily == 0 {
 		return nil
 	}
@@ -228,7 +228,7 @@ func (x *FontMapClass) GetGetFamily() func(*FontMap, string) *FontFamily {
 }
 
 // OverrideGetFace sets the "get_face" callback function.
-func (x *FontMapClass) OverrideGetFace(cb func(*FontMap, *Font) *FontFace) {
+func (x *FontMapClassGType) OverrideGetFace(cb func(*FontMap, *Font) *FontFace) {
 	if cb == nil {
 		x.xGetFace = 0
 	} else {
@@ -243,7 +243,7 @@ func (x *FontMapClass) OverrideGetFace(cb func(*FontMap, *Font) *FontFace) {
 }
 
 // GetGetFace gets the "get_face" callback function.
-func (x *FontMapClass) GetGetFace() func(*FontMap, *Font) *FontFace {
+func (x *FontMapClassGType) GetGetFace() func(*FontMap, *Font) *FontFace {
 	if x.xGetFace == 0 {
 		return nil
 	}

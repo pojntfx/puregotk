@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type FileMonitorClass struct {
+type FileMonitorClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xChanged uintptr
 
@@ -32,12 +32,12 @@ type FileMonitorClass struct {
 	xGReserved5 uintptr
 }
 
-func (x *FileMonitorClass) GoPointer() uintptr {
+func (x *FileMonitorClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideChanged sets the "changed" callback function.
-func (x *FileMonitorClass) OverrideChanged(cb func(*FileMonitor, File, File, FileMonitorEvent)) {
+func (x *FileMonitorClassGType) OverrideChanged(cb func(*FileMonitor, File, File, FileMonitorEvent)) {
 	if cb == nil {
 		x.xChanged = 0
 	} else {
@@ -48,7 +48,7 @@ func (x *FileMonitorClass) OverrideChanged(cb func(*FileMonitor, File, File, Fil
 }
 
 // GetChanged gets the "changed" callback function.
-func (x *FileMonitorClass) GetChanged() func(*FileMonitor, File, File, FileMonitorEvent) {
+func (x *FileMonitorClassGType) GetChanged() func(*FileMonitor, File, File, FileMonitorEvent) {
 	if x.xChanged == 0 {
 		return nil
 	}
@@ -60,7 +60,7 @@ func (x *FileMonitorClass) GetChanged() func(*FileMonitor, File, File, FileMonit
 }
 
 // OverrideCancel sets the "cancel" callback function.
-func (x *FileMonitorClass) OverrideCancel(cb func(*FileMonitor) bool) {
+func (x *FileMonitorClassGType) OverrideCancel(cb func(*FileMonitor) bool) {
 	if cb == nil {
 		x.xCancel = 0
 	} else {
@@ -71,7 +71,7 @@ func (x *FileMonitorClass) OverrideCancel(cb func(*FileMonitor) bool) {
 }
 
 // GetCancel gets the "cancel" callback function.
-func (x *FileMonitorClass) GetCancel() func(*FileMonitor) bool {
+func (x *FileMonitorClassGType) GetCancel() func(*FileMonitor) bool {
 	if x.xCancel == 0 {
 		return nil
 	}
@@ -83,7 +83,7 @@ func (x *FileMonitorClass) GetCancel() func(*FileMonitor) bool {
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *FileMonitorClass) OverrideGReserved1(cb func()) {
+func (x *FileMonitorClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -94,7 +94,7 @@ func (x *FileMonitorClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *FileMonitorClass) GetGReserved1() func() {
+func (x *FileMonitorClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -106,7 +106,7 @@ func (x *FileMonitorClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *FileMonitorClass) OverrideGReserved2(cb func()) {
+func (x *FileMonitorClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -117,7 +117,7 @@ func (x *FileMonitorClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *FileMonitorClass) GetGReserved2() func() {
+func (x *FileMonitorClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}
@@ -129,7 +129,7 @@ func (x *FileMonitorClass) GetGReserved2() func() {
 }
 
 // OverrideGReserved3 sets the "_g_reserved3" callback function.
-func (x *FileMonitorClass) OverrideGReserved3(cb func()) {
+func (x *FileMonitorClassGType) OverrideGReserved3(cb func()) {
 	if cb == nil {
 		x.xGReserved3 = 0
 	} else {
@@ -140,7 +140,7 @@ func (x *FileMonitorClass) OverrideGReserved3(cb func()) {
 }
 
 // GetGReserved3 gets the "_g_reserved3" callback function.
-func (x *FileMonitorClass) GetGReserved3() func() {
+func (x *FileMonitorClassGType) GetGReserved3() func() {
 	if x.xGReserved3 == 0 {
 		return nil
 	}
@@ -152,7 +152,7 @@ func (x *FileMonitorClass) GetGReserved3() func() {
 }
 
 // OverrideGReserved4 sets the "_g_reserved4" callback function.
-func (x *FileMonitorClass) OverrideGReserved4(cb func()) {
+func (x *FileMonitorClassGType) OverrideGReserved4(cb func()) {
 	if cb == nil {
 		x.xGReserved4 = 0
 	} else {
@@ -163,7 +163,7 @@ func (x *FileMonitorClass) OverrideGReserved4(cb func()) {
 }
 
 // GetGReserved4 gets the "_g_reserved4" callback function.
-func (x *FileMonitorClass) GetGReserved4() func() {
+func (x *FileMonitorClassGType) GetGReserved4() func() {
 	if x.xGReserved4 == 0 {
 		return nil
 	}
@@ -175,7 +175,7 @@ func (x *FileMonitorClass) GetGReserved4() func() {
 }
 
 // OverrideGReserved5 sets the "_g_reserved5" callback function.
-func (x *FileMonitorClass) OverrideGReserved5(cb func()) {
+func (x *FileMonitorClassGType) OverrideGReserved5(cb func()) {
 	if cb == nil {
 		x.xGReserved5 = 0
 	} else {
@@ -186,7 +186,7 @@ func (x *FileMonitorClass) OverrideGReserved5(cb func()) {
 }
 
 // GetGReserved5 gets the "_g_reserved5" callback function.
-func (x *FileMonitorClass) GetGReserved5() func() {
+func (x *FileMonitorClassGType) GetGReserved5() func() {
 	if x.xGReserved5 == 0 {
 		return nil
 	}

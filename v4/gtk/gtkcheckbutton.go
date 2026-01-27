@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type CheckButtonClass struct {
+type CheckButtonClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xToggled uintptr
 
@@ -24,12 +24,12 @@ type CheckButtonClass struct {
 	Padding [7]uintptr
 }
 
-func (x *CheckButtonClass) GoPointer() uintptr {
+func (x *CheckButtonClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideToggled sets the "toggled" callback function.
-func (x *CheckButtonClass) OverrideToggled(cb func(*CheckButton)) {
+func (x *CheckButtonClassGType) OverrideToggled(cb func(*CheckButton)) {
 	if cb == nil {
 		x.xToggled = 0
 	} else {
@@ -40,7 +40,7 @@ func (x *CheckButtonClass) OverrideToggled(cb func(*CheckButton)) {
 }
 
 // GetToggled gets the "toggled" callback function.
-func (x *CheckButtonClass) GetToggled() func(*CheckButton) {
+func (x *CheckButtonClassGType) GetToggled() func(*CheckButton) {
 	if x.xToggled == 0 {
 		return nil
 	}
@@ -52,7 +52,7 @@ func (x *CheckButtonClass) GetToggled() func(*CheckButton) {
 }
 
 // OverrideActivate sets the "activate" callback function.
-func (x *CheckButtonClass) OverrideActivate(cb func(*CheckButton)) {
+func (x *CheckButtonClassGType) OverrideActivate(cb func(*CheckButton)) {
 	if cb == nil {
 		x.xActivate = 0
 	} else {
@@ -63,7 +63,7 @@ func (x *CheckButtonClass) OverrideActivate(cb func(*CheckButton)) {
 }
 
 // GetActivate gets the "activate" callback function.
-func (x *CheckButtonClass) GetActivate() func(*CheckButton) {
+func (x *CheckButtonClassGType) GetActivate() func(*CheckButton) {
 	if x.xActivate == 0 {
 		return nil
 	}

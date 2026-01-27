@@ -12,13 +12,13 @@ import (
 )
 
 // Class structure for #GProxyAddress.
-type ProxyAddressClass struct {
+type ProxyAddressClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass InetSocketAddressClass
+	ParentClass InetSocketAddressClassGType
 }
 
-func (x *ProxyAddressClass) GoPointer() uintptr {
+func (x *ProxyAddressClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

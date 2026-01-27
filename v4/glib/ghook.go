@@ -44,11 +44,11 @@ type Hook struct {
 
 	Prev *Hook
 
-	RefCount uint
+	RefCount uint32
 
 	HookId uint32
 
-	Flags uint
+	Flags uint32
 
 	Func uintptr
 
@@ -75,9 +75,9 @@ type HookList struct {
 
 	SeqId uint32
 
-	HookSize uint
+	HookSize uint32
 
-	IsSetup uint
+	IsSetup uint32
 
 	Hooks *Hook
 

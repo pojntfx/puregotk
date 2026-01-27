@@ -15,10 +15,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type NavigationPageClass struct {
+type NavigationPageClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 
 	xShowing uintptr
 
@@ -31,12 +31,12 @@ type NavigationPageClass struct {
 	Padding [8]uintptr
 }
 
-func (x *NavigationPageClass) GoPointer() uintptr {
+func (x *NavigationPageClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideShowing sets the "showing" callback function.
-func (x *NavigationPageClass) OverrideShowing(cb func(*NavigationPage)) {
+func (x *NavigationPageClassGType) OverrideShowing(cb func(*NavigationPage)) {
 	if cb == nil {
 		x.xShowing = 0
 	} else {
@@ -47,7 +47,7 @@ func (x *NavigationPageClass) OverrideShowing(cb func(*NavigationPage)) {
 }
 
 // GetShowing gets the "showing" callback function.
-func (x *NavigationPageClass) GetShowing() func(*NavigationPage) {
+func (x *NavigationPageClassGType) GetShowing() func(*NavigationPage) {
 	if x.xShowing == 0 {
 		return nil
 	}
@@ -59,7 +59,7 @@ func (x *NavigationPageClass) GetShowing() func(*NavigationPage) {
 }
 
 // OverrideShown sets the "shown" callback function.
-func (x *NavigationPageClass) OverrideShown(cb func(*NavigationPage)) {
+func (x *NavigationPageClassGType) OverrideShown(cb func(*NavigationPage)) {
 	if cb == nil {
 		x.xShown = 0
 	} else {
@@ -70,7 +70,7 @@ func (x *NavigationPageClass) OverrideShown(cb func(*NavigationPage)) {
 }
 
 // GetShown gets the "shown" callback function.
-func (x *NavigationPageClass) GetShown() func(*NavigationPage) {
+func (x *NavigationPageClassGType) GetShown() func(*NavigationPage) {
 	if x.xShown == 0 {
 		return nil
 	}
@@ -82,7 +82,7 @@ func (x *NavigationPageClass) GetShown() func(*NavigationPage) {
 }
 
 // OverrideHiding sets the "hiding" callback function.
-func (x *NavigationPageClass) OverrideHiding(cb func(*NavigationPage)) {
+func (x *NavigationPageClassGType) OverrideHiding(cb func(*NavigationPage)) {
 	if cb == nil {
 		x.xHiding = 0
 	} else {
@@ -93,7 +93,7 @@ func (x *NavigationPageClass) OverrideHiding(cb func(*NavigationPage)) {
 }
 
 // GetHiding gets the "hiding" callback function.
-func (x *NavigationPageClass) GetHiding() func(*NavigationPage) {
+func (x *NavigationPageClassGType) GetHiding() func(*NavigationPage) {
 	if x.xHiding == 0 {
 		return nil
 	}
@@ -105,7 +105,7 @@ func (x *NavigationPageClass) GetHiding() func(*NavigationPage) {
 }
 
 // OverrideHidden sets the "hidden" callback function.
-func (x *NavigationPageClass) OverrideHidden(cb func(*NavigationPage)) {
+func (x *NavigationPageClassGType) OverrideHidden(cb func(*NavigationPage)) {
 	if cb == nil {
 		x.xHidden = 0
 	} else {
@@ -116,7 +116,7 @@ func (x *NavigationPageClass) OverrideHidden(cb func(*NavigationPage)) {
 }
 
 // GetHidden gets the "hidden" callback function.
-func (x *NavigationPageClass) GetHidden() func(*NavigationPage) {
+func (x *NavigationPageClassGType) GetHidden() func(*NavigationPage) {
 	if x.xHidden == 0 {
 		return nil
 	}
@@ -127,13 +127,13 @@ func (x *NavigationPageClass) GetHidden() func(*NavigationPage) {
 	}
 }
 
-type NavigationViewClass struct {
+type NavigationViewClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *NavigationViewClass) GoPointer() uintptr {
+func (x *NavigationViewClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

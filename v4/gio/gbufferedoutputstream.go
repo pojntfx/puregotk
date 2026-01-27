@@ -12,22 +12,22 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type BufferedOutputStreamClass struct {
+type BufferedOutputStreamClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass FilterOutputStreamClass
+	ParentClass FilterOutputStreamClassGType
 
 	xGReserved1 uintptr
 
 	xGReserved2 uintptr
 }
 
-func (x *BufferedOutputStreamClass) GoPointer() uintptr {
+func (x *BufferedOutputStreamClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *BufferedOutputStreamClass) OverrideGReserved1(cb func()) {
+func (x *BufferedOutputStreamClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -38,7 +38,7 @@ func (x *BufferedOutputStreamClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *BufferedOutputStreamClass) GetGReserved1() func() {
+func (x *BufferedOutputStreamClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -50,7 +50,7 @@ func (x *BufferedOutputStreamClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *BufferedOutputStreamClass) OverrideGReserved2(cb func()) {
+func (x *BufferedOutputStreamClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -61,7 +61,7 @@ func (x *BufferedOutputStreamClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *BufferedOutputStreamClass) GetGReserved2() func() {
+func (x *BufferedOutputStreamClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}

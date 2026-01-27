@@ -16,7 +16,7 @@ import (
 // around the corresponding virtual methods, and no pre-processing of inputs is
 // implemented — so implementations of this API must handle all functionality
 // documented in the interface methods.
-type DatagramBasedInterface struct {
+type DatagramBasedInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -32,13 +32,13 @@ type DatagramBasedInterface struct {
 	xConditionWait uintptr
 }
 
-func (x *DatagramBasedInterface) GoPointer() uintptr {
+func (x *DatagramBasedInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideReceiveMessages sets the "receive_messages" callback function.
 // Virtual method for g_datagram_based_receive_messages().
-func (x *DatagramBasedInterface) OverrideReceiveMessages(cb func(DatagramBased, []InputMessage, uint, int, int64, *Cancellable) int) {
+func (x *DatagramBasedInterfaceGType) OverrideReceiveMessages(cb func(DatagramBased, []InputMessage, uint, int, int64, *Cancellable) int) {
 	if cb == nil {
 		x.xReceiveMessages = 0
 	} else {
@@ -50,7 +50,7 @@ func (x *DatagramBasedInterface) OverrideReceiveMessages(cb func(DatagramBased, 
 
 // GetReceiveMessages gets the "receive_messages" callback function.
 // Virtual method for g_datagram_based_receive_messages().
-func (x *DatagramBasedInterface) GetReceiveMessages() func(DatagramBased, []InputMessage, uint, int, int64, *Cancellable) int {
+func (x *DatagramBasedInterfaceGType) GetReceiveMessages() func(DatagramBased, []InputMessage, uint, int, int64, *Cancellable) int {
 	if x.xReceiveMessages == 0 {
 		return nil
 	}
@@ -63,7 +63,7 @@ func (x *DatagramBasedInterface) GetReceiveMessages() func(DatagramBased, []Inpu
 
 // OverrideSendMessages sets the "send_messages" callback function.
 // Virtual method for g_datagram_based_send_messages().
-func (x *DatagramBasedInterface) OverrideSendMessages(cb func(DatagramBased, []OutputMessage, uint, int, int64, *Cancellable) int) {
+func (x *DatagramBasedInterfaceGType) OverrideSendMessages(cb func(DatagramBased, []OutputMessage, uint, int, int64, *Cancellable) int) {
 	if cb == nil {
 		x.xSendMessages = 0
 	} else {
@@ -75,7 +75,7 @@ func (x *DatagramBasedInterface) OverrideSendMessages(cb func(DatagramBased, []O
 
 // GetSendMessages gets the "send_messages" callback function.
 // Virtual method for g_datagram_based_send_messages().
-func (x *DatagramBasedInterface) GetSendMessages() func(DatagramBased, []OutputMessage, uint, int, int64, *Cancellable) int {
+func (x *DatagramBasedInterfaceGType) GetSendMessages() func(DatagramBased, []OutputMessage, uint, int, int64, *Cancellable) int {
 	if x.xSendMessages == 0 {
 		return nil
 	}
@@ -88,7 +88,7 @@ func (x *DatagramBasedInterface) GetSendMessages() func(DatagramBased, []OutputM
 
 // OverrideCreateSource sets the "create_source" callback function.
 // Virtual method for g_datagram_based_create_source().
-func (x *DatagramBasedInterface) OverrideCreateSource(cb func(DatagramBased, glib.IOCondition, *Cancellable) *glib.Source) {
+func (x *DatagramBasedInterfaceGType) OverrideCreateSource(cb func(DatagramBased, glib.IOCondition, *Cancellable) *glib.Source) {
 	if cb == nil {
 		x.xCreateSource = 0
 	} else {
@@ -100,7 +100,7 @@ func (x *DatagramBasedInterface) OverrideCreateSource(cb func(DatagramBased, gli
 
 // GetCreateSource gets the "create_source" callback function.
 // Virtual method for g_datagram_based_create_source().
-func (x *DatagramBasedInterface) GetCreateSource() func(DatagramBased, glib.IOCondition, *Cancellable) *glib.Source {
+func (x *DatagramBasedInterfaceGType) GetCreateSource() func(DatagramBased, glib.IOCondition, *Cancellable) *glib.Source {
 	if x.xCreateSource == 0 {
 		return nil
 	}
@@ -113,7 +113,7 @@ func (x *DatagramBasedInterface) GetCreateSource() func(DatagramBased, glib.IOCo
 
 // OverrideConditionCheck sets the "condition_check" callback function.
 // Virtual method for g_datagram_based_condition_check().
-func (x *DatagramBasedInterface) OverrideConditionCheck(cb func(DatagramBased, glib.IOCondition) glib.IOCondition) {
+func (x *DatagramBasedInterfaceGType) OverrideConditionCheck(cb func(DatagramBased, glib.IOCondition) glib.IOCondition) {
 	if cb == nil {
 		x.xConditionCheck = 0
 	} else {
@@ -125,7 +125,7 @@ func (x *DatagramBasedInterface) OverrideConditionCheck(cb func(DatagramBased, g
 
 // GetConditionCheck gets the "condition_check" callback function.
 // Virtual method for g_datagram_based_condition_check().
-func (x *DatagramBasedInterface) GetConditionCheck() func(DatagramBased, glib.IOCondition) glib.IOCondition {
+func (x *DatagramBasedInterfaceGType) GetConditionCheck() func(DatagramBased, glib.IOCondition) glib.IOCondition {
 	if x.xConditionCheck == 0 {
 		return nil
 	}
@@ -140,7 +140,7 @@ func (x *DatagramBasedInterface) GetConditionCheck() func(DatagramBased, glib.IO
 // Virtual method for
 //
 //	g_datagram_based_condition_wait().
-func (x *DatagramBasedInterface) OverrideConditionWait(cb func(DatagramBased, glib.IOCondition, int64, *Cancellable) bool) {
+func (x *DatagramBasedInterfaceGType) OverrideConditionWait(cb func(DatagramBased, glib.IOCondition, int64, *Cancellable) bool) {
 	if cb == nil {
 		x.xConditionWait = 0
 	} else {
@@ -154,7 +154,7 @@ func (x *DatagramBasedInterface) OverrideConditionWait(cb func(DatagramBased, gl
 // Virtual method for
 //
 //	g_datagram_based_condition_wait().
-func (x *DatagramBasedInterface) GetConditionWait() func(DatagramBased, glib.IOCondition, int64, *Cancellable) bool {
+func (x *DatagramBasedInterfaceGType) GetConditionWait() func(DatagramBased, glib.IOCondition, int64, *Cancellable) bool {
 	if x.xConditionWait == 0 {
 		return nil
 	}

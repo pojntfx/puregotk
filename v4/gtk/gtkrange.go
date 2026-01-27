@@ -13,10 +13,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type RangeClass struct {
+type RangeClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xValueChanged uintptr
 
@@ -31,12 +31,12 @@ type RangeClass struct {
 	Padding [8]uintptr
 }
 
-func (x *RangeClass) GoPointer() uintptr {
+func (x *RangeClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideValueChanged sets the "value_changed" callback function.
-func (x *RangeClass) OverrideValueChanged(cb func(*Range)) {
+func (x *RangeClassGType) OverrideValueChanged(cb func(*Range)) {
 	if cb == nil {
 		x.xValueChanged = 0
 	} else {
@@ -47,7 +47,7 @@ func (x *RangeClass) OverrideValueChanged(cb func(*Range)) {
 }
 
 // GetValueChanged gets the "value_changed" callback function.
-func (x *RangeClass) GetValueChanged() func(*Range) {
+func (x *RangeClassGType) GetValueChanged() func(*Range) {
 	if x.xValueChanged == 0 {
 		return nil
 	}
@@ -59,7 +59,7 @@ func (x *RangeClass) GetValueChanged() func(*Range) {
 }
 
 // OverrideAdjustBounds sets the "adjust_bounds" callback function.
-func (x *RangeClass) OverrideAdjustBounds(cb func(*Range, float64)) {
+func (x *RangeClassGType) OverrideAdjustBounds(cb func(*Range, float64)) {
 	if cb == nil {
 		x.xAdjustBounds = 0
 	} else {
@@ -70,7 +70,7 @@ func (x *RangeClass) OverrideAdjustBounds(cb func(*Range, float64)) {
 }
 
 // GetAdjustBounds gets the "adjust_bounds" callback function.
-func (x *RangeClass) GetAdjustBounds() func(*Range, float64) {
+func (x *RangeClassGType) GetAdjustBounds() func(*Range, float64) {
 	if x.xAdjustBounds == 0 {
 		return nil
 	}
@@ -82,7 +82,7 @@ func (x *RangeClass) GetAdjustBounds() func(*Range, float64) {
 }
 
 // OverrideMoveSlider sets the "move_slider" callback function.
-func (x *RangeClass) OverrideMoveSlider(cb func(*Range, ScrollType)) {
+func (x *RangeClassGType) OverrideMoveSlider(cb func(*Range, ScrollType)) {
 	if cb == nil {
 		x.xMoveSlider = 0
 	} else {
@@ -93,7 +93,7 @@ func (x *RangeClass) OverrideMoveSlider(cb func(*Range, ScrollType)) {
 }
 
 // GetMoveSlider gets the "move_slider" callback function.
-func (x *RangeClass) GetMoveSlider() func(*Range, ScrollType) {
+func (x *RangeClassGType) GetMoveSlider() func(*Range, ScrollType) {
 	if x.xMoveSlider == 0 {
 		return nil
 	}
@@ -105,7 +105,7 @@ func (x *RangeClass) GetMoveSlider() func(*Range, ScrollType) {
 }
 
 // OverrideGetRangeBorder sets the "get_range_border" callback function.
-func (x *RangeClass) OverrideGetRangeBorder(cb func(*Range, *Border)) {
+func (x *RangeClassGType) OverrideGetRangeBorder(cb func(*Range, *Border)) {
 	if cb == nil {
 		x.xGetRangeBorder = 0
 	} else {
@@ -116,7 +116,7 @@ func (x *RangeClass) OverrideGetRangeBorder(cb func(*Range, *Border)) {
 }
 
 // GetGetRangeBorder gets the "get_range_border" callback function.
-func (x *RangeClass) GetGetRangeBorder() func(*Range, *Border) {
+func (x *RangeClassGType) GetGetRangeBorder() func(*Range, *Border) {
 	if x.xGetRangeBorder == 0 {
 		return nil
 	}
@@ -128,7 +128,7 @@ func (x *RangeClass) GetGetRangeBorder() func(*Range, *Border) {
 }
 
 // OverrideChangeValue sets the "change_value" callback function.
-func (x *RangeClass) OverrideChangeValue(cb func(*Range, ScrollType, float64) bool) {
+func (x *RangeClassGType) OverrideChangeValue(cb func(*Range, ScrollType, float64) bool) {
 	if cb == nil {
 		x.xChangeValue = 0
 	} else {
@@ -139,7 +139,7 @@ func (x *RangeClass) OverrideChangeValue(cb func(*Range, ScrollType, float64) bo
 }
 
 // GetChangeValue gets the "change_value" callback function.
-func (x *RangeClass) GetChangeValue() func(*Range, ScrollType, float64) bool {
+func (x *RangeClassGType) GetChangeValue() func(*Range, ScrollType, float64) bool {
 	if x.xChangeValue == 0 {
 		return nil
 	}

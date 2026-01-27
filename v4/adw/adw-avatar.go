@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type AvatarClass struct {
+type AvatarClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *AvatarClass) GoPointer() uintptr {
+func (x *AvatarClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ResolverClass struct {
+type ResolverClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xReload uintptr
 
@@ -50,12 +50,12 @@ type ResolverClass struct {
 	xLookupByNameWithFlags uintptr
 }
 
-func (x *ResolverClass) GoPointer() uintptr {
+func (x *ResolverClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideReload sets the "reload" callback function.
-func (x *ResolverClass) OverrideReload(cb func(*Resolver)) {
+func (x *ResolverClassGType) OverrideReload(cb func(*Resolver)) {
 	if cb == nil {
 		x.xReload = 0
 	} else {
@@ -66,7 +66,7 @@ func (x *ResolverClass) OverrideReload(cb func(*Resolver)) {
 }
 
 // GetReload gets the "reload" callback function.
-func (x *ResolverClass) GetReload() func(*Resolver) {
+func (x *ResolverClassGType) GetReload() func(*Resolver) {
 	if x.xReload == 0 {
 		return nil
 	}
@@ -78,7 +78,7 @@ func (x *ResolverClass) GetReload() func(*Resolver) {
 }
 
 // OverrideLookupByName sets the "lookup_by_name" callback function.
-func (x *ResolverClass) OverrideLookupByName(cb func(*Resolver, string, *Cancellable) *glib.List) {
+func (x *ResolverClassGType) OverrideLookupByName(cb func(*Resolver, string, *Cancellable) *glib.List) {
 	if cb == nil {
 		x.xLookupByName = 0
 	} else {
@@ -89,7 +89,7 @@ func (x *ResolverClass) OverrideLookupByName(cb func(*Resolver, string, *Cancell
 }
 
 // GetLookupByName gets the "lookup_by_name" callback function.
-func (x *ResolverClass) GetLookupByName() func(*Resolver, string, *Cancellable) *glib.List {
+func (x *ResolverClassGType) GetLookupByName() func(*Resolver, string, *Cancellable) *glib.List {
 	if x.xLookupByName == 0 {
 		return nil
 	}
@@ -101,7 +101,7 @@ func (x *ResolverClass) GetLookupByName() func(*Resolver, string, *Cancellable) 
 }
 
 // OverrideLookupByNameAsync sets the "lookup_by_name_async" callback function.
-func (x *ResolverClass) OverrideLookupByNameAsync(cb func(*Resolver, string, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *ResolverClassGType) OverrideLookupByNameAsync(cb func(*Resolver, string, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xLookupByNameAsync = 0
 	} else {
@@ -112,7 +112,7 @@ func (x *ResolverClass) OverrideLookupByNameAsync(cb func(*Resolver, string, *Ca
 }
 
 // GetLookupByNameAsync gets the "lookup_by_name_async" callback function.
-func (x *ResolverClass) GetLookupByNameAsync() func(*Resolver, string, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *ResolverClassGType) GetLookupByNameAsync() func(*Resolver, string, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xLookupByNameAsync == 0 {
 		return nil
 	}
@@ -124,7 +124,7 @@ func (x *ResolverClass) GetLookupByNameAsync() func(*Resolver, string, *Cancella
 }
 
 // OverrideLookupByNameFinish sets the "lookup_by_name_finish" callback function.
-func (x *ResolverClass) OverrideLookupByNameFinish(cb func(*Resolver, AsyncResult) *glib.List) {
+func (x *ResolverClassGType) OverrideLookupByNameFinish(cb func(*Resolver, AsyncResult) *glib.List) {
 	if cb == nil {
 		x.xLookupByNameFinish = 0
 	} else {
@@ -135,7 +135,7 @@ func (x *ResolverClass) OverrideLookupByNameFinish(cb func(*Resolver, AsyncResul
 }
 
 // GetLookupByNameFinish gets the "lookup_by_name_finish" callback function.
-func (x *ResolverClass) GetLookupByNameFinish() func(*Resolver, AsyncResult) *glib.List {
+func (x *ResolverClassGType) GetLookupByNameFinish() func(*Resolver, AsyncResult) *glib.List {
 	if x.xLookupByNameFinish == 0 {
 		return nil
 	}
@@ -147,7 +147,7 @@ func (x *ResolverClass) GetLookupByNameFinish() func(*Resolver, AsyncResult) *gl
 }
 
 // OverrideLookupByAddress sets the "lookup_by_address" callback function.
-func (x *ResolverClass) OverrideLookupByAddress(cb func(*Resolver, *InetAddress, *Cancellable) string) {
+func (x *ResolverClassGType) OverrideLookupByAddress(cb func(*Resolver, *InetAddress, *Cancellable) string) {
 	if cb == nil {
 		x.xLookupByAddress = 0
 	} else {
@@ -158,7 +158,7 @@ func (x *ResolverClass) OverrideLookupByAddress(cb func(*Resolver, *InetAddress,
 }
 
 // GetLookupByAddress gets the "lookup_by_address" callback function.
-func (x *ResolverClass) GetLookupByAddress() func(*Resolver, *InetAddress, *Cancellable) string {
+func (x *ResolverClassGType) GetLookupByAddress() func(*Resolver, *InetAddress, *Cancellable) string {
 	if x.xLookupByAddress == 0 {
 		return nil
 	}
@@ -170,7 +170,7 @@ func (x *ResolverClass) GetLookupByAddress() func(*Resolver, *InetAddress, *Canc
 }
 
 // OverrideLookupByAddressAsync sets the "lookup_by_address_async" callback function.
-func (x *ResolverClass) OverrideLookupByAddressAsync(cb func(*Resolver, *InetAddress, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *ResolverClassGType) OverrideLookupByAddressAsync(cb func(*Resolver, *InetAddress, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xLookupByAddressAsync = 0
 	} else {
@@ -181,7 +181,7 @@ func (x *ResolverClass) OverrideLookupByAddressAsync(cb func(*Resolver, *InetAdd
 }
 
 // GetLookupByAddressAsync gets the "lookup_by_address_async" callback function.
-func (x *ResolverClass) GetLookupByAddressAsync() func(*Resolver, *InetAddress, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *ResolverClassGType) GetLookupByAddressAsync() func(*Resolver, *InetAddress, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xLookupByAddressAsync == 0 {
 		return nil
 	}
@@ -193,7 +193,7 @@ func (x *ResolverClass) GetLookupByAddressAsync() func(*Resolver, *InetAddress, 
 }
 
 // OverrideLookupByAddressFinish sets the "lookup_by_address_finish" callback function.
-func (x *ResolverClass) OverrideLookupByAddressFinish(cb func(*Resolver, AsyncResult) string) {
+func (x *ResolverClassGType) OverrideLookupByAddressFinish(cb func(*Resolver, AsyncResult) string) {
 	if cb == nil {
 		x.xLookupByAddressFinish = 0
 	} else {
@@ -204,7 +204,7 @@ func (x *ResolverClass) OverrideLookupByAddressFinish(cb func(*Resolver, AsyncRe
 }
 
 // GetLookupByAddressFinish gets the "lookup_by_address_finish" callback function.
-func (x *ResolverClass) GetLookupByAddressFinish() func(*Resolver, AsyncResult) string {
+func (x *ResolverClassGType) GetLookupByAddressFinish() func(*Resolver, AsyncResult) string {
 	if x.xLookupByAddressFinish == 0 {
 		return nil
 	}
@@ -216,7 +216,7 @@ func (x *ResolverClass) GetLookupByAddressFinish() func(*Resolver, AsyncResult) 
 }
 
 // OverrideLookupService sets the "lookup_service" callback function.
-func (x *ResolverClass) OverrideLookupService(cb func(*Resolver, string, *Cancellable) *glib.List) {
+func (x *ResolverClassGType) OverrideLookupService(cb func(*Resolver, string, *Cancellable) *glib.List) {
 	if cb == nil {
 		x.xLookupService = 0
 	} else {
@@ -227,7 +227,7 @@ func (x *ResolverClass) OverrideLookupService(cb func(*Resolver, string, *Cancel
 }
 
 // GetLookupService gets the "lookup_service" callback function.
-func (x *ResolverClass) GetLookupService() func(*Resolver, string, *Cancellable) *glib.List {
+func (x *ResolverClassGType) GetLookupService() func(*Resolver, string, *Cancellable) *glib.List {
 	if x.xLookupService == 0 {
 		return nil
 	}
@@ -239,7 +239,7 @@ func (x *ResolverClass) GetLookupService() func(*Resolver, string, *Cancellable)
 }
 
 // OverrideLookupServiceAsync sets the "lookup_service_async" callback function.
-func (x *ResolverClass) OverrideLookupServiceAsync(cb func(*Resolver, string, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *ResolverClassGType) OverrideLookupServiceAsync(cb func(*Resolver, string, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xLookupServiceAsync = 0
 	} else {
@@ -250,7 +250,7 @@ func (x *ResolverClass) OverrideLookupServiceAsync(cb func(*Resolver, string, *C
 }
 
 // GetLookupServiceAsync gets the "lookup_service_async" callback function.
-func (x *ResolverClass) GetLookupServiceAsync() func(*Resolver, string, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *ResolverClassGType) GetLookupServiceAsync() func(*Resolver, string, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xLookupServiceAsync == 0 {
 		return nil
 	}
@@ -262,7 +262,7 @@ func (x *ResolverClass) GetLookupServiceAsync() func(*Resolver, string, *Cancell
 }
 
 // OverrideLookupServiceFinish sets the "lookup_service_finish" callback function.
-func (x *ResolverClass) OverrideLookupServiceFinish(cb func(*Resolver, AsyncResult) *glib.List) {
+func (x *ResolverClassGType) OverrideLookupServiceFinish(cb func(*Resolver, AsyncResult) *glib.List) {
 	if cb == nil {
 		x.xLookupServiceFinish = 0
 	} else {
@@ -273,7 +273,7 @@ func (x *ResolverClass) OverrideLookupServiceFinish(cb func(*Resolver, AsyncResu
 }
 
 // GetLookupServiceFinish gets the "lookup_service_finish" callback function.
-func (x *ResolverClass) GetLookupServiceFinish() func(*Resolver, AsyncResult) *glib.List {
+func (x *ResolverClassGType) GetLookupServiceFinish() func(*Resolver, AsyncResult) *glib.List {
 	if x.xLookupServiceFinish == 0 {
 		return nil
 	}
@@ -285,7 +285,7 @@ func (x *ResolverClass) GetLookupServiceFinish() func(*Resolver, AsyncResult) *g
 }
 
 // OverrideLookupRecords sets the "lookup_records" callback function.
-func (x *ResolverClass) OverrideLookupRecords(cb func(*Resolver, string, ResolverRecordType, *Cancellable) *glib.List) {
+func (x *ResolverClassGType) OverrideLookupRecords(cb func(*Resolver, string, ResolverRecordType, *Cancellable) *glib.List) {
 	if cb == nil {
 		x.xLookupRecords = 0
 	} else {
@@ -296,7 +296,7 @@ func (x *ResolverClass) OverrideLookupRecords(cb func(*Resolver, string, Resolve
 }
 
 // GetLookupRecords gets the "lookup_records" callback function.
-func (x *ResolverClass) GetLookupRecords() func(*Resolver, string, ResolverRecordType, *Cancellable) *glib.List {
+func (x *ResolverClassGType) GetLookupRecords() func(*Resolver, string, ResolverRecordType, *Cancellable) *glib.List {
 	if x.xLookupRecords == 0 {
 		return nil
 	}
@@ -308,7 +308,7 @@ func (x *ResolverClass) GetLookupRecords() func(*Resolver, string, ResolverRecor
 }
 
 // OverrideLookupRecordsAsync sets the "lookup_records_async" callback function.
-func (x *ResolverClass) OverrideLookupRecordsAsync(cb func(*Resolver, string, ResolverRecordType, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *ResolverClassGType) OverrideLookupRecordsAsync(cb func(*Resolver, string, ResolverRecordType, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xLookupRecordsAsync = 0
 	} else {
@@ -319,7 +319,7 @@ func (x *ResolverClass) OverrideLookupRecordsAsync(cb func(*Resolver, string, Re
 }
 
 // GetLookupRecordsAsync gets the "lookup_records_async" callback function.
-func (x *ResolverClass) GetLookupRecordsAsync() func(*Resolver, string, ResolverRecordType, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *ResolverClassGType) GetLookupRecordsAsync() func(*Resolver, string, ResolverRecordType, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xLookupRecordsAsync == 0 {
 		return nil
 	}
@@ -331,7 +331,7 @@ func (x *ResolverClass) GetLookupRecordsAsync() func(*Resolver, string, Resolver
 }
 
 // OverrideLookupRecordsFinish sets the "lookup_records_finish" callback function.
-func (x *ResolverClass) OverrideLookupRecordsFinish(cb func(*Resolver, AsyncResult) *glib.List) {
+func (x *ResolverClassGType) OverrideLookupRecordsFinish(cb func(*Resolver, AsyncResult) *glib.List) {
 	if cb == nil {
 		x.xLookupRecordsFinish = 0
 	} else {
@@ -342,7 +342,7 @@ func (x *ResolverClass) OverrideLookupRecordsFinish(cb func(*Resolver, AsyncResu
 }
 
 // GetLookupRecordsFinish gets the "lookup_records_finish" callback function.
-func (x *ResolverClass) GetLookupRecordsFinish() func(*Resolver, AsyncResult) *glib.List {
+func (x *ResolverClassGType) GetLookupRecordsFinish() func(*Resolver, AsyncResult) *glib.List {
 	if x.xLookupRecordsFinish == 0 {
 		return nil
 	}
@@ -354,7 +354,7 @@ func (x *ResolverClass) GetLookupRecordsFinish() func(*Resolver, AsyncResult) *g
 }
 
 // OverrideLookupByNameWithFlagsAsync sets the "lookup_by_name_with_flags_async" callback function.
-func (x *ResolverClass) OverrideLookupByNameWithFlagsAsync(cb func(*Resolver, string, ResolverNameLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *ResolverClassGType) OverrideLookupByNameWithFlagsAsync(cb func(*Resolver, string, ResolverNameLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xLookupByNameWithFlagsAsync = 0
 	} else {
@@ -365,7 +365,7 @@ func (x *ResolverClass) OverrideLookupByNameWithFlagsAsync(cb func(*Resolver, st
 }
 
 // GetLookupByNameWithFlagsAsync gets the "lookup_by_name_with_flags_async" callback function.
-func (x *ResolverClass) GetLookupByNameWithFlagsAsync() func(*Resolver, string, ResolverNameLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *ResolverClassGType) GetLookupByNameWithFlagsAsync() func(*Resolver, string, ResolverNameLookupFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xLookupByNameWithFlagsAsync == 0 {
 		return nil
 	}
@@ -377,7 +377,7 @@ func (x *ResolverClass) GetLookupByNameWithFlagsAsync() func(*Resolver, string, 
 }
 
 // OverrideLookupByNameWithFlagsFinish sets the "lookup_by_name_with_flags_finish" callback function.
-func (x *ResolverClass) OverrideLookupByNameWithFlagsFinish(cb func(*Resolver, AsyncResult) *glib.List) {
+func (x *ResolverClassGType) OverrideLookupByNameWithFlagsFinish(cb func(*Resolver, AsyncResult) *glib.List) {
 	if cb == nil {
 		x.xLookupByNameWithFlagsFinish = 0
 	} else {
@@ -388,7 +388,7 @@ func (x *ResolverClass) OverrideLookupByNameWithFlagsFinish(cb func(*Resolver, A
 }
 
 // GetLookupByNameWithFlagsFinish gets the "lookup_by_name_with_flags_finish" callback function.
-func (x *ResolverClass) GetLookupByNameWithFlagsFinish() func(*Resolver, AsyncResult) *glib.List {
+func (x *ResolverClassGType) GetLookupByNameWithFlagsFinish() func(*Resolver, AsyncResult) *glib.List {
 	if x.xLookupByNameWithFlagsFinish == 0 {
 		return nil
 	}
@@ -400,7 +400,7 @@ func (x *ResolverClass) GetLookupByNameWithFlagsFinish() func(*Resolver, AsyncRe
 }
 
 // OverrideLookupByNameWithFlags sets the "lookup_by_name_with_flags" callback function.
-func (x *ResolverClass) OverrideLookupByNameWithFlags(cb func(*Resolver, string, ResolverNameLookupFlags, *Cancellable) *glib.List) {
+func (x *ResolverClassGType) OverrideLookupByNameWithFlags(cb func(*Resolver, string, ResolverNameLookupFlags, *Cancellable) *glib.List) {
 	if cb == nil {
 		x.xLookupByNameWithFlags = 0
 	} else {
@@ -411,7 +411,7 @@ func (x *ResolverClass) OverrideLookupByNameWithFlags(cb func(*Resolver, string,
 }
 
 // GetLookupByNameWithFlags gets the "lookup_by_name_with_flags" callback function.
-func (x *ResolverClass) GetLookupByNameWithFlags() func(*Resolver, string, ResolverNameLookupFlags, *Cancellable) *glib.List {
+func (x *ResolverClassGType) GetLookupByNameWithFlags() func(*Resolver, string, ResolverNameLookupFlags, *Cancellable) *glib.List {
 	if x.xLookupByNameWithFlags == 0 {
 		return nil
 	}

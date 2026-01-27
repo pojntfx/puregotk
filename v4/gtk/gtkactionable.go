@@ -13,7 +13,7 @@ import (
 )
 
 // The interface vtable for `GtkActionable`.
-type ActionableInterface struct {
+type ActionableInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -27,13 +27,13 @@ type ActionableInterface struct {
 	xSetActionTargetValue uintptr
 }
 
-func (x *ActionableInterface) GoPointer() uintptr {
+func (x *ActionableInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetActionName sets the "get_action_name" callback function.
 // virtual function for [method@Actionable.get_action_name]
-func (x *ActionableInterface) OverrideGetActionName(cb func(Actionable) string) {
+func (x *ActionableInterfaceGType) OverrideGetActionName(cb func(Actionable) string) {
 	if cb == nil {
 		x.xGetActionName = 0
 	} else {
@@ -45,7 +45,7 @@ func (x *ActionableInterface) OverrideGetActionName(cb func(Actionable) string) 
 
 // GetGetActionName gets the "get_action_name" callback function.
 // virtual function for [method@Actionable.get_action_name]
-func (x *ActionableInterface) GetGetActionName() func(Actionable) string {
+func (x *ActionableInterfaceGType) GetGetActionName() func(Actionable) string {
 	if x.xGetActionName == 0 {
 		return nil
 	}
@@ -58,7 +58,7 @@ func (x *ActionableInterface) GetGetActionName() func(Actionable) string {
 
 // OverrideSetActionName sets the "set_action_name" callback function.
 // virtual function for [method@Actionable.set_action_name]
-func (x *ActionableInterface) OverrideSetActionName(cb func(Actionable, string)) {
+func (x *ActionableInterfaceGType) OverrideSetActionName(cb func(Actionable, string)) {
 	if cb == nil {
 		x.xSetActionName = 0
 	} else {
@@ -70,7 +70,7 @@ func (x *ActionableInterface) OverrideSetActionName(cb func(Actionable, string))
 
 // GetSetActionName gets the "set_action_name" callback function.
 // virtual function for [method@Actionable.set_action_name]
-func (x *ActionableInterface) GetSetActionName() func(Actionable, string) {
+func (x *ActionableInterfaceGType) GetSetActionName() func(Actionable, string) {
 	if x.xSetActionName == 0 {
 		return nil
 	}
@@ -83,7 +83,7 @@ func (x *ActionableInterface) GetSetActionName() func(Actionable, string) {
 
 // OverrideGetActionTargetValue sets the "get_action_target_value" callback function.
 // virtual function for [method@Actionable.get_action_target_value]
-func (x *ActionableInterface) OverrideGetActionTargetValue(cb func(Actionable) *glib.Variant) {
+func (x *ActionableInterfaceGType) OverrideGetActionTargetValue(cb func(Actionable) *glib.Variant) {
 	if cb == nil {
 		x.xGetActionTargetValue = 0
 	} else {
@@ -95,7 +95,7 @@ func (x *ActionableInterface) OverrideGetActionTargetValue(cb func(Actionable) *
 
 // GetGetActionTargetValue gets the "get_action_target_value" callback function.
 // virtual function for [method@Actionable.get_action_target_value]
-func (x *ActionableInterface) GetGetActionTargetValue() func(Actionable) *glib.Variant {
+func (x *ActionableInterfaceGType) GetGetActionTargetValue() func(Actionable) *glib.Variant {
 	if x.xGetActionTargetValue == 0 {
 		return nil
 	}
@@ -108,7 +108,7 @@ func (x *ActionableInterface) GetGetActionTargetValue() func(Actionable) *glib.V
 
 // OverrideSetActionTargetValue sets the "set_action_target_value" callback function.
 // virtual function for [method@Actionable.set_action_target_value]
-func (x *ActionableInterface) OverrideSetActionTargetValue(cb func(Actionable, *glib.Variant)) {
+func (x *ActionableInterfaceGType) OverrideSetActionTargetValue(cb func(Actionable, *glib.Variant)) {
 	if cb == nil {
 		x.xSetActionTargetValue = 0
 	} else {
@@ -120,7 +120,7 @@ func (x *ActionableInterface) OverrideSetActionTargetValue(cb func(Actionable, *
 
 // GetSetActionTargetValue gets the "set_action_target_value" callback function.
 // virtual function for [method@Actionable.set_action_target_value]
-func (x *ActionableInterface) GetSetActionTargetValue() func(Actionable, *glib.Variant) {
+func (x *ActionableInterfaceGType) GetSetActionTargetValue() func(Actionable, *glib.Variant) {
 	if x.xSetActionTargetValue == 0 {
 		return nil
 	}

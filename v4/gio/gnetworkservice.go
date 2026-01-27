@@ -11,13 +11,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type NetworkServiceClass struct {
+type NetworkServiceClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *NetworkServiceClass) GoPointer() uintptr {
+func (x *NetworkServiceClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

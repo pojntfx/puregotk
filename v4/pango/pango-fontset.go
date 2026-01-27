@@ -19,10 +19,10 @@ type FontsetForeachFunc func(uintptr, uintptr, uintptr) bool
 
 // The `PangoFontsetClass` structure holds the virtual functions for
 // a particular `PangoFontset` implementation.
-type FontsetClass struct {
+type FontsetClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xGetFont uintptr
 
@@ -41,7 +41,7 @@ type FontsetClass struct {
 	xPangoReserved4 uintptr
 }
 
-func (x *FontsetClass) GoPointer() uintptr {
+func (x *FontsetClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -49,7 +49,7 @@ func (x *FontsetClass) GoPointer() uintptr {
 // a function to get the font in the fontset that contains the
 //
 //	best glyph for the given Unicode character; see [method@Pango.Fontset.get_font]
-func (x *FontsetClass) OverrideGetFont(cb func(*Fontset, uint) *Font) {
+func (x *FontsetClassGType) OverrideGetFont(cb func(*Fontset, uint) *Font) {
 	if cb == nil {
 		x.xGetFont = 0
 	} else {
@@ -67,7 +67,7 @@ func (x *FontsetClass) OverrideGetFont(cb func(*Fontset, uint) *Font) {
 // a function to get the font in the fontset that contains the
 //
 //	best glyph for the given Unicode character; see [method@Pango.Fontset.get_font]
-func (x *FontsetClass) GetGetFont() func(*Fontset, uint) *Font {
+func (x *FontsetClassGType) GetGetFont() func(*Fontset, uint) *Font {
 	if x.xGetFont == 0 {
 		return nil
 	}
@@ -88,7 +88,7 @@ func (x *FontsetClass) GetGetFont() func(*Fontset, uint) *Font {
 // a function to get overall metric information for the fonts
 //
 //	in the fontset; see [method@Pango.Fontset.get_metrics]
-func (x *FontsetClass) OverrideGetMetrics(cb func(*Fontset) *FontMetrics) {
+func (x *FontsetClassGType) OverrideGetMetrics(cb func(*Fontset) *FontMetrics) {
 	if cb == nil {
 		x.xGetMetrics = 0
 	} else {
@@ -102,7 +102,7 @@ func (x *FontsetClass) OverrideGetMetrics(cb func(*Fontset) *FontMetrics) {
 // a function to get overall metric information for the fonts
 //
 //	in the fontset; see [method@Pango.Fontset.get_metrics]
-func (x *FontsetClass) GetGetMetrics() func(*Fontset) *FontMetrics {
+func (x *FontsetClassGType) GetGetMetrics() func(*Fontset) *FontMetrics {
 	if x.xGetMetrics == 0 {
 		return nil
 	}
@@ -115,7 +115,7 @@ func (x *FontsetClass) GetGetMetrics() func(*Fontset) *FontMetrics {
 
 // OverrideGetLanguage sets the "get_language" callback function.
 // a function to get the language of the fontset.
-func (x *FontsetClass) OverrideGetLanguage(cb func(*Fontset) *Language) {
+func (x *FontsetClassGType) OverrideGetLanguage(cb func(*Fontset) *Language) {
 	if cb == nil {
 		x.xGetLanguage = 0
 	} else {
@@ -127,7 +127,7 @@ func (x *FontsetClass) OverrideGetLanguage(cb func(*Fontset) *Language) {
 
 // GetGetLanguage gets the "get_language" callback function.
 // a function to get the language of the fontset.
-func (x *FontsetClass) GetGetLanguage() func(*Fontset) *Language {
+func (x *FontsetClassGType) GetGetLanguage() func(*Fontset) *Language {
 	if x.xGetLanguage == 0 {
 		return nil
 	}
@@ -142,7 +142,7 @@ func (x *FontsetClass) GetGetLanguage() func(*Fontset) *Language {
 // Callback used when enumerating fonts in a fontset.
 //
 // See [method@Pango.Fontset.foreach].
-func (x *FontsetClass) OverrideForeach(cb func(*Fontset, *FontsetForeachFunc, uintptr)) {
+func (x *FontsetClassGType) OverrideForeach(cb func(*Fontset, *FontsetForeachFunc, uintptr)) {
 	if cb == nil {
 		x.xForeach = 0
 	} else {
@@ -156,7 +156,7 @@ func (x *FontsetClass) OverrideForeach(cb func(*Fontset, *FontsetForeachFunc, ui
 // Callback used when enumerating fonts in a fontset.
 //
 // See [method@Pango.Fontset.foreach].
-func (x *FontsetClass) GetForeach() func(*Fontset, *FontsetForeachFunc, uintptr) {
+func (x *FontsetClassGType) GetForeach() func(*Fontset, *FontsetForeachFunc, uintptr) {
 	if x.xForeach == 0 {
 		return nil
 	}
@@ -168,7 +168,7 @@ func (x *FontsetClass) GetForeach() func(*Fontset, *FontsetForeachFunc, uintptr)
 }
 
 // OverridePangoReserved1 sets the "_pango_reserved1" callback function.
-func (x *FontsetClass) OverridePangoReserved1(cb func()) {
+func (x *FontsetClassGType) OverridePangoReserved1(cb func()) {
 	if cb == nil {
 		x.xPangoReserved1 = 0
 	} else {
@@ -179,7 +179,7 @@ func (x *FontsetClass) OverridePangoReserved1(cb func()) {
 }
 
 // GetPangoReserved1 gets the "_pango_reserved1" callback function.
-func (x *FontsetClass) GetPangoReserved1() func() {
+func (x *FontsetClassGType) GetPangoReserved1() func() {
 	if x.xPangoReserved1 == 0 {
 		return nil
 	}
@@ -191,7 +191,7 @@ func (x *FontsetClass) GetPangoReserved1() func() {
 }
 
 // OverridePangoReserved2 sets the "_pango_reserved2" callback function.
-func (x *FontsetClass) OverridePangoReserved2(cb func()) {
+func (x *FontsetClassGType) OverridePangoReserved2(cb func()) {
 	if cb == nil {
 		x.xPangoReserved2 = 0
 	} else {
@@ -202,7 +202,7 @@ func (x *FontsetClass) OverridePangoReserved2(cb func()) {
 }
 
 // GetPangoReserved2 gets the "_pango_reserved2" callback function.
-func (x *FontsetClass) GetPangoReserved2() func() {
+func (x *FontsetClassGType) GetPangoReserved2() func() {
 	if x.xPangoReserved2 == 0 {
 		return nil
 	}
@@ -214,7 +214,7 @@ func (x *FontsetClass) GetPangoReserved2() func() {
 }
 
 // OverridePangoReserved3 sets the "_pango_reserved3" callback function.
-func (x *FontsetClass) OverridePangoReserved3(cb func()) {
+func (x *FontsetClassGType) OverridePangoReserved3(cb func()) {
 	if cb == nil {
 		x.xPangoReserved3 = 0
 	} else {
@@ -225,7 +225,7 @@ func (x *FontsetClass) OverridePangoReserved3(cb func()) {
 }
 
 // GetPangoReserved3 gets the "_pango_reserved3" callback function.
-func (x *FontsetClass) GetPangoReserved3() func() {
+func (x *FontsetClassGType) GetPangoReserved3() func() {
 	if x.xPangoReserved3 == 0 {
 		return nil
 	}
@@ -237,7 +237,7 @@ func (x *FontsetClass) GetPangoReserved3() func() {
 }
 
 // OverridePangoReserved4 sets the "_pango_reserved4" callback function.
-func (x *FontsetClass) OverridePangoReserved4(cb func()) {
+func (x *FontsetClassGType) OverridePangoReserved4(cb func()) {
 	if cb == nil {
 		x.xPangoReserved4 = 0
 	} else {
@@ -248,7 +248,7 @@ func (x *FontsetClass) OverridePangoReserved4(cb func()) {
 }
 
 // GetPangoReserved4 gets the "_pango_reserved4" callback function.
-func (x *FontsetClass) GetPangoReserved4() func() {
+func (x *FontsetClassGType) GetPangoReserved4() func() {
 	if x.xPangoReserved4 == 0 {
 		return nil
 	}

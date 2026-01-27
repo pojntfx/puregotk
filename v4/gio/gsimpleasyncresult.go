@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type SimpleAsyncResultClass struct {
+type SimpleAsyncResultClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *SimpleAsyncResultClass) GoPointer() uintptr {
+func (x *SimpleAsyncResultClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

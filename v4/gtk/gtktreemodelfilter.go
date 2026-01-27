@@ -24,10 +24,10 @@ type TreeModelFilterModifyFunc func(uintptr, *TreeIter, *gobject.Value, int, uin
 // A function which decides whether the row indicated by @iter is visible.
 type TreeModelFilterVisibleFunc func(uintptr, *TreeIter, uintptr) bool
 
-type TreeModelFilterClass struct {
+type TreeModelFilterClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xVisible uintptr
 
@@ -36,13 +36,13 @@ type TreeModelFilterClass struct {
 	Padding [8]uintptr
 }
 
-func (x *TreeModelFilterClass) GoPointer() uintptr {
+func (x *TreeModelFilterClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideVisible sets the "visible" callback function.
 // A function which decides whether the row indicated by @iter is visible.
-func (x *TreeModelFilterClass) OverrideVisible(cb func(*TreeModelFilter, TreeModel, *TreeIter) bool) {
+func (x *TreeModelFilterClassGType) OverrideVisible(cb func(*TreeModelFilter, TreeModel, *TreeIter) bool) {
 	if cb == nil {
 		x.xVisible = 0
 	} else {
@@ -54,7 +54,7 @@ func (x *TreeModelFilterClass) OverrideVisible(cb func(*TreeModelFilter, TreeMod
 
 // GetVisible gets the "visible" callback function.
 // A function which decides whether the row indicated by @iter is visible.
-func (x *TreeModelFilterClass) GetVisible() func(*TreeModelFilter, TreeModel, *TreeIter) bool {
+func (x *TreeModelFilterClassGType) GetVisible() func(*TreeModelFilter, TreeModel, *TreeIter) bool {
 	if x.xVisible == 0 {
 		return nil
 	}
@@ -72,7 +72,7 @@ func (x *TreeModelFilterClass) GetVisible() func(*TreeModelFilter, TreeModel, *T
 //
 // Since this function is called for each data access, it’s not a
 // particularly efficient operation.
-func (x *TreeModelFilterClass) OverrideModify(cb func(*TreeModelFilter, TreeModel, *TreeIter, *gobject.Value, int)) {
+func (x *TreeModelFilterClassGType) OverrideModify(cb func(*TreeModelFilter, TreeModel, *TreeIter, *gobject.Value, int)) {
 	if cb == nil {
 		x.xModify = 0
 	} else {
@@ -89,7 +89,7 @@ func (x *TreeModelFilterClass) OverrideModify(cb func(*TreeModelFilter, TreeMode
 //
 // Since this function is called for each data access, it’s not a
 // particularly efficient operation.
-func (x *TreeModelFilterClass) GetModify() func(*TreeModelFilter, TreeModel, *TreeIter, *gobject.Value, int) {
+func (x *TreeModelFilterClassGType) GetModify() func(*TreeModelFilter, TreeModel, *TreeIter, *gobject.Value, int) {
 	if x.xModify == 0 {
 		return nil
 	}

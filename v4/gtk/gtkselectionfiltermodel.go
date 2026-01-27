@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type SelectionFilterModelClass struct {
+type SelectionFilterModelClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *SelectionFilterModelClass) GoPointer() uintptr {
+func (x *SelectionFilterModelClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

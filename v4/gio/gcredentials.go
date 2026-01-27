@@ -13,11 +13,11 @@ import (
 )
 
 // Class structure for #GCredentials.
-type CredentialsClass struct {
+type CredentialsClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *CredentialsClass) GoPointer() uintptr {
+func (x *CredentialsClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

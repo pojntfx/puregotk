@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type LayoutClass struct {
+type LayoutClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *LayoutClass) GoPointer() uintptr {
+func (x *LayoutClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

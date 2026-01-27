@@ -12,15 +12,15 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type SimpleActionGroupClass struct {
+type SimpleActionGroupClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	Padding [12]uintptr
 }
 
-func (x *SimpleActionGroupClass) GoPointer() uintptr {
+func (x *SimpleActionGroupClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type PixbufLoaderClass struct {
+type PixbufLoaderClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xSizePrepared uintptr
 
@@ -26,12 +26,12 @@ type PixbufLoaderClass struct {
 	xClosed uintptr
 }
 
-func (x *PixbufLoaderClass) GoPointer() uintptr {
+func (x *PixbufLoaderClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideSizePrepared sets the "size_prepared" callback function.
-func (x *PixbufLoaderClass) OverrideSizePrepared(cb func(*PixbufLoader, int, int)) {
+func (x *PixbufLoaderClassGType) OverrideSizePrepared(cb func(*PixbufLoader, int, int)) {
 	if cb == nil {
 		x.xSizePrepared = 0
 	} else {
@@ -42,7 +42,7 @@ func (x *PixbufLoaderClass) OverrideSizePrepared(cb func(*PixbufLoader, int, int
 }
 
 // GetSizePrepared gets the "size_prepared" callback function.
-func (x *PixbufLoaderClass) GetSizePrepared() func(*PixbufLoader, int, int) {
+func (x *PixbufLoaderClassGType) GetSizePrepared() func(*PixbufLoader, int, int) {
 	if x.xSizePrepared == 0 {
 		return nil
 	}
@@ -54,7 +54,7 @@ func (x *PixbufLoaderClass) GetSizePrepared() func(*PixbufLoader, int, int) {
 }
 
 // OverrideAreaPrepared sets the "area_prepared" callback function.
-func (x *PixbufLoaderClass) OverrideAreaPrepared(cb func(*PixbufLoader)) {
+func (x *PixbufLoaderClassGType) OverrideAreaPrepared(cb func(*PixbufLoader)) {
 	if cb == nil {
 		x.xAreaPrepared = 0
 	} else {
@@ -65,7 +65,7 @@ func (x *PixbufLoaderClass) OverrideAreaPrepared(cb func(*PixbufLoader)) {
 }
 
 // GetAreaPrepared gets the "area_prepared" callback function.
-func (x *PixbufLoaderClass) GetAreaPrepared() func(*PixbufLoader) {
+func (x *PixbufLoaderClassGType) GetAreaPrepared() func(*PixbufLoader) {
 	if x.xAreaPrepared == 0 {
 		return nil
 	}
@@ -77,7 +77,7 @@ func (x *PixbufLoaderClass) GetAreaPrepared() func(*PixbufLoader) {
 }
 
 // OverrideAreaUpdated sets the "area_updated" callback function.
-func (x *PixbufLoaderClass) OverrideAreaUpdated(cb func(*PixbufLoader, int, int, int, int)) {
+func (x *PixbufLoaderClassGType) OverrideAreaUpdated(cb func(*PixbufLoader, int, int, int, int)) {
 	if cb == nil {
 		x.xAreaUpdated = 0
 	} else {
@@ -88,7 +88,7 @@ func (x *PixbufLoaderClass) OverrideAreaUpdated(cb func(*PixbufLoader, int, int,
 }
 
 // GetAreaUpdated gets the "area_updated" callback function.
-func (x *PixbufLoaderClass) GetAreaUpdated() func(*PixbufLoader, int, int, int, int) {
+func (x *PixbufLoaderClassGType) GetAreaUpdated() func(*PixbufLoader, int, int, int, int) {
 	if x.xAreaUpdated == 0 {
 		return nil
 	}
@@ -100,7 +100,7 @@ func (x *PixbufLoaderClass) GetAreaUpdated() func(*PixbufLoader, int, int, int, 
 }
 
 // OverrideClosed sets the "closed" callback function.
-func (x *PixbufLoaderClass) OverrideClosed(cb func(*PixbufLoader)) {
+func (x *PixbufLoaderClassGType) OverrideClosed(cb func(*PixbufLoader)) {
 	if cb == nil {
 		x.xClosed = 0
 	} else {
@@ -111,7 +111,7 @@ func (x *PixbufLoaderClass) OverrideClosed(cb func(*PixbufLoader)) {
 }
 
 // GetClosed gets the "closed" callback function.
-func (x *PixbufLoaderClass) GetClosed() func(*PixbufLoader) {
+func (x *PixbufLoaderClassGType) GetClosed() func(*PixbufLoader) {
 	if x.xClosed == 0 {
 		return nil
 	}

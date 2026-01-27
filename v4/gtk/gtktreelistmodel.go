@@ -22,23 +22,23 @@ import (
 // children arrive.
 type TreeListModelCreateModelFunc func(uintptr, uintptr) uintptr
 
-type TreeListModelClass struct {
+type TreeListModelClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *TreeListModelClass) GoPointer() uintptr {
+func (x *TreeListModelClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type TreeListRowClass struct {
+type TreeListRowClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *TreeListRowClass) GoPointer() uintptr {
+func (x *TreeListRowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

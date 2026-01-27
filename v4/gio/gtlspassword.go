@@ -13,10 +13,10 @@ import (
 )
 
 // Class structure for #GTlsPassword.
-type TlsPasswordClass struct {
+type TlsPasswordClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xGetValue uintptr
 
@@ -27,13 +27,13 @@ type TlsPasswordClass struct {
 	Padding [4]uintptr
 }
 
-func (x *TlsPasswordClass) GoPointer() uintptr {
+func (x *TlsPasswordClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetValue sets the "get_value" callback function.
 // virtual method for g_tls_password_get_value()
-func (x *TlsPasswordClass) OverrideGetValue(cb func(*TlsPassword, *uint) uintptr) {
+func (x *TlsPasswordClassGType) OverrideGetValue(cb func(*TlsPassword, *uint) uintptr) {
 	if cb == nil {
 		x.xGetValue = 0
 	} else {
@@ -45,7 +45,7 @@ func (x *TlsPasswordClass) OverrideGetValue(cb func(*TlsPassword, *uint) uintptr
 
 // GetGetValue gets the "get_value" callback function.
 // virtual method for g_tls_password_get_value()
-func (x *TlsPasswordClass) GetGetValue() func(*TlsPassword, *uint) uintptr {
+func (x *TlsPasswordClassGType) GetGetValue() func(*TlsPassword, *uint) uintptr {
 	if x.xGetValue == 0 {
 		return nil
 	}
@@ -58,7 +58,7 @@ func (x *TlsPasswordClass) GetGetValue() func(*TlsPassword, *uint) uintptr {
 
 // OverrideSetValue sets the "set_value" callback function.
 // virtual method for g_tls_password_set_value()
-func (x *TlsPasswordClass) OverrideSetValue(cb func(*TlsPassword, []byte, int, *glib.DestroyNotify)) {
+func (x *TlsPasswordClassGType) OverrideSetValue(cb func(*TlsPassword, []byte, int, *glib.DestroyNotify)) {
 	if cb == nil {
 		x.xSetValue = 0
 	} else {
@@ -70,7 +70,7 @@ func (x *TlsPasswordClass) OverrideSetValue(cb func(*TlsPassword, []byte, int, *
 
 // GetSetValue gets the "set_value" callback function.
 // virtual method for g_tls_password_set_value()
-func (x *TlsPasswordClass) GetSetValue() func(*TlsPassword, []byte, int, *glib.DestroyNotify) {
+func (x *TlsPasswordClassGType) GetSetValue() func(*TlsPassword, []byte, int, *glib.DestroyNotify) {
 	if x.xSetValue == 0 {
 		return nil
 	}
@@ -85,7 +85,7 @@ func (x *TlsPasswordClass) GetSetValue() func(*TlsPassword, []byte, int, *glib.D
 // virtual method for g_tls_password_get_warning() if no
 //
 //	value has been set using g_tls_password_set_warning()
-func (x *TlsPasswordClass) OverrideGetDefaultWarning(cb func(*TlsPassword) string) {
+func (x *TlsPasswordClassGType) OverrideGetDefaultWarning(cb func(*TlsPassword) string) {
 	if cb == nil {
 		x.xGetDefaultWarning = 0
 	} else {
@@ -99,7 +99,7 @@ func (x *TlsPasswordClass) OverrideGetDefaultWarning(cb func(*TlsPassword) strin
 // virtual method for g_tls_password_get_warning() if no
 //
 //	value has been set using g_tls_password_set_warning()
-func (x *TlsPasswordClass) GetGetDefaultWarning() func(*TlsPassword) string {
+func (x *TlsPasswordClassGType) GetGetDefaultWarning() func(*TlsPassword) string {
 	if x.xGetDefaultWarning == 0 {
 		return nil
 	}

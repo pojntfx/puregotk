@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type StatusPageClass struct {
+type StatusPageClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *StatusPageClass) GoPointer() uintptr {
+func (x *StatusPageClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

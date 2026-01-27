@@ -11,13 +11,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type TreeExpanderClass struct {
+type TreeExpanderClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 }
 
-func (x *TreeExpanderClass) GoPointer() uintptr {
+func (x *TreeExpanderClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

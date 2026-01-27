@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type SignalListItemFactoryClass struct {
+type SignalListItemFactoryClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *SignalListItemFactoryClass) GoPointer() uintptr {
+func (x *SignalListItemFactoryClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

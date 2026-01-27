@@ -10,13 +10,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type PasswordEntryBufferClass struct {
+type PasswordEntryBufferClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass EntryBufferClass
+	ParentClass EntryBufferClassGType
 }
 
-func (x *PasswordEntryBufferClass) GoPointer() uintptr {
+func (x *PasswordEntryBufferClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

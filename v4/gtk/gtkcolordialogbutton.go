@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ColorDialogButtonClass struct {
+type ColorDialogButtonClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 }
 
-func (x *ColorDialogButtonClass) GoPointer() uintptr {
+func (x *ColorDialogButtonClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

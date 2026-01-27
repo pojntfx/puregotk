@@ -12,7 +12,7 @@ import (
 )
 
 // Base type for D-Bus object managers.
-type DBusObjectManagerIface struct {
+type DBusObjectManagerIfaceGType struct {
 	_ structs.HostLayout
 
 	ParentIface uintptr
@@ -34,13 +34,13 @@ type DBusObjectManagerIface struct {
 	xInterfaceRemoved uintptr
 }
 
-func (x *DBusObjectManagerIface) GoPointer() uintptr {
+func (x *DBusObjectManagerIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetObjectPath sets the "get_object_path" callback function.
 // Virtual function for g_dbus_object_manager_get_object_path().
-func (x *DBusObjectManagerIface) OverrideGetObjectPath(cb func(DBusObjectManager) string) {
+func (x *DBusObjectManagerIfaceGType) OverrideGetObjectPath(cb func(DBusObjectManager) string) {
 	if cb == nil {
 		x.xGetObjectPath = 0
 	} else {
@@ -52,7 +52,7 @@ func (x *DBusObjectManagerIface) OverrideGetObjectPath(cb func(DBusObjectManager
 
 // GetGetObjectPath gets the "get_object_path" callback function.
 // Virtual function for g_dbus_object_manager_get_object_path().
-func (x *DBusObjectManagerIface) GetGetObjectPath() func(DBusObjectManager) string {
+func (x *DBusObjectManagerIfaceGType) GetGetObjectPath() func(DBusObjectManager) string {
 	if x.xGetObjectPath == 0 {
 		return nil
 	}
@@ -65,7 +65,7 @@ func (x *DBusObjectManagerIface) GetGetObjectPath() func(DBusObjectManager) stri
 
 // OverrideGetObjects sets the "get_objects" callback function.
 // Virtual function for g_dbus_object_manager_get_objects().
-func (x *DBusObjectManagerIface) OverrideGetObjects(cb func(DBusObjectManager) *glib.List) {
+func (x *DBusObjectManagerIfaceGType) OverrideGetObjects(cb func(DBusObjectManager) *glib.List) {
 	if cb == nil {
 		x.xGetObjects = 0
 	} else {
@@ -77,7 +77,7 @@ func (x *DBusObjectManagerIface) OverrideGetObjects(cb func(DBusObjectManager) *
 
 // GetGetObjects gets the "get_objects" callback function.
 // Virtual function for g_dbus_object_manager_get_objects().
-func (x *DBusObjectManagerIface) GetGetObjects() func(DBusObjectManager) *glib.List {
+func (x *DBusObjectManagerIfaceGType) GetGetObjects() func(DBusObjectManager) *glib.List {
 	if x.xGetObjects == 0 {
 		return nil
 	}
@@ -90,7 +90,7 @@ func (x *DBusObjectManagerIface) GetGetObjects() func(DBusObjectManager) *glib.L
 
 // OverrideGetObject sets the "get_object" callback function.
 // Virtual function for g_dbus_object_manager_get_object().
-func (x *DBusObjectManagerIface) OverrideGetObject(cb func(DBusObjectManager, string) *DBusObjectBase) {
+func (x *DBusObjectManagerIfaceGType) OverrideGetObject(cb func(DBusObjectManager, string) *DBusObjectBase) {
 	if cb == nil {
 		x.xGetObject = 0
 	} else {
@@ -106,7 +106,7 @@ func (x *DBusObjectManagerIface) OverrideGetObject(cb func(DBusObjectManager, st
 
 // GetGetObject gets the "get_object" callback function.
 // Virtual function for g_dbus_object_manager_get_object().
-func (x *DBusObjectManagerIface) GetGetObject() func(DBusObjectManager, string) *DBusObjectBase {
+func (x *DBusObjectManagerIfaceGType) GetGetObject() func(DBusObjectManager, string) *DBusObjectBase {
 	if x.xGetObject == 0 {
 		return nil
 	}
@@ -125,7 +125,7 @@ func (x *DBusObjectManagerIface) GetGetObject() func(DBusObjectManager, string) 
 
 // OverrideGetInterface sets the "get_interface" callback function.
 // Virtual function for g_dbus_object_manager_get_interface().
-func (x *DBusObjectManagerIface) OverrideGetInterface(cb func(DBusObjectManager, string, string) *DBusInterfaceBase) {
+func (x *DBusObjectManagerIfaceGType) OverrideGetInterface(cb func(DBusObjectManager, string, string) *DBusInterfaceBase) {
 	if cb == nil {
 		x.xGetInterface = 0
 	} else {
@@ -141,7 +141,7 @@ func (x *DBusObjectManagerIface) OverrideGetInterface(cb func(DBusObjectManager,
 
 // GetGetInterface gets the "get_interface" callback function.
 // Virtual function for g_dbus_object_manager_get_interface().
-func (x *DBusObjectManagerIface) GetGetInterface() func(DBusObjectManager, string, string) *DBusInterfaceBase {
+func (x *DBusObjectManagerIfaceGType) GetGetInterface() func(DBusObjectManager, string, string) *DBusInterfaceBase {
 	if x.xGetInterface == 0 {
 		return nil
 	}
@@ -160,7 +160,7 @@ func (x *DBusObjectManagerIface) GetGetInterface() func(DBusObjectManager, strin
 
 // OverrideObjectAdded sets the "object_added" callback function.
 // Signal handler for the #GDBusObjectManager::object-added signal.
-func (x *DBusObjectManagerIface) OverrideObjectAdded(cb func(DBusObjectManager, DBusObject)) {
+func (x *DBusObjectManagerIfaceGType) OverrideObjectAdded(cb func(DBusObjectManager, DBusObject)) {
 	if cb == nil {
 		x.xObjectAdded = 0
 	} else {
@@ -172,7 +172,7 @@ func (x *DBusObjectManagerIface) OverrideObjectAdded(cb func(DBusObjectManager, 
 
 // GetObjectAdded gets the "object_added" callback function.
 // Signal handler for the #GDBusObjectManager::object-added signal.
-func (x *DBusObjectManagerIface) GetObjectAdded() func(DBusObjectManager, DBusObject) {
+func (x *DBusObjectManagerIfaceGType) GetObjectAdded() func(DBusObjectManager, DBusObject) {
 	if x.xObjectAdded == 0 {
 		return nil
 	}
@@ -185,7 +185,7 @@ func (x *DBusObjectManagerIface) GetObjectAdded() func(DBusObjectManager, DBusOb
 
 // OverrideObjectRemoved sets the "object_removed" callback function.
 // Signal handler for the #GDBusObjectManager::object-removed signal.
-func (x *DBusObjectManagerIface) OverrideObjectRemoved(cb func(DBusObjectManager, DBusObject)) {
+func (x *DBusObjectManagerIfaceGType) OverrideObjectRemoved(cb func(DBusObjectManager, DBusObject)) {
 	if cb == nil {
 		x.xObjectRemoved = 0
 	} else {
@@ -197,7 +197,7 @@ func (x *DBusObjectManagerIface) OverrideObjectRemoved(cb func(DBusObjectManager
 
 // GetObjectRemoved gets the "object_removed" callback function.
 // Signal handler for the #GDBusObjectManager::object-removed signal.
-func (x *DBusObjectManagerIface) GetObjectRemoved() func(DBusObjectManager, DBusObject) {
+func (x *DBusObjectManagerIfaceGType) GetObjectRemoved() func(DBusObjectManager, DBusObject) {
 	if x.xObjectRemoved == 0 {
 		return nil
 	}
@@ -210,7 +210,7 @@ func (x *DBusObjectManagerIface) GetObjectRemoved() func(DBusObjectManager, DBus
 
 // OverrideInterfaceAdded sets the "interface_added" callback function.
 // Signal handler for the #GDBusObjectManager::interface-added signal.
-func (x *DBusObjectManagerIface) OverrideInterfaceAdded(cb func(DBusObjectManager, DBusObject, DBusInterface)) {
+func (x *DBusObjectManagerIfaceGType) OverrideInterfaceAdded(cb func(DBusObjectManager, DBusObject, DBusInterface)) {
 	if cb == nil {
 		x.xInterfaceAdded = 0
 	} else {
@@ -222,7 +222,7 @@ func (x *DBusObjectManagerIface) OverrideInterfaceAdded(cb func(DBusObjectManage
 
 // GetInterfaceAdded gets the "interface_added" callback function.
 // Signal handler for the #GDBusObjectManager::interface-added signal.
-func (x *DBusObjectManagerIface) GetInterfaceAdded() func(DBusObjectManager, DBusObject, DBusInterface) {
+func (x *DBusObjectManagerIfaceGType) GetInterfaceAdded() func(DBusObjectManager, DBusObject, DBusInterface) {
 	if x.xInterfaceAdded == 0 {
 		return nil
 	}
@@ -235,7 +235,7 @@ func (x *DBusObjectManagerIface) GetInterfaceAdded() func(DBusObjectManager, DBu
 
 // OverrideInterfaceRemoved sets the "interface_removed" callback function.
 // Signal handler for the #GDBusObjectManager::interface-removed signal.
-func (x *DBusObjectManagerIface) OverrideInterfaceRemoved(cb func(DBusObjectManager, DBusObject, DBusInterface)) {
+func (x *DBusObjectManagerIfaceGType) OverrideInterfaceRemoved(cb func(DBusObjectManager, DBusObject, DBusInterface)) {
 	if cb == nil {
 		x.xInterfaceRemoved = 0
 	} else {
@@ -247,7 +247,7 @@ func (x *DBusObjectManagerIface) OverrideInterfaceRemoved(cb func(DBusObjectMana
 
 // GetInterfaceRemoved gets the "interface_removed" callback function.
 // Signal handler for the #GDBusObjectManager::interface-removed signal.
-func (x *DBusObjectManagerIface) GetInterfaceRemoved() func(DBusObjectManager, DBusObject, DBusInterface) {
+func (x *DBusObjectManagerIfaceGType) GetInterfaceRemoved() func(DBusObjectManager, DBusObject, DBusInterface) {
 	if x.xInterfaceRemoved == 0 {
 		return nil
 	}

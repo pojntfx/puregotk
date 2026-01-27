@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type GesturePanClass struct {
+type GesturePanClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *GesturePanClass) GoPointer() uintptr {
+func (x *GesturePanClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

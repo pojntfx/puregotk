@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type InetAddressMaskClass struct {
+type InetAddressMaskClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *InetAddressMaskClass) GoPointer() uintptr {
+func (x *InetAddressMaskClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type FileIconClass struct {
+type FileIconClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *FileIconClass) GoPointer() uintptr {
+func (x *FileIconClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

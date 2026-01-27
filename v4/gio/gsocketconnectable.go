@@ -12,7 +12,7 @@ import (
 
 // Provides an interface for returning a #GSocketAddressEnumerator
 // and #GProxyAddressEnumerator
-type SocketConnectableIface struct {
+type SocketConnectableIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -24,13 +24,13 @@ type SocketConnectableIface struct {
 	xToString uintptr
 }
 
-func (x *SocketConnectableIface) GoPointer() uintptr {
+func (x *SocketConnectableIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideEnumerate sets the "enumerate" callback function.
 // Creates a #GSocketAddressEnumerator
-func (x *SocketConnectableIface) OverrideEnumerate(cb func(SocketConnectable) *SocketAddressEnumerator) {
+func (x *SocketConnectableIfaceGType) OverrideEnumerate(cb func(SocketConnectable) *SocketAddressEnumerator) {
 	if cb == nil {
 		x.xEnumerate = 0
 	} else {
@@ -46,7 +46,7 @@ func (x *SocketConnectableIface) OverrideEnumerate(cb func(SocketConnectable) *S
 
 // GetEnumerate gets the "enumerate" callback function.
 // Creates a #GSocketAddressEnumerator
-func (x *SocketConnectableIface) GetEnumerate() func(SocketConnectable) *SocketAddressEnumerator {
+func (x *SocketConnectableIfaceGType) GetEnumerate() func(SocketConnectable) *SocketAddressEnumerator {
 	if x.xEnumerate == 0 {
 		return nil
 	}
@@ -65,7 +65,7 @@ func (x *SocketConnectableIface) GetEnumerate() func(SocketConnectable) *SocketA
 
 // OverrideProxyEnumerate sets the "proxy_enumerate" callback function.
 // Creates a #GProxyAddressEnumerator
-func (x *SocketConnectableIface) OverrideProxyEnumerate(cb func(SocketConnectable) *SocketAddressEnumerator) {
+func (x *SocketConnectableIfaceGType) OverrideProxyEnumerate(cb func(SocketConnectable) *SocketAddressEnumerator) {
 	if cb == nil {
 		x.xProxyEnumerate = 0
 	} else {
@@ -81,7 +81,7 @@ func (x *SocketConnectableIface) OverrideProxyEnumerate(cb func(SocketConnectabl
 
 // GetProxyEnumerate gets the "proxy_enumerate" callback function.
 // Creates a #GProxyAddressEnumerator
-func (x *SocketConnectableIface) GetProxyEnumerate() func(SocketConnectable) *SocketAddressEnumerator {
+func (x *SocketConnectableIfaceGType) GetProxyEnumerate() func(SocketConnectable) *SocketAddressEnumerator {
 	if x.xProxyEnumerate == 0 {
 		return nil
 	}
@@ -102,7 +102,7 @@ func (x *SocketConnectableIface) GetProxyEnumerate() func(SocketConnectable) *So
 // Format the connectable’s address as a string for debugging.
 //
 //	Implementing this is optional. (Since: 2.48)
-func (x *SocketConnectableIface) OverrideToString(cb func(SocketConnectable) string) {
+func (x *SocketConnectableIfaceGType) OverrideToString(cb func(SocketConnectable) string) {
 	if cb == nil {
 		x.xToString = 0
 	} else {
@@ -116,7 +116,7 @@ func (x *SocketConnectableIface) OverrideToString(cb func(SocketConnectable) str
 // Format the connectable’s address as a string for debugging.
 //
 //	Implementing this is optional. (Since: 2.48)
-func (x *SocketConnectableIface) GetToString() func(SocketConnectable) string {
+func (x *SocketConnectableIfaceGType) GetToString() func(SocketConnectable) string {
 	if x.xToString == 0 {
 		return nil
 	}

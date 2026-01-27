@@ -11,13 +11,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type MediaControlsClass struct {
+type MediaControlsClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 }
 
-func (x *MediaControlsClass) GoPointer() uintptr {
+func (x *MediaControlsClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

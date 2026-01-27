@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type ShortcutsItemClass struct {
+type ShortcutsItemClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *ShortcutsItemClass) GoPointer() uintptr {
+func (x *ShortcutsItemClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

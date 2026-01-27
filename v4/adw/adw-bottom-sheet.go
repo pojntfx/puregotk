@@ -14,13 +14,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type BottomSheetClass struct {
+type BottomSheetClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *BottomSheetClass) GoPointer() uintptr {
+func (x *BottomSheetClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gsk"
 )
 
-type DragIconClass struct {
+type DragIconClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 }
 
-func (x *DragIconClass) GoPointer() uintptr {
+func (x *DragIconClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

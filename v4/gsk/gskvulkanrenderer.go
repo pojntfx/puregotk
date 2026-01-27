@@ -10,11 +10,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type VulkanRendererClass struct {
+type VulkanRendererClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *VulkanRendererClass) GoPointer() uintptr {
+func (x *VulkanRendererClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

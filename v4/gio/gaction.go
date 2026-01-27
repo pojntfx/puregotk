@@ -13,7 +13,7 @@ import (
 )
 
 // The virtual function table for [type@Gio.Action].
-type ActionInterface struct {
+type ActionInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -35,13 +35,13 @@ type ActionInterface struct {
 	xActivate uintptr
 }
 
-func (x *ActionInterface) GoPointer() uintptr {
+func (x *ActionInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetName sets the "get_name" callback function.
 // the virtual function pointer for [method@Gio.Action.get_name]
-func (x *ActionInterface) OverrideGetName(cb func(Action) string) {
+func (x *ActionInterfaceGType) OverrideGetName(cb func(Action) string) {
 	if cb == nil {
 		x.xGetName = 0
 	} else {
@@ -53,7 +53,7 @@ func (x *ActionInterface) OverrideGetName(cb func(Action) string) {
 
 // GetGetName gets the "get_name" callback function.
 // the virtual function pointer for [method@Gio.Action.get_name]
-func (x *ActionInterface) GetGetName() func(Action) string {
+func (x *ActionInterfaceGType) GetGetName() func(Action) string {
 	if x.xGetName == 0 {
 		return nil
 	}
@@ -66,7 +66,7 @@ func (x *ActionInterface) GetGetName() func(Action) string {
 
 // OverrideGetParameterType sets the "get_parameter_type" callback function.
 // the virtual function pointer for [method@Gio.Action.get_parameter_type]
-func (x *ActionInterface) OverrideGetParameterType(cb func(Action) *glib.VariantType) {
+func (x *ActionInterfaceGType) OverrideGetParameterType(cb func(Action) *glib.VariantType) {
 	if cb == nil {
 		x.xGetParameterType = 0
 	} else {
@@ -78,7 +78,7 @@ func (x *ActionInterface) OverrideGetParameterType(cb func(Action) *glib.Variant
 
 // GetGetParameterType gets the "get_parameter_type" callback function.
 // the virtual function pointer for [method@Gio.Action.get_parameter_type]
-func (x *ActionInterface) GetGetParameterType() func(Action) *glib.VariantType {
+func (x *ActionInterfaceGType) GetGetParameterType() func(Action) *glib.VariantType {
 	if x.xGetParameterType == 0 {
 		return nil
 	}
@@ -91,7 +91,7 @@ func (x *ActionInterface) GetGetParameterType() func(Action) *glib.VariantType {
 
 // OverrideGetStateType sets the "get_state_type" callback function.
 // the virtual function pointer for [method@Gio.Action.get_state_type]
-func (x *ActionInterface) OverrideGetStateType(cb func(Action) *glib.VariantType) {
+func (x *ActionInterfaceGType) OverrideGetStateType(cb func(Action) *glib.VariantType) {
 	if cb == nil {
 		x.xGetStateType = 0
 	} else {
@@ -103,7 +103,7 @@ func (x *ActionInterface) OverrideGetStateType(cb func(Action) *glib.VariantType
 
 // GetGetStateType gets the "get_state_type" callback function.
 // the virtual function pointer for [method@Gio.Action.get_state_type]
-func (x *ActionInterface) GetGetStateType() func(Action) *glib.VariantType {
+func (x *ActionInterfaceGType) GetGetStateType() func(Action) *glib.VariantType {
 	if x.xGetStateType == 0 {
 		return nil
 	}
@@ -116,7 +116,7 @@ func (x *ActionInterface) GetGetStateType() func(Action) *glib.VariantType {
 
 // OverrideGetStateHint sets the "get_state_hint" callback function.
 // the virtual function pointer for [method@Gio.Action.get_state_hint]
-func (x *ActionInterface) OverrideGetStateHint(cb func(Action) *glib.Variant) {
+func (x *ActionInterfaceGType) OverrideGetStateHint(cb func(Action) *glib.Variant) {
 	if cb == nil {
 		x.xGetStateHint = 0
 	} else {
@@ -128,7 +128,7 @@ func (x *ActionInterface) OverrideGetStateHint(cb func(Action) *glib.Variant) {
 
 // GetGetStateHint gets the "get_state_hint" callback function.
 // the virtual function pointer for [method@Gio.Action.get_state_hint]
-func (x *ActionInterface) GetGetStateHint() func(Action) *glib.Variant {
+func (x *ActionInterfaceGType) GetGetStateHint() func(Action) *glib.Variant {
 	if x.xGetStateHint == 0 {
 		return nil
 	}
@@ -141,7 +141,7 @@ func (x *ActionInterface) GetGetStateHint() func(Action) *glib.Variant {
 
 // OverrideGetEnabled sets the "get_enabled" callback function.
 // the virtual function pointer for [method@Gio.Action.get_enabled]
-func (x *ActionInterface) OverrideGetEnabled(cb func(Action) bool) {
+func (x *ActionInterfaceGType) OverrideGetEnabled(cb func(Action) bool) {
 	if cb == nil {
 		x.xGetEnabled = 0
 	} else {
@@ -153,7 +153,7 @@ func (x *ActionInterface) OverrideGetEnabled(cb func(Action) bool) {
 
 // GetGetEnabled gets the "get_enabled" callback function.
 // the virtual function pointer for [method@Gio.Action.get_enabled]
-func (x *ActionInterface) GetGetEnabled() func(Action) bool {
+func (x *ActionInterfaceGType) GetGetEnabled() func(Action) bool {
 	if x.xGetEnabled == 0 {
 		return nil
 	}
@@ -166,7 +166,7 @@ func (x *ActionInterface) GetGetEnabled() func(Action) bool {
 
 // OverrideGetState sets the "get_state" callback function.
 // the virtual function pointer for [method@Gio.Action.get_state]
-func (x *ActionInterface) OverrideGetState(cb func(Action) *glib.Variant) {
+func (x *ActionInterfaceGType) OverrideGetState(cb func(Action) *glib.Variant) {
 	if cb == nil {
 		x.xGetState = 0
 	} else {
@@ -178,7 +178,7 @@ func (x *ActionInterface) OverrideGetState(cb func(Action) *glib.Variant) {
 
 // GetGetState gets the "get_state" callback function.
 // the virtual function pointer for [method@Gio.Action.get_state]
-func (x *ActionInterface) GetGetState() func(Action) *glib.Variant {
+func (x *ActionInterfaceGType) GetGetState() func(Action) *glib.Variant {
 	if x.xGetState == 0 {
 		return nil
 	}
@@ -191,7 +191,7 @@ func (x *ActionInterface) GetGetState() func(Action) *glib.Variant {
 
 // OverrideChangeState sets the "change_state" callback function.
 // the virtual function pointer for [method@Gio.Action.change_state]
-func (x *ActionInterface) OverrideChangeState(cb func(Action, *glib.Variant)) {
+func (x *ActionInterfaceGType) OverrideChangeState(cb func(Action, *glib.Variant)) {
 	if cb == nil {
 		x.xChangeState = 0
 	} else {
@@ -203,7 +203,7 @@ func (x *ActionInterface) OverrideChangeState(cb func(Action, *glib.Variant)) {
 
 // GetChangeState gets the "change_state" callback function.
 // the virtual function pointer for [method@Gio.Action.change_state]
-func (x *ActionInterface) GetChangeState() func(Action, *glib.Variant) {
+func (x *ActionInterfaceGType) GetChangeState() func(Action, *glib.Variant) {
 	if x.xChangeState == 0 {
 		return nil
 	}
@@ -218,7 +218,7 @@ func (x *ActionInterface) GetChangeState() func(Action, *glib.Variant) {
 // the virtual function pointer for [method@Gio.Action.activate].  Note that [type@Gio.Action] does not have an
 //
 //	'activate' signal but that implementations of it may have one.
-func (x *ActionInterface) OverrideActivate(cb func(Action, *glib.Variant)) {
+func (x *ActionInterfaceGType) OverrideActivate(cb func(Action, *glib.Variant)) {
 	if cb == nil {
 		x.xActivate = 0
 	} else {
@@ -232,7 +232,7 @@ func (x *ActionInterface) OverrideActivate(cb func(Action, *glib.Variant)) {
 // the virtual function pointer for [method@Gio.Action.activate].  Note that [type@Gio.Action] does not have an
 //
 //	'activate' signal but that implementations of it may have one.
-func (x *ActionInterface) GetActivate() func(Action, *glib.Variant) {
+func (x *ActionInterfaceGType) GetActivate() func(Action, *glib.Variant) {
 	if x.xActivate == 0 {
 		return nil
 	}

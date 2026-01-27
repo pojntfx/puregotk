@@ -14,37 +14,37 @@ import (
 type LogAttr struct {
 	_ structs.HostLayout
 
-	IsLineBreak uint
+	IsLineBreak uint32
 
-	IsMandatoryBreak uint
+	IsMandatoryBreak uint32
 
-	IsCharBreak uint
+	IsCharBreak uint32
 
-	IsWhite uint
+	IsWhite uint32
 
-	IsCursorPosition uint
+	IsCursorPosition uint32
 
-	IsWordStart uint
+	IsWordStart uint32
 
-	IsWordEnd uint
+	IsWordEnd uint32
 
-	IsSentenceBoundary uint
+	IsSentenceBoundary uint32
 
-	IsSentenceStart uint
+	IsSentenceStart uint32
 
-	IsSentenceEnd uint
+	IsSentenceEnd uint32
 
-	BackspaceDeletesCharacter uint
+	BackspaceDeletesCharacter uint32
 
-	IsExpandableSpace uint
+	IsExpandableSpace uint32
 
-	IsWordBoundary uint
+	IsWordBoundary uint32
 
-	BreakInsertsHyphen uint
+	BreakInsertsHyphen uint32
 
-	BreakRemovesPreceding uint
+	BreakRemovesPreceding uint32
 
-	Reserved uint
+	Reserved uint32
 }
 
 func (x *LogAttr) GoPointer() uintptr {

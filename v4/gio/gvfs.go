@@ -20,10 +20,10 @@ import (
 // created for @uri, or %NULL to continue with the default implementation.
 type VfsFileLookupFunc func(uintptr, string, uintptr) uintptr
 
-type VfsClass struct {
+type VfsClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xIsActive uintptr
 
@@ -60,12 +60,12 @@ type VfsClass struct {
 	xGReserved6 uintptr
 }
 
-func (x *VfsClass) GoPointer() uintptr {
+func (x *VfsClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideIsActive sets the "is_active" callback function.
-func (x *VfsClass) OverrideIsActive(cb func(*Vfs) bool) {
+func (x *VfsClassGType) OverrideIsActive(cb func(*Vfs) bool) {
 	if cb == nil {
 		x.xIsActive = 0
 	} else {
@@ -76,7 +76,7 @@ func (x *VfsClass) OverrideIsActive(cb func(*Vfs) bool) {
 }
 
 // GetIsActive gets the "is_active" callback function.
-func (x *VfsClass) GetIsActive() func(*Vfs) bool {
+func (x *VfsClassGType) GetIsActive() func(*Vfs) bool {
 	if x.xIsActive == 0 {
 		return nil
 	}
@@ -88,7 +88,7 @@ func (x *VfsClass) GetIsActive() func(*Vfs) bool {
 }
 
 // OverrideGetFileForPath sets the "get_file_for_path" callback function.
-func (x *VfsClass) OverrideGetFileForPath(cb func(*Vfs, string) *FileBase) {
+func (x *VfsClassGType) OverrideGetFileForPath(cb func(*Vfs, string) *FileBase) {
 	if cb == nil {
 		x.xGetFileForPath = 0
 	} else {
@@ -103,7 +103,7 @@ func (x *VfsClass) OverrideGetFileForPath(cb func(*Vfs, string) *FileBase) {
 }
 
 // GetGetFileForPath gets the "get_file_for_path" callback function.
-func (x *VfsClass) GetGetFileForPath() func(*Vfs, string) *FileBase {
+func (x *VfsClassGType) GetGetFileForPath() func(*Vfs, string) *FileBase {
 	if x.xGetFileForPath == 0 {
 		return nil
 	}
@@ -121,7 +121,7 @@ func (x *VfsClass) GetGetFileForPath() func(*Vfs, string) *FileBase {
 }
 
 // OverrideGetFileForUri sets the "get_file_for_uri" callback function.
-func (x *VfsClass) OverrideGetFileForUri(cb func(*Vfs, string) *FileBase) {
+func (x *VfsClassGType) OverrideGetFileForUri(cb func(*Vfs, string) *FileBase) {
 	if cb == nil {
 		x.xGetFileForUri = 0
 	} else {
@@ -136,7 +136,7 @@ func (x *VfsClass) OverrideGetFileForUri(cb func(*Vfs, string) *FileBase) {
 }
 
 // GetGetFileForUri gets the "get_file_for_uri" callback function.
-func (x *VfsClass) GetGetFileForUri() func(*Vfs, string) *FileBase {
+func (x *VfsClassGType) GetGetFileForUri() func(*Vfs, string) *FileBase {
 	if x.xGetFileForUri == 0 {
 		return nil
 	}
@@ -154,7 +154,7 @@ func (x *VfsClass) GetGetFileForUri() func(*Vfs, string) *FileBase {
 }
 
 // OverrideGetSupportedUriSchemes sets the "get_supported_uri_schemes" callback function.
-func (x *VfsClass) OverrideGetSupportedUriSchemes(cb func(*Vfs) []string) {
+func (x *VfsClassGType) OverrideGetSupportedUriSchemes(cb func(*Vfs) []string) {
 	if cb == nil {
 		x.xGetSupportedUriSchemes = 0
 	} else {
@@ -165,7 +165,7 @@ func (x *VfsClass) OverrideGetSupportedUriSchemes(cb func(*Vfs) []string) {
 }
 
 // GetGetSupportedUriSchemes gets the "get_supported_uri_schemes" callback function.
-func (x *VfsClass) GetGetSupportedUriSchemes() func(*Vfs) []string {
+func (x *VfsClassGType) GetGetSupportedUriSchemes() func(*Vfs) []string {
 	if x.xGetSupportedUriSchemes == 0 {
 		return nil
 	}
@@ -177,7 +177,7 @@ func (x *VfsClass) GetGetSupportedUriSchemes() func(*Vfs) []string {
 }
 
 // OverrideParseName sets the "parse_name" callback function.
-func (x *VfsClass) OverrideParseName(cb func(*Vfs, string) *FileBase) {
+func (x *VfsClassGType) OverrideParseName(cb func(*Vfs, string) *FileBase) {
 	if cb == nil {
 		x.xParseName = 0
 	} else {
@@ -192,7 +192,7 @@ func (x *VfsClass) OverrideParseName(cb func(*Vfs, string) *FileBase) {
 }
 
 // GetParseName gets the "parse_name" callback function.
-func (x *VfsClass) GetParseName() func(*Vfs, string) *FileBase {
+func (x *VfsClassGType) GetParseName() func(*Vfs, string) *FileBase {
 	if x.xParseName == 0 {
 		return nil
 	}
@@ -210,7 +210,7 @@ func (x *VfsClass) GetParseName() func(*Vfs, string) *FileBase {
 }
 
 // OverrideLocalFileAddInfo sets the "local_file_add_info" callback function.
-func (x *VfsClass) OverrideLocalFileAddInfo(cb func(*Vfs, string, uint64, *FileAttributeMatcher, *FileInfo, *Cancellable, uintptr, *glib.DestroyNotify)) {
+func (x *VfsClassGType) OverrideLocalFileAddInfo(cb func(*Vfs, string, uint64, *FileAttributeMatcher, *FileInfo, *Cancellable, uintptr, *glib.DestroyNotify)) {
 	if cb == nil {
 		x.xLocalFileAddInfo = 0
 	} else {
@@ -221,7 +221,7 @@ func (x *VfsClass) OverrideLocalFileAddInfo(cb func(*Vfs, string, uint64, *FileA
 }
 
 // GetLocalFileAddInfo gets the "local_file_add_info" callback function.
-func (x *VfsClass) GetLocalFileAddInfo() func(*Vfs, string, uint64, *FileAttributeMatcher, *FileInfo, *Cancellable, uintptr, *glib.DestroyNotify) {
+func (x *VfsClassGType) GetLocalFileAddInfo() func(*Vfs, string, uint64, *FileAttributeMatcher, *FileInfo, *Cancellable, uintptr, *glib.DestroyNotify) {
 	if x.xLocalFileAddInfo == 0 {
 		return nil
 	}
@@ -233,7 +233,7 @@ func (x *VfsClass) GetLocalFileAddInfo() func(*Vfs, string, uint64, *FileAttribu
 }
 
 // OverrideAddWritableNamespaces sets the "add_writable_namespaces" callback function.
-func (x *VfsClass) OverrideAddWritableNamespaces(cb func(*Vfs, *FileAttributeInfoList)) {
+func (x *VfsClassGType) OverrideAddWritableNamespaces(cb func(*Vfs, *FileAttributeInfoList)) {
 	if cb == nil {
 		x.xAddWritableNamespaces = 0
 	} else {
@@ -244,7 +244,7 @@ func (x *VfsClass) OverrideAddWritableNamespaces(cb func(*Vfs, *FileAttributeInf
 }
 
 // GetAddWritableNamespaces gets the "add_writable_namespaces" callback function.
-func (x *VfsClass) GetAddWritableNamespaces() func(*Vfs, *FileAttributeInfoList) {
+func (x *VfsClassGType) GetAddWritableNamespaces() func(*Vfs, *FileAttributeInfoList) {
 	if x.xAddWritableNamespaces == 0 {
 		return nil
 	}
@@ -256,7 +256,7 @@ func (x *VfsClass) GetAddWritableNamespaces() func(*Vfs, *FileAttributeInfoList)
 }
 
 // OverrideLocalFileSetAttributes sets the "local_file_set_attributes" callback function.
-func (x *VfsClass) OverrideLocalFileSetAttributes(cb func(*Vfs, string, *FileInfo, FileQueryInfoFlags, *Cancellable) bool) {
+func (x *VfsClassGType) OverrideLocalFileSetAttributes(cb func(*Vfs, string, *FileInfo, FileQueryInfoFlags, *Cancellable) bool) {
 	if cb == nil {
 		x.xLocalFileSetAttributes = 0
 	} else {
@@ -267,7 +267,7 @@ func (x *VfsClass) OverrideLocalFileSetAttributes(cb func(*Vfs, string, *FileInf
 }
 
 // GetLocalFileSetAttributes gets the "local_file_set_attributes" callback function.
-func (x *VfsClass) GetLocalFileSetAttributes() func(*Vfs, string, *FileInfo, FileQueryInfoFlags, *Cancellable) bool {
+func (x *VfsClassGType) GetLocalFileSetAttributes() func(*Vfs, string, *FileInfo, FileQueryInfoFlags, *Cancellable) bool {
 	if x.xLocalFileSetAttributes == 0 {
 		return nil
 	}
@@ -279,7 +279,7 @@ func (x *VfsClass) GetLocalFileSetAttributes() func(*Vfs, string, *FileInfo, Fil
 }
 
 // OverrideLocalFileRemoved sets the "local_file_removed" callback function.
-func (x *VfsClass) OverrideLocalFileRemoved(cb func(*Vfs, string)) {
+func (x *VfsClassGType) OverrideLocalFileRemoved(cb func(*Vfs, string)) {
 	if cb == nil {
 		x.xLocalFileRemoved = 0
 	} else {
@@ -290,7 +290,7 @@ func (x *VfsClass) OverrideLocalFileRemoved(cb func(*Vfs, string)) {
 }
 
 // GetLocalFileRemoved gets the "local_file_removed" callback function.
-func (x *VfsClass) GetLocalFileRemoved() func(*Vfs, string) {
+func (x *VfsClassGType) GetLocalFileRemoved() func(*Vfs, string) {
 	if x.xLocalFileRemoved == 0 {
 		return nil
 	}
@@ -302,7 +302,7 @@ func (x *VfsClass) GetLocalFileRemoved() func(*Vfs, string) {
 }
 
 // OverrideLocalFileMoved sets the "local_file_moved" callback function.
-func (x *VfsClass) OverrideLocalFileMoved(cb func(*Vfs, string, string)) {
+func (x *VfsClassGType) OverrideLocalFileMoved(cb func(*Vfs, string, string)) {
 	if cb == nil {
 		x.xLocalFileMoved = 0
 	} else {
@@ -313,7 +313,7 @@ func (x *VfsClass) OverrideLocalFileMoved(cb func(*Vfs, string, string)) {
 }
 
 // GetLocalFileMoved gets the "local_file_moved" callback function.
-func (x *VfsClass) GetLocalFileMoved() func(*Vfs, string, string) {
+func (x *VfsClassGType) GetLocalFileMoved() func(*Vfs, string, string) {
 	if x.xLocalFileMoved == 0 {
 		return nil
 	}
@@ -325,7 +325,7 @@ func (x *VfsClass) GetLocalFileMoved() func(*Vfs, string, string) {
 }
 
 // OverrideDeserializeIcon sets the "deserialize_icon" callback function.
-func (x *VfsClass) OverrideDeserializeIcon(cb func(*Vfs, *glib.Variant) *IconBase) {
+func (x *VfsClassGType) OverrideDeserializeIcon(cb func(*Vfs, *glib.Variant) *IconBase) {
 	if cb == nil {
 		x.xDeserializeIcon = 0
 	} else {
@@ -340,7 +340,7 @@ func (x *VfsClass) OverrideDeserializeIcon(cb func(*Vfs, *glib.Variant) *IconBas
 }
 
 // GetDeserializeIcon gets the "deserialize_icon" callback function.
-func (x *VfsClass) GetDeserializeIcon() func(*Vfs, *glib.Variant) *IconBase {
+func (x *VfsClassGType) GetDeserializeIcon() func(*Vfs, *glib.Variant) *IconBase {
 	if x.xDeserializeIcon == 0 {
 		return nil
 	}
@@ -358,7 +358,7 @@ func (x *VfsClass) GetDeserializeIcon() func(*Vfs, *glib.Variant) *IconBase {
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *VfsClass) OverrideGReserved1(cb func()) {
+func (x *VfsClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -369,7 +369,7 @@ func (x *VfsClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *VfsClass) GetGReserved1() func() {
+func (x *VfsClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -381,7 +381,7 @@ func (x *VfsClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *VfsClass) OverrideGReserved2(cb func()) {
+func (x *VfsClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -392,7 +392,7 @@ func (x *VfsClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *VfsClass) GetGReserved2() func() {
+func (x *VfsClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}
@@ -404,7 +404,7 @@ func (x *VfsClass) GetGReserved2() func() {
 }
 
 // OverrideGReserved3 sets the "_g_reserved3" callback function.
-func (x *VfsClass) OverrideGReserved3(cb func()) {
+func (x *VfsClassGType) OverrideGReserved3(cb func()) {
 	if cb == nil {
 		x.xGReserved3 = 0
 	} else {
@@ -415,7 +415,7 @@ func (x *VfsClass) OverrideGReserved3(cb func()) {
 }
 
 // GetGReserved3 gets the "_g_reserved3" callback function.
-func (x *VfsClass) GetGReserved3() func() {
+func (x *VfsClassGType) GetGReserved3() func() {
 	if x.xGReserved3 == 0 {
 		return nil
 	}
@@ -427,7 +427,7 @@ func (x *VfsClass) GetGReserved3() func() {
 }
 
 // OverrideGReserved4 sets the "_g_reserved4" callback function.
-func (x *VfsClass) OverrideGReserved4(cb func()) {
+func (x *VfsClassGType) OverrideGReserved4(cb func()) {
 	if cb == nil {
 		x.xGReserved4 = 0
 	} else {
@@ -438,7 +438,7 @@ func (x *VfsClass) OverrideGReserved4(cb func()) {
 }
 
 // GetGReserved4 gets the "_g_reserved4" callback function.
-func (x *VfsClass) GetGReserved4() func() {
+func (x *VfsClassGType) GetGReserved4() func() {
 	if x.xGReserved4 == 0 {
 		return nil
 	}
@@ -450,7 +450,7 @@ func (x *VfsClass) GetGReserved4() func() {
 }
 
 // OverrideGReserved5 sets the "_g_reserved5" callback function.
-func (x *VfsClass) OverrideGReserved5(cb func()) {
+func (x *VfsClassGType) OverrideGReserved5(cb func()) {
 	if cb == nil {
 		x.xGReserved5 = 0
 	} else {
@@ -461,7 +461,7 @@ func (x *VfsClass) OverrideGReserved5(cb func()) {
 }
 
 // GetGReserved5 gets the "_g_reserved5" callback function.
-func (x *VfsClass) GetGReserved5() func() {
+func (x *VfsClassGType) GetGReserved5() func() {
 	if x.xGReserved5 == 0 {
 		return nil
 	}
@@ -473,7 +473,7 @@ func (x *VfsClass) GetGReserved5() func() {
 }
 
 // OverrideGReserved6 sets the "_g_reserved6" callback function.
-func (x *VfsClass) OverrideGReserved6(cb func()) {
+func (x *VfsClassGType) OverrideGReserved6(cb func()) {
 	if cb == nil {
 		x.xGReserved6 = 0
 	} else {
@@ -484,7 +484,7 @@ func (x *VfsClass) OverrideGReserved6(cb func()) {
 }
 
 // GetGReserved6 gets the "_g_reserved6" callback function.
-func (x *VfsClass) GetGReserved6() func() {
+func (x *VfsClassGType) GetGReserved6() func() {
 	if x.xGReserved6 == 0 {
 		return nil
 	}

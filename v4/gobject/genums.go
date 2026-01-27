@@ -21,7 +21,7 @@ type EnumClass struct {
 
 	Maximum int32
 
-	NValues uint
+	NValues uint32
 
 	Values *EnumValue
 }
@@ -53,9 +53,9 @@ type FlagsClass struct {
 
 	GTypeClass uintptr
 
-	Mask uint
+	Mask uint32
 
-	NValues uint
+	NValues uint32
 
 	Values *FlagsValue
 }
@@ -69,7 +69,7 @@ func (x *FlagsClass) GoPointer() uintptr {
 type FlagsValue struct {
 	_ structs.HostLayout
 
-	Value uint
+	Value uint32
 
 	ValueName uintptr
 

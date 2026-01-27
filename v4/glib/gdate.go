@@ -52,17 +52,17 @@ import (
 type Date struct {
 	_ structs.HostLayout
 
-	JulianDays uint
+	JulianDays uint32
 
-	Julian uint
+	Julian uint32
 
-	Dmy uint
+	Dmy uint32
 
-	Day uint
+	Day uint32
 
-	Month uint
+	Month uint32
 
-	Year uint
+	Year uint32
 }
 
 var xDateGLibType func() types.GType

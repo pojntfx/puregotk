@@ -18,22 +18,22 @@ import (
 // See [method@Gtk.Scale.set_format_value_func].
 type ScaleFormatValueFunc func(uintptr, float64, uintptr) string
 
-type ScaleClass struct {
+type ScaleClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass RangeClass
+	ParentClass RangeClassGType
 
 	xGetLayoutOffsets uintptr
 
 	Padding [8]uintptr
 }
 
-func (x *ScaleClass) GoPointer() uintptr {
+func (x *ScaleClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetLayoutOffsets sets the "get_layout_offsets" callback function.
-func (x *ScaleClass) OverrideGetLayoutOffsets(cb func(*Scale, *int, *int)) {
+func (x *ScaleClassGType) OverrideGetLayoutOffsets(cb func(*Scale, *int, *int)) {
 	if cb == nil {
 		x.xGetLayoutOffsets = 0
 	} else {
@@ -44,7 +44,7 @@ func (x *ScaleClass) OverrideGetLayoutOffsets(cb func(*Scale, *int, *int)) {
 }
 
 // GetGetLayoutOffsets gets the "get_layout_offsets" callback function.
-func (x *ScaleClass) GetGetLayoutOffsets() func(*Scale, *int, *int) {
+func (x *ScaleClassGType) GetGetLayoutOffsets() func(*Scale, *int, *int) {
 	if x.xGetLayoutOffsets == 0 {
 		return nil
 	}

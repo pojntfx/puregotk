@@ -14,15 +14,15 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type PreferencesGroupClass struct {
+type PreferencesGroupClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 
 	Padding [4]uintptr
 }
 
-func (x *PreferencesGroupClass) GoPointer() uintptr {
+func (x *PreferencesGroupClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

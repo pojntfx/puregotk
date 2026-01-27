@@ -19,7 +19,7 @@ import (
 // See [method@Gtk.FontChooser.set_filter_func].
 type FontFilterFunc func(uintptr, uintptr, uintptr) bool
 
-type FontChooserIface struct {
+type FontChooserIfaceGType struct {
 	_ structs.HostLayout
 
 	BaseIface uintptr
@@ -41,12 +41,12 @@ type FontChooserIface struct {
 	Padding [10]uintptr
 }
 
-func (x *FontChooserIface) GoPointer() uintptr {
+func (x *FontChooserIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetFontFamily sets the "get_font_family" callback function.
-func (x *FontChooserIface) OverrideGetFontFamily(cb func(FontChooser) *pango.FontFamily) {
+func (x *FontChooserIfaceGType) OverrideGetFontFamily(cb func(FontChooser) *pango.FontFamily) {
 	if cb == nil {
 		x.xGetFontFamily = 0
 	} else {
@@ -61,7 +61,7 @@ func (x *FontChooserIface) OverrideGetFontFamily(cb func(FontChooser) *pango.Fon
 }
 
 // GetGetFontFamily gets the "get_font_family" callback function.
-func (x *FontChooserIface) GetGetFontFamily() func(FontChooser) *pango.FontFamily {
+func (x *FontChooserIfaceGType) GetGetFontFamily() func(FontChooser) *pango.FontFamily {
 	if x.xGetFontFamily == 0 {
 		return nil
 	}
@@ -79,7 +79,7 @@ func (x *FontChooserIface) GetGetFontFamily() func(FontChooser) *pango.FontFamil
 }
 
 // OverrideGetFontFace sets the "get_font_face" callback function.
-func (x *FontChooserIface) OverrideGetFontFace(cb func(FontChooser) *pango.FontFace) {
+func (x *FontChooserIfaceGType) OverrideGetFontFace(cb func(FontChooser) *pango.FontFace) {
 	if cb == nil {
 		x.xGetFontFace = 0
 	} else {
@@ -94,7 +94,7 @@ func (x *FontChooserIface) OverrideGetFontFace(cb func(FontChooser) *pango.FontF
 }
 
 // GetGetFontFace gets the "get_font_face" callback function.
-func (x *FontChooserIface) GetGetFontFace() func(FontChooser) *pango.FontFace {
+func (x *FontChooserIfaceGType) GetGetFontFace() func(FontChooser) *pango.FontFace {
 	if x.xGetFontFace == 0 {
 		return nil
 	}
@@ -112,7 +112,7 @@ func (x *FontChooserIface) GetGetFontFace() func(FontChooser) *pango.FontFace {
 }
 
 // OverrideGetFontSize sets the "get_font_size" callback function.
-func (x *FontChooserIface) OverrideGetFontSize(cb func(FontChooser) int) {
+func (x *FontChooserIfaceGType) OverrideGetFontSize(cb func(FontChooser) int) {
 	if cb == nil {
 		x.xGetFontSize = 0
 	} else {
@@ -123,7 +123,7 @@ func (x *FontChooserIface) OverrideGetFontSize(cb func(FontChooser) int) {
 }
 
 // GetGetFontSize gets the "get_font_size" callback function.
-func (x *FontChooserIface) GetGetFontSize() func(FontChooser) int {
+func (x *FontChooserIfaceGType) GetGetFontSize() func(FontChooser) int {
 	if x.xGetFontSize == 0 {
 		return nil
 	}
@@ -135,7 +135,7 @@ func (x *FontChooserIface) GetGetFontSize() func(FontChooser) int {
 }
 
 // OverrideSetFilterFunc sets the "set_filter_func" callback function.
-func (x *FontChooserIface) OverrideSetFilterFunc(cb func(FontChooser, *FontFilterFunc, uintptr, *glib.DestroyNotify)) {
+func (x *FontChooserIfaceGType) OverrideSetFilterFunc(cb func(FontChooser, *FontFilterFunc, uintptr, *glib.DestroyNotify)) {
 	if cb == nil {
 		x.xSetFilterFunc = 0
 	} else {
@@ -146,7 +146,7 @@ func (x *FontChooserIface) OverrideSetFilterFunc(cb func(FontChooser, *FontFilte
 }
 
 // GetSetFilterFunc gets the "set_filter_func" callback function.
-func (x *FontChooserIface) GetSetFilterFunc() func(FontChooser, *FontFilterFunc, uintptr, *glib.DestroyNotify) {
+func (x *FontChooserIfaceGType) GetSetFilterFunc() func(FontChooser, *FontFilterFunc, uintptr, *glib.DestroyNotify) {
 	if x.xSetFilterFunc == 0 {
 		return nil
 	}
@@ -158,7 +158,7 @@ func (x *FontChooserIface) GetSetFilterFunc() func(FontChooser, *FontFilterFunc,
 }
 
 // OverrideFontActivated sets the "font_activated" callback function.
-func (x *FontChooserIface) OverrideFontActivated(cb func(FontChooser, string)) {
+func (x *FontChooserIfaceGType) OverrideFontActivated(cb func(FontChooser, string)) {
 	if cb == nil {
 		x.xFontActivated = 0
 	} else {
@@ -169,7 +169,7 @@ func (x *FontChooserIface) OverrideFontActivated(cb func(FontChooser, string)) {
 }
 
 // GetFontActivated gets the "font_activated" callback function.
-func (x *FontChooserIface) GetFontActivated() func(FontChooser, string) {
+func (x *FontChooserIfaceGType) GetFontActivated() func(FontChooser, string) {
 	if x.xFontActivated == 0 {
 		return nil
 	}
@@ -181,7 +181,7 @@ func (x *FontChooserIface) GetFontActivated() func(FontChooser, string) {
 }
 
 // OverrideSetFontMap sets the "set_font_map" callback function.
-func (x *FontChooserIface) OverrideSetFontMap(cb func(FontChooser, *pango.FontMap)) {
+func (x *FontChooserIfaceGType) OverrideSetFontMap(cb func(FontChooser, *pango.FontMap)) {
 	if cb == nil {
 		x.xSetFontMap = 0
 	} else {
@@ -192,7 +192,7 @@ func (x *FontChooserIface) OverrideSetFontMap(cb func(FontChooser, *pango.FontMa
 }
 
 // GetSetFontMap gets the "set_font_map" callback function.
-func (x *FontChooserIface) GetSetFontMap() func(FontChooser, *pango.FontMap) {
+func (x *FontChooserIfaceGType) GetSetFontMap() func(FontChooser, *pango.FontMap) {
 	if x.xSetFontMap == 0 {
 		return nil
 	}
@@ -204,7 +204,7 @@ func (x *FontChooserIface) GetSetFontMap() func(FontChooser, *pango.FontMap) {
 }
 
 // OverrideGetFontMap sets the "get_font_map" callback function.
-func (x *FontChooserIface) OverrideGetFontMap(cb func(FontChooser) *pango.FontMap) {
+func (x *FontChooserIfaceGType) OverrideGetFontMap(cb func(FontChooser) *pango.FontMap) {
 	if cb == nil {
 		x.xGetFontMap = 0
 	} else {
@@ -219,7 +219,7 @@ func (x *FontChooserIface) OverrideGetFontMap(cb func(FontChooser) *pango.FontMa
 }
 
 // GetGetFontMap gets the "get_font_map" callback function.
-func (x *FontChooserIface) GetGetFontMap() func(FontChooser) *pango.FontMap {
+func (x *FontChooserIfaceGType) GetGetFontMap() func(FontChooser) *pango.FontMap {
 	if x.xGetFontMap == 0 {
 		return nil
 	}

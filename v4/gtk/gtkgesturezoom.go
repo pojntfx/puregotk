@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type GestureZoomClass struct {
+type GestureZoomClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *GestureZoomClass) GoPointer() uintptr {
+func (x *GestureZoomClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

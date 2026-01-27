@@ -13,23 +13,23 @@ import (
 )
 
 // Class structure for #GDBusObjectSkeleton.
-type DBusObjectSkeletonClass struct {
+type DBusObjectSkeletonClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xAuthorizeMethod uintptr
 
 	Padding [8]uintptr
 }
 
-func (x *DBusObjectSkeletonClass) GoPointer() uintptr {
+func (x *DBusObjectSkeletonClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideAuthorizeMethod sets the "authorize_method" callback function.
 // Signal class handler for the #GDBusObjectSkeleton::authorize-method signal.
-func (x *DBusObjectSkeletonClass) OverrideAuthorizeMethod(cb func(*DBusObjectSkeleton, *DBusInterfaceSkeleton, *DBusMethodInvocation) bool) {
+func (x *DBusObjectSkeletonClassGType) OverrideAuthorizeMethod(cb func(*DBusObjectSkeleton, *DBusInterfaceSkeleton, *DBusMethodInvocation) bool) {
 	if cb == nil {
 		x.xAuthorizeMethod = 0
 	} else {
@@ -41,7 +41,7 @@ func (x *DBusObjectSkeletonClass) OverrideAuthorizeMethod(cb func(*DBusObjectSke
 
 // GetAuthorizeMethod gets the "authorize_method" callback function.
 // Signal class handler for the #GDBusObjectSkeleton::authorize-method signal.
-func (x *DBusObjectSkeletonClass) GetAuthorizeMethod() func(*DBusObjectSkeleton, *DBusInterfaceSkeleton, *DBusMethodInvocation) bool {
+func (x *DBusObjectSkeletonClassGType) GetAuthorizeMethod() func(*DBusObjectSkeleton, *DBusInterfaceSkeleton, *DBusMethodInvocation) bool {
 	if x.xAuthorizeMethod == 0 {
 		return nil
 	}

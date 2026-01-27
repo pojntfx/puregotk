@@ -31,11 +31,11 @@ func (x *PadActionEntry) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type PadControllerClass struct {
+type PadControllerClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *PadControllerClass) GoPointer() uintptr {
+func (x *PadControllerClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

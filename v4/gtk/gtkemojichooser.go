@@ -14,11 +14,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gsk"
 )
 
-type EmojiChooserClass struct {
+type EmojiChooserClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *EmojiChooserClass) GoPointer() uintptr {
+func (x *EmojiChooserClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

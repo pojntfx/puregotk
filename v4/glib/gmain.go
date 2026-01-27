@@ -704,15 +704,15 @@ type Source struct {
 
 	SourceFuncs *SourceFuncs
 
-	RefCount uint
+	RefCount uint32
 
 	Context *MainContext
 
 	Priority int32
 
-	Flags uint
+	Flags uint32
 
-	SourceId uint
+	SourceId uint32
 
 	PollFds *SList
 

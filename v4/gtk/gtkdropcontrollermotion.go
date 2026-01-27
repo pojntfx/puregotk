@@ -13,11 +13,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type DropControllerMotionClass struct {
+type DropControllerMotionClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *DropControllerMotionClass) GoPointer() uintptr {
+func (x *DropControllerMotionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

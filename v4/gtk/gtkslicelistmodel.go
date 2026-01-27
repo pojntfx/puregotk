@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type SliceListModelClass struct {
+type SliceListModelClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *SliceListModelClass) GoPointer() uintptr {
+func (x *SliceListModelClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

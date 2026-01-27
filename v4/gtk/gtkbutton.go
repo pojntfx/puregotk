@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ButtonClass struct {
+type ButtonClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xClicked uintptr
 
@@ -24,13 +24,13 @@ type ButtonClass struct {
 	Padding [8]uintptr
 }
 
-func (x *ButtonClass) GoPointer() uintptr {
+func (x *ButtonClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideClicked sets the "clicked" callback function.
 // Signal emitted when the button has been activated (pressed and released).
-func (x *ButtonClass) OverrideClicked(cb func(*Button)) {
+func (x *ButtonClassGType) OverrideClicked(cb func(*Button)) {
 	if cb == nil {
 		x.xClicked = 0
 	} else {
@@ -42,7 +42,7 @@ func (x *ButtonClass) OverrideClicked(cb func(*Button)) {
 
 // GetClicked gets the "clicked" callback function.
 // Signal emitted when the button has been activated (pressed and released).
-func (x *ButtonClass) GetClicked() func(*Button) {
+func (x *ButtonClassGType) GetClicked() func(*Button) {
 	if x.xClicked == 0 {
 		return nil
 	}
@@ -58,7 +58,7 @@ func (x *ButtonClass) GetClicked() func(*Button) {
 //
 //	release. Applications should never connect to this signal, but use
 //	the @clicked signal.
-func (x *ButtonClass) OverrideActivate(cb func(*Button)) {
+func (x *ButtonClassGType) OverrideActivate(cb func(*Button)) {
 	if cb == nil {
 		x.xActivate = 0
 	} else {
@@ -73,7 +73,7 @@ func (x *ButtonClass) OverrideActivate(cb func(*Button)) {
 //
 //	release. Applications should never connect to this signal, but use
 //	the @clicked signal.
-func (x *ButtonClass) GetActivate() func(*Button) {
+func (x *ButtonClassGType) GetActivate() func(*Button) {
 	if x.xActivate == 0 {
 		return nil
 	}

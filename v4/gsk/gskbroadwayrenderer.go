@@ -10,11 +10,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type BroadwayRendererClass struct {
+type BroadwayRendererClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *BroadwayRendererClass) GoPointer() uintptr {
+func (x *BroadwayRendererClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

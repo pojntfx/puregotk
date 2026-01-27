@@ -12,7 +12,7 @@ import (
 )
 
 // Base type for D-Bus interfaces.
-type DBusInterfaceIface struct {
+type DBusInterfaceIfaceGType struct {
 	_ structs.HostLayout
 
 	ParentIface uintptr
@@ -26,13 +26,13 @@ type DBusInterfaceIface struct {
 	xDupObject uintptr
 }
 
-func (x *DBusInterfaceIface) GoPointer() uintptr {
+func (x *DBusInterfaceIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetInfo sets the "get_info" callback function.
 // Returns a #GDBusInterfaceInfo. See g_dbus_interface_get_info().
-func (x *DBusInterfaceIface) OverrideGetInfo(cb func(DBusInterface) *DBusInterfaceInfo) {
+func (x *DBusInterfaceIfaceGType) OverrideGetInfo(cb func(DBusInterface) *DBusInterfaceInfo) {
 	if cb == nil {
 		x.xGetInfo = 0
 	} else {
@@ -44,7 +44,7 @@ func (x *DBusInterfaceIface) OverrideGetInfo(cb func(DBusInterface) *DBusInterfa
 
 // GetGetInfo gets the "get_info" callback function.
 // Returns a #GDBusInterfaceInfo. See g_dbus_interface_get_info().
-func (x *DBusInterfaceIface) GetGetInfo() func(DBusInterface) *DBusInterfaceInfo {
+func (x *DBusInterfaceIfaceGType) GetGetInfo() func(DBusInterface) *DBusInterfaceInfo {
 	if x.xGetInfo == 0 {
 		return nil
 	}
@@ -57,7 +57,7 @@ func (x *DBusInterfaceIface) GetGetInfo() func(DBusInterface) *DBusInterfaceInfo
 
 // OverrideGetObject sets the "get_object" callback function.
 // Gets the enclosing #GDBusObject. See g_dbus_interface_get_object().
-func (x *DBusInterfaceIface) OverrideGetObject(cb func(DBusInterface) *DBusObjectBase) {
+func (x *DBusInterfaceIfaceGType) OverrideGetObject(cb func(DBusInterface) *DBusObjectBase) {
 	if cb == nil {
 		x.xGetObject = 0
 	} else {
@@ -73,7 +73,7 @@ func (x *DBusInterfaceIface) OverrideGetObject(cb func(DBusInterface) *DBusObjec
 
 // GetGetObject gets the "get_object" callback function.
 // Gets the enclosing #GDBusObject. See g_dbus_interface_get_object().
-func (x *DBusInterfaceIface) GetGetObject() func(DBusInterface) *DBusObjectBase {
+func (x *DBusInterfaceIfaceGType) GetGetObject() func(DBusInterface) *DBusObjectBase {
 	if x.xGetObject == 0 {
 		return nil
 	}
@@ -92,7 +92,7 @@ func (x *DBusInterfaceIface) GetGetObject() func(DBusInterface) *DBusObjectBase 
 
 // OverrideSetObject sets the "set_object" callback function.
 // Sets the enclosing #GDBusObject. See g_dbus_interface_set_object().
-func (x *DBusInterfaceIface) OverrideSetObject(cb func(DBusInterface, DBusObject)) {
+func (x *DBusInterfaceIfaceGType) OverrideSetObject(cb func(DBusInterface, DBusObject)) {
 	if cb == nil {
 		x.xSetObject = 0
 	} else {
@@ -104,7 +104,7 @@ func (x *DBusInterfaceIface) OverrideSetObject(cb func(DBusInterface, DBusObject
 
 // GetSetObject gets the "set_object" callback function.
 // Sets the enclosing #GDBusObject. See g_dbus_interface_set_object().
-func (x *DBusInterfaceIface) GetSetObject() func(DBusInterface, DBusObject) {
+func (x *DBusInterfaceIfaceGType) GetSetObject() func(DBusInterface, DBusObject) {
 	if x.xSetObject == 0 {
 		return nil
 	}
@@ -117,7 +117,7 @@ func (x *DBusInterfaceIface) GetSetObject() func(DBusInterface, DBusObject) {
 
 // OverrideDupObject sets the "dup_object" callback function.
 // Gets a reference to the enclosing #GDBusObject. See g_dbus_interface_dup_object(). Added in 2.32.
-func (x *DBusInterfaceIface) OverrideDupObject(cb func(DBusInterface) *DBusObjectBase) {
+func (x *DBusInterfaceIfaceGType) OverrideDupObject(cb func(DBusInterface) *DBusObjectBase) {
 	if cb == nil {
 		x.xDupObject = 0
 	} else {
@@ -133,7 +133,7 @@ func (x *DBusInterfaceIface) OverrideDupObject(cb func(DBusInterface) *DBusObjec
 
 // GetDupObject gets the "dup_object" callback function.
 // Gets a reference to the enclosing #GDBusObject. See g_dbus_interface_dup_object(). Added in 2.32.
-func (x *DBusInterfaceIface) GetDupObject() func(DBusInterface) *DBusObjectBase {
+func (x *DBusInterfaceIfaceGType) GetDupObject() func(DBusInterface) *DBusObjectBase {
 	if x.xDupObject == 0 {
 		return nil
 	}

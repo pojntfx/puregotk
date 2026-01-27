@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type IOModuleClass struct {
+type IOModuleClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *IOModuleClass) GoPointer() uintptr {
+func (x *IOModuleClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

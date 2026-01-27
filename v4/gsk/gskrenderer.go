@@ -15,11 +15,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/graphene"
 )
 
-type RendererClass struct {
+type RendererClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *RendererClass) GoPointer() uintptr {
+func (x *RendererClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

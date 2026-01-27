@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type CicpParamsClass struct {
+type CicpParamsClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *CicpParamsClass) GoPointer() uintptr {
+func (x *CicpParamsClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

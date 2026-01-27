@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type ToastClass struct {
+type ToastClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *ToastClass) GoPointer() uintptr {
+func (x *ToastClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -12,15 +12,15 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type PreferencesDialogClass struct {
+type PreferencesDialogClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass DialogClass
+	ParentClass DialogClassGType
 
 	Padding [4]uintptr
 }
 
-func (x *PreferencesDialogClass) GoPointer() uintptr {
+func (x *PreferencesDialogClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

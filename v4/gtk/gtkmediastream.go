@@ -13,10 +13,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type MediaStreamClass struct {
+type MediaStreamClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xPlay uintptr
 
@@ -47,12 +47,12 @@ type MediaStreamClass struct {
 	xGtkReserved8 uintptr
 }
 
-func (x *MediaStreamClass) GoPointer() uintptr {
+func (x *MediaStreamClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverridePlay sets the "play" callback function.
-func (x *MediaStreamClass) OverridePlay(cb func(*MediaStream) bool) {
+func (x *MediaStreamClassGType) OverridePlay(cb func(*MediaStream) bool) {
 	if cb == nil {
 		x.xPlay = 0
 	} else {
@@ -63,7 +63,7 @@ func (x *MediaStreamClass) OverridePlay(cb func(*MediaStream) bool) {
 }
 
 // GetPlay gets the "play" callback function.
-func (x *MediaStreamClass) GetPlay() func(*MediaStream) bool {
+func (x *MediaStreamClassGType) GetPlay() func(*MediaStream) bool {
 	if x.xPlay == 0 {
 		return nil
 	}
@@ -75,7 +75,7 @@ func (x *MediaStreamClass) GetPlay() func(*MediaStream) bool {
 }
 
 // OverridePause sets the "pause" callback function.
-func (x *MediaStreamClass) OverridePause(cb func(*MediaStream)) {
+func (x *MediaStreamClassGType) OverridePause(cb func(*MediaStream)) {
 	if cb == nil {
 		x.xPause = 0
 	} else {
@@ -86,7 +86,7 @@ func (x *MediaStreamClass) OverridePause(cb func(*MediaStream)) {
 }
 
 // GetPause gets the "pause" callback function.
-func (x *MediaStreamClass) GetPause() func(*MediaStream) {
+func (x *MediaStreamClassGType) GetPause() func(*MediaStream) {
 	if x.xPause == 0 {
 		return nil
 	}
@@ -98,7 +98,7 @@ func (x *MediaStreamClass) GetPause() func(*MediaStream) {
 }
 
 // OverrideSeek sets the "seek" callback function.
-func (x *MediaStreamClass) OverrideSeek(cb func(*MediaStream, int64)) {
+func (x *MediaStreamClassGType) OverrideSeek(cb func(*MediaStream, int64)) {
 	if cb == nil {
 		x.xSeek = 0
 	} else {
@@ -109,7 +109,7 @@ func (x *MediaStreamClass) OverrideSeek(cb func(*MediaStream, int64)) {
 }
 
 // GetSeek gets the "seek" callback function.
-func (x *MediaStreamClass) GetSeek() func(*MediaStream, int64) {
+func (x *MediaStreamClassGType) GetSeek() func(*MediaStream, int64) {
 	if x.xSeek == 0 {
 		return nil
 	}
@@ -121,7 +121,7 @@ func (x *MediaStreamClass) GetSeek() func(*MediaStream, int64) {
 }
 
 // OverrideUpdateAudio sets the "update_audio" callback function.
-func (x *MediaStreamClass) OverrideUpdateAudio(cb func(*MediaStream, bool, float64)) {
+func (x *MediaStreamClassGType) OverrideUpdateAudio(cb func(*MediaStream, bool, float64)) {
 	if cb == nil {
 		x.xUpdateAudio = 0
 	} else {
@@ -132,7 +132,7 @@ func (x *MediaStreamClass) OverrideUpdateAudio(cb func(*MediaStream, bool, float
 }
 
 // GetUpdateAudio gets the "update_audio" callback function.
-func (x *MediaStreamClass) GetUpdateAudio() func(*MediaStream, bool, float64) {
+func (x *MediaStreamClassGType) GetUpdateAudio() func(*MediaStream, bool, float64) {
 	if x.xUpdateAudio == 0 {
 		return nil
 	}
@@ -144,7 +144,7 @@ func (x *MediaStreamClass) GetUpdateAudio() func(*MediaStream, bool, float64) {
 }
 
 // OverrideRealize sets the "realize" callback function.
-func (x *MediaStreamClass) OverrideRealize(cb func(*MediaStream, *gdk.Surface)) {
+func (x *MediaStreamClassGType) OverrideRealize(cb func(*MediaStream, *gdk.Surface)) {
 	if cb == nil {
 		x.xRealize = 0
 	} else {
@@ -155,7 +155,7 @@ func (x *MediaStreamClass) OverrideRealize(cb func(*MediaStream, *gdk.Surface)) 
 }
 
 // GetRealize gets the "realize" callback function.
-func (x *MediaStreamClass) GetRealize() func(*MediaStream, *gdk.Surface) {
+func (x *MediaStreamClassGType) GetRealize() func(*MediaStream, *gdk.Surface) {
 	if x.xRealize == 0 {
 		return nil
 	}
@@ -167,7 +167,7 @@ func (x *MediaStreamClass) GetRealize() func(*MediaStream, *gdk.Surface) {
 }
 
 // OverrideUnrealize sets the "unrealize" callback function.
-func (x *MediaStreamClass) OverrideUnrealize(cb func(*MediaStream, *gdk.Surface)) {
+func (x *MediaStreamClassGType) OverrideUnrealize(cb func(*MediaStream, *gdk.Surface)) {
 	if cb == nil {
 		x.xUnrealize = 0
 	} else {
@@ -178,7 +178,7 @@ func (x *MediaStreamClass) OverrideUnrealize(cb func(*MediaStream, *gdk.Surface)
 }
 
 // GetUnrealize gets the "unrealize" callback function.
-func (x *MediaStreamClass) GetUnrealize() func(*MediaStream, *gdk.Surface) {
+func (x *MediaStreamClassGType) GetUnrealize() func(*MediaStream, *gdk.Surface) {
 	if x.xUnrealize == 0 {
 		return nil
 	}
@@ -190,7 +190,7 @@ func (x *MediaStreamClass) GetUnrealize() func(*MediaStream, *gdk.Surface) {
 }
 
 // OverrideGtkReserved1 sets the "_gtk_reserved1" callback function.
-func (x *MediaStreamClass) OverrideGtkReserved1(cb func()) {
+func (x *MediaStreamClassGType) OverrideGtkReserved1(cb func()) {
 	if cb == nil {
 		x.xGtkReserved1 = 0
 	} else {
@@ -201,7 +201,7 @@ func (x *MediaStreamClass) OverrideGtkReserved1(cb func()) {
 }
 
 // GetGtkReserved1 gets the "_gtk_reserved1" callback function.
-func (x *MediaStreamClass) GetGtkReserved1() func() {
+func (x *MediaStreamClassGType) GetGtkReserved1() func() {
 	if x.xGtkReserved1 == 0 {
 		return nil
 	}
@@ -213,7 +213,7 @@ func (x *MediaStreamClass) GetGtkReserved1() func() {
 }
 
 // OverrideGtkReserved2 sets the "_gtk_reserved2" callback function.
-func (x *MediaStreamClass) OverrideGtkReserved2(cb func()) {
+func (x *MediaStreamClassGType) OverrideGtkReserved2(cb func()) {
 	if cb == nil {
 		x.xGtkReserved2 = 0
 	} else {
@@ -224,7 +224,7 @@ func (x *MediaStreamClass) OverrideGtkReserved2(cb func()) {
 }
 
 // GetGtkReserved2 gets the "_gtk_reserved2" callback function.
-func (x *MediaStreamClass) GetGtkReserved2() func() {
+func (x *MediaStreamClassGType) GetGtkReserved2() func() {
 	if x.xGtkReserved2 == 0 {
 		return nil
 	}
@@ -236,7 +236,7 @@ func (x *MediaStreamClass) GetGtkReserved2() func() {
 }
 
 // OverrideGtkReserved3 sets the "_gtk_reserved3" callback function.
-func (x *MediaStreamClass) OverrideGtkReserved3(cb func()) {
+func (x *MediaStreamClassGType) OverrideGtkReserved3(cb func()) {
 	if cb == nil {
 		x.xGtkReserved3 = 0
 	} else {
@@ -247,7 +247,7 @@ func (x *MediaStreamClass) OverrideGtkReserved3(cb func()) {
 }
 
 // GetGtkReserved3 gets the "_gtk_reserved3" callback function.
-func (x *MediaStreamClass) GetGtkReserved3() func() {
+func (x *MediaStreamClassGType) GetGtkReserved3() func() {
 	if x.xGtkReserved3 == 0 {
 		return nil
 	}
@@ -259,7 +259,7 @@ func (x *MediaStreamClass) GetGtkReserved3() func() {
 }
 
 // OverrideGtkReserved4 sets the "_gtk_reserved4" callback function.
-func (x *MediaStreamClass) OverrideGtkReserved4(cb func()) {
+func (x *MediaStreamClassGType) OverrideGtkReserved4(cb func()) {
 	if cb == nil {
 		x.xGtkReserved4 = 0
 	} else {
@@ -270,7 +270,7 @@ func (x *MediaStreamClass) OverrideGtkReserved4(cb func()) {
 }
 
 // GetGtkReserved4 gets the "_gtk_reserved4" callback function.
-func (x *MediaStreamClass) GetGtkReserved4() func() {
+func (x *MediaStreamClassGType) GetGtkReserved4() func() {
 	if x.xGtkReserved4 == 0 {
 		return nil
 	}
@@ -282,7 +282,7 @@ func (x *MediaStreamClass) GetGtkReserved4() func() {
 }
 
 // OverrideGtkReserved5 sets the "_gtk_reserved5" callback function.
-func (x *MediaStreamClass) OverrideGtkReserved5(cb func()) {
+func (x *MediaStreamClassGType) OverrideGtkReserved5(cb func()) {
 	if cb == nil {
 		x.xGtkReserved5 = 0
 	} else {
@@ -293,7 +293,7 @@ func (x *MediaStreamClass) OverrideGtkReserved5(cb func()) {
 }
 
 // GetGtkReserved5 gets the "_gtk_reserved5" callback function.
-func (x *MediaStreamClass) GetGtkReserved5() func() {
+func (x *MediaStreamClassGType) GetGtkReserved5() func() {
 	if x.xGtkReserved5 == 0 {
 		return nil
 	}
@@ -305,7 +305,7 @@ func (x *MediaStreamClass) GetGtkReserved5() func() {
 }
 
 // OverrideGtkReserved6 sets the "_gtk_reserved6" callback function.
-func (x *MediaStreamClass) OverrideGtkReserved6(cb func()) {
+func (x *MediaStreamClassGType) OverrideGtkReserved6(cb func()) {
 	if cb == nil {
 		x.xGtkReserved6 = 0
 	} else {
@@ -316,7 +316,7 @@ func (x *MediaStreamClass) OverrideGtkReserved6(cb func()) {
 }
 
 // GetGtkReserved6 gets the "_gtk_reserved6" callback function.
-func (x *MediaStreamClass) GetGtkReserved6() func() {
+func (x *MediaStreamClassGType) GetGtkReserved6() func() {
 	if x.xGtkReserved6 == 0 {
 		return nil
 	}
@@ -328,7 +328,7 @@ func (x *MediaStreamClass) GetGtkReserved6() func() {
 }
 
 // OverrideGtkReserved7 sets the "_gtk_reserved7" callback function.
-func (x *MediaStreamClass) OverrideGtkReserved7(cb func()) {
+func (x *MediaStreamClassGType) OverrideGtkReserved7(cb func()) {
 	if cb == nil {
 		x.xGtkReserved7 = 0
 	} else {
@@ -339,7 +339,7 @@ func (x *MediaStreamClass) OverrideGtkReserved7(cb func()) {
 }
 
 // GetGtkReserved7 gets the "_gtk_reserved7" callback function.
-func (x *MediaStreamClass) GetGtkReserved7() func() {
+func (x *MediaStreamClassGType) GetGtkReserved7() func() {
 	if x.xGtkReserved7 == 0 {
 		return nil
 	}
@@ -351,7 +351,7 @@ func (x *MediaStreamClass) GetGtkReserved7() func() {
 }
 
 // OverrideGtkReserved8 sets the "_gtk_reserved8" callback function.
-func (x *MediaStreamClass) OverrideGtkReserved8(cb func()) {
+func (x *MediaStreamClassGType) OverrideGtkReserved8(cb func()) {
 	if cb == nil {
 		x.xGtkReserved8 = 0
 	} else {
@@ -362,7 +362,7 @@ func (x *MediaStreamClass) OverrideGtkReserved8(cb func()) {
 }
 
 // GetGtkReserved8 gets the "_gtk_reserved8" callback function.
-func (x *MediaStreamClass) GetGtkReserved8() func() {
+func (x *MediaStreamClassGType) GetGtkReserved8() func() {
 	if x.xGtkReserved8 == 0 {
 		return nil
 	}

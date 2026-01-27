@@ -10,11 +10,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type DevicePadInterface struct {
+type DevicePadInterfaceGType struct {
 	_ structs.HostLayout
 }
 
-func (x *DevicePadInterface) GoPointer() uintptr {
+func (x *DevicePadInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

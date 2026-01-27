@@ -13,15 +13,15 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ListStoreClass struct {
+type ListStoreClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	Padding [8]uintptr
 }
 
-func (x *ListStoreClass) GoPointer() uintptr {
+func (x *ListStoreClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -13,7 +13,7 @@ import (
 )
 
 // vtable for a #GTlsClientConnection implementation.
-type TlsClientConnectionInterface struct {
+type TlsClientConnectionInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -21,13 +21,13 @@ type TlsClientConnectionInterface struct {
 	xCopySessionState uintptr
 }
 
-func (x *TlsClientConnectionInterface) GoPointer() uintptr {
+func (x *TlsClientConnectionInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideCopySessionState sets the "copy_session_state" callback function.
 // Copies session state from one #GTlsClientConnection to another.
-func (x *TlsClientConnectionInterface) OverrideCopySessionState(cb func(TlsClientConnection, TlsClientConnection)) {
+func (x *TlsClientConnectionInterfaceGType) OverrideCopySessionState(cb func(TlsClientConnection, TlsClientConnection)) {
 	if cb == nil {
 		x.xCopySessionState = 0
 	} else {
@@ -39,7 +39,7 @@ func (x *TlsClientConnectionInterface) OverrideCopySessionState(cb func(TlsClien
 
 // GetCopySessionState gets the "copy_session_state" callback function.
 // Copies session state from one #GTlsClientConnection to another.
-func (x *TlsClientConnectionInterface) GetCopySessionState() func(TlsClientConnection, TlsClientConnection) {
+func (x *TlsClientConnectionInterfaceGType) GetCopySessionState() func(TlsClientConnection, TlsClientConnection) {
 	if x.xCopySessionState == 0 {
 		return nil
 	}

@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type SocketAddressClass struct {
+type SocketAddressClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xGetFamily uintptr
 
@@ -24,12 +24,12 @@ type SocketAddressClass struct {
 	xToNative uintptr
 }
 
-func (x *SocketAddressClass) GoPointer() uintptr {
+func (x *SocketAddressClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetFamily sets the "get_family" callback function.
-func (x *SocketAddressClass) OverrideGetFamily(cb func(*SocketAddress) SocketFamily) {
+func (x *SocketAddressClassGType) OverrideGetFamily(cb func(*SocketAddress) SocketFamily) {
 	if cb == nil {
 		x.xGetFamily = 0
 	} else {
@@ -40,7 +40,7 @@ func (x *SocketAddressClass) OverrideGetFamily(cb func(*SocketAddress) SocketFam
 }
 
 // GetGetFamily gets the "get_family" callback function.
-func (x *SocketAddressClass) GetGetFamily() func(*SocketAddress) SocketFamily {
+func (x *SocketAddressClassGType) GetGetFamily() func(*SocketAddress) SocketFamily {
 	if x.xGetFamily == 0 {
 		return nil
 	}
@@ -52,7 +52,7 @@ func (x *SocketAddressClass) GetGetFamily() func(*SocketAddress) SocketFamily {
 }
 
 // OverrideGetNativeSize sets the "get_native_size" callback function.
-func (x *SocketAddressClass) OverrideGetNativeSize(cb func(*SocketAddress) int) {
+func (x *SocketAddressClassGType) OverrideGetNativeSize(cb func(*SocketAddress) int) {
 	if cb == nil {
 		x.xGetNativeSize = 0
 	} else {
@@ -63,7 +63,7 @@ func (x *SocketAddressClass) OverrideGetNativeSize(cb func(*SocketAddress) int) 
 }
 
 // GetGetNativeSize gets the "get_native_size" callback function.
-func (x *SocketAddressClass) GetGetNativeSize() func(*SocketAddress) int {
+func (x *SocketAddressClassGType) GetGetNativeSize() func(*SocketAddress) int {
 	if x.xGetNativeSize == 0 {
 		return nil
 	}
@@ -75,7 +75,7 @@ func (x *SocketAddressClass) GetGetNativeSize() func(*SocketAddress) int {
 }
 
 // OverrideToNative sets the "to_native" callback function.
-func (x *SocketAddressClass) OverrideToNative(cb func(*SocketAddress, uintptr, uint) bool) {
+func (x *SocketAddressClassGType) OverrideToNative(cb func(*SocketAddress, uintptr, uint) bool) {
 	if cb == nil {
 		x.xToNative = 0
 	} else {
@@ -86,7 +86,7 @@ func (x *SocketAddressClass) OverrideToNative(cb func(*SocketAddress, uintptr, u
 }
 
 // GetToNative gets the "to_native" callback function.
-func (x *SocketAddressClass) GetToNative() func(*SocketAddress, uintptr, uint) bool {
+func (x *SocketAddressClassGType) GetToNative() func(*SocketAddress, uintptr, uint) bool {
 	if x.xToNative == 0 {
 		return nil
 	}

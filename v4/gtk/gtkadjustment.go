@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type AdjustmentClass struct {
+type AdjustmentClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.InitiallyUnownedClass
+	ParentClass gobject.InitiallyUnownedClassGType
 
 	xChanged uintptr
 
@@ -30,12 +30,12 @@ type AdjustmentClass struct {
 	xGtkReserved4 uintptr
 }
 
-func (x *AdjustmentClass) GoPointer() uintptr {
+func (x *AdjustmentClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideChanged sets the "changed" callback function.
-func (x *AdjustmentClass) OverrideChanged(cb func(*Adjustment)) {
+func (x *AdjustmentClassGType) OverrideChanged(cb func(*Adjustment)) {
 	if cb == nil {
 		x.xChanged = 0
 	} else {
@@ -46,7 +46,7 @@ func (x *AdjustmentClass) OverrideChanged(cb func(*Adjustment)) {
 }
 
 // GetChanged gets the "changed" callback function.
-func (x *AdjustmentClass) GetChanged() func(*Adjustment) {
+func (x *AdjustmentClassGType) GetChanged() func(*Adjustment) {
 	if x.xChanged == 0 {
 		return nil
 	}
@@ -58,7 +58,7 @@ func (x *AdjustmentClass) GetChanged() func(*Adjustment) {
 }
 
 // OverrideValueChanged sets the "value_changed" callback function.
-func (x *AdjustmentClass) OverrideValueChanged(cb func(*Adjustment)) {
+func (x *AdjustmentClassGType) OverrideValueChanged(cb func(*Adjustment)) {
 	if cb == nil {
 		x.xValueChanged = 0
 	} else {
@@ -69,7 +69,7 @@ func (x *AdjustmentClass) OverrideValueChanged(cb func(*Adjustment)) {
 }
 
 // GetValueChanged gets the "value_changed" callback function.
-func (x *AdjustmentClass) GetValueChanged() func(*Adjustment) {
+func (x *AdjustmentClassGType) GetValueChanged() func(*Adjustment) {
 	if x.xValueChanged == 0 {
 		return nil
 	}
@@ -81,7 +81,7 @@ func (x *AdjustmentClass) GetValueChanged() func(*Adjustment) {
 }
 
 // OverrideGtkReserved1 sets the "_gtk_reserved1" callback function.
-func (x *AdjustmentClass) OverrideGtkReserved1(cb func()) {
+func (x *AdjustmentClassGType) OverrideGtkReserved1(cb func()) {
 	if cb == nil {
 		x.xGtkReserved1 = 0
 	} else {
@@ -92,7 +92,7 @@ func (x *AdjustmentClass) OverrideGtkReserved1(cb func()) {
 }
 
 // GetGtkReserved1 gets the "_gtk_reserved1" callback function.
-func (x *AdjustmentClass) GetGtkReserved1() func() {
+func (x *AdjustmentClassGType) GetGtkReserved1() func() {
 	if x.xGtkReserved1 == 0 {
 		return nil
 	}
@@ -104,7 +104,7 @@ func (x *AdjustmentClass) GetGtkReserved1() func() {
 }
 
 // OverrideGtkReserved2 sets the "_gtk_reserved2" callback function.
-func (x *AdjustmentClass) OverrideGtkReserved2(cb func()) {
+func (x *AdjustmentClassGType) OverrideGtkReserved2(cb func()) {
 	if cb == nil {
 		x.xGtkReserved2 = 0
 	} else {
@@ -115,7 +115,7 @@ func (x *AdjustmentClass) OverrideGtkReserved2(cb func()) {
 }
 
 // GetGtkReserved2 gets the "_gtk_reserved2" callback function.
-func (x *AdjustmentClass) GetGtkReserved2() func() {
+func (x *AdjustmentClassGType) GetGtkReserved2() func() {
 	if x.xGtkReserved2 == 0 {
 		return nil
 	}
@@ -127,7 +127,7 @@ func (x *AdjustmentClass) GetGtkReserved2() func() {
 }
 
 // OverrideGtkReserved3 sets the "_gtk_reserved3" callback function.
-func (x *AdjustmentClass) OverrideGtkReserved3(cb func()) {
+func (x *AdjustmentClassGType) OverrideGtkReserved3(cb func()) {
 	if cb == nil {
 		x.xGtkReserved3 = 0
 	} else {
@@ -138,7 +138,7 @@ func (x *AdjustmentClass) OverrideGtkReserved3(cb func()) {
 }
 
 // GetGtkReserved3 gets the "_gtk_reserved3" callback function.
-func (x *AdjustmentClass) GetGtkReserved3() func() {
+func (x *AdjustmentClassGType) GetGtkReserved3() func() {
 	if x.xGtkReserved3 == 0 {
 		return nil
 	}
@@ -150,7 +150,7 @@ func (x *AdjustmentClass) GetGtkReserved3() func() {
 }
 
 // OverrideGtkReserved4 sets the "_gtk_reserved4" callback function.
-func (x *AdjustmentClass) OverrideGtkReserved4(cb func()) {
+func (x *AdjustmentClassGType) OverrideGtkReserved4(cb func()) {
 	if cb == nil {
 		x.xGtkReserved4 = 0
 	} else {
@@ -161,7 +161,7 @@ func (x *AdjustmentClass) OverrideGtkReserved4(cb func()) {
 }
 
 // GetGtkReserved4 gets the "_gtk_reserved4" callback function.
-func (x *AdjustmentClass) GetGtkReserved4() func() {
+func (x *AdjustmentClassGType) GetGtkReserved4() func() {
 	if x.xGtkReserved4 == 0 {
 		return nil
 	}

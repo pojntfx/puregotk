@@ -13,11 +13,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type EventControllerKeyClass struct {
+type EventControllerKeyClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *EventControllerKeyClass) GoPointer() uintptr {
+func (x *EventControllerKeyClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

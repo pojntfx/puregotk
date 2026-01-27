@@ -11,11 +11,11 @@ import (
 )
 
 // The `GdkDragSurfaceInterface` implementation is private to GDK.
-type DragSurfaceInterface struct {
+type DragSurfaceInterfaceGType struct {
 	_ structs.HostLayout
 }
 
-func (x *DragSurfaceInterface) GoPointer() uintptr {
+func (x *DragSurfaceInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

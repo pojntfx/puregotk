@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type BufferedInputStreamClass struct {
+type BufferedInputStreamClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass FilterInputStreamClass
+	ParentClass FilterInputStreamClassGType
 
 	xFill uintptr
 
@@ -34,12 +34,12 @@ type BufferedInputStreamClass struct {
 	xGReserved5 uintptr
 }
 
-func (x *BufferedInputStreamClass) GoPointer() uintptr {
+func (x *BufferedInputStreamClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideFill sets the "fill" callback function.
-func (x *BufferedInputStreamClass) OverrideFill(cb func(*BufferedInputStream, int, *Cancellable) int) {
+func (x *BufferedInputStreamClassGType) OverrideFill(cb func(*BufferedInputStream, int, *Cancellable) int) {
 	if cb == nil {
 		x.xFill = 0
 	} else {
@@ -50,7 +50,7 @@ func (x *BufferedInputStreamClass) OverrideFill(cb func(*BufferedInputStream, in
 }
 
 // GetFill gets the "fill" callback function.
-func (x *BufferedInputStreamClass) GetFill() func(*BufferedInputStream, int, *Cancellable) int {
+func (x *BufferedInputStreamClassGType) GetFill() func(*BufferedInputStream, int, *Cancellable) int {
 	if x.xFill == 0 {
 		return nil
 	}
@@ -62,7 +62,7 @@ func (x *BufferedInputStreamClass) GetFill() func(*BufferedInputStream, int, *Ca
 }
 
 // OverrideFillAsync sets the "fill_async" callback function.
-func (x *BufferedInputStreamClass) OverrideFillAsync(cb func(*BufferedInputStream, int, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *BufferedInputStreamClassGType) OverrideFillAsync(cb func(*BufferedInputStream, int, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xFillAsync = 0
 	} else {
@@ -73,7 +73,7 @@ func (x *BufferedInputStreamClass) OverrideFillAsync(cb func(*BufferedInputStrea
 }
 
 // GetFillAsync gets the "fill_async" callback function.
-func (x *BufferedInputStreamClass) GetFillAsync() func(*BufferedInputStream, int, int, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *BufferedInputStreamClassGType) GetFillAsync() func(*BufferedInputStream, int, int, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xFillAsync == 0 {
 		return nil
 	}
@@ -85,7 +85,7 @@ func (x *BufferedInputStreamClass) GetFillAsync() func(*BufferedInputStream, int
 }
 
 // OverrideFillFinish sets the "fill_finish" callback function.
-func (x *BufferedInputStreamClass) OverrideFillFinish(cb func(*BufferedInputStream, AsyncResult) int) {
+func (x *BufferedInputStreamClassGType) OverrideFillFinish(cb func(*BufferedInputStream, AsyncResult) int) {
 	if cb == nil {
 		x.xFillFinish = 0
 	} else {
@@ -96,7 +96,7 @@ func (x *BufferedInputStreamClass) OverrideFillFinish(cb func(*BufferedInputStre
 }
 
 // GetFillFinish gets the "fill_finish" callback function.
-func (x *BufferedInputStreamClass) GetFillFinish() func(*BufferedInputStream, AsyncResult) int {
+func (x *BufferedInputStreamClassGType) GetFillFinish() func(*BufferedInputStream, AsyncResult) int {
 	if x.xFillFinish == 0 {
 		return nil
 	}
@@ -108,7 +108,7 @@ func (x *BufferedInputStreamClass) GetFillFinish() func(*BufferedInputStream, As
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *BufferedInputStreamClass) OverrideGReserved1(cb func()) {
+func (x *BufferedInputStreamClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -119,7 +119,7 @@ func (x *BufferedInputStreamClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *BufferedInputStreamClass) GetGReserved1() func() {
+func (x *BufferedInputStreamClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -131,7 +131,7 @@ func (x *BufferedInputStreamClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *BufferedInputStreamClass) OverrideGReserved2(cb func()) {
+func (x *BufferedInputStreamClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -142,7 +142,7 @@ func (x *BufferedInputStreamClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *BufferedInputStreamClass) GetGReserved2() func() {
+func (x *BufferedInputStreamClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}
@@ -154,7 +154,7 @@ func (x *BufferedInputStreamClass) GetGReserved2() func() {
 }
 
 // OverrideGReserved3 sets the "_g_reserved3" callback function.
-func (x *BufferedInputStreamClass) OverrideGReserved3(cb func()) {
+func (x *BufferedInputStreamClassGType) OverrideGReserved3(cb func()) {
 	if cb == nil {
 		x.xGReserved3 = 0
 	} else {
@@ -165,7 +165,7 @@ func (x *BufferedInputStreamClass) OverrideGReserved3(cb func()) {
 }
 
 // GetGReserved3 gets the "_g_reserved3" callback function.
-func (x *BufferedInputStreamClass) GetGReserved3() func() {
+func (x *BufferedInputStreamClassGType) GetGReserved3() func() {
 	if x.xGReserved3 == 0 {
 		return nil
 	}
@@ -177,7 +177,7 @@ func (x *BufferedInputStreamClass) GetGReserved3() func() {
 }
 
 // OverrideGReserved4 sets the "_g_reserved4" callback function.
-func (x *BufferedInputStreamClass) OverrideGReserved4(cb func()) {
+func (x *BufferedInputStreamClassGType) OverrideGReserved4(cb func()) {
 	if cb == nil {
 		x.xGReserved4 = 0
 	} else {
@@ -188,7 +188,7 @@ func (x *BufferedInputStreamClass) OverrideGReserved4(cb func()) {
 }
 
 // GetGReserved4 gets the "_g_reserved4" callback function.
-func (x *BufferedInputStreamClass) GetGReserved4() func() {
+func (x *BufferedInputStreamClassGType) GetGReserved4() func() {
 	if x.xGReserved4 == 0 {
 		return nil
 	}
@@ -200,7 +200,7 @@ func (x *BufferedInputStreamClass) GetGReserved4() func() {
 }
 
 // OverrideGReserved5 sets the "_g_reserved5" callback function.
-func (x *BufferedInputStreamClass) OverrideGReserved5(cb func()) {
+func (x *BufferedInputStreamClassGType) OverrideGReserved5(cb func()) {
 	if cb == nil {
 		x.xGReserved5 = 0
 	} else {
@@ -211,7 +211,7 @@ func (x *BufferedInputStreamClass) OverrideGReserved5(cb func()) {
 }
 
 // GetGReserved5 gets the "_g_reserved5" callback function.
-func (x *BufferedInputStreamClass) GetGReserved5() func() {
+func (x *BufferedInputStreamClassGType) GetGReserved5() func() {
 	if x.xGReserved5 == 0 {
 		return nil
 	}

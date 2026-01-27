@@ -13,11 +13,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type SurfaceClass struct {
+type SurfaceClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *SurfaceClass) GoPointer() uintptr {
+func (x *SurfaceClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

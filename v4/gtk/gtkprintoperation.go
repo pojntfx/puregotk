@@ -19,10 +19,10 @@ import (
 // is dismissed, and also serves as destroy notify for @data.
 type PageSetupDoneFunc func(uintptr, uintptr)
 
-type PrintOperationClass struct {
+type PrintOperationClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xDone uintptr
 
@@ -49,7 +49,7 @@ type PrintOperationClass struct {
 	Padding [8]uintptr
 }
 
-func (x *PrintOperationClass) GoPointer() uintptr {
+func (x *PrintOperationClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -57,7 +57,7 @@ func (x *PrintOperationClass) GoPointer() uintptr {
 // Signal emitted when the print operation run has finished
 //
 //	doing everything required for printing.
-func (x *PrintOperationClass) OverrideDone(cb func(*PrintOperation, PrintOperationResult)) {
+func (x *PrintOperationClassGType) OverrideDone(cb func(*PrintOperation, PrintOperationResult)) {
 	if cb == nil {
 		x.xDone = 0
 	} else {
@@ -71,7 +71,7 @@ func (x *PrintOperationClass) OverrideDone(cb func(*PrintOperation, PrintOperati
 // Signal emitted when the print operation run has finished
 //
 //	doing everything required for printing.
-func (x *PrintOperationClass) GetDone() func(*PrintOperation, PrintOperationResult) {
+func (x *PrintOperationClassGType) GetDone() func(*PrintOperation, PrintOperationResult) {
 	if x.xDone == 0 {
 		return nil
 	}
@@ -86,7 +86,7 @@ func (x *PrintOperationClass) GetDone() func(*PrintOperation, PrintOperationResu
 // Signal emitted after the user has finished changing
 //
 //	print settings in the dialog, before the actual rendering starts.
-func (x *PrintOperationClass) OverrideBeginPrint(cb func(*PrintOperation, *PrintContext)) {
+func (x *PrintOperationClassGType) OverrideBeginPrint(cb func(*PrintOperation, *PrintContext)) {
 	if cb == nil {
 		x.xBeginPrint = 0
 	} else {
@@ -100,7 +100,7 @@ func (x *PrintOperationClass) OverrideBeginPrint(cb func(*PrintOperation, *Print
 // Signal emitted after the user has finished changing
 //
 //	print settings in the dialog, before the actual rendering starts.
-func (x *PrintOperationClass) GetBeginPrint() func(*PrintOperation, *PrintContext) {
+func (x *PrintOperationClassGType) GetBeginPrint() func(*PrintOperation, *PrintContext) {
 	if x.xBeginPrint == 0 {
 		return nil
 	}
@@ -115,7 +115,7 @@ func (x *PrintOperationClass) GetBeginPrint() func(*PrintOperation, *PrintContex
 // Signal emitted after the “begin-print” signal, but
 //
 //	before the actual rendering starts.
-func (x *PrintOperationClass) OverridePaginate(cb func(*PrintOperation, *PrintContext) bool) {
+func (x *PrintOperationClassGType) OverridePaginate(cb func(*PrintOperation, *PrintContext) bool) {
 	if cb == nil {
 		x.xPaginate = 0
 	} else {
@@ -129,7 +129,7 @@ func (x *PrintOperationClass) OverridePaginate(cb func(*PrintOperation, *PrintCo
 // Signal emitted after the “begin-print” signal, but
 //
 //	before the actual rendering starts.
-func (x *PrintOperationClass) GetPaginate() func(*PrintOperation, *PrintContext) bool {
+func (x *PrintOperationClassGType) GetPaginate() func(*PrintOperation, *PrintContext) bool {
 	if x.xPaginate == 0 {
 		return nil
 	}
@@ -144,7 +144,7 @@ func (x *PrintOperationClass) GetPaginate() func(*PrintOperation, *PrintContext)
 // Emitted once for every page that is printed,
 //
 //	to give the application a chance to modify the page setup.
-func (x *PrintOperationClass) OverrideRequestPageSetup(cb func(*PrintOperation, *PrintContext, int, *PageSetup)) {
+func (x *PrintOperationClassGType) OverrideRequestPageSetup(cb func(*PrintOperation, *PrintContext, int, *PageSetup)) {
 	if cb == nil {
 		x.xRequestPageSetup = 0
 	} else {
@@ -158,7 +158,7 @@ func (x *PrintOperationClass) OverrideRequestPageSetup(cb func(*PrintOperation, 
 // Emitted once for every page that is printed,
 //
 //	to give the application a chance to modify the page setup.
-func (x *PrintOperationClass) GetRequestPageSetup() func(*PrintOperation, *PrintContext, int, *PageSetup) {
+func (x *PrintOperationClassGType) GetRequestPageSetup() func(*PrintOperation, *PrintContext, int, *PageSetup) {
 	if x.xRequestPageSetup == 0 {
 		return nil
 	}
@@ -171,7 +171,7 @@ func (x *PrintOperationClass) GetRequestPageSetup() func(*PrintOperation, *Print
 
 // OverrideDrawPage sets the "draw_page" callback function.
 // Signal emitted for every page that is printed.
-func (x *PrintOperationClass) OverrideDrawPage(cb func(*PrintOperation, *PrintContext, int)) {
+func (x *PrintOperationClassGType) OverrideDrawPage(cb func(*PrintOperation, *PrintContext, int)) {
 	if cb == nil {
 		x.xDrawPage = 0
 	} else {
@@ -183,7 +183,7 @@ func (x *PrintOperationClass) OverrideDrawPage(cb func(*PrintOperation, *PrintCo
 
 // GetDrawPage gets the "draw_page" callback function.
 // Signal emitted for every page that is printed.
-func (x *PrintOperationClass) GetDrawPage() func(*PrintOperation, *PrintContext, int) {
+func (x *PrintOperationClassGType) GetDrawPage() func(*PrintOperation, *PrintContext, int) {
 	if x.xDrawPage == 0 {
 		return nil
 	}
@@ -196,7 +196,7 @@ func (x *PrintOperationClass) GetDrawPage() func(*PrintOperation, *PrintContext,
 
 // OverrideEndPrint sets the "end_print" callback function.
 // Signal emitted after all pages have been rendered.
-func (x *PrintOperationClass) OverrideEndPrint(cb func(*PrintOperation, *PrintContext)) {
+func (x *PrintOperationClassGType) OverrideEndPrint(cb func(*PrintOperation, *PrintContext)) {
 	if cb == nil {
 		x.xEndPrint = 0
 	} else {
@@ -208,7 +208,7 @@ func (x *PrintOperationClass) OverrideEndPrint(cb func(*PrintOperation, *PrintCo
 
 // GetEndPrint gets the "end_print" callback function.
 // Signal emitted after all pages have been rendered.
-func (x *PrintOperationClass) GetEndPrint() func(*PrintOperation, *PrintContext) {
+func (x *PrintOperationClassGType) GetEndPrint() func(*PrintOperation, *PrintContext) {
 	if x.xEndPrint == 0 {
 		return nil
 	}
@@ -223,7 +223,7 @@ func (x *PrintOperationClass) GetEndPrint() func(*PrintOperation, *PrintContext)
 // Emitted at between the various phases of the print
 //
 //	operation.
-func (x *PrintOperationClass) OverrideStatusChanged(cb func(*PrintOperation)) {
+func (x *PrintOperationClassGType) OverrideStatusChanged(cb func(*PrintOperation)) {
 	if cb == nil {
 		x.xStatusChanged = 0
 	} else {
@@ -237,7 +237,7 @@ func (x *PrintOperationClass) OverrideStatusChanged(cb func(*PrintOperation)) {
 // Emitted at between the various phases of the print
 //
 //	operation.
-func (x *PrintOperationClass) GetStatusChanged() func(*PrintOperation) {
+func (x *PrintOperationClassGType) GetStatusChanged() func(*PrintOperation) {
 	if x.xStatusChanged == 0 {
 		return nil
 	}
@@ -250,7 +250,7 @@ func (x *PrintOperationClass) GetStatusChanged() func(*PrintOperation) {
 
 // OverrideCreateCustomWidget sets the "create_custom_widget" callback function.
 // Signal emitted when displaying the print dialog.
-func (x *PrintOperationClass) OverrideCreateCustomWidget(cb func(*PrintOperation) *Widget) {
+func (x *PrintOperationClassGType) OverrideCreateCustomWidget(cb func(*PrintOperation) *Widget) {
 	if cb == nil {
 		x.xCreateCustomWidget = 0
 	} else {
@@ -266,7 +266,7 @@ func (x *PrintOperationClass) OverrideCreateCustomWidget(cb func(*PrintOperation
 
 // GetCreateCustomWidget gets the "create_custom_widget" callback function.
 // Signal emitted when displaying the print dialog.
-func (x *PrintOperationClass) GetCreateCustomWidget() func(*PrintOperation) *Widget {
+func (x *PrintOperationClassGType) GetCreateCustomWidget() func(*PrintOperation) *Widget {
 	if x.xCreateCustomWidget == 0 {
 		return nil
 	}
@@ -287,7 +287,7 @@ func (x *PrintOperationClass) GetCreateCustomWidget() func(*PrintOperation) *Wid
 // Signal emitted right before “begin-print” if
 //
 //	you added a custom widget in the “create-custom-widget” handler.
-func (x *PrintOperationClass) OverrideCustomWidgetApply(cb func(*PrintOperation, *Widget)) {
+func (x *PrintOperationClassGType) OverrideCustomWidgetApply(cb func(*PrintOperation, *Widget)) {
 	if cb == nil {
 		x.xCustomWidgetApply = 0
 	} else {
@@ -301,7 +301,7 @@ func (x *PrintOperationClass) OverrideCustomWidgetApply(cb func(*PrintOperation,
 // Signal emitted right before “begin-print” if
 //
 //	you added a custom widget in the “create-custom-widget” handler.
-func (x *PrintOperationClass) GetCustomWidgetApply() func(*PrintOperation, *Widget) {
+func (x *PrintOperationClassGType) GetCustomWidgetApply() func(*PrintOperation, *Widget) {
 	if x.xCustomWidgetApply == 0 {
 		return nil
 	}
@@ -316,7 +316,7 @@ func (x *PrintOperationClass) GetCustomWidgetApply() func(*PrintOperation, *Widg
 // Signal emitted when a preview is requested from the
 //
 //	native dialog.
-func (x *PrintOperationClass) OverridePreview(cb func(*PrintOperation, PrintOperationPreview, *PrintContext, *Window) bool) {
+func (x *PrintOperationClassGType) OverridePreview(cb func(*PrintOperation, PrintOperationPreview, *PrintContext, *Window) bool) {
 	if cb == nil {
 		x.xPreview = 0
 	} else {
@@ -330,7 +330,7 @@ func (x *PrintOperationClass) OverridePreview(cb func(*PrintOperation, PrintOper
 // Signal emitted when a preview is requested from the
 //
 //	native dialog.
-func (x *PrintOperationClass) GetPreview() func(*PrintOperation, PrintOperationPreview, *PrintContext, *Window) bool {
+func (x *PrintOperationClassGType) GetPreview() func(*PrintOperation, PrintOperationPreview, *PrintContext, *Window) bool {
 	if x.xPreview == 0 {
 		return nil
 	}
@@ -343,7 +343,7 @@ func (x *PrintOperationClass) GetPreview() func(*PrintOperation, PrintOperationP
 
 // OverrideUpdateCustomWidget sets the "update_custom_widget" callback function.
 // Emitted after change of selected printer.
-func (x *PrintOperationClass) OverrideUpdateCustomWidget(cb func(*PrintOperation, *Widget, *PageSetup, *PrintSettings)) {
+func (x *PrintOperationClassGType) OverrideUpdateCustomWidget(cb func(*PrintOperation, *Widget, *PageSetup, *PrintSettings)) {
 	if cb == nil {
 		x.xUpdateCustomWidget = 0
 	} else {
@@ -355,7 +355,7 @@ func (x *PrintOperationClass) OverrideUpdateCustomWidget(cb func(*PrintOperation
 
 // GetUpdateCustomWidget gets the "update_custom_widget" callback function.
 // Emitted after change of selected printer.
-func (x *PrintOperationClass) GetUpdateCustomWidget() func(*PrintOperation, *Widget, *PageSetup, *PrintSettings) {
+func (x *PrintOperationClassGType) GetUpdateCustomWidget() func(*PrintOperation, *Widget, *PageSetup, *PrintSettings) {
 	if x.xUpdateCustomWidget == 0 {
 		return nil
 	}

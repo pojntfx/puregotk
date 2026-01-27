@@ -12,15 +12,15 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type BreakpointBinClass struct {
+type BreakpointBinClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 
 	Padding [4]uintptr
 }
 
-func (x *BreakpointBinClass) GoPointer() uintptr {
+func (x *BreakpointBinClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

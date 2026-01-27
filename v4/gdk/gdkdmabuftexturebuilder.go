@@ -13,11 +13,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type DmabufTextureBuilderClass struct {
+type DmabufTextureBuilderClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *DmabufTextureBuilderClass) GoPointer() uintptr {
+func (x *DmabufTextureBuilderClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

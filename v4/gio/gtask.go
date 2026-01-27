@@ -29,11 +29,11 @@ import (
 // `g_task_return_` function.
 type TaskThreadFunc func(uintptr, uintptr, uintptr, uintptr)
 
-type TaskClass struct {
+type TaskClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *TaskClass) GoPointer() uintptr {
+func (x *TaskClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -131,8 +131,11 @@ func (f *funcArgsTemplate) AddPure(t string, n string, k Kind, isOut bool) {
 				c = n
 				t = "uintptr"
 			} else {
-				c = fmt.Sprintf("%s{Ptr: %s}", t+"Base", n)
-				t = strings.Repeat("*", stars-1) + "uintptr"
+				// Remove all dereference operators to get the base interface name
+				// Don't add & here - convertCallbackArgs adds it when it sees {Ptr:
+				baseName := strings.TrimPrefix(t, strings.Repeat("*", stars))
+				c = fmt.Sprintf("%sBase{Ptr: %s}", baseName, n)
+				t = "uintptr"
 			}
 		}
 	}
@@ -488,6 +491,13 @@ type InterfaceTemplate struct {
 	Properties []PropertyTemplate
 	// TypeGetter is the function to get the GLib type
 	TypeGetter string
+	// SkipBase indicates that the *Base implementation struct should be skipped
+	// because a class with the same name already exists
+	SkipBase bool
+	// BaseName is the name to use for the Base implementation struct
+	// Usually this is "Name + Base", but when a class with that name exists,
+	// it may be different (e.g., "Name + Impl")
+	BaseName string
 }
 
 type TemplateArg struct {

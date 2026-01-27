@@ -10,13 +10,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type BinLayoutClass struct {
+type BinLayoutClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass LayoutManagerClass
+	ParentClass LayoutManagerClassGType
 }
 
-func (x *BinLayoutClass) GoPointer() uintptr {
+func (x *BinLayoutClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

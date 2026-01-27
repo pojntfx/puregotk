@@ -12,13 +12,13 @@ import (
 )
 
 // The virtual function table for #GDebugController.
-type DebugControllerInterface struct {
+type DebugControllerInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
 }
 
-func (x *DebugControllerInterface) GoPointer() uintptr {
+func (x *DebugControllerInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

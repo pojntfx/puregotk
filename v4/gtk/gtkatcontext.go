@@ -13,11 +13,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ATContextClass struct {
+type ATContextClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *ATContextClass) GoPointer() uintptr {
+func (x *ATContextClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

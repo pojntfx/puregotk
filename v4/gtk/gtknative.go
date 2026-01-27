@@ -13,11 +13,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gsk"
 )
 
-type NativeInterface struct {
+type NativeInterfaceGType struct {
 	_ structs.HostLayout
 }
 
-func (x *NativeInterface) GoPointer() uintptr {
+func (x *NativeInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

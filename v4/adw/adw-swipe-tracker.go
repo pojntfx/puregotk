@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type SwipeTrackerClass struct {
+type SwipeTrackerClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *SwipeTrackerClass) GoPointer() uintptr {
+func (x *SwipeTrackerClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

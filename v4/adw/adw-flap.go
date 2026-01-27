@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type FlapClass struct {
+type FlapClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *FlapClass) GoPointer() uintptr {
+func (x *FlapClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

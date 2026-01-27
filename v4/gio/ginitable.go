@@ -14,7 +14,7 @@ import (
 
 // Provides an interface for initializing object such that initialization
 // may fail.
-type InitableIface struct {
+type InitableIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -22,13 +22,13 @@ type InitableIface struct {
 	xInit uintptr
 }
 
-func (x *InitableIface) GoPointer() uintptr {
+func (x *InitableIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideInit sets the "init" callback function.
 // Initializes the object.
-func (x *InitableIface) OverrideInit(cb func(Initable, *Cancellable) bool) {
+func (x *InitableIfaceGType) OverrideInit(cb func(Initable, *Cancellable) bool) {
 	if cb == nil {
 		x.xInit = 0
 	} else {
@@ -40,7 +40,7 @@ func (x *InitableIface) OverrideInit(cb func(Initable, *Cancellable) bool) {
 
 // GetInit gets the "init" callback function.
 // Initializes the object.
-func (x *InitableIface) GetInit() func(Initable, *Cancellable) bool {
+func (x *InitableIfaceGType) GetInit() func(Initable, *Cancellable) bool {
 	if x.xInit == 0 {
 		return nil
 	}

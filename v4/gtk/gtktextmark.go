@@ -11,15 +11,15 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type TextMarkClass struct {
+type TextMarkClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	Padding [8]uintptr
 }
 
-func (x *TextMarkClass) GoPointer() uintptr {
+func (x *TextMarkClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

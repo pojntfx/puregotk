@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type BookmarkListClass struct {
+type BookmarkListClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *BookmarkListClass) GoPointer() uintptr {
+func (x *BookmarkListClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

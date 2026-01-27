@@ -41,11 +41,11 @@ import (
 type ValueArray struct {
 	_ structs.HostLayout
 
-	NValues uint
+	NValues uint32
 
 	Values *Value
 
-	NPrealloced uint
+	NPrealloced uint32
 }
 
 var xValueArrayGLibType func() types.GType

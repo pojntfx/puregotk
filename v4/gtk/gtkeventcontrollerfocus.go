@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type EventControllerFocusClass struct {
+type EventControllerFocusClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *EventControllerFocusClass) GoPointer() uintptr {
+func (x *EventControllerFocusClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

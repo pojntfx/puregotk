@@ -12,22 +12,22 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type CellRendererTextClass struct {
+type CellRendererTextClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass CellRendererClass
+	ParentClass CellRendererClassGType
 
 	xEdited uintptr
 
 	Padding [8]uintptr
 }
 
-func (x *CellRendererTextClass) GoPointer() uintptr {
+func (x *CellRendererTextClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideEdited sets the "edited" callback function.
-func (x *CellRendererTextClass) OverrideEdited(cb func(*CellRendererText, string, string)) {
+func (x *CellRendererTextClassGType) OverrideEdited(cb func(*CellRendererText, string, string)) {
 	if cb == nil {
 		x.xEdited = 0
 	} else {
@@ -38,7 +38,7 @@ func (x *CellRendererTextClass) OverrideEdited(cb func(*CellRendererText, string
 }
 
 // GetEdited gets the "edited" callback function.
-func (x *CellRendererTextClass) GetEdited() func(*CellRendererText, string, string) {
+func (x *CellRendererTextClassGType) GetEdited() func(*CellRendererText, string, string) {
 	if x.xEdited == 0 {
 		return nil
 	}

@@ -12,23 +12,23 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gsk"
 )
 
-type FixedLayoutChildClass struct {
+type FixedLayoutChildClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass LayoutChildClass
+	ParentClass LayoutChildClassGType
 }
 
-func (x *FixedLayoutChildClass) GoPointer() uintptr {
+func (x *FixedLayoutChildClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type FixedLayoutClass struct {
+type FixedLayoutClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass LayoutManagerClass
+	ParentClass LayoutManagerClassGType
 }
 
-func (x *FixedLayoutClass) GoPointer() uintptr {
+func (x *FixedLayoutClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

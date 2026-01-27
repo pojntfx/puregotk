@@ -111,7 +111,7 @@ func (x *ActionEntry) GetChangeState() func(*SimpleAction, *glib.Variant, uintpt
 }
 
 // The virtual function table for [iface@Gio.ActionMap].
-type ActionMapInterface struct {
+type ActionMapInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -123,7 +123,7 @@ type ActionMapInterface struct {
 	xRemoveAction uintptr
 }
 
-func (x *ActionMapInterface) GoPointer() uintptr {
+func (x *ActionMapInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -131,7 +131,7 @@ func (x *ActionMapInterface) GoPointer() uintptr {
 // the virtual function pointer for
 //
 //	[method@Gio.ActionMap.lookup_action]
-func (x *ActionMapInterface) OverrideLookupAction(cb func(ActionMap, string) *ActionBase) {
+func (x *ActionMapInterfaceGType) OverrideLookupAction(cb func(ActionMap, string) *ActionBase) {
 	if cb == nil {
 		x.xLookupAction = 0
 	} else {
@@ -149,7 +149,7 @@ func (x *ActionMapInterface) OverrideLookupAction(cb func(ActionMap, string) *Ac
 // the virtual function pointer for
 //
 //	[method@Gio.ActionMap.lookup_action]
-func (x *ActionMapInterface) GetLookupAction() func(ActionMap, string) *ActionBase {
+func (x *ActionMapInterfaceGType) GetLookupAction() func(ActionMap, string) *ActionBase {
 	if x.xLookupAction == 0 {
 		return nil
 	}
@@ -170,7 +170,7 @@ func (x *ActionMapInterface) GetLookupAction() func(ActionMap, string) *ActionBa
 // the virtual function pointer for
 //
 //	[method@Gio.ActionMap.add_action]
-func (x *ActionMapInterface) OverrideAddAction(cb func(ActionMap, Action)) {
+func (x *ActionMapInterfaceGType) OverrideAddAction(cb func(ActionMap, Action)) {
 	if cb == nil {
 		x.xAddAction = 0
 	} else {
@@ -184,7 +184,7 @@ func (x *ActionMapInterface) OverrideAddAction(cb func(ActionMap, Action)) {
 // the virtual function pointer for
 //
 //	[method@Gio.ActionMap.add_action]
-func (x *ActionMapInterface) GetAddAction() func(ActionMap, Action) {
+func (x *ActionMapInterfaceGType) GetAddAction() func(ActionMap, Action) {
 	if x.xAddAction == 0 {
 		return nil
 	}
@@ -199,7 +199,7 @@ func (x *ActionMapInterface) GetAddAction() func(ActionMap, Action) {
 // the virtual function pointer for
 //
 //	[method@Gio.ActionMap.remove_action]
-func (x *ActionMapInterface) OverrideRemoveAction(cb func(ActionMap, string)) {
+func (x *ActionMapInterfaceGType) OverrideRemoveAction(cb func(ActionMap, string)) {
 	if cb == nil {
 		x.xRemoveAction = 0
 	} else {
@@ -213,7 +213,7 @@ func (x *ActionMapInterface) OverrideRemoveAction(cb func(ActionMap, string)) {
 // the virtual function pointer for
 //
 //	[method@Gio.ActionMap.remove_action]
-func (x *ActionMapInterface) GetRemoveAction() func(ActionMap, string) {
+func (x *ActionMapInterfaceGType) GetRemoveAction() func(ActionMap, string) {
 	if x.xRemoveAction == 0 {
 		return nil
 	}

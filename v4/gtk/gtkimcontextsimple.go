@@ -10,13 +10,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type IMContextSimpleClass struct {
+type IMContextSimpleClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass IMContextClass
+	ParentClass IMContextClassGType
 }
 
-func (x *IMContextSimpleClass) GoPointer() uintptr {
+func (x *IMContextSimpleClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

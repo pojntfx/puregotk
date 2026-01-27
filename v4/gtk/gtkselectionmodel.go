@@ -22,7 +22,7 @@ import (
 // All selection functions fall back to `GtkSelectionModel::set_selection()`
 // so it is sufficient to implement just that function for full selection
 // support.
-type SelectionModelInterface struct {
+type SelectionModelInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -46,13 +46,13 @@ type SelectionModelInterface struct {
 	xSetSelection uintptr
 }
 
-func (x *SelectionModelInterface) GoPointer() uintptr {
+func (x *SelectionModelInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideIsSelected sets the "is_selected" callback function.
 // Return if the item at the given position is selected.
-func (x *SelectionModelInterface) OverrideIsSelected(cb func(SelectionModel, uint) bool) {
+func (x *SelectionModelInterfaceGType) OverrideIsSelected(cb func(SelectionModel, uint) bool) {
 	if cb == nil {
 		x.xIsSelected = 0
 	} else {
@@ -64,7 +64,7 @@ func (x *SelectionModelInterface) OverrideIsSelected(cb func(SelectionModel, uin
 
 // GetIsSelected gets the "is_selected" callback function.
 // Return if the item at the given position is selected.
-func (x *SelectionModelInterface) GetIsSelected() func(SelectionModel, uint) bool {
+func (x *SelectionModelInterfaceGType) GetIsSelected() func(SelectionModel, uint) bool {
 	if x.xIsSelected == 0 {
 		return nil
 	}
@@ -80,7 +80,7 @@ func (x *SelectionModelInterface) GetIsSelected() func(SelectionModel, uint) boo
 //
 //	items in the given range. By default, this function will call
 //	`GtkSelectionModel::is_selected()` on all items in the given range.
-func (x *SelectionModelInterface) OverrideGetSelectionInRange(cb func(SelectionModel, uint, uint) *Bitset) {
+func (x *SelectionModelInterfaceGType) OverrideGetSelectionInRange(cb func(SelectionModel, uint, uint) *Bitset) {
 	if cb == nil {
 		x.xGetSelectionInRange = 0
 	} else {
@@ -95,7 +95,7 @@ func (x *SelectionModelInterface) OverrideGetSelectionInRange(cb func(SelectionM
 //
 //	items in the given range. By default, this function will call
 //	`GtkSelectionModel::is_selected()` on all items in the given range.
-func (x *SelectionModelInterface) GetGetSelectionInRange() func(SelectionModel, uint, uint) *Bitset {
+func (x *SelectionModelInterfaceGType) GetGetSelectionInRange() func(SelectionModel, uint, uint) *Bitset {
 	if x.xGetSelectionInRange == 0 {
 		return nil
 	}
@@ -110,7 +110,7 @@ func (x *SelectionModelInterface) GetGetSelectionInRange() func(SelectionModel, 
 // Select the item in the given position. If the operation
 //
 //	is known to fail, return %FALSE.
-func (x *SelectionModelInterface) OverrideSelectItem(cb func(SelectionModel, uint, bool) bool) {
+func (x *SelectionModelInterfaceGType) OverrideSelectItem(cb func(SelectionModel, uint, bool) bool) {
 	if cb == nil {
 		x.xSelectItem = 0
 	} else {
@@ -124,7 +124,7 @@ func (x *SelectionModelInterface) OverrideSelectItem(cb func(SelectionModel, uin
 // Select the item in the given position. If the operation
 //
 //	is known to fail, return %FALSE.
-func (x *SelectionModelInterface) GetSelectItem() func(SelectionModel, uint, bool) bool {
+func (x *SelectionModelInterfaceGType) GetSelectItem() func(SelectionModel, uint, bool) bool {
 	if x.xSelectItem == 0 {
 		return nil
 	}
@@ -139,7 +139,7 @@ func (x *SelectionModelInterface) GetSelectItem() func(SelectionModel, uint, boo
 // Unselect the item in the given position. If the
 //
 //	operation is known to fail, return %FALSE.
-func (x *SelectionModelInterface) OverrideUnselectItem(cb func(SelectionModel, uint) bool) {
+func (x *SelectionModelInterfaceGType) OverrideUnselectItem(cb func(SelectionModel, uint) bool) {
 	if cb == nil {
 		x.xUnselectItem = 0
 	} else {
@@ -153,7 +153,7 @@ func (x *SelectionModelInterface) OverrideUnselectItem(cb func(SelectionModel, u
 // Unselect the item in the given position. If the
 //
 //	operation is known to fail, return %FALSE.
-func (x *SelectionModelInterface) GetUnselectItem() func(SelectionModel, uint) bool {
+func (x *SelectionModelInterfaceGType) GetUnselectItem() func(SelectionModel, uint) bool {
 	if x.xUnselectItem == 0 {
 		return nil
 	}
@@ -168,7 +168,7 @@ func (x *SelectionModelInterface) GetUnselectItem() func(SelectionModel, uint) b
 // Select all items in the given range. If the operation
 //
 //	is unsupported or known to fail for all items, return %FALSE.
-func (x *SelectionModelInterface) OverrideSelectRange(cb func(SelectionModel, uint, uint, bool) bool) {
+func (x *SelectionModelInterfaceGType) OverrideSelectRange(cb func(SelectionModel, uint, uint, bool) bool) {
 	if cb == nil {
 		x.xSelectRange = 0
 	} else {
@@ -182,7 +182,7 @@ func (x *SelectionModelInterface) OverrideSelectRange(cb func(SelectionModel, ui
 // Select all items in the given range. If the operation
 //
 //	is unsupported or known to fail for all items, return %FALSE.
-func (x *SelectionModelInterface) GetSelectRange() func(SelectionModel, uint, uint, bool) bool {
+func (x *SelectionModelInterfaceGType) GetSelectRange() func(SelectionModel, uint, uint, bool) bool {
 	if x.xSelectRange == 0 {
 		return nil
 	}
@@ -198,7 +198,7 @@ func (x *SelectionModelInterface) GetSelectRange() func(SelectionModel, uint, ui
 //
 //	operation is unsupported or known to fail for all items, return
 //	%FALSE.
-func (x *SelectionModelInterface) OverrideUnselectRange(cb func(SelectionModel, uint, uint) bool) {
+func (x *SelectionModelInterfaceGType) OverrideUnselectRange(cb func(SelectionModel, uint, uint) bool) {
 	if cb == nil {
 		x.xUnselectRange = 0
 	} else {
@@ -213,7 +213,7 @@ func (x *SelectionModelInterface) OverrideUnselectRange(cb func(SelectionModel, 
 //
 //	operation is unsupported or known to fail for all items, return
 //	%FALSE.
-func (x *SelectionModelInterface) GetUnselectRange() func(SelectionModel, uint, uint) bool {
+func (x *SelectionModelInterfaceGType) GetUnselectRange() func(SelectionModel, uint, uint) bool {
 	if x.xUnselectRange == 0 {
 		return nil
 	}
@@ -228,7 +228,7 @@ func (x *SelectionModelInterface) GetUnselectRange() func(SelectionModel, uint, 
 // Select all items in the model. If the operation is
 //
 //	unsupported or known to fail for all items, return %FALSE.
-func (x *SelectionModelInterface) OverrideSelectAll(cb func(SelectionModel) bool) {
+func (x *SelectionModelInterfaceGType) OverrideSelectAll(cb func(SelectionModel) bool) {
 	if cb == nil {
 		x.xSelectAll = 0
 	} else {
@@ -242,7 +242,7 @@ func (x *SelectionModelInterface) OverrideSelectAll(cb func(SelectionModel) bool
 // Select all items in the model. If the operation is
 //
 //	unsupported or known to fail for all items, return %FALSE.
-func (x *SelectionModelInterface) GetSelectAll() func(SelectionModel) bool {
+func (x *SelectionModelInterfaceGType) GetSelectAll() func(SelectionModel) bool {
 	if x.xSelectAll == 0 {
 		return nil
 	}
@@ -257,7 +257,7 @@ func (x *SelectionModelInterface) GetSelectAll() func(SelectionModel) bool {
 // Unselect all items in the model. If the operation is
 //
 //	unsupported or known to fail for all items, return %FALSE.
-func (x *SelectionModelInterface) OverrideUnselectAll(cb func(SelectionModel) bool) {
+func (x *SelectionModelInterfaceGType) OverrideUnselectAll(cb func(SelectionModel) bool) {
 	if cb == nil {
 		x.xUnselectAll = 0
 	} else {
@@ -271,7 +271,7 @@ func (x *SelectionModelInterface) OverrideUnselectAll(cb func(SelectionModel) bo
 // Unselect all items in the model. If the operation is
 //
 //	unsupported or known to fail for all items, return %FALSE.
-func (x *SelectionModelInterface) GetUnselectAll() func(SelectionModel) bool {
+func (x *SelectionModelInterfaceGType) GetUnselectAll() func(SelectionModel) bool {
 	if x.xUnselectAll == 0 {
 		return nil
 	}
@@ -287,7 +287,7 @@ func (x *SelectionModelInterface) GetUnselectAll() func(SelectionModel) bool {
 //
 //	See gtk_selection_model_set_selection() for a detailed explanation
 //	of this function.
-func (x *SelectionModelInterface) OverrideSetSelection(cb func(SelectionModel, *Bitset, *Bitset) bool) {
+func (x *SelectionModelInterfaceGType) OverrideSetSelection(cb func(SelectionModel, *Bitset, *Bitset) bool) {
 	if cb == nil {
 		x.xSetSelection = 0
 	} else {
@@ -302,7 +302,7 @@ func (x *SelectionModelInterface) OverrideSetSelection(cb func(SelectionModel, *
 //
 //	See gtk_selection_model_set_selection() for a detailed explanation
 //	of this function.
-func (x *SelectionModelInterface) GetSetSelection() func(SelectionModel, *Bitset, *Bitset) bool {
+func (x *SelectionModelInterfaceGType) GetSetSelection() func(SelectionModel, *Bitset, *Bitset) bool {
 	if x.xSetSelection == 0 {
 		return nil
 	}

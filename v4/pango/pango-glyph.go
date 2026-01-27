@@ -239,9 +239,9 @@ func (x *GlyphString) XToIndex(TextVar string, LengthVar int, AnalysisVar *Analy
 type GlyphVisAttr struct {
 	_ structs.HostLayout
 
-	IsClusterStart uint
+	IsClusterStart uint32
 
-	IsColor uint
+	IsColor uint32
 }
 
 func (x *GlyphVisAttr) GoPointer() uintptr {

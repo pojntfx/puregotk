@@ -14,10 +14,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gsk"
 )
 
-type PopoverClass struct {
+type PopoverClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xClosed uintptr
 
@@ -26,12 +26,12 @@ type PopoverClass struct {
 	Reserved [8]uintptr
 }
 
-func (x *PopoverClass) GoPointer() uintptr {
+func (x *PopoverClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideClosed sets the "closed" callback function.
-func (x *PopoverClass) OverrideClosed(cb func(*Popover)) {
+func (x *PopoverClassGType) OverrideClosed(cb func(*Popover)) {
 	if cb == nil {
 		x.xClosed = 0
 	} else {
@@ -42,7 +42,7 @@ func (x *PopoverClass) OverrideClosed(cb func(*Popover)) {
 }
 
 // GetClosed gets the "closed" callback function.
-func (x *PopoverClass) GetClosed() func(*Popover) {
+func (x *PopoverClassGType) GetClosed() func(*Popover) {
 	if x.xClosed == 0 {
 		return nil
 	}
@@ -54,7 +54,7 @@ func (x *PopoverClass) GetClosed() func(*Popover) {
 }
 
 // OverrideActivateDefault sets the "activate_default" callback function.
-func (x *PopoverClass) OverrideActivateDefault(cb func(*Popover)) {
+func (x *PopoverClassGType) OverrideActivateDefault(cb func(*Popover)) {
 	if cb == nil {
 		x.xActivateDefault = 0
 	} else {
@@ -65,7 +65,7 @@ func (x *PopoverClass) OverrideActivateDefault(cb func(*Popover)) {
 }
 
 // GetActivateDefault gets the "activate_default" callback function.
-func (x *PopoverClass) GetActivateDefault() func(*Popover) {
+func (x *PopoverClassGType) GetActivateDefault() func(*Popover) {
 	if x.xActivateDefault == 0 {
 		return nil
 	}

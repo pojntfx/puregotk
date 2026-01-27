@@ -13,15 +13,15 @@ import (
 )
 
 // Class structure for #GDBusObjectProxy.
-type DBusObjectProxyClass struct {
+type DBusObjectProxyClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	Padding [8]uintptr
 }
 
-func (x *DBusObjectProxyClass) GoPointer() uintptr {
+func (x *DBusObjectProxyClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

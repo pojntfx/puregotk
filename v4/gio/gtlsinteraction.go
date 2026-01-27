@@ -26,10 +26,10 @@ import (
 // If the user cancels an interaction, then the result should be
 // %G_TLS_INTERACTION_FAILED and the error should be set with a domain of
 // %G_IO_ERROR and code of %G_IO_ERROR_CANCELLED.
-type TlsInteractionClass struct {
+type TlsInteractionClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xAskPassword uintptr
 
@@ -46,7 +46,7 @@ type TlsInteractionClass struct {
 	Padding [21]uintptr
 }
 
-func (x *TlsInteractionClass) GoPointer() uintptr {
+func (x *TlsInteractionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -56,7 +56,7 @@ func (x *TlsInteractionClass) GoPointer() uintptr {
 //	returns %G_TLS_INTERACTION_HANDLED, then the password argument should
 //	have been filled in by using g_tls_password_set_value() or a similar
 //	function.
-func (x *TlsInteractionClass) OverrideAskPassword(cb func(*TlsInteraction, *TlsPassword, *Cancellable) TlsInteractionResult) {
+func (x *TlsInteractionClassGType) OverrideAskPassword(cb func(*TlsInteraction, *TlsPassword, *Cancellable) TlsInteractionResult) {
 	if cb == nil {
 		x.xAskPassword = 0
 	} else {
@@ -72,7 +72,7 @@ func (x *TlsInteractionClass) OverrideAskPassword(cb func(*TlsInteraction, *TlsP
 //	returns %G_TLS_INTERACTION_HANDLED, then the password argument should
 //	have been filled in by using g_tls_password_set_value() or a similar
 //	function.
-func (x *TlsInteractionClass) GetAskPassword() func(*TlsInteraction, *TlsPassword, *Cancellable) TlsInteractionResult {
+func (x *TlsInteractionClassGType) GetAskPassword() func(*TlsInteraction, *TlsPassword, *Cancellable) TlsInteractionResult {
 	if x.xAskPassword == 0 {
 		return nil
 	}
@@ -85,7 +85,7 @@ func (x *TlsInteractionClass) GetAskPassword() func(*TlsInteraction, *TlsPasswor
 
 // OverrideAskPasswordAsync sets the "ask_password_async" callback function.
 // ask for a password asynchronously.
-func (x *TlsInteractionClass) OverrideAskPasswordAsync(cb func(*TlsInteraction, *TlsPassword, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *TlsInteractionClassGType) OverrideAskPasswordAsync(cb func(*TlsInteraction, *TlsPassword, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xAskPasswordAsync = 0
 	} else {
@@ -97,7 +97,7 @@ func (x *TlsInteractionClass) OverrideAskPasswordAsync(cb func(*TlsInteraction, 
 
 // GetAskPasswordAsync gets the "ask_password_async" callback function.
 // ask for a password asynchronously.
-func (x *TlsInteractionClass) GetAskPasswordAsync() func(*TlsInteraction, *TlsPassword, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *TlsInteractionClassGType) GetAskPasswordAsync() func(*TlsInteraction, *TlsPassword, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xAskPasswordAsync == 0 {
 		return nil
 	}
@@ -114,7 +114,7 @@ func (x *TlsInteractionClass) GetAskPasswordAsync() func(*TlsInteraction, *TlsPa
 //	If the implementation returns %G_TLS_INTERACTION_HANDLED, then the
 //	password argument of the async method should have been filled in by using
 //	g_tls_password_set_value() or a similar function.
-func (x *TlsInteractionClass) OverrideAskPasswordFinish(cb func(*TlsInteraction, AsyncResult) TlsInteractionResult) {
+func (x *TlsInteractionClassGType) OverrideAskPasswordFinish(cb func(*TlsInteraction, AsyncResult) TlsInteractionResult) {
 	if cb == nil {
 		x.xAskPasswordFinish = 0
 	} else {
@@ -130,7 +130,7 @@ func (x *TlsInteractionClass) OverrideAskPasswordFinish(cb func(*TlsInteraction,
 //	If the implementation returns %G_TLS_INTERACTION_HANDLED, then the
 //	password argument of the async method should have been filled in by using
 //	g_tls_password_set_value() or a similar function.
-func (x *TlsInteractionClass) GetAskPasswordFinish() func(*TlsInteraction, AsyncResult) TlsInteractionResult {
+func (x *TlsInteractionClassGType) GetAskPasswordFinish() func(*TlsInteraction, AsyncResult) TlsInteractionResult {
 	if x.xAskPasswordFinish == 0 {
 		return nil
 	}
@@ -147,7 +147,7 @@ func (x *TlsInteractionClass) GetAskPasswordFinish() func(*TlsInteraction, Async
 //	implementation returns %G_TLS_INTERACTION_HANDLED, then the connection
 //	argument should have been filled in by using
 //	g_tls_connection_set_certificate().
-func (x *TlsInteractionClass) OverrideRequestCertificate(cb func(*TlsInteraction, *TlsConnection, TlsCertificateRequestFlags, *Cancellable) TlsInteractionResult) {
+func (x *TlsInteractionClassGType) OverrideRequestCertificate(cb func(*TlsInteraction, *TlsConnection, TlsCertificateRequestFlags, *Cancellable) TlsInteractionResult) {
 	if cb == nil {
 		x.xRequestCertificate = 0
 	} else {
@@ -163,7 +163,7 @@ func (x *TlsInteractionClass) OverrideRequestCertificate(cb func(*TlsInteraction
 //	implementation returns %G_TLS_INTERACTION_HANDLED, then the connection
 //	argument should have been filled in by using
 //	g_tls_connection_set_certificate().
-func (x *TlsInteractionClass) GetRequestCertificate() func(*TlsInteraction, *TlsConnection, TlsCertificateRequestFlags, *Cancellable) TlsInteractionResult {
+func (x *TlsInteractionClassGType) GetRequestCertificate() func(*TlsInteraction, *TlsConnection, TlsCertificateRequestFlags, *Cancellable) TlsInteractionResult {
 	if x.xRequestCertificate == 0 {
 		return nil
 	}
@@ -176,7 +176,7 @@ func (x *TlsInteractionClass) GetRequestCertificate() func(*TlsInteraction, *Tls
 
 // OverrideRequestCertificateAsync sets the "request_certificate_async" callback function.
 // ask for a certificate asynchronously.
-func (x *TlsInteractionClass) OverrideRequestCertificateAsync(cb func(*TlsInteraction, *TlsConnection, TlsCertificateRequestFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *TlsInteractionClassGType) OverrideRequestCertificateAsync(cb func(*TlsInteraction, *TlsConnection, TlsCertificateRequestFlags, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xRequestCertificateAsync = 0
 	} else {
@@ -188,7 +188,7 @@ func (x *TlsInteractionClass) OverrideRequestCertificateAsync(cb func(*TlsIntera
 
 // GetRequestCertificateAsync gets the "request_certificate_async" callback function.
 // ask for a certificate asynchronously.
-func (x *TlsInteractionClass) GetRequestCertificateAsync() func(*TlsInteraction, *TlsConnection, TlsCertificateRequestFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *TlsInteractionClassGType) GetRequestCertificateAsync() func(*TlsInteraction, *TlsConnection, TlsCertificateRequestFlags, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xRequestCertificateAsync == 0 {
 		return nil
 	}
@@ -205,7 +205,7 @@ func (x *TlsInteractionClass) GetRequestCertificateAsync() func(*TlsInteraction,
 //	asynchronously. If the implementation returns %G_TLS_INTERACTION_HANDLED,
 //	then the connection argument of the async method should have been
 //	filled in by using g_tls_connection_set_certificate().
-func (x *TlsInteractionClass) OverrideRequestCertificateFinish(cb func(*TlsInteraction, AsyncResult) TlsInteractionResult) {
+func (x *TlsInteractionClassGType) OverrideRequestCertificateFinish(cb func(*TlsInteraction, AsyncResult) TlsInteractionResult) {
 	if cb == nil {
 		x.xRequestCertificateFinish = 0
 	} else {
@@ -221,7 +221,7 @@ func (x *TlsInteractionClass) OverrideRequestCertificateFinish(cb func(*TlsInter
 //	asynchronously. If the implementation returns %G_TLS_INTERACTION_HANDLED,
 //	then the connection argument of the async method should have been
 //	filled in by using g_tls_connection_set_certificate().
-func (x *TlsInteractionClass) GetRequestCertificateFinish() func(*TlsInteraction, AsyncResult) TlsInteractionResult {
+func (x *TlsInteractionClassGType) GetRequestCertificateFinish() func(*TlsInteraction, AsyncResult) TlsInteractionResult {
 	if x.xRequestCertificateFinish == 0 {
 		return nil
 	}

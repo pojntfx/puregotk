@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ThemedIconClass struct {
+type ThemedIconClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *ThemedIconClass) GoPointer() uintptr {
+func (x *ThemedIconClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

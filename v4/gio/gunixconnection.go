@@ -11,13 +11,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type UnixConnectionClass struct {
+type UnixConnectionClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass SocketConnectionClass
+	ParentClass SocketConnectionClassGType
 }
 
-func (x *UnixConnectionClass) GoPointer() uintptr {
+func (x *UnixConnectionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

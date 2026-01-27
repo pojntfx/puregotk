@@ -16,11 +16,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/pango"
 )
 
-type SnapshotClass struct {
+type SnapshotClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *SnapshotClass) GoPointer() uintptr {
+func (x *SnapshotClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

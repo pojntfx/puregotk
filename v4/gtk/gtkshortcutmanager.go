@@ -14,7 +14,7 @@ import (
 //
 // Note that no function is mandatory to implement, the default implementation
 // will work fine.
-type ShortcutManagerInterface struct {
+type ShortcutManagerInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -24,13 +24,13 @@ type ShortcutManagerInterface struct {
 	xRemoveController uintptr
 }
 
-func (x *ShortcutManagerInterface) GoPointer() uintptr {
+func (x *ShortcutManagerInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideAddController sets the "add_controller" callback function.
 // Add a `GtkShortcutController` to be managed.
-func (x *ShortcutManagerInterface) OverrideAddController(cb func(ShortcutManager, *ShortcutController)) {
+func (x *ShortcutManagerInterfaceGType) OverrideAddController(cb func(ShortcutManager, *ShortcutController)) {
 	if cb == nil {
 		x.xAddController = 0
 	} else {
@@ -42,7 +42,7 @@ func (x *ShortcutManagerInterface) OverrideAddController(cb func(ShortcutManager
 
 // GetAddController gets the "add_controller" callback function.
 // Add a `GtkShortcutController` to be managed.
-func (x *ShortcutManagerInterface) GetAddController() func(ShortcutManager, *ShortcutController) {
+func (x *ShortcutManagerInterfaceGType) GetAddController() func(ShortcutManager, *ShortcutController) {
 	if x.xAddController == 0 {
 		return nil
 	}
@@ -57,7 +57,7 @@ func (x *ShortcutManagerInterface) GetAddController() func(ShortcutManager, *Sho
 // Remove a `GtkShortcutController` that had previously
 //
 //	been added
-func (x *ShortcutManagerInterface) OverrideRemoveController(cb func(ShortcutManager, *ShortcutController)) {
+func (x *ShortcutManagerInterfaceGType) OverrideRemoveController(cb func(ShortcutManager, *ShortcutController)) {
 	if cb == nil {
 		x.xRemoveController = 0
 	} else {
@@ -71,7 +71,7 @@ func (x *ShortcutManagerInterface) OverrideRemoveController(cb func(ShortcutMana
 // Remove a `GtkShortcutController` that had previously
 //
 //	been added
-func (x *ShortcutManagerInterface) GetRemoveController() func(ShortcutManager, *ShortcutController) {
+func (x *ShortcutManagerInterfaceGType) GetRemoveController() func(ShortcutManager, *ShortcutController) {
 	if x.xRemoveController == 0 {
 		return nil
 	}

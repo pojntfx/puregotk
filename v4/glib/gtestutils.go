@@ -114,11 +114,11 @@ type TestLogMsg struct {
 
 	LogType TestLogType
 
-	NStrings uint
+	NStrings uint32
 
 	Strings uintptr
 
-	NNums uint
+	NNums uint32
 
 	Nums float64
 }

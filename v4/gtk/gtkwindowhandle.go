@@ -11,13 +11,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type WindowHandleClass struct {
+type WindowHandleClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 }
 
-func (x *WindowHandleClass) GoPointer() uintptr {
+func (x *WindowHandleClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -13,10 +13,10 @@ import (
 )
 
 // Class structure for #GDBusObjectManagerClient.
-type DBusObjectManagerClientClass struct {
+type DBusObjectManagerClientClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xInterfaceProxySignal uintptr
 
@@ -25,13 +25,13 @@ type DBusObjectManagerClientClass struct {
 	Padding [8]uintptr
 }
 
-func (x *DBusObjectManagerClientClass) GoPointer() uintptr {
+func (x *DBusObjectManagerClientClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideInterfaceProxySignal sets the "interface_proxy_signal" callback function.
 // Signal class handler for the #GDBusObjectManagerClient::interface-proxy-signal signal.
-func (x *DBusObjectManagerClientClass) OverrideInterfaceProxySignal(cb func(*DBusObjectManagerClient, *DBusObjectProxy, *DBusProxy, string, string, *glib.Variant)) {
+func (x *DBusObjectManagerClientClassGType) OverrideInterfaceProxySignal(cb func(*DBusObjectManagerClient, *DBusObjectProxy, *DBusProxy, string, string, *glib.Variant)) {
 	if cb == nil {
 		x.xInterfaceProxySignal = 0
 	} else {
@@ -43,7 +43,7 @@ func (x *DBusObjectManagerClientClass) OverrideInterfaceProxySignal(cb func(*DBu
 
 // GetInterfaceProxySignal gets the "interface_proxy_signal" callback function.
 // Signal class handler for the #GDBusObjectManagerClient::interface-proxy-signal signal.
-func (x *DBusObjectManagerClientClass) GetInterfaceProxySignal() func(*DBusObjectManagerClient, *DBusObjectProxy, *DBusProxy, string, string, *glib.Variant) {
+func (x *DBusObjectManagerClientClassGType) GetInterfaceProxySignal() func(*DBusObjectManagerClient, *DBusObjectProxy, *DBusProxy, string, string, *glib.Variant) {
 	if x.xInterfaceProxySignal == 0 {
 		return nil
 	}
@@ -56,7 +56,7 @@ func (x *DBusObjectManagerClientClass) GetInterfaceProxySignal() func(*DBusObjec
 
 // OverrideInterfaceProxyPropertiesChanged sets the "interface_proxy_properties_changed" callback function.
 // Signal class handler for the #GDBusObjectManagerClient::interface-proxy-properties-changed signal.
-func (x *DBusObjectManagerClientClass) OverrideInterfaceProxyPropertiesChanged(cb func(*DBusObjectManagerClient, *DBusObjectProxy, *DBusProxy, *glib.Variant, string)) {
+func (x *DBusObjectManagerClientClassGType) OverrideInterfaceProxyPropertiesChanged(cb func(*DBusObjectManagerClient, *DBusObjectProxy, *DBusProxy, *glib.Variant, string)) {
 	if cb == nil {
 		x.xInterfaceProxyPropertiesChanged = 0
 	} else {
@@ -68,7 +68,7 @@ func (x *DBusObjectManagerClientClass) OverrideInterfaceProxyPropertiesChanged(c
 
 // GetInterfaceProxyPropertiesChanged gets the "interface_proxy_properties_changed" callback function.
 // Signal class handler for the #GDBusObjectManagerClient::interface-proxy-properties-changed signal.
-func (x *DBusObjectManagerClientClass) GetInterfaceProxyPropertiesChanged() func(*DBusObjectManagerClient, *DBusObjectProxy, *DBusProxy, *glib.Variant, string) {
+func (x *DBusObjectManagerClientClassGType) GetInterfaceProxyPropertiesChanged() func(*DBusObjectManagerClient, *DBusObjectProxy, *DBusProxy, *glib.Variant, string) {
 	if x.xInterfaceProxyPropertiesChanged == 0 {
 		return nil
 	}

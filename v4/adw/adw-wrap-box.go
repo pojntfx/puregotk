@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type WrapBoxClass struct {
+type WrapBoxClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *WrapBoxClass) GoPointer() uintptr {
+func (x *WrapBoxClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

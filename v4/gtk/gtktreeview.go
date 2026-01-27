@@ -38,10 +38,10 @@ type TreeViewRowSeparatorFunc func(uintptr, *TreeIter, uintptr) bool
 // has some similarity to strcmp() returning 0 for equal strings.
 type TreeViewSearchEqualFunc func(uintptr, int, string, *TreeIter, uintptr) bool
 
-type TreeViewClass struct {
+type TreeViewClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xRowActivated uintptr
 
@@ -76,12 +76,12 @@ type TreeViewClass struct {
 	Reserved [16]uintptr
 }
 
-func (x *TreeViewClass) GoPointer() uintptr {
+func (x *TreeViewClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideRowActivated sets the "row_activated" callback function.
-func (x *TreeViewClass) OverrideRowActivated(cb func(*TreeView, *TreePath, *TreeViewColumn)) {
+func (x *TreeViewClassGType) OverrideRowActivated(cb func(*TreeView, *TreePath, *TreeViewColumn)) {
 	if cb == nil {
 		x.xRowActivated = 0
 	} else {
@@ -92,7 +92,7 @@ func (x *TreeViewClass) OverrideRowActivated(cb func(*TreeView, *TreePath, *Tree
 }
 
 // GetRowActivated gets the "row_activated" callback function.
-func (x *TreeViewClass) GetRowActivated() func(*TreeView, *TreePath, *TreeViewColumn) {
+func (x *TreeViewClassGType) GetRowActivated() func(*TreeView, *TreePath, *TreeViewColumn) {
 	if x.xRowActivated == 0 {
 		return nil
 	}
@@ -104,7 +104,7 @@ func (x *TreeViewClass) GetRowActivated() func(*TreeView, *TreePath, *TreeViewCo
 }
 
 // OverrideTestExpandRow sets the "test_expand_row" callback function.
-func (x *TreeViewClass) OverrideTestExpandRow(cb func(*TreeView, *TreeIter, *TreePath) bool) {
+func (x *TreeViewClassGType) OverrideTestExpandRow(cb func(*TreeView, *TreeIter, *TreePath) bool) {
 	if cb == nil {
 		x.xTestExpandRow = 0
 	} else {
@@ -115,7 +115,7 @@ func (x *TreeViewClass) OverrideTestExpandRow(cb func(*TreeView, *TreeIter, *Tre
 }
 
 // GetTestExpandRow gets the "test_expand_row" callback function.
-func (x *TreeViewClass) GetTestExpandRow() func(*TreeView, *TreeIter, *TreePath) bool {
+func (x *TreeViewClassGType) GetTestExpandRow() func(*TreeView, *TreeIter, *TreePath) bool {
 	if x.xTestExpandRow == 0 {
 		return nil
 	}
@@ -127,7 +127,7 @@ func (x *TreeViewClass) GetTestExpandRow() func(*TreeView, *TreeIter, *TreePath)
 }
 
 // OverrideTestCollapseRow sets the "test_collapse_row" callback function.
-func (x *TreeViewClass) OverrideTestCollapseRow(cb func(*TreeView, *TreeIter, *TreePath) bool) {
+func (x *TreeViewClassGType) OverrideTestCollapseRow(cb func(*TreeView, *TreeIter, *TreePath) bool) {
 	if cb == nil {
 		x.xTestCollapseRow = 0
 	} else {
@@ -138,7 +138,7 @@ func (x *TreeViewClass) OverrideTestCollapseRow(cb func(*TreeView, *TreeIter, *T
 }
 
 // GetTestCollapseRow gets the "test_collapse_row" callback function.
-func (x *TreeViewClass) GetTestCollapseRow() func(*TreeView, *TreeIter, *TreePath) bool {
+func (x *TreeViewClassGType) GetTestCollapseRow() func(*TreeView, *TreeIter, *TreePath) bool {
 	if x.xTestCollapseRow == 0 {
 		return nil
 	}
@@ -150,7 +150,7 @@ func (x *TreeViewClass) GetTestCollapseRow() func(*TreeView, *TreeIter, *TreePat
 }
 
 // OverrideRowExpanded sets the "row_expanded" callback function.
-func (x *TreeViewClass) OverrideRowExpanded(cb func(*TreeView, *TreeIter, *TreePath)) {
+func (x *TreeViewClassGType) OverrideRowExpanded(cb func(*TreeView, *TreeIter, *TreePath)) {
 	if cb == nil {
 		x.xRowExpanded = 0
 	} else {
@@ -161,7 +161,7 @@ func (x *TreeViewClass) OverrideRowExpanded(cb func(*TreeView, *TreeIter, *TreeP
 }
 
 // GetRowExpanded gets the "row_expanded" callback function.
-func (x *TreeViewClass) GetRowExpanded() func(*TreeView, *TreeIter, *TreePath) {
+func (x *TreeViewClassGType) GetRowExpanded() func(*TreeView, *TreeIter, *TreePath) {
 	if x.xRowExpanded == 0 {
 		return nil
 	}
@@ -173,7 +173,7 @@ func (x *TreeViewClass) GetRowExpanded() func(*TreeView, *TreeIter, *TreePath) {
 }
 
 // OverrideRowCollapsed sets the "row_collapsed" callback function.
-func (x *TreeViewClass) OverrideRowCollapsed(cb func(*TreeView, *TreeIter, *TreePath)) {
+func (x *TreeViewClassGType) OverrideRowCollapsed(cb func(*TreeView, *TreeIter, *TreePath)) {
 	if cb == nil {
 		x.xRowCollapsed = 0
 	} else {
@@ -184,7 +184,7 @@ func (x *TreeViewClass) OverrideRowCollapsed(cb func(*TreeView, *TreeIter, *Tree
 }
 
 // GetRowCollapsed gets the "row_collapsed" callback function.
-func (x *TreeViewClass) GetRowCollapsed() func(*TreeView, *TreeIter, *TreePath) {
+func (x *TreeViewClassGType) GetRowCollapsed() func(*TreeView, *TreeIter, *TreePath) {
 	if x.xRowCollapsed == 0 {
 		return nil
 	}
@@ -196,7 +196,7 @@ func (x *TreeViewClass) GetRowCollapsed() func(*TreeView, *TreeIter, *TreePath) 
 }
 
 // OverrideColumnsChanged sets the "columns_changed" callback function.
-func (x *TreeViewClass) OverrideColumnsChanged(cb func(*TreeView)) {
+func (x *TreeViewClassGType) OverrideColumnsChanged(cb func(*TreeView)) {
 	if cb == nil {
 		x.xColumnsChanged = 0
 	} else {
@@ -207,7 +207,7 @@ func (x *TreeViewClass) OverrideColumnsChanged(cb func(*TreeView)) {
 }
 
 // GetColumnsChanged gets the "columns_changed" callback function.
-func (x *TreeViewClass) GetColumnsChanged() func(*TreeView) {
+func (x *TreeViewClassGType) GetColumnsChanged() func(*TreeView) {
 	if x.xColumnsChanged == 0 {
 		return nil
 	}
@@ -219,7 +219,7 @@ func (x *TreeViewClass) GetColumnsChanged() func(*TreeView) {
 }
 
 // OverrideCursorChanged sets the "cursor_changed" callback function.
-func (x *TreeViewClass) OverrideCursorChanged(cb func(*TreeView)) {
+func (x *TreeViewClassGType) OverrideCursorChanged(cb func(*TreeView)) {
 	if cb == nil {
 		x.xCursorChanged = 0
 	} else {
@@ -230,7 +230,7 @@ func (x *TreeViewClass) OverrideCursorChanged(cb func(*TreeView)) {
 }
 
 // GetCursorChanged gets the "cursor_changed" callback function.
-func (x *TreeViewClass) GetCursorChanged() func(*TreeView) {
+func (x *TreeViewClassGType) GetCursorChanged() func(*TreeView) {
 	if x.xCursorChanged == 0 {
 		return nil
 	}
@@ -242,7 +242,7 @@ func (x *TreeViewClass) GetCursorChanged() func(*TreeView) {
 }
 
 // OverrideMoveCursor sets the "move_cursor" callback function.
-func (x *TreeViewClass) OverrideMoveCursor(cb func(*TreeView, MovementStep, int, bool, bool) bool) {
+func (x *TreeViewClassGType) OverrideMoveCursor(cb func(*TreeView, MovementStep, int, bool, bool) bool) {
 	if cb == nil {
 		x.xMoveCursor = 0
 	} else {
@@ -253,7 +253,7 @@ func (x *TreeViewClass) OverrideMoveCursor(cb func(*TreeView, MovementStep, int,
 }
 
 // GetMoveCursor gets the "move_cursor" callback function.
-func (x *TreeViewClass) GetMoveCursor() func(*TreeView, MovementStep, int, bool, bool) bool {
+func (x *TreeViewClassGType) GetMoveCursor() func(*TreeView, MovementStep, int, bool, bool) bool {
 	if x.xMoveCursor == 0 {
 		return nil
 	}
@@ -265,7 +265,7 @@ func (x *TreeViewClass) GetMoveCursor() func(*TreeView, MovementStep, int, bool,
 }
 
 // OverrideSelectAll sets the "select_all" callback function.
-func (x *TreeViewClass) OverrideSelectAll(cb func(*TreeView) bool) {
+func (x *TreeViewClassGType) OverrideSelectAll(cb func(*TreeView) bool) {
 	if cb == nil {
 		x.xSelectAll = 0
 	} else {
@@ -276,7 +276,7 @@ func (x *TreeViewClass) OverrideSelectAll(cb func(*TreeView) bool) {
 }
 
 // GetSelectAll gets the "select_all" callback function.
-func (x *TreeViewClass) GetSelectAll() func(*TreeView) bool {
+func (x *TreeViewClassGType) GetSelectAll() func(*TreeView) bool {
 	if x.xSelectAll == 0 {
 		return nil
 	}
@@ -288,7 +288,7 @@ func (x *TreeViewClass) GetSelectAll() func(*TreeView) bool {
 }
 
 // OverrideUnselectAll sets the "unselect_all" callback function.
-func (x *TreeViewClass) OverrideUnselectAll(cb func(*TreeView) bool) {
+func (x *TreeViewClassGType) OverrideUnselectAll(cb func(*TreeView) bool) {
 	if cb == nil {
 		x.xUnselectAll = 0
 	} else {
@@ -299,7 +299,7 @@ func (x *TreeViewClass) OverrideUnselectAll(cb func(*TreeView) bool) {
 }
 
 // GetUnselectAll gets the "unselect_all" callback function.
-func (x *TreeViewClass) GetUnselectAll() func(*TreeView) bool {
+func (x *TreeViewClassGType) GetUnselectAll() func(*TreeView) bool {
 	if x.xUnselectAll == 0 {
 		return nil
 	}
@@ -311,7 +311,7 @@ func (x *TreeViewClass) GetUnselectAll() func(*TreeView) bool {
 }
 
 // OverrideSelectCursorRow sets the "select_cursor_row" callback function.
-func (x *TreeViewClass) OverrideSelectCursorRow(cb func(*TreeView, bool) bool) {
+func (x *TreeViewClassGType) OverrideSelectCursorRow(cb func(*TreeView, bool) bool) {
 	if cb == nil {
 		x.xSelectCursorRow = 0
 	} else {
@@ -322,7 +322,7 @@ func (x *TreeViewClass) OverrideSelectCursorRow(cb func(*TreeView, bool) bool) {
 }
 
 // GetSelectCursorRow gets the "select_cursor_row" callback function.
-func (x *TreeViewClass) GetSelectCursorRow() func(*TreeView, bool) bool {
+func (x *TreeViewClassGType) GetSelectCursorRow() func(*TreeView, bool) bool {
 	if x.xSelectCursorRow == 0 {
 		return nil
 	}
@@ -334,7 +334,7 @@ func (x *TreeViewClass) GetSelectCursorRow() func(*TreeView, bool) bool {
 }
 
 // OverrideToggleCursorRow sets the "toggle_cursor_row" callback function.
-func (x *TreeViewClass) OverrideToggleCursorRow(cb func(*TreeView) bool) {
+func (x *TreeViewClassGType) OverrideToggleCursorRow(cb func(*TreeView) bool) {
 	if cb == nil {
 		x.xToggleCursorRow = 0
 	} else {
@@ -345,7 +345,7 @@ func (x *TreeViewClass) OverrideToggleCursorRow(cb func(*TreeView) bool) {
 }
 
 // GetToggleCursorRow gets the "toggle_cursor_row" callback function.
-func (x *TreeViewClass) GetToggleCursorRow() func(*TreeView) bool {
+func (x *TreeViewClassGType) GetToggleCursorRow() func(*TreeView) bool {
 	if x.xToggleCursorRow == 0 {
 		return nil
 	}
@@ -357,7 +357,7 @@ func (x *TreeViewClass) GetToggleCursorRow() func(*TreeView) bool {
 }
 
 // OverrideExpandCollapseCursorRow sets the "expand_collapse_cursor_row" callback function.
-func (x *TreeViewClass) OverrideExpandCollapseCursorRow(cb func(*TreeView, bool, bool, bool) bool) {
+func (x *TreeViewClassGType) OverrideExpandCollapseCursorRow(cb func(*TreeView, bool, bool, bool) bool) {
 	if cb == nil {
 		x.xExpandCollapseCursorRow = 0
 	} else {
@@ -368,7 +368,7 @@ func (x *TreeViewClass) OverrideExpandCollapseCursorRow(cb func(*TreeView, bool,
 }
 
 // GetExpandCollapseCursorRow gets the "expand_collapse_cursor_row" callback function.
-func (x *TreeViewClass) GetExpandCollapseCursorRow() func(*TreeView, bool, bool, bool) bool {
+func (x *TreeViewClassGType) GetExpandCollapseCursorRow() func(*TreeView, bool, bool, bool) bool {
 	if x.xExpandCollapseCursorRow == 0 {
 		return nil
 	}
@@ -380,7 +380,7 @@ func (x *TreeViewClass) GetExpandCollapseCursorRow() func(*TreeView, bool, bool,
 }
 
 // OverrideSelectCursorParent sets the "select_cursor_parent" callback function.
-func (x *TreeViewClass) OverrideSelectCursorParent(cb func(*TreeView) bool) {
+func (x *TreeViewClassGType) OverrideSelectCursorParent(cb func(*TreeView) bool) {
 	if cb == nil {
 		x.xSelectCursorParent = 0
 	} else {
@@ -391,7 +391,7 @@ func (x *TreeViewClass) OverrideSelectCursorParent(cb func(*TreeView) bool) {
 }
 
 // GetSelectCursorParent gets the "select_cursor_parent" callback function.
-func (x *TreeViewClass) GetSelectCursorParent() func(*TreeView) bool {
+func (x *TreeViewClassGType) GetSelectCursorParent() func(*TreeView) bool {
 	if x.xSelectCursorParent == 0 {
 		return nil
 	}
@@ -403,7 +403,7 @@ func (x *TreeViewClass) GetSelectCursorParent() func(*TreeView) bool {
 }
 
 // OverrideStartInteractiveSearch sets the "start_interactive_search" callback function.
-func (x *TreeViewClass) OverrideStartInteractiveSearch(cb func(*TreeView) bool) {
+func (x *TreeViewClassGType) OverrideStartInteractiveSearch(cb func(*TreeView) bool) {
 	if cb == nil {
 		x.xStartInteractiveSearch = 0
 	} else {
@@ -414,7 +414,7 @@ func (x *TreeViewClass) OverrideStartInteractiveSearch(cb func(*TreeView) bool) 
 }
 
 // GetStartInteractiveSearch gets the "start_interactive_search" callback function.
-func (x *TreeViewClass) GetStartInteractiveSearch() func(*TreeView) bool {
+func (x *TreeViewClassGType) GetStartInteractiveSearch() func(*TreeView) bool {
 	if x.xStartInteractiveSearch == 0 {
 		return nil
 	}

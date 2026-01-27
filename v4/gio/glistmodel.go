@@ -12,7 +12,7 @@ import (
 )
 
 // The virtual function table for #GListModel.
-type ListModelInterface struct {
+type ListModelInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -24,13 +24,13 @@ type ListModelInterface struct {
 	xGetItem uintptr
 }
 
-func (x *ListModelInterface) GoPointer() uintptr {
+func (x *ListModelInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetItemType sets the "get_item_type" callback function.
 // the virtual function pointer for g_list_model_get_item_type()
-func (x *ListModelInterface) OverrideGetItemType(cb func(ListModel) types.GType) {
+func (x *ListModelInterfaceGType) OverrideGetItemType(cb func(ListModel) types.GType) {
 	if cb == nil {
 		x.xGetItemType = 0
 	} else {
@@ -42,7 +42,7 @@ func (x *ListModelInterface) OverrideGetItemType(cb func(ListModel) types.GType)
 
 // GetGetItemType gets the "get_item_type" callback function.
 // the virtual function pointer for g_list_model_get_item_type()
-func (x *ListModelInterface) GetGetItemType() func(ListModel) types.GType {
+func (x *ListModelInterfaceGType) GetGetItemType() func(ListModel) types.GType {
 	if x.xGetItemType == 0 {
 		return nil
 	}
@@ -55,7 +55,7 @@ func (x *ListModelInterface) GetGetItemType() func(ListModel) types.GType {
 
 // OverrideGetNItems sets the "get_n_items" callback function.
 // the virtual function pointer for g_list_model_get_n_items()
-func (x *ListModelInterface) OverrideGetNItems(cb func(ListModel) uint) {
+func (x *ListModelInterfaceGType) OverrideGetNItems(cb func(ListModel) uint) {
 	if cb == nil {
 		x.xGetNItems = 0
 	} else {
@@ -67,7 +67,7 @@ func (x *ListModelInterface) OverrideGetNItems(cb func(ListModel) uint) {
 
 // GetGetNItems gets the "get_n_items" callback function.
 // the virtual function pointer for g_list_model_get_n_items()
-func (x *ListModelInterface) GetGetNItems() func(ListModel) uint {
+func (x *ListModelInterfaceGType) GetGetNItems() func(ListModel) uint {
 	if x.xGetNItems == 0 {
 		return nil
 	}
@@ -80,7 +80,7 @@ func (x *ListModelInterface) GetGetNItems() func(ListModel) uint {
 
 // OverrideGetItem sets the "get_item" callback function.
 // the virtual function pointer for g_list_model_get_item()
-func (x *ListModelInterface) OverrideGetItem(cb func(ListModel, uint) *gobject.Object) {
+func (x *ListModelInterfaceGType) OverrideGetItem(cb func(ListModel, uint) *gobject.Object) {
 	if cb == nil {
 		x.xGetItem = 0
 	} else {
@@ -96,7 +96,7 @@ func (x *ListModelInterface) OverrideGetItem(cb func(ListModel, uint) *gobject.O
 
 // GetGetItem gets the "get_item" callback function.
 // the virtual function pointer for g_list_model_get_item()
-func (x *ListModelInterface) GetGetItem() func(ListModel, uint) *gobject.Object {
+func (x *ListModelInterfaceGType) GetGetItem() func(ListModel, uint) *gobject.Object {
 	if x.xGetItem == 0 {
 		return nil
 	}

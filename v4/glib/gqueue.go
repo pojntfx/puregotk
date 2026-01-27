@@ -18,7 +18,7 @@ type Queue struct {
 
 	Tail *List
 
-	Length uint
+	Length uint32
 }
 
 func (x *Queue) GoPointer() uintptr {

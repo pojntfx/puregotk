@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type FilenameCompleterClass struct {
+type FilenameCompleterClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xGotCompletionData uintptr
 
@@ -26,12 +26,12 @@ type FilenameCompleterClass struct {
 	xGReserved3 uintptr
 }
 
-func (x *FilenameCompleterClass) GoPointer() uintptr {
+func (x *FilenameCompleterClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGotCompletionData sets the "got_completion_data" callback function.
-func (x *FilenameCompleterClass) OverrideGotCompletionData(cb func(*FilenameCompleter)) {
+func (x *FilenameCompleterClassGType) OverrideGotCompletionData(cb func(*FilenameCompleter)) {
 	if cb == nil {
 		x.xGotCompletionData = 0
 	} else {
@@ -42,7 +42,7 @@ func (x *FilenameCompleterClass) OverrideGotCompletionData(cb func(*FilenameComp
 }
 
 // GetGotCompletionData gets the "got_completion_data" callback function.
-func (x *FilenameCompleterClass) GetGotCompletionData() func(*FilenameCompleter) {
+func (x *FilenameCompleterClassGType) GetGotCompletionData() func(*FilenameCompleter) {
 	if x.xGotCompletionData == 0 {
 		return nil
 	}
@@ -54,7 +54,7 @@ func (x *FilenameCompleterClass) GetGotCompletionData() func(*FilenameCompleter)
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *FilenameCompleterClass) OverrideGReserved1(cb func()) {
+func (x *FilenameCompleterClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -65,7 +65,7 @@ func (x *FilenameCompleterClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *FilenameCompleterClass) GetGReserved1() func() {
+func (x *FilenameCompleterClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -77,7 +77,7 @@ func (x *FilenameCompleterClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *FilenameCompleterClass) OverrideGReserved2(cb func()) {
+func (x *FilenameCompleterClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -88,7 +88,7 @@ func (x *FilenameCompleterClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *FilenameCompleterClass) GetGReserved2() func() {
+func (x *FilenameCompleterClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}
@@ -100,7 +100,7 @@ func (x *FilenameCompleterClass) GetGReserved2() func() {
 }
 
 // OverrideGReserved3 sets the "_g_reserved3" callback function.
-func (x *FilenameCompleterClass) OverrideGReserved3(cb func()) {
+func (x *FilenameCompleterClassGType) OverrideGReserved3(cb func()) {
 	if cb == nil {
 		x.xGReserved3 = 0
 	} else {
@@ -111,7 +111,7 @@ func (x *FilenameCompleterClass) OverrideGReserved3(cb func()) {
 }
 
 // GetGReserved3 gets the "_g_reserved3" callback function.
-func (x *FilenameCompleterClass) GetGReserved3() func() {
+func (x *FilenameCompleterClassGType) GetGReserved3() func() {
 	if x.xGReserved3 == 0 {
 		return nil
 	}

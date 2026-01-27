@@ -12,13 +12,13 @@ import (
 )
 
 // vtable for a #GDtlsServerConnection implementation.
-type DtlsServerConnectionInterface struct {
+type DtlsServerConnectionInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
 }
 
-func (x *DtlsServerConnectionInterface) GoPointer() uintptr {
+func (x *DtlsServerConnectionInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -13,10 +13,10 @@ import (
 )
 
 // Class structure for #GSettingsBackend.
-type SettingsBackendClass struct {
+type SettingsBackendClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xRead uintptr
 
@@ -41,13 +41,13 @@ type SettingsBackendClass struct {
 	Padding [23]uintptr
 }
 
-func (x *SettingsBackendClass) GoPointer() uintptr {
+func (x *SettingsBackendClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideRead sets the "read" callback function.
 // virtual method to read a key's value
-func (x *SettingsBackendClass) OverrideRead(cb func(*SettingsBackend, string, *glib.VariantType, bool) *glib.Variant) {
+func (x *SettingsBackendClassGType) OverrideRead(cb func(*SettingsBackend, string, *glib.VariantType, bool) *glib.Variant) {
 	if cb == nil {
 		x.xRead = 0
 	} else {
@@ -59,7 +59,7 @@ func (x *SettingsBackendClass) OverrideRead(cb func(*SettingsBackend, string, *g
 
 // GetRead gets the "read" callback function.
 // virtual method to read a key's value
-func (x *SettingsBackendClass) GetRead() func(*SettingsBackend, string, *glib.VariantType, bool) *glib.Variant {
+func (x *SettingsBackendClassGType) GetRead() func(*SettingsBackend, string, *glib.VariantType, bool) *glib.Variant {
 	if x.xRead == 0 {
 		return nil
 	}
@@ -72,7 +72,7 @@ func (x *SettingsBackendClass) GetRead() func(*SettingsBackend, string, *glib.Va
 
 // OverrideGetWritable sets the "get_writable" callback function.
 // virtual method to get if a key is writable
-func (x *SettingsBackendClass) OverrideGetWritable(cb func(*SettingsBackend, string) bool) {
+func (x *SettingsBackendClassGType) OverrideGetWritable(cb func(*SettingsBackend, string) bool) {
 	if cb == nil {
 		x.xGetWritable = 0
 	} else {
@@ -84,7 +84,7 @@ func (x *SettingsBackendClass) OverrideGetWritable(cb func(*SettingsBackend, str
 
 // GetGetWritable gets the "get_writable" callback function.
 // virtual method to get if a key is writable
-func (x *SettingsBackendClass) GetGetWritable() func(*SettingsBackend, string) bool {
+func (x *SettingsBackendClassGType) GetGetWritable() func(*SettingsBackend, string) bool {
 	if x.xGetWritable == 0 {
 		return nil
 	}
@@ -97,7 +97,7 @@ func (x *SettingsBackendClass) GetGetWritable() func(*SettingsBackend, string) b
 
 // OverrideWrite sets the "write" callback function.
 // virtual method to change key's value
-func (x *SettingsBackendClass) OverrideWrite(cb func(*SettingsBackend, string, *glib.Variant, uintptr) bool) {
+func (x *SettingsBackendClassGType) OverrideWrite(cb func(*SettingsBackend, string, *glib.Variant, uintptr) bool) {
 	if cb == nil {
 		x.xWrite = 0
 	} else {
@@ -109,7 +109,7 @@ func (x *SettingsBackendClass) OverrideWrite(cb func(*SettingsBackend, string, *
 
 // GetWrite gets the "write" callback function.
 // virtual method to change key's value
-func (x *SettingsBackendClass) GetWrite() func(*SettingsBackend, string, *glib.Variant, uintptr) bool {
+func (x *SettingsBackendClassGType) GetWrite() func(*SettingsBackend, string, *glib.Variant, uintptr) bool {
 	if x.xWrite == 0 {
 		return nil
 	}
@@ -122,7 +122,7 @@ func (x *SettingsBackendClass) GetWrite() func(*SettingsBackend, string, *glib.V
 
 // OverrideWriteTree sets the "write_tree" callback function.
 // virtual method to change a tree of keys
-func (x *SettingsBackendClass) OverrideWriteTree(cb func(*SettingsBackend, *glib.Tree, uintptr) bool) {
+func (x *SettingsBackendClassGType) OverrideWriteTree(cb func(*SettingsBackend, *glib.Tree, uintptr) bool) {
 	if cb == nil {
 		x.xWriteTree = 0
 	} else {
@@ -134,7 +134,7 @@ func (x *SettingsBackendClass) OverrideWriteTree(cb func(*SettingsBackend, *glib
 
 // GetWriteTree gets the "write_tree" callback function.
 // virtual method to change a tree of keys
-func (x *SettingsBackendClass) GetWriteTree() func(*SettingsBackend, *glib.Tree, uintptr) bool {
+func (x *SettingsBackendClassGType) GetWriteTree() func(*SettingsBackend, *glib.Tree, uintptr) bool {
 	if x.xWriteTree == 0 {
 		return nil
 	}
@@ -147,7 +147,7 @@ func (x *SettingsBackendClass) GetWriteTree() func(*SettingsBackend, *glib.Tree,
 
 // OverrideReset sets the "reset" callback function.
 // virtual method to reset state
-func (x *SettingsBackendClass) OverrideReset(cb func(*SettingsBackend, string, uintptr)) {
+func (x *SettingsBackendClassGType) OverrideReset(cb func(*SettingsBackend, string, uintptr)) {
 	if cb == nil {
 		x.xReset = 0
 	} else {
@@ -159,7 +159,7 @@ func (x *SettingsBackendClass) OverrideReset(cb func(*SettingsBackend, string, u
 
 // GetReset gets the "reset" callback function.
 // virtual method to reset state
-func (x *SettingsBackendClass) GetReset() func(*SettingsBackend, string, uintptr) {
+func (x *SettingsBackendClassGType) GetReset() func(*SettingsBackend, string, uintptr) {
 	if x.xReset == 0 {
 		return nil
 	}
@@ -172,7 +172,7 @@ func (x *SettingsBackendClass) GetReset() func(*SettingsBackend, string, uintptr
 
 // OverrideSubscribe sets the "subscribe" callback function.
 // virtual method to subscribe to key changes
-func (x *SettingsBackendClass) OverrideSubscribe(cb func(*SettingsBackend, string)) {
+func (x *SettingsBackendClassGType) OverrideSubscribe(cb func(*SettingsBackend, string)) {
 	if cb == nil {
 		x.xSubscribe = 0
 	} else {
@@ -184,7 +184,7 @@ func (x *SettingsBackendClass) OverrideSubscribe(cb func(*SettingsBackend, strin
 
 // GetSubscribe gets the "subscribe" callback function.
 // virtual method to subscribe to key changes
-func (x *SettingsBackendClass) GetSubscribe() func(*SettingsBackend, string) {
+func (x *SettingsBackendClassGType) GetSubscribe() func(*SettingsBackend, string) {
 	if x.xSubscribe == 0 {
 		return nil
 	}
@@ -197,7 +197,7 @@ func (x *SettingsBackendClass) GetSubscribe() func(*SettingsBackend, string) {
 
 // OverrideUnsubscribe sets the "unsubscribe" callback function.
 // virtual method to unsubscribe to key changes
-func (x *SettingsBackendClass) OverrideUnsubscribe(cb func(*SettingsBackend, string)) {
+func (x *SettingsBackendClassGType) OverrideUnsubscribe(cb func(*SettingsBackend, string)) {
 	if cb == nil {
 		x.xUnsubscribe = 0
 	} else {
@@ -209,7 +209,7 @@ func (x *SettingsBackendClass) OverrideUnsubscribe(cb func(*SettingsBackend, str
 
 // GetUnsubscribe gets the "unsubscribe" callback function.
 // virtual method to unsubscribe to key changes
-func (x *SettingsBackendClass) GetUnsubscribe() func(*SettingsBackend, string) {
+func (x *SettingsBackendClassGType) GetUnsubscribe() func(*SettingsBackend, string) {
 	if x.xUnsubscribe == 0 {
 		return nil
 	}
@@ -222,7 +222,7 @@ func (x *SettingsBackendClass) GetUnsubscribe() func(*SettingsBackend, string) {
 
 // OverrideSync sets the "sync" callback function.
 // virtual method to sync state
-func (x *SettingsBackendClass) OverrideSync(cb func(*SettingsBackend)) {
+func (x *SettingsBackendClassGType) OverrideSync(cb func(*SettingsBackend)) {
 	if cb == nil {
 		x.xSync = 0
 	} else {
@@ -234,7 +234,7 @@ func (x *SettingsBackendClass) OverrideSync(cb func(*SettingsBackend)) {
 
 // GetSync gets the "sync" callback function.
 // virtual method to sync state
-func (x *SettingsBackendClass) GetSync() func(*SettingsBackend) {
+func (x *SettingsBackendClassGType) GetSync() func(*SettingsBackend) {
 	if x.xSync == 0 {
 		return nil
 	}
@@ -247,7 +247,7 @@ func (x *SettingsBackendClass) GetSync() func(*SettingsBackend) {
 
 // OverrideGetPermission sets the "get_permission" callback function.
 // virtual method to get permission of a key
-func (x *SettingsBackendClass) OverrideGetPermission(cb func(*SettingsBackend, string) *Permission) {
+func (x *SettingsBackendClassGType) OverrideGetPermission(cb func(*SettingsBackend, string) *Permission) {
 	if cb == nil {
 		x.xGetPermission = 0
 	} else {
@@ -263,7 +263,7 @@ func (x *SettingsBackendClass) OverrideGetPermission(cb func(*SettingsBackend, s
 
 // GetGetPermission gets the "get_permission" callback function.
 // virtual method to get permission of a key
-func (x *SettingsBackendClass) GetGetPermission() func(*SettingsBackend, string) *Permission {
+func (x *SettingsBackendClassGType) GetGetPermission() func(*SettingsBackend, string) *Permission {
 	if x.xGetPermission == 0 {
 		return nil
 	}
@@ -282,7 +282,7 @@ func (x *SettingsBackendClass) GetGetPermission() func(*SettingsBackend, string)
 
 // OverrideReadUserValue sets the "read_user_value" callback function.
 // virtual method to read user's key value
-func (x *SettingsBackendClass) OverrideReadUserValue(cb func(*SettingsBackend, string, *glib.VariantType) *glib.Variant) {
+func (x *SettingsBackendClassGType) OverrideReadUserValue(cb func(*SettingsBackend, string, *glib.VariantType) *glib.Variant) {
 	if cb == nil {
 		x.xReadUserValue = 0
 	} else {
@@ -294,7 +294,7 @@ func (x *SettingsBackendClass) OverrideReadUserValue(cb func(*SettingsBackend, s
 
 // GetReadUserValue gets the "read_user_value" callback function.
 // virtual method to read user's key value
-func (x *SettingsBackendClass) GetReadUserValue() func(*SettingsBackend, string, *glib.VariantType) *glib.Variant {
+func (x *SettingsBackendClassGType) GetReadUserValue() func(*SettingsBackend, string, *glib.VariantType) *glib.Variant {
 	if x.xReadUserValue == 0 {
 		return nil
 	}

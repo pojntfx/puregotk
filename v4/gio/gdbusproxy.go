@@ -13,10 +13,10 @@ import (
 )
 
 // Class structure for #GDBusProxy.
-type DBusProxyClass struct {
+type DBusProxyClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xGPropertiesChanged uintptr
 
@@ -25,13 +25,13 @@ type DBusProxyClass struct {
 	Padding [32]uintptr
 }
 
-func (x *DBusProxyClass) GoPointer() uintptr {
+func (x *DBusProxyClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGPropertiesChanged sets the "g_properties_changed" callback function.
 // Signal class handler for the #GDBusProxy::g-properties-changed signal.
-func (x *DBusProxyClass) OverrideGPropertiesChanged(cb func(*DBusProxy, *glib.Variant, string)) {
+func (x *DBusProxyClassGType) OverrideGPropertiesChanged(cb func(*DBusProxy, *glib.Variant, string)) {
 	if cb == nil {
 		x.xGPropertiesChanged = 0
 	} else {
@@ -43,7 +43,7 @@ func (x *DBusProxyClass) OverrideGPropertiesChanged(cb func(*DBusProxy, *glib.Va
 
 // GetGPropertiesChanged gets the "g_properties_changed" callback function.
 // Signal class handler for the #GDBusProxy::g-properties-changed signal.
-func (x *DBusProxyClass) GetGPropertiesChanged() func(*DBusProxy, *glib.Variant, string) {
+func (x *DBusProxyClassGType) GetGPropertiesChanged() func(*DBusProxy, *glib.Variant, string) {
 	if x.xGPropertiesChanged == 0 {
 		return nil
 	}
@@ -56,7 +56,7 @@ func (x *DBusProxyClass) GetGPropertiesChanged() func(*DBusProxy, *glib.Variant,
 
 // OverrideGSignal sets the "g_signal" callback function.
 // Signal class handler for the #GDBusProxy::g-signal signal.
-func (x *DBusProxyClass) OverrideGSignal(cb func(*DBusProxy, string, string, *glib.Variant)) {
+func (x *DBusProxyClassGType) OverrideGSignal(cb func(*DBusProxy, string, string, *glib.Variant)) {
 	if cb == nil {
 		x.xGSignal = 0
 	} else {
@@ -68,7 +68,7 @@ func (x *DBusProxyClass) OverrideGSignal(cb func(*DBusProxy, string, string, *gl
 
 // GetGSignal gets the "g_signal" callback function.
 // Signal class handler for the #GDBusProxy::g-signal signal.
-func (x *DBusProxyClass) GetGSignal() func(*DBusProxy, string, string, *glib.Variant) {
+func (x *DBusProxyClassGType) GetGSignal() func(*DBusProxy, string, string, *glib.Variant) {
 	if x.xGSignal == 0 {
 		return nil
 	}

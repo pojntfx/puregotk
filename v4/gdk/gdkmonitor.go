@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type MonitorClass struct {
+type MonitorClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *MonitorClass) GoPointer() uintptr {
+func (x *MonitorClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

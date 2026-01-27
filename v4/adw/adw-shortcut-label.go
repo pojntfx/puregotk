@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type ShortcutLabelClass struct {
+type ShortcutLabelClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *ShortcutLabelClass) GoPointer() uintptr {
+func (x *ShortcutLabelClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -86,7 +86,7 @@ func (x *ShortcutLabelClass) GoPointer() uintptr {
 //
 // ## Accessibility
 //
-// `AdwShortcutLabel` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
+// `AdwShortcutLabel` uses the `GTK_ACCESSIBLE_ROLE_LABEL` role.
 //
 // See also: [class@ShortcutsDialog].
 type ShortcutLabel struct {

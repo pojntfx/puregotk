@@ -20,13 +20,13 @@ import (
 // used with.
 type MapListModelMapFunc func(uintptr, uintptr) uintptr
 
-type MapListModelClass struct {
+type MapListModelClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *MapListModelClass) GoPointer() uintptr {
+func (x *MapListModelClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

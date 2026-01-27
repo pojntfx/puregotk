@@ -13,10 +13,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ApplicationClass struct {
+type ApplicationClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gio.ApplicationClass
+	ParentClass gio.ApplicationClassGType
 
 	xWindowAdded uintptr
 
@@ -25,7 +25,7 @@ type ApplicationClass struct {
 	Padding [8]uintptr
 }
 
-func (x *ApplicationClass) GoPointer() uintptr {
+func (x *ApplicationClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -33,7 +33,7 @@ func (x *ApplicationClass) GoPointer() uintptr {
 // Signal emitted when a `GtkWindow` is added to
 //
 //	application through gtk_application_add_window().
-func (x *ApplicationClass) OverrideWindowAdded(cb func(*Application, *Window)) {
+func (x *ApplicationClassGType) OverrideWindowAdded(cb func(*Application, *Window)) {
 	if cb == nil {
 		x.xWindowAdded = 0
 	} else {
@@ -47,7 +47,7 @@ func (x *ApplicationClass) OverrideWindowAdded(cb func(*Application, *Window)) {
 // Signal emitted when a `GtkWindow` is added to
 //
 //	application through gtk_application_add_window().
-func (x *ApplicationClass) GetWindowAdded() func(*Application, *Window) {
+func (x *ApplicationClassGType) GetWindowAdded() func(*Application, *Window) {
 	if x.xWindowAdded == 0 {
 		return nil
 	}
@@ -63,7 +63,7 @@ func (x *ApplicationClass) GetWindowAdded() func(*Application, *Window) {
 //
 //	application, either as a side-effect of being destroyed or
 //	explicitly through gtk_application_remove_window().
-func (x *ApplicationClass) OverrideWindowRemoved(cb func(*Application, *Window)) {
+func (x *ApplicationClassGType) OverrideWindowRemoved(cb func(*Application, *Window)) {
 	if cb == nil {
 		x.xWindowRemoved = 0
 	} else {
@@ -78,7 +78,7 @@ func (x *ApplicationClass) OverrideWindowRemoved(cb func(*Application, *Window))
 //
 //	application, either as a side-effect of being destroyed or
 //	explicitly through gtk_application_remove_window().
-func (x *ApplicationClass) GetWindowRemoved() func(*Application, *Window) {
+func (x *ApplicationClassGType) GetWindowRemoved() func(*Application, *Window) {
 	if x.xWindowRemoved == 0 {
 		return nil
 	}

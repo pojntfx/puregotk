@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type FileChooserNativeClass struct {
+type FileChooserNativeClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass NativeDialogClass
+	ParentClass NativeDialogClassGType
 }
 
-func (x *FileChooserNativeClass) GoPointer() uintptr {
+func (x *FileChooserNativeClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

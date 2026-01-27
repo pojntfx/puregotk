@@ -11,13 +11,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type GraphicsOffloadClass struct {
+type GraphicsOffloadClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 }
 
-func (x *GraphicsOffloadClass) GoPointer() uintptr {
+func (x *GraphicsOffloadClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

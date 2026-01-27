@@ -11,11 +11,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ColumnViewRowClass struct {
+type ColumnViewRowClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *ColumnViewRowClass) GoPointer() uintptr {
+func (x *ColumnViewRowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

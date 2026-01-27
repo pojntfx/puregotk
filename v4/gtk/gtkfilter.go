@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type FilterClass struct {
+type FilterClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xMatch uintptr
 
@@ -38,12 +38,12 @@ type FilterClass struct {
 	xGtkReserved8 uintptr
 }
 
-func (x *FilterClass) GoPointer() uintptr {
+func (x *FilterClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideMatch sets the "match" callback function.
-func (x *FilterClass) OverrideMatch(cb func(*Filter, *gobject.Object) bool) {
+func (x *FilterClassGType) OverrideMatch(cb func(*Filter, *gobject.Object) bool) {
 	if cb == nil {
 		x.xMatch = 0
 	} else {
@@ -54,7 +54,7 @@ func (x *FilterClass) OverrideMatch(cb func(*Filter, *gobject.Object) bool) {
 }
 
 // GetMatch gets the "match" callback function.
-func (x *FilterClass) GetMatch() func(*Filter, *gobject.Object) bool {
+func (x *FilterClassGType) GetMatch() func(*Filter, *gobject.Object) bool {
 	if x.xMatch == 0 {
 		return nil
 	}
@@ -66,7 +66,7 @@ func (x *FilterClass) GetMatch() func(*Filter, *gobject.Object) bool {
 }
 
 // OverrideGetStrictness sets the "get_strictness" callback function.
-func (x *FilterClass) OverrideGetStrictness(cb func(*Filter) FilterMatch) {
+func (x *FilterClassGType) OverrideGetStrictness(cb func(*Filter) FilterMatch) {
 	if cb == nil {
 		x.xGetStrictness = 0
 	} else {
@@ -77,7 +77,7 @@ func (x *FilterClass) OverrideGetStrictness(cb func(*Filter) FilterMatch) {
 }
 
 // GetGetStrictness gets the "get_strictness" callback function.
-func (x *FilterClass) GetGetStrictness() func(*Filter) FilterMatch {
+func (x *FilterClassGType) GetGetStrictness() func(*Filter) FilterMatch {
 	if x.xGetStrictness == 0 {
 		return nil
 	}
@@ -89,7 +89,7 @@ func (x *FilterClass) GetGetStrictness() func(*Filter) FilterMatch {
 }
 
 // OverrideGtkReserved1 sets the "_gtk_reserved1" callback function.
-func (x *FilterClass) OverrideGtkReserved1(cb func()) {
+func (x *FilterClassGType) OverrideGtkReserved1(cb func()) {
 	if cb == nil {
 		x.xGtkReserved1 = 0
 	} else {
@@ -100,7 +100,7 @@ func (x *FilterClass) OverrideGtkReserved1(cb func()) {
 }
 
 // GetGtkReserved1 gets the "_gtk_reserved1" callback function.
-func (x *FilterClass) GetGtkReserved1() func() {
+func (x *FilterClassGType) GetGtkReserved1() func() {
 	if x.xGtkReserved1 == 0 {
 		return nil
 	}
@@ -112,7 +112,7 @@ func (x *FilterClass) GetGtkReserved1() func() {
 }
 
 // OverrideGtkReserved2 sets the "_gtk_reserved2" callback function.
-func (x *FilterClass) OverrideGtkReserved2(cb func()) {
+func (x *FilterClassGType) OverrideGtkReserved2(cb func()) {
 	if cb == nil {
 		x.xGtkReserved2 = 0
 	} else {
@@ -123,7 +123,7 @@ func (x *FilterClass) OverrideGtkReserved2(cb func()) {
 }
 
 // GetGtkReserved2 gets the "_gtk_reserved2" callback function.
-func (x *FilterClass) GetGtkReserved2() func() {
+func (x *FilterClassGType) GetGtkReserved2() func() {
 	if x.xGtkReserved2 == 0 {
 		return nil
 	}
@@ -135,7 +135,7 @@ func (x *FilterClass) GetGtkReserved2() func() {
 }
 
 // OverrideGtkReserved3 sets the "_gtk_reserved3" callback function.
-func (x *FilterClass) OverrideGtkReserved3(cb func()) {
+func (x *FilterClassGType) OverrideGtkReserved3(cb func()) {
 	if cb == nil {
 		x.xGtkReserved3 = 0
 	} else {
@@ -146,7 +146,7 @@ func (x *FilterClass) OverrideGtkReserved3(cb func()) {
 }
 
 // GetGtkReserved3 gets the "_gtk_reserved3" callback function.
-func (x *FilterClass) GetGtkReserved3() func() {
+func (x *FilterClassGType) GetGtkReserved3() func() {
 	if x.xGtkReserved3 == 0 {
 		return nil
 	}
@@ -158,7 +158,7 @@ func (x *FilterClass) GetGtkReserved3() func() {
 }
 
 // OverrideGtkReserved4 sets the "_gtk_reserved4" callback function.
-func (x *FilterClass) OverrideGtkReserved4(cb func()) {
+func (x *FilterClassGType) OverrideGtkReserved4(cb func()) {
 	if cb == nil {
 		x.xGtkReserved4 = 0
 	} else {
@@ -169,7 +169,7 @@ func (x *FilterClass) OverrideGtkReserved4(cb func()) {
 }
 
 // GetGtkReserved4 gets the "_gtk_reserved4" callback function.
-func (x *FilterClass) GetGtkReserved4() func() {
+func (x *FilterClassGType) GetGtkReserved4() func() {
 	if x.xGtkReserved4 == 0 {
 		return nil
 	}
@@ -181,7 +181,7 @@ func (x *FilterClass) GetGtkReserved4() func() {
 }
 
 // OverrideGtkReserved5 sets the "_gtk_reserved5" callback function.
-func (x *FilterClass) OverrideGtkReserved5(cb func()) {
+func (x *FilterClassGType) OverrideGtkReserved5(cb func()) {
 	if cb == nil {
 		x.xGtkReserved5 = 0
 	} else {
@@ -192,7 +192,7 @@ func (x *FilterClass) OverrideGtkReserved5(cb func()) {
 }
 
 // GetGtkReserved5 gets the "_gtk_reserved5" callback function.
-func (x *FilterClass) GetGtkReserved5() func() {
+func (x *FilterClassGType) GetGtkReserved5() func() {
 	if x.xGtkReserved5 == 0 {
 		return nil
 	}
@@ -204,7 +204,7 @@ func (x *FilterClass) GetGtkReserved5() func() {
 }
 
 // OverrideGtkReserved6 sets the "_gtk_reserved6" callback function.
-func (x *FilterClass) OverrideGtkReserved6(cb func()) {
+func (x *FilterClassGType) OverrideGtkReserved6(cb func()) {
 	if cb == nil {
 		x.xGtkReserved6 = 0
 	} else {
@@ -215,7 +215,7 @@ func (x *FilterClass) OverrideGtkReserved6(cb func()) {
 }
 
 // GetGtkReserved6 gets the "_gtk_reserved6" callback function.
-func (x *FilterClass) GetGtkReserved6() func() {
+func (x *FilterClassGType) GetGtkReserved6() func() {
 	if x.xGtkReserved6 == 0 {
 		return nil
 	}
@@ -227,7 +227,7 @@ func (x *FilterClass) GetGtkReserved6() func() {
 }
 
 // OverrideGtkReserved7 sets the "_gtk_reserved7" callback function.
-func (x *FilterClass) OverrideGtkReserved7(cb func()) {
+func (x *FilterClassGType) OverrideGtkReserved7(cb func()) {
 	if cb == nil {
 		x.xGtkReserved7 = 0
 	} else {
@@ -238,7 +238,7 @@ func (x *FilterClass) OverrideGtkReserved7(cb func()) {
 }
 
 // GetGtkReserved7 gets the "_gtk_reserved7" callback function.
-func (x *FilterClass) GetGtkReserved7() func() {
+func (x *FilterClassGType) GetGtkReserved7() func() {
 	if x.xGtkReserved7 == 0 {
 		return nil
 	}
@@ -250,7 +250,7 @@ func (x *FilterClass) GetGtkReserved7() func() {
 }
 
 // OverrideGtkReserved8 sets the "_gtk_reserved8" callback function.
-func (x *FilterClass) OverrideGtkReserved8(cb func()) {
+func (x *FilterClassGType) OverrideGtkReserved8(cb func()) {
 	if cb == nil {
 		x.xGtkReserved8 = 0
 	} else {
@@ -261,7 +261,7 @@ func (x *FilterClass) OverrideGtkReserved8(cb func()) {
 }
 
 // GetGtkReserved8 gets the "_gtk_reserved8" callback function.
-func (x *FilterClass) GetGtkReserved8() func() {
+func (x *FilterClassGType) GetGtkReserved8() func() {
 	if x.xGtkReserved8 == 0 {
 		return nil
 	}

@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type EmblemClass struct {
+type EmblemClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *EmblemClass) GoPointer() uintptr {
+func (x *EmblemClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

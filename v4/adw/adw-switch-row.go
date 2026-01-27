@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type SwitchRowClass struct {
+type SwitchRowClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass ActionRowClass
+	ParentClass ActionRowClassGType
 }
 
-func (x *SwitchRowClass) GoPointer() uintptr {
+func (x *SwitchRowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

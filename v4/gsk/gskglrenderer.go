@@ -10,11 +10,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type GLRendererClass struct {
+type GLRendererClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *GLRendererClass) GoPointer() uintptr {
+func (x *GLRendererClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

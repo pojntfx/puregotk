@@ -12,7 +12,7 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type CellEditableIface struct {
+type CellEditableIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -24,7 +24,7 @@ type CellEditableIface struct {
 	xStartEditing uintptr
 }
 
-func (x *CellEditableIface) GoPointer() uintptr {
+func (x *CellEditableIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -32,7 +32,7 @@ func (x *CellEditableIface) GoPointer() uintptr {
 // Signal is a sign for the cell renderer to update its
 //
 //	value from the cell_editable.
-func (x *CellEditableIface) OverrideEditingDone(cb func(CellEditable)) {
+func (x *CellEditableIfaceGType) OverrideEditingDone(cb func(CellEditable)) {
 	if cb == nil {
 		x.xEditingDone = 0
 	} else {
@@ -46,7 +46,7 @@ func (x *CellEditableIface) OverrideEditingDone(cb func(CellEditable)) {
 // Signal is a sign for the cell renderer to update its
 //
 //	value from the cell_editable.
-func (x *CellEditableIface) GetEditingDone() func(CellEditable) {
+func (x *CellEditableIfaceGType) GetEditingDone() func(CellEditable) {
 	if x.xEditingDone == 0 {
 		return nil
 	}
@@ -61,7 +61,7 @@ func (x *CellEditableIface) GetEditingDone() func(CellEditable) {
 // Signal is meant to indicate that the cell is
 //
 //	finished editing, and the widget may now be destroyed.
-func (x *CellEditableIface) OverrideRemoveWidget(cb func(CellEditable)) {
+func (x *CellEditableIfaceGType) OverrideRemoveWidget(cb func(CellEditable)) {
 	if cb == nil {
 		x.xRemoveWidget = 0
 	} else {
@@ -75,7 +75,7 @@ func (x *CellEditableIface) OverrideRemoveWidget(cb func(CellEditable)) {
 // Signal is meant to indicate that the cell is
 //
 //	finished editing, and the widget may now be destroyed.
-func (x *CellEditableIface) GetRemoveWidget() func(CellEditable) {
+func (x *CellEditableIfaceGType) GetRemoveWidget() func(CellEditable) {
 	if x.xRemoveWidget == 0 {
 		return nil
 	}
@@ -88,7 +88,7 @@ func (x *CellEditableIface) GetRemoveWidget() func(CellEditable) {
 
 // OverrideStartEditing sets the "start_editing" callback function.
 // Begins editing on a cell_editable.
-func (x *CellEditableIface) OverrideStartEditing(cb func(CellEditable, *gdk.Event)) {
+func (x *CellEditableIfaceGType) OverrideStartEditing(cb func(CellEditable, *gdk.Event)) {
 	if cb == nil {
 		x.xStartEditing = 0
 	} else {
@@ -100,7 +100,7 @@ func (x *CellEditableIface) OverrideStartEditing(cb func(CellEditable, *gdk.Even
 
 // GetStartEditing gets the "start_editing" callback function.
 // Begins editing on a cell_editable.
-func (x *CellEditableIface) GetStartEditing() func(CellEditable, *gdk.Event) {
+func (x *CellEditableIfaceGType) GetStartEditing() func(CellEditable, *gdk.Event) {
 	if x.xStartEditing == 0 {
 		return nil
 	}

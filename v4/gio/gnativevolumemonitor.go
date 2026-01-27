@@ -9,20 +9,20 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type NativeVolumeMonitorClass struct {
+type NativeVolumeMonitorClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass VolumeMonitorClass
+	ParentClass VolumeMonitorClassGType
 
 	xGetMountForMountPath uintptr
 }
 
-func (x *NativeVolumeMonitorClass) GoPointer() uintptr {
+func (x *NativeVolumeMonitorClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetMountForMountPath sets the "get_mount_for_mount_path" callback function.
-func (x *NativeVolumeMonitorClass) OverrideGetMountForMountPath(cb func(string, *Cancellable) *MountBase) {
+func (x *NativeVolumeMonitorClassGType) OverrideGetMountForMountPath(cb func(string, *Cancellable) *MountBase) {
 	if cb == nil {
 		x.xGetMountForMountPath = 0
 	} else {
@@ -37,7 +37,7 @@ func (x *NativeVolumeMonitorClass) OverrideGetMountForMountPath(cb func(string, 
 }
 
 // GetGetMountForMountPath gets the "get_mount_for_mount_path" callback function.
-func (x *NativeVolumeMonitorClass) GetGetMountForMountPath() func(string, *Cancellable) *MountBase {
+func (x *NativeVolumeMonitorClassGType) GetGetMountForMountPath() func(string, *Cancellable) *MountBase {
 	if x.xGetMountForMountPath == 0 {
 		return nil
 	}

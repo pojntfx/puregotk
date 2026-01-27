@@ -19,22 +19,22 @@ import (
 // and must not call any widget functions that cause changes.
 type DrawingAreaDrawFunc func(uintptr, *cairo.Context, int, int, uintptr)
 
-type DrawingAreaClass struct {
+type DrawingAreaClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xResize uintptr
 
 	Padding [8]uintptr
 }
 
-func (x *DrawingAreaClass) GoPointer() uintptr {
+func (x *DrawingAreaClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideResize sets the "resize" callback function.
-func (x *DrawingAreaClass) OverrideResize(cb func(*DrawingArea, int, int)) {
+func (x *DrawingAreaClassGType) OverrideResize(cb func(*DrawingArea, int, int)) {
 	if cb == nil {
 		x.xResize = 0
 	} else {
@@ -45,7 +45,7 @@ func (x *DrawingAreaClass) OverrideResize(cb func(*DrawingArea, int, int)) {
 }
 
 // GetResize gets the "resize" callback function.
-func (x *DrawingAreaClass) GetResize() func(*DrawingArea, int, int) {
+func (x *DrawingAreaClassGType) GetResize() func(*DrawingArea, int, int) {
 	if x.xResize == 0 {
 		return nil
 	}

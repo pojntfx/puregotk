@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type DropDownClass struct {
+type DropDownClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 }
 
-func (x *DropDownClass) GoPointer() uintptr {
+func (x *DropDownClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

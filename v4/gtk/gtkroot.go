@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type RootInterface struct {
+type RootInterfaceGType struct {
 	_ structs.HostLayout
 }
 
-func (x *RootInterface) GoPointer() uintptr {
+func (x *RootInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -14,7 +14,7 @@ import (
 
 // Provides an interface for asynchronous initializing object such that
 // initialization may fail.
-type AsyncInitableIface struct {
+type AsyncInitableIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -24,13 +24,13 @@ type AsyncInitableIface struct {
 	xInitFinish uintptr
 }
 
-func (x *AsyncInitableIface) GoPointer() uintptr {
+func (x *AsyncInitableIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideInitAsync sets the "init_async" callback function.
 // Starts initialization of the object.
-func (x *AsyncInitableIface) OverrideInitAsync(cb func(AsyncInitable, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *AsyncInitableIfaceGType) OverrideInitAsync(cb func(AsyncInitable, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xInitAsync = 0
 	} else {
@@ -42,7 +42,7 @@ func (x *AsyncInitableIface) OverrideInitAsync(cb func(AsyncInitable, int, *Canc
 
 // GetInitAsync gets the "init_async" callback function.
 // Starts initialization of the object.
-func (x *AsyncInitableIface) GetInitAsync() func(AsyncInitable, int, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *AsyncInitableIfaceGType) GetInitAsync() func(AsyncInitable, int, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xInitAsync == 0 {
 		return nil
 	}
@@ -55,7 +55,7 @@ func (x *AsyncInitableIface) GetInitAsync() func(AsyncInitable, int, *Cancellabl
 
 // OverrideInitFinish sets the "init_finish" callback function.
 // Finishes initialization of the object.
-func (x *AsyncInitableIface) OverrideInitFinish(cb func(AsyncInitable, AsyncResult) bool) {
+func (x *AsyncInitableIfaceGType) OverrideInitFinish(cb func(AsyncInitable, AsyncResult) bool) {
 	if cb == nil {
 		x.xInitFinish = 0
 	} else {
@@ -67,7 +67,7 @@ func (x *AsyncInitableIface) OverrideInitFinish(cb func(AsyncInitable, AsyncResu
 
 // GetInitFinish gets the "init_finish" callback function.
 // Finishes initialization of the object.
-func (x *AsyncInitableIface) GetInitFinish() func(AsyncInitable, AsyncResult) bool {
+func (x *AsyncInitableIfaceGType) GetInitFinish() func(AsyncInitable, AsyncResult) bool {
 	if x.xInitFinish == 0 {
 		return nil
 	}

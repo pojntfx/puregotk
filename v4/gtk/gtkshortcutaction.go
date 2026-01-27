@@ -15,59 +15,59 @@ import (
 // Type for shortcuts based on user callbacks.
 type ShortcutFunc func(uintptr, *glib.Variant, uintptr) bool
 
-type ActivateActionClass struct {
+type ActivateActionClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *ActivateActionClass) GoPointer() uintptr {
+func (x *ActivateActionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type CallbackActionClass struct {
+type CallbackActionClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *CallbackActionClass) GoPointer() uintptr {
+func (x *CallbackActionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type MnemonicActionClass struct {
+type MnemonicActionClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *MnemonicActionClass) GoPointer() uintptr {
+func (x *MnemonicActionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type NamedActionClass struct {
+type NamedActionClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *NamedActionClass) GoPointer() uintptr {
+func (x *NamedActionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type NothingActionClass struct {
+type NothingActionClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *NothingActionClass) GoPointer() uintptr {
+func (x *NothingActionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type ShortcutActionClass struct {
+type ShortcutActionClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *ShortcutActionClass) GoPointer() uintptr {
+func (x *ShortcutActionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type SignalActionClass struct {
+type SignalActionClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *SignalActionClass) GoPointer() uintptr {
+func (x *SignalActionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

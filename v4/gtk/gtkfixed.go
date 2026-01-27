@@ -12,15 +12,15 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gsk"
 )
 
-type FixedClass struct {
+type FixedClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	Padding [8]uintptr
 }
 
-func (x *FixedClass) GoPointer() uintptr {
+func (x *FixedClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

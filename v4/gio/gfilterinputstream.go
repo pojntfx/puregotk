@@ -11,10 +11,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type FilterInputStreamClass struct {
+type FilterInputStreamClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass InputStreamClass
+	ParentClass InputStreamClassGType
 
 	xGReserved1 uintptr
 
@@ -23,12 +23,12 @@ type FilterInputStreamClass struct {
 	xGReserved3 uintptr
 }
 
-func (x *FilterInputStreamClass) GoPointer() uintptr {
+func (x *FilterInputStreamClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *FilterInputStreamClass) OverrideGReserved1(cb func()) {
+func (x *FilterInputStreamClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -39,7 +39,7 @@ func (x *FilterInputStreamClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *FilterInputStreamClass) GetGReserved1() func() {
+func (x *FilterInputStreamClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -51,7 +51,7 @@ func (x *FilterInputStreamClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *FilterInputStreamClass) OverrideGReserved2(cb func()) {
+func (x *FilterInputStreamClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -62,7 +62,7 @@ func (x *FilterInputStreamClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *FilterInputStreamClass) GetGReserved2() func() {
+func (x *FilterInputStreamClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}
@@ -74,7 +74,7 @@ func (x *FilterInputStreamClass) GetGReserved2() func() {
 }
 
 // OverrideGReserved3 sets the "_g_reserved3" callback function.
-func (x *FilterInputStreamClass) OverrideGReserved3(cb func()) {
+func (x *FilterInputStreamClassGType) OverrideGReserved3(cb func()) {
 	if cb == nil {
 		x.xGReserved3 = 0
 	} else {
@@ -85,7 +85,7 @@ func (x *FilterInputStreamClass) OverrideGReserved3(cb func()) {
 }
 
 // GetGReserved3 gets the "_g_reserved3" callback function.
-func (x *FilterInputStreamClass) GetGReserved3() func() {
+func (x *FilterInputStreamClassGType) GetGReserved3() func() {
 	if x.xGReserved3 == 0 {
 		return nil
 	}

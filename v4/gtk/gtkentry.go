@@ -20,17 +20,17 @@ import (
 // signal handlers to %NULL, but must keep @get_text_area_size and
 // @get_frame_size non-%NULL; either use the default implementation, or provide
 // a custom one.
-type EntryClass struct {
+type EntryClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xActivate uintptr
 
 	Padding [8]uintptr
 }
 
-func (x *EntryClass) GoPointer() uintptr {
+func (x *EntryClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -38,7 +38,7 @@ func (x *EntryClass) GoPointer() uintptr {
 // Class handler for the `GtkEntry::activate` signal. The default
 //
 //	implementation activates the gtk.activate-default action.
-func (x *EntryClass) OverrideActivate(cb func(*Entry)) {
+func (x *EntryClassGType) OverrideActivate(cb func(*Entry)) {
 	if cb == nil {
 		x.xActivate = 0
 	} else {
@@ -52,7 +52,7 @@ func (x *EntryClass) OverrideActivate(cb func(*Entry)) {
 // Class handler for the `GtkEntry::activate` signal. The default
 //
 //	implementation activates the gtk.activate-default action.
-func (x *EntryClass) GetActivate() func(*Entry) {
+func (x *EntryClassGType) GetActivate() func(*Entry) {
 	if x.xActivate == 0 {
 		return nil
 	}

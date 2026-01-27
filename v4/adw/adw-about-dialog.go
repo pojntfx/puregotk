@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type AboutDialogClass struct {
+type AboutDialogClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass DialogClass
+	ParentClass DialogClassGType
 }
 
-func (x *AboutDialogClass) GoPointer() uintptr {
+func (x *AboutDialogClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

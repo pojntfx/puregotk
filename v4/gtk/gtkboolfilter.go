@@ -11,13 +11,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type BoolFilterClass struct {
+type BoolFilterClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass FilterClass
+	ParentClass FilterClassGType
 }
 
-func (x *BoolFilterClass) GoPointer() uintptr {
+func (x *BoolFilterClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -12,22 +12,22 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type TlsCertificateClass struct {
+type TlsCertificateClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xVerify uintptr
 
 	Padding [8]uintptr
 }
 
-func (x *TlsCertificateClass) GoPointer() uintptr {
+func (x *TlsCertificateClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideVerify sets the "verify" callback function.
-func (x *TlsCertificateClass) OverrideVerify(cb func(*TlsCertificate, SocketConnectable, *TlsCertificate) TlsCertificateFlags) {
+func (x *TlsCertificateClassGType) OverrideVerify(cb func(*TlsCertificate, SocketConnectable, *TlsCertificate) TlsCertificateFlags) {
 	if cb == nil {
 		x.xVerify = 0
 	} else {
@@ -38,7 +38,7 @@ func (x *TlsCertificateClass) OverrideVerify(cb func(*TlsCertificate, SocketConn
 }
 
 // GetVerify gets the "verify" callback function.
-func (x *TlsCertificateClass) GetVerify() func(*TlsCertificate, SocketConnectable, *TlsCertificate) TlsCertificateFlags {
+func (x *TlsCertificateClassGType) GetVerify() func(*TlsCertificate, SocketConnectable, *TlsCertificate) TlsCertificateFlags {
 	if x.xVerify == 0 {
 		return nil
 	}
@@ -472,27 +472,19 @@ func (x *TlsCertificate) GetPropertyCertificatePem() string {
 // GetPropertyDnsNames gets the "dns-names" property.
 // The DNS names from the certificate's Subject Alternative Names (SANs),
 // %NULL if unavailable.
-func (x *TlsCertificate) GetPropertyDnsNames() []uintptr {
+func (x *TlsCertificate) GetPropertyDnsNames() uintptr {
 	var v gobject.Value
 	x.GetProperty("dns-names", &v)
-	ptr := v.GetBoxed()
-	if ptr == 0 {
-		return nil
-	}
-	return unsafe.Slice((*uintptr)(unsafe.Pointer(ptr)), 0)[:0]
+	return v.GetPointer()
 }
 
 // GetPropertyIpAddresses gets the "ip-addresses" property.
 // The IP addresses from the certificate's Subject Alternative Names (SANs),
 // %NULL if unavailable.
-func (x *TlsCertificate) GetPropertyIpAddresses() []uintptr {
+func (x *TlsCertificate) GetPropertyIpAddresses() uintptr {
 	var v gobject.Value
 	x.GetProperty("ip-addresses", &v)
-	ptr := v.GetBoxed()
-	if ptr == 0 {
-		return nil
-	}
-	return unsafe.Slice((*uintptr)(unsafe.Pointer(ptr)), 0)[:0]
+	return v.GetPointer()
 }
 
 // GetPropertyIssuerName gets the "issuer-name" property.

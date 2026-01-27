@@ -11,11 +11,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ListItemClass struct {
+type ListItemClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *ListItemClass) GoPointer() uintptr {
+func (x *ListItemClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

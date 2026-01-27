@@ -13,33 +13,33 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type ViewStackClass struct {
+type ViewStackClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *ViewStackClass) GoPointer() uintptr {
+func (x *ViewStackClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type ViewStackPageClass struct {
+type ViewStackPageClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *ViewStackPageClass) GoPointer() uintptr {
+func (x *ViewStackPageClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type ViewStackPagesClass struct {
+type ViewStackPagesClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *ViewStackPagesClass) GoPointer() uintptr {
+func (x *ViewStackPagesClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type CarouselIndicatorDotsClass struct {
+type CarouselIndicatorDotsClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *CarouselIndicatorDotsClass) GoPointer() uintptr {
+func (x *CarouselIndicatorDotsClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

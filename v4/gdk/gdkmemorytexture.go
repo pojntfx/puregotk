@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type MemoryTextureClass struct {
+type MemoryTextureClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *MemoryTextureClass) GoPointer() uintptr {
+func (x *MemoryTextureClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

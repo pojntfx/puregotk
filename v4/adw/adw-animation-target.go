@@ -15,27 +15,27 @@ import (
 // Prototype for animation targets based on user callbacks.
 type AnimationTargetFunc func(float64, uintptr)
 
-type AnimationTargetClass struct {
+type AnimationTargetClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *AnimationTargetClass) GoPointer() uintptr {
+func (x *AnimationTargetClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type CallbackAnimationTargetClass struct {
+type CallbackAnimationTargetClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *CallbackAnimationTargetClass) GoPointer() uintptr {
+func (x *CallbackAnimationTargetClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type PropertyAnimationTargetClass struct {
+type PropertyAnimationTargetClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *PropertyAnimationTargetClass) GoPointer() uintptr {
+func (x *PropertyAnimationTargetClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -14,13 +14,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/pango"
 )
 
-type EntryRowClass struct {
+type EntryRowClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass PreferencesRowClass
+	ParentClass PreferencesRowClassGType
 }
 
-func (x *EntryRowClass) GoPointer() uintptr {
+func (x *EntryRowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

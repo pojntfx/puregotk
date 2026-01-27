@@ -13,11 +13,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type DropTargetAsyncClass struct {
+type DropTargetAsyncClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *DropTargetAsyncClass) GoPointer() uintptr {
+func (x *DropTargetAsyncClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

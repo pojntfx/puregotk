@@ -14,10 +14,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gsk"
 )
 
-type DialogClass struct {
+type DialogClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WindowClass
+	ParentClass WindowClassGType
 
 	xResponse uintptr
 
@@ -26,13 +26,13 @@ type DialogClass struct {
 	Padding [8]uintptr
 }
 
-func (x *DialogClass) GoPointer() uintptr {
+func (x *DialogClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideResponse sets the "response" callback function.
 // Signal emitted when an action widget is activated.
-func (x *DialogClass) OverrideResponse(cb func(*Dialog, int)) {
+func (x *DialogClassGType) OverrideResponse(cb func(*Dialog, int)) {
 	if cb == nil {
 		x.xResponse = 0
 	} else {
@@ -44,7 +44,7 @@ func (x *DialogClass) OverrideResponse(cb func(*Dialog, int)) {
 
 // GetResponse gets the "response" callback function.
 // Signal emitted when an action widget is activated.
-func (x *DialogClass) GetResponse() func(*Dialog, int) {
+func (x *DialogClassGType) GetResponse() func(*Dialog, int) {
 	if x.xResponse == 0 {
 		return nil
 	}
@@ -57,7 +57,7 @@ func (x *DialogClass) GetResponse() func(*Dialog, int) {
 
 // OverrideClose sets the "close" callback function.
 // Signal emitted when the user uses a keybinding to close the dialog.
-func (x *DialogClass) OverrideClose(cb func(*Dialog)) {
+func (x *DialogClassGType) OverrideClose(cb func(*Dialog)) {
 	if cb == nil {
 		x.xClose = 0
 	} else {
@@ -69,7 +69,7 @@ func (x *DialogClass) OverrideClose(cb func(*Dialog)) {
 
 // GetClose gets the "close" callback function.
 // Signal emitted when the user uses a keybinding to close the dialog.
-func (x *DialogClass) GetClose() func(*Dialog) {
+func (x *DialogClassGType) GetClose() func(*Dialog) {
 	if x.xClose == 0 {
 		return nil
 	}

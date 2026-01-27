@@ -12,7 +12,7 @@ import (
 )
 
 // Interface for icons that can be loaded as a stream.
-type LoadableIconIface struct {
+type LoadableIconIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -24,13 +24,13 @@ type LoadableIconIface struct {
 	xLoadFinish uintptr
 }
 
-func (x *LoadableIconIface) GoPointer() uintptr {
+func (x *LoadableIconIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideLoad sets the "load" callback function.
 // Loads an icon.
-func (x *LoadableIconIface) OverrideLoad(cb func(LoadableIcon, int, *string, *Cancellable) *InputStream) {
+func (x *LoadableIconIfaceGType) OverrideLoad(cb func(LoadableIcon, int, *string, *Cancellable) *InputStream) {
 	if cb == nil {
 		x.xLoad = 0
 	} else {
@@ -46,7 +46,7 @@ func (x *LoadableIconIface) OverrideLoad(cb func(LoadableIcon, int, *string, *Ca
 
 // GetLoad gets the "load" callback function.
 // Loads an icon.
-func (x *LoadableIconIface) GetLoad() func(LoadableIcon, int, *string, *Cancellable) *InputStream {
+func (x *LoadableIconIfaceGType) GetLoad() func(LoadableIcon, int, *string, *Cancellable) *InputStream {
 	if x.xLoad == 0 {
 		return nil
 	}
@@ -65,7 +65,7 @@ func (x *LoadableIconIface) GetLoad() func(LoadableIcon, int, *string, *Cancella
 
 // OverrideLoadAsync sets the "load_async" callback function.
 // Loads an icon asynchronously.
-func (x *LoadableIconIface) OverrideLoadAsync(cb func(LoadableIcon, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *LoadableIconIfaceGType) OverrideLoadAsync(cb func(LoadableIcon, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xLoadAsync = 0
 	} else {
@@ -77,7 +77,7 @@ func (x *LoadableIconIface) OverrideLoadAsync(cb func(LoadableIcon, int, *Cancel
 
 // GetLoadAsync gets the "load_async" callback function.
 // Loads an icon asynchronously.
-func (x *LoadableIconIface) GetLoadAsync() func(LoadableIcon, int, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *LoadableIconIfaceGType) GetLoadAsync() func(LoadableIcon, int, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xLoadAsync == 0 {
 		return nil
 	}
@@ -90,7 +90,7 @@ func (x *LoadableIconIface) GetLoadAsync() func(LoadableIcon, int, *Cancellable,
 
 // OverrideLoadFinish sets the "load_finish" callback function.
 // Finishes an asynchronous icon load.
-func (x *LoadableIconIface) OverrideLoadFinish(cb func(LoadableIcon, AsyncResult, *string) *InputStream) {
+func (x *LoadableIconIfaceGType) OverrideLoadFinish(cb func(LoadableIcon, AsyncResult, *string) *InputStream) {
 	if cb == nil {
 		x.xLoadFinish = 0
 	} else {
@@ -106,7 +106,7 @@ func (x *LoadableIconIface) OverrideLoadFinish(cb func(LoadableIcon, AsyncResult
 
 // GetLoadFinish gets the "load_finish" callback function.
 // Finishes an asynchronous icon load.
-func (x *LoadableIconIface) GetLoadFinish() func(LoadableIcon, AsyncResult, *string) *InputStream {
+func (x *LoadableIconIfaceGType) GetLoadFinish() func(LoadableIcon, AsyncResult, *string) *InputStream {
 	if x.xLoadFinish == 0 {
 		return nil
 	}

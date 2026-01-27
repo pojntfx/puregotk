@@ -11,22 +11,22 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type FrameClass struct {
+type FrameClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xComputeChildAllocation uintptr
 
 	Padding [8]uintptr
 }
 
-func (x *FrameClass) GoPointer() uintptr {
+func (x *FrameClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideComputeChildAllocation sets the "compute_child_allocation" callback function.
-func (x *FrameClass) OverrideComputeChildAllocation(cb func(*Frame, *Allocation)) {
+func (x *FrameClassGType) OverrideComputeChildAllocation(cb func(*Frame, *Allocation)) {
 	if cb == nil {
 		x.xComputeChildAllocation = 0
 	} else {
@@ -37,7 +37,7 @@ func (x *FrameClass) OverrideComputeChildAllocation(cb func(*Frame, *Allocation)
 }
 
 // GetComputeChildAllocation gets the "compute_child_allocation" callback function.
-func (x *FrameClass) GetComputeChildAllocation() func(*Frame, *Allocation) {
+func (x *FrameClassGType) GetComputeChildAllocation() func(*Frame, *Allocation) {
 	if x.xComputeChildAllocation == 0 {
 		return nil
 	}

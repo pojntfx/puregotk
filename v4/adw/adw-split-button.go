@@ -14,13 +14,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type SplitButtonClass struct {
+type SplitButtonClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *SplitButtonClass) GoPointer() uintptr {
+func (x *SplitButtonClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

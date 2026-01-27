@@ -13,23 +13,23 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type StringListClass struct {
+type StringListClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *StringListClass) GoPointer() uintptr {
+func (x *StringListClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type StringObjectClass struct {
+type StringObjectClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *StringObjectClass) GoPointer() uintptr {
+func (x *StringObjectClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -13,7 +13,7 @@ import (
 
 // The list of virtual functions for the `GtkSymbolicPaintable` interface.
 // No function must be implemented, default implementations exist for each one.
-type SymbolicPaintableInterface struct {
+type SymbolicPaintableInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -21,7 +21,7 @@ type SymbolicPaintableInterface struct {
 	xSnapshotSymbolic uintptr
 }
 
-func (x *SymbolicPaintableInterface) GoPointer() uintptr {
+func (x *SymbolicPaintableInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -31,7 +31,7 @@ func (x *SymbolicPaintableInterface) GoPointer() uintptr {
 //	See `GtkSymbolicPaintable::snapshot_symbolic()` for details.
 //	If this function is not implemented, [vfunc@Gdk.Paintable.snapshot]
 //	will be called.
-func (x *SymbolicPaintableInterface) OverrideSnapshotSymbolic(cb func(SymbolicPaintable, *gdk.Snapshot, float64, float64, []gdk.RGBA, uint)) {
+func (x *SymbolicPaintableInterfaceGType) OverrideSnapshotSymbolic(cb func(SymbolicPaintable, *gdk.Snapshot, float64, float64, []gdk.RGBA, uint)) {
 	if cb == nil {
 		x.xSnapshotSymbolic = 0
 	} else {
@@ -47,7 +47,7 @@ func (x *SymbolicPaintableInterface) OverrideSnapshotSymbolic(cb func(SymbolicPa
 //	See `GtkSymbolicPaintable::snapshot_symbolic()` for details.
 //	If this function is not implemented, [vfunc@Gdk.Paintable.snapshot]
 //	will be called.
-func (x *SymbolicPaintableInterface) GetSnapshotSymbolic() func(SymbolicPaintable, *gdk.Snapshot, float64, float64, []gdk.RGBA, uint) {
+func (x *SymbolicPaintableInterfaceGType) GetSnapshotSymbolic() func(SymbolicPaintable, *gdk.Snapshot, float64, float64, []gdk.RGBA, uint) {
 	if x.xSnapshotSymbolic == 0 {
 		return nil
 	}

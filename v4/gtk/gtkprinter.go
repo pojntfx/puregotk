@@ -417,6 +417,23 @@ func (x *Printer) GetPropertyAcceptsPs() bool {
 	return v.GetBoolean()
 }
 
+// SetPropertyBackend sets the "backend" property.
+// The backend for the printer.
+func (x *Printer) SetPropertyBackend(value uintptr) {
+	var v gobject.Value
+	v.Init(gobject.TypePointerVal)
+	v.SetPointer(value)
+	x.SetProperty("backend", &v)
+}
+
+// GetPropertyBackend gets the "backend" property.
+// The backend for the printer.
+func (x *Printer) GetPropertyBackend() uintptr {
+	var v gobject.Value
+	x.GetProperty("backend", &v)
+	return v.GetPointer()
+}
+
 // GetPropertyIconName gets the "icon-name" property.
 // Icon name to use for the printer.
 func (x *Printer) GetPropertyIconName() string {

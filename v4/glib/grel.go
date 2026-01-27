@@ -145,7 +145,7 @@ func (x *Relation) Select(KeyVar uintptr, FieldVar int) *Tuples {
 type Tuples struct {
 	_ structs.HostLayout
 
-	Len uint
+	Len uint32
 }
 
 func (x *Tuples) GoPointer() uintptr {

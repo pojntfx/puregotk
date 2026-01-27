@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type GestureLongPressClass struct {
+type GestureLongPressClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *GestureLongPressClass) GoPointer() uintptr {
+func (x *GestureLongPressClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

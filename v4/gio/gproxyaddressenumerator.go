@@ -11,10 +11,10 @@ import (
 )
 
 // Class structure for #GProxyAddressEnumerator.
-type ProxyAddressEnumeratorClass struct {
+type ProxyAddressEnumeratorClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass SocketAddressEnumeratorClass
+	ParentClass SocketAddressEnumeratorClassGType
 
 	xGReserved1 uintptr
 
@@ -31,12 +31,12 @@ type ProxyAddressEnumeratorClass struct {
 	xGReserved7 uintptr
 }
 
-func (x *ProxyAddressEnumeratorClass) GoPointer() uintptr {
+func (x *ProxyAddressEnumeratorClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *ProxyAddressEnumeratorClass) OverrideGReserved1(cb func()) {
+func (x *ProxyAddressEnumeratorClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -47,7 +47,7 @@ func (x *ProxyAddressEnumeratorClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *ProxyAddressEnumeratorClass) GetGReserved1() func() {
+func (x *ProxyAddressEnumeratorClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -59,7 +59,7 @@ func (x *ProxyAddressEnumeratorClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *ProxyAddressEnumeratorClass) OverrideGReserved2(cb func()) {
+func (x *ProxyAddressEnumeratorClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -70,7 +70,7 @@ func (x *ProxyAddressEnumeratorClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *ProxyAddressEnumeratorClass) GetGReserved2() func() {
+func (x *ProxyAddressEnumeratorClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}
@@ -82,7 +82,7 @@ func (x *ProxyAddressEnumeratorClass) GetGReserved2() func() {
 }
 
 // OverrideGReserved3 sets the "_g_reserved3" callback function.
-func (x *ProxyAddressEnumeratorClass) OverrideGReserved3(cb func()) {
+func (x *ProxyAddressEnumeratorClassGType) OverrideGReserved3(cb func()) {
 	if cb == nil {
 		x.xGReserved3 = 0
 	} else {
@@ -93,7 +93,7 @@ func (x *ProxyAddressEnumeratorClass) OverrideGReserved3(cb func()) {
 }
 
 // GetGReserved3 gets the "_g_reserved3" callback function.
-func (x *ProxyAddressEnumeratorClass) GetGReserved3() func() {
+func (x *ProxyAddressEnumeratorClassGType) GetGReserved3() func() {
 	if x.xGReserved3 == 0 {
 		return nil
 	}
@@ -105,7 +105,7 @@ func (x *ProxyAddressEnumeratorClass) GetGReserved3() func() {
 }
 
 // OverrideGReserved4 sets the "_g_reserved4" callback function.
-func (x *ProxyAddressEnumeratorClass) OverrideGReserved4(cb func()) {
+func (x *ProxyAddressEnumeratorClassGType) OverrideGReserved4(cb func()) {
 	if cb == nil {
 		x.xGReserved4 = 0
 	} else {
@@ -116,7 +116,7 @@ func (x *ProxyAddressEnumeratorClass) OverrideGReserved4(cb func()) {
 }
 
 // GetGReserved4 gets the "_g_reserved4" callback function.
-func (x *ProxyAddressEnumeratorClass) GetGReserved4() func() {
+func (x *ProxyAddressEnumeratorClassGType) GetGReserved4() func() {
 	if x.xGReserved4 == 0 {
 		return nil
 	}
@@ -128,7 +128,7 @@ func (x *ProxyAddressEnumeratorClass) GetGReserved4() func() {
 }
 
 // OverrideGReserved5 sets the "_g_reserved5" callback function.
-func (x *ProxyAddressEnumeratorClass) OverrideGReserved5(cb func()) {
+func (x *ProxyAddressEnumeratorClassGType) OverrideGReserved5(cb func()) {
 	if cb == nil {
 		x.xGReserved5 = 0
 	} else {
@@ -139,7 +139,7 @@ func (x *ProxyAddressEnumeratorClass) OverrideGReserved5(cb func()) {
 }
 
 // GetGReserved5 gets the "_g_reserved5" callback function.
-func (x *ProxyAddressEnumeratorClass) GetGReserved5() func() {
+func (x *ProxyAddressEnumeratorClassGType) GetGReserved5() func() {
 	if x.xGReserved5 == 0 {
 		return nil
 	}
@@ -151,7 +151,7 @@ func (x *ProxyAddressEnumeratorClass) GetGReserved5() func() {
 }
 
 // OverrideGReserved6 sets the "_g_reserved6" callback function.
-func (x *ProxyAddressEnumeratorClass) OverrideGReserved6(cb func()) {
+func (x *ProxyAddressEnumeratorClassGType) OverrideGReserved6(cb func()) {
 	if cb == nil {
 		x.xGReserved6 = 0
 	} else {
@@ -162,7 +162,7 @@ func (x *ProxyAddressEnumeratorClass) OverrideGReserved6(cb func()) {
 }
 
 // GetGReserved6 gets the "_g_reserved6" callback function.
-func (x *ProxyAddressEnumeratorClass) GetGReserved6() func() {
+func (x *ProxyAddressEnumeratorClassGType) GetGReserved6() func() {
 	if x.xGReserved6 == 0 {
 		return nil
 	}
@@ -174,7 +174,7 @@ func (x *ProxyAddressEnumeratorClass) GetGReserved6() func() {
 }
 
 // OverrideGReserved7 sets the "_g_reserved7" callback function.
-func (x *ProxyAddressEnumeratorClass) OverrideGReserved7(cb func()) {
+func (x *ProxyAddressEnumeratorClassGType) OverrideGReserved7(cb func()) {
 	if cb == nil {
 		x.xGReserved7 = 0
 	} else {
@@ -185,7 +185,7 @@ func (x *ProxyAddressEnumeratorClass) OverrideGReserved7(cb func()) {
 }
 
 // GetGReserved7 gets the "_g_reserved7" callback function.
-func (x *ProxyAddressEnumeratorClass) GetGReserved7() func() {
+func (x *ProxyAddressEnumeratorClassGType) GetGReserved7() func() {
 	if x.xGReserved7 == 0 {
 		return nil
 	}

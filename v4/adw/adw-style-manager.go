@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type StyleManagerClass struct {
+type StyleManagerClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *StyleManagerClass) GoPointer() uintptr {
+func (x *StyleManagerClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

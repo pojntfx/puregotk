@@ -12,27 +12,27 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type AnyFilterClass struct {
+type AnyFilterClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *AnyFilterClass) GoPointer() uintptr {
+func (x *AnyFilterClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type EveryFilterClass struct {
+type EveryFilterClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *EveryFilterClass) GoPointer() uintptr {
+func (x *EveryFilterClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type MultiFilterClass struct {
+type MultiFilterClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *MultiFilterClass) GoPointer() uintptr {
+func (x *MultiFilterClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

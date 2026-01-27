@@ -13,10 +13,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type MountOperationClass struct {
+type MountOperationClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gio.MountOperationClass
+	ParentClass gio.MountOperationClassGType
 
 	xGtkReserved1 uintptr
 
@@ -27,12 +27,12 @@ type MountOperationClass struct {
 	xGtkReserved4 uintptr
 }
 
-func (x *MountOperationClass) GoPointer() uintptr {
+func (x *MountOperationClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGtkReserved1 sets the "_gtk_reserved1" callback function.
-func (x *MountOperationClass) OverrideGtkReserved1(cb func()) {
+func (x *MountOperationClassGType) OverrideGtkReserved1(cb func()) {
 	if cb == nil {
 		x.xGtkReserved1 = 0
 	} else {
@@ -43,7 +43,7 @@ func (x *MountOperationClass) OverrideGtkReserved1(cb func()) {
 }
 
 // GetGtkReserved1 gets the "_gtk_reserved1" callback function.
-func (x *MountOperationClass) GetGtkReserved1() func() {
+func (x *MountOperationClassGType) GetGtkReserved1() func() {
 	if x.xGtkReserved1 == 0 {
 		return nil
 	}
@@ -55,7 +55,7 @@ func (x *MountOperationClass) GetGtkReserved1() func() {
 }
 
 // OverrideGtkReserved2 sets the "_gtk_reserved2" callback function.
-func (x *MountOperationClass) OverrideGtkReserved2(cb func()) {
+func (x *MountOperationClassGType) OverrideGtkReserved2(cb func()) {
 	if cb == nil {
 		x.xGtkReserved2 = 0
 	} else {
@@ -66,7 +66,7 @@ func (x *MountOperationClass) OverrideGtkReserved2(cb func()) {
 }
 
 // GetGtkReserved2 gets the "_gtk_reserved2" callback function.
-func (x *MountOperationClass) GetGtkReserved2() func() {
+func (x *MountOperationClassGType) GetGtkReserved2() func() {
 	if x.xGtkReserved2 == 0 {
 		return nil
 	}
@@ -78,7 +78,7 @@ func (x *MountOperationClass) GetGtkReserved2() func() {
 }
 
 // OverrideGtkReserved3 sets the "_gtk_reserved3" callback function.
-func (x *MountOperationClass) OverrideGtkReserved3(cb func()) {
+func (x *MountOperationClassGType) OverrideGtkReserved3(cb func()) {
 	if cb == nil {
 		x.xGtkReserved3 = 0
 	} else {
@@ -89,7 +89,7 @@ func (x *MountOperationClass) OverrideGtkReserved3(cb func()) {
 }
 
 // GetGtkReserved3 gets the "_gtk_reserved3" callback function.
-func (x *MountOperationClass) GetGtkReserved3() func() {
+func (x *MountOperationClassGType) GetGtkReserved3() func() {
 	if x.xGtkReserved3 == 0 {
 		return nil
 	}
@@ -101,7 +101,7 @@ func (x *MountOperationClass) GetGtkReserved3() func() {
 }
 
 // OverrideGtkReserved4 sets the "_gtk_reserved4" callback function.
-func (x *MountOperationClass) OverrideGtkReserved4(cb func()) {
+func (x *MountOperationClassGType) OverrideGtkReserved4(cb func()) {
 	if cb == nil {
 		x.xGtkReserved4 = 0
 	} else {
@@ -112,7 +112,7 @@ func (x *MountOperationClass) OverrideGtkReserved4(cb func()) {
 }
 
 // GetGtkReserved4 gets the "_gtk_reserved4" callback function.
-func (x *MountOperationClass) GetGtkReserved4() func() {
+func (x *MountOperationClassGType) GetGtkReserved4() func() {
 	if x.xGtkReserved4 == 0 {
 		return nil
 	}

@@ -12,23 +12,23 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type ToggleClass struct {
+type ToggleClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *ToggleClass) GoPointer() uintptr {
+func (x *ToggleClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type ToggleGroupClass struct {
+type ToggleGroupClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *ToggleGroupClass) GoPointer() uintptr {
+func (x *ToggleGroupClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type SocketClientClass struct {
+type SocketClientClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xEvent uintptr
 
@@ -28,12 +28,12 @@ type SocketClientClass struct {
 	xGReserved4 uintptr
 }
 
-func (x *SocketClientClass) GoPointer() uintptr {
+func (x *SocketClientClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideEvent sets the "event" callback function.
-func (x *SocketClientClass) OverrideEvent(cb func(*SocketClient, SocketClientEvent, SocketConnectable, *IOStream)) {
+func (x *SocketClientClassGType) OverrideEvent(cb func(*SocketClient, SocketClientEvent, SocketConnectable, *IOStream)) {
 	if cb == nil {
 		x.xEvent = 0
 	} else {
@@ -44,7 +44,7 @@ func (x *SocketClientClass) OverrideEvent(cb func(*SocketClient, SocketClientEve
 }
 
 // GetEvent gets the "event" callback function.
-func (x *SocketClientClass) GetEvent() func(*SocketClient, SocketClientEvent, SocketConnectable, *IOStream) {
+func (x *SocketClientClassGType) GetEvent() func(*SocketClient, SocketClientEvent, SocketConnectable, *IOStream) {
 	if x.xEvent == 0 {
 		return nil
 	}
@@ -56,7 +56,7 @@ func (x *SocketClientClass) GetEvent() func(*SocketClient, SocketClientEvent, So
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *SocketClientClass) OverrideGReserved1(cb func()) {
+func (x *SocketClientClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -67,7 +67,7 @@ func (x *SocketClientClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *SocketClientClass) GetGReserved1() func() {
+func (x *SocketClientClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -79,7 +79,7 @@ func (x *SocketClientClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *SocketClientClass) OverrideGReserved2(cb func()) {
+func (x *SocketClientClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -90,7 +90,7 @@ func (x *SocketClientClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *SocketClientClass) GetGReserved2() func() {
+func (x *SocketClientClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}
@@ -102,7 +102,7 @@ func (x *SocketClientClass) GetGReserved2() func() {
 }
 
 // OverrideGReserved3 sets the "_g_reserved3" callback function.
-func (x *SocketClientClass) OverrideGReserved3(cb func()) {
+func (x *SocketClientClassGType) OverrideGReserved3(cb func()) {
 	if cb == nil {
 		x.xGReserved3 = 0
 	} else {
@@ -113,7 +113,7 @@ func (x *SocketClientClass) OverrideGReserved3(cb func()) {
 }
 
 // GetGReserved3 gets the "_g_reserved3" callback function.
-func (x *SocketClientClass) GetGReserved3() func() {
+func (x *SocketClientClassGType) GetGReserved3() func() {
 	if x.xGReserved3 == 0 {
 		return nil
 	}
@@ -125,7 +125,7 @@ func (x *SocketClientClass) GetGReserved3() func() {
 }
 
 // OverrideGReserved4 sets the "_g_reserved4" callback function.
-func (x *SocketClientClass) OverrideGReserved4(cb func()) {
+func (x *SocketClientClassGType) OverrideGReserved4(cb func()) {
 	if cb == nil {
 		x.xGReserved4 = 0
 	} else {
@@ -136,7 +136,7 @@ func (x *SocketClientClass) OverrideGReserved4(cb func()) {
 }
 
 // GetGReserved4 gets the "_g_reserved4" callback function.
-func (x *SocketClientClass) GetGReserved4() func() {
+func (x *SocketClientClassGType) GetGReserved4() func() {
 	if x.xGReserved4 == 0 {
 		return nil
 	}

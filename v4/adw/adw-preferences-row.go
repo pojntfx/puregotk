@@ -13,15 +13,15 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type PreferencesRowClass struct {
+type PreferencesRowClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.ListBoxRowClass
+	ParentClass gtk.ListBoxRowClassGType
 
 	Padding [4]uintptr
 }
 
-func (x *PreferencesRowClass) GoPointer() uintptr {
+func (x *PreferencesRowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

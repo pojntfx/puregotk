@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type SimpleProxyResolverClass struct {
+type SimpleProxyResolverClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xGReserved1 uintptr
 
@@ -28,12 +28,12 @@ type SimpleProxyResolverClass struct {
 	xGReserved5 uintptr
 }
 
-func (x *SimpleProxyResolverClass) GoPointer() uintptr {
+func (x *SimpleProxyResolverClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *SimpleProxyResolverClass) OverrideGReserved1(cb func()) {
+func (x *SimpleProxyResolverClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -44,7 +44,7 @@ func (x *SimpleProxyResolverClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *SimpleProxyResolverClass) GetGReserved1() func() {
+func (x *SimpleProxyResolverClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -56,7 +56,7 @@ func (x *SimpleProxyResolverClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *SimpleProxyResolverClass) OverrideGReserved2(cb func()) {
+func (x *SimpleProxyResolverClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -67,7 +67,7 @@ func (x *SimpleProxyResolverClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *SimpleProxyResolverClass) GetGReserved2() func() {
+func (x *SimpleProxyResolverClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}
@@ -79,7 +79,7 @@ func (x *SimpleProxyResolverClass) GetGReserved2() func() {
 }
 
 // OverrideGReserved3 sets the "_g_reserved3" callback function.
-func (x *SimpleProxyResolverClass) OverrideGReserved3(cb func()) {
+func (x *SimpleProxyResolverClassGType) OverrideGReserved3(cb func()) {
 	if cb == nil {
 		x.xGReserved3 = 0
 	} else {
@@ -90,7 +90,7 @@ func (x *SimpleProxyResolverClass) OverrideGReserved3(cb func()) {
 }
 
 // GetGReserved3 gets the "_g_reserved3" callback function.
-func (x *SimpleProxyResolverClass) GetGReserved3() func() {
+func (x *SimpleProxyResolverClassGType) GetGReserved3() func() {
 	if x.xGReserved3 == 0 {
 		return nil
 	}
@@ -102,7 +102,7 @@ func (x *SimpleProxyResolverClass) GetGReserved3() func() {
 }
 
 // OverrideGReserved4 sets the "_g_reserved4" callback function.
-func (x *SimpleProxyResolverClass) OverrideGReserved4(cb func()) {
+func (x *SimpleProxyResolverClassGType) OverrideGReserved4(cb func()) {
 	if cb == nil {
 		x.xGReserved4 = 0
 	} else {
@@ -113,7 +113,7 @@ func (x *SimpleProxyResolverClass) OverrideGReserved4(cb func()) {
 }
 
 // GetGReserved4 gets the "_g_reserved4" callback function.
-func (x *SimpleProxyResolverClass) GetGReserved4() func() {
+func (x *SimpleProxyResolverClassGType) GetGReserved4() func() {
 	if x.xGReserved4 == 0 {
 		return nil
 	}
@@ -125,7 +125,7 @@ func (x *SimpleProxyResolverClass) GetGReserved4() func() {
 }
 
 // OverrideGReserved5 sets the "_g_reserved5" callback function.
-func (x *SimpleProxyResolverClass) OverrideGReserved5(cb func()) {
+func (x *SimpleProxyResolverClassGType) OverrideGReserved5(cb func()) {
 	if cb == nil {
 		x.xGReserved5 = 0
 	} else {
@@ -136,7 +136,7 @@ func (x *SimpleProxyResolverClass) OverrideGReserved5(cb func()) {
 }
 
 // GetGReserved5 gets the "_g_reserved5" callback function.
-func (x *SimpleProxyResolverClass) GetGReserved5() func() {
+func (x *SimpleProxyResolverClassGType) GetGReserved5() func() {
 	if x.xGReserved5 == 0 {
 		return nil
 	}

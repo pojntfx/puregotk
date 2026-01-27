@@ -17,13 +17,13 @@ import (
 // If the item should be filtered out, false must be returned.
 type CustomFilterFunc func(uintptr, uintptr) bool
 
-type CustomFilterClass struct {
+type CustomFilterClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass FilterClass
+	ParentClass FilterClassGType
 }
 
-func (x *CustomFilterClass) GoPointer() uintptr {
+func (x *CustomFilterClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

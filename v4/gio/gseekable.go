@@ -12,7 +12,7 @@ import (
 )
 
 // Provides an interface for implementing seekable functionality on I/O Streams.
-type SeekableIface struct {
+type SeekableIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -28,13 +28,13 @@ type SeekableIface struct {
 	xTruncateFn uintptr
 }
 
-func (x *SeekableIface) GoPointer() uintptr {
+func (x *SeekableIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideTell sets the "tell" callback function.
 // Tells the current location within a stream.
-func (x *SeekableIface) OverrideTell(cb func(Seekable) int64) {
+func (x *SeekableIfaceGType) OverrideTell(cb func(Seekable) int64) {
 	if cb == nil {
 		x.xTell = 0
 	} else {
@@ -46,7 +46,7 @@ func (x *SeekableIface) OverrideTell(cb func(Seekable) int64) {
 
 // GetTell gets the "tell" callback function.
 // Tells the current location within a stream.
-func (x *SeekableIface) GetTell() func(Seekable) int64 {
+func (x *SeekableIfaceGType) GetTell() func(Seekable) int64 {
 	if x.xTell == 0 {
 		return nil
 	}
@@ -59,7 +59,7 @@ func (x *SeekableIface) GetTell() func(Seekable) int64 {
 
 // OverrideCanSeek sets the "can_seek" callback function.
 // Checks if seeking is supported by the stream.
-func (x *SeekableIface) OverrideCanSeek(cb func(Seekable) bool) {
+func (x *SeekableIfaceGType) OverrideCanSeek(cb func(Seekable) bool) {
 	if cb == nil {
 		x.xCanSeek = 0
 	} else {
@@ -71,7 +71,7 @@ func (x *SeekableIface) OverrideCanSeek(cb func(Seekable) bool) {
 
 // GetCanSeek gets the "can_seek" callback function.
 // Checks if seeking is supported by the stream.
-func (x *SeekableIface) GetCanSeek() func(Seekable) bool {
+func (x *SeekableIfaceGType) GetCanSeek() func(Seekable) bool {
 	if x.xCanSeek == 0 {
 		return nil
 	}
@@ -84,7 +84,7 @@ func (x *SeekableIface) GetCanSeek() func(Seekable) bool {
 
 // OverrideSeek sets the "seek" callback function.
 // Seeks to a location within a stream.
-func (x *SeekableIface) OverrideSeek(cb func(Seekable, int64, glib.SeekType, *Cancellable) bool) {
+func (x *SeekableIfaceGType) OverrideSeek(cb func(Seekable, int64, glib.SeekType, *Cancellable) bool) {
 	if cb == nil {
 		x.xSeek = 0
 	} else {
@@ -96,7 +96,7 @@ func (x *SeekableIface) OverrideSeek(cb func(Seekable, int64, glib.SeekType, *Ca
 
 // GetSeek gets the "seek" callback function.
 // Seeks to a location within a stream.
-func (x *SeekableIface) GetSeek() func(Seekable, int64, glib.SeekType, *Cancellable) bool {
+func (x *SeekableIfaceGType) GetSeek() func(Seekable, int64, glib.SeekType, *Cancellable) bool {
 	if x.xSeek == 0 {
 		return nil
 	}
@@ -109,7 +109,7 @@ func (x *SeekableIface) GetSeek() func(Seekable, int64, glib.SeekType, *Cancella
 
 // OverrideCanTruncate sets the "can_truncate" callback function.
 // Checks if truncation is supported by the stream.
-func (x *SeekableIface) OverrideCanTruncate(cb func(Seekable) bool) {
+func (x *SeekableIfaceGType) OverrideCanTruncate(cb func(Seekable) bool) {
 	if cb == nil {
 		x.xCanTruncate = 0
 	} else {
@@ -121,7 +121,7 @@ func (x *SeekableIface) OverrideCanTruncate(cb func(Seekable) bool) {
 
 // GetCanTruncate gets the "can_truncate" callback function.
 // Checks if truncation is supported by the stream.
-func (x *SeekableIface) GetCanTruncate() func(Seekable) bool {
+func (x *SeekableIfaceGType) GetCanTruncate() func(Seekable) bool {
 	if x.xCanTruncate == 0 {
 		return nil
 	}
@@ -134,7 +134,7 @@ func (x *SeekableIface) GetCanTruncate() func(Seekable) bool {
 
 // OverrideTruncateFn sets the "truncate_fn" callback function.
 // Truncates a stream.
-func (x *SeekableIface) OverrideTruncateFn(cb func(Seekable, int64, *Cancellable) bool) {
+func (x *SeekableIfaceGType) OverrideTruncateFn(cb func(Seekable, int64, *Cancellable) bool) {
 	if cb == nil {
 		x.xTruncateFn = 0
 	} else {
@@ -146,7 +146,7 @@ func (x *SeekableIface) OverrideTruncateFn(cb func(Seekable, int64, *Cancellable
 
 // GetTruncateFn gets the "truncate_fn" callback function.
 // Truncates a stream.
-func (x *SeekableIface) GetTruncateFn() func(Seekable, int64, *Cancellable) bool {
+func (x *SeekableIfaceGType) GetTruncateFn() func(Seekable, int64, *Cancellable) bool {
 	if x.xTruncateFn == 0 {
 		return nil
 	}

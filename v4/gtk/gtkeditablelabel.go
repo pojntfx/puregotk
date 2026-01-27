@@ -11,13 +11,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type EditableLabelClass struct {
+type EditableLabelClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 }
 
-func (x *EditableLabelClass) GoPointer() uintptr {
+func (x *EditableLabelClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

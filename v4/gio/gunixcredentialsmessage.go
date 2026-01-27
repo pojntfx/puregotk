@@ -12,22 +12,22 @@ import (
 )
 
 // Class structure for #GUnixCredentialsMessage.
-type UnixCredentialsMessageClass struct {
+type UnixCredentialsMessageClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass SocketControlMessageClass
+	ParentClass SocketControlMessageClassGType
 
 	xGReserved1 uintptr
 
 	xGReserved2 uintptr
 }
 
-func (x *UnixCredentialsMessageClass) GoPointer() uintptr {
+func (x *UnixCredentialsMessageClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *UnixCredentialsMessageClass) OverrideGReserved1(cb func()) {
+func (x *UnixCredentialsMessageClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -38,7 +38,7 @@ func (x *UnixCredentialsMessageClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *UnixCredentialsMessageClass) GetGReserved1() func() {
+func (x *UnixCredentialsMessageClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -50,7 +50,7 @@ func (x *UnixCredentialsMessageClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *UnixCredentialsMessageClass) OverrideGReserved2(cb func()) {
+func (x *UnixCredentialsMessageClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -61,7 +61,7 @@ func (x *UnixCredentialsMessageClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *UnixCredentialsMessageClass) GetGReserved2() func() {
+func (x *UnixCredentialsMessageClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}

@@ -10,13 +10,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type OrientableIface struct {
+type OrientableIfaceGType struct {
 	_ structs.HostLayout
 
 	BaseIface uintptr
 }
 
-func (x *OrientableIface) GoPointer() uintptr {
+func (x *OrientableIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

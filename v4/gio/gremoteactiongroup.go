@@ -12,7 +12,7 @@ import (
 )
 
 // The virtual function table for #GRemoteActionGroup.
-type RemoteActionGroupInterface struct {
+type RemoteActionGroupInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -22,13 +22,13 @@ type RemoteActionGroupInterface struct {
 	xChangeActionStateFull uintptr
 }
 
-func (x *RemoteActionGroupInterface) GoPointer() uintptr {
+func (x *RemoteActionGroupInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideActivateActionFull sets the "activate_action_full" callback function.
 // the virtual function pointer for g_remote_action_group_activate_action_full()
-func (x *RemoteActionGroupInterface) OverrideActivateActionFull(cb func(RemoteActionGroup, string, *glib.Variant, *glib.Variant)) {
+func (x *RemoteActionGroupInterfaceGType) OverrideActivateActionFull(cb func(RemoteActionGroup, string, *glib.Variant, *glib.Variant)) {
 	if cb == nil {
 		x.xActivateActionFull = 0
 	} else {
@@ -40,7 +40,7 @@ func (x *RemoteActionGroupInterface) OverrideActivateActionFull(cb func(RemoteAc
 
 // GetActivateActionFull gets the "activate_action_full" callback function.
 // the virtual function pointer for g_remote_action_group_activate_action_full()
-func (x *RemoteActionGroupInterface) GetActivateActionFull() func(RemoteActionGroup, string, *glib.Variant, *glib.Variant) {
+func (x *RemoteActionGroupInterfaceGType) GetActivateActionFull() func(RemoteActionGroup, string, *glib.Variant, *glib.Variant) {
 	if x.xActivateActionFull == 0 {
 		return nil
 	}
@@ -53,7 +53,7 @@ func (x *RemoteActionGroupInterface) GetActivateActionFull() func(RemoteActionGr
 
 // OverrideChangeActionStateFull sets the "change_action_state_full" callback function.
 // the virtual function pointer for g_remote_action_group_change_action_state_full()
-func (x *RemoteActionGroupInterface) OverrideChangeActionStateFull(cb func(RemoteActionGroup, string, *glib.Variant, *glib.Variant)) {
+func (x *RemoteActionGroupInterfaceGType) OverrideChangeActionStateFull(cb func(RemoteActionGroup, string, *glib.Variant, *glib.Variant)) {
 	if cb == nil {
 		x.xChangeActionStateFull = 0
 	} else {
@@ -65,7 +65,7 @@ func (x *RemoteActionGroupInterface) OverrideChangeActionStateFull(cb func(Remot
 
 // GetChangeActionStateFull gets the "change_action_state_full" callback function.
 // the virtual function pointer for g_remote_action_group_change_action_state_full()
-func (x *RemoteActionGroupInterface) GetChangeActionStateFull() func(RemoteActionGroup, string, *glib.Variant, *glib.Variant) {
+func (x *RemoteActionGroupInterfaceGType) GetChangeActionStateFull() func(RemoteActionGroup, string, *glib.Variant, *glib.Variant) {
 	if x.xChangeActionStateFull == 0 {
 		return nil
 	}

@@ -12,7 +12,7 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ColorChooserInterface struct {
+type ColorChooserInterfaceGType struct {
 	_ structs.HostLayout
 
 	BaseInterface uintptr
@@ -28,12 +28,12 @@ type ColorChooserInterface struct {
 	Padding [12]uintptr
 }
 
-func (x *ColorChooserInterface) GoPointer() uintptr {
+func (x *ColorChooserInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetRgba sets the "get_rgba" callback function.
-func (x *ColorChooserInterface) OverrideGetRgba(cb func(ColorChooser, *gdk.RGBA)) {
+func (x *ColorChooserInterfaceGType) OverrideGetRgba(cb func(ColorChooser, *gdk.RGBA)) {
 	if cb == nil {
 		x.xGetRgba = 0
 	} else {
@@ -44,7 +44,7 @@ func (x *ColorChooserInterface) OverrideGetRgba(cb func(ColorChooser, *gdk.RGBA)
 }
 
 // GetGetRgba gets the "get_rgba" callback function.
-func (x *ColorChooserInterface) GetGetRgba() func(ColorChooser, *gdk.RGBA) {
+func (x *ColorChooserInterfaceGType) GetGetRgba() func(ColorChooser, *gdk.RGBA) {
 	if x.xGetRgba == 0 {
 		return nil
 	}
@@ -56,7 +56,7 @@ func (x *ColorChooserInterface) GetGetRgba() func(ColorChooser, *gdk.RGBA) {
 }
 
 // OverrideSetRgba sets the "set_rgba" callback function.
-func (x *ColorChooserInterface) OverrideSetRgba(cb func(ColorChooser, *gdk.RGBA)) {
+func (x *ColorChooserInterfaceGType) OverrideSetRgba(cb func(ColorChooser, *gdk.RGBA)) {
 	if cb == nil {
 		x.xSetRgba = 0
 	} else {
@@ -67,7 +67,7 @@ func (x *ColorChooserInterface) OverrideSetRgba(cb func(ColorChooser, *gdk.RGBA)
 }
 
 // GetSetRgba gets the "set_rgba" callback function.
-func (x *ColorChooserInterface) GetSetRgba() func(ColorChooser, *gdk.RGBA) {
+func (x *ColorChooserInterfaceGType) GetSetRgba() func(ColorChooser, *gdk.RGBA) {
 	if x.xSetRgba == 0 {
 		return nil
 	}
@@ -79,7 +79,7 @@ func (x *ColorChooserInterface) GetSetRgba() func(ColorChooser, *gdk.RGBA) {
 }
 
 // OverrideAddPalette sets the "add_palette" callback function.
-func (x *ColorChooserInterface) OverrideAddPalette(cb func(ColorChooser, Orientation, int, int, []gdk.RGBA)) {
+func (x *ColorChooserInterfaceGType) OverrideAddPalette(cb func(ColorChooser, Orientation, int, int, []gdk.RGBA)) {
 	if cb == nil {
 		x.xAddPalette = 0
 	} else {
@@ -90,7 +90,7 @@ func (x *ColorChooserInterface) OverrideAddPalette(cb func(ColorChooser, Orienta
 }
 
 // GetAddPalette gets the "add_palette" callback function.
-func (x *ColorChooserInterface) GetAddPalette() func(ColorChooser, Orientation, int, int, []gdk.RGBA) {
+func (x *ColorChooserInterfaceGType) GetAddPalette() func(ColorChooser, Orientation, int, int, []gdk.RGBA) {
 	if x.xAddPalette == 0 {
 		return nil
 	}
@@ -102,7 +102,7 @@ func (x *ColorChooserInterface) GetAddPalette() func(ColorChooser, Orientation, 
 }
 
 // OverrideColorActivated sets the "color_activated" callback function.
-func (x *ColorChooserInterface) OverrideColorActivated(cb func(ColorChooser, *gdk.RGBA)) {
+func (x *ColorChooserInterfaceGType) OverrideColorActivated(cb func(ColorChooser, *gdk.RGBA)) {
 	if cb == nil {
 		x.xColorActivated = 0
 	} else {
@@ -113,7 +113,7 @@ func (x *ColorChooserInterface) OverrideColorActivated(cb func(ColorChooser, *gd
 }
 
 // GetColorActivated gets the "color_activated" callback function.
-func (x *ColorChooserInterface) GetColorActivated() func(ColorChooser, *gdk.RGBA) {
+func (x *ColorChooserInterfaceGType) GetColorActivated() func(ColorChooser, *gdk.RGBA) {
 	if x.xColorActivated == 0 {
 		return nil
 	}

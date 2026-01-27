@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type FrameClockClass struct {
+type FrameClockClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *FrameClockClass) GoPointer() uintptr {
+func (x *FrameClockClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

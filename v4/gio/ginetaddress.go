@@ -11,22 +11,22 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type InetAddressClass struct {
+type InetAddressClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xToString uintptr
 
 	xToBytes uintptr
 }
 
-func (x *InetAddressClass) GoPointer() uintptr {
+func (x *InetAddressClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideToString sets the "to_string" callback function.
-func (x *InetAddressClass) OverrideToString(cb func(*InetAddress) string) {
+func (x *InetAddressClassGType) OverrideToString(cb func(*InetAddress) string) {
 	if cb == nil {
 		x.xToString = 0
 	} else {
@@ -37,7 +37,7 @@ func (x *InetAddressClass) OverrideToString(cb func(*InetAddress) string) {
 }
 
 // GetToString gets the "to_string" callback function.
-func (x *InetAddressClass) GetToString() func(*InetAddress) string {
+func (x *InetAddressClassGType) GetToString() func(*InetAddress) string {
 	if x.xToString == 0 {
 		return nil
 	}
@@ -49,7 +49,7 @@ func (x *InetAddressClass) GetToString() func(*InetAddress) string {
 }
 
 // OverrideToBytes sets the "to_bytes" callback function.
-func (x *InetAddressClass) OverrideToBytes(cb func(*InetAddress) byte) {
+func (x *InetAddressClassGType) OverrideToBytes(cb func(*InetAddress) byte) {
 	if cb == nil {
 		x.xToBytes = 0
 	} else {
@@ -60,7 +60,7 @@ func (x *InetAddressClass) OverrideToBytes(cb func(*InetAddress) byte) {
 }
 
 // GetToBytes gets the "to_bytes" callback function.
-func (x *InetAddressClass) GetToBytes() func(*InetAddress) byte {
+func (x *InetAddressClassGType) GetToBytes() func(*InetAddress) byte {
 	if x.xToBytes == 0 {
 		return nil
 	}

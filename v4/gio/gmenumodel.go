@@ -12,20 +12,20 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type MenuAttributeIterClass struct {
+type MenuAttributeIterClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xGetNext uintptr
 }
 
-func (x *MenuAttributeIterClass) GoPointer() uintptr {
+func (x *MenuAttributeIterClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetNext sets the "get_next" callback function.
-func (x *MenuAttributeIterClass) OverrideGetNext(cb func(*MenuAttributeIter, *string, **glib.Variant) bool) {
+func (x *MenuAttributeIterClassGType) OverrideGetNext(cb func(*MenuAttributeIter, *string, **glib.Variant) bool) {
 	if cb == nil {
 		x.xGetNext = 0
 	} else {
@@ -36,7 +36,7 @@ func (x *MenuAttributeIterClass) OverrideGetNext(cb func(*MenuAttributeIter, *st
 }
 
 // GetGetNext gets the "get_next" callback function.
-func (x *MenuAttributeIterClass) GetGetNext() func(*MenuAttributeIter, *string, **glib.Variant) bool {
+func (x *MenuAttributeIterClassGType) GetGetNext() func(*MenuAttributeIter, *string, **glib.Variant) bool {
 	if x.xGetNext == 0 {
 		return nil
 	}
@@ -55,20 +55,20 @@ func (x *MenuAttributeIterPrivate) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type MenuLinkIterClass struct {
+type MenuLinkIterClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xGetNext uintptr
 }
 
-func (x *MenuLinkIterClass) GoPointer() uintptr {
+func (x *MenuLinkIterClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetNext sets the "get_next" callback function.
-func (x *MenuLinkIterClass) OverrideGetNext(cb func(*MenuLinkIter, *string, **MenuModel) bool) {
+func (x *MenuLinkIterClassGType) OverrideGetNext(cb func(*MenuLinkIter, *string, **MenuModel) bool) {
 	if cb == nil {
 		x.xGetNext = 0
 	} else {
@@ -79,7 +79,7 @@ func (x *MenuLinkIterClass) OverrideGetNext(cb func(*MenuLinkIter, *string, **Me
 }
 
 // GetGetNext gets the "get_next" callback function.
-func (x *MenuLinkIterClass) GetGetNext() func(*MenuLinkIter, *string, **MenuModel) bool {
+func (x *MenuLinkIterClassGType) GetGetNext() func(*MenuLinkIter, *string, **MenuModel) bool {
 	if x.xGetNext == 0 {
 		return nil
 	}
@@ -98,10 +98,10 @@ func (x *MenuLinkIterPrivate) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type MenuModelClass struct {
+type MenuModelClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xIsMutable uintptr
 
@@ -120,12 +120,12 @@ type MenuModelClass struct {
 	xGetItemLink uintptr
 }
 
-func (x *MenuModelClass) GoPointer() uintptr {
+func (x *MenuModelClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideIsMutable sets the "is_mutable" callback function.
-func (x *MenuModelClass) OverrideIsMutable(cb func(*MenuModel) bool) {
+func (x *MenuModelClassGType) OverrideIsMutable(cb func(*MenuModel) bool) {
 	if cb == nil {
 		x.xIsMutable = 0
 	} else {
@@ -136,7 +136,7 @@ func (x *MenuModelClass) OverrideIsMutable(cb func(*MenuModel) bool) {
 }
 
 // GetIsMutable gets the "is_mutable" callback function.
-func (x *MenuModelClass) GetIsMutable() func(*MenuModel) bool {
+func (x *MenuModelClassGType) GetIsMutable() func(*MenuModel) bool {
 	if x.xIsMutable == 0 {
 		return nil
 	}
@@ -148,7 +148,7 @@ func (x *MenuModelClass) GetIsMutable() func(*MenuModel) bool {
 }
 
 // OverrideGetNItems sets the "get_n_items" callback function.
-func (x *MenuModelClass) OverrideGetNItems(cb func(*MenuModel) int) {
+func (x *MenuModelClassGType) OverrideGetNItems(cb func(*MenuModel) int) {
 	if cb == nil {
 		x.xGetNItems = 0
 	} else {
@@ -159,7 +159,7 @@ func (x *MenuModelClass) OverrideGetNItems(cb func(*MenuModel) int) {
 }
 
 // GetGetNItems gets the "get_n_items" callback function.
-func (x *MenuModelClass) GetGetNItems() func(*MenuModel) int {
+func (x *MenuModelClassGType) GetGetNItems() func(*MenuModel) int {
 	if x.xGetNItems == 0 {
 		return nil
 	}
@@ -171,7 +171,7 @@ func (x *MenuModelClass) GetGetNItems() func(*MenuModel) int {
 }
 
 // OverrideGetItemAttributes sets the "get_item_attributes" callback function.
-func (x *MenuModelClass) OverrideGetItemAttributes(cb func(*MenuModel, int, **glib.HashTable)) {
+func (x *MenuModelClassGType) OverrideGetItemAttributes(cb func(*MenuModel, int, **glib.HashTable)) {
 	if cb == nil {
 		x.xGetItemAttributes = 0
 	} else {
@@ -182,7 +182,7 @@ func (x *MenuModelClass) OverrideGetItemAttributes(cb func(*MenuModel, int, **gl
 }
 
 // GetGetItemAttributes gets the "get_item_attributes" callback function.
-func (x *MenuModelClass) GetGetItemAttributes() func(*MenuModel, int, **glib.HashTable) {
+func (x *MenuModelClassGType) GetGetItemAttributes() func(*MenuModel, int, **glib.HashTable) {
 	if x.xGetItemAttributes == 0 {
 		return nil
 	}
@@ -194,7 +194,7 @@ func (x *MenuModelClass) GetGetItemAttributes() func(*MenuModel, int, **glib.Has
 }
 
 // OverrideIterateItemAttributes sets the "iterate_item_attributes" callback function.
-func (x *MenuModelClass) OverrideIterateItemAttributes(cb func(*MenuModel, int) *MenuAttributeIter) {
+func (x *MenuModelClassGType) OverrideIterateItemAttributes(cb func(*MenuModel, int) *MenuAttributeIter) {
 	if cb == nil {
 		x.xIterateItemAttributes = 0
 	} else {
@@ -209,7 +209,7 @@ func (x *MenuModelClass) OverrideIterateItemAttributes(cb func(*MenuModel, int) 
 }
 
 // GetIterateItemAttributes gets the "iterate_item_attributes" callback function.
-func (x *MenuModelClass) GetIterateItemAttributes() func(*MenuModel, int) *MenuAttributeIter {
+func (x *MenuModelClassGType) GetIterateItemAttributes() func(*MenuModel, int) *MenuAttributeIter {
 	if x.xIterateItemAttributes == 0 {
 		return nil
 	}
@@ -227,7 +227,7 @@ func (x *MenuModelClass) GetIterateItemAttributes() func(*MenuModel, int) *MenuA
 }
 
 // OverrideGetItemAttributeValue sets the "get_item_attribute_value" callback function.
-func (x *MenuModelClass) OverrideGetItemAttributeValue(cb func(*MenuModel, int, string, *glib.VariantType) *glib.Variant) {
+func (x *MenuModelClassGType) OverrideGetItemAttributeValue(cb func(*MenuModel, int, string, *glib.VariantType) *glib.Variant) {
 	if cb == nil {
 		x.xGetItemAttributeValue = 0
 	} else {
@@ -238,7 +238,7 @@ func (x *MenuModelClass) OverrideGetItemAttributeValue(cb func(*MenuModel, int, 
 }
 
 // GetGetItemAttributeValue gets the "get_item_attribute_value" callback function.
-func (x *MenuModelClass) GetGetItemAttributeValue() func(*MenuModel, int, string, *glib.VariantType) *glib.Variant {
+func (x *MenuModelClassGType) GetGetItemAttributeValue() func(*MenuModel, int, string, *glib.VariantType) *glib.Variant {
 	if x.xGetItemAttributeValue == 0 {
 		return nil
 	}
@@ -250,7 +250,7 @@ func (x *MenuModelClass) GetGetItemAttributeValue() func(*MenuModel, int, string
 }
 
 // OverrideGetItemLinks sets the "get_item_links" callback function.
-func (x *MenuModelClass) OverrideGetItemLinks(cb func(*MenuModel, int, **glib.HashTable)) {
+func (x *MenuModelClassGType) OverrideGetItemLinks(cb func(*MenuModel, int, **glib.HashTable)) {
 	if cb == nil {
 		x.xGetItemLinks = 0
 	} else {
@@ -261,7 +261,7 @@ func (x *MenuModelClass) OverrideGetItemLinks(cb func(*MenuModel, int, **glib.Ha
 }
 
 // GetGetItemLinks gets the "get_item_links" callback function.
-func (x *MenuModelClass) GetGetItemLinks() func(*MenuModel, int, **glib.HashTable) {
+func (x *MenuModelClassGType) GetGetItemLinks() func(*MenuModel, int, **glib.HashTable) {
 	if x.xGetItemLinks == 0 {
 		return nil
 	}
@@ -273,7 +273,7 @@ func (x *MenuModelClass) GetGetItemLinks() func(*MenuModel, int, **glib.HashTabl
 }
 
 // OverrideIterateItemLinks sets the "iterate_item_links" callback function.
-func (x *MenuModelClass) OverrideIterateItemLinks(cb func(*MenuModel, int) *MenuLinkIter) {
+func (x *MenuModelClassGType) OverrideIterateItemLinks(cb func(*MenuModel, int) *MenuLinkIter) {
 	if cb == nil {
 		x.xIterateItemLinks = 0
 	} else {
@@ -288,7 +288,7 @@ func (x *MenuModelClass) OverrideIterateItemLinks(cb func(*MenuModel, int) *Menu
 }
 
 // GetIterateItemLinks gets the "iterate_item_links" callback function.
-func (x *MenuModelClass) GetIterateItemLinks() func(*MenuModel, int) *MenuLinkIter {
+func (x *MenuModelClassGType) GetIterateItemLinks() func(*MenuModel, int) *MenuLinkIter {
 	if x.xIterateItemLinks == 0 {
 		return nil
 	}
@@ -306,7 +306,7 @@ func (x *MenuModelClass) GetIterateItemLinks() func(*MenuModel, int) *MenuLinkIt
 }
 
 // OverrideGetItemLink sets the "get_item_link" callback function.
-func (x *MenuModelClass) OverrideGetItemLink(cb func(*MenuModel, int, string) *MenuModel) {
+func (x *MenuModelClassGType) OverrideGetItemLink(cb func(*MenuModel, int, string) *MenuModel) {
 	if cb == nil {
 		x.xGetItemLink = 0
 	} else {
@@ -321,7 +321,7 @@ func (x *MenuModelClass) OverrideGetItemLink(cb func(*MenuModel, int, string) *M
 }
 
 // GetGetItemLink gets the "get_item_link" callback function.
-func (x *MenuModelClass) GetGetItemLink() func(*MenuModel, int, string) *MenuModel {
+func (x *MenuModelClassGType) GetGetItemLink() func(*MenuModel, int, string) *MenuModel {
 	if x.xGetItemLink == 0 {
 		return nil
 	}

@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type ButtonRowClass struct {
+type ButtonRowClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass PreferencesRowClass
+	ParentClass PreferencesRowClassGType
 }
 
-func (x *ButtonRowClass) GoPointer() uintptr {
+func (x *ButtonRowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

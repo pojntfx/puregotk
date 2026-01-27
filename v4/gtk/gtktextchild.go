@@ -11,10 +11,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type TextChildAnchorClass struct {
+type TextChildAnchorClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xGtkReserved1 uintptr
 
@@ -25,12 +25,12 @@ type TextChildAnchorClass struct {
 	xGtkReserved4 uintptr
 }
 
-func (x *TextChildAnchorClass) GoPointer() uintptr {
+func (x *TextChildAnchorClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGtkReserved1 sets the "_gtk_reserved1" callback function.
-func (x *TextChildAnchorClass) OverrideGtkReserved1(cb func()) {
+func (x *TextChildAnchorClassGType) OverrideGtkReserved1(cb func()) {
 	if cb == nil {
 		x.xGtkReserved1 = 0
 	} else {
@@ -41,7 +41,7 @@ func (x *TextChildAnchorClass) OverrideGtkReserved1(cb func()) {
 }
 
 // GetGtkReserved1 gets the "_gtk_reserved1" callback function.
-func (x *TextChildAnchorClass) GetGtkReserved1() func() {
+func (x *TextChildAnchorClassGType) GetGtkReserved1() func() {
 	if x.xGtkReserved1 == 0 {
 		return nil
 	}
@@ -53,7 +53,7 @@ func (x *TextChildAnchorClass) GetGtkReserved1() func() {
 }
 
 // OverrideGtkReserved2 sets the "_gtk_reserved2" callback function.
-func (x *TextChildAnchorClass) OverrideGtkReserved2(cb func()) {
+func (x *TextChildAnchorClassGType) OverrideGtkReserved2(cb func()) {
 	if cb == nil {
 		x.xGtkReserved2 = 0
 	} else {
@@ -64,7 +64,7 @@ func (x *TextChildAnchorClass) OverrideGtkReserved2(cb func()) {
 }
 
 // GetGtkReserved2 gets the "_gtk_reserved2" callback function.
-func (x *TextChildAnchorClass) GetGtkReserved2() func() {
+func (x *TextChildAnchorClassGType) GetGtkReserved2() func() {
 	if x.xGtkReserved2 == 0 {
 		return nil
 	}
@@ -76,7 +76,7 @@ func (x *TextChildAnchorClass) GetGtkReserved2() func() {
 }
 
 // OverrideGtkReserved3 sets the "_gtk_reserved3" callback function.
-func (x *TextChildAnchorClass) OverrideGtkReserved3(cb func()) {
+func (x *TextChildAnchorClassGType) OverrideGtkReserved3(cb func()) {
 	if cb == nil {
 		x.xGtkReserved3 = 0
 	} else {
@@ -87,7 +87,7 @@ func (x *TextChildAnchorClass) OverrideGtkReserved3(cb func()) {
 }
 
 // GetGtkReserved3 gets the "_gtk_reserved3" callback function.
-func (x *TextChildAnchorClass) GetGtkReserved3() func() {
+func (x *TextChildAnchorClassGType) GetGtkReserved3() func() {
 	if x.xGtkReserved3 == 0 {
 		return nil
 	}
@@ -99,7 +99,7 @@ func (x *TextChildAnchorClass) GetGtkReserved3() func() {
 }
 
 // OverrideGtkReserved4 sets the "_gtk_reserved4" callback function.
-func (x *TextChildAnchorClass) OverrideGtkReserved4(cb func()) {
+func (x *TextChildAnchorClassGType) OverrideGtkReserved4(cb func()) {
 	if cb == nil {
 		x.xGtkReserved4 = 0
 	} else {
@@ -110,7 +110,7 @@ func (x *TextChildAnchorClass) OverrideGtkReserved4(cb func()) {
 }
 
 // GetGtkReserved4 gets the "_gtk_reserved4" callback function.
-func (x *TextChildAnchorClass) GetGtkReserved4() func() {
+func (x *TextChildAnchorClassGType) GetGtkReserved4() func() {
 	if x.xGtkReserved4 == 0 {
 		return nil
 	}

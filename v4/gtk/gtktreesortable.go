@@ -25,7 +25,7 @@ import (
 // `price_of(@a) - price_of(@b)`.
 type TreeIterCompareFunc func(uintptr, *TreeIter, *TreeIter, uintptr) int
 
-type TreeSortableIface struct {
+type TreeSortableIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -43,7 +43,7 @@ type TreeSortableIface struct {
 	xHasDefaultSortFunc uintptr
 }
 
-func (x *TreeSortableIface) GoPointer() uintptr {
+func (x *TreeSortableIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -51,7 +51,7 @@ func (x *TreeSortableIface) GoPointer() uintptr {
 // Signal emitted when the sort column or sort
 //
 //	order of sortable is changed.
-func (x *TreeSortableIface) OverrideSortColumnChanged(cb func(TreeSortable)) {
+func (x *TreeSortableIfaceGType) OverrideSortColumnChanged(cb func(TreeSortable)) {
 	if cb == nil {
 		x.xSortColumnChanged = 0
 	} else {
@@ -65,7 +65,7 @@ func (x *TreeSortableIface) OverrideSortColumnChanged(cb func(TreeSortable)) {
 // Signal emitted when the sort column or sort
 //
 //	order of sortable is changed.
-func (x *TreeSortableIface) GetSortColumnChanged() func(TreeSortable) {
+func (x *TreeSortableIfaceGType) GetSortColumnChanged() func(TreeSortable) {
 	if x.xSortColumnChanged == 0 {
 		return nil
 	}
@@ -80,7 +80,7 @@ func (x *TreeSortableIface) GetSortColumnChanged() func(TreeSortable) {
 // Fills in sort_column_id and order with the
 //
 //	current sort column and the order.
-func (x *TreeSortableIface) OverrideGetSortColumnId(cb func(TreeSortable, *int, *SortType) bool) {
+func (x *TreeSortableIfaceGType) OverrideGetSortColumnId(cb func(TreeSortable, *int, *SortType) bool) {
 	if cb == nil {
 		x.xGetSortColumnId = 0
 	} else {
@@ -94,7 +94,7 @@ func (x *TreeSortableIface) OverrideGetSortColumnId(cb func(TreeSortable, *int, 
 // Fills in sort_column_id and order with the
 //
 //	current sort column and the order.
-func (x *TreeSortableIface) GetGetSortColumnId() func(TreeSortable, *int, *SortType) bool {
+func (x *TreeSortableIfaceGType) GetGetSortColumnId() func(TreeSortable, *int, *SortType) bool {
 	if x.xGetSortColumnId == 0 {
 		return nil
 	}
@@ -109,7 +109,7 @@ func (x *TreeSortableIface) GetGetSortColumnId() func(TreeSortable, *int, *SortT
 // Sets the current sort column to be
 //
 //	sort_column_id.
-func (x *TreeSortableIface) OverrideSetSortColumnId(cb func(TreeSortable, int, SortType)) {
+func (x *TreeSortableIfaceGType) OverrideSetSortColumnId(cb func(TreeSortable, int, SortType)) {
 	if cb == nil {
 		x.xSetSortColumnId = 0
 	} else {
@@ -123,7 +123,7 @@ func (x *TreeSortableIface) OverrideSetSortColumnId(cb func(TreeSortable, int, S
 // Sets the current sort column to be
 //
 //	sort_column_id.
-func (x *TreeSortableIface) GetSetSortColumnId() func(TreeSortable, int, SortType) {
+func (x *TreeSortableIfaceGType) GetSetSortColumnId() func(TreeSortable, int, SortType) {
 	if x.xSetSortColumnId == 0 {
 		return nil
 	}
@@ -138,7 +138,7 @@ func (x *TreeSortableIface) GetSetSortColumnId() func(TreeSortable, int, SortTyp
 // Sets the comparison function used when sorting to
 //
 //	be sort_func.
-func (x *TreeSortableIface) OverrideSetSortFunc(cb func(TreeSortable, int, *TreeIterCompareFunc, uintptr, *glib.DestroyNotify)) {
+func (x *TreeSortableIfaceGType) OverrideSetSortFunc(cb func(TreeSortable, int, *TreeIterCompareFunc, uintptr, *glib.DestroyNotify)) {
 	if cb == nil {
 		x.xSetSortFunc = 0
 	} else {
@@ -152,7 +152,7 @@ func (x *TreeSortableIface) OverrideSetSortFunc(cb func(TreeSortable, int, *Tree
 // Sets the comparison function used when sorting to
 //
 //	be sort_func.
-func (x *TreeSortableIface) GetSetSortFunc() func(TreeSortable, int, *TreeIterCompareFunc, uintptr, *glib.DestroyNotify) {
+func (x *TreeSortableIfaceGType) GetSetSortFunc() func(TreeSortable, int, *TreeIterCompareFunc, uintptr, *glib.DestroyNotify) {
 	if x.xSetSortFunc == 0 {
 		return nil
 	}
@@ -167,7 +167,7 @@ func (x *TreeSortableIface) GetSetSortFunc() func(TreeSortable, int, *TreeIterCo
 // Sets the default comparison function used
 //
 //	when sorting to be sort_func.
-func (x *TreeSortableIface) OverrideSetDefaultSortFunc(cb func(TreeSortable, *TreeIterCompareFunc, uintptr, *glib.DestroyNotify)) {
+func (x *TreeSortableIfaceGType) OverrideSetDefaultSortFunc(cb func(TreeSortable, *TreeIterCompareFunc, uintptr, *glib.DestroyNotify)) {
 	if cb == nil {
 		x.xSetDefaultSortFunc = 0
 	} else {
@@ -181,7 +181,7 @@ func (x *TreeSortableIface) OverrideSetDefaultSortFunc(cb func(TreeSortable, *Tr
 // Sets the default comparison function used
 //
 //	when sorting to be sort_func.
-func (x *TreeSortableIface) GetSetDefaultSortFunc() func(TreeSortable, *TreeIterCompareFunc, uintptr, *glib.DestroyNotify) {
+func (x *TreeSortableIfaceGType) GetSetDefaultSortFunc() func(TreeSortable, *TreeIterCompareFunc, uintptr, *glib.DestroyNotify) {
 	if x.xSetDefaultSortFunc == 0 {
 		return nil
 	}
@@ -195,7 +195,7 @@ func (x *TreeSortableIface) GetSetDefaultSortFunc() func(TreeSortable, *TreeIter
 // OverrideHasDefaultSortFunc sets the "has_default_sort_func" callback function.
 // %TRUE if the model has a default sort
 // function.
-func (x *TreeSortableIface) OverrideHasDefaultSortFunc(cb func(TreeSortable) bool) {
+func (x *TreeSortableIfaceGType) OverrideHasDefaultSortFunc(cb func(TreeSortable) bool) {
 	if cb == nil {
 		x.xHasDefaultSortFunc = 0
 	} else {
@@ -208,7 +208,7 @@ func (x *TreeSortableIface) OverrideHasDefaultSortFunc(cb func(TreeSortable) boo
 // GetHasDefaultSortFunc gets the "has_default_sort_func" callback function.
 // %TRUE if the model has a default sort
 // function.
-func (x *TreeSortableIface) GetHasDefaultSortFunc() func(TreeSortable) bool {
+func (x *TreeSortableIfaceGType) GetHasDefaultSortFunc() func(TreeSortable) bool {
 	if x.xHasDefaultSortFunc == 0 {
 		return nil
 	}

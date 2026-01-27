@@ -9,11 +9,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ShortcutsShortcutClass struct {
+type ShortcutsShortcutClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *ShortcutsShortcutClass) GoPointer() uintptr {
+func (x *ShortcutsShortcutClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

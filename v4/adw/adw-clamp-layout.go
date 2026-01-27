@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type ClampLayoutClass struct {
+type ClampLayoutClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.LayoutManagerClass
+	ParentClass gtk.LayoutManagerClassGType
 }
 
-func (x *ClampLayoutClass) GoPointer() uintptr {
+func (x *ClampLayoutClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

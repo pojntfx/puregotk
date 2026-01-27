@@ -13,10 +13,10 @@ import (
 )
 
 // Class structure for `GtkNativeDialog`.
-type NativeDialogClass struct {
+type NativeDialogClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xResponse uintptr
 
@@ -33,13 +33,13 @@ type NativeDialogClass struct {
 	xGtkReserved4 uintptr
 }
 
-func (x *NativeDialogClass) GoPointer() uintptr {
+func (x *NativeDialogClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideResponse sets the "response" callback function.
 // class handler for the `GtkNativeDialog::response` signal
-func (x *NativeDialogClass) OverrideResponse(cb func(*NativeDialog, int)) {
+func (x *NativeDialogClassGType) OverrideResponse(cb func(*NativeDialog, int)) {
 	if cb == nil {
 		x.xResponse = 0
 	} else {
@@ -51,7 +51,7 @@ func (x *NativeDialogClass) OverrideResponse(cb func(*NativeDialog, int)) {
 
 // GetResponse gets the "response" callback function.
 // class handler for the `GtkNativeDialog::response` signal
-func (x *NativeDialogClass) GetResponse() func(*NativeDialog, int) {
+func (x *NativeDialogClassGType) GetResponse() func(*NativeDialog, int) {
 	if x.xResponse == 0 {
 		return nil
 	}
@@ -63,7 +63,7 @@ func (x *NativeDialogClass) GetResponse() func(*NativeDialog, int) {
 }
 
 // OverrideShow sets the "show" callback function.
-func (x *NativeDialogClass) OverrideShow(cb func(*NativeDialog)) {
+func (x *NativeDialogClassGType) OverrideShow(cb func(*NativeDialog)) {
 	if cb == nil {
 		x.xShow = 0
 	} else {
@@ -74,7 +74,7 @@ func (x *NativeDialogClass) OverrideShow(cb func(*NativeDialog)) {
 }
 
 // GetShow gets the "show" callback function.
-func (x *NativeDialogClass) GetShow() func(*NativeDialog) {
+func (x *NativeDialogClassGType) GetShow() func(*NativeDialog) {
 	if x.xShow == 0 {
 		return nil
 	}
@@ -86,7 +86,7 @@ func (x *NativeDialogClass) GetShow() func(*NativeDialog) {
 }
 
 // OverrideHide sets the "hide" callback function.
-func (x *NativeDialogClass) OverrideHide(cb func(*NativeDialog)) {
+func (x *NativeDialogClassGType) OverrideHide(cb func(*NativeDialog)) {
 	if cb == nil {
 		x.xHide = 0
 	} else {
@@ -97,7 +97,7 @@ func (x *NativeDialogClass) OverrideHide(cb func(*NativeDialog)) {
 }
 
 // GetHide gets the "hide" callback function.
-func (x *NativeDialogClass) GetHide() func(*NativeDialog) {
+func (x *NativeDialogClassGType) GetHide() func(*NativeDialog) {
 	if x.xHide == 0 {
 		return nil
 	}
@@ -109,7 +109,7 @@ func (x *NativeDialogClass) GetHide() func(*NativeDialog) {
 }
 
 // OverrideGtkReserved1 sets the "_gtk_reserved1" callback function.
-func (x *NativeDialogClass) OverrideGtkReserved1(cb func()) {
+func (x *NativeDialogClassGType) OverrideGtkReserved1(cb func()) {
 	if cb == nil {
 		x.xGtkReserved1 = 0
 	} else {
@@ -120,7 +120,7 @@ func (x *NativeDialogClass) OverrideGtkReserved1(cb func()) {
 }
 
 // GetGtkReserved1 gets the "_gtk_reserved1" callback function.
-func (x *NativeDialogClass) GetGtkReserved1() func() {
+func (x *NativeDialogClassGType) GetGtkReserved1() func() {
 	if x.xGtkReserved1 == 0 {
 		return nil
 	}
@@ -132,7 +132,7 @@ func (x *NativeDialogClass) GetGtkReserved1() func() {
 }
 
 // OverrideGtkReserved2 sets the "_gtk_reserved2" callback function.
-func (x *NativeDialogClass) OverrideGtkReserved2(cb func()) {
+func (x *NativeDialogClassGType) OverrideGtkReserved2(cb func()) {
 	if cb == nil {
 		x.xGtkReserved2 = 0
 	} else {
@@ -143,7 +143,7 @@ func (x *NativeDialogClass) OverrideGtkReserved2(cb func()) {
 }
 
 // GetGtkReserved2 gets the "_gtk_reserved2" callback function.
-func (x *NativeDialogClass) GetGtkReserved2() func() {
+func (x *NativeDialogClassGType) GetGtkReserved2() func() {
 	if x.xGtkReserved2 == 0 {
 		return nil
 	}
@@ -155,7 +155,7 @@ func (x *NativeDialogClass) GetGtkReserved2() func() {
 }
 
 // OverrideGtkReserved3 sets the "_gtk_reserved3" callback function.
-func (x *NativeDialogClass) OverrideGtkReserved3(cb func()) {
+func (x *NativeDialogClassGType) OverrideGtkReserved3(cb func()) {
 	if cb == nil {
 		x.xGtkReserved3 = 0
 	} else {
@@ -166,7 +166,7 @@ func (x *NativeDialogClass) OverrideGtkReserved3(cb func()) {
 }
 
 // GetGtkReserved3 gets the "_gtk_reserved3" callback function.
-func (x *NativeDialogClass) GetGtkReserved3() func() {
+func (x *NativeDialogClassGType) GetGtkReserved3() func() {
 	if x.xGtkReserved3 == 0 {
 		return nil
 	}
@@ -178,7 +178,7 @@ func (x *NativeDialogClass) GetGtkReserved3() func() {
 }
 
 // OverrideGtkReserved4 sets the "_gtk_reserved4" callback function.
-func (x *NativeDialogClass) OverrideGtkReserved4(cb func()) {
+func (x *NativeDialogClassGType) OverrideGtkReserved4(cb func()) {
 	if cb == nil {
 		x.xGtkReserved4 = 0
 	} else {
@@ -189,7 +189,7 @@ func (x *NativeDialogClass) OverrideGtkReserved4(cb func()) {
 }
 
 // GetGtkReserved4 gets the "_gtk_reserved4" callback function.
-func (x *NativeDialogClass) GetGtkReserved4() func() {
+func (x *NativeDialogClassGType) GetGtkReserved4() func() {
 	if x.xGtkReserved4 == 0 {
 		return nil
 	}

@@ -80,10 +80,10 @@ func (x *Requisition) Free() {
 
 }
 
-type WidgetClass struct {
+type WidgetClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.InitiallyUnownedClass
+	ParentClass gobject.InitiallyUnownedClassGType
 
 	xShow uintptr
 
@@ -140,11 +140,11 @@ type WidgetClass struct {
 	Padding [8]uintptr
 }
 
-func (x *WidgetClass) GoPointer() uintptr {
+func (x *WidgetClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-var xWidgetClassAddBinding func(uintptr, uint, gdk.ModifierType, uintptr, string, ...interface{})
+var xWidgetClassGTypeAddBinding func(uintptr, uint, gdk.ModifierType, uintptr, string, ...interface{})
 
 // Creates a new shortcut for @widget_class that calls the given @callback
 // with arguments according to @format_string.
@@ -157,13 +157,13 @@ var xWidgetClassAddBinding func(uintptr, uint, gdk.ModifierType, uintptr, string
 // initialization. It does not provide for user data, if you need that,
 // you will have to use [method@Gtk.WidgetClass.add_shortcut] with a custom
 // shortcut.
-func (x *WidgetClass) AddBinding(KeyvalVar uint, ModsVar gdk.ModifierType, CallbackVar *ShortcutFunc, FormatStringVar string, varArgs ...interface{}) {
+func (x *WidgetClassGType) AddBinding(KeyvalVar uint, ModsVar gdk.ModifierType, CallbackVar *ShortcutFunc, FormatStringVar string, varArgs ...interface{}) {
 
-	xWidgetClassAddBinding(x.GoPointer(), KeyvalVar, ModsVar, glib.NewCallback(CallbackVar), FormatStringVar, varArgs...)
+	xWidgetClassGTypeAddBinding(x.GoPointer(), KeyvalVar, ModsVar, glib.NewCallback(CallbackVar), FormatStringVar, varArgs...)
 
 }
 
-var xWidgetClassAddBindingAction func(uintptr, uint, gdk.ModifierType, string, string, ...interface{})
+var xWidgetClassGTypeAddBindingAction func(uintptr, uint, gdk.ModifierType, string, string, ...interface{})
 
 // Creates a new shortcut for @widget_class that activates the given
 // @action_name with arguments read according to @format_string.
@@ -174,13 +174,13 @@ var xWidgetClassAddBindingAction func(uintptr, uint, gdk.ModifierType, string, s
 // This function is a convenience wrapper around
 // [method@Gtk.WidgetClass.add_shortcut] and must be called during class
 // initialization.
-func (x *WidgetClass) AddBindingAction(KeyvalVar uint, ModsVar gdk.ModifierType, ActionNameVar string, FormatStringVar string, varArgs ...interface{}) {
+func (x *WidgetClassGType) AddBindingAction(KeyvalVar uint, ModsVar gdk.ModifierType, ActionNameVar string, FormatStringVar string, varArgs ...interface{}) {
 
-	xWidgetClassAddBindingAction(x.GoPointer(), KeyvalVar, ModsVar, ActionNameVar, FormatStringVar, varArgs...)
+	xWidgetClassGTypeAddBindingAction(x.GoPointer(), KeyvalVar, ModsVar, ActionNameVar, FormatStringVar, varArgs...)
 
 }
 
-var xWidgetClassAddBindingSignal func(uintptr, uint, gdk.ModifierType, string, string, ...interface{})
+var xWidgetClassGTypeAddBindingSignal func(uintptr, uint, gdk.ModifierType, string, string, ...interface{})
 
 // Creates a new shortcut for @widget_class that emits the given action
 // @signal with arguments read according to @format_string.
@@ -191,13 +191,13 @@ var xWidgetClassAddBindingSignal func(uintptr, uint, gdk.ModifierType, string, s
 // This function is a convenience wrapper around
 // [method@Gtk.WidgetClass.add_shortcut] and must be called during class
 // initialization.
-func (x *WidgetClass) AddBindingSignal(KeyvalVar uint, ModsVar gdk.ModifierType, SignalVar string, FormatStringVar string, varArgs ...interface{}) {
+func (x *WidgetClassGType) AddBindingSignal(KeyvalVar uint, ModsVar gdk.ModifierType, SignalVar string, FormatStringVar string, varArgs ...interface{}) {
 
-	xWidgetClassAddBindingSignal(x.GoPointer(), KeyvalVar, ModsVar, SignalVar, FormatStringVar, varArgs...)
+	xWidgetClassGTypeAddBindingSignal(x.GoPointer(), KeyvalVar, ModsVar, SignalVar, FormatStringVar, varArgs...)
 
 }
 
-var xWidgetClassAddShortcut func(uintptr, uintptr)
+var xWidgetClassGTypeAddShortcut func(uintptr, uintptr)
 
 // Installs a shortcut in @widget_class.
 //
@@ -209,13 +209,13 @@ var xWidgetClassAddShortcut func(uintptr, uintptr)
 //
 // This function must only be used in class initialization functions
 // otherwise it is not guaranteed that the shortcut will be installed.
-func (x *WidgetClass) AddShortcut(ShortcutVar *Shortcut) {
+func (x *WidgetClassGType) AddShortcut(ShortcutVar *Shortcut) {
 
-	xWidgetClassAddShortcut(x.GoPointer(), ShortcutVar.GoPointer())
+	xWidgetClassGTypeAddShortcut(x.GoPointer(), ShortcutVar.GoPointer())
 
 }
 
-var xWidgetClassBindTemplateCallbackFull func(uintptr, string, uintptr)
+var xWidgetClassGTypeBindTemplateCallbackFull func(uintptr, string, uintptr)
 
 // Associates a name to be used in GtkBuilder XML with a symbol.
 //
@@ -226,13 +226,13 @@ var xWidgetClassBindTemplateCallbackFull func(uintptr, string, uintptr)
 //
 // Note that this must be called from a composite widget classes
 // class initializer after calling [method@Gtk.WidgetClass.set_template].
-func (x *WidgetClass) BindTemplateCallbackFull(CallbackNameVar string, CallbackSymbolVar *gobject.Callback) {
+func (x *WidgetClassGType) BindTemplateCallbackFull(CallbackNameVar string, CallbackSymbolVar *gobject.Callback) {
 
-	xWidgetClassBindTemplateCallbackFull(x.GoPointer(), CallbackNameVar, glib.NewCallback(CallbackSymbolVar))
+	xWidgetClassGTypeBindTemplateCallbackFull(x.GoPointer(), CallbackNameVar, glib.NewCallback(CallbackSymbolVar))
 
 }
 
-var xWidgetClassBindTemplateChildFull func(uintptr, string, bool, int)
+var xWidgetClassGTypeBindTemplateChildFull func(uintptr, string, bool, int)
 
 // Assigns an object declared in the class template XML to be set to
 // a location on a freshly built instance’s private data, or
@@ -262,13 +262,13 @@ var xWidgetClassBindTemplateChildFull func(uintptr, string, bool, int)
 //
 // Note that this must be called from a composite widget classes class
 // initializer after calling [method@Gtk.WidgetClass.set_template].
-func (x *WidgetClass) BindTemplateChildFull(NameVar string, InternalChildVar bool, StructOffsetVar int) {
+func (x *WidgetClassGType) BindTemplateChildFull(NameVar string, InternalChildVar bool, StructOffsetVar int) {
 
-	xWidgetClassBindTemplateChildFull(x.GoPointer(), NameVar, InternalChildVar, StructOffsetVar)
+	xWidgetClassGTypeBindTemplateChildFull(x.GoPointer(), NameVar, InternalChildVar, StructOffsetVar)
 
 }
 
-var xWidgetClassGetAccessibleRole func(uintptr) AccessibleRole
+var xWidgetClassGTypeGetAccessibleRole func(uintptr) AccessibleRole
 
 // Retrieves the accessible role used by the given widget class.
 //
@@ -276,48 +276,48 @@ var xWidgetClassGetAccessibleRole func(uintptr) AccessibleRole
 // differently by assistive technologies.
 //
 // See also: [method@Gtk.Accessible.get_accessible_role].
-func (x *WidgetClass) GetAccessibleRole() AccessibleRole {
+func (x *WidgetClassGType) GetAccessibleRole() AccessibleRole {
 
-	cret := xWidgetClassGetAccessibleRole(x.GoPointer())
+	cret := xWidgetClassGTypeGetAccessibleRole(x.GoPointer())
 	return cret
 }
 
-var xWidgetClassGetActivateSignal func(uintptr) uint
+var xWidgetClassGTypeGetActivateSignal func(uintptr) uint
 
 // Retrieves the signal id for the activation signal.
 //
 // The activation signal is set using
 // [method@Gtk.WidgetClass.set_activate_signal].
-func (x *WidgetClass) GetActivateSignal() uint {
+func (x *WidgetClassGType) GetActivateSignal() uint {
 
-	cret := xWidgetClassGetActivateSignal(x.GoPointer())
+	cret := xWidgetClassGTypeGetActivateSignal(x.GoPointer())
 	return cret
 }
 
-var xWidgetClassGetCssName func(uintptr) string
+var xWidgetClassGTypeGetCssName func(uintptr) string
 
 // Gets the name used by this class for matching in CSS code.
 //
 // See [method@Gtk.WidgetClass.set_css_name] for details.
-func (x *WidgetClass) GetCssName() string {
+func (x *WidgetClassGType) GetCssName() string {
 
-	cret := xWidgetClassGetCssName(x.GoPointer())
+	cret := xWidgetClassGTypeGetCssName(x.GoPointer())
 	return cret
 }
 
-var xWidgetClassGetLayoutManagerType func(uintptr) types.GType
+var xWidgetClassGTypeGetLayoutManagerType func(uintptr) types.GType
 
 // Retrieves the type of the [class@Gtk.LayoutManager]
 // used by widgets of class @widget_class.
 //
 // See also: [method@Gtk.WidgetClass.set_layout_manager_type].
-func (x *WidgetClass) GetLayoutManagerType() types.GType {
+func (x *WidgetClassGType) GetLayoutManagerType() types.GType {
 
-	cret := xWidgetClassGetLayoutManagerType(x.GoPointer())
+	cret := xWidgetClassGTypeGetLayoutManagerType(x.GoPointer())
 	return cret
 }
 
-var xWidgetClassInstallAction func(uintptr, string, string, uintptr)
+var xWidgetClassGTypeInstallAction func(uintptr, string, string, uintptr)
 
 // Adds an action for all instances of a widget class.
 //
@@ -326,13 +326,13 @@ var xWidgetClassInstallAction func(uintptr, string, string, uintptr)
 // Actions installed by this function are stateless. The only state
 // they have is whether they are enabled or not (which can be changed
 // with [method@Gtk.Widget.action_set_enabled]).
-func (x *WidgetClass) InstallAction(ActionNameVar string, ParameterTypeVar string, ActivateVar *WidgetActionActivateFunc) {
+func (x *WidgetClassGType) InstallAction(ActionNameVar string, ParameterTypeVar string, ActivateVar *WidgetActionActivateFunc) {
 
-	xWidgetClassInstallAction(x.GoPointer(), ActionNameVar, ParameterTypeVar, glib.NewCallback(ActivateVar))
+	xWidgetClassGTypeInstallAction(x.GoPointer(), ActionNameVar, ParameterTypeVar, glib.NewCallback(ActivateVar))
 
 }
 
-var xWidgetClassInstallPropertyAction func(uintptr, string, string)
+var xWidgetClassGTypeInstallPropertyAction func(uintptr, string, string)
 
 // Installs an action called @action_name on @widget_class and
 // binds its state to the value of the @property_name property.
@@ -349,13 +349,13 @@ var xWidgetClassInstallPropertyAction func(uintptr, string, string)
 // If the property is boolean, the action will have no parameter and
 // toggle the property value. Otherwise, the action will have a parameter
 // of the same type as the property.
-func (x *WidgetClass) InstallPropertyAction(ActionNameVar string, PropertyNameVar string) {
+func (x *WidgetClassGType) InstallPropertyAction(ActionNameVar string, PropertyNameVar string) {
 
-	xWidgetClassInstallPropertyAction(x.GoPointer(), ActionNameVar, PropertyNameVar)
+	xWidgetClassGTypeInstallPropertyAction(x.GoPointer(), ActionNameVar, PropertyNameVar)
 
 }
 
-var xWidgetClassQueryAction func(uintptr, uint, *types.GType, *string, **glib.VariantType, *string) bool
+var xWidgetClassGTypeQueryAction func(uintptr, uint, *types.GType, *string, **glib.VariantType, *string) bool
 
 // Returns details about an action that has been
 // installed for @widget_class.
@@ -366,25 +366,25 @@ var xWidgetClassQueryAction func(uintptr, uint, *types.GType, *string, **glib.Va
 // Note that this function will also return actions defined
 // by parent classes. You can identify those by looking
 // at @owner.
-func (x *WidgetClass) QueryAction(IndexVar uint, OwnerVar *types.GType, ActionNameVar *string, ParameterTypeVar **glib.VariantType, PropertyNameVar *string) bool {
+func (x *WidgetClassGType) QueryAction(IndexVar uint, OwnerVar *types.GType, ActionNameVar *string, ParameterTypeVar **glib.VariantType, PropertyNameVar *string) bool {
 
-	cret := xWidgetClassQueryAction(x.GoPointer(), IndexVar, OwnerVar, ActionNameVar, ParameterTypeVar, PropertyNameVar)
+	cret := xWidgetClassGTypeQueryAction(x.GoPointer(), IndexVar, OwnerVar, ActionNameVar, ParameterTypeVar, PropertyNameVar)
 	return cret
 }
 
-var xWidgetClassSetAccessibleRole func(uintptr, AccessibleRole)
+var xWidgetClassGTypeSetAccessibleRole func(uintptr, AccessibleRole)
 
 // Sets the accessible role used by the given widget class.
 //
 // Different accessible roles have different states, and are
 // rendered differently by assistive technologies.
-func (x *WidgetClass) SetAccessibleRole(AccessibleRoleVar AccessibleRole) {
+func (x *WidgetClassGType) SetAccessibleRole(AccessibleRoleVar AccessibleRole) {
 
-	xWidgetClassSetAccessibleRole(x.GoPointer(), AccessibleRoleVar)
+	xWidgetClassGTypeSetAccessibleRole(x.GoPointer(), AccessibleRoleVar)
 
 }
 
-var xWidgetClassSetActivateSignal func(uintptr, uint)
+var xWidgetClassGTypeSetActivateSignal func(uintptr, uint)
 
 // Sets the activation signal for a widget class.
 //
@@ -392,13 +392,13 @@ var xWidgetClassSetActivateSignal func(uintptr, uint)
 //
 // The @signal_id must have been registered with [function.GObject.signal_new]
 // or [func@GObject.signal_newv] before calling this function.
-func (x *WidgetClass) SetActivateSignal(SignalIdVar uint) {
+func (x *WidgetClassGType) SetActivateSignal(SignalIdVar uint) {
 
-	xWidgetClassSetActivateSignal(x.GoPointer(), SignalIdVar)
+	xWidgetClassGTypeSetActivateSignal(x.GoPointer(), SignalIdVar)
 
 }
 
-var xWidgetClassSetActivateSignalFromName func(uintptr, string)
+var xWidgetClassGTypeSetActivateSignalFromName func(uintptr, string)
 
 // Sets the activation signal for a widget class.
 //
@@ -408,26 +408,26 @@ var xWidgetClassSetActivateSignalFromName func(uintptr, string)
 //
 // The @signal_name must have been registered with [function.GObject.signal_new]
 // or [func@GObject.signal_newv] before calling this function.
-func (x *WidgetClass) SetActivateSignalFromName(SignalNameVar string) {
+func (x *WidgetClassGType) SetActivateSignalFromName(SignalNameVar string) {
 
-	xWidgetClassSetActivateSignalFromName(x.GoPointer(), SignalNameVar)
+	xWidgetClassGTypeSetActivateSignalFromName(x.GoPointer(), SignalNameVar)
 
 }
 
-var xWidgetClassSetCssName func(uintptr, string)
+var xWidgetClassGTypeSetCssName func(uintptr, string)
 
 // Sets the name to be used for CSS matching of widgets.
 //
 // If this function is not called for a given class, the name
 // set on the parent class is used. By default, `GtkWidget`
 // uses the name "widget".
-func (x *WidgetClass) SetCssName(NameVar string) {
+func (x *WidgetClassGType) SetCssName(NameVar string) {
 
-	xWidgetClassSetCssName(x.GoPointer(), NameVar)
+	xWidgetClassGTypeSetCssName(x.GoPointer(), NameVar)
 
 }
 
-var xWidgetClassSetLayoutManagerType func(uintptr, types.GType)
+var xWidgetClassGTypeSetLayoutManagerType func(uintptr, types.GType)
 
 // Sets the type to be used for creating layout managers for
 // widgets of @widget_class.
@@ -436,13 +436,13 @@ var xWidgetClassSetLayoutManagerType func(uintptr, types.GType)
 //
 // This function should only be called from class init functions
 // of widgets.
-func (x *WidgetClass) SetLayoutManagerType(TypeVar types.GType) {
+func (x *WidgetClassGType) SetLayoutManagerType(TypeVar types.GType) {
 
-	xWidgetClassSetLayoutManagerType(x.GoPointer(), TypeVar)
+	xWidgetClassGTypeSetLayoutManagerType(x.GoPointer(), TypeVar)
 
 }
 
-var xWidgetClassSetTemplate func(uintptr, *glib.Bytes)
+var xWidgetClassGTypeSetTemplate func(uintptr, *glib.Bytes)
 
 // This should be called at class initialization time to specify
 // the `GtkBuilder` XML to be used to extend a widget.
@@ -452,13 +452,13 @@ var xWidgetClassSetTemplate func(uintptr, *glib.Bytes)
 //
 // Note that any class that installs templates must call
 // [method@Gtk.Widget.init_template] in the widget’s instance initializer.
-func (x *WidgetClass) SetTemplate(TemplateBytesVar *glib.Bytes) {
+func (x *WidgetClassGType) SetTemplate(TemplateBytesVar *glib.Bytes) {
 
-	xWidgetClassSetTemplate(x.GoPointer(), TemplateBytesVar)
+	xWidgetClassGTypeSetTemplate(x.GoPointer(), TemplateBytesVar)
 
 }
 
-var xWidgetClassSetTemplateFromResource func(uintptr, string)
+var xWidgetClassGTypeSetTemplateFromResource func(uintptr, string)
 
 // A convenience function that calls [method@Gtk.WidgetClass.set_template]
 // with the contents of a resource.
@@ -466,13 +466,13 @@ var xWidgetClassSetTemplateFromResource func(uintptr, string)
 // Note that any class that installs templates must call
 // [method@Gtk.Widget.init_template] in the widget’s instance
 // initializer.
-func (x *WidgetClass) SetTemplateFromResource(ResourceNameVar string) {
+func (x *WidgetClassGType) SetTemplateFromResource(ResourceNameVar string) {
 
-	xWidgetClassSetTemplateFromResource(x.GoPointer(), ResourceNameVar)
+	xWidgetClassGTypeSetTemplateFromResource(x.GoPointer(), ResourceNameVar)
 
 }
 
-var xWidgetClassSetTemplateScope func(uintptr, uintptr)
+var xWidgetClassGTypeSetTemplateScope func(uintptr, uintptr)
 
 // Overrides the default scope to be used when parsing the class template.
 //
@@ -480,15 +480,15 @@ var xWidgetClassSetTemplateScope func(uintptr, uintptr)
 //
 // Note that this must be called from a composite widget classes class
 // initializer after calling [method@Gtk.WidgetClass.set_template].
-func (x *WidgetClass) SetTemplateScope(ScopeVar BuilderScope) {
+func (x *WidgetClassGType) SetTemplateScope(ScopeVar BuilderScope) {
 
-	xWidgetClassSetTemplateScope(x.GoPointer(), ScopeVar.GoPointer())
+	xWidgetClassGTypeSetTemplateScope(x.GoPointer(), ScopeVar.GoPointer())
 
 }
 
 // OverrideShow sets the "show" callback function.
 // Signal emitted when widget is shown
-func (x *WidgetClass) OverrideShow(cb func(*Widget)) {
+func (x *WidgetClassGType) OverrideShow(cb func(*Widget)) {
 	if cb == nil {
 		x.xShow = 0
 	} else {
@@ -500,7 +500,7 @@ func (x *WidgetClass) OverrideShow(cb func(*Widget)) {
 
 // GetShow gets the "show" callback function.
 // Signal emitted when widget is shown
-func (x *WidgetClass) GetShow() func(*Widget) {
+func (x *WidgetClassGType) GetShow() func(*Widget) {
 	if x.xShow == 0 {
 		return nil
 	}
@@ -513,7 +513,7 @@ func (x *WidgetClass) GetShow() func(*Widget) {
 
 // OverrideHide sets the "hide" callback function.
 // Signal emitted when widget is hidden.
-func (x *WidgetClass) OverrideHide(cb func(*Widget)) {
+func (x *WidgetClassGType) OverrideHide(cb func(*Widget)) {
 	if cb == nil {
 		x.xHide = 0
 	} else {
@@ -525,7 +525,7 @@ func (x *WidgetClass) OverrideHide(cb func(*Widget)) {
 
 // GetHide gets the "hide" callback function.
 // Signal emitted when widget is hidden.
-func (x *WidgetClass) GetHide() func(*Widget) {
+func (x *WidgetClassGType) GetHide() func(*Widget) {
 	if x.xHide == 0 {
 		return nil
 	}
@@ -542,7 +542,7 @@ func (x *WidgetClass) GetHide() func(*Widget) {
 //	when the widget is visible (which is controlled with
 //	gtk_widget_set_visible()) and all its parents up to the toplevel
 //	widget are also visible.
-func (x *WidgetClass) OverrideMap(cb func(*Widget)) {
+func (x *WidgetClassGType) OverrideMap(cb func(*Widget)) {
 	if cb == nil {
 		x.xMap = 0
 	} else {
@@ -558,7 +558,7 @@ func (x *WidgetClass) OverrideMap(cb func(*Widget)) {
 //	when the widget is visible (which is controlled with
 //	gtk_widget_set_visible()) and all its parents up to the toplevel
 //	widget are also visible.
-func (x *WidgetClass) GetMap() func(*Widget) {
+func (x *WidgetClassGType) GetMap() func(*Widget) {
 	if x.xMap == 0 {
 		return nil
 	}
@@ -574,7 +574,7 @@ func (x *WidgetClass) GetMap() func(*Widget) {
 //
 //	means that either it or any of its parents up to the toplevel
 //	widget have been set as hidden.
-func (x *WidgetClass) OverrideUnmap(cb func(*Widget)) {
+func (x *WidgetClassGType) OverrideUnmap(cb func(*Widget)) {
 	if cb == nil {
 		x.xUnmap = 0
 	} else {
@@ -589,7 +589,7 @@ func (x *WidgetClass) OverrideUnmap(cb func(*Widget)) {
 //
 //	means that either it or any of its parents up to the toplevel
 //	widget have been set as hidden.
-func (x *WidgetClass) GetUnmap() func(*Widget) {
+func (x *WidgetClassGType) GetUnmap() func(*Widget) {
 	if x.xUnmap == 0 {
 		return nil
 	}
@@ -605,7 +605,7 @@ func (x *WidgetClass) GetUnmap() func(*Widget) {
 //
 //	`GdkSurface`, which means that gtk_widget_realize() has been called or
 //	the widget has been mapped (that is, it is going to be drawn).
-func (x *WidgetClass) OverrideRealize(cb func(*Widget)) {
+func (x *WidgetClassGType) OverrideRealize(cb func(*Widget)) {
 	if cb == nil {
 		x.xRealize = 0
 	} else {
@@ -620,7 +620,7 @@ func (x *WidgetClass) OverrideRealize(cb func(*Widget)) {
 //
 //	`GdkSurface`, which means that gtk_widget_realize() has been called or
 //	the widget has been mapped (that is, it is going to be drawn).
-func (x *WidgetClass) GetRealize() func(*Widget) {
+func (x *WidgetClassGType) GetRealize() func(*Widget) {
 	if x.xRealize == 0 {
 		return nil
 	}
@@ -637,7 +637,7 @@ func (x *WidgetClass) GetRealize() func(*Widget) {
 //	widget is destroyed, which means that gtk_widget_unrealize() has
 //	been called or the widget has been unmapped (that is, it is going
 //	to be hidden).
-func (x *WidgetClass) OverrideUnrealize(cb func(*Widget)) {
+func (x *WidgetClassGType) OverrideUnrealize(cb func(*Widget)) {
 	if cb == nil {
 		x.xUnrealize = 0
 	} else {
@@ -653,7 +653,7 @@ func (x *WidgetClass) OverrideUnrealize(cb func(*Widget)) {
 //	widget is destroyed, which means that gtk_widget_unrealize() has
 //	been called or the widget has been unmapped (that is, it is going
 //	to be hidden).
-func (x *WidgetClass) GetUnrealize() func(*Widget) {
+func (x *WidgetClassGType) GetUnrealize() func(*Widget) {
 	if x.xUnrealize == 0 {
 		return nil
 	}
@@ -668,7 +668,7 @@ func (x *WidgetClass) GetUnrealize() func(*Widget) {
 // Called when the widget gets added to a `GtkRoot` widget. Must
 //
 //	chain up
-func (x *WidgetClass) OverrideRoot(cb func(*Widget)) {
+func (x *WidgetClassGType) OverrideRoot(cb func(*Widget)) {
 	if cb == nil {
 		x.xRoot = 0
 	} else {
@@ -682,7 +682,7 @@ func (x *WidgetClass) OverrideRoot(cb func(*Widget)) {
 // Called when the widget gets added to a `GtkRoot` widget. Must
 //
 //	chain up
-func (x *WidgetClass) GetRoot() func(*Widget) {
+func (x *WidgetClassGType) GetRoot() func(*Widget) {
 	if x.xRoot == 0 {
 		return nil
 	}
@@ -697,7 +697,7 @@ func (x *WidgetClass) GetRoot() func(*Widget) {
 // Called when the widget is about to be removed from its
 //
 //	`GtkRoot` widget. Must chain up
-func (x *WidgetClass) OverrideUnroot(cb func(*Widget)) {
+func (x *WidgetClassGType) OverrideUnroot(cb func(*Widget)) {
 	if cb == nil {
 		x.xUnroot = 0
 	} else {
@@ -711,7 +711,7 @@ func (x *WidgetClass) OverrideUnroot(cb func(*Widget)) {
 // Called when the widget is about to be removed from its
 //
 //	`GtkRoot` widget. Must chain up
-func (x *WidgetClass) GetUnroot() func(*Widget) {
+func (x *WidgetClassGType) GetUnroot() func(*Widget) {
 	if x.xUnroot == 0 {
 		return nil
 	}
@@ -726,7 +726,7 @@ func (x *WidgetClass) GetUnroot() func(*Widget) {
 // Called to set the allocation, if the widget does
 //
 //	not have a layout manager.
-func (x *WidgetClass) OverrideSizeAllocate(cb func(*Widget, int, int, int)) {
+func (x *WidgetClassGType) OverrideSizeAllocate(cb func(*Widget, int, int, int)) {
 	if cb == nil {
 		x.xSizeAllocate = 0
 	} else {
@@ -740,7 +740,7 @@ func (x *WidgetClass) OverrideSizeAllocate(cb func(*Widget, int, int, int)) {
 // Called to set the allocation, if the widget does
 //
 //	not have a layout manager.
-func (x *WidgetClass) GetSizeAllocate() func(*Widget, int, int, int) {
+func (x *WidgetClassGType) GetSizeAllocate() func(*Widget, int, int, int) {
 	if x.xSizeAllocate == 0 {
 		return nil
 	}
@@ -755,7 +755,7 @@ func (x *WidgetClass) GetSizeAllocate() func(*Widget, int, int, int) {
 // Signal emitted when the widget state changes,
 //
 //	see gtk_widget_get_state_flags().
-func (x *WidgetClass) OverrideStateFlagsChanged(cb func(*Widget, StateFlags)) {
+func (x *WidgetClassGType) OverrideStateFlagsChanged(cb func(*Widget, StateFlags)) {
 	if cb == nil {
 		x.xStateFlagsChanged = 0
 	} else {
@@ -769,7 +769,7 @@ func (x *WidgetClass) OverrideStateFlagsChanged(cb func(*Widget, StateFlags)) {
 // Signal emitted when the widget state changes,
 //
 //	see gtk_widget_get_state_flags().
-func (x *WidgetClass) GetStateFlagsChanged() func(*Widget, StateFlags) {
+func (x *WidgetClassGType) GetStateFlagsChanged() func(*Widget, StateFlags) {
 	if x.xStateFlagsChanged == 0 {
 		return nil
 	}
@@ -784,7 +784,7 @@ func (x *WidgetClass) GetStateFlagsChanged() func(*Widget, StateFlags) {
 // Signal emitted when the text direction of a
 //
 //	widget changes.
-func (x *WidgetClass) OverrideDirectionChanged(cb func(*Widget, TextDirection)) {
+func (x *WidgetClassGType) OverrideDirectionChanged(cb func(*Widget, TextDirection)) {
 	if cb == nil {
 		x.xDirectionChanged = 0
 	} else {
@@ -798,7 +798,7 @@ func (x *WidgetClass) OverrideDirectionChanged(cb func(*Widget, TextDirection)) 
 // Signal emitted when the text direction of a
 //
 //	widget changes.
-func (x *WidgetClass) GetDirectionChanged() func(*Widget, TextDirection) {
+func (x *WidgetClassGType) GetDirectionChanged() func(*Widget, TextDirection) {
 	if x.xDirectionChanged == 0 {
 		return nil
 	}
@@ -826,7 +826,7 @@ func (x *WidgetClass) GetDirectionChanged() func(*Widget, TextDirection) {
 //	which trades height-for-width or width-for-height must respond properly
 //	to a for_size value &gt;= -1 passed to `GtkWidgetClass.measure`, for both
 //	possible orientations.
-func (x *WidgetClass) OverrideGetRequestMode(cb func(*Widget) SizeRequestMode) {
+func (x *WidgetClassGType) OverrideGetRequestMode(cb func(*Widget) SizeRequestMode) {
 	if cb == nil {
 		x.xGetRequestMode = 0
 	} else {
@@ -853,7 +853,7 @@ func (x *WidgetClass) OverrideGetRequestMode(cb func(*Widget) SizeRequestMode) {
 //	which trades height-for-width or width-for-height must respond properly
 //	to a for_size value &gt;= -1 passed to `GtkWidgetClass.measure`, for both
 //	possible orientations.
-func (x *WidgetClass) GetGetRequestMode() func(*Widget) SizeRequestMode {
+func (x *WidgetClassGType) GetGetRequestMode() func(*Widget) SizeRequestMode {
 	if x.xGetRequestMode == 0 {
 		return nil
 	}
@@ -871,7 +871,7 @@ func (x *WidgetClass) GetGetRequestMode() func(*Widget) SizeRequestMode {
 //	Depending on the orientation parameter, the passed for_size can be
 //	interpreted as width or height. A widget will never be allocated less
 //	than its minimum size.
-func (x *WidgetClass) OverrideMeasure(cb func(*Widget, Orientation, int, *int, *int, *int, *int)) {
+func (x *WidgetClassGType) OverrideMeasure(cb func(*Widget, Orientation, int, *int, *int, *int, *int)) {
 	if cb == nil {
 		x.xMeasure = 0
 	} else {
@@ -888,7 +888,7 @@ func (x *WidgetClass) OverrideMeasure(cb func(*Widget, Orientation, int, *int, *
 //	Depending on the orientation parameter, the passed for_size can be
 //	interpreted as width or height. A widget will never be allocated less
 //	than its minimum size.
-func (x *WidgetClass) GetMeasure() func(*Widget, Orientation, int, *int, *int, *int, *int) {
+func (x *WidgetClassGType) GetMeasure() func(*Widget, Orientation, int, *int, *int, *int, *int) {
 	if x.xMeasure == 0 {
 		return nil
 	}
@@ -903,7 +903,7 @@ func (x *WidgetClass) GetMeasure() func(*Widget, Orientation, int, *int, *int, *
 // Activates the @widget if @group_cycling is
 //
 //	%FALSE, and just grabs the focus if @group_cycling is %TRUE.
-func (x *WidgetClass) OverrideMnemonicActivate(cb func(*Widget, bool) bool) {
+func (x *WidgetClassGType) OverrideMnemonicActivate(cb func(*Widget, bool) bool) {
 	if cb == nil {
 		x.xMnemonicActivate = 0
 	} else {
@@ -917,7 +917,7 @@ func (x *WidgetClass) OverrideMnemonicActivate(cb func(*Widget, bool) bool) {
 // Activates the @widget if @group_cycling is
 //
 //	%FALSE, and just grabs the focus if @group_cycling is %TRUE.
-func (x *WidgetClass) GetMnemonicActivate() func(*Widget, bool) bool {
+func (x *WidgetClassGType) GetMnemonicActivate() func(*Widget, bool) bool {
 	if x.xMnemonicActivate == 0 {
 		return nil
 	}
@@ -932,7 +932,7 @@ func (x *WidgetClass) GetMnemonicActivate() func(*Widget, bool) bool {
 // Causes @widget to have the keyboard focus for the
 //
 //	`GtkWindow` it’s inside.
-func (x *WidgetClass) OverrideGrabFocus(cb func(*Widget) bool) {
+func (x *WidgetClassGType) OverrideGrabFocus(cb func(*Widget) bool) {
 	if cb == nil {
 		x.xGrabFocus = 0
 	} else {
@@ -946,7 +946,7 @@ func (x *WidgetClass) OverrideGrabFocus(cb func(*Widget) bool) {
 // Causes @widget to have the keyboard focus for the
 //
 //	`GtkWindow` it’s inside.
-func (x *WidgetClass) GetGrabFocus() func(*Widget) bool {
+func (x *WidgetClassGType) GetGrabFocus() func(*Widget) bool {
 	if x.xGrabFocus == 0 {
 		return nil
 	}
@@ -959,7 +959,7 @@ func (x *WidgetClass) GetGrabFocus() func(*Widget) bool {
 
 // OverrideFocus sets the "focus" callback function.
 // Vfunc for gtk_widget_child_focus()
-func (x *WidgetClass) OverrideFocus(cb func(*Widget, DirectionType) bool) {
+func (x *WidgetClassGType) OverrideFocus(cb func(*Widget, DirectionType) bool) {
 	if cb == nil {
 		x.xFocus = 0
 	} else {
@@ -971,7 +971,7 @@ func (x *WidgetClass) OverrideFocus(cb func(*Widget, DirectionType) bool) {
 
 // GetFocus gets the "focus" callback function.
 // Vfunc for gtk_widget_child_focus()
-func (x *WidgetClass) GetFocus() func(*Widget, DirectionType) bool {
+func (x *WidgetClassGType) GetFocus() func(*Widget, DirectionType) bool {
 	if x.xFocus == 0 {
 		return nil
 	}
@@ -984,7 +984,7 @@ func (x *WidgetClass) GetFocus() func(*Widget, DirectionType) bool {
 
 // OverrideSetFocusChild sets the "set_focus_child" callback function.
 // Sets the focused child of a widget. Must chain up
-func (x *WidgetClass) OverrideSetFocusChild(cb func(*Widget, *Widget)) {
+func (x *WidgetClassGType) OverrideSetFocusChild(cb func(*Widget, *Widget)) {
 	if cb == nil {
 		x.xSetFocusChild = 0
 	} else {
@@ -996,7 +996,7 @@ func (x *WidgetClass) OverrideSetFocusChild(cb func(*Widget, *Widget)) {
 
 // GetSetFocusChild gets the "set_focus_child" callback function.
 // Sets the focused child of a widget. Must chain up
-func (x *WidgetClass) GetSetFocusChild() func(*Widget, *Widget) {
+func (x *WidgetClassGType) GetSetFocusChild() func(*Widget, *Widget) {
 	if x.xSetFocusChild == 0 {
 		return nil
 	}
@@ -1009,7 +1009,7 @@ func (x *WidgetClass) GetSetFocusChild() func(*Widget, *Widget) {
 
 // OverrideMoveFocus sets the "move_focus" callback function.
 // Signal emitted when a change of focus is requested
-func (x *WidgetClass) OverrideMoveFocus(cb func(*Widget, DirectionType)) {
+func (x *WidgetClassGType) OverrideMoveFocus(cb func(*Widget, DirectionType)) {
 	if cb == nil {
 		x.xMoveFocus = 0
 	} else {
@@ -1021,7 +1021,7 @@ func (x *WidgetClass) OverrideMoveFocus(cb func(*Widget, DirectionType)) {
 
 // GetMoveFocus gets the "move_focus" callback function.
 // Signal emitted when a change of focus is requested
-func (x *WidgetClass) GetMoveFocus() func(*Widget, DirectionType) {
+func (x *WidgetClassGType) GetMoveFocus() func(*Widget, DirectionType) {
 	if x.xMoveFocus == 0 {
 		return nil
 	}
@@ -1034,7 +1034,7 @@ func (x *WidgetClass) GetMoveFocus() func(*Widget, DirectionType) {
 
 // OverrideKeynavFailed sets the "keynav_failed" callback function.
 // Signal emitted if keyboard navigation fails.
-func (x *WidgetClass) OverrideKeynavFailed(cb func(*Widget, DirectionType) bool) {
+func (x *WidgetClassGType) OverrideKeynavFailed(cb func(*Widget, DirectionType) bool) {
 	if cb == nil {
 		x.xKeynavFailed = 0
 	} else {
@@ -1046,7 +1046,7 @@ func (x *WidgetClass) OverrideKeynavFailed(cb func(*Widget, DirectionType) bool)
 
 // GetKeynavFailed gets the "keynav_failed" callback function.
 // Signal emitted if keyboard navigation fails.
-func (x *WidgetClass) GetKeynavFailed() func(*Widget, DirectionType) bool {
+func (x *WidgetClassGType) GetKeynavFailed() func(*Widget, DirectionType) bool {
 	if x.xKeynavFailed == 0 {
 		return nil
 	}
@@ -1062,7 +1062,7 @@ func (x *WidgetClass) GetKeynavFailed() func(*Widget, DirectionType) bool {
 //
 //	hover timeout has expired with the cursor hovering “above”
 //	widget; or emitted when widget got focus in keyboard mode.
-func (x *WidgetClass) OverrideQueryTooltip(cb func(*Widget, int, int, bool, *Tooltip) bool) {
+func (x *WidgetClassGType) OverrideQueryTooltip(cb func(*Widget, int, int, bool, *Tooltip) bool) {
 	if cb == nil {
 		x.xQueryTooltip = 0
 	} else {
@@ -1077,7 +1077,7 @@ func (x *WidgetClass) OverrideQueryTooltip(cb func(*Widget, int, int, bool, *Too
 //
 //	hover timeout has expired with the cursor hovering “above”
 //	widget; or emitted when widget got focus in keyboard mode.
-func (x *WidgetClass) GetQueryTooltip() func(*Widget, int, int, bool, *Tooltip) bool {
+func (x *WidgetClassGType) GetQueryTooltip() func(*Widget, int, int, bool, *Tooltip) bool {
 	if x.xQueryTooltip == 0 {
 		return nil
 	}
@@ -1092,7 +1092,7 @@ func (x *WidgetClass) GetQueryTooltip() func(*Widget, int, int, bool, *Tooltip) 
 // Computes whether a container should give this
 //
 //	widget extra space when possible.
-func (x *WidgetClass) OverrideComputeExpand(cb func(*Widget, bool, bool)) {
+func (x *WidgetClassGType) OverrideComputeExpand(cb func(*Widget, bool, bool)) {
 	if cb == nil {
 		x.xComputeExpand = 0
 	} else {
@@ -1106,7 +1106,7 @@ func (x *WidgetClass) OverrideComputeExpand(cb func(*Widget, bool, bool)) {
 // Computes whether a container should give this
 //
 //	widget extra space when possible.
-func (x *WidgetClass) GetComputeExpand() func(*Widget, bool, bool) {
+func (x *WidgetClassGType) GetComputeExpand() func(*Widget, bool, bool) {
 	if x.xComputeExpand == 0 {
 		return nil
 	}
@@ -1123,7 +1123,7 @@ func (x *WidgetClass) GetComputeExpand() func(*Widget, bool, bool) {
 //	should then discard their caches that depend on CSS and queue resizes or
 //	redraws accordingly. The default implementation will take care of this for
 //	all the default CSS properties, so implementations must chain up.
-func (x *WidgetClass) OverrideCssChanged(cb func(*Widget, *CssStyleChange)) {
+func (x *WidgetClassGType) OverrideCssChanged(cb func(*Widget, *CssStyleChange)) {
 	if cb == nil {
 		x.xCssChanged = 0
 	} else {
@@ -1139,7 +1139,7 @@ func (x *WidgetClass) OverrideCssChanged(cb func(*Widget, *CssStyleChange)) {
 //	should then discard their caches that depend on CSS and queue resizes or
 //	redraws accordingly. The default implementation will take care of this for
 //	all the default CSS properties, so implementations must chain up.
-func (x *WidgetClass) GetCssChanged() func(*Widget, *CssStyleChange) {
+func (x *WidgetClassGType) GetCssChanged() func(*Widget, *CssStyleChange) {
 	if x.xCssChanged == 0 {
 		return nil
 	}
@@ -1152,7 +1152,7 @@ func (x *WidgetClass) GetCssChanged() func(*Widget, *CssStyleChange) {
 
 // OverrideSystemSettingChanged sets the "system_setting_changed" callback function.
 // Emitted when a system setting was changed. Must chain up.
-func (x *WidgetClass) OverrideSystemSettingChanged(cb func(*Widget, SystemSetting)) {
+func (x *WidgetClassGType) OverrideSystemSettingChanged(cb func(*Widget, SystemSetting)) {
 	if cb == nil {
 		x.xSystemSettingChanged = 0
 	} else {
@@ -1164,7 +1164,7 @@ func (x *WidgetClass) OverrideSystemSettingChanged(cb func(*Widget, SystemSettin
 
 // GetSystemSettingChanged gets the "system_setting_changed" callback function.
 // Emitted when a system setting was changed. Must chain up.
-func (x *WidgetClass) GetSystemSettingChanged() func(*Widget, SystemSetting) {
+func (x *WidgetClassGType) GetSystemSettingChanged() func(*Widget, SystemSetting) {
 	if x.xSystemSettingChanged == 0 {
 		return nil
 	}
@@ -1177,7 +1177,7 @@ func (x *WidgetClass) GetSystemSettingChanged() func(*Widget, SystemSetting) {
 
 // OverrideSnapshot sets the "snapshot" callback function.
 // Vfunc called when a new snapshot of the widget has to be taken.
-func (x *WidgetClass) OverrideSnapshot(cb func(*Widget, *Snapshot)) {
+func (x *WidgetClassGType) OverrideSnapshot(cb func(*Widget, *Snapshot)) {
 	if cb == nil {
 		x.xSnapshot = 0
 	} else {
@@ -1189,7 +1189,7 @@ func (x *WidgetClass) OverrideSnapshot(cb func(*Widget, *Snapshot)) {
 
 // GetSnapshot gets the "snapshot" callback function.
 // Vfunc called when a new snapshot of the widget has to be taken.
-func (x *WidgetClass) GetSnapshot() func(*Widget, *Snapshot) {
+func (x *WidgetClassGType) GetSnapshot() func(*Widget, *Snapshot) {
 	if x.xSnapshot == 0 {
 		return nil
 	}
@@ -1202,7 +1202,7 @@ func (x *WidgetClass) GetSnapshot() func(*Widget, *Snapshot) {
 
 // OverrideContains sets the "contains" callback function.
 // Vfunc for gtk_widget_contains().
-func (x *WidgetClass) OverrideContains(cb func(*Widget, float64, float64) bool) {
+func (x *WidgetClassGType) OverrideContains(cb func(*Widget, float64, float64) bool) {
 	if cb == nil {
 		x.xContains = 0
 	} else {
@@ -1214,7 +1214,7 @@ func (x *WidgetClass) OverrideContains(cb func(*Widget, float64, float64) bool) 
 
 // GetContains gets the "contains" callback function.
 // Vfunc for gtk_widget_contains().
-func (x *WidgetClass) GetContains() func(*Widget, float64, float64) bool {
+func (x *WidgetClassGType) GetContains() func(*Widget, float64, float64) bool {
 	if x.xContains == 0 {
 		return nil
 	}
@@ -5589,27 +5589,27 @@ func init() {
 	core.PuregoSafeRegister(&xRequisitionCopy, libs, "gtk_requisition_copy")
 	core.PuregoSafeRegister(&xRequisitionFree, libs, "gtk_requisition_free")
 
-	core.PuregoSafeRegister(&xWidgetClassAddBinding, libs, "gtk_widget_class_add_binding")
-	core.PuregoSafeRegister(&xWidgetClassAddBindingAction, libs, "gtk_widget_class_add_binding_action")
-	core.PuregoSafeRegister(&xWidgetClassAddBindingSignal, libs, "gtk_widget_class_add_binding_signal")
-	core.PuregoSafeRegister(&xWidgetClassAddShortcut, libs, "gtk_widget_class_add_shortcut")
-	core.PuregoSafeRegister(&xWidgetClassBindTemplateCallbackFull, libs, "gtk_widget_class_bind_template_callback_full")
-	core.PuregoSafeRegister(&xWidgetClassBindTemplateChildFull, libs, "gtk_widget_class_bind_template_child_full")
-	core.PuregoSafeRegister(&xWidgetClassGetAccessibleRole, libs, "gtk_widget_class_get_accessible_role")
-	core.PuregoSafeRegister(&xWidgetClassGetActivateSignal, libs, "gtk_widget_class_get_activate_signal")
-	core.PuregoSafeRegister(&xWidgetClassGetCssName, libs, "gtk_widget_class_get_css_name")
-	core.PuregoSafeRegister(&xWidgetClassGetLayoutManagerType, libs, "gtk_widget_class_get_layout_manager_type")
-	core.PuregoSafeRegister(&xWidgetClassInstallAction, libs, "gtk_widget_class_install_action")
-	core.PuregoSafeRegister(&xWidgetClassInstallPropertyAction, libs, "gtk_widget_class_install_property_action")
-	core.PuregoSafeRegister(&xWidgetClassQueryAction, libs, "gtk_widget_class_query_action")
-	core.PuregoSafeRegister(&xWidgetClassSetAccessibleRole, libs, "gtk_widget_class_set_accessible_role")
-	core.PuregoSafeRegister(&xWidgetClassSetActivateSignal, libs, "gtk_widget_class_set_activate_signal")
-	core.PuregoSafeRegister(&xWidgetClassSetActivateSignalFromName, libs, "gtk_widget_class_set_activate_signal_from_name")
-	core.PuregoSafeRegister(&xWidgetClassSetCssName, libs, "gtk_widget_class_set_css_name")
-	core.PuregoSafeRegister(&xWidgetClassSetLayoutManagerType, libs, "gtk_widget_class_set_layout_manager_type")
-	core.PuregoSafeRegister(&xWidgetClassSetTemplate, libs, "gtk_widget_class_set_template")
-	core.PuregoSafeRegister(&xWidgetClassSetTemplateFromResource, libs, "gtk_widget_class_set_template_from_resource")
-	core.PuregoSafeRegister(&xWidgetClassSetTemplateScope, libs, "gtk_widget_class_set_template_scope")
+	core.PuregoSafeRegister(&xWidgetClassGTypeAddBinding, libs, "gtk_widget_class_add_binding")
+	core.PuregoSafeRegister(&xWidgetClassGTypeAddBindingAction, libs, "gtk_widget_class_add_binding_action")
+	core.PuregoSafeRegister(&xWidgetClassGTypeAddBindingSignal, libs, "gtk_widget_class_add_binding_signal")
+	core.PuregoSafeRegister(&xWidgetClassGTypeAddShortcut, libs, "gtk_widget_class_add_shortcut")
+	core.PuregoSafeRegister(&xWidgetClassGTypeBindTemplateCallbackFull, libs, "gtk_widget_class_bind_template_callback_full")
+	core.PuregoSafeRegister(&xWidgetClassGTypeBindTemplateChildFull, libs, "gtk_widget_class_bind_template_child_full")
+	core.PuregoSafeRegister(&xWidgetClassGTypeGetAccessibleRole, libs, "gtk_widget_class_get_accessible_role")
+	core.PuregoSafeRegister(&xWidgetClassGTypeGetActivateSignal, libs, "gtk_widget_class_get_activate_signal")
+	core.PuregoSafeRegister(&xWidgetClassGTypeGetCssName, libs, "gtk_widget_class_get_css_name")
+	core.PuregoSafeRegister(&xWidgetClassGTypeGetLayoutManagerType, libs, "gtk_widget_class_get_layout_manager_type")
+	core.PuregoSafeRegister(&xWidgetClassGTypeInstallAction, libs, "gtk_widget_class_install_action")
+	core.PuregoSafeRegister(&xWidgetClassGTypeInstallPropertyAction, libs, "gtk_widget_class_install_property_action")
+	core.PuregoSafeRegister(&xWidgetClassGTypeQueryAction, libs, "gtk_widget_class_query_action")
+	core.PuregoSafeRegister(&xWidgetClassGTypeSetAccessibleRole, libs, "gtk_widget_class_set_accessible_role")
+	core.PuregoSafeRegister(&xWidgetClassGTypeSetActivateSignal, libs, "gtk_widget_class_set_activate_signal")
+	core.PuregoSafeRegister(&xWidgetClassGTypeSetActivateSignalFromName, libs, "gtk_widget_class_set_activate_signal_from_name")
+	core.PuregoSafeRegister(&xWidgetClassGTypeSetCssName, libs, "gtk_widget_class_set_css_name")
+	core.PuregoSafeRegister(&xWidgetClassGTypeSetLayoutManagerType, libs, "gtk_widget_class_set_layout_manager_type")
+	core.PuregoSafeRegister(&xWidgetClassGTypeSetTemplate, libs, "gtk_widget_class_set_template")
+	core.PuregoSafeRegister(&xWidgetClassGTypeSetTemplateFromResource, libs, "gtk_widget_class_set_template_from_resource")
+	core.PuregoSafeRegister(&xWidgetClassGTypeSetTemplateScope, libs, "gtk_widget_class_set_template_scope")
 
 	core.PuregoSafeRegister(&xWidgetGLibType, libs, "gtk_widget_get_type")
 

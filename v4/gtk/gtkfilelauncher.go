@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type FileLauncherClass struct {
+type FileLauncherClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *FileLauncherClass) GoPointer() uintptr {
+func (x *FileLauncherClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -14,10 +14,10 @@ import (
 )
 
 // The `GtkGLAreaClass` structure contains only private data.
-type GLAreaClass struct {
+type GLAreaClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 
 	xRender uintptr
 
@@ -28,13 +28,13 @@ type GLAreaClass struct {
 	Padding [8]uintptr
 }
 
-func (x *GLAreaClass) GoPointer() uintptr {
+func (x *GLAreaClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideRender sets the "render" callback function.
 // class closure for the `GtkGLArea::render` signal
-func (x *GLAreaClass) OverrideRender(cb func(*GLArea, *gdk.GLContext) bool) {
+func (x *GLAreaClassGType) OverrideRender(cb func(*GLArea, *gdk.GLContext) bool) {
 	if cb == nil {
 		x.xRender = 0
 	} else {
@@ -46,7 +46,7 @@ func (x *GLAreaClass) OverrideRender(cb func(*GLArea, *gdk.GLContext) bool) {
 
 // GetRender gets the "render" callback function.
 // class closure for the `GtkGLArea::render` signal
-func (x *GLAreaClass) GetRender() func(*GLArea, *gdk.GLContext) bool {
+func (x *GLAreaClassGType) GetRender() func(*GLArea, *gdk.GLContext) bool {
 	if x.xRender == 0 {
 		return nil
 	}
@@ -59,7 +59,7 @@ func (x *GLAreaClass) GetRender() func(*GLArea, *gdk.GLContext) bool {
 
 // OverrideResize sets the "resize" callback function.
 // class closeure for the `GtkGLArea::resize` signal
-func (x *GLAreaClass) OverrideResize(cb func(*GLArea, int, int)) {
+func (x *GLAreaClassGType) OverrideResize(cb func(*GLArea, int, int)) {
 	if cb == nil {
 		x.xResize = 0
 	} else {
@@ -71,7 +71,7 @@ func (x *GLAreaClass) OverrideResize(cb func(*GLArea, int, int)) {
 
 // GetResize gets the "resize" callback function.
 // class closeure for the `GtkGLArea::resize` signal
-func (x *GLAreaClass) GetResize() func(*GLArea, int, int) {
+func (x *GLAreaClassGType) GetResize() func(*GLArea, int, int) {
 	if x.xResize == 0 {
 		return nil
 	}
@@ -84,7 +84,7 @@ func (x *GLAreaClass) GetResize() func(*GLArea, int, int) {
 
 // OverrideCreateContext sets the "create_context" callback function.
 // class closure for the `GtkGLArea::create-context` signal
-func (x *GLAreaClass) OverrideCreateContext(cb func(*GLArea) *gdk.GLContext) {
+func (x *GLAreaClassGType) OverrideCreateContext(cb func(*GLArea) *gdk.GLContext) {
 	if cb == nil {
 		x.xCreateContext = 0
 	} else {
@@ -100,7 +100,7 @@ func (x *GLAreaClass) OverrideCreateContext(cb func(*GLArea) *gdk.GLContext) {
 
 // GetCreateContext gets the "create_context" callback function.
 // class closure for the `GtkGLArea::create-context` signal
-func (x *GLAreaClass) GetCreateContext() func(*GLArea) *gdk.GLContext {
+func (x *GLAreaClassGType) GetCreateContext() func(*GLArea) *gdk.GLContext {
 	if x.xCreateContext == 0 {
 		return nil
 	}

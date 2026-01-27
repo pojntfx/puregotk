@@ -14,22 +14,22 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type AlertDialogClass struct {
+type AlertDialogClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass DialogClass
+	ParentClass DialogClassGType
 
 	xResponse uintptr
 
 	Padding [4]uintptr
 }
 
-func (x *AlertDialogClass) GoPointer() uintptr {
+func (x *AlertDialogClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideResponse sets the "response" callback function.
-func (x *AlertDialogClass) OverrideResponse(cb func(*AlertDialog, string)) {
+func (x *AlertDialogClassGType) OverrideResponse(cb func(*AlertDialog, string)) {
 	if cb == nil {
 		x.xResponse = 0
 	} else {
@@ -40,7 +40,7 @@ func (x *AlertDialogClass) OverrideResponse(cb func(*AlertDialog, string)) {
 }
 
 // GetResponse gets the "response" callback function.
-func (x *AlertDialogClass) GetResponse() func(*AlertDialog, string) {
+func (x *AlertDialogClassGType) GetResponse() func(*AlertDialog, string) {
 	if x.xResponse == 0 {
 		return nil
 	}

@@ -21,7 +21,7 @@ import (
 // to override it if it is possible that your @is_readable
 // implementation may return %TRUE when the stream is not actually
 // readable.
-type PollableInputStreamInterface struct {
+type PollableInputStreamInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -35,13 +35,13 @@ type PollableInputStreamInterface struct {
 	xReadNonblocking uintptr
 }
 
-func (x *PollableInputStreamInterface) GoPointer() uintptr {
+func (x *PollableInputStreamInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideCanPoll sets the "can_poll" callback function.
 // Checks if the #GPollableInputStream instance is actually pollable
-func (x *PollableInputStreamInterface) OverrideCanPoll(cb func(PollableInputStream) bool) {
+func (x *PollableInputStreamInterfaceGType) OverrideCanPoll(cb func(PollableInputStream) bool) {
 	if cb == nil {
 		x.xCanPoll = 0
 	} else {
@@ -53,7 +53,7 @@ func (x *PollableInputStreamInterface) OverrideCanPoll(cb func(PollableInputStre
 
 // GetCanPoll gets the "can_poll" callback function.
 // Checks if the #GPollableInputStream instance is actually pollable
-func (x *PollableInputStreamInterface) GetCanPoll() func(PollableInputStream) bool {
+func (x *PollableInputStreamInterfaceGType) GetCanPoll() func(PollableInputStream) bool {
 	if x.xCanPoll == 0 {
 		return nil
 	}
@@ -66,7 +66,7 @@ func (x *PollableInputStreamInterface) GetCanPoll() func(PollableInputStream) bo
 
 // OverrideIsReadable sets the "is_readable" callback function.
 // Checks if the stream is readable
-func (x *PollableInputStreamInterface) OverrideIsReadable(cb func(PollableInputStream) bool) {
+func (x *PollableInputStreamInterfaceGType) OverrideIsReadable(cb func(PollableInputStream) bool) {
 	if cb == nil {
 		x.xIsReadable = 0
 	} else {
@@ -78,7 +78,7 @@ func (x *PollableInputStreamInterface) OverrideIsReadable(cb func(PollableInputS
 
 // GetIsReadable gets the "is_readable" callback function.
 // Checks if the stream is readable
-func (x *PollableInputStreamInterface) GetIsReadable() func(PollableInputStream) bool {
+func (x *PollableInputStreamInterfaceGType) GetIsReadable() func(PollableInputStream) bool {
 	if x.xIsReadable == 0 {
 		return nil
 	}
@@ -91,7 +91,7 @@ func (x *PollableInputStreamInterface) GetIsReadable() func(PollableInputStream)
 
 // OverrideCreateSource sets the "create_source" callback function.
 // Creates a #GSource to poll the stream
-func (x *PollableInputStreamInterface) OverrideCreateSource(cb func(PollableInputStream, *Cancellable) *glib.Source) {
+func (x *PollableInputStreamInterfaceGType) OverrideCreateSource(cb func(PollableInputStream, *Cancellable) *glib.Source) {
 	if cb == nil {
 		x.xCreateSource = 0
 	} else {
@@ -103,7 +103,7 @@ func (x *PollableInputStreamInterface) OverrideCreateSource(cb func(PollableInpu
 
 // GetCreateSource gets the "create_source" callback function.
 // Creates a #GSource to poll the stream
-func (x *PollableInputStreamInterface) GetCreateSource() func(PollableInputStream, *Cancellable) *glib.Source {
+func (x *PollableInputStreamInterfaceGType) GetCreateSource() func(PollableInputStream, *Cancellable) *glib.Source {
 	if x.xCreateSource == 0 {
 		return nil
 	}
@@ -118,7 +118,7 @@ func (x *PollableInputStreamInterface) GetCreateSource() func(PollableInputStrea
 // Does a non-blocking read or returns
 //
 //	%G_IO_ERROR_WOULD_BLOCK
-func (x *PollableInputStreamInterface) OverrideReadNonblocking(cb func(PollableInputStream, *[]byte, uint) int) {
+func (x *PollableInputStreamInterfaceGType) OverrideReadNonblocking(cb func(PollableInputStream, *[]byte, uint) int) {
 	if cb == nil {
 		x.xReadNonblocking = 0
 	} else {
@@ -132,7 +132,7 @@ func (x *PollableInputStreamInterface) OverrideReadNonblocking(cb func(PollableI
 // Does a non-blocking read or returns
 //
 //	%G_IO_ERROR_WOULD_BLOCK
-func (x *PollableInputStreamInterface) GetReadNonblocking() func(PollableInputStream, *[]byte, uint) int {
+func (x *PollableInputStreamInterfaceGType) GetReadNonblocking() func(PollableInputStream, *[]byte, uint) int {
 	if x.xReadNonblocking == 0 {
 		return nil
 	}

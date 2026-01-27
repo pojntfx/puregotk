@@ -48,10 +48,10 @@ import (
 type TextBufferCommitNotify func(uintptr, TextBufferNotifyFlags, uint, uint, uintptr)
 
 // The class structure for `GtkTextBuffer`.
-type TextBufferClass struct {
+type TextBufferClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xInsertText uintptr
 
@@ -92,13 +92,13 @@ type TextBufferClass struct {
 	xGtkReserved4 uintptr
 }
 
-func (x *TextBufferClass) GoPointer() uintptr {
+func (x *TextBufferClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideInsertText sets the "insert_text" callback function.
 // The class handler for the `GtkTextBuffer::insert-text` signal.
-func (x *TextBufferClass) OverrideInsertText(cb func(*TextBuffer, *TextIter, string, int)) {
+func (x *TextBufferClassGType) OverrideInsertText(cb func(*TextBuffer, *TextIter, string, int)) {
 	if cb == nil {
 		x.xInsertText = 0
 	} else {
@@ -110,7 +110,7 @@ func (x *TextBufferClass) OverrideInsertText(cb func(*TextBuffer, *TextIter, str
 
 // GetInsertText gets the "insert_text" callback function.
 // The class handler for the `GtkTextBuffer::insert-text` signal.
-func (x *TextBufferClass) GetInsertText() func(*TextBuffer, *TextIter, string, int) {
+func (x *TextBufferClassGType) GetInsertText() func(*TextBuffer, *TextIter, string, int) {
 	if x.xInsertText == 0 {
 		return nil
 	}
@@ -123,7 +123,7 @@ func (x *TextBufferClass) GetInsertText() func(*TextBuffer, *TextIter, string, i
 
 // OverrideInsertPaintable sets the "insert_paintable" callback function.
 // The class handler for the `GtkTextBuffer::insert-paintable` signal.
-func (x *TextBufferClass) OverrideInsertPaintable(cb func(*TextBuffer, *TextIter, gdk.Paintable)) {
+func (x *TextBufferClassGType) OverrideInsertPaintable(cb func(*TextBuffer, *TextIter, gdk.Paintable)) {
 	if cb == nil {
 		x.xInsertPaintable = 0
 	} else {
@@ -135,7 +135,7 @@ func (x *TextBufferClass) OverrideInsertPaintable(cb func(*TextBuffer, *TextIter
 
 // GetInsertPaintable gets the "insert_paintable" callback function.
 // The class handler for the `GtkTextBuffer::insert-paintable` signal.
-func (x *TextBufferClass) GetInsertPaintable() func(*TextBuffer, *TextIter, gdk.Paintable) {
+func (x *TextBufferClassGType) GetInsertPaintable() func(*TextBuffer, *TextIter, gdk.Paintable) {
 	if x.xInsertPaintable == 0 {
 		return nil
 	}
@@ -148,7 +148,7 @@ func (x *TextBufferClass) GetInsertPaintable() func(*TextBuffer, *TextIter, gdk.
 
 // OverrideInsertChildAnchor sets the "insert_child_anchor" callback function.
 // The class handler for the `GtkTextBuffer::insert-child-anchor` signal.
-func (x *TextBufferClass) OverrideInsertChildAnchor(cb func(*TextBuffer, *TextIter, *TextChildAnchor)) {
+func (x *TextBufferClassGType) OverrideInsertChildAnchor(cb func(*TextBuffer, *TextIter, *TextChildAnchor)) {
 	if cb == nil {
 		x.xInsertChildAnchor = 0
 	} else {
@@ -160,7 +160,7 @@ func (x *TextBufferClass) OverrideInsertChildAnchor(cb func(*TextBuffer, *TextIt
 
 // GetInsertChildAnchor gets the "insert_child_anchor" callback function.
 // The class handler for the `GtkTextBuffer::insert-child-anchor` signal.
-func (x *TextBufferClass) GetInsertChildAnchor() func(*TextBuffer, *TextIter, *TextChildAnchor) {
+func (x *TextBufferClassGType) GetInsertChildAnchor() func(*TextBuffer, *TextIter, *TextChildAnchor) {
 	if x.xInsertChildAnchor == 0 {
 		return nil
 	}
@@ -173,7 +173,7 @@ func (x *TextBufferClass) GetInsertChildAnchor() func(*TextBuffer, *TextIter, *T
 
 // OverrideDeleteRange sets the "delete_range" callback function.
 // The class handler for the `GtkTextBuffer::delete-range` signal.
-func (x *TextBufferClass) OverrideDeleteRange(cb func(*TextBuffer, *TextIter, *TextIter)) {
+func (x *TextBufferClassGType) OverrideDeleteRange(cb func(*TextBuffer, *TextIter, *TextIter)) {
 	if cb == nil {
 		x.xDeleteRange = 0
 	} else {
@@ -185,7 +185,7 @@ func (x *TextBufferClass) OverrideDeleteRange(cb func(*TextBuffer, *TextIter, *T
 
 // GetDeleteRange gets the "delete_range" callback function.
 // The class handler for the `GtkTextBuffer::delete-range` signal.
-func (x *TextBufferClass) GetDeleteRange() func(*TextBuffer, *TextIter, *TextIter) {
+func (x *TextBufferClassGType) GetDeleteRange() func(*TextBuffer, *TextIter, *TextIter) {
 	if x.xDeleteRange == 0 {
 		return nil
 	}
@@ -198,7 +198,7 @@ func (x *TextBufferClass) GetDeleteRange() func(*TextBuffer, *TextIter, *TextIte
 
 // OverrideChanged sets the "changed" callback function.
 // The class handler for the `GtkTextBuffer::changed` signal.
-func (x *TextBufferClass) OverrideChanged(cb func(*TextBuffer)) {
+func (x *TextBufferClassGType) OverrideChanged(cb func(*TextBuffer)) {
 	if cb == nil {
 		x.xChanged = 0
 	} else {
@@ -210,7 +210,7 @@ func (x *TextBufferClass) OverrideChanged(cb func(*TextBuffer)) {
 
 // GetChanged gets the "changed" callback function.
 // The class handler for the `GtkTextBuffer::changed` signal.
-func (x *TextBufferClass) GetChanged() func(*TextBuffer) {
+func (x *TextBufferClassGType) GetChanged() func(*TextBuffer) {
 	if x.xChanged == 0 {
 		return nil
 	}
@@ -223,7 +223,7 @@ func (x *TextBufferClass) GetChanged() func(*TextBuffer) {
 
 // OverrideModifiedChanged sets the "modified_changed" callback function.
 // The class handler for the `GtkTextBuffer::modified-changed` signal.
-func (x *TextBufferClass) OverrideModifiedChanged(cb func(*TextBuffer)) {
+func (x *TextBufferClassGType) OverrideModifiedChanged(cb func(*TextBuffer)) {
 	if cb == nil {
 		x.xModifiedChanged = 0
 	} else {
@@ -235,7 +235,7 @@ func (x *TextBufferClass) OverrideModifiedChanged(cb func(*TextBuffer)) {
 
 // GetModifiedChanged gets the "modified_changed" callback function.
 // The class handler for the `GtkTextBuffer::modified-changed` signal.
-func (x *TextBufferClass) GetModifiedChanged() func(*TextBuffer) {
+func (x *TextBufferClassGType) GetModifiedChanged() func(*TextBuffer) {
 	if x.xModifiedChanged == 0 {
 		return nil
 	}
@@ -248,7 +248,7 @@ func (x *TextBufferClass) GetModifiedChanged() func(*TextBuffer) {
 
 // OverrideMarkSet sets the "mark_set" callback function.
 // The class handler for the `GtkTextBuffer::mark-set` signal.
-func (x *TextBufferClass) OverrideMarkSet(cb func(*TextBuffer, *TextIter, *TextMark)) {
+func (x *TextBufferClassGType) OverrideMarkSet(cb func(*TextBuffer, *TextIter, *TextMark)) {
 	if cb == nil {
 		x.xMarkSet = 0
 	} else {
@@ -260,7 +260,7 @@ func (x *TextBufferClass) OverrideMarkSet(cb func(*TextBuffer, *TextIter, *TextM
 
 // GetMarkSet gets the "mark_set" callback function.
 // The class handler for the `GtkTextBuffer::mark-set` signal.
-func (x *TextBufferClass) GetMarkSet() func(*TextBuffer, *TextIter, *TextMark) {
+func (x *TextBufferClassGType) GetMarkSet() func(*TextBuffer, *TextIter, *TextMark) {
 	if x.xMarkSet == 0 {
 		return nil
 	}
@@ -273,7 +273,7 @@ func (x *TextBufferClass) GetMarkSet() func(*TextBuffer, *TextIter, *TextMark) {
 
 // OverrideMarkDeleted sets the "mark_deleted" callback function.
 // The class handler for the `GtkTextBuffer::mark-deleted` signal.
-func (x *TextBufferClass) OverrideMarkDeleted(cb func(*TextBuffer, *TextMark)) {
+func (x *TextBufferClassGType) OverrideMarkDeleted(cb func(*TextBuffer, *TextMark)) {
 	if cb == nil {
 		x.xMarkDeleted = 0
 	} else {
@@ -285,7 +285,7 @@ func (x *TextBufferClass) OverrideMarkDeleted(cb func(*TextBuffer, *TextMark)) {
 
 // GetMarkDeleted gets the "mark_deleted" callback function.
 // The class handler for the `GtkTextBuffer::mark-deleted` signal.
-func (x *TextBufferClass) GetMarkDeleted() func(*TextBuffer, *TextMark) {
+func (x *TextBufferClassGType) GetMarkDeleted() func(*TextBuffer, *TextMark) {
 	if x.xMarkDeleted == 0 {
 		return nil
 	}
@@ -298,7 +298,7 @@ func (x *TextBufferClass) GetMarkDeleted() func(*TextBuffer, *TextMark) {
 
 // OverrideApplyTag sets the "apply_tag" callback function.
 // The class handler for the `GtkTextBuffer::apply-tag` signal.
-func (x *TextBufferClass) OverrideApplyTag(cb func(*TextBuffer, *TextTag, *TextIter, *TextIter)) {
+func (x *TextBufferClassGType) OverrideApplyTag(cb func(*TextBuffer, *TextTag, *TextIter, *TextIter)) {
 	if cb == nil {
 		x.xApplyTag = 0
 	} else {
@@ -310,7 +310,7 @@ func (x *TextBufferClass) OverrideApplyTag(cb func(*TextBuffer, *TextTag, *TextI
 
 // GetApplyTag gets the "apply_tag" callback function.
 // The class handler for the `GtkTextBuffer::apply-tag` signal.
-func (x *TextBufferClass) GetApplyTag() func(*TextBuffer, *TextTag, *TextIter, *TextIter) {
+func (x *TextBufferClassGType) GetApplyTag() func(*TextBuffer, *TextTag, *TextIter, *TextIter) {
 	if x.xApplyTag == 0 {
 		return nil
 	}
@@ -323,7 +323,7 @@ func (x *TextBufferClass) GetApplyTag() func(*TextBuffer, *TextTag, *TextIter, *
 
 // OverrideRemoveTag sets the "remove_tag" callback function.
 // The class handler for the `GtkTextBuffer::remove-tag` signal.
-func (x *TextBufferClass) OverrideRemoveTag(cb func(*TextBuffer, *TextTag, *TextIter, *TextIter)) {
+func (x *TextBufferClassGType) OverrideRemoveTag(cb func(*TextBuffer, *TextTag, *TextIter, *TextIter)) {
 	if cb == nil {
 		x.xRemoveTag = 0
 	} else {
@@ -335,7 +335,7 @@ func (x *TextBufferClass) OverrideRemoveTag(cb func(*TextBuffer, *TextTag, *Text
 
 // GetRemoveTag gets the "remove_tag" callback function.
 // The class handler for the `GtkTextBuffer::remove-tag` signal.
-func (x *TextBufferClass) GetRemoveTag() func(*TextBuffer, *TextTag, *TextIter, *TextIter) {
+func (x *TextBufferClassGType) GetRemoveTag() func(*TextBuffer, *TextTag, *TextIter, *TextIter) {
 	if x.xRemoveTag == 0 {
 		return nil
 	}
@@ -348,7 +348,7 @@ func (x *TextBufferClass) GetRemoveTag() func(*TextBuffer, *TextTag, *TextIter, 
 
 // OverrideBeginUserAction sets the "begin_user_action" callback function.
 // The class handler for the `GtkTextBuffer::begin-user-action` signal.
-func (x *TextBufferClass) OverrideBeginUserAction(cb func(*TextBuffer)) {
+func (x *TextBufferClassGType) OverrideBeginUserAction(cb func(*TextBuffer)) {
 	if cb == nil {
 		x.xBeginUserAction = 0
 	} else {
@@ -360,7 +360,7 @@ func (x *TextBufferClass) OverrideBeginUserAction(cb func(*TextBuffer)) {
 
 // GetBeginUserAction gets the "begin_user_action" callback function.
 // The class handler for the `GtkTextBuffer::begin-user-action` signal.
-func (x *TextBufferClass) GetBeginUserAction() func(*TextBuffer) {
+func (x *TextBufferClassGType) GetBeginUserAction() func(*TextBuffer) {
 	if x.xBeginUserAction == 0 {
 		return nil
 	}
@@ -373,7 +373,7 @@ func (x *TextBufferClass) GetBeginUserAction() func(*TextBuffer) {
 
 // OverrideEndUserAction sets the "end_user_action" callback function.
 // The class handler for the `GtkTextBuffer::end-user-action` signal.
-func (x *TextBufferClass) OverrideEndUserAction(cb func(*TextBuffer)) {
+func (x *TextBufferClassGType) OverrideEndUserAction(cb func(*TextBuffer)) {
 	if cb == nil {
 		x.xEndUserAction = 0
 	} else {
@@ -385,7 +385,7 @@ func (x *TextBufferClass) OverrideEndUserAction(cb func(*TextBuffer)) {
 
 // GetEndUserAction gets the "end_user_action" callback function.
 // The class handler for the `GtkTextBuffer::end-user-action` signal.
-func (x *TextBufferClass) GetEndUserAction() func(*TextBuffer) {
+func (x *TextBufferClassGType) GetEndUserAction() func(*TextBuffer) {
 	if x.xEndUserAction == 0 {
 		return nil
 	}
@@ -398,7 +398,7 @@ func (x *TextBufferClass) GetEndUserAction() func(*TextBuffer) {
 
 // OverridePasteDone sets the "paste_done" callback function.
 // The class handler for the `GtkTextBuffer::paste-done` signal.
-func (x *TextBufferClass) OverridePasteDone(cb func(*TextBuffer, *gdk.Clipboard)) {
+func (x *TextBufferClassGType) OverridePasteDone(cb func(*TextBuffer, *gdk.Clipboard)) {
 	if cb == nil {
 		x.xPasteDone = 0
 	} else {
@@ -410,7 +410,7 @@ func (x *TextBufferClass) OverridePasteDone(cb func(*TextBuffer, *gdk.Clipboard)
 
 // GetPasteDone gets the "paste_done" callback function.
 // The class handler for the `GtkTextBuffer::paste-done` signal.
-func (x *TextBufferClass) GetPasteDone() func(*TextBuffer, *gdk.Clipboard) {
+func (x *TextBufferClassGType) GetPasteDone() func(*TextBuffer, *gdk.Clipboard) {
 	if x.xPasteDone == 0 {
 		return nil
 	}
@@ -423,7 +423,7 @@ func (x *TextBufferClass) GetPasteDone() func(*TextBuffer, *gdk.Clipboard) {
 
 // OverrideUndo sets the "undo" callback function.
 // The class handler for the `GtkTextBuffer::undo` signal
-func (x *TextBufferClass) OverrideUndo(cb func(*TextBuffer)) {
+func (x *TextBufferClassGType) OverrideUndo(cb func(*TextBuffer)) {
 	if cb == nil {
 		x.xUndo = 0
 	} else {
@@ -435,7 +435,7 @@ func (x *TextBufferClass) OverrideUndo(cb func(*TextBuffer)) {
 
 // GetUndo gets the "undo" callback function.
 // The class handler for the `GtkTextBuffer::undo` signal
-func (x *TextBufferClass) GetUndo() func(*TextBuffer) {
+func (x *TextBufferClassGType) GetUndo() func(*TextBuffer) {
 	if x.xUndo == 0 {
 		return nil
 	}
@@ -448,7 +448,7 @@ func (x *TextBufferClass) GetUndo() func(*TextBuffer) {
 
 // OverrideRedo sets the "redo" callback function.
 // The class handler for the `GtkTextBuffer::redo` signal
-func (x *TextBufferClass) OverrideRedo(cb func(*TextBuffer)) {
+func (x *TextBufferClassGType) OverrideRedo(cb func(*TextBuffer)) {
 	if cb == nil {
 		x.xRedo = 0
 	} else {
@@ -460,7 +460,7 @@ func (x *TextBufferClass) OverrideRedo(cb func(*TextBuffer)) {
 
 // GetRedo gets the "redo" callback function.
 // The class handler for the `GtkTextBuffer::redo` signal
-func (x *TextBufferClass) GetRedo() func(*TextBuffer) {
+func (x *TextBufferClassGType) GetRedo() func(*TextBuffer) {
 	if x.xRedo == 0 {
 		return nil
 	}
@@ -472,7 +472,7 @@ func (x *TextBufferClass) GetRedo() func(*TextBuffer) {
 }
 
 // OverrideGtkReserved1 sets the "_gtk_reserved1" callback function.
-func (x *TextBufferClass) OverrideGtkReserved1(cb func()) {
+func (x *TextBufferClassGType) OverrideGtkReserved1(cb func()) {
 	if cb == nil {
 		x.xGtkReserved1 = 0
 	} else {
@@ -483,7 +483,7 @@ func (x *TextBufferClass) OverrideGtkReserved1(cb func()) {
 }
 
 // GetGtkReserved1 gets the "_gtk_reserved1" callback function.
-func (x *TextBufferClass) GetGtkReserved1() func() {
+func (x *TextBufferClassGType) GetGtkReserved1() func() {
 	if x.xGtkReserved1 == 0 {
 		return nil
 	}
@@ -495,7 +495,7 @@ func (x *TextBufferClass) GetGtkReserved1() func() {
 }
 
 // OverrideGtkReserved2 sets the "_gtk_reserved2" callback function.
-func (x *TextBufferClass) OverrideGtkReserved2(cb func()) {
+func (x *TextBufferClassGType) OverrideGtkReserved2(cb func()) {
 	if cb == nil {
 		x.xGtkReserved2 = 0
 	} else {
@@ -506,7 +506,7 @@ func (x *TextBufferClass) OverrideGtkReserved2(cb func()) {
 }
 
 // GetGtkReserved2 gets the "_gtk_reserved2" callback function.
-func (x *TextBufferClass) GetGtkReserved2() func() {
+func (x *TextBufferClassGType) GetGtkReserved2() func() {
 	if x.xGtkReserved2 == 0 {
 		return nil
 	}
@@ -518,7 +518,7 @@ func (x *TextBufferClass) GetGtkReserved2() func() {
 }
 
 // OverrideGtkReserved3 sets the "_gtk_reserved3" callback function.
-func (x *TextBufferClass) OverrideGtkReserved3(cb func()) {
+func (x *TextBufferClassGType) OverrideGtkReserved3(cb func()) {
 	if cb == nil {
 		x.xGtkReserved3 = 0
 	} else {
@@ -529,7 +529,7 @@ func (x *TextBufferClass) OverrideGtkReserved3(cb func()) {
 }
 
 // GetGtkReserved3 gets the "_gtk_reserved3" callback function.
-func (x *TextBufferClass) GetGtkReserved3() func() {
+func (x *TextBufferClassGType) GetGtkReserved3() func() {
 	if x.xGtkReserved3 == 0 {
 		return nil
 	}
@@ -541,7 +541,7 @@ func (x *TextBufferClass) GetGtkReserved3() func() {
 }
 
 // OverrideGtkReserved4 sets the "_gtk_reserved4" callback function.
-func (x *TextBufferClass) OverrideGtkReserved4(cb func()) {
+func (x *TextBufferClassGType) OverrideGtkReserved4(cb func()) {
 	if cb == nil {
 		x.xGtkReserved4 = 0
 	} else {
@@ -552,7 +552,7 @@ func (x *TextBufferClass) OverrideGtkReserved4(cb func()) {
 }
 
 // GetGtkReserved4 gets the "_gtk_reserved4" callback function.
-func (x *TextBufferClass) GetGtkReserved4() func() {
+func (x *TextBufferClassGType) GetGtkReserved4() func() {
 	if x.xGtkReserved4 == 0 {
 		return nil
 	}

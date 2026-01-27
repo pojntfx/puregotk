@@ -326,10 +326,10 @@ func (x *RecentInfo) Unref() {
 }
 
 // `GtkRecentManagerClass` contains only private data.
-type RecentManagerClass struct {
+type RecentManagerClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xChanged uintptr
 
@@ -342,12 +342,12 @@ type RecentManagerClass struct {
 	xGtkRecent4 uintptr
 }
 
-func (x *RecentManagerClass) GoPointer() uintptr {
+func (x *RecentManagerClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideChanged sets the "changed" callback function.
-func (x *RecentManagerClass) OverrideChanged(cb func(*RecentManager)) {
+func (x *RecentManagerClassGType) OverrideChanged(cb func(*RecentManager)) {
 	if cb == nil {
 		x.xChanged = 0
 	} else {
@@ -358,7 +358,7 @@ func (x *RecentManagerClass) OverrideChanged(cb func(*RecentManager)) {
 }
 
 // GetChanged gets the "changed" callback function.
-func (x *RecentManagerClass) GetChanged() func(*RecentManager) {
+func (x *RecentManagerClassGType) GetChanged() func(*RecentManager) {
 	if x.xChanged == 0 {
 		return nil
 	}
@@ -370,7 +370,7 @@ func (x *RecentManagerClass) GetChanged() func(*RecentManager) {
 }
 
 // OverrideGtkRecent1 sets the "_gtk_recent1" callback function.
-func (x *RecentManagerClass) OverrideGtkRecent1(cb func()) {
+func (x *RecentManagerClassGType) OverrideGtkRecent1(cb func()) {
 	if cb == nil {
 		x.xGtkRecent1 = 0
 	} else {
@@ -381,7 +381,7 @@ func (x *RecentManagerClass) OverrideGtkRecent1(cb func()) {
 }
 
 // GetGtkRecent1 gets the "_gtk_recent1" callback function.
-func (x *RecentManagerClass) GetGtkRecent1() func() {
+func (x *RecentManagerClassGType) GetGtkRecent1() func() {
 	if x.xGtkRecent1 == 0 {
 		return nil
 	}
@@ -393,7 +393,7 @@ func (x *RecentManagerClass) GetGtkRecent1() func() {
 }
 
 // OverrideGtkRecent2 sets the "_gtk_recent2" callback function.
-func (x *RecentManagerClass) OverrideGtkRecent2(cb func()) {
+func (x *RecentManagerClassGType) OverrideGtkRecent2(cb func()) {
 	if cb == nil {
 		x.xGtkRecent2 = 0
 	} else {
@@ -404,7 +404,7 @@ func (x *RecentManagerClass) OverrideGtkRecent2(cb func()) {
 }
 
 // GetGtkRecent2 gets the "_gtk_recent2" callback function.
-func (x *RecentManagerClass) GetGtkRecent2() func() {
+func (x *RecentManagerClassGType) GetGtkRecent2() func() {
 	if x.xGtkRecent2 == 0 {
 		return nil
 	}
@@ -416,7 +416,7 @@ func (x *RecentManagerClass) GetGtkRecent2() func() {
 }
 
 // OverrideGtkRecent3 sets the "_gtk_recent3" callback function.
-func (x *RecentManagerClass) OverrideGtkRecent3(cb func()) {
+func (x *RecentManagerClassGType) OverrideGtkRecent3(cb func()) {
 	if cb == nil {
 		x.xGtkRecent3 = 0
 	} else {
@@ -427,7 +427,7 @@ func (x *RecentManagerClass) OverrideGtkRecent3(cb func()) {
 }
 
 // GetGtkRecent3 gets the "_gtk_recent3" callback function.
-func (x *RecentManagerClass) GetGtkRecent3() func() {
+func (x *RecentManagerClassGType) GetGtkRecent3() func() {
 	if x.xGtkRecent3 == 0 {
 		return nil
 	}
@@ -439,7 +439,7 @@ func (x *RecentManagerClass) GetGtkRecent3() func() {
 }
 
 // OverrideGtkRecent4 sets the "_gtk_recent4" callback function.
-func (x *RecentManagerClass) OverrideGtkRecent4(cb func()) {
+func (x *RecentManagerClassGType) OverrideGtkRecent4(cb func()) {
 	if cb == nil {
 		x.xGtkRecent4 = 0
 	} else {
@@ -450,7 +450,7 @@ func (x *RecentManagerClass) OverrideGtkRecent4(cb func()) {
 }
 
 // GetGtkRecent4 gets the "_gtk_recent4" callback function.
-func (x *RecentManagerClass) GetGtkRecent4() func() {
+func (x *RecentManagerClassGType) GetGtkRecent4() func() {
 	if x.xGtkRecent4 == 0 {
 		return nil
 	}

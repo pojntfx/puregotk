@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type CharsetConverterClass struct {
+type CharsetConverterClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *CharsetConverterClass) GoPointer() uintptr {
+func (x *CharsetConverterClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

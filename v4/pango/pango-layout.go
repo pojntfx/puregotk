@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type LayoutClass struct {
+type LayoutClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *LayoutClass) GoPointer() uintptr {
+func (x *LayoutClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -325,9 +325,9 @@ type LayoutLine struct {
 
 	Runs *glib.SList
 
-	IsParagraphStart uint
+	IsParagraphStart uint32
 
-	ResolvedDir uint
+	ResolvedDir uint32
 }
 
 var xLayoutLineGLibType func() types.GType

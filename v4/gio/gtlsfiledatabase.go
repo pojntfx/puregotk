@@ -13,7 +13,7 @@ import (
 )
 
 // Provides an interface for #GTlsFileDatabase implementations.
-type TlsFileDatabaseInterface struct {
+type TlsFileDatabaseInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -21,7 +21,7 @@ type TlsFileDatabaseInterface struct {
 	Padding [8]uintptr
 }
 
-func (x *TlsFileDatabaseInterface) GoPointer() uintptr {
+func (x *TlsFileDatabaseInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

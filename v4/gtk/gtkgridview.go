@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type GridViewClass struct {
+type GridViewClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *GridViewClass) GoPointer() uintptr {
+func (x *GridViewClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -13,43 +13,43 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type AlternativeTriggerClass struct {
+type AlternativeTriggerClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *AlternativeTriggerClass) GoPointer() uintptr {
+func (x *AlternativeTriggerClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type KeyvalTriggerClass struct {
+type KeyvalTriggerClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *KeyvalTriggerClass) GoPointer() uintptr {
+func (x *KeyvalTriggerClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type MnemonicTriggerClass struct {
+type MnemonicTriggerClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *MnemonicTriggerClass) GoPointer() uintptr {
+func (x *MnemonicTriggerClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type NeverTriggerClass struct {
+type NeverTriggerClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *NeverTriggerClass) GoPointer() uintptr {
+func (x *NeverTriggerClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type ShortcutTriggerClass struct {
+type ShortcutTriggerClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *ShortcutTriggerClass) GoPointer() uintptr {
+func (x *ShortcutTriggerClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

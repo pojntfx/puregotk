@@ -12,7 +12,7 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type TreeDragDestIface struct {
+type TreeDragDestIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -22,7 +22,7 @@ type TreeDragDestIface struct {
 	xRowDropPossible uintptr
 }
 
-func (x *TreeDragDestIface) GoPointer() uintptr {
+func (x *TreeDragDestIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -31,7 +31,7 @@ func (x *TreeDragDestIface) GoPointer() uintptr {
 //
 //	before the path dest, deriving the contents of the row from
 //	selection_data.
-func (x *TreeDragDestIface) OverrideDragDataReceived(cb func(TreeDragDest, *TreePath, *gobject.Value) bool) {
+func (x *TreeDragDestIfaceGType) OverrideDragDataReceived(cb func(TreeDragDest, *TreePath, *gobject.Value) bool) {
 	if cb == nil {
 		x.xDragDataReceived = 0
 	} else {
@@ -46,7 +46,7 @@ func (x *TreeDragDestIface) OverrideDragDataReceived(cb func(TreeDragDest, *Tree
 //
 //	before the path dest, deriving the contents of the row from
 //	selection_data.
-func (x *TreeDragDestIface) GetDragDataReceived() func(TreeDragDest, *TreePath, *gobject.Value) bool {
+func (x *TreeDragDestIfaceGType) GetDragDataReceived() func(TreeDragDest, *TreePath, *gobject.Value) bool {
 	if x.xDragDataReceived == 0 {
 		return nil
 	}
@@ -61,7 +61,7 @@ func (x *TreeDragDestIface) GetDragDataReceived() func(TreeDragDest, *TreePath, 
 // Determines whether a drop is possible before
 //
 //	the given dest_path, at the same depth as dest_path.
-func (x *TreeDragDestIface) OverrideRowDropPossible(cb func(TreeDragDest, *TreePath, *gobject.Value) bool) {
+func (x *TreeDragDestIfaceGType) OverrideRowDropPossible(cb func(TreeDragDest, *TreePath, *gobject.Value) bool) {
 	if cb == nil {
 		x.xRowDropPossible = 0
 	} else {
@@ -75,7 +75,7 @@ func (x *TreeDragDestIface) OverrideRowDropPossible(cb func(TreeDragDest, *TreeP
 // Determines whether a drop is possible before
 //
 //	the given dest_path, at the same depth as dest_path.
-func (x *TreeDragDestIface) GetRowDropPossible() func(TreeDragDest, *TreePath, *gobject.Value) bool {
+func (x *TreeDragDestIfaceGType) GetRowDropPossible() func(TreeDragDest, *TreePath, *gobject.Value) bool {
 	if x.xRowDropPossible == 0 {
 		return nil
 	}
@@ -86,7 +86,7 @@ func (x *TreeDragDestIface) GetRowDropPossible() func(TreeDragDest, *TreePath, *
 	}
 }
 
-type TreeDragSourceIface struct {
+type TreeDragSourceIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -98,7 +98,7 @@ type TreeDragSourceIface struct {
 	xDragDataDelete uintptr
 }
 
-func (x *TreeDragSourceIface) GoPointer() uintptr {
+func (x *TreeDragSourceIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -106,7 +106,7 @@ func (x *TreeDragSourceIface) GoPointer() uintptr {
 // Asks the `GtkTreeDragSource` whether a particular
 //
 //	row can be used as the source of a DND operation.
-func (x *TreeDragSourceIface) OverrideRowDraggable(cb func(TreeDragSource, *TreePath) bool) {
+func (x *TreeDragSourceIfaceGType) OverrideRowDraggable(cb func(TreeDragSource, *TreePath) bool) {
 	if cb == nil {
 		x.xRowDraggable = 0
 	} else {
@@ -120,7 +120,7 @@ func (x *TreeDragSourceIface) OverrideRowDraggable(cb func(TreeDragSource, *Tree
 // Asks the `GtkTreeDragSource` whether a particular
 //
 //	row can be used as the source of a DND operation.
-func (x *TreeDragSourceIface) GetRowDraggable() func(TreeDragSource, *TreePath) bool {
+func (x *TreeDragSourceIfaceGType) GetRowDraggable() func(TreeDragSource, *TreePath) bool {
 	if x.xRowDraggable == 0 {
 		return nil
 	}
@@ -135,7 +135,7 @@ func (x *TreeDragSourceIface) GetRowDraggable() func(TreeDragSource, *TreePath) 
 // Asks the `GtkTreeDragSource` to fill in
 //
 //	selection_data with a representation of the row at path.
-func (x *TreeDragSourceIface) OverrideDragDataGet(cb func(TreeDragSource, *TreePath) *gdk.ContentProvider) {
+func (x *TreeDragSourceIfaceGType) OverrideDragDataGet(cb func(TreeDragSource, *TreePath) *gdk.ContentProvider) {
 	if cb == nil {
 		x.xDragDataGet = 0
 	} else {
@@ -153,7 +153,7 @@ func (x *TreeDragSourceIface) OverrideDragDataGet(cb func(TreeDragSource, *TreeP
 // Asks the `GtkTreeDragSource` to fill in
 //
 //	selection_data with a representation of the row at path.
-func (x *TreeDragSourceIface) GetDragDataGet() func(TreeDragSource, *TreePath) *gdk.ContentProvider {
+func (x *TreeDragSourceIfaceGType) GetDragDataGet() func(TreeDragSource, *TreePath) *gdk.ContentProvider {
 	if x.xDragDataGet == 0 {
 		return nil
 	}
@@ -174,7 +174,7 @@ func (x *TreeDragSourceIface) GetDragDataGet() func(TreeDragSource, *TreePath) *
 // Asks the `GtkTreeDragSource` to delete the row at
 //
 //	path, because it was moved somewhere else via drag-and-drop.
-func (x *TreeDragSourceIface) OverrideDragDataDelete(cb func(TreeDragSource, *TreePath) bool) {
+func (x *TreeDragSourceIfaceGType) OverrideDragDataDelete(cb func(TreeDragSource, *TreePath) bool) {
 	if cb == nil {
 		x.xDragDataDelete = 0
 	} else {
@@ -188,7 +188,7 @@ func (x *TreeDragSourceIface) OverrideDragDataDelete(cb func(TreeDragSource, *Tr
 // Asks the `GtkTreeDragSource` to delete the row at
 //
 //	path, because it was moved somewhere else via drag-and-drop.
-func (x *TreeDragSourceIface) GetDragDataDelete() func(TreeDragSource, *TreePath) bool {
+func (x *TreeDragSourceIfaceGType) GetDragDataDelete() func(TreeDragSource, *TreePath) bool {
 	if x.xDragDataDelete == 0 {
 		return nil
 	}

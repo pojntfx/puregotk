@@ -12,13 +12,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/pango"
 )
 
-type InscriptionClass struct {
+type InscriptionClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass WidgetClass
+	ParentClass WidgetClassGType
 }
 
-func (x *InscriptionClass) GoPointer() uintptr {
+func (x *InscriptionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -13,10 +13,10 @@ import (
 )
 
 // The class structure for the #GTlsConnection type.
-type TlsConnectionClass struct {
+type TlsConnectionClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass IOStreamClass
+	ParentClass IOStreamClassGType
 
 	xAcceptCertificate uintptr
 
@@ -33,13 +33,13 @@ type TlsConnectionClass struct {
 	Padding [6]uintptr
 }
 
-func (x *TlsConnectionClass) GoPointer() uintptr {
+func (x *TlsConnectionClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideAcceptCertificate sets the "accept_certificate" callback function.
 // Check whether to accept a certificate.
-func (x *TlsConnectionClass) OverrideAcceptCertificate(cb func(*TlsConnection, *TlsCertificate, TlsCertificateFlags) bool) {
+func (x *TlsConnectionClassGType) OverrideAcceptCertificate(cb func(*TlsConnection, *TlsCertificate, TlsCertificateFlags) bool) {
 	if cb == nil {
 		x.xAcceptCertificate = 0
 	} else {
@@ -51,7 +51,7 @@ func (x *TlsConnectionClass) OverrideAcceptCertificate(cb func(*TlsConnection, *
 
 // GetAcceptCertificate gets the "accept_certificate" callback function.
 // Check whether to accept a certificate.
-func (x *TlsConnectionClass) GetAcceptCertificate() func(*TlsConnection, *TlsCertificate, TlsCertificateFlags) bool {
+func (x *TlsConnectionClassGType) GetAcceptCertificate() func(*TlsConnection, *TlsCertificate, TlsCertificateFlags) bool {
 	if x.xAcceptCertificate == 0 {
 		return nil
 	}
@@ -64,7 +64,7 @@ func (x *TlsConnectionClass) GetAcceptCertificate() func(*TlsConnection, *TlsCer
 
 // OverrideHandshake sets the "handshake" callback function.
 // Perform a handshake operation.
-func (x *TlsConnectionClass) OverrideHandshake(cb func(*TlsConnection, *Cancellable) bool) {
+func (x *TlsConnectionClassGType) OverrideHandshake(cb func(*TlsConnection, *Cancellable) bool) {
 	if cb == nil {
 		x.xHandshake = 0
 	} else {
@@ -76,7 +76,7 @@ func (x *TlsConnectionClass) OverrideHandshake(cb func(*TlsConnection, *Cancella
 
 // GetHandshake gets the "handshake" callback function.
 // Perform a handshake operation.
-func (x *TlsConnectionClass) GetHandshake() func(*TlsConnection, *Cancellable) bool {
+func (x *TlsConnectionClassGType) GetHandshake() func(*TlsConnection, *Cancellable) bool {
 	if x.xHandshake == 0 {
 		return nil
 	}
@@ -89,7 +89,7 @@ func (x *TlsConnectionClass) GetHandshake() func(*TlsConnection, *Cancellable) b
 
 // OverrideHandshakeAsync sets the "handshake_async" callback function.
 // Start an asynchronous handshake operation.
-func (x *TlsConnectionClass) OverrideHandshakeAsync(cb func(*TlsConnection, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
+func (x *TlsConnectionClassGType) OverrideHandshakeAsync(cb func(*TlsConnection, int, *Cancellable, *AsyncReadyCallback, uintptr)) {
 	if cb == nil {
 		x.xHandshakeAsync = 0
 	} else {
@@ -101,7 +101,7 @@ func (x *TlsConnectionClass) OverrideHandshakeAsync(cb func(*TlsConnection, int,
 
 // GetHandshakeAsync gets the "handshake_async" callback function.
 // Start an asynchronous handshake operation.
-func (x *TlsConnectionClass) GetHandshakeAsync() func(*TlsConnection, int, *Cancellable, *AsyncReadyCallback, uintptr) {
+func (x *TlsConnectionClassGType) GetHandshakeAsync() func(*TlsConnection, int, *Cancellable, *AsyncReadyCallback, uintptr) {
 	if x.xHandshakeAsync == 0 {
 		return nil
 	}
@@ -114,7 +114,7 @@ func (x *TlsConnectionClass) GetHandshakeAsync() func(*TlsConnection, int, *Canc
 
 // OverrideHandshakeFinish sets the "handshake_finish" callback function.
 // Finish an asynchronous handshake operation.
-func (x *TlsConnectionClass) OverrideHandshakeFinish(cb func(*TlsConnection, AsyncResult) bool) {
+func (x *TlsConnectionClassGType) OverrideHandshakeFinish(cb func(*TlsConnection, AsyncResult) bool) {
 	if cb == nil {
 		x.xHandshakeFinish = 0
 	} else {
@@ -126,7 +126,7 @@ func (x *TlsConnectionClass) OverrideHandshakeFinish(cb func(*TlsConnection, Asy
 
 // GetHandshakeFinish gets the "handshake_finish" callback function.
 // Finish an asynchronous handshake operation.
-func (x *TlsConnectionClass) GetHandshakeFinish() func(*TlsConnection, AsyncResult) bool {
+func (x *TlsConnectionClassGType) GetHandshakeFinish() func(*TlsConnection, AsyncResult) bool {
 	if x.xHandshakeFinish == 0 {
 		return nil
 	}
@@ -139,7 +139,7 @@ func (x *TlsConnectionClass) GetHandshakeFinish() func(*TlsConnection, AsyncResu
 
 // OverrideGetBindingData sets the "get_binding_data" callback function.
 // Retrieve TLS channel binding data (Since: 2.66)
-func (x *TlsConnectionClass) OverrideGetBindingData(cb func(*TlsConnection, TlsChannelBindingType, []byte) bool) {
+func (x *TlsConnectionClassGType) OverrideGetBindingData(cb func(*TlsConnection, TlsChannelBindingType, []byte) bool) {
 	if cb == nil {
 		x.xGetBindingData = 0
 	} else {
@@ -151,7 +151,7 @@ func (x *TlsConnectionClass) OverrideGetBindingData(cb func(*TlsConnection, TlsC
 
 // GetGetBindingData gets the "get_binding_data" callback function.
 // Retrieve TLS channel binding data (Since: 2.66)
-func (x *TlsConnectionClass) GetGetBindingData() func(*TlsConnection, TlsChannelBindingType, []byte) bool {
+func (x *TlsConnectionClassGType) GetGetBindingData() func(*TlsConnection, TlsChannelBindingType, []byte) bool {
 	if x.xGetBindingData == 0 {
 		return nil
 	}
@@ -164,7 +164,7 @@ func (x *TlsConnectionClass) GetGetBindingData() func(*TlsConnection, TlsChannel
 
 // OverrideGetNegotiatedProtocol sets the "get_negotiated_protocol" callback function.
 // Get ALPN-negotiated protocol (Since: 2.70)
-func (x *TlsConnectionClass) OverrideGetNegotiatedProtocol(cb func(*TlsConnection) string) {
+func (x *TlsConnectionClassGType) OverrideGetNegotiatedProtocol(cb func(*TlsConnection) string) {
 	if cb == nil {
 		x.xGetNegotiatedProtocol = 0
 	} else {
@@ -176,7 +176,7 @@ func (x *TlsConnectionClass) OverrideGetNegotiatedProtocol(cb func(*TlsConnectio
 
 // GetGetNegotiatedProtocol gets the "get_negotiated_protocol" callback function.
 // Get ALPN-negotiated protocol (Since: 2.70)
-func (x *TlsConnectionClass) GetGetNegotiatedProtocol() func(*TlsConnection) string {
+func (x *TlsConnectionClassGType) GetGetNegotiatedProtocol() func(*TlsConnection) string {
 	if x.xGetNegotiatedProtocol == 0 {
 		return nil
 	}

@@ -12,23 +12,23 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type SqueezerClass struct {
+type SqueezerClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *SqueezerClass) GoPointer() uintptr {
+func (x *SqueezerClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-type SqueezerPageClass struct {
+type SqueezerPageClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 }
 
-func (x *SqueezerPageClass) GoPointer() uintptr {
+func (x *SqueezerPageClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

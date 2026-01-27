@@ -46,6 +46,7 @@ var convList = map[string]string{
 	"pid_t":    "int",
 	"time_t":   "int",
 	"gintptr":  "int",
+	"off_t":    "int64",
 
 	// these are probably not correct but needed to compile
 	"_Value__data__union": "uint64",
@@ -55,9 +56,26 @@ var convList = map[string]string{
 	"const char*":         "string",
 	"const char**":        "[]string",
 	"char**":              "[]string",
+	// GPtrArray types should be uintptr - manual conversion required
+	"GPtrArray*":       "uintptr",
+	"const GPtrArray*": "uintptr",
+	"GPtrArray**":      "uintptr",
 	// not exported
 	"HarfBuzz.feature_t": "uintptr",
 	"HarfBuzz.font_t":    "uintptr",
+	// json-glib types (not yet generated)
+	"Json.Object":  "uintptr",
+	"Json.Builder": "uintptr",
+	"Json.Node":    "uintptr",
+	"Json.Array":   "uintptr",
+	// libxml2 types (not yet generated)
+	"libxml2.Node":          "uintptr",
+	"libxml2.Doc":           "uintptr",
+	"libxml2.NodePtr":       "uintptr",
+	"libxml2.XPathError":    "int",
+	"libxml2.Char":          "byte",
+	"libxml2.XPathContext":  "uintptr",
+	"libxml2.XPathObject":   "uintptr",
 	//"GLib.Quark": "byte",
 	//"Allocation": "uintptr",
 }
@@ -160,6 +178,13 @@ func (a *Array) Template(ns string, kinds KindMap) string {
 	if v, ok := convList[a.CType]; ok {
 		return v
 	}
+
+	// GPtrArray should always be uintptr - purego cannot automatically convert it
+	// to []string, so manual conversion using glib.PtrArray is required
+	if a.Name == "GLib.PtrArray" {
+		return "uintptr"
+	}
+
 	// default case of an array is just a pointer
 	ret := "uintptr"
 
@@ -275,9 +300,21 @@ func (t *Type) Template(ns string, kinds KindMap, array bool) string {
 		return v
 	}
 
+	// Handle types with no name attribute (e.g., <type c:type="regex_t*"/>)
+	// or types starting with underscore (private types like _search_flags_t)
+	if t.Name == "" || strings.HasPrefix(t.Name, "_") {
+		return "uintptr"
+	}
+
 	_type := util.NormalizeNamespace(ns, t.Name, true)
 
 	kind := kinds.Kind(ns, _type)
+
+	// Add "GType" suffix for GType struct records to match the renamed struct
+	if kinds.IsGTypeStruct(ns, _type) {
+		_type = _type + "GType"
+	}
+
 	// find the total pointer count
 	count := strings.Count(t.CType, "*")
 	w := strings.Trim(t.CType, "*")
@@ -398,6 +435,9 @@ func (c *Constant) Template(ns string, kinds KindMap) ConstantTemplate {
 
 	switch t {
 	case "string":
+		// Escape any quotes and backslashes in the value, then wrap in quotes
+		v = strings.ReplaceAll(v, `\`, `\\`)
+		v = strings.ReplaceAll(v, `"`, `\"`)
 		v = fmt.Sprintf(`"%s"`, v)
 	}
 
@@ -844,10 +884,21 @@ func (r *ReturnValue) Template(ns string, ins string, kinds KindMap, throws bool
 			class = false
 			val = "uintptr"
 		}
+		// Double pointers (like **GParamSpec) can't be treated as class types
+		// because we can't instantiate them with &Type{} - use uintptr instead
+		if stars > 1 {
+			class = false
+			val = "uintptr"
+		}
 	case InterfacesType:
 		raw = "uintptr"
 		val += "Base"
 		class = true
+		// Double pointers can't be treated as class types - use uintptr instead
+		if stars > 1 {
+			class = false
+			val = "uintptr"
+		}
 	// callback returns should always be uintptr
 	// I needed this for glib.LogSetDefaultHandler
 	// Otherwise I got 'panic: reflect.MakeFunc: value of type *glib.LogFunc is not assignable to type glib.LogFunc'

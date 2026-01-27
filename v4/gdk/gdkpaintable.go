@@ -19,7 +19,7 @@ import (
 // for non-static paintables and [vfunc@Gdk.Paintable.get_flags] if the
 // image is not dynamic as the default implementation returns no flags and
 // that will make the implementation likely quite slow.
-type PaintableInterface struct {
+type PaintableInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -37,7 +37,7 @@ type PaintableInterface struct {
 	xGetIntrinsicAspectRatio uintptr
 }
 
-func (x *PaintableInterface) GoPointer() uintptr {
+func (x *PaintableInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
@@ -47,7 +47,7 @@ func (x *PaintableInterface) GoPointer() uintptr {
 //	guaranteed to be larger than 0.0. The resulting snapshot must modify
 //	only the area in the rectangle from (0,0) to (width, height).
 //	This is the only function that must be implemented for this interface.
-func (x *PaintableInterface) OverrideSnapshot(cb func(Paintable, *Snapshot, float64, float64)) {
+func (x *PaintableInterfaceGType) OverrideSnapshot(cb func(Paintable, *Snapshot, float64, float64)) {
 	if cb == nil {
 		x.xSnapshot = 0
 	} else {
@@ -63,7 +63,7 @@ func (x *PaintableInterface) OverrideSnapshot(cb func(Paintable, *Snapshot, floa
 //	guaranteed to be larger than 0.0. The resulting snapshot must modify
 //	only the area in the rectangle from (0,0) to (width, height).
 //	This is the only function that must be implemented for this interface.
-func (x *PaintableInterface) GetSnapshot() func(Paintable, *Snapshot, float64, float64) {
+func (x *PaintableInterfaceGType) GetSnapshot() func(Paintable, *Snapshot, float64, float64) {
 	if x.xSnapshot == 0 {
 		return nil
 	}
@@ -79,7 +79,7 @@ func (x *PaintableInterface) GetSnapshot() func(Paintable, *Snapshot, float64, f
 //
 //	time. This means the `GDK_PAINTABLE_STATIC_SIZE` and
 //	`GDK_PAINTABLE_STATIC_CONTENTS` flag are set.
-func (x *PaintableInterface) OverrideGetCurrentImage(cb func(Paintable) *PaintableBase) {
+func (x *PaintableInterfaceGType) OverrideGetCurrentImage(cb func(Paintable) *PaintableBase) {
 	if cb == nil {
 		x.xGetCurrentImage = 0
 	} else {
@@ -98,7 +98,7 @@ func (x *PaintableInterface) OverrideGetCurrentImage(cb func(Paintable) *Paintab
 //
 //	time. This means the `GDK_PAINTABLE_STATIC_SIZE` and
 //	`GDK_PAINTABLE_STATIC_CONTENTS` flag are set.
-func (x *PaintableInterface) GetGetCurrentImage() func(Paintable) *PaintableBase {
+func (x *PaintableInterfaceGType) GetGetCurrentImage() func(Paintable) *PaintableBase {
 	if x.xGetCurrentImage == 0 {
 		return nil
 	}
@@ -119,7 +119,7 @@ func (x *PaintableInterface) GetGetCurrentImage() func(Paintable) *PaintableBase
 // Get the flags for this instance. See [flags@Gdk.PaintableFlags]
 //
 //	for details.
-func (x *PaintableInterface) OverrideGetFlags(cb func(Paintable) PaintableFlags) {
+func (x *PaintableInterfaceGType) OverrideGetFlags(cb func(Paintable) PaintableFlags) {
 	if cb == nil {
 		x.xGetFlags = 0
 	} else {
@@ -133,7 +133,7 @@ func (x *PaintableInterface) OverrideGetFlags(cb func(Paintable) PaintableFlags)
 // Get the flags for this instance. See [flags@Gdk.PaintableFlags]
 //
 //	for details.
-func (x *PaintableInterface) GetGetFlags() func(Paintable) PaintableFlags {
+func (x *PaintableInterfaceGType) GetGetFlags() func(Paintable) PaintableFlags {
 	if x.xGetFlags == 0 {
 		return nil
 	}
@@ -149,7 +149,7 @@ func (x *PaintableInterface) GetGetFlags() func(Paintable) PaintableFlags {
 //
 //	snapshot at or 0 if none. This is purely a hint. The object must still
 //	be able to render at any size.
-func (x *PaintableInterface) OverrideGetIntrinsicWidth(cb func(Paintable) int) {
+func (x *PaintableInterfaceGType) OverrideGetIntrinsicWidth(cb func(Paintable) int) {
 	if cb == nil {
 		x.xGetIntrinsicWidth = 0
 	} else {
@@ -164,7 +164,7 @@ func (x *PaintableInterface) OverrideGetIntrinsicWidth(cb func(Paintable) int) {
 //
 //	snapshot at or 0 if none. This is purely a hint. The object must still
 //	be able to render at any size.
-func (x *PaintableInterface) GetGetIntrinsicWidth() func(Paintable) int {
+func (x *PaintableInterfaceGType) GetGetIntrinsicWidth() func(Paintable) int {
 	if x.xGetIntrinsicWidth == 0 {
 		return nil
 	}
@@ -180,7 +180,7 @@ func (x *PaintableInterface) GetGetIntrinsicWidth() func(Paintable) int {
 //
 //	snapshot at or 0 if none. This is purely a hint. The object must still
 //	be able to render at any size.
-func (x *PaintableInterface) OverrideGetIntrinsicHeight(cb func(Paintable) int) {
+func (x *PaintableInterfaceGType) OverrideGetIntrinsicHeight(cb func(Paintable) int) {
 	if cb == nil {
 		x.xGetIntrinsicHeight = 0
 	} else {
@@ -195,7 +195,7 @@ func (x *PaintableInterface) OverrideGetIntrinsicHeight(cb func(Paintable) int) 
 //
 //	snapshot at or 0 if none. This is purely a hint. The object must still
 //	be able to render at any size.
-func (x *PaintableInterface) GetGetIntrinsicHeight() func(Paintable) int {
+func (x *PaintableInterfaceGType) GetGetIntrinsicHeight() func(Paintable) int {
 	if x.xGetIntrinsicHeight == 0 {
 		return nil
 	}
@@ -212,7 +212,7 @@ func (x *PaintableInterface) GetGetIntrinsicHeight() func(Paintable) int {
 //	or 0 if none. If both [vfunc@Gdk.Paintable.get_intrinsic_width]
 //	and [vfunc@Gdk.Paintable.get_intrinsic_height] return non-zero
 //	values, this function should return the aspect ratio computed from those.
-func (x *PaintableInterface) OverrideGetIntrinsicAspectRatio(cb func(Paintable) float64) {
+func (x *PaintableInterfaceGType) OverrideGetIntrinsicAspectRatio(cb func(Paintable) float64) {
 	if cb == nil {
 		x.xGetIntrinsicAspectRatio = 0
 	} else {
@@ -228,7 +228,7 @@ func (x *PaintableInterface) OverrideGetIntrinsicAspectRatio(cb func(Paintable) 
 //	or 0 if none. If both [vfunc@Gdk.Paintable.get_intrinsic_width]
 //	and [vfunc@Gdk.Paintable.get_intrinsic_height] return non-zero
 //	values, this function should return the aspect ratio computed from those.
-func (x *PaintableInterface) GetGetIntrinsicAspectRatio() func(Paintable) float64 {
+func (x *PaintableInterfaceGType) GetGetIntrinsicAspectRatio() func(Paintable) float64 {
 	if x.xGetIntrinsicAspectRatio == 0 {
 		return nil
 	}

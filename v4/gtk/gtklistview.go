@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ListViewClass struct {
+type ListViewClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *ListViewClass) GoPointer() uintptr {
+func (x *ListViewClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

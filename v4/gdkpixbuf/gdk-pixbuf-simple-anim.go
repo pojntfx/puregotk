@@ -11,11 +11,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type PixbufSimpleAnimClass struct {
+type PixbufSimpleAnimClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *PixbufSimpleAnimClass) GoPointer() uintptr {
+func (x *PixbufSimpleAnimClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

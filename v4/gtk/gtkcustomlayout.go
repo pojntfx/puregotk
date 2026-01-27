@@ -20,13 +20,13 @@ type CustomMeasureFunc func(uintptr, Orientation, int, *int, *int, *int, *int)
 // Queries a widget for its preferred size request mode.
 type CustomRequestModeFunc func(uintptr) SizeRequestMode
 
-type CustomLayoutClass struct {
+type CustomLayoutClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass LayoutManagerClass
+	ParentClass LayoutManagerClassGType
 }
 
-func (x *CustomLayoutClass) GoPointer() uintptr {
+func (x *CustomLayoutClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

@@ -13,7 +13,7 @@ import (
 )
 
 // The interface vtable for accessible objects containing text.
-type AccessibleTextInterface struct {
+type AccessibleTextInterfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -35,12 +35,12 @@ type AccessibleTextInterface struct {
 	xGetOffset uintptr
 }
 
-func (x *AccessibleTextInterface) GoPointer() uintptr {
+func (x *AccessibleTextInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetContents sets the "get_contents" callback function.
-func (x *AccessibleTextInterface) OverrideGetContents(cb func(AccessibleText, uint, uint) *glib.Bytes) {
+func (x *AccessibleTextInterfaceGType) OverrideGetContents(cb func(AccessibleText, uint, uint) *glib.Bytes) {
 	if cb == nil {
 		x.xGetContents = 0
 	} else {
@@ -51,7 +51,7 @@ func (x *AccessibleTextInterface) OverrideGetContents(cb func(AccessibleText, ui
 }
 
 // GetGetContents gets the "get_contents" callback function.
-func (x *AccessibleTextInterface) GetGetContents() func(AccessibleText, uint, uint) *glib.Bytes {
+func (x *AccessibleTextInterfaceGType) GetGetContents() func(AccessibleText, uint, uint) *glib.Bytes {
 	if x.xGetContents == 0 {
 		return nil
 	}
@@ -63,7 +63,7 @@ func (x *AccessibleTextInterface) GetGetContents() func(AccessibleText, uint, ui
 }
 
 // OverrideGetContentsAt sets the "get_contents_at" callback function.
-func (x *AccessibleTextInterface) OverrideGetContentsAt(cb func(AccessibleText, uint, AccessibleTextGranularity, *uint, *uint) *glib.Bytes) {
+func (x *AccessibleTextInterfaceGType) OverrideGetContentsAt(cb func(AccessibleText, uint, AccessibleTextGranularity, *uint, *uint) *glib.Bytes) {
 	if cb == nil {
 		x.xGetContentsAt = 0
 	} else {
@@ -74,7 +74,7 @@ func (x *AccessibleTextInterface) OverrideGetContentsAt(cb func(AccessibleText, 
 }
 
 // GetGetContentsAt gets the "get_contents_at" callback function.
-func (x *AccessibleTextInterface) GetGetContentsAt() func(AccessibleText, uint, AccessibleTextGranularity, *uint, *uint) *glib.Bytes {
+func (x *AccessibleTextInterfaceGType) GetGetContentsAt() func(AccessibleText, uint, AccessibleTextGranularity, *uint, *uint) *glib.Bytes {
 	if x.xGetContentsAt == 0 {
 		return nil
 	}
@@ -86,7 +86,7 @@ func (x *AccessibleTextInterface) GetGetContentsAt() func(AccessibleText, uint, 
 }
 
 // OverrideGetCaretPosition sets the "get_caret_position" callback function.
-func (x *AccessibleTextInterface) OverrideGetCaretPosition(cb func(AccessibleText) uint) {
+func (x *AccessibleTextInterfaceGType) OverrideGetCaretPosition(cb func(AccessibleText) uint) {
 	if cb == nil {
 		x.xGetCaretPosition = 0
 	} else {
@@ -97,7 +97,7 @@ func (x *AccessibleTextInterface) OverrideGetCaretPosition(cb func(AccessibleTex
 }
 
 // GetGetCaretPosition gets the "get_caret_position" callback function.
-func (x *AccessibleTextInterface) GetGetCaretPosition() func(AccessibleText) uint {
+func (x *AccessibleTextInterfaceGType) GetGetCaretPosition() func(AccessibleText) uint {
 	if x.xGetCaretPosition == 0 {
 		return nil
 	}
@@ -109,7 +109,7 @@ func (x *AccessibleTextInterface) GetGetCaretPosition() func(AccessibleText) uin
 }
 
 // OverrideGetSelection sets the "get_selection" callback function.
-func (x *AccessibleTextInterface) OverrideGetSelection(cb func(AccessibleText, *uint, *uintptr) bool) {
+func (x *AccessibleTextInterfaceGType) OverrideGetSelection(cb func(AccessibleText, *uint, *uintptr) bool) {
 	if cb == nil {
 		x.xGetSelection = 0
 	} else {
@@ -120,7 +120,7 @@ func (x *AccessibleTextInterface) OverrideGetSelection(cb func(AccessibleText, *
 }
 
 // GetGetSelection gets the "get_selection" callback function.
-func (x *AccessibleTextInterface) GetGetSelection() func(AccessibleText, *uint, *uintptr) bool {
+func (x *AccessibleTextInterfaceGType) GetGetSelection() func(AccessibleText, *uint, *uintptr) bool {
 	if x.xGetSelection == 0 {
 		return nil
 	}
@@ -132,7 +132,7 @@ func (x *AccessibleTextInterface) GetGetSelection() func(AccessibleText, *uint, 
 }
 
 // OverrideGetAttributes sets the "get_attributes" callback function.
-func (x *AccessibleTextInterface) OverrideGetAttributes(cb func(AccessibleText, uint, *uint, *uintptr, *[]string, *[]string) bool) {
+func (x *AccessibleTextInterfaceGType) OverrideGetAttributes(cb func(AccessibleText, uint, *uint, *uintptr, *[]string, *[]string) bool) {
 	if cb == nil {
 		x.xGetAttributes = 0
 	} else {
@@ -143,7 +143,7 @@ func (x *AccessibleTextInterface) OverrideGetAttributes(cb func(AccessibleText, 
 }
 
 // GetGetAttributes gets the "get_attributes" callback function.
-func (x *AccessibleTextInterface) GetGetAttributes() func(AccessibleText, uint, *uint, *uintptr, *[]string, *[]string) bool {
+func (x *AccessibleTextInterfaceGType) GetGetAttributes() func(AccessibleText, uint, *uint, *uintptr, *[]string, *[]string) bool {
 	if x.xGetAttributes == 0 {
 		return nil
 	}
@@ -155,7 +155,7 @@ func (x *AccessibleTextInterface) GetGetAttributes() func(AccessibleText, uint, 
 }
 
 // OverrideGetDefaultAttributes sets the "get_default_attributes" callback function.
-func (x *AccessibleTextInterface) OverrideGetDefaultAttributes(cb func(AccessibleText, *[]string, *[]string)) {
+func (x *AccessibleTextInterfaceGType) OverrideGetDefaultAttributes(cb func(AccessibleText, *[]string, *[]string)) {
 	if cb == nil {
 		x.xGetDefaultAttributes = 0
 	} else {
@@ -166,7 +166,7 @@ func (x *AccessibleTextInterface) OverrideGetDefaultAttributes(cb func(Accessibl
 }
 
 // GetGetDefaultAttributes gets the "get_default_attributes" callback function.
-func (x *AccessibleTextInterface) GetGetDefaultAttributes() func(AccessibleText, *[]string, *[]string) {
+func (x *AccessibleTextInterfaceGType) GetGetDefaultAttributes() func(AccessibleText, *[]string, *[]string) {
 	if x.xGetDefaultAttributes == 0 {
 		return nil
 	}
@@ -178,7 +178,7 @@ func (x *AccessibleTextInterface) GetGetDefaultAttributes() func(AccessibleText,
 }
 
 // OverrideGetExtents sets the "get_extents" callback function.
-func (x *AccessibleTextInterface) OverrideGetExtents(cb func(AccessibleText, uint, uint, *graphene.Rect) bool) {
+func (x *AccessibleTextInterfaceGType) OverrideGetExtents(cb func(AccessibleText, uint, uint, *graphene.Rect) bool) {
 	if cb == nil {
 		x.xGetExtents = 0
 	} else {
@@ -189,7 +189,7 @@ func (x *AccessibleTextInterface) OverrideGetExtents(cb func(AccessibleText, uin
 }
 
 // GetGetExtents gets the "get_extents" callback function.
-func (x *AccessibleTextInterface) GetGetExtents() func(AccessibleText, uint, uint, *graphene.Rect) bool {
+func (x *AccessibleTextInterfaceGType) GetGetExtents() func(AccessibleText, uint, uint, *graphene.Rect) bool {
 	if x.xGetExtents == 0 {
 		return nil
 	}
@@ -201,7 +201,7 @@ func (x *AccessibleTextInterface) GetGetExtents() func(AccessibleText, uint, uin
 }
 
 // OverrideGetOffset sets the "get_offset" callback function.
-func (x *AccessibleTextInterface) OverrideGetOffset(cb func(AccessibleText, *graphene.Point, *uint) bool) {
+func (x *AccessibleTextInterfaceGType) OverrideGetOffset(cb func(AccessibleText, *graphene.Point, *uint) bool) {
 	if cb == nil {
 		x.xGetOffset = 0
 	} else {
@@ -212,7 +212,7 @@ func (x *AccessibleTextInterface) OverrideGetOffset(cb func(AccessibleText, *gra
 }
 
 // GetGetOffset gets the "get_offset" callback function.
-func (x *AccessibleTextInterface) GetGetOffset() func(AccessibleText, *graphene.Point, *uint) bool {
+func (x *AccessibleTextInterfaceGType) GetGetOffset() func(AccessibleText, *graphene.Point, *uint) bool {
 	if x.xGetOffset == 0 {
 		return nil
 	}

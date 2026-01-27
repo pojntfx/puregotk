@@ -93,25 +93,25 @@ func (x *CClosure) GoPointer() uintptr {
 type Closure struct {
 	_ structs.HostLayout
 
-	RefCount uint
+	RefCount uint32
 
-	MetaMarshalNouse uint
+	MetaMarshalNouse uint32
 
-	NGuards uint
+	NGuards uint32
 
-	NFnotifiers uint
+	NFnotifiers uint32
 
-	NInotifiers uint
+	NInotifiers uint32
 
-	InInotify uint
+	InInotify uint32
 
-	Floating uint
+	Floating uint32
 
-	DerivativeFlag uint
+	DerivativeFlag uint32
 
-	InMarshal uint
+	InMarshal uint32
 
-	IsInvalid uint
+	IsInvalid uint32
 
 	xMarshal uintptr
 

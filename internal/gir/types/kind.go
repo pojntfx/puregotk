@@ -53,6 +53,20 @@ func (km KindMap) MustInterface(ns string, name string) Interface {
 	return p.Value.(Interface)
 }
 
+// IsGTypeStruct returns true if the named type is a Record with GLibIsGTypeStructFor set,
+// indicating it's a GType class/interface struct that needs a "GType" suffix to avoid collisions
+func (km KindMap) IsGTypeStruct(ns string, name string) bool {
+	p := km.pair(ns, name)
+	if p.K != RecordsType {
+		return false
+	}
+	rec, ok := p.Value.(Record)
+	if !ok {
+		return false
+	}
+	return rec.GLibIsGTypeStructFor != ""
+}
+
 type KindPair struct {
 	K     Kind
 	Value interface{}

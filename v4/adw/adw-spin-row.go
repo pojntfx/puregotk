@@ -13,13 +13,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type SpinRowClass struct {
+type SpinRowClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass ActionRowClass
+	ParentClass ActionRowClassGType
 }
 
-func (x *SpinRowClass) GoPointer() uintptr {
+func (x *SpinRowClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

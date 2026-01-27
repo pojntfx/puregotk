@@ -12,10 +12,10 @@ import (
 )
 
 // Class structure for #GSocketControlMessage.
-type SocketControlMessageClass struct {
+type SocketControlMessageClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xGetSize uintptr
 
@@ -38,13 +38,13 @@ type SocketControlMessageClass struct {
 	xGReserved5 uintptr
 }
 
-func (x *SocketControlMessageClass) GoPointer() uintptr {
+func (x *SocketControlMessageClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetSize sets the "get_size" callback function.
 // gets the size of the message.
-func (x *SocketControlMessageClass) OverrideGetSize(cb func(*SocketControlMessage) uint) {
+func (x *SocketControlMessageClassGType) OverrideGetSize(cb func(*SocketControlMessage) uint) {
 	if cb == nil {
 		x.xGetSize = 0
 	} else {
@@ -56,7 +56,7 @@ func (x *SocketControlMessageClass) OverrideGetSize(cb func(*SocketControlMessag
 
 // GetGetSize gets the "get_size" callback function.
 // gets the size of the message.
-func (x *SocketControlMessageClass) GetGetSize() func(*SocketControlMessage) uint {
+func (x *SocketControlMessageClassGType) GetGetSize() func(*SocketControlMessage) uint {
 	if x.xGetSize == 0 {
 		return nil
 	}
@@ -69,7 +69,7 @@ func (x *SocketControlMessageClass) GetGetSize() func(*SocketControlMessage) uin
 
 // OverrideGetLevel sets the "get_level" callback function.
 // gets the protocol of the message.
-func (x *SocketControlMessageClass) OverrideGetLevel(cb func(*SocketControlMessage) int) {
+func (x *SocketControlMessageClassGType) OverrideGetLevel(cb func(*SocketControlMessage) int) {
 	if cb == nil {
 		x.xGetLevel = 0
 	} else {
@@ -81,7 +81,7 @@ func (x *SocketControlMessageClass) OverrideGetLevel(cb func(*SocketControlMessa
 
 // GetGetLevel gets the "get_level" callback function.
 // gets the protocol of the message.
-func (x *SocketControlMessageClass) GetGetLevel() func(*SocketControlMessage) int {
+func (x *SocketControlMessageClassGType) GetGetLevel() func(*SocketControlMessage) int {
 	if x.xGetLevel == 0 {
 		return nil
 	}
@@ -94,7 +94,7 @@ func (x *SocketControlMessageClass) GetGetLevel() func(*SocketControlMessage) in
 
 // OverrideGetType sets the "get_type" callback function.
 // gets the protocol specific type of the message.
-func (x *SocketControlMessageClass) OverrideGetType(cb func(*SocketControlMessage) int) {
+func (x *SocketControlMessageClassGType) OverrideGetType(cb func(*SocketControlMessage) int) {
 	if cb == nil {
 		x.xGetType = 0
 	} else {
@@ -106,7 +106,7 @@ func (x *SocketControlMessageClass) OverrideGetType(cb func(*SocketControlMessag
 
 // GetGetType gets the "get_type" callback function.
 // gets the protocol specific type of the message.
-func (x *SocketControlMessageClass) GetGetType() func(*SocketControlMessage) int {
+func (x *SocketControlMessageClassGType) GetGetType() func(*SocketControlMessage) int {
 	if x.xGetType == 0 {
 		return nil
 	}
@@ -119,7 +119,7 @@ func (x *SocketControlMessageClass) GetGetType() func(*SocketControlMessage) int
 
 // OverrideSerialize sets the "serialize" callback function.
 // Writes out the message data.
-func (x *SocketControlMessageClass) OverrideSerialize(cb func(*SocketControlMessage, uintptr)) {
+func (x *SocketControlMessageClassGType) OverrideSerialize(cb func(*SocketControlMessage, uintptr)) {
 	if cb == nil {
 		x.xSerialize = 0
 	} else {
@@ -131,7 +131,7 @@ func (x *SocketControlMessageClass) OverrideSerialize(cb func(*SocketControlMess
 
 // GetSerialize gets the "serialize" callback function.
 // Writes out the message data.
-func (x *SocketControlMessageClass) GetSerialize() func(*SocketControlMessage, uintptr) {
+func (x *SocketControlMessageClassGType) GetSerialize() func(*SocketControlMessage, uintptr) {
 	if x.xSerialize == 0 {
 		return nil
 	}
@@ -144,7 +144,7 @@ func (x *SocketControlMessageClass) GetSerialize() func(*SocketControlMessage, u
 
 // OverrideDeserialize sets the "deserialize" callback function.
 // Tries to deserialize a message.
-func (x *SocketControlMessageClass) OverrideDeserialize(cb func(int, int, uint, uintptr) *SocketControlMessage) {
+func (x *SocketControlMessageClassGType) OverrideDeserialize(cb func(int, int, uint, uintptr) *SocketControlMessage) {
 	if cb == nil {
 		x.xDeserialize = 0
 	} else {
@@ -160,7 +160,7 @@ func (x *SocketControlMessageClass) OverrideDeserialize(cb func(int, int, uint, 
 
 // GetDeserialize gets the "deserialize" callback function.
 // Tries to deserialize a message.
-func (x *SocketControlMessageClass) GetDeserialize() func(int, int, uint, uintptr) *SocketControlMessage {
+func (x *SocketControlMessageClassGType) GetDeserialize() func(int, int, uint, uintptr) *SocketControlMessage {
 	if x.xDeserialize == 0 {
 		return nil
 	}
@@ -178,7 +178,7 @@ func (x *SocketControlMessageClass) GetDeserialize() func(int, int, uint, uintpt
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *SocketControlMessageClass) OverrideGReserved1(cb func()) {
+func (x *SocketControlMessageClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -189,7 +189,7 @@ func (x *SocketControlMessageClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *SocketControlMessageClass) GetGReserved1() func() {
+func (x *SocketControlMessageClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -201,7 +201,7 @@ func (x *SocketControlMessageClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *SocketControlMessageClass) OverrideGReserved2(cb func()) {
+func (x *SocketControlMessageClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -212,7 +212,7 @@ func (x *SocketControlMessageClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *SocketControlMessageClass) GetGReserved2() func() {
+func (x *SocketControlMessageClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}
@@ -224,7 +224,7 @@ func (x *SocketControlMessageClass) GetGReserved2() func() {
 }
 
 // OverrideGReserved3 sets the "_g_reserved3" callback function.
-func (x *SocketControlMessageClass) OverrideGReserved3(cb func()) {
+func (x *SocketControlMessageClassGType) OverrideGReserved3(cb func()) {
 	if cb == nil {
 		x.xGReserved3 = 0
 	} else {
@@ -235,7 +235,7 @@ func (x *SocketControlMessageClass) OverrideGReserved3(cb func()) {
 }
 
 // GetGReserved3 gets the "_g_reserved3" callback function.
-func (x *SocketControlMessageClass) GetGReserved3() func() {
+func (x *SocketControlMessageClassGType) GetGReserved3() func() {
 	if x.xGReserved3 == 0 {
 		return nil
 	}
@@ -247,7 +247,7 @@ func (x *SocketControlMessageClass) GetGReserved3() func() {
 }
 
 // OverrideGReserved4 sets the "_g_reserved4" callback function.
-func (x *SocketControlMessageClass) OverrideGReserved4(cb func()) {
+func (x *SocketControlMessageClassGType) OverrideGReserved4(cb func()) {
 	if cb == nil {
 		x.xGReserved4 = 0
 	} else {
@@ -258,7 +258,7 @@ func (x *SocketControlMessageClass) OverrideGReserved4(cb func()) {
 }
 
 // GetGReserved4 gets the "_g_reserved4" callback function.
-func (x *SocketControlMessageClass) GetGReserved4() func() {
+func (x *SocketControlMessageClassGType) GetGReserved4() func() {
 	if x.xGReserved4 == 0 {
 		return nil
 	}
@@ -270,7 +270,7 @@ func (x *SocketControlMessageClass) GetGReserved4() func() {
 }
 
 // OverrideGReserved5 sets the "_g_reserved5" callback function.
-func (x *SocketControlMessageClass) OverrideGReserved5(cb func()) {
+func (x *SocketControlMessageClassGType) OverrideGReserved5(cb func()) {
 	if cb == nil {
 		x.xGReserved5 = 0
 	} else {
@@ -281,7 +281,7 @@ func (x *SocketControlMessageClass) OverrideGReserved5(cb func()) {
 }
 
 // GetGReserved5 gets the "_g_reserved5" callback function.
-func (x *SocketControlMessageClass) GetGReserved5() func() {
+func (x *SocketControlMessageClassGType) GetGReserved5() func() {
 	if x.xGReserved5 == 0 {
 		return nil
 	}

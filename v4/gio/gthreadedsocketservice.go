@@ -12,10 +12,10 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type ThreadedSocketServiceClass struct {
+type ThreadedSocketServiceClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass SocketServiceClass
+	ParentClass SocketServiceClassGType
 
 	xRun uintptr
 
@@ -30,12 +30,12 @@ type ThreadedSocketServiceClass struct {
 	xGReserved5 uintptr
 }
 
-func (x *ThreadedSocketServiceClass) GoPointer() uintptr {
+func (x *ThreadedSocketServiceClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideRun sets the "run" callback function.
-func (x *ThreadedSocketServiceClass) OverrideRun(cb func(*ThreadedSocketService, *SocketConnection, *gobject.Object) bool) {
+func (x *ThreadedSocketServiceClassGType) OverrideRun(cb func(*ThreadedSocketService, *SocketConnection, *gobject.Object) bool) {
 	if cb == nil {
 		x.xRun = 0
 	} else {
@@ -46,7 +46,7 @@ func (x *ThreadedSocketServiceClass) OverrideRun(cb func(*ThreadedSocketService,
 }
 
 // GetRun gets the "run" callback function.
-func (x *ThreadedSocketServiceClass) GetRun() func(*ThreadedSocketService, *SocketConnection, *gobject.Object) bool {
+func (x *ThreadedSocketServiceClassGType) GetRun() func(*ThreadedSocketService, *SocketConnection, *gobject.Object) bool {
 	if x.xRun == 0 {
 		return nil
 	}
@@ -58,7 +58,7 @@ func (x *ThreadedSocketServiceClass) GetRun() func(*ThreadedSocketService, *Sock
 }
 
 // OverrideGReserved1 sets the "_g_reserved1" callback function.
-func (x *ThreadedSocketServiceClass) OverrideGReserved1(cb func()) {
+func (x *ThreadedSocketServiceClassGType) OverrideGReserved1(cb func()) {
 	if cb == nil {
 		x.xGReserved1 = 0
 	} else {
@@ -69,7 +69,7 @@ func (x *ThreadedSocketServiceClass) OverrideGReserved1(cb func()) {
 }
 
 // GetGReserved1 gets the "_g_reserved1" callback function.
-func (x *ThreadedSocketServiceClass) GetGReserved1() func() {
+func (x *ThreadedSocketServiceClassGType) GetGReserved1() func() {
 	if x.xGReserved1 == 0 {
 		return nil
 	}
@@ -81,7 +81,7 @@ func (x *ThreadedSocketServiceClass) GetGReserved1() func() {
 }
 
 // OverrideGReserved2 sets the "_g_reserved2" callback function.
-func (x *ThreadedSocketServiceClass) OverrideGReserved2(cb func()) {
+func (x *ThreadedSocketServiceClassGType) OverrideGReserved2(cb func()) {
 	if cb == nil {
 		x.xGReserved2 = 0
 	} else {
@@ -92,7 +92,7 @@ func (x *ThreadedSocketServiceClass) OverrideGReserved2(cb func()) {
 }
 
 // GetGReserved2 gets the "_g_reserved2" callback function.
-func (x *ThreadedSocketServiceClass) GetGReserved2() func() {
+func (x *ThreadedSocketServiceClassGType) GetGReserved2() func() {
 	if x.xGReserved2 == 0 {
 		return nil
 	}
@@ -104,7 +104,7 @@ func (x *ThreadedSocketServiceClass) GetGReserved2() func() {
 }
 
 // OverrideGReserved3 sets the "_g_reserved3" callback function.
-func (x *ThreadedSocketServiceClass) OverrideGReserved3(cb func()) {
+func (x *ThreadedSocketServiceClassGType) OverrideGReserved3(cb func()) {
 	if cb == nil {
 		x.xGReserved3 = 0
 	} else {
@@ -115,7 +115,7 @@ func (x *ThreadedSocketServiceClass) OverrideGReserved3(cb func()) {
 }
 
 // GetGReserved3 gets the "_g_reserved3" callback function.
-func (x *ThreadedSocketServiceClass) GetGReserved3() func() {
+func (x *ThreadedSocketServiceClassGType) GetGReserved3() func() {
 	if x.xGReserved3 == 0 {
 		return nil
 	}
@@ -127,7 +127,7 @@ func (x *ThreadedSocketServiceClass) GetGReserved3() func() {
 }
 
 // OverrideGReserved4 sets the "_g_reserved4" callback function.
-func (x *ThreadedSocketServiceClass) OverrideGReserved4(cb func()) {
+func (x *ThreadedSocketServiceClassGType) OverrideGReserved4(cb func()) {
 	if cb == nil {
 		x.xGReserved4 = 0
 	} else {
@@ -138,7 +138,7 @@ func (x *ThreadedSocketServiceClass) OverrideGReserved4(cb func()) {
 }
 
 // GetGReserved4 gets the "_g_reserved4" callback function.
-func (x *ThreadedSocketServiceClass) GetGReserved4() func() {
+func (x *ThreadedSocketServiceClassGType) GetGReserved4() func() {
 	if x.xGReserved4 == 0 {
 		return nil
 	}
@@ -150,7 +150,7 @@ func (x *ThreadedSocketServiceClass) GetGReserved4() func() {
 }
 
 // OverrideGReserved5 sets the "_g_reserved5" callback function.
-func (x *ThreadedSocketServiceClass) OverrideGReserved5(cb func()) {
+func (x *ThreadedSocketServiceClassGType) OverrideGReserved5(cb func()) {
 	if cb == nil {
 		x.xGReserved5 = 0
 	} else {
@@ -161,7 +161,7 @@ func (x *ThreadedSocketServiceClass) OverrideGReserved5(cb func()) {
 }
 
 // GetGReserved5 gets the "_g_reserved5" callback function.
-func (x *ThreadedSocketServiceClass) GetGReserved5() func() {
+func (x *ThreadedSocketServiceClassGType) GetGReserved5() func() {
 	if x.xGReserved5 == 0 {
 		return nil
 	}

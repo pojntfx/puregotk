@@ -47,6 +47,7 @@ func ConvertInterface(currns string, ins string, inter Interface, implemented ma
 	name := util.SnakeToCamel(inter.Name)
 	return InterfaceTemplate{
 		Name:       name,
+		BaseName:   name + "Base", // Default base name, may be changed by caller if collision
 		Doc:        inter.Doc.StringSafe(),
 		Methods:    methods,
 		Properties: properties,

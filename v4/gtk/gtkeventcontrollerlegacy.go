@@ -12,11 +12,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type EventControllerLegacyClass struct {
+type EventControllerLegacyClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *EventControllerLegacyClass) GoPointer() uintptr {
+func (x *EventControllerLegacyClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

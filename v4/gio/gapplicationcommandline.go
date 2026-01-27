@@ -14,10 +14,10 @@ import (
 
 // The #GApplicationCommandLineClass-struct
 // contains private data only.
-type ApplicationCommandLineClass struct {
+type ApplicationCommandLineClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gobject.ObjectClass
+	ParentClass gobject.ObjectClassGType
 
 	xPrintLiteral uintptr
 
@@ -30,12 +30,12 @@ type ApplicationCommandLineClass struct {
 	Padding [10]uintptr
 }
 
-func (x *ApplicationCommandLineClass) GoPointer() uintptr {
+func (x *ApplicationCommandLineClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverridePrintLiteral sets the "print_literal" callback function.
-func (x *ApplicationCommandLineClass) OverridePrintLiteral(cb func(*ApplicationCommandLine, string)) {
+func (x *ApplicationCommandLineClassGType) OverridePrintLiteral(cb func(*ApplicationCommandLine, string)) {
 	if cb == nil {
 		x.xPrintLiteral = 0
 	} else {
@@ -46,7 +46,7 @@ func (x *ApplicationCommandLineClass) OverridePrintLiteral(cb func(*ApplicationC
 }
 
 // GetPrintLiteral gets the "print_literal" callback function.
-func (x *ApplicationCommandLineClass) GetPrintLiteral() func(*ApplicationCommandLine, string) {
+func (x *ApplicationCommandLineClassGType) GetPrintLiteral() func(*ApplicationCommandLine, string) {
 	if x.xPrintLiteral == 0 {
 		return nil
 	}
@@ -58,7 +58,7 @@ func (x *ApplicationCommandLineClass) GetPrintLiteral() func(*ApplicationCommand
 }
 
 // OverridePrinterrLiteral sets the "printerr_literal" callback function.
-func (x *ApplicationCommandLineClass) OverridePrinterrLiteral(cb func(*ApplicationCommandLine, string)) {
+func (x *ApplicationCommandLineClassGType) OverridePrinterrLiteral(cb func(*ApplicationCommandLine, string)) {
 	if cb == nil {
 		x.xPrinterrLiteral = 0
 	} else {
@@ -69,7 +69,7 @@ func (x *ApplicationCommandLineClass) OverridePrinterrLiteral(cb func(*Applicati
 }
 
 // GetPrinterrLiteral gets the "printerr_literal" callback function.
-func (x *ApplicationCommandLineClass) GetPrinterrLiteral() func(*ApplicationCommandLine, string) {
+func (x *ApplicationCommandLineClassGType) GetPrinterrLiteral() func(*ApplicationCommandLine, string) {
 	if x.xPrinterrLiteral == 0 {
 		return nil
 	}
@@ -81,7 +81,7 @@ func (x *ApplicationCommandLineClass) GetPrinterrLiteral() func(*ApplicationComm
 }
 
 // OverrideGetStdin sets the "get_stdin" callback function.
-func (x *ApplicationCommandLineClass) OverrideGetStdin(cb func(*ApplicationCommandLine) *InputStream) {
+func (x *ApplicationCommandLineClassGType) OverrideGetStdin(cb func(*ApplicationCommandLine) *InputStream) {
 	if cb == nil {
 		x.xGetStdin = 0
 	} else {
@@ -96,7 +96,7 @@ func (x *ApplicationCommandLineClass) OverrideGetStdin(cb func(*ApplicationComma
 }
 
 // GetGetStdin gets the "get_stdin" callback function.
-func (x *ApplicationCommandLineClass) GetGetStdin() func(*ApplicationCommandLine) *InputStream {
+func (x *ApplicationCommandLineClassGType) GetGetStdin() func(*ApplicationCommandLine) *InputStream {
 	if x.xGetStdin == 0 {
 		return nil
 	}
@@ -114,7 +114,7 @@ func (x *ApplicationCommandLineClass) GetGetStdin() func(*ApplicationCommandLine
 }
 
 // OverrideDone sets the "done" callback function.
-func (x *ApplicationCommandLineClass) OverrideDone(cb func(*ApplicationCommandLine)) {
+func (x *ApplicationCommandLineClassGType) OverrideDone(cb func(*ApplicationCommandLine)) {
 	if cb == nil {
 		x.xDone = 0
 	} else {
@@ -125,7 +125,7 @@ func (x *ApplicationCommandLineClass) OverrideDone(cb func(*ApplicationCommandLi
 }
 
 // GetDone gets the "done" callback function.
-func (x *ApplicationCommandLineClass) GetDone() func(*ApplicationCommandLine) {
+func (x *ApplicationCommandLineClassGType) GetDone() func(*ApplicationCommandLine) {
 	if x.xDone == 0 {
 		return nil
 	}

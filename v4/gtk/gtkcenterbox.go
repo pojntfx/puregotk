@@ -11,11 +11,11 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gobject/types"
 )
 
-type CenterBoxClass struct {
+type CenterBoxClassGType struct {
 	_ structs.HostLayout
 }
 
-func (x *CenterBoxClass) GoPointer() uintptr {
+func (x *CenterBoxClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

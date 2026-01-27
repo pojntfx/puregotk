@@ -66,7 +66,7 @@ type IOChannel struct {
 
 	LineTerm uintptr
 
-	LineTermLen uint
+	LineTermLen uint32
 
 	BufSize uint
 
@@ -78,17 +78,17 @@ type IOChannel struct {
 
 	PartialWriteBuf [6]byte
 
-	UseBuffer uint
+	UseBuffer uint32
 
-	DoEncode uint
+	DoEncode uint32
 
-	CloseOnUnref uint
+	CloseOnUnref uint32
 
-	IsReadable uint
+	IsReadable uint32
 
-	IsWriteable uint
+	IsWriteable uint32
 
-	IsSeekable uint
+	IsSeekable uint32
 
 	Reserved1 uintptr
 

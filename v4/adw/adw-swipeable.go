@@ -12,7 +12,7 @@ import (
 )
 
 // An interface for swipeable widgets.
-type SwipeableInterface struct {
+type SwipeableInterfaceGType struct {
 	_ structs.HostLayout
 
 	Parent uintptr
@@ -30,13 +30,13 @@ type SwipeableInterface struct {
 	Padding [4]uintptr
 }
 
-func (x *SwipeableInterface) GoPointer() uintptr {
+func (x *SwipeableInterfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideGetDistance sets the "get_distance" callback function.
 // Gets the swipe distance.
-func (x *SwipeableInterface) OverrideGetDistance(cb func(Swipeable) float64) {
+func (x *SwipeableInterfaceGType) OverrideGetDistance(cb func(Swipeable) float64) {
 	if cb == nil {
 		x.xGetDistance = 0
 	} else {
@@ -48,7 +48,7 @@ func (x *SwipeableInterface) OverrideGetDistance(cb func(Swipeable) float64) {
 
 // GetGetDistance gets the "get_distance" callback function.
 // Gets the swipe distance.
-func (x *SwipeableInterface) GetGetDistance() func(Swipeable) float64 {
+func (x *SwipeableInterfaceGType) GetGetDistance() func(Swipeable) float64 {
 	if x.xGetDistance == 0 {
 		return nil
 	}
@@ -61,7 +61,7 @@ func (x *SwipeableInterface) GetGetDistance() func(Swipeable) float64 {
 
 // OverrideGetSnapPoints sets the "get_snap_points" callback function.
 // Gets the snap points.
-func (x *SwipeableInterface) OverrideGetSnapPoints(cb func(Swipeable, *int) uintptr) {
+func (x *SwipeableInterfaceGType) OverrideGetSnapPoints(cb func(Swipeable, *int) uintptr) {
 	if cb == nil {
 		x.xGetSnapPoints = 0
 	} else {
@@ -73,7 +73,7 @@ func (x *SwipeableInterface) OverrideGetSnapPoints(cb func(Swipeable, *int) uint
 
 // GetGetSnapPoints gets the "get_snap_points" callback function.
 // Gets the snap points.
-func (x *SwipeableInterface) GetGetSnapPoints() func(Swipeable, *int) uintptr {
+func (x *SwipeableInterfaceGType) GetGetSnapPoints() func(Swipeable, *int) uintptr {
 	if x.xGetSnapPoints == 0 {
 		return nil
 	}
@@ -86,7 +86,7 @@ func (x *SwipeableInterface) GetGetSnapPoints() func(Swipeable, *int) uintptr {
 
 // OverrideGetProgress sets the "get_progress" callback function.
 // Gets the current progress.
-func (x *SwipeableInterface) OverrideGetProgress(cb func(Swipeable) float64) {
+func (x *SwipeableInterfaceGType) OverrideGetProgress(cb func(Swipeable) float64) {
 	if cb == nil {
 		x.xGetProgress = 0
 	} else {
@@ -98,7 +98,7 @@ func (x *SwipeableInterface) OverrideGetProgress(cb func(Swipeable) float64) {
 
 // GetGetProgress gets the "get_progress" callback function.
 // Gets the current progress.
-func (x *SwipeableInterface) GetGetProgress() func(Swipeable) float64 {
+func (x *SwipeableInterfaceGType) GetGetProgress() func(Swipeable) float64 {
 	if x.xGetProgress == 0 {
 		return nil
 	}
@@ -111,7 +111,7 @@ func (x *SwipeableInterface) GetGetProgress() func(Swipeable) float64 {
 
 // OverrideGetCancelProgress sets the "get_cancel_progress" callback function.
 // Gets the cancel progress.
-func (x *SwipeableInterface) OverrideGetCancelProgress(cb func(Swipeable) float64) {
+func (x *SwipeableInterfaceGType) OverrideGetCancelProgress(cb func(Swipeable) float64) {
 	if cb == nil {
 		x.xGetCancelProgress = 0
 	} else {
@@ -123,7 +123,7 @@ func (x *SwipeableInterface) OverrideGetCancelProgress(cb func(Swipeable) float6
 
 // GetGetCancelProgress gets the "get_cancel_progress" callback function.
 // Gets the cancel progress.
-func (x *SwipeableInterface) GetGetCancelProgress() func(Swipeable) float64 {
+func (x *SwipeableInterfaceGType) GetGetCancelProgress() func(Swipeable) float64 {
 	if x.xGetCancelProgress == 0 {
 		return nil
 	}
@@ -136,7 +136,7 @@ func (x *SwipeableInterface) GetGetCancelProgress() func(Swipeable) float64 {
 
 // OverrideGetSwipeArea sets the "get_swipe_area" callback function.
 // Gets the swipeable rectangle.
-func (x *SwipeableInterface) OverrideGetSwipeArea(cb func(Swipeable, NavigationDirection, bool, *gdk.Rectangle)) {
+func (x *SwipeableInterfaceGType) OverrideGetSwipeArea(cb func(Swipeable, NavigationDirection, bool, *gdk.Rectangle)) {
 	if cb == nil {
 		x.xGetSwipeArea = 0
 	} else {
@@ -148,7 +148,7 @@ func (x *SwipeableInterface) OverrideGetSwipeArea(cb func(Swipeable, NavigationD
 
 // GetGetSwipeArea gets the "get_swipe_area" callback function.
 // Gets the swipeable rectangle.
-func (x *SwipeableInterface) GetGetSwipeArea() func(Swipeable, NavigationDirection, bool, *gdk.Rectangle) {
+func (x *SwipeableInterfaceGType) GetGetSwipeArea() func(Swipeable, NavigationDirection, bool, *gdk.Rectangle) {
 	if x.xGetSwipeArea == 0 {
 		return nil
 	}

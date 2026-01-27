@@ -14,13 +14,13 @@ import (
 	"github.com/jwijenbergh/puregotk/v4/gtk"
 )
 
-type TabBarClass struct {
+type TabBarClassGType struct {
 	_ structs.HostLayout
 
-	ParentClass gtk.WidgetClass
+	ParentClass gtk.WidgetClassGType
 }
 
-func (x *TabBarClass) GoPointer() uintptr {
+func (x *TabBarClassGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 

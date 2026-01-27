@@ -14,7 +14,7 @@ import (
 // Provides an interface for converting data from one type
 // to another type. The conversion can be stateful
 // and may fail at any place.
-type ConverterIface struct {
+type ConverterIfaceGType struct {
 	_ structs.HostLayout
 
 	GIface uintptr
@@ -24,13 +24,13 @@ type ConverterIface struct {
 	xReset uintptr
 }
 
-func (x *ConverterIface) GoPointer() uintptr {
+func (x *ConverterIfaceGType) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
 // OverrideConvert sets the "convert" callback function.
 // Converts data.
-func (x *ConverterIface) OverrideConvert(cb func(Converter, []byte, uint, []byte, uint, ConverterFlags, *uint, *uint) ConverterResult) {
+func (x *ConverterIfaceGType) OverrideConvert(cb func(Converter, []byte, uint, []byte, uint, ConverterFlags, *uint, *uint) ConverterResult) {
 	if cb == nil {
 		x.xConvert = 0
 	} else {
@@ -42,7 +42,7 @@ func (x *ConverterIface) OverrideConvert(cb func(Converter, []byte, uint, []byte
 
 // GetConvert gets the "convert" callback function.
 // Converts data.
-func (x *ConverterIface) GetConvert() func(Converter, []byte, uint, []byte, uint, ConverterFlags, *uint, *uint) ConverterResult {
+func (x *ConverterIfaceGType) GetConvert() func(Converter, []byte, uint, []byte, uint, ConverterFlags, *uint, *uint) ConverterResult {
 	if x.xConvert == 0 {
 		return nil
 	}
@@ -55,7 +55,7 @@ func (x *ConverterIface) GetConvert() func(Converter, []byte, uint, []byte, uint
 
 // OverrideReset sets the "reset" callback function.
 // Reverts the internal state of the converter to its initial state.
-func (x *ConverterIface) OverrideReset(cb func(Converter)) {
+func (x *ConverterIfaceGType) OverrideReset(cb func(Converter)) {
 	if cb == nil {
 		x.xReset = 0
 	} else {
@@ -67,7 +67,7 @@ func (x *ConverterIface) OverrideReset(cb func(Converter)) {
 
 // GetReset gets the "reset" callback function.
 // Reverts the internal state of the converter to its initial state.
-func (x *ConverterIface) GetReset() func(Converter) {
+func (x *ConverterIfaceGType) GetReset() func(Converter) {
 	if x.xReset == 0 {
 		return nil
 	}
