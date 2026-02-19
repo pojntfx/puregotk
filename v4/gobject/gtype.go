@@ -1011,6 +1011,18 @@ func TypeClassPeekStatic(TypeVar types.GType) *TypeClass {
 	return cret
 }
 
+var xTypeClassRef func(types.GType) *TypeClass
+
+// Increments the reference count of the class structure belonging to
+// @type.
+//
+// This function will demand-create the class if it doesn't exist already.
+func TypeClassRef(TypeVar types.GType) *TypeClass {
+
+	cret := xTypeClassRef(TypeVar)
+	return cret
+}
+
 var xTypeCreateInstance func(types.GType) *TypeInstance
 
 // Creates and initializes an instance of @type if @type is valid and
@@ -1561,6 +1573,7 @@ func init() {
 	core.PuregoSafeRegister(&xTypeClassGet, libs, "g_type_class_get")
 	core.PuregoSafeRegister(&xTypeClassPeek, libs, "g_type_class_peek")
 	core.PuregoSafeRegister(&xTypeClassPeekStatic, libs, "g_type_class_peek_static")
+	core.PuregoSafeRegister(&xTypeClassRef, libs, "g_type_class_ref")
 	core.PuregoSafeRegister(&xTypeCreateInstance, libs, "g_type_create_instance")
 	core.PuregoSafeRegister(&xTypeDefaultInterfaceGet, libs, "g_type_default_interface_get")
 	core.PuregoSafeRegister(&xTypeDefaultInterfacePeek, libs, "g_type_default_interface_peek")

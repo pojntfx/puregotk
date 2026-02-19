@@ -70,7 +70,7 @@ const (
 	// Like #gtk_micro_version, but from the headers used at
 	// application compile time, rather than from the library
 	// linked against at application run time.
-	MICRO_VERSION int = 0
+	MICRO_VERSION int = 2
 	// The minor version number of the GLib library.
 	//
 	// Like #gtk_minor_version, but from the headers used at
@@ -111,4 +111,6 @@ const (
 	SYSDEF_MSG_OOB int = 1
 
 	SYSDEF_MSG_PEEK int = 2
+
+	VA_COPY_AS_ARRAY int = 1
 )

@@ -86,7 +86,7 @@ func (x *ShortcutLabelClass) GoPointer() uintptr {
 //
 // ## Accessibility
 //
-// `AdwShortcutLabel` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
+// `AdwShortcutLabel` uses the `GTK_ACCESSIBLE_ROLE_LABEL` role.
 //
 // See also: [class@ShortcutsDialog].
 type ShortcutLabel struct {
