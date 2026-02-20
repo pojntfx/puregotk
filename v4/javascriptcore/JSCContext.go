@@ -112,13 +112,13 @@ func NewContextWithVirtualMachine(VmVar *VirtualMachine) *Context {
 	return cls
 }
 
-var xContextCheckSyntax func(uintptr, string, int, CheckSyntaxMode, string, uint, **Exception) CheckSyntaxResult
+var xContextCheckSyntax func(uintptr, string, int, CheckSyntaxMode, string, uint32, **Exception) CheckSyntaxResult
 
 // Check the given @code in @context for syntax errors. The @line_number is the starting line number in @uri;
 // the value is one-based so the first line is 1. @uri and @line_number are only used to fill the @exception.
 // In case of errors @exception will be set to a new #JSCException with the details. You can pass %NULL to
 // @exception to ignore the error details.
-func (x *Context) CheckSyntax(CodeVar string, LengthVar int, ModeVar CheckSyntaxMode, UriVar string, LineNumberVar uint, ExceptionVar **Exception) CheckSyntaxResult {
+func (x *Context) CheckSyntax(CodeVar string, LengthVar int, ModeVar CheckSyntaxMode, UriVar string, LineNumberVar uint32, ExceptionVar **Exception) CheckSyntaxResult {
 
 	cret := xContextCheckSyntax(x.GoPointer(), CodeVar, LengthVar, ModeVar, UriVar, LineNumberVar, ExceptionVar)
 	return cret
@@ -149,14 +149,14 @@ func (x *Context) Evaluate(CodeVar string, LengthVar int) *Value {
 	return cls
 }
 
-var xContextEvaluateInObject func(uintptr, string, int, uintptr, uintptr, string, uint, **Value) uintptr
+var xContextEvaluateInObject func(uintptr, string, int, uintptr, uintptr, string, uint32, **Value) uintptr
 
 // Evaluate @code and create an new object where symbols defined in @code will be added as properties,
 // instead of being added to @context global object. The new object is returned as @object parameter.
 // Similar to how jsc_value_new_object() works, if @object_instance is not %NULL @object_class must be provided too.
 // The @line_number is the starting line number in @uri; the value is one-based so the first line is 1.
 // @uri and @line_number will be shown in exceptions and they don't affect the behavior of the script.
-func (x *Context) EvaluateInObject(CodeVar string, LengthVar int, ObjectInstanceVar uintptr, ObjectClassVar *Class, UriVar string, LineNumberVar uint, ObjectVar **Value) *Value {
+func (x *Context) EvaluateInObject(CodeVar string, LengthVar int, ObjectInstanceVar uintptr, ObjectClassVar *Class, UriVar string, LineNumberVar uint32, ObjectVar **Value) *Value {
 	var cls *Value
 
 	cret := xContextEvaluateInObject(x.GoPointer(), CodeVar, LengthVar, ObjectInstanceVar, ObjectClassVar.GoPointer(), UriVar, LineNumberVar, ObjectVar)
@@ -169,12 +169,12 @@ func (x *Context) EvaluateInObject(CodeVar string, LengthVar int, ObjectInstance
 	return cls
 }
 
-var xContextEvaluateWithSourceUri func(uintptr, string, int, string, uint) uintptr
+var xContextEvaluateWithSourceUri func(uintptr, string, int, string, uint32) uintptr
 
 // Evaluate @code in @context using @uri as the source URI. The @line_number is the starting line number
 // in @uri; the value is one-based so the first line is 1. @uri and @line_number will be shown in exceptions and
 // they don't affect the behavior of the script.
-func (x *Context) EvaluateWithSourceUri(CodeVar string, LengthVar int, UriVar string, LineNumberVar uint) *Value {
+func (x *Context) EvaluateWithSourceUri(CodeVar string, LengthVar int, UriVar string, LineNumberVar uint32) *Value {
 	var cls *Value
 
 	cret := xContextEvaluateWithSourceUri(x.GoPointer(), CodeVar, LengthVar, UriVar, LineNumberVar)

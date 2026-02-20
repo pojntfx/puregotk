@@ -160,7 +160,7 @@ func HeaderParseSemiParamListStrict(HeaderVar string) *glib.HashTable {
 	return cret
 }
 
-var xHeadersParse func(string, int, *MessageHeaders) bool
+var xHeadersParse func(string, int32, *MessageHeaders) bool
 
 // Parses the headers of an HTTP request or response in @str and
 // stores the results in @dest.
@@ -169,43 +169,43 @@ var xHeadersParse func(string, int, *MessageHeaders) bool
 //
 // This is a low-level method; normally you would use
 // [func@headers_parse_request] or [func@headers_parse_response].
-func HeadersParse(StrVar string, LenVar int, DestVar *MessageHeaders) bool {
+func HeadersParse(StrVar string, LenVar int32, DestVar *MessageHeaders) bool {
 
 	cret := xHeadersParse(StrVar, LenVar, DestVar)
 	return cret
 }
 
-var xHeadersParseRequest func(string, int, *MessageHeaders, *string, *string, *HTTPVersion) uint
+var xHeadersParseRequest func(string, int32, *MessageHeaders, *string, *string, *HTTPVersion) uint32
 
 // Parses the headers of an HTTP request in @str and stores the
 // results in @req_method, @req_path, @ver, and @req_headers.
 //
 // Beware that @req_headers may be modified even on failure.
-func HeadersParseRequest(StrVar string, LenVar int, ReqHeadersVar *MessageHeaders, ReqMethodVar *string, ReqPathVar *string, VerVar *HTTPVersion) uint {
+func HeadersParseRequest(StrVar string, LenVar int32, ReqHeadersVar *MessageHeaders, ReqMethodVar *string, ReqPathVar *string, VerVar *HTTPVersion) uint32 {
 
 	cret := xHeadersParseRequest(StrVar, LenVar, ReqHeadersVar, ReqMethodVar, ReqPathVar, VerVar)
 	return cret
 }
 
-var xHeadersParseResponse func(string, int, *MessageHeaders, *HTTPVersion, *uint, *string) bool
+var xHeadersParseResponse func(string, int32, *MessageHeaders, *HTTPVersion, *uint32, *string) bool
 
 // Parses the headers of an HTTP response in @str and stores the
 // results in @ver, @status_code, @reason_phrase, and @headers.
 //
 // Beware that @headers may be modified even on failure.
-func HeadersParseResponse(StrVar string, LenVar int, HeadersVar *MessageHeaders, VerVar *HTTPVersion, StatusCodeVar *uint, ReasonPhraseVar *string) bool {
+func HeadersParseResponse(StrVar string, LenVar int32, HeadersVar *MessageHeaders, VerVar *HTTPVersion, StatusCodeVar *uint32, ReasonPhraseVar *string) bool {
 
 	cret := xHeadersParseResponse(StrVar, LenVar, HeadersVar, VerVar, StatusCodeVar, ReasonPhraseVar)
 	return cret
 }
 
-var xHeadersParseStatusLine func(string, *HTTPVersion, *uint, *string) bool
+var xHeadersParseStatusLine func(string, *HTTPVersion, *uint32, *string) bool
 
 // Parses the HTTP Status-Line string in @status_line into @ver,
 // @status_code, and @reason_phrase.
 //
 // @status_line must be terminated by either "\0" or "\r\n".
-func HeadersParseStatusLine(StatusLineVar string, VerVar *HTTPVersion, StatusCodeVar *uint, ReasonPhraseVar *string) bool {
+func HeadersParseStatusLine(StatusLineVar string, VerVar *HTTPVersion, StatusCodeVar *uint32, ReasonPhraseVar *string) bool {
 
 	cret := xHeadersParseStatusLine(StatusLineVar, VerVar, StatusCodeVar, ReasonPhraseVar)
 	return cret

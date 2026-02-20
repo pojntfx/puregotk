@@ -362,24 +362,24 @@ func (x *WebViewClass) GetPermissionRequest() func(*WebView, PermissionRequest) 
 }
 
 // OverrideMouseTargetChanged sets the "mouse_target_changed" callback function.
-func (x *WebViewClass) OverrideMouseTargetChanged(cb func(*WebView, *HitTestResult, uint)) {
+func (x *WebViewClass) OverrideMouseTargetChanged(cb func(*WebView, *HitTestResult, uint32)) {
 	if cb == nil {
 		x.xMouseTargetChanged = 0
 	} else {
-		x.xMouseTargetChanged = purego.NewCallback(func(WebViewVarp uintptr, HitTestResultVarp uintptr, ModifiersVarp uint) {
+		x.xMouseTargetChanged = purego.NewCallback(func(WebViewVarp uintptr, HitTestResultVarp uintptr, ModifiersVarp uint32) {
 			cb(WebViewNewFromInternalPtr(WebViewVarp), HitTestResultNewFromInternalPtr(HitTestResultVarp), ModifiersVarp)
 		})
 	}
 }
 
 // GetMouseTargetChanged gets the "mouse_target_changed" callback function.
-func (x *WebViewClass) GetMouseTargetChanged() func(*WebView, *HitTestResult, uint) {
+func (x *WebViewClass) GetMouseTargetChanged() func(*WebView, *HitTestResult, uint32) {
 	if x.xMouseTargetChanged == 0 {
 		return nil
 	}
-	var rawCallback func(WebViewVarp uintptr, HitTestResultVarp uintptr, ModifiersVarp uint)
+	var rawCallback func(WebViewVarp uintptr, HitTestResultVarp uintptr, ModifiersVarp uint32)
 	purego.RegisterFunc(&rawCallback, x.xMouseTargetChanged)
-	return func(WebViewVar *WebView, HitTestResultVar *HitTestResult, ModifiersVar uint) {
+	return func(WebViewVar *WebView, HitTestResultVar *HitTestResult, ModifiersVar uint32) {
 		rawCallback(WebViewVar.GoPointer(), HitTestResultVar.GoPointer(), ModifiersVar)
 	}
 }
@@ -3750,13 +3750,13 @@ func (x *WebView) ConnectLoadFailedWithTlsErrors(cb *func(WebView, string, uintp
 // #GdkModifierType flags indicating the state of modifier keys.
 // The signal is emitted again when the mouse is moved out of the
 // current element with a new @hit_test_result.
-func (x *WebView) ConnectMouseTargetChanged(cb *func(WebView, uintptr, uint)) uint32 {
+func (x *WebView) ConnectMouseTargetChanged(cb *func(WebView, uintptr, uint32)) uint32 {
 	cbPtr := uintptr(unsafe.Pointer(cb))
 	if cbRefPtr, ok := glib.GetCallback(cbPtr); ok {
 		return gobject.SignalConnect(x.GoPointer(), "mouse-target-changed", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, HitTestResultVarp uintptr, ModifiersVarp uint) {
+	fcb := func(clsPtr uintptr, HitTestResultVarp uintptr, ModifiersVarp uint32) {
 		fa := WebView{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
@@ -4268,7 +4268,7 @@ func (x *WebView) GetAtContext() *gtk.ATContext {
 // This functionality can be overridden by `GtkAccessible`
 // implementations, e.g. to get the bounds from an ignored
 // child widget.
-func (x *WebView) GetBounds(XVar *int, YVar *int, WidthVar *int, HeightVar *int) bool {
+func (x *WebView) GetBounds(XVar *int32, YVar *int32, WidthVar *int32, HeightVar *int32) bool {
 
 	cret := gtk.XGtkAccessibleGetBounds(x.GoPointer(), XVar, YVar, WidthVar, HeightVar)
 	return cret
@@ -4400,7 +4400,7 @@ func (x *WebView) UpdateProperty(FirstPropertyVar gtk.AccessibleProperty, varArg
 // property change must be communicated to assistive technologies.
 //
 // This function is meant to be used by language bindings.
-func (x *WebView) UpdatePropertyValue(NPropertiesVar int, PropertiesVar []gtk.AccessibleProperty, ValuesVar []gobject.Value) {
+func (x *WebView) UpdatePropertyValue(NPropertiesVar int32, PropertiesVar []gtk.AccessibleProperty, ValuesVar []gobject.Value) {
 
 	gtk.XGtkAccessibleUpdatePropertyValue(x.GoPointer(), NPropertiesVar, PropertiesVar, ValuesVar)
 
@@ -4436,7 +4436,7 @@ func (x *WebView) UpdateRelation(FirstRelationVar gtk.AccessibleRelation, varArg
 // relation change must be communicated to assistive technologies.
 //
 // This function is meant to be used by language bindings.
-func (x *WebView) UpdateRelationValue(NRelationsVar int, RelationsVar []gtk.AccessibleRelation, ValuesVar []gobject.Value) {
+func (x *WebView) UpdateRelationValue(NRelationsVar int32, RelationsVar []gtk.AccessibleRelation, ValuesVar []gobject.Value) {
 
 	gtk.XGtkAccessibleUpdateRelationValue(x.GoPointer(), NRelationsVar, RelationsVar, ValuesVar)
 
@@ -4473,7 +4473,7 @@ func (x *WebView) UpdateState(FirstStateVar gtk.AccessibleState, varArgs ...inte
 // state change must be communicated to assistive technologies.
 //
 // This function is meant to be used by language bindings.
-func (x *WebView) UpdateStateValue(NStatesVar int, StatesVar []gtk.AccessibleState, ValuesVar []gobject.Value) {
+func (x *WebView) UpdateStateValue(NStatesVar int32, StatesVar []gtk.AccessibleState, ValuesVar []gobject.Value) {
 
 	gtk.XGtkAccessibleUpdateStateValue(x.GoPointer(), NStatesVar, StatesVar, ValuesVar)
 

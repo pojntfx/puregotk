@@ -72,7 +72,7 @@ func (x *URIResponse) GetMimeType() string {
 	return cret
 }
 
-var xURIResponseGetStatusCode func(uintptr) uint
+var xURIResponseGetStatusCode func(uintptr) uint32
 
 // Get the status code of the #WebKitURIResponse.
 //
@@ -80,7 +80,7 @@ var xURIResponseGetStatusCode func(uintptr) uint
 // the server. It will normally be a #SoupKnownStatusCode, for
 // example %SOUP_STATUS_OK, though the server can respond with any
 // unsigned integer.
-func (x *URIResponse) GetStatusCode() uint {
+func (x *URIResponse) GetStatusCode() uint32 {
 
 	cret := xURIResponseGetStatusCode(x.GoPointer())
 	return cret
@@ -145,10 +145,10 @@ func (x *URIResponse) GetPropertyMimeType() string {
 
 // GetPropertyStatusCode gets the "status-code" property.
 // The status code of the response as returned by the server.
-func (x *URIResponse) GetPropertyStatusCode() uint {
+func (x *URIResponse) GetPropertyStatusCode() uint32 {
 	var v gobject.Value
 	x.GetProperty("status-code", &v)
-	return v.GetUint()
+	return v.GetUlong()
 }
 
 // GetPropertySuggestedFilename gets the "suggested-filename" property.

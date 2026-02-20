@@ -44,7 +44,7 @@ func OptionMenuNewFromInternalPtr(ptr uintptr) *OptionMenu {
 	return cls
 }
 
-var xOptionMenuActivateItem func(uintptr, uint)
+var xOptionMenuActivateItem func(uintptr, uint32)
 
 // Activates the #WebKitOptionMenuItem at @index in @menu.
 //
@@ -52,7 +52,7 @@ var xOptionMenuActivateItem func(uintptr, uint)
 // of the element making the item the active one. You are expected to close the menu with
 // webkit_option_menu_close() after activating an item, calling this function again will have no
 // effect.
-func (x *OptionMenu) ActivateItem(IndexVar uint) {
+func (x *OptionMenu) ActivateItem(IndexVar uint32) {
 
 	xOptionMenuActivateItem(x.GoPointer(), IndexVar)
 
@@ -92,25 +92,25 @@ func (x *OptionMenu) GetEvent() *gdk.Event {
 	return cls
 }
 
-var xOptionMenuGetItem func(uintptr, uint) *OptionMenuItem
+var xOptionMenuGetItem func(uintptr, uint32) *OptionMenuItem
 
 // Returns the #WebKitOptionMenuItem at @index in @menu.
-func (x *OptionMenu) GetItem(IndexVar uint) *OptionMenuItem {
+func (x *OptionMenu) GetItem(IndexVar uint32) *OptionMenuItem {
 
 	cret := xOptionMenuGetItem(x.GoPointer(), IndexVar)
 	return cret
 }
 
-var xOptionMenuGetNItems func(uintptr) uint
+var xOptionMenuGetNItems func(uintptr) uint32
 
 // Gets the length of the @menu.
-func (x *OptionMenu) GetNItems() uint {
+func (x *OptionMenu) GetNItems() uint32 {
 
 	cret := xOptionMenuGetNItems(x.GoPointer())
 	return cret
 }
 
-var xOptionMenuSelectItem func(uintptr, uint)
+var xOptionMenuSelectItem func(uintptr, uint32)
 
 // Selects the #WebKitOptionMenuItem at @index in @menu.
 //
@@ -118,7 +118,7 @@ var xOptionMenuSelectItem func(uintptr, uint)
 // text shown by the combo button, but it doesn't change the value of the element. You need to
 // explicitly activate the item with webkit_option_menu_select_item() or close the menu with
 // webkit_option_menu_close() in which case the currently selected item will be activated.
-func (x *OptionMenu) SelectItem(IndexVar uint) {
+func (x *OptionMenu) SelectItem(IndexVar uint32) {
 
 	xOptionMenuSelectItem(x.GoPointer(), IndexVar)
 

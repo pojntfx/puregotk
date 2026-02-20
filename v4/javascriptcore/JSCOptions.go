@@ -80,10 +80,10 @@ func OptionsGetDouble(OptionVar string, ValueVar *float64) bool {
 	return cret
 }
 
-var xOptionsGetInt func(string, *int) bool
+var xOptionsGetInt func(string, *int32) bool
 
 // Get @option as a #gint value.
-func OptionsGetInt(OptionVar string, ValueVar *int) bool {
+func OptionsGetInt(OptionVar string, ValueVar *int32) bool {
 
 	cret := xOptionsGetInt(OptionVar, ValueVar)
 	return cret
@@ -134,10 +134,10 @@ func OptionsGetString(OptionVar string, ValueVar *string) bool {
 	return cret
 }
 
-var xOptionsGetUint func(string, *uint) bool
+var xOptionsGetUint func(string, *uint32) bool
 
 // Get @option as a #guint value.
-func OptionsGetUint(OptionVar string, ValueVar *uint) bool {
+func OptionsGetUint(OptionVar string, ValueVar *uint32) bool {
 
 	cret := xOptionsGetUint(OptionVar, ValueVar)
 	return cret
@@ -161,10 +161,10 @@ func OptionsSetDouble(OptionVar string, ValueVar float64) bool {
 	return cret
 }
 
-var xOptionsSetInt func(string, int) bool
+var xOptionsSetInt func(string, int32) bool
 
 // Set @option as a #gint value.
-func OptionsSetInt(OptionVar string, ValueVar int) bool {
+func OptionsSetInt(OptionVar string, ValueVar int32) bool {
 
 	cret := xOptionsSetInt(OptionVar, ValueVar)
 	return cret
@@ -200,10 +200,10 @@ func OptionsSetString(OptionVar string, ValueVar string) bool {
 	return cret
 }
 
-var xOptionsSetUint func(string, uint) bool
+var xOptionsSetUint func(string, uint32) bool
 
 // Set @option as a #guint value.
-func OptionsSetUint(OptionVar string, ValueVar uint) bool {
+func OptionsSetUint(OptionVar string, ValueVar uint32) bool {
 
 	cret := xOptionsSetUint(OptionVar, ValueVar)
 	return cret

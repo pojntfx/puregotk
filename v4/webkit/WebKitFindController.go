@@ -78,7 +78,7 @@ func FindControllerNewFromInternalPtr(ptr uintptr) *FindController {
 	return cls
 }
 
-var xFindControllerCountMatches func(uintptr, string, uint32, uint)
+var xFindControllerCountMatches func(uintptr, string, uint32, uint32)
 
 // Counts the number of matches for @search_text.
 //
@@ -86,13 +86,13 @@ var xFindControllerCountMatches func(uintptr, string, uint32, uint)
 // #WebKitWebView with the provided @find_options. The number of
 // matches will be provided by the
 // #WebKitFindController::counted-matches signal.
-func (x *FindController) CountMatches(SearchTextVar string, FindOptionsVar uint32, MaxMatchCountVar uint) {
+func (x *FindController) CountMatches(SearchTextVar string, FindOptionsVar uint32, MaxMatchCountVar uint32) {
 
 	xFindControllerCountMatches(x.GoPointer(), SearchTextVar, FindOptionsVar, MaxMatchCountVar)
 
 }
 
-var xFindControllerGetMaxMatchCount func(uintptr) uint
+var xFindControllerGetMaxMatchCount func(uintptr) uint32
 
 // Gets the maximum number of matches to report.
 //
@@ -100,7 +100,7 @@ var xFindControllerGetMaxMatchCount func(uintptr) uint
 // lookup. This number is passed as the last argument of
 // webkit_find_controller_search() or
 // webkit_find_controller_count_matches().
-func (x *FindController) GetMaxMatchCount() uint {
+func (x *FindController) GetMaxMatchCount() uint32 {
 
 	cret := xFindControllerGetMaxMatchCount(x.GoPointer())
 	return cret
@@ -153,7 +153,7 @@ func (x *FindController) GetWebView() *WebView {
 	return cls
 }
 
-var xFindControllerSearch func(uintptr, string, uint32, uint)
+var xFindControllerSearch func(uintptr, string, uint32, uint32)
 
 // Looks for @search_text associated with @find_controller.
 //
@@ -176,7 +176,7 @@ var xFindControllerSearch func(uintptr, string, uint32, uint)
 //
 // Callers should call webkit_find_controller_search_finish() to
 // finish the current search operation.
-func (x *FindController) Search(SearchTextVar string, FindOptionsVar uint32, MaxMatchCountVar uint) {
+func (x *FindController) Search(SearchTextVar string, FindOptionsVar uint32, MaxMatchCountVar uint32) {
 
 	xFindControllerSearch(x.GoPointer(), SearchTextVar, FindOptionsVar, MaxMatchCountVar)
 
@@ -235,10 +235,10 @@ func (c *FindController) SetGoPointer(ptr uintptr) {
 
 // GetPropertyMaxMatchCount gets the "max-match-count" property.
 // The maximum number of matches to report for a given search.
-func (x *FindController) GetPropertyMaxMatchCount() uint {
+func (x *FindController) GetPropertyMaxMatchCount() uint32 {
 	var v gobject.Value
 	x.GetProperty("max-match-count", &v)
-	return v.GetUint()
+	return v.GetUlong()
 }
 
 // GetPropertyText gets the "text" property.
@@ -252,13 +252,13 @@ func (x *FindController) GetPropertyText() string {
 // This signal is emitted when the #WebKitFindController has
 // counted the number of matches for a given text after a call
 // to webkit_find_controller_count_matches().
-func (x *FindController) ConnectCountedMatches(cb *func(FindController, uint)) uint32 {
+func (x *FindController) ConnectCountedMatches(cb *func(FindController, uint32)) uint32 {
 	cbPtr := uintptr(unsafe.Pointer(cb))
 	if cbRefPtr, ok := glib.GetCallback(cbPtr); ok {
 		return gobject.SignalConnect(x.GoPointer(), "counted-matches", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, MatchCountVarp uint) {
+	fcb := func(clsPtr uintptr, MatchCountVarp uint32) {
 		fa := FindController{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
@@ -300,13 +300,13 @@ func (x *FindController) ConnectFailedToFindText(cb *func(FindController)) uint3
 // asynchronously after a call to webkit_find_controller_search(),
 // webkit_find_controller_search_next() or
 // webkit_find_controller_search_previous().
-func (x *FindController) ConnectFoundText(cb *func(FindController, uint)) uint32 {
+func (x *FindController) ConnectFoundText(cb *func(FindController, uint32)) uint32 {
 	cbPtr := uintptr(unsafe.Pointer(cb))
 	if cbRefPtr, ok := glib.GetCallback(cbPtr); ok {
 		return gobject.SignalConnect(x.GoPointer(), "found-text", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, MatchCountVarp uint) {
+	fcb := func(clsPtr uintptr, MatchCountVarp uint32) {
 		fa := FindController{}
 		fa.Ptr = clsPtr
 		cbFn := *cb

@@ -12,19 +12,19 @@ const (
 	// A constant corresponding to 1 day.
 	//
 	// For use with [ctor@Cookie.new] and [method@Cookie.set_max_age].
-	COOKIE_MAX_AGE_ONE_DAY int = 0
+	COOKIE_MAX_AGE_ONE_DAY int32 = 0
 	// A constant corresponding to 1 hour.
 	//
 	// For use with [ctor@Cookie.new] and [method@Cookie.set_max_age].
-	COOKIE_MAX_AGE_ONE_HOUR int = 3600
+	COOKIE_MAX_AGE_ONE_HOUR int32 = 3600
 	// A constant corresponding to 1 week.
 	//
 	// For use with [ctor@Cookie.new] and [method@Cookie.set_max_age].
-	COOKIE_MAX_AGE_ONE_WEEK int = 0
+	COOKIE_MAX_AGE_ONE_WEEK int32 = 0
 	// A constant corresponding to 1 year.
 	//
 	// For use with [ctor@Cookie.new] and [method@Cookie.set_max_age].
-	COOKIE_MAX_AGE_ONE_YEAR int = 0
+	COOKIE_MAX_AGE_ONE_YEAR int32 = 0
 )
 
 // Represents the same-site policies of a cookie.

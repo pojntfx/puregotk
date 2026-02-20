@@ -160,19 +160,19 @@ func NewLogger(LevelVar LoggerLogLevel) *Logger {
 	return cls
 }
 
-var xLoggerGetMaxBodySize func(uintptr) int
+var xLoggerGetMaxBodySize func(uintptr) int32
 
 // Get the maximum body size for @logger.
-func (x *Logger) GetMaxBodySize() int {
+func (x *Logger) GetMaxBodySize() int32 {
 
 	cret := xLoggerGetMaxBodySize(x.GoPointer())
 	return cret
 }
 
-var xLoggerSetMaxBodySize func(uintptr, int)
+var xLoggerSetMaxBodySize func(uintptr, int32)
 
 // Sets the maximum body size for @logger (-1 means no limit).
-func (x *Logger) SetMaxBodySize(MaxBodySizeVar int) {
+func (x *Logger) SetMaxBodySize(MaxBodySizeVar int32) {
 
 	xLoggerSetMaxBodySize(x.GoPointer(), MaxBodySizeVar)
 
@@ -231,10 +231,10 @@ func (c *Logger) SetGoPointer(ptr uintptr) {
 // If [property@Logger:level] is %SOUP_LOGGER_LOG_BODY, this gives
 // the maximum number of bytes of the body that will be logged.
 // (-1 means "no limit".)
-func (x *Logger) SetPropertyMaxBodySize(value int) {
+func (x *Logger) SetPropertyMaxBodySize(value int32) {
 	var v gobject.Value
-	v.Init(gobject.TypeIntVal)
-	v.SetInt(value)
+	v.Init(gobject.TypeLongVal)
+	v.SetLong(value)
 	x.SetProperty("max-body-size", &v)
 }
 
@@ -242,10 +242,10 @@ func (x *Logger) SetPropertyMaxBodySize(value int) {
 // If [property@Logger:level] is %SOUP_LOGGER_LOG_BODY, this gives
 // the maximum number of bytes of the body that will be logged.
 // (-1 means "no limit".)
-func (x *Logger) GetPropertyMaxBodySize() int {
+func (x *Logger) GetPropertyMaxBodySize() int32 {
 	var v gobject.Value
 	x.GetProperty("max-body-size", &v)
-	return v.GetInt()
+	return v.GetLong()
 }
 
 func init() {

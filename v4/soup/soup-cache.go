@@ -163,10 +163,10 @@ func (x *Cache) Flush() {
 
 }
 
-var xCacheGetMaxSize func(uintptr) uint
+var xCacheGetMaxSize func(uintptr) uint32
 
 // Gets the maximum size of the cache.
-func (x *Cache) GetMaxSize() uint {
+func (x *Cache) GetMaxSize() uint32 {
 
 	cret := xCacheGetMaxSize(x.GoPointer())
 	return cret
@@ -183,10 +183,10 @@ func (x *Cache) Load() {
 
 }
 
-var xCacheSetMaxSize func(uintptr, uint)
+var xCacheSetMaxSize func(uintptr, uint32)
 
 // Sets the maximum size of the cache.
-func (x *Cache) SetMaxSize(MaxSizeVar uint) {
+func (x *Cache) SetMaxSize(MaxSizeVar uint32) {
 
 	xCacheSetMaxSize(x.GoPointer(), MaxSizeVar)
 

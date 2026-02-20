@@ -1377,39 +1377,39 @@ func (x *Settings) GetPropertyDefaultFontFamily() string {
 // SetPropertyDefaultFontSize sets the "default-font-size" property.
 // The default font size in pixels to use for content displayed if
 // no font size is specified.
-func (x *Settings) SetPropertyDefaultFontSize(value uint) {
+func (x *Settings) SetPropertyDefaultFontSize(value uint32) {
 	var v gobject.Value
-	v.Init(gobject.TypeUintVal)
-	v.SetUint(value)
+	v.Init(gobject.TypeUlongVal)
+	v.SetUlong(value)
 	x.SetProperty("default-font-size", &v)
 }
 
 // GetPropertyDefaultFontSize gets the "default-font-size" property.
 // The default font size in pixels to use for content displayed if
 // no font size is specified.
-func (x *Settings) GetPropertyDefaultFontSize() uint {
+func (x *Settings) GetPropertyDefaultFontSize() uint32 {
 	var v gobject.Value
 	x.GetProperty("default-font-size", &v)
-	return v.GetUint()
+	return v.GetUlong()
 }
 
 // SetPropertyDefaultMonospaceFontSize sets the "default-monospace-font-size" property.
 // The default font size in pixels to use for content displayed in
 // monospace font if no font size is specified.
-func (x *Settings) SetPropertyDefaultMonospaceFontSize(value uint) {
+func (x *Settings) SetPropertyDefaultMonospaceFontSize(value uint32) {
 	var v gobject.Value
-	v.Init(gobject.TypeUintVal)
-	v.SetUint(value)
+	v.Init(gobject.TypeUlongVal)
+	v.SetUlong(value)
 	x.SetProperty("default-monospace-font-size", &v)
 }
 
 // GetPropertyDefaultMonospaceFontSize gets the "default-monospace-font-size" property.
 // The default font size in pixels to use for content displayed in
 // monospace font if no font size is specified.
-func (x *Settings) GetPropertyDefaultMonospaceFontSize() uint {
+func (x *Settings) GetPropertyDefaultMonospaceFontSize() uint32 {
 	var v gobject.Value
 	x.GetProperty("default-monospace-font-size", &v)
-	return v.GetUint()
+	return v.GetUlong()
 }
 
 // SetPropertyDisableWebSecurity sets the "disable-web-security" property.
@@ -2219,10 +2219,10 @@ func (x *Settings) GetPropertyMediaPlaybackRequiresUserGesture() bool {
 // The minimum font size in pixels used to display text. This setting
 // controls the absolute smallest size. Values other than 0 can
 // potentially break page layouts.
-func (x *Settings) SetPropertyMinimumFontSize(value uint) {
+func (x *Settings) SetPropertyMinimumFontSize(value uint32) {
 	var v gobject.Value
-	v.Init(gobject.TypeUintVal)
-	v.SetUint(value)
+	v.Init(gobject.TypeUlongVal)
+	v.SetUlong(value)
 	x.SetProperty("minimum-font-size", &v)
 }
 
@@ -2230,10 +2230,10 @@ func (x *Settings) SetPropertyMinimumFontSize(value uint) {
 // The minimum font size in pixels used to display text. This setting
 // controls the absolute smallest size. Values other than 0 can
 // potentially break page layouts.
-func (x *Settings) GetPropertyMinimumFontSize() uint {
+func (x *Settings) GetPropertyMinimumFontSize() uint32 {
 	var v gobject.Value
 	x.GetProperty("minimum-font-size", &v)
-	return v.GetUint()
+	return v.GetUlong()
 }
 
 // SetPropertyMonospaceFontFamily sets the "monospace-font-family" property.

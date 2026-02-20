@@ -49,7 +49,7 @@ func (x *Cookie) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-var xNewCookie func(string, string, string, string, int) *Cookie
+var xNewCookie func(string, string, string, string, int32) *Cookie
 
 // Creates a new #SoupCookie with the given attributes.
 //
@@ -72,7 +72,7 @@ var xNewCookie func(string, string, string, string, int) *Cookie
 //
 // As of version 3.4.0 the default value of a cookie's same-site-policy
 // is %SOUP_SAME_SITE_POLICY_LAX.
-func NewCookie(NameVar string, ValueVar string, DomainVar string, PathVar string, MaxAgeVar int) *Cookie {
+func NewCookie(NameVar string, ValueVar string, DomainVar string, PathVar string, MaxAgeVar int32) *Cookie {
 
 	cret := xNewCookie(NameVar, ValueVar, DomainVar, PathVar, MaxAgeVar)
 	return cret
@@ -240,7 +240,7 @@ func (x *Cookie) SetHttpOnly(HttpOnlyVar bool) {
 
 }
 
-var xCookieSetMaxAge func(uintptr, int)
+var xCookieSetMaxAge func(uintptr, int32)
 
 // Sets @cookie's max age to @max_age.
 //
@@ -253,7 +253,7 @@ var xCookieSetMaxAge func(uintptr, int)
 // already-expired.)
 //
 // This sets the same property as [method@Cookie.set_expires].
-func (x *Cookie) SetMaxAge(MaxAgeVar int) {
+func (x *Cookie) SetMaxAge(MaxAgeVar int32) {
 
 	xCookieSetMaxAge(x.GoPointer(), MaxAgeVar)
 

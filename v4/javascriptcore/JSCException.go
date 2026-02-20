@@ -149,19 +149,19 @@ func (x *Exception) GetBacktraceString() string {
 	return cret
 }
 
-var xExceptionGetColumnNumber func(uintptr) uint
+var xExceptionGetColumnNumber func(uintptr) uint32
 
 // Get the column number at which @exception happened.
-func (x *Exception) GetColumnNumber() uint {
+func (x *Exception) GetColumnNumber() uint32 {
 
 	cret := xExceptionGetColumnNumber(x.GoPointer())
 	return cret
 }
 
-var xExceptionGetLineNumber func(uintptr) uint
+var xExceptionGetLineNumber func(uintptr) uint32
 
 // Get the line number at which @exception happened.
-func (x *Exception) GetLineNumber() uint {
+func (x *Exception) GetLineNumber() uint32 {
 
 	cret := xExceptionGetLineNumber(x.GoPointer())
 	return cret

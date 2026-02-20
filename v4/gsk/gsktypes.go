@@ -36,7 +36,7 @@ func (x *ComponentTransfer) GoPointer() uintptr {
 	return uintptr(unsafe.Pointer(x))
 }
 
-var xNewComponentTransferDiscrete func(uint, []float32) *ComponentTransfer
+var xNewComponentTransferDiscrete func(uint32, []float32) *ComponentTransfer
 
 // Creates a new component transfer that applies
 // a step function.
@@ -57,7 +57,7 @@ var xNewComponentTransferDiscrete func(uint, []float32) *ComponentTransfer
 //	&lt;/picture&gt;
 //
 // &lt;/figure&gt;
-func NewComponentTransferDiscrete(NVar uint, ValuesVar []float32) *ComponentTransfer {
+func NewComponentTransferDiscrete(NVar uint32, ValuesVar []float32) *ComponentTransfer {
 
 	cret := xNewComponentTransferDiscrete(NVar, ValuesVar)
 	return cret
@@ -151,7 +151,7 @@ func NewComponentTransferLinear(MVar float32, BVar float32) *ComponentTransfer {
 	return cret
 }
 
-var xNewComponentTransferTable func(uint, []float32) *ComponentTransfer
+var xNewComponentTransferTable func(uint32, []float32) *ComponentTransfer
 
 // Creates a new component transfer that applies
 // a piecewise linear function.
@@ -172,7 +172,7 @@ var xNewComponentTransferTable func(uint, []float32) *ComponentTransfer
 //	&lt;/picture&gt;
 //
 // &lt;/figure&gt;
-func NewComponentTransferTable(NVar uint, ValuesVar []float32) *ComponentTransfer {
+func NewComponentTransferTable(NVar uint32, ValuesVar []float32) *ComponentTransfer {
 
 	cret := xNewComponentTransferTable(NVar, ValuesVar)
 	return cret

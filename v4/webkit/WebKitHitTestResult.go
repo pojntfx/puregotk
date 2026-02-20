@@ -144,10 +144,10 @@ func (x *HitTestResult) ContextIsSelection() bool {
 	return cret
 }
 
-var xHitTestResultGetContext func(uintptr) uint
+var xHitTestResultGetContext func(uintptr) uint32
 
 // Gets the value of the #WebKitHitTestResult:context property.
-func (x *HitTestResult) GetContext() uint {
+func (x *HitTestResult) GetContext() uint32 {
 
 	cret := xHitTestResultGetContext(x.GoPointer())
 	return cret
@@ -212,20 +212,20 @@ func (c *HitTestResult) SetGoPointer(ptr uintptr) {
 // SetPropertyContext sets the "context" property.
 // Bitmask of #WebKitHitTestResultContext flags representing
 // the context of the #WebKitHitTestResult.
-func (x *HitTestResult) SetPropertyContext(value uint) {
+func (x *HitTestResult) SetPropertyContext(value uint32) {
 	var v gobject.Value
-	v.Init(gobject.TypeUintVal)
-	v.SetUint(value)
+	v.Init(gobject.TypeUlongVal)
+	v.SetUlong(value)
 	x.SetProperty("context", &v)
 }
 
 // GetPropertyContext gets the "context" property.
 // Bitmask of #WebKitHitTestResultContext flags representing
 // the context of the #WebKitHitTestResult.
-func (x *HitTestResult) GetPropertyContext() uint {
+func (x *HitTestResult) GetPropertyContext() uint32 {
 	var v gobject.Value
 	x.GetProperty("context", &v)
-	return v.GetUint()
+	return v.GetUlong()
 }
 
 // SetPropertyImageUri sets the "image-uri" property.

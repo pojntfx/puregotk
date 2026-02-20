@@ -104,19 +104,19 @@ func (x *Multipart) Free() {
 
 }
 
-var xMultipartGetLength func(uintptr) int
+var xMultipartGetLength func(uintptr) int32
 
 // Gets the number of body parts in @multipart.
-func (x *Multipart) GetLength() int {
+func (x *Multipart) GetLength() int32 {
 
 	cret := xMultipartGetLength(x.GoPointer())
 	return cret
 }
 
-var xMultipartGetPart func(uintptr, int, **MessageHeaders, **glib.Bytes) bool
+var xMultipartGetPart func(uintptr, int32, **MessageHeaders, **glib.Bytes) bool
 
 // Gets the indicated body part from @multipart.
-func (x *Multipart) GetPart(PartVar int, HeadersVar **MessageHeaders, BodyVar **glib.Bytes) bool {
+func (x *Multipart) GetPart(PartVar int32, HeadersVar **MessageHeaders, BodyVar **glib.Bytes) bool {
 
 	cret := xMultipartGetPart(x.GoPointer(), PartVar, HeadersVar, BodyVar)
 	return cret

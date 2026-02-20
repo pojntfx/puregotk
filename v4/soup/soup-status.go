@@ -166,7 +166,7 @@ const (
 	StatusNotExtendedValue Status = 510
 )
 
-var xStatusGetPhrase func(uint) string
+var xStatusGetPhrase func(uint32) string
 
 // Looks up the stock HTTP description of @status_code.
 //
@@ -179,7 +179,7 @@ var xStatusGetPhrase func(uint) string
 // anyway, and so they should never be presented to the user directly.
 // Instead, you should create you own error messages based on the
 // status code, and on what you were trying to do.
-func StatusGetPhrase(StatusCodeVar uint) string {
+func StatusGetPhrase(StatusCodeVar uint32) string {
 
 	cret := xStatusGetPhrase(StatusCodeVar)
 	return cret

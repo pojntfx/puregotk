@@ -238,7 +238,7 @@ func (x *MessageHeaders) GetOne(NameVar string) string {
 	return cret
 }
 
-var xMessageHeadersGetRanges func(uintptr, int64, *uintptr, *int) bool
+var xMessageHeadersGetRanges func(uintptr, int64, *uintptr, *int32) bool
 
 // Parses @hdrs's Range header and returns an array of the requested
 // byte ranges.
@@ -268,7 +268,7 @@ var xMessageHeadersGetRanges func(uintptr, int64, *uintptr, *int) bool
 // it all at once, or you do not already have the complete response
 // body available, and only want to generate the parts that were
 // actually requested by the client.
-func (x *MessageHeaders) GetRanges(TotalLengthVar int64, RangesVar *uintptr, LengthVar *int) bool {
+func (x *MessageHeaders) GetRanges(TotalLengthVar int64, RangesVar *uintptr, LengthVar *int32) bool {
 
 	cret := xMessageHeadersGetRanges(x.GoPointer(), TotalLengthVar, RangesVar, LengthVar)
 	return cret
@@ -434,13 +434,13 @@ func (x *MessageHeaders) SetRange(StartVar int64, EndVar int64) {
 
 }
 
-var xMessageHeadersSetRanges func(uintptr, *Range, int)
+var xMessageHeadersSetRanges func(uintptr, *Range, int32)
 
 // Sets @hdrs's Range header to request the indicated ranges.
 //
 // If you only want to request a single range, you can use
 // [method@MessageHeaders.set_range].
-func (x *MessageHeaders) SetRanges(RangesVar *Range, LengthVar int) {
+func (x *MessageHeaders) SetRanges(RangesVar *Range, LengthVar int32) {
 
 	xMessageHeadersSetRanges(x.GoPointer(), RangesVar, LengthVar)
 

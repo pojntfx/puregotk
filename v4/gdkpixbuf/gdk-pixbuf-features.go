@@ -4,13 +4,13 @@ package gdkpixbuf
 const (
 	// Major version of gdk-pixbuf library, that is the "0" in
 	// "0.8.2" for example.
-	PIXBUF_MAJOR int = 2
+	PIXBUF_MAJOR int32 = 2
 	// Micro version of gdk-pixbuf library, that is the "2" in
 	// "0.8.2" for example.
-	PIXBUF_MICRO int = 4
+	PIXBUF_MICRO int32 = 4
 	// Minor version of gdk-pixbuf library, that is the "8" in
 	// "0.8.2" for example.
-	PIXBUF_MINOR int = 44
+	PIXBUF_MINOR int32 = 44
 	// Contains the full version of GdkPixbuf as a string.
 	//
 	// This is the version being compiled against; contrast with

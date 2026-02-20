@@ -144,10 +144,10 @@ func (x *AuthenticationRequest) GetHost() string {
 	return cret
 }
 
-var xAuthenticationRequestGetPort func(uintptr) uint
+var xAuthenticationRequestGetPort func(uintptr) uint32
 
 // Get the port that this authentication challenge is applicable to.
-func (x *AuthenticationRequest) GetPort() uint {
+func (x *AuthenticationRequest) GetPort() uint32 {
 
 	cret := xAuthenticationRequestGetPort(x.GoPointer())
 	return cret

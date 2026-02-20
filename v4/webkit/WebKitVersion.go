@@ -10,18 +10,18 @@ const (
 	// Like webkit_get_major_version(), but from the headers used at
 	// application compile time, rather than from the library linked
 	// against at application run time.
-	MAJOR_VERSION int = 2
+	MAJOR_VERSION int32 = 2
 	// Like webkit_get_micro_version(), but from the headers used at
 	// application compile time, rather than from the library linked
 	// against at application run time.
-	MICRO_VERSION int = 3
+	MICRO_VERSION int32 = 3
 	// Like webkit_get_minor_version(), but from the headers used at
 	// application compile time, rather than from the library linked
 	// against at application run time.
-	MINOR_VERSION int = 50
+	MINOR_VERSION int32 = 50
 )
 
-var xGetMajorVersion func() uint
+var xGetMajorVersion func() uint32
 
 // Returns the major version number of the WebKit library.
 //
@@ -31,13 +31,13 @@ var xGetMajorVersion func() uint
 // your code is running against. Contrast with the #WEBKIT_MAJOR_VERSION
 // macro, which represents the major version of the WebKit headers you
 // have included when compiling your code.
-func GetMajorVersion() uint {
+func GetMajorVersion() uint32 {
 
 	cret := xGetMajorVersion()
 	return cret
 }
 
-var xGetMicroVersion func() uint
+var xGetMicroVersion func() uint32
 
 // Returns the micro version number of the WebKit library.
 //
@@ -47,13 +47,13 @@ var xGetMicroVersion func() uint
 // your code is running against. Contrast with the #WEBKIT_MICRO_VERSION
 // macro, which represents the micro version of the WebKit headers you
 // have included when compiling your code.
-func GetMicroVersion() uint {
+func GetMicroVersion() uint32 {
 
 	cret := xGetMicroVersion()
 	return cret
 }
 
-var xGetMinorVersion func() uint
+var xGetMinorVersion func() uint32
 
 // Returns the minor version number of the WebKit library.
 //
@@ -63,7 +63,7 @@ var xGetMinorVersion func() uint
 // your code is running against. Contrast with the #WEBKIT_MINOR_VERSION
 // macro, which represents the minor version of the WebKit headers you
 // have included when compiling your code.
-func GetMinorVersion() uint {
+func GetMinorVersion() uint32 {
 
 	cret := xGetMinorVersion()
 	return cret

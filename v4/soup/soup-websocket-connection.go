@@ -160,19 +160,19 @@ func (x *WebsocketConnection) GetIoStream() *gio.IOStream {
 	return cls
 }
 
-var xWebsocketConnectionGetKeepaliveInterval func(uintptr) uint
+var xWebsocketConnectionGetKeepaliveInterval func(uintptr) uint32
 
 // Gets the keepalive interval in seconds or 0 if disabled.
-func (x *WebsocketConnection) GetKeepaliveInterval() uint {
+func (x *WebsocketConnection) GetKeepaliveInterval() uint32 {
 
 	cret := xWebsocketConnectionGetKeepaliveInterval(x.GoPointer())
 	return cret
 }
 
-var xWebsocketConnectionGetKeepalivePongTimeout func(uintptr) uint
+var xWebsocketConnectionGetKeepalivePongTimeout func(uintptr) uint32
 
 // Gets the keepalive pong timeout in seconds or 0 if disabled.
-func (x *WebsocketConnection) GetKeepalivePongTimeout() uint {
+func (x *WebsocketConnection) GetKeepalivePongTimeout() uint32 {
 
 	cret := xWebsocketConnectionGetKeepalivePongTimeout(x.GoPointer())
 	return cret
@@ -268,25 +268,25 @@ func (x *WebsocketConnection) SendText(TextVar string) {
 
 }
 
-var xWebsocketConnectionSetKeepaliveInterval func(uintptr, uint)
+var xWebsocketConnectionSetKeepaliveInterval func(uintptr, uint32)
 
 // Sets the interval in seconds on when to send a ping message which will serve
 // as a keepalive message.
 //
 // If set to 0 the keepalive message is disabled.
-func (x *WebsocketConnection) SetKeepaliveInterval(IntervalVar uint) {
+func (x *WebsocketConnection) SetKeepaliveInterval(IntervalVar uint32) {
 
 	xWebsocketConnectionSetKeepaliveInterval(x.GoPointer(), IntervalVar)
 
 }
 
-var xWebsocketConnectionSetKeepalivePongTimeout func(uintptr, uint)
+var xWebsocketConnectionSetKeepalivePongTimeout func(uintptr, uint32)
 
 // Set the timeout in seconds for when the absence of a pong from a keepalive
 // ping is assumed to be caused by a faulty connection.
 //
 // If set to 0 then the absence of pongs from keepalive pings is ignored.
-func (x *WebsocketConnection) SetKeepalivePongTimeout(PongTimeoutVar uint) {
+func (x *WebsocketConnection) SetKeepalivePongTimeout(PongTimeoutVar uint32) {
 
 	xWebsocketConnectionSetKeepalivePongTimeout(x.GoPointer(), PongTimeoutVar)
 
@@ -336,10 +336,10 @@ func (x *WebsocketConnection) GetPropertyExtensions() uintptr {
 // serve as a keepalive message.
 //
 // If set to 0 the keepalive message is disabled.
-func (x *WebsocketConnection) SetPropertyKeepaliveInterval(value uint) {
+func (x *WebsocketConnection) SetPropertyKeepaliveInterval(value uint32) {
 	var v gobject.Value
-	v.Init(gobject.TypeUintVal)
-	v.SetUint(value)
+	v.Init(gobject.TypeUlongVal)
+	v.SetUlong(value)
 	x.SetProperty("keepalive-interval", &v)
 }
 
@@ -348,10 +348,10 @@ func (x *WebsocketConnection) SetPropertyKeepaliveInterval(value uint) {
 // serve as a keepalive message.
 //
 // If set to 0 the keepalive message is disabled.
-func (x *WebsocketConnection) GetPropertyKeepaliveInterval() uint {
+func (x *WebsocketConnection) GetPropertyKeepaliveInterval() uint32 {
 	var v gobject.Value
 	x.GetProperty("keepalive-interval", &v)
-	return v.GetUint()
+	return v.GetUlong()
 }
 
 // SetPropertyKeepalivePongTimeout sets the "keepalive-pong-timeout" property.
@@ -361,10 +361,10 @@ func (x *WebsocketConnection) GetPropertyKeepaliveInterval() uint {
 //
 // If set to 0 then the absence of pongs from keepalive pings is
 // ignored.
-func (x *WebsocketConnection) SetPropertyKeepalivePongTimeout(value uint) {
+func (x *WebsocketConnection) SetPropertyKeepalivePongTimeout(value uint32) {
 	var v gobject.Value
-	v.Init(gobject.TypeUintVal)
-	v.SetUint(value)
+	v.Init(gobject.TypeUlongVal)
+	v.SetUlong(value)
 	x.SetProperty("keepalive-pong-timeout", &v)
 }
 
@@ -375,10 +375,10 @@ func (x *WebsocketConnection) SetPropertyKeepalivePongTimeout(value uint) {
 //
 // If set to 0 then the absence of pongs from keepalive pings is
 // ignored.
-func (x *WebsocketConnection) GetPropertyKeepalivePongTimeout() uint {
+func (x *WebsocketConnection) GetPropertyKeepalivePongTimeout() uint32 {
 	var v gobject.Value
 	x.GetProperty("keepalive-pong-timeout", &v)
-	return v.GetUint()
+	return v.GetUlong()
 }
 
 // SetPropertyMaxIncomingPayloadSize sets the "max-incoming-payload-size" property.
@@ -535,13 +535,13 @@ func (x *WebsocketConnection) ConnectError(cb *func(WebsocketConnection, uintptr
 // As a convenience, the @message data will always be
 // %NULL-terminated, but the NUL byte will not be included in
 // the length count.
-func (x *WebsocketConnection) ConnectMessage(cb *func(WebsocketConnection, int, uintptr)) uint32 {
+func (x *WebsocketConnection) ConnectMessage(cb *func(WebsocketConnection, int32, uintptr)) uint32 {
 	cbPtr := uintptr(unsafe.Pointer(cb))
 	if cbRefPtr, ok := glib.GetCallback(cbPtr); ok {
 		return gobject.SignalConnect(x.GoPointer(), "message", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, TypeVarp int, MessageVarp uintptr) {
+	fcb := func(clsPtr uintptr, TypeVarp int32, MessageVarp uintptr) {
 		fa := WebsocketConnection{}
 		fa.Ptr = clsPtr
 		cbFn := *cb

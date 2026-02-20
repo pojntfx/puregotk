@@ -184,10 +184,10 @@ func (x *ServerMessage) GetSocket() *gio.Socket {
 	return cls
 }
 
-var xServerMessageGetStatus func(uintptr) uint
+var xServerMessageGetStatus func(uintptr) uint32
 
 // Get the HTTP status code of @msg.
-func (x *ServerMessage) GetStatus() uint {
+func (x *ServerMessage) GetStatus() uint32 {
 
 	cret := xServerMessageGetStatus(x.GoPointer())
 	return cret
@@ -263,7 +263,7 @@ func (x *ServerMessage) SetHttpVersion(VersionVar HTTPVersion) {
 
 }
 
-var xServerMessageSetRedirect func(uintptr, uint, string)
+var xServerMessageSetRedirect func(uintptr, uint32, string)
 
 // Sets @msg's status_code to @status_code and adds a Location header
 // pointing to @redirect_uri. Use this from a [class@Server] when you
@@ -273,7 +273,7 @@ var xServerMessageSetRedirect func(uintptr, uint, string)
 // interpreted relative to @msg's current URI. In particular, if
 // @redirect_uri is just a path, it will replace the path
 // *and query* of @msg's URI.
-func (x *ServerMessage) SetRedirect(StatusCodeVar uint, RedirectUriVar string) {
+func (x *ServerMessage) SetRedirect(StatusCodeVar uint32, RedirectUriVar string) {
 
 	xServerMessageSetRedirect(x.GoPointer(), StatusCodeVar, RedirectUriVar)
 
@@ -289,13 +289,13 @@ func (x *ServerMessage) SetResponse(ContentTypeVar string, RespUseVar MemoryUse,
 
 }
 
-var xServerMessageSetStatus func(uintptr, uint, string)
+var xServerMessageSetStatus func(uintptr, uint32, string)
 
 // Sets @msg's status code to @status_code.
 //
 // If @status_code is a known value and @reason_phrase is %NULL, the
 // reason_phrase will be set automatically.
-func (x *ServerMessage) SetStatus(StatusCodeVar uint, ReasonPhraseVar string) {
+func (x *ServerMessage) SetStatus(StatusCodeVar uint32, ReasonPhraseVar string) {
 
 	xServerMessageSetStatus(x.GoPointer(), StatusCodeVar, ReasonPhraseVar)
 
@@ -520,13 +520,13 @@ func (x *ServerMessage) ConnectWroteBody(cb *func(ServerMessage)) uint32 {
 
 // Emitted immediately after writing a portion of the message
 // body to the network.
-func (x *ServerMessage) ConnectWroteBodyData(cb *func(ServerMessage, uint)) uint32 {
+func (x *ServerMessage) ConnectWroteBodyData(cb *func(ServerMessage, uint32)) uint32 {
 	cbPtr := uintptr(unsafe.Pointer(cb))
 	if cbRefPtr, ok := glib.GetCallback(cbPtr); ok {
 		return gobject.SignalConnect(x.GoPointer(), "wrote-body-data", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, ChunkSizeVarp uint) {
+	fcb := func(clsPtr uintptr, ChunkSizeVarp uint32) {
 		fa := ServerMessage{}
 		fa.Ptr = clsPtr
 		cbFn := *cb

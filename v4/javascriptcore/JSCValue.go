@@ -220,7 +220,7 @@ func NewValueFromJson(ContextVar *Context, JsonVar string) *Value {
 	return cls
 }
 
-var xNewValueFunction func(uintptr, string, uintptr, uintptr, uintptr, types.GType, uint, ...interface{}) uintptr
+var xNewValueFunction func(uintptr, string, uintptr, uintptr, uintptr, types.GType, uint32, ...interface{}) uintptr
 
 // Create a function in @context. If @name is %NULL an anonymous function will be created.
 // When the function is called by JavaScript or jsc_value_function_call(), @callback is called
@@ -231,7 +231,7 @@ var xNewValueFunction func(uintptr, string, uintptr, uintptr, uintptr, types.GTy
 // %G_TYPE_POINTER instead of the actual boxed #GType to ensure that the instance owned by #JSCClass is used.
 // If you really want to return a new copy of the boxed type, use #JSC_TYPE_VALUE and return a #JSCValue created
 // with jsc_value_new_object() that receives the copy as instance parameter.
-func NewValueFunction(ContextVar *Context, NameVar string, CallbackVar *gobject.Callback, UserDataVar uintptr, DestroyNotifyVar *glib.DestroyNotify, ReturnTypeVar types.GType, NParamsVar uint, varArgs ...interface{}) *Value {
+func NewValueFunction(ContextVar *Context, NameVar string, CallbackVar *gobject.Callback, UserDataVar uintptr, DestroyNotifyVar *glib.DestroyNotify, ReturnTypeVar types.GType, NParamsVar uint32, varArgs ...interface{}) *Value {
 	var cls *Value
 
 	cret := xNewValueFunction(ContextVar.GoPointer(), NameVar, glib.NewCallback(CallbackVar), UserDataVar, glib.NewCallbackNullable(DestroyNotifyVar), ReturnTypeVar, NParamsVar, varArgs...)
@@ -268,7 +268,7 @@ func NewValueFunctionVariadic(ContextVar *Context, NameVar string, CallbackVar *
 	return cls
 }
 
-var xNewValueFunctionv func(uintptr, string, uintptr, uintptr, uintptr, types.GType, uint, []types.GType) uintptr
+var xNewValueFunctionv func(uintptr, string, uintptr, uintptr, uintptr, types.GType, uint32, []types.GType) uintptr
 
 // Create a function in @context. If @name is %NULL an anonymous function will be created.
 // When the function is called by JavaScript or jsc_value_function_call(), @callback is called
@@ -279,7 +279,7 @@ var xNewValueFunctionv func(uintptr, string, uintptr, uintptr, uintptr, types.GT
 // %G_TYPE_POINTER instead of the actual boxed #GType to ensure that the instance owned by #JSCClass is used.
 // If you really want to return a new copy of the boxed type, use #JSC_TYPE_VALUE and return a #JSCValue created
 // with jsc_value_new_object() that receives the copy as instance parameter.
-func NewValueFunctionv(ContextVar *Context, NameVar string, CallbackVar *gobject.Callback, UserDataVar uintptr, DestroyNotifyVar *glib.DestroyNotify, ReturnTypeVar types.GType, NParametersVar uint, ParameterTypesVar []types.GType) *Value {
+func NewValueFunctionv(ContextVar *Context, NameVar string, CallbackVar *gobject.Callback, UserDataVar uintptr, DestroyNotifyVar *glib.DestroyNotify, ReturnTypeVar types.GType, NParametersVar uint32, ParameterTypesVar []types.GType) *Value {
 	var cls *Value
 
 	cret := xNewValueFunctionv(ContextVar.GoPointer(), NameVar, glib.NewCallback(CallbackVar), UserDataVar, glib.NewCallbackNullable(DestroyNotifyVar), ReturnTypeVar, NParametersVar, ParameterTypesVar)
@@ -486,11 +486,11 @@ func (x *Value) ConstructorCall(FirstParameterTypeVar types.GType, varArgs ...in
 	return cls
 }
 
-var xValueConstructorCallv func(uintptr, uint, []Value) uintptr
+var xValueConstructorCallv func(uintptr, uint32, []Value) uintptr
 
 // Invoke &lt;function&gt;new&lt;/function&gt; with constructor referenced by @value. If @n_parameters
 // is 0 no parameters will be passed to the constructor.
-func (x *Value) ConstructorCallv(NParametersVar uint, ParametersVar []Value) *Value {
+func (x *Value) ConstructorCallv(NParametersVar uint32, ParametersVar []Value) *Value {
 	var cls *Value
 
 	cret := xValueConstructorCallv(x.GoPointer(), NParametersVar, ParametersVar)
@@ -523,14 +523,14 @@ func (x *Value) FunctionCall(FirstParameterTypeVar types.GType, varArgs ...inter
 	return cls
 }
 
-var xValueFunctionCallv func(uintptr, uint, []Value) uintptr
+var xValueFunctionCallv func(uintptr, uint32, []Value) uintptr
 
 // Call function referenced by @value, passing the given @parameters. If @n_parameters
 // is 0 no parameters will be passed to the function.
 //
 // This function always returns a #JSCValue, in case of void functions a #JSCValue referencing
 // &lt;function&gt;undefined&lt;/function&gt; is returned
-func (x *Value) FunctionCallv(NParametersVar uint, ParametersVar []Value) *Value {
+func (x *Value) FunctionCallv(NParametersVar uint32, ParametersVar []Value) *Value {
 	var cls *Value
 
 	cret := xValueFunctionCallv(x.GoPointer(), NParametersVar, ParametersVar)
@@ -755,10 +755,10 @@ func (x *Value) ObjectGetProperty(NameVar string) *Value {
 	return cls
 }
 
-var xValueObjectGetPropertyAtIndex func(uintptr, uint) uintptr
+var xValueObjectGetPropertyAtIndex func(uintptr, uint32) uintptr
 
 // Get property at @index from @value.
-func (x *Value) ObjectGetPropertyAtIndex(IndexVar uint) *Value {
+func (x *Value) ObjectGetPropertyAtIndex(IndexVar uint32) *Value {
 	var cls *Value
 
 	cret := xValueObjectGetPropertyAtIndex(x.GoPointer(), IndexVar)
@@ -803,7 +803,7 @@ func (x *Value) ObjectInvokeMethod(NameVar string, FirstParameterTypeVar types.G
 	return cls
 }
 
-var xValueObjectInvokeMethodv func(uintptr, string, uint, []Value) uintptr
+var xValueObjectInvokeMethodv func(uintptr, string, uint32, []Value) uintptr
 
 // Invoke method with @name on object referenced by @value, passing the given @parameters. If
 // @n_parameters is 0 no parameters will be passed to the method.
@@ -813,7 +813,7 @@ var xValueObjectInvokeMethodv func(uintptr, string, uint, []Value) uintptr
 //
 // This function always returns a #JSCValue, in case of void methods a #JSCValue referencing
 // &lt;function&gt;undefined&lt;/function&gt; is returned.
-func (x *Value) ObjectInvokeMethodv(NameVar string, NParametersVar uint, ParametersVar []Value) *Value {
+func (x *Value) ObjectInvokeMethodv(NameVar string, NParametersVar uint32, ParametersVar []Value) *Value {
 	var cls *Value
 
 	cret := xValueObjectInvokeMethodv(x.GoPointer(), NameVar, NParametersVar, ParametersVar)
@@ -844,10 +844,10 @@ func (x *Value) ObjectSetProperty(NameVar string, PropertyVar *Value) {
 
 }
 
-var xValueObjectSetPropertyAtIndex func(uintptr, uint, uintptr)
+var xValueObjectSetPropertyAtIndex func(uintptr, uint32, uintptr)
 
 // Set @property at @index on @value.
-func (x *Value) ObjectSetPropertyAtIndex(IndexVar uint, PropertyVar *Value) {
+func (x *Value) ObjectSetPropertyAtIndex(IndexVar uint32, PropertyVar *Value) {
 
 	xValueObjectSetPropertyAtIndex(x.GoPointer(), IndexVar, PropertyVar.GoPointer())
 
@@ -880,11 +880,11 @@ func (x *Value) ToInt32() int32 {
 	return cret
 }
 
-var xValueToJson func(uintptr, uint) string
+var xValueToJson func(uintptr, uint32) string
 
 // Create a JSON string of @value serialization. If @indent is 0, the resulting JSON will
 // not contain newlines. The size of the indent is clamped to 10 spaces.
-func (x *Value) ToJson(IndentVar uint) string {
+func (x *Value) ToJson(IndentVar uint32) string {
 
 	cret := xValueToJson(x.GoPointer(), IndentVar)
 	return cret

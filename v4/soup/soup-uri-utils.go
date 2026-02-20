@@ -10,7 +10,7 @@ import (
 
 const (
 	// The set of #GUriFlags libsoup expects all #GUri to use.
-	HTTP_URI_FLAGS int = 482
+	HTTP_URI_FLAGS int32 = 482
 )
 
 // Enum values passed to [func@uri_copy] to indicate the components of

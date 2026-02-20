@@ -591,7 +591,7 @@ func (x *Server) Listen(AddressVar *gio.SocketAddress, OptionsVar ServerListenOp
 
 }
 
-var xServerListenAll func(uintptr, uint, ServerListenOptions, **glib.Error) bool
+var xServerListenAll func(uintptr, uint32, ServerListenOptions, **glib.Error) bool
 
 // Attempts to set up @server to listen for connections on all interfaces
 // on the system.
@@ -604,7 +604,7 @@ var xServerListenAll func(uintptr, uint, ServerListenOptions, **glib.Error) bool
 // what port it ended up choosing.
 //
 // See [method@Server.listen] for more details.
-func (x *Server) ListenAll(PortVar uint, OptionsVar ServerListenOptions) (bool, error) {
+func (x *Server) ListenAll(PortVar uint32, OptionsVar ServerListenOptions) (bool, error) {
 	var cerr *glib.Error
 
 	cret := xServerListenAll(x.GoPointer(), PortVar, OptionsVar, &cerr)
@@ -615,7 +615,7 @@ func (x *Server) ListenAll(PortVar uint, OptionsVar ServerListenOptions) (bool, 
 
 }
 
-var xServerListenLocal func(uintptr, uint, ServerListenOptions, **glib.Error) bool
+var xServerListenLocal func(uintptr, uint32, ServerListenOptions, **glib.Error) bool
 
 // Attempts to set up @server to listen for connections on "localhost".
 //
@@ -626,7 +626,7 @@ var xServerListenLocal func(uintptr, uint, ServerListenOptions, **glib.Error) bo
 // [method@Server.get_uris] to find out what port it ended up choosing.
 //
 // See [method@Server.listen] for more details.
-func (x *Server) ListenLocal(PortVar uint, OptionsVar ServerListenOptions) (bool, error) {
+func (x *Server) ListenLocal(PortVar uint32, OptionsVar ServerListenOptions) (bool, error) {
 	var cerr *glib.Error
 
 	cret := xServerListenLocal(x.GoPointer(), PortVar, OptionsVar, &cerr)

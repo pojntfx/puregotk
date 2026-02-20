@@ -228,20 +228,20 @@ func (x *Message) AddFlags(FlagsVar MessageFlags) {
 
 }
 
-var xMessageAddHeaderHandler func(uintptr, string, string, uintptr, uintptr) uint
+var xMessageAddHeaderHandler func(uintptr, string, string, uintptr, uintptr) uint32
 
 // Adds a signal handler to @msg for @signal.
 //
 // Similar to [func@GObject.signal_connect], but the @callback will only be run
 // if @msg's incoming messages headers (that is, the `request_headers`) contain
 // a header named @header.
-func (x *Message) AddHeaderHandler(SignalVar string, HeaderVar string, CallbackVar *gobject.Callback, UserDataVar uintptr) uint {
+func (x *Message) AddHeaderHandler(SignalVar string, HeaderVar string, CallbackVar *gobject.Callback, UserDataVar uintptr) uint32 {
 
 	cret := xMessageAddHeaderHandler(x.GoPointer(), SignalVar, HeaderVar, glib.NewCallback(CallbackVar), UserDataVar)
 	return cret
 }
 
-var xMessageAddStatusCodeHandler func(uintptr, string, uint, uintptr, uintptr) uint
+var xMessageAddStatusCodeHandler func(uintptr, string, uint32, uintptr, uintptr) uint32
 
 // Adds a signal handler to @msg for @signal.
 //
@@ -250,7 +250,7 @@ var xMessageAddStatusCodeHandler func(uintptr, string, uint, uintptr, uintptr) u
 //
 // @signal must be a signal that will be emitted after @msg's status
 // is set (this means it can't be a "wrote" signal).
-func (x *Message) AddStatusCodeHandler(SignalVar string, StatusCodeVar uint, CallbackVar *gobject.Callback, UserDataVar uintptr) uint {
+func (x *Message) AddStatusCodeHandler(SignalVar string, StatusCodeVar uint32, CallbackVar *gobject.Callback, UserDataVar uintptr) uint32 {
 
 	cret := xMessageAddStatusCodeHandler(x.GoPointer(), SignalVar, StatusCodeVar, glib.NewCallback(CallbackVar), UserDataVar)
 	return cret
@@ -855,10 +855,10 @@ func (x *Message) GetPropertySiteForCookies() uintptr {
 
 // GetPropertyStatusCode gets the "status-code" property.
 // The HTTP response status code.
-func (x *Message) GetPropertyStatusCode() uint {
+func (x *Message) GetPropertyStatusCode() uint32 {
 	var v gobject.Value
 	x.GetProperty("status-code", &v)
-	return v.GetUint()
+	return v.GetUlong()
 }
 
 // GetPropertyTlsCiphersuiteName gets the "tls-ciphersuite-name" property.
@@ -1013,13 +1013,13 @@ func (x *Message) ConnectGotBody(cb *func(Message)) uint32 {
 
 // Emitted after reading a portion of the message
 // body from the network.
-func (x *Message) ConnectGotBodyData(cb *func(Message, uint)) uint32 {
+func (x *Message) ConnectGotBodyData(cb *func(Message, uint32)) uint32 {
 	cbPtr := uintptr(unsafe.Pointer(cb))
 	if cbRefPtr, ok := glib.GetCallback(cbPtr); ok {
 		return gobject.SignalConnect(x.GoPointer(), "got-body-data", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, ChunkSizeVarp uint) {
+	fcb := func(clsPtr uintptr, ChunkSizeVarp uint32) {
 		fa := Message{}
 		fa.Ptr = clsPtr
 		cbFn := *cb
@@ -1276,13 +1276,13 @@ func (x *Message) ConnectWroteBody(cb *func(Message)) uint32 {
 
 // Emitted immediately after writing a portion of the message
 // body to the network.
-func (x *Message) ConnectWroteBodyData(cb *func(Message, uint)) uint32 {
+func (x *Message) ConnectWroteBodyData(cb *func(Message, uint32)) uint32 {
 	cbPtr := uintptr(unsafe.Pointer(cb))
 	if cbRefPtr, ok := glib.GetCallback(cbPtr); ok {
 		return gobject.SignalConnect(x.GoPointer(), "wrote-body-data", cbRefPtr)
 	}
 
-	fcb := func(clsPtr uintptr, ChunkSizeVarp uint) {
+	fcb := func(clsPtr uintptr, ChunkSizeVarp uint32) {
 		fa := Message{}
 		fa.Ptr = clsPtr
 		cbFn := *cb

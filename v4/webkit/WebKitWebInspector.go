@@ -94,14 +94,14 @@ func (x *WebInspector) Detach() {
 
 }
 
-var xWebInspectorGetAttachedHeight func(uintptr) uint
+var xWebInspectorGetAttachedHeight func(uintptr) uint32
 
 // Get the height that the inspector view when attached.
 //
 // Get the height that the inspector view should have when
 // it's attached. If the inspector view is not attached this
 // returns 0.
-func (x *WebInspector) GetAttachedHeight() uint {
+func (x *WebInspector) GetAttachedHeight() uint32 {
 
 	cret := xWebInspectorGetAttachedHeight(x.GoPointer())
 	return cret
@@ -183,10 +183,10 @@ func (c *WebInspector) SetGoPointer(ptr uintptr) {
 
 // GetPropertyAttachedHeight gets the "attached-height" property.
 // The height that the inspector view should have when it is attached.
-func (x *WebInspector) GetPropertyAttachedHeight() uint {
+func (x *WebInspector) GetPropertyAttachedHeight() uint32 {
 	var v gobject.Value
 	x.GetProperty("attached-height", &v)
-	return v.GetUint()
+	return v.GetUlong()
 }
 
 // GetPropertyCanAttach gets the "can-attach" property.

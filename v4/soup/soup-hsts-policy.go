@@ -3,5 +3,5 @@ package soup
 
 const (
 	// An expiration date that is always in the past.
-	HSTS_POLICY_MAX_AGE_PAST int = 0
+	HSTS_POLICY_MAX_AGE_PAST int32 = 0
 )

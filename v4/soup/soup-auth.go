@@ -19,7 +19,7 @@ type AuthClass struct {
 
 	SchemeName uintptr
 
-	Strength uint
+	Strength uint32
 
 	xUpdate uintptr
 

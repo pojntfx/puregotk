@@ -515,11 +515,11 @@ func (x *Session) GetFeatureForMessage(FeatureTypeVar types.GType, MsgVar *Messa
 	return cls
 }
 
-var xSessionGetIdleTimeout func(uintptr) uint
+var xSessionGetIdleTimeout func(uintptr) uint32
 
 // Get the timeout in seconds for idle connection lifetime currently used by
 // @session.
-func (x *Session) GetIdleTimeout() uint {
+func (x *Session) GetIdleTimeout() uint32 {
 
 	cret := xSessionGetIdleTimeout(x.GoPointer())
 	return cret
@@ -543,20 +543,20 @@ func (x *Session) GetLocalAddress() *gio.InetSocketAddress {
 	return cls
 }
 
-var xSessionGetMaxConns func(uintptr) uint
+var xSessionGetMaxConns func(uintptr) uint32
 
 // Get the maximum number of connections that @session can open at once.
-func (x *Session) GetMaxConns() uint {
+func (x *Session) GetMaxConns() uint32 {
 
 	cret := xSessionGetMaxConns(x.GoPointer())
 	return cret
 }
 
-var xSessionGetMaxConnsPerHost func(uintptr) uint
+var xSessionGetMaxConnsPerHost func(uintptr) uint32
 
 // Get the maximum number of connections that @session can open at once to a
 // given host.
-func (x *Session) GetMaxConnsPerHost() uint {
+func (x *Session) GetMaxConnsPerHost() uint32 {
 
 	cret := xSessionGetMaxConnsPerHost(x.GoPointer())
 	return cret
@@ -596,11 +596,11 @@ func (x *Session) GetRemoteConnectable() *gio.SocketConnectableBase {
 	return cls
 }
 
-var xSessionGetTimeout func(uintptr) uint
+var xSessionGetTimeout func(uintptr) uint32
 
 // Get the timeout in seconds for socket I/O operations currently used by
 // @session.
-func (x *Session) GetTimeout() uint {
+func (x *Session) GetTimeout() uint32 {
 
 	cret := xSessionGetTimeout(x.GoPointer())
 	return cret
@@ -660,7 +660,7 @@ func (x *Session) HasFeature(FeatureTypeVar types.GType) bool {
 	return cret
 }
 
-var xSessionPreconnectAsync func(uintptr, uintptr, int, uintptr, uintptr, uintptr)
+var xSessionPreconnectAsync func(uintptr, uintptr, int32, uintptr, uintptr, uintptr)
 
 // Start a preconnection to @msg.
 //
@@ -673,7 +673,7 @@ var xSessionPreconnectAsync func(uintptr, uintptr, int, uintptr, uintptr, uintpt
 // a connection error it will be handled by the request).
 //
 // The operation finishes when the connection is done or an error occurred.
-func (x *Session) PreconnectAsync(MsgVar *Message, IoPriorityVar int, CancellableVar *gio.Cancellable, CallbackVar *gio.AsyncReadyCallback, UserDataVar uintptr) {
+func (x *Session) PreconnectAsync(MsgVar *Message, IoPriorityVar int32, CancellableVar *gio.Cancellable, CallbackVar *gio.AsyncReadyCallback, UserDataVar uintptr) {
 
 	xSessionPreconnectAsync(x.GoPointer(), MsgVar.GoPointer(), IoPriorityVar, CancellableVar.GoPointer(), glib.NewCallbackNullable(CallbackVar), UserDataVar)
 
@@ -773,7 +773,7 @@ func (x *Session) SendAndRead(MsgVar *Message, CancellableVar *gio.Cancellable) 
 
 }
 
-var xSessionSendAndReadAsync func(uintptr, uintptr, int, uintptr, uintptr, uintptr)
+var xSessionSendAndReadAsync func(uintptr, uintptr, int32, uintptr, uintptr, uintptr)
 
 // Asynchronously sends @msg and reads the response body.
 //
@@ -784,7 +784,7 @@ var xSessionSendAndReadAsync func(uintptr, uintptr, int, uintptr, uintptr, uintp
 // [struct@GLib.Bytes] with the response body.
 //
 // See [method@Session.send] for more details on the general semantics.
-func (x *Session) SendAndReadAsync(MsgVar *Message, IoPriorityVar int, CancellableVar *gio.Cancellable, CallbackVar *gio.AsyncReadyCallback, UserDataVar uintptr) {
+func (x *Session) SendAndReadAsync(MsgVar *Message, IoPriorityVar int32, CancellableVar *gio.Cancellable, CallbackVar *gio.AsyncReadyCallback, UserDataVar uintptr) {
 
 	xSessionSendAndReadAsync(x.GoPointer(), MsgVar.GoPointer(), IoPriorityVar, CancellableVar.GoPointer(), glib.NewCallbackNullable(CallbackVar), UserDataVar)
 
@@ -822,14 +822,14 @@ func (x *Session) SendAndSplice(MsgVar *Message, OutStreamVar *gio.OutputStream,
 
 }
 
-var xSessionSendAndSpliceAsync func(uintptr, uintptr, uintptr, gio.OutputStreamSpliceFlags, int, uintptr, uintptr, uintptr)
+var xSessionSendAndSpliceAsync func(uintptr, uintptr, uintptr, gio.OutputStreamSpliceFlags, int32, uintptr, uintptr, uintptr)
 
 // Asynchronously sends @msg and splices the response body stream into @out_stream.
 // When @callback is called, then either @msg has been sent and its response body
 // spliced, or else an error has occurred.
 //
 // See [method@Session.send] for more details on the general semantics.
-func (x *Session) SendAndSpliceAsync(MsgVar *Message, OutStreamVar *gio.OutputStream, FlagsVar gio.OutputStreamSpliceFlags, IoPriorityVar int, CancellableVar *gio.Cancellable, CallbackVar *gio.AsyncReadyCallback, UserDataVar uintptr) {
+func (x *Session) SendAndSpliceAsync(MsgVar *Message, OutStreamVar *gio.OutputStream, FlagsVar gio.OutputStreamSpliceFlags, IoPriorityVar int32, CancellableVar *gio.Cancellable, CallbackVar *gio.AsyncReadyCallback, UserDataVar uintptr) {
 
 	xSessionSendAndSpliceAsync(x.GoPointer(), MsgVar.GoPointer(), OutStreamVar.GoPointer(), FlagsVar, IoPriorityVar, CancellableVar.GoPointer(), glib.NewCallbackNullable(CallbackVar), UserDataVar)
 
@@ -849,7 +849,7 @@ func (x *Session) SendAndSpliceFinish(ResultVar gio.AsyncResult) (int, error) {
 
 }
 
-var xSessionSendAsync func(uintptr, uintptr, int, uintptr, uintptr, uintptr)
+var xSessionSendAsync func(uintptr, uintptr, int32, uintptr, uintptr, uintptr)
 
 // Asynchronously sends @msg and waits for the beginning of a response.
 //
@@ -859,7 +859,7 @@ var xSessionSendAsync func(uintptr, uintptr, int, uintptr, uintptr, uintptr)
 // response body.
 //
 // See [method@Session.send] for more details on the general semantics.
-func (x *Session) SendAsync(MsgVar *Message, IoPriorityVar int, CancellableVar *gio.Cancellable, CallbackVar *gio.AsyncReadyCallback, UserDataVar uintptr) {
+func (x *Session) SendAsync(MsgVar *Message, IoPriorityVar int32, CancellableVar *gio.Cancellable, CallbackVar *gio.AsyncReadyCallback, UserDataVar uintptr) {
 
 	xSessionSendAsync(x.GoPointer(), MsgVar.GoPointer(), IoPriorityVar, CancellableVar.GoPointer(), glib.NewCallbackNullable(CallbackVar), UserDataVar)
 
@@ -915,13 +915,13 @@ func (x *Session) SetAcceptLanguageAuto(AcceptLanguageAutoVar bool) {
 
 }
 
-var xSessionSetIdleTimeout func(uintptr, uint)
+var xSessionSetIdleTimeout func(uintptr, uint32)
 
 // Set a timeout in seconds for idle connection lifetime to be used by @session
 // on new connections.
 //
 // See [property@Session:idle-timeout] for more information.
-func (x *Session) SetIdleTimeout(TimeoutVar uint) {
+func (x *Session) SetIdleTimeout(TimeoutVar uint32) {
 
 	xSessionSetIdleTimeout(x.GoPointer(), TimeoutVar)
 
@@ -939,13 +939,13 @@ func (x *Session) SetProxyResolver(ProxyResolverVar gio.ProxyResolver) {
 
 }
 
-var xSessionSetTimeout func(uintptr, uint)
+var xSessionSetTimeout func(uintptr, uint32)
 
 // Set a timeout in seconds for socket I/O operations to be used by @session
 // on new connections.
 //
 // See [property@Session:timeout] for more information.
-func (x *Session) SetTimeout(TimeoutVar uint) {
+func (x *Session) SetTimeout(TimeoutVar uint32) {
 
 	xSessionSetTimeout(x.GoPointer(), TimeoutVar)
 
@@ -992,7 +992,7 @@ func (x *Session) SetUserAgent(UserAgentVar string) {
 
 }
 
-var xSessionWebsocketConnectAsync func(uintptr, uintptr, string, []string, int, uintptr, uintptr, uintptr)
+var xSessionWebsocketConnectAsync func(uintptr, uintptr, string, []string, int32, uintptr, uintptr, uintptr)
 
 // Asynchronously creates a [class@WebsocketConnection] to communicate with a
 // remote server.
@@ -1011,7 +1011,7 @@ var xSessionWebsocketConnectAsync func(uintptr, uintptr, string, []string, int, 
 // @msg will contain the complete response headers and body from the server's
 // response, and [method@Session.websocket_connect_finish] will return
 // %SOUP_WEBSOCKET_ERROR_NOT_WEBSOCKET.
-func (x *Session) WebsocketConnectAsync(MsgVar *Message, OriginVar string, ProtocolsVar []string, IoPriorityVar int, CancellableVar *gio.Cancellable, CallbackVar *gio.AsyncReadyCallback, UserDataVar uintptr) {
+func (x *Session) WebsocketConnectAsync(MsgVar *Message, OriginVar string, ProtocolsVar []string, IoPriorityVar int32, CancellableVar *gio.Cancellable, CallbackVar *gio.AsyncReadyCallback, UserDataVar uintptr) {
 
 	xSessionWebsocketConnectAsync(x.GoPointer(), MsgVar.GoPointer(), OriginVar, ProtocolsVar, IoPriorityVar, CancellableVar.GoPointer(), glib.NewCallbackNullable(CallbackVar), UserDataVar)
 
@@ -1112,10 +1112,10 @@ func (x *Session) GetPropertyAcceptLanguageAuto() bool {
 // ones. You can call [method@Session.abort] after setting this
 // if you want to ensure that all future connections will have
 // this timeout value.
-func (x *Session) SetPropertyIdleTimeout(value uint) {
+func (x *Session) SetPropertyIdleTimeout(value uint32) {
 	var v gobject.Value
-	v.Init(gobject.TypeUintVal)
-	v.SetUint(value)
+	v.Init(gobject.TypeUlongVal)
+	v.SetUlong(value)
 	x.SetProperty("idle-timeout", &v)
 }
 
@@ -1128,46 +1128,46 @@ func (x *Session) SetPropertyIdleTimeout(value uint) {
 // ones. You can call [method@Session.abort] after setting this
 // if you want to ensure that all future connections will have
 // this timeout value.
-func (x *Session) GetPropertyIdleTimeout() uint {
+func (x *Session) GetPropertyIdleTimeout() uint32 {
 	var v gobject.Value
 	x.GetProperty("idle-timeout", &v)
-	return v.GetUint()
+	return v.GetUlong()
 }
 
 // SetPropertyMaxConns sets the "max-conns" property.
 // The maximum number of connections that the session can open at once.
-func (x *Session) SetPropertyMaxConns(value int) {
+func (x *Session) SetPropertyMaxConns(value int32) {
 	var v gobject.Value
-	v.Init(gobject.TypeIntVal)
-	v.SetInt(value)
+	v.Init(gobject.TypeLongVal)
+	v.SetLong(value)
 	x.SetProperty("max-conns", &v)
 }
 
 // GetPropertyMaxConns gets the "max-conns" property.
 // The maximum number of connections that the session can open at once.
-func (x *Session) GetPropertyMaxConns() int {
+func (x *Session) GetPropertyMaxConns() int32 {
 	var v gobject.Value
 	x.GetProperty("max-conns", &v)
-	return v.GetInt()
+	return v.GetLong()
 }
 
 // SetPropertyMaxConnsPerHost sets the "max-conns-per-host" property.
 // The maximum number of connections that the session can open at once
 // to a given host.
-func (x *Session) SetPropertyMaxConnsPerHost(value int) {
+func (x *Session) SetPropertyMaxConnsPerHost(value int32) {
 	var v gobject.Value
-	v.Init(gobject.TypeIntVal)
-	v.SetInt(value)
+	v.Init(gobject.TypeLongVal)
+	v.SetLong(value)
 	x.SetProperty("max-conns-per-host", &v)
 }
 
 // GetPropertyMaxConnsPerHost gets the "max-conns-per-host" property.
 // The maximum number of connections that the session can open at once
 // to a given host.
-func (x *Session) GetPropertyMaxConnsPerHost() int {
+func (x *Session) GetPropertyMaxConnsPerHost() int32 {
 	var v gobject.Value
 	x.GetProperty("max-conns-per-host", &v)
-	return v.GetInt()
+	return v.GetLong()
 }
 
 // SetPropertyTimeout sets the "timeout" property.
@@ -1184,10 +1184,10 @@ func (x *Session) GetPropertyMaxConnsPerHost() int {
 // Not to be confused with [property@Session:idle-timeout] (which is
 // the length of time that idle persistent connections will be
 // kept open).
-func (x *Session) SetPropertyTimeout(value uint) {
+func (x *Session) SetPropertyTimeout(value uint32) {
 	var v gobject.Value
-	v.Init(gobject.TypeUintVal)
-	v.SetUint(value)
+	v.Init(gobject.TypeUlongVal)
+	v.SetUlong(value)
 	x.SetProperty("timeout", &v)
 }
 
@@ -1205,10 +1205,10 @@ func (x *Session) SetPropertyTimeout(value uint) {
 // Not to be confused with [property@Session:idle-timeout] (which is
 // the length of time that idle persistent connections will be
 // kept open).
-func (x *Session) GetPropertyTimeout() uint {
+func (x *Session) GetPropertyTimeout() uint32 {
 	var v gobject.Value
 	x.GetProperty("timeout", &v)
-	return v.GetUint()
+	return v.GetUlong()
 }
 
 // SetPropertyUserAgent sets the "user-agent" property.

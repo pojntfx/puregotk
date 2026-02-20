@@ -121,12 +121,12 @@ func (x *MultipartInputStream) NextPart(CancellableVar *gio.Cancellable) (*gio.I
 
 }
 
-var xMultipartInputStreamNextPartAsync func(uintptr, int, uintptr, uintptr, uintptr)
+var xMultipartInputStreamNextPartAsync func(uintptr, int32, uintptr, uintptr, uintptr)
 
 // Obtains a [class@Gio.InputStream] for the next request.
 //
 // See [method@MultipartInputStream.next_part] for details on the workflow.
-func (x *MultipartInputStream) NextPartAsync(IoPriorityVar int, CancellableVar *gio.Cancellable, CallbackVar *gio.AsyncReadyCallback, DataVar uintptr) {
+func (x *MultipartInputStream) NextPartAsync(IoPriorityVar int32, CancellableVar *gio.Cancellable, CallbackVar *gio.AsyncReadyCallback, DataVar uintptr) {
 
 	xMultipartInputStreamNextPartAsync(x.GoPointer(), IoPriorityVar, CancellableVar.GoPointer(), glib.NewCallbackNullable(CallbackVar), DataVar)
 
